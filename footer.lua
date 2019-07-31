@@ -1,4 +1,6 @@
 
+
+
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
     SetPlayerColor(Player(0), ConvertPlayerColor(0))
