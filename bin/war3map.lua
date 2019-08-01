@@ -40,8 +40,9 @@ local projectile = require("src/projectile.lua")
 
 local trigger = CreateTrigger()
 
+local projectiles = {"ehip", "ewsp"}
+
 local keyPressed = function()
-    print("key pressed")
     local playerId = GetPlayerId(GetTriggerPlayer())
     local hero = hero.getHero(playerId)
 
@@ -50,13 +51,16 @@ local keyPressed = function()
     local endX = mouse.getMouseX(playerId)
     local endY = mouse.getMouseY(playerId)
 
+    local projectileModel = projectiles[GetRandomInt(1, 2)]
+
     projectile.createProjectile(
         "ehip",
         startX,
         startY,
         endX,
         endY,
-        700
+        900,
+        200
     )
 
 end
@@ -116,21 +120,50 @@ return {
 end
 
 src_projectile_lua = function()
+local vector = require('src/vector.lua')
+
 local projectiles = {}
+local timer
 
 local isCloseTo = function(val, expected)
     return val + 15 >= expected and val - 15 <= expected
 end
 
 local clearProjectiles = function()
+    local elapsedTime = TimerGetElapsed(timer)
+
     local toRemove = {}
     for idx, projectile in pairs(projectiles) do
+        local curProjectileX = GetUnitX(projectile.unit)
+        local curProjectileY = GetUnitY(projectile.unit)
+
         if
-            isCloseTo(GetUnitX(projectile.unit), projectile.toX) and
-            isCloseTo(GetUnitY(projectile.unit), projectile.toY)
+            isCloseTo(curProjectileX, projectile.toX) and
+            isCloseTo(curProjectileY, projectile.toY)
         then
+            -- Already at destination, can finish
             RemoveUnit(projectile.unit)
             projectile.toRemove = true
+        else
+            -- Move toward destination at speed
+            local totalDistX = projectile.toX - curProjectileX
+            local totalDistY = projectile.toY - curProjectileY
+
+            local distVector = vector.create(totalDistX, totalDistY)
+
+            local v1 = vector.normalize(distVector)
+            v1 = vector.multiply(v1, projectile.speed * elapsedTime)
+
+            if vector.magnitude(v1) >= vector.magnitude(distVector) then
+                v1 = distVector
+            end
+
+            v1 = vector.add(
+                v1,
+                vector.create(curProjectileX, curProjectileY))
+
+            SetUnitX(projectile.unit, v1.x)
+            SetUnitY(projectile.unit, v1.y)
         end
     end
     for idx, projectile in pairs(projectiles) do
@@ -141,11 +174,22 @@ local clearProjectiles = function()
 end
 
 local init = function()
-    TimerStart(CreateTimer(), 0.1, true, clearProjectiles)
+    timer = CreateTimer()
+    TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(model, fromX, fromY, toX, toY, length)
-    print("Creating projectile")
+local createProjectile = function(model, fromX, fromY, toX, toY, speed, length)
+    if length ~= nil then
+        local fromVector = vector.create(fromX, fromY)
+        local toVector = vector.create(toX, toY)
+        local totalVector = vector.subtract(toVector, fromVector)
+        totalVector = vector.normalize(totalVector)
+        totalVector = vector.multiply(totalVector, length)
+        totalVector = vector.add(fromVector, totalVector)
+        toX = totalVector.x
+        toY = totalVector.y
+    end
+
     local projectile = CreateUnit(
         Player(0),
         FourCC(model),
@@ -153,12 +197,11 @@ local createProjectile = function(model, fromX, fromY, toX, toY, length)
         fromY,
         bj_RADTODEG * Atan2(toY - fromY, toX - fromX))
 
-    IssuePointOrder(projectile, "move", toX, toY)
-
     table.insert(projectiles, {
         unit = projectile,
         toX = toX,
         toY = toY,
+        speed = speed,
     })
 
     return projectile
@@ -205,6 +248,65 @@ src_ui_lua = function()
 
 -- TimerStart(CreateTimer(), 0.0, false, initUI)
 end
+
+src_vector_lua = function()
+local abs = function(a)
+  if a >= 0 then
+    return a
+  end
+  return -a
+end
+
+local create = function(x, y)
+  return {
+    x = x,
+    y = y,
+  }
+end
+
+local add = function(a, b)
+  return {
+    x = a.x + b.x,
+    y = a.y + b.y,
+  }
+end
+
+local subtract = function(a, b)
+  return {
+    x = a.x - b.x,
+    y = a.y - b.y,
+  }
+end
+
+local multiply = function(a, b)
+  return {
+    x = a.x * b,
+    y = a.y * b
+  }
+end
+
+local magnitude = function(a)
+  return SquareRoot(a.x^2 + a.y^2)
+end
+
+local normalize = function(a)
+  local mag = magnitude(a)
+  return {
+    x = a.x / mag,
+    y = a.y / mag,
+  }
+end
+
+return {
+  create = create,
+  add = add,
+  subtract = subtract,
+  multiply = multiply,
+  magnitude = magnitude,
+  normalize = normalize,
+}
+
+end
 requireMap["src/hero.lua"] = src_hero_lua
 requireMap["src/keyboard.lua"] = src_keyboard_lua
 requireMap["src/main.lua"] = src_main_lua
@@ -212,6 +314,7 @@ requireMap["src/mouse.lua"] = src_mouse_lua
 requireMap["src/projectile.lua"] = src_projectile_lua
 requireMap["src/setMoney.lua"] = src_setMoney_lua
 requireMap["src/ui.lua"] = src_ui_lua
+requireMap["src/vector.lua"] = src_vector_lua
 
 
 local hero = require('src/hero.lua')
