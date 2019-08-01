@@ -22,7 +22,8 @@ local clearProjectiles = function()
             local collidedUnit = GetEnumUnit()
             if
                 collidedUnit ~= ownerHero and
-                GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0
+                GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
+                projectile.toRemove ~= true
             then
                 UnitDamageTargetBJ(
                     ownerHero,
