@@ -4,8 +4,6 @@ local projectile = require("src/projectile.lua")
 
 local trigger = CreateTrigger()
 
-local projectiles = {"ehip", "ewsp"}
-
 local keyPressed = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local hero = hero.getHero(playerId)
@@ -15,16 +13,22 @@ local keyPressed = function()
     local endX = mouse.getMouseX(playerId)
     local endY = mouse.getMouseY(playerId)
 
-    local projectileModel = projectiles[GetRandomInt(1, 2)]
+    IssueImmediateOrder(hero, "stop")
+    SetUnitFacingTimed(
+        hero,
+        bj_RADTODEG * Atan2(endY - startY, endX - startX),
+        0.05)
+    SetUnitAnimationByIndex(hero, 4)
 
     projectile.createProjectile(
+        playerId,
         "ehip",
         startX,
         startY,
         endX,
         endY,
         900,
-        200
+        500
     )
 
 end

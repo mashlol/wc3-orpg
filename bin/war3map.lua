@@ -40,8 +40,6 @@ local projectile = require("src/projectile.lua")
 
 local trigger = CreateTrigger()
 
-local projectiles = {"ehip", "ewsp"}
-
 local keyPressed = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local hero = hero.getHero(playerId)
@@ -51,16 +49,22 @@ local keyPressed = function()
     local endX = mouse.getMouseX(playerId)
     local endY = mouse.getMouseY(playerId)
 
-    local projectileModel = projectiles[GetRandomInt(1, 2)]
+    IssueImmediateOrder(hero, "stop")
+    SetUnitFacingTimed(
+        hero,
+        bj_RADTODEG * Atan2(endY - startY, endX - startX),
+        0.05)
+    SetUnitAnimationByIndex(hero, 4)
 
     projectile.createProjectile(
+        playerId,
         "ehip",
         startX,
         startY,
         endX,
         endY,
         900,
-        200
+        500
     )
 
 end
@@ -121,6 +125,7 @@ end
 
 src_projectile_lua = function()
 local vector = require('src/vector.lua')
+local hero = require('src/hero.lua')
 
 local projectiles = {}
 local timer
@@ -137,7 +142,19 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        if
+        local grp = GetUnitsInRangeOfLocAll(10, GetUnitLoc(projectile.unit))
+        ForGroupBJ(grp, function()
+            local collidedUnit = GetEnumUnit()
+            if collidedUnit ~= hero.getHero(projectile.playerId) then
+                BlzSetUnitRealField(collidedUnit, UNIT_RF_HP, BlzGetUnitRealField(collidedUnit, UNIT_RF_HP) - 10)
+                RemoveUnit(projectile.unit)
+                projectile.toRemove = true
+            end
+        end)
+
+        if projectile.toRemove then
+
+        elseif
             isCloseTo(curProjectileX, projectile.toX) and
             isCloseTo(curProjectileY, projectile.toY)
         then
@@ -178,7 +195,7 @@ local init = function()
     TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(model, fromX, fromY, toX, toY, speed, length)
+local createProjectile = function(playerId, model, fromX, fromY, toX, toY, speed, length)
     if length ~= nil then
         local fromVector = vector.create(fromX, fromY)
         local toVector = vector.create(toX, toY)
@@ -202,6 +219,7 @@ local createProjectile = function(model, fromX, fromY, toX, toY, speed, length)
         toX = toX,
         toY = toY,
         speed = speed,
+        playerId = playerId,
     })
 
     return projectile

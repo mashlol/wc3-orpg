@@ -1,4 +1,5 @@
 local vector = require('src/vector.lua')
+local hero = require('src/hero.lua')
 
 local projectiles = {}
 local timer
@@ -15,7 +16,22 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        if
+        local grp = GetUnitsInRangeOfLocAll(10, GetUnitLoc(projectile.unit))
+        ForGroupBJ(grp, function()
+            local collidedUnit = GetEnumUnit()
+            if collidedUnit ~= hero.getHero(projectile.playerId) then
+                BlzSetUnitRealField(
+                    collidedUnit,
+                    UNIT_RF_HP,
+                    BlzGetUnitRealField(collidedUnit, UNIT_RF_HP) - 10)
+                RemoveUnit(projectile.unit)
+                projectile.toRemove = true
+            end
+        end)
+
+        if projectile.toRemove then
+
+        elseif
             isCloseTo(curProjectileX, projectile.toX) and
             isCloseTo(curProjectileY, projectile.toY)
         then
@@ -56,7 +72,7 @@ local init = function()
     TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(model, fromX, fromY, toX, toY, speed, length)
+local createProjectile = function(playerId, model, fromX, fromY, toX, toY, speed, length)
     if length ~= nil then
         local fromVector = vector.create(fromX, fromY)
         local toVector = vector.create(toX, toY)
@@ -80,6 +96,7 @@ local createProjectile = function(model, fromX, fromY, toX, toY, speed, length)
         toX = toX,
         toY = toY,
         speed = speed,
+        playerId = playerId,
     })
 
     return projectile
