@@ -8,6 +8,12 @@ local isCloseTo = function(val, expected)
     return val + 15 >= expected and val - 15 <= expected
 end
 
+function tablelength(t)
+  local count = 0
+  for _ in pairs(t) do count = count + 1 end
+  return count
+end
+
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
@@ -67,11 +73,13 @@ local clearProjectiles = function()
             SetUnitY(projectile.unit, v1.y)
         end
     end
+    local newProjectiles = {}
     for idx, projectile in pairs(projectiles) do
-        if projectile.toRemove then
-            tables.remove(projectiles, idx)
+        if projectile ~= nil and projectile.toRemove ~= true then
+            table.insert(newProjectiles, projectile)
         end
     end
+    projectiles = newProjectiles
 end
 
 local init = function()
