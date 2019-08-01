@@ -16,18 +16,21 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(30, GetUnitLoc(projectile.unit))
+        local grp = GetUnitsInRangeOfLocAll(50, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
             local ownerHero = hero.getHero(projectile.playerId)
             local collidedUnit = GetEnumUnit()
-            if collidedUnit ~= ownerHero then
+            if
+                collidedUnit ~= ownerHero and
+                GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0
+            then
                 UnitDamageTargetBJ(
                     ownerHero,
                     collidedUnit,
                     100,
                     ATTACK_TYPE_PIERCE,
                     DAMAGE_TYPE_UNKNOWN)
-                RemoveUnit(projectile.unit)
+                KillUnit(projectile.unit)
                 projectile.toRemove = true
             end
         end)
@@ -39,7 +42,7 @@ local clearProjectiles = function()
             isCloseTo(curProjectileY, projectile.toY)
         then
             -- Already at destination, can finish
-            RemoveUnit(projectile.unit)
+            KillUnit(projectile.unit)
             projectile.toRemove = true
         else
             -- Move toward destination at speed
@@ -75,29 +78,26 @@ local init = function()
     TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(playerId, model, fromX, fromY, toX, toY, speed, length)
+local createProjectile = function(playerId, model, fromV, toV, speed, length)
     if length ~= nil then
-        local fromVector = vector.create(fromX, fromY)
-        local toVector = vector.create(toX, toY)
-        local totalVector = vector.subtract(toVector, fromVector)
-        totalVector = vector.normalize(totalVector)
-        totalVector = vector.multiply(totalVector, length)
-        totalVector = vector.add(fromVector, totalVector)
-        toX = totalVector.x
-        toY = totalVector.y
+        local lengthNormalizedV = vector.subtract(toV, fromV)
+        lengthNormalizedV = vector.normalize(lengthNormalizedV)
+        lengthNormalizedV = vector.multiply(lengthNormalizedV, length)
+        lengthNormalizedV = vector.add(fromV, lengthNormalizedV)
+        toV = lengthNormalizedV
     end
 
     local projectile = CreateUnit(
         Player(0),
         FourCC(model),
-        fromX,
-        fromY,
-        bj_RADTODEG * Atan2(toY - fromY, toX - fromX))
+        fromV.x,
+        fromV.y,
+        bj_RADTODEG * Atan2(toV.y - fromV.y, toV.x - fromV.x))
 
     table.insert(projectiles, {
         unit = projectile,
-        toX = toX,
-        toY = toY,
+        toX = toV.x,
+        toY = toV.y,
         speed = speed,
         playerId = playerId,
     })

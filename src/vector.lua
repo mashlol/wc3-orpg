@@ -12,6 +12,13 @@ local create = function(x, y)
   }
 end
 
+local fromAngle = function(angle)
+  return {
+    x = Cos(angle),
+    y = Sin(angle),
+  }
+end
+
 local add = function(a, b)
   return {
     x = a.x + b.x,
@@ -47,6 +54,7 @@ end
 
 return {
   create = create,
+  fromAngle = fromAngle,
   add = add,
   subtract = subtract,
   multiply = multiply,
