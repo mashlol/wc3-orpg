@@ -16,14 +16,17 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(10, GetUnitLoc(projectile.unit))
+        local grp = GetUnitsInRangeOfLocAll(30, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
+            local ownerHero = hero.getHero(projectile.playerId)
             local collidedUnit = GetEnumUnit()
-            if collidedUnit ~= hero.getHero(projectile.playerId) then
-                BlzSetUnitRealField(
+            if collidedUnit ~= ownerHero then
+                UnitDamageTargetBJ(
+                    ownerHero,
                     collidedUnit,
-                    UNIT_RF_HP,
-                    BlzGetUnitRealField(collidedUnit, UNIT_RF_HP) - 10)
+                    100,
+                    ATTACK_TYPE_PIERCE,
+                    DAMAGE_TYPE_UNKNOWN)
                 RemoveUnit(projectile.unit)
                 projectile.toRemove = true
             end
