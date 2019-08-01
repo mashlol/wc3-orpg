@@ -8,12 +8,6 @@ local isCloseTo = function(val, expected)
     return val + 15 >= expected and val - 15 <= expected
 end
 
-function tablelength(t)
-  local count = 0
-  for _ in pairs(t) do count = count + 1 end
-  return count
-end
-
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
@@ -30,12 +24,7 @@ local clearProjectiles = function()
                 GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
                 projectile.toRemove ~= true
             then
-                UnitDamageTargetBJ(
-                    ownerHero,
-                    collidedUnit,
-                    100,
-                    ATTACK_TYPE_PIERCE,
-                    DAMAGE_TYPE_UNKNOWN)
+                projectile.collisionLambda(collidedUnit)
                 KillUnit(projectile.unit)
                 projectile.toRemove = true
             end
@@ -86,7 +75,7 @@ local init = function()
     TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(playerId, model, fromV, toV, speed, length)
+local createProjectile = function(playerId, model, fromV, toV, speed, length, collisionLambda)
     if length ~= nil then
         local lengthNormalizedV = vector.subtract(toV, fromV)
         lengthNormalizedV = vector.normalize(lengthNormalizedV)
@@ -108,6 +97,7 @@ local createProjectile = function(playerId, model, fromV, toV, speed, length)
         toY = toV.y,
         speed = speed,
         playerId = playerId,
+        collisionLambda = collisionLambda,
     })
 
     return projectile
