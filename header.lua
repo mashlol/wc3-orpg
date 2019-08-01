@@ -1,6 +1,3 @@
-function InitGlobals()
-end
-
 requireMap = {}
 requireCache = {}
 

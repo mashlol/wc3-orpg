@@ -1,6 +1,7 @@
 function InitGlobals()
 end
 
+local REPLACE_ME
 requireMap = {}
 requireCache = {}
 
@@ -142,11 +143,17 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(10, GetUnitLoc(projectile.unit))
+        local grp = GetUnitsInRangeOfLocAll(30, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
+            local ownerHero = hero.getHero(projectile.playerId)
             local collidedUnit = GetEnumUnit()
-            if collidedUnit ~= hero.getHero(projectile.playerId) then
-                BlzSetUnitRealField(collidedUnit, UNIT_RF_HP, BlzGetUnitRealField(collidedUnit, UNIT_RF_HP) - 10)
+            if collidedUnit ~= ownerHero then
+                UnitDamageTargetBJ(
+                    ownerHero,
+                    collidedUnit,
+                    100,
+                    ATTACK_TYPE_PIERCE,
+                    DAMAGE_TYPE_UNKNOWN)
                 RemoveUnit(projectile.unit)
                 projectile.toRemove = true
             end
@@ -350,8 +357,26 @@ end
 TimerStart(CreateTimer(), 0.0, false, mainInit)
 
 
+function CreateUnitsForPlayer1()
+    local p = Player(1)
+    local u
+    local unitID
+    local t
+    local life
+    u = CreateUnit(p, FourCC("hfoo"), -399.3, -188.4, 48.363)
+end
 
+function CreatePlayerBuildings()
+end
 
+function CreatePlayerUnits()
+    CreateUnitsForPlayer1()
+end
+
+function CreateAllUnits()
+    CreatePlayerBuildings()
+    CreatePlayerUnits()
+end
 
 function InitCustomPlayerSlots()
     SetPlayerStartLocation(Player(0), 0)
@@ -385,6 +410,7 @@ function main()
     SetAmbientDaySound("LordaeronSummerDay")
     SetAmbientNightSound("LordaeronSummerNight")
     SetMapMusic("Music", true, 0)
+    CreateAllUnits()
     InitBlizzard()
     InitGlobals()
 end
@@ -395,7 +421,7 @@ function config()
     SetPlayers(2)
     SetTeams(2)
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-    DefineStartLocation(0, 256.0, 2368.0)
+    DefineStartLocation(0, -2688.0, -2880.0)
     DefineStartLocation(1, 2368.0, 1856.0)
     InitCustomPlayerSlots()
     SetPlayerSlotAvailable(Player(0), MAP_CONTROL_USER)
