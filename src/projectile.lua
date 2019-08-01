@@ -17,7 +17,6 @@ end
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
-    local toRemove = {}
     for idx, projectile in pairs(projectiles) do
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
@@ -58,19 +57,19 @@ local clearProjectiles = function()
 
             local distVector = vector.create(totalDistX, totalDistY)
 
-            local v1 = vector.normalize(distVector)
-            v1 = vector.multiply(v1, projectile.speed * elapsedTime)
+            local deltaV = vector.normalize(distVector)
+            deltaV = vector.multiply(deltaV, projectile.speed * elapsedTime)
 
-            if vector.magnitude(v1) >= vector.magnitude(distVector) then
-                v1 = distVector
+            if vector.magnitude(deltaV) >= vector.magnitude(distVector) then
+                deltaV = distVector
             end
 
-            v1 = vector.add(
-                v1,
+            deltaV = vector.add(
+                deltaV,
                 vector.create(curProjectileX, curProjectileY))
 
-            SetUnitX(projectile.unit, v1.x)
-            SetUnitY(projectile.unit, v1.y)
+            SetUnitX(projectile.unit, deltaV.x)
+            SetUnitY(projectile.unit, deltaV.y)
         end
     end
     local newProjectiles = {}
