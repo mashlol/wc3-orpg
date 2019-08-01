@@ -4,6 +4,9 @@ local projectile = require("src/projectile.lua")
 local vector = require('src/vector.lua')
 
 local castFireball = function(playerId, hero, heroV, mouseV)
+    IssueImmediateOrder(hero, "stop")
+    SetUnitAnimationByIndex(hero, 4)
+
     SetUnitFacingTimed(
             hero,
             bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
@@ -14,10 +17,21 @@ local castFireball = function(playerId, hero, heroV, mouseV)
             heroV,
             mouseV,
             900,
-            500)
+            500,
+            function(collidedUnit)
+                UnitDamageTargetBJ(
+                    hero,
+                    collidedUnit,
+                    100,
+                    ATTACK_TYPE_PIERCE,
+                    DAMAGE_TYPE_UNKNOWN)
+            end)
 end
 
 local castFrostNova = function(playerId, hero, heroV, mouseV)
+    IssueImmediateOrder(hero, "stop")
+    SetUnitAnimationByIndex(hero, 5)
+
     for i=0,360,20 do
         local toV = vector.fromAngle(bj_DEGTORAD * i)
 
@@ -27,7 +41,23 @@ local castFrostNova = function(playerId, hero, heroV, mouseV)
             heroV,
             vector.add(heroV, toV),
             450,
-            250)
+            250,
+            function(collidedUnit)
+                 local dummy = CreateUnit(
+                    Player(playerId),
+                    FourCC("hfoo"),
+                    GetUnitX(collidedUnit),
+                    GetUnitY(collidedUnit), 0)
+
+                ShowUnit(dummy, false)
+
+                UnitRemoveAbility(dummy, FourCC('Aatk'))
+                UnitAddAbility(dummy, FourCC('Aenr'))
+
+                IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
+
+                UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+            end)
     end
 end
 
@@ -39,9 +69,6 @@ local keyPressed = function()
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
-
-    IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 4)
 
     if BlzGetTriggerPlayerKey() == OSKEY_Q then
         castFireball(playerId, hero, heroV, mouseV)
