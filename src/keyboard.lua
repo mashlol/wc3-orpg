@@ -28,6 +28,68 @@ local castFireball = function(playerId, hero, heroV, mouseV)
             end)
 end
 
+local castFrostOrb = function(playerId, hero, heroV, mouseV)
+    IssueImmediateOrder(hero, "stop")
+    SetUnitAnimationByIndex(hero, 10)
+
+    -- SetUnitFacingTimed(
+    --         hero,
+    --         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
+    --         0.05)
+    -- projectile.createProjectile(
+    --         playerId,
+    --         "efor",
+    --         heroV,
+    --         mouseV,
+    --         900,
+    --         500,
+    --         function(collidedUnit)
+    --             UnitDamageTargetBJ(
+    --                 hero,
+    --                 collidedUnit,
+    --                 100,
+    --                 ATTACK_TYPE_PIERCE,
+    --                 DAMAGE_TYPE_UNKNOWN)
+    --         end)
+
+    for x=0,30,10 do
+        for i=x,360+x,40 do
+            local toV = vector.fromAngle(bj_DEGTORAD * i)
+
+            projectile.createProjectile(
+                playerId,
+                "efor",
+                heroV,
+                vector.add(heroV, toV),
+                300,
+                350,
+                function(collidedUnit)
+                    UnitDamageTargetBJ(
+                        hero,
+                        collidedUnit,
+                        300,
+                        ATTACK_TYPE_PIERCE,
+                        DAMAGE_TYPE_UNKNOWN)
+                    -- local dummy = CreateUnit(
+                    --     Player(playerId),
+                    --     FourCC("hfoo"),
+                    --     GetUnitX(collidedUnit),
+                    --     GetUnitY(collidedUnit), 0)
+
+                    -- ShowUnit(dummy, false)
+
+                    -- UnitRemoveAbility(dummy, FourCC('Aatk'))
+                    -- UnitAddAbility(dummy, FourCC('Aenr'))
+
+                    -- IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
+
+                    -- UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+                end)
+        end
+        TriggerSleepAction(0.03)
+    end
+end
+
 local castFrostNova = function(playerId, hero, heroV, mouseV)
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 5)
@@ -38,8 +100,8 @@ local castFrostNova = function(playerId, hero, heroV, mouseV)
         projectile.createProjectile(
             playerId,
             "efnv",
-            heroV,
-            vector.add(heroV, toV),
+            mouseV,
+            vector.add(mouseV, toV),
             450,
             250,
             function(collidedUnit)
@@ -74,6 +136,8 @@ local keyPressed = function()
         castFireball(playerId, hero, heroV, mouseV)
     elseif BlzGetTriggerPlayerKey() == OSKEY_W then
         castFrostNova(playerId, hero, heroV, mouseV)
+    elseif BlzGetTriggerPlayerKey() == OSKEY_E then
+        castFrostOrb(playerId, hero, heroV, mouseV)
     end
 end
 
@@ -86,6 +150,9 @@ local init = function()
 
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_W, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_W, 0, true)
+
+    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_E, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_E, 0, true)
 
     TriggerAddAction(trigger, keyPressed)
 end
