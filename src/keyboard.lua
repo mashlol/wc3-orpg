@@ -2,6 +2,7 @@ local mouse = require("src/mouse.lua")
 local hero = require("src/hero.lua")
 local projectile = require("src/projectile.lua")
 local vector = require('src/vector.lua')
+local effect = require('src/effect.lua')
 
 local castFireball = function(playerId, hero, heroV, mouseV)
     IssueImmediateOrder(hero, "stop")
@@ -11,80 +12,51 @@ local castFireball = function(playerId, hero, heroV, mouseV)
             hero,
             bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
             0.05)
-    projectile.createProjectile(
-            playerId,
-            "ehip",
-            heroV,
-            mouseV,
-            900,
-            500,
-            function(collidedUnit)
-                UnitDamageTargetBJ(
-                    hero,
-                    collidedUnit,
-                    100,
-                    ATTACK_TYPE_PIERCE,
-                    DAMAGE_TYPE_UNKNOWN)
-            end)
+
+    projectile.createProjectile{
+        playerId = playerId,
+        model = "eoil",
+        fromV = heroV,
+        toV = mouseV,
+        speed = 900,
+        length = 500,
+        destroyOnCollide = true,
+        onCollide = function(collidedUnit)
+            UnitDamageTargetBJ(
+                hero,
+                collidedUnit,
+                100,
+                ATTACK_TYPE_PIERCE,
+                DAMAGE_TYPE_UNKNOWN)
+        end
+    }
 end
 
 local castFrostOrb = function(playerId, hero, heroV, mouseV)
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 10)
 
-    -- SetUnitFacingTimed(
-    --         hero,
-    --         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
-    --         0.05)
-    -- projectile.createProjectile(
-    --         playerId,
-    --         "efor",
-    --         heroV,
-    --         mouseV,
-    --         900,
-    --         500,
-    --         function(collidedUnit)
-    --             UnitDamageTargetBJ(
-    --                 hero,
-    --                 collidedUnit,
-    --                 100,
-    --                 ATTACK_TYPE_PIERCE,
-    --                 DAMAGE_TYPE_UNKNOWN)
-    --         end)
-
     for x=0,30,10 do
         for i=x,360+x,40 do
             local toV = vector.fromAngle(bj_DEGTORAD * i)
 
-            projectile.createProjectile(
-                playerId,
-                "efor",
-                heroV,
-                vector.add(heroV, toV),
-                300,
-                350,
-                function(collidedUnit)
+            projectile.createProjectile{
+                playerId = playerId,
+                model = "efor",
+                fromV = heroV,
+                toV = vector.add(heroV, toV),
+                speed = 300,
+                length = 350,
+                destroyOnCollide = true,
+                onCollide = function(collidedUnit)
                     UnitDamageTargetBJ(
                         hero,
                         collidedUnit,
                         300,
                         ATTACK_TYPE_PIERCE,
                         DAMAGE_TYPE_UNKNOWN)
-                    -- local dummy = CreateUnit(
-                    --     Player(playerId),
-                    --     FourCC("hfoo"),
-                    --     GetUnitX(collidedUnit),
-                    --     GetUnitY(collidedUnit), 0)
-
-                    -- ShowUnit(dummy, false)
-
-                    -- UnitRemoveAbility(dummy, FourCC('Aatk'))
-                    -- UnitAddAbility(dummy, FourCC('Aenr'))
-
-                    -- IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
-
-                    -- UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
-                end)
+                end
+            }
         end
         TriggerSleepAction(0.03)
     end
@@ -97,19 +69,25 @@ local castFrostNova = function(playerId, hero, heroV, mouseV)
     for i=0,360,20 do
         local toV = vector.fromAngle(bj_DEGTORAD * i)
 
-        projectile.createProjectile(
-            playerId,
-            "efnv",
-            mouseV,
-            vector.add(mouseV, toV),
-            450,
-            250,
-            function(collidedUnit)
-                 local dummy = CreateUnit(
+        projectile.createProjectile{
+            playerId = playerId,
+            model = "efnv",
+            fromV = mouseV,
+            toV = vector.add(mouseV, toV),
+            speed = 450,
+            length = 250,
+            onCollide = function(collidedUnit)
+                local dummy = CreateUnit(
                     Player(playerId),
                     FourCC("hfoo"),
                     GetUnitX(collidedUnit),
                     GetUnitY(collidedUnit), 0)
+
+                effect.createEffect{
+                    model = "efir",
+                    unit = collidedUnit,
+                    duration = 0.5,
+                }
 
                 ShowUnit(dummy, false)
 
@@ -119,7 +97,8 @@ local castFrostNova = function(playerId, hero, heroV, mouseV)
                 IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
 
                 UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
-            end)
+            end
+        }
     end
 end
 
