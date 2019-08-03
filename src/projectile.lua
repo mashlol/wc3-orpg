@@ -8,6 +8,14 @@ local isCloseTo = function(val, expected)
     return val + 15 >= expected and val - 15 <= expected
 end
 
+local destroyProjectile = function(projectile)
+    KillUnit(projectile.unit)
+    projectile.toRemove = true
+    if projectile.options.onDestroy then
+        projectile.options.onDestroy()
+    end
+end
+
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
@@ -17,37 +25,41 @@ local clearProjectiles = function()
 
         local grp = GetUnitsInRangeOfLocAll(50, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
-            local ownerHero = hero.getHero(projectile.playerId)
+            local ownerHero = hero.getHero(projectile.options.playerId)
             local collidedUnit = GetEnumUnit()
             if
                 collidedUnit ~= ownerHero and
                 GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
                 projectile.toRemove ~= true
             then
-                projectile.collisionLambda(collidedUnit)
-                KillUnit(projectile.unit)
-                projectile.toRemove = true
+                if projectile.options.onCollide then
+                    projectile.options.onCollide(collidedUnit)
+                end
+                if projectile.options.destroyOnCollide then
+                    destroyProjectile(projectile)
+                end
             end
         end)
 
         if projectile.toRemove then
-
+            -- do nothing
         elseif
-            isCloseTo(curProjectileX, projectile.toX) and
-            isCloseTo(curProjectileY, projectile.toY)
+            isCloseTo(curProjectileX, projectile.options.toV.x) and
+            isCloseTo(curProjectileY, projectile.options.toV.y)
         then
             -- Already at destination, can finish
-            KillUnit(projectile.unit)
-            projectile.toRemove = true
+            destroyProjectile(projectile)
         else
             -- Move toward destination at speed
-            local totalDistX = projectile.toX - curProjectileX
-            local totalDistY = projectile.toY - curProjectileY
+            local totalDistX = projectile.options.toV.x - curProjectileX
+            local totalDistY = projectile.options.toV.y - curProjectileY
 
             local distVector = vector.create(totalDistX, totalDistY)
 
             local deltaV = vector.normalize(distVector)
-            deltaV = vector.multiply(deltaV, projectile.speed * elapsedTime)
+            deltaV = vector.multiply(
+                deltaV,
+                projectile.options.speed * elapsedTime)
 
             if vector.magnitude(deltaV) >= vector.magnitude(distVector) then
                 deltaV = distVector
@@ -75,29 +87,25 @@ local init = function()
     TimerStart(timer, 0.03125, true, clearProjectiles)
 end
 
-local createProjectile = function(playerId, model, fromV, toV, speed, length, collisionLambda)
-    if length ~= nil then
-        local lengthNormalizedV = vector.subtract(toV, fromV)
+local createProjectile = function(options)
+    if options.length ~= nil then
+        local lengthNormalizedV = vector.subtract(options.toV, options.fromV)
         lengthNormalizedV = vector.normalize(lengthNormalizedV)
-        lengthNormalizedV = vector.multiply(lengthNormalizedV, length)
-        lengthNormalizedV = vector.add(fromV, lengthNormalizedV)
-        toV = lengthNormalizedV
+        lengthNormalizedV = vector.multiply(lengthNormalizedV, options.length)
+        lengthNormalizedV = vector.add(options.fromV, lengthNormalizedV)
+        options.toV = lengthNormalizedV
     end
 
     local projectile = CreateUnit(
-        Player(0),
-        FourCC(model),
-        fromV.x,
-        fromV.y,
-        bj_RADTODEG * Atan2(toV.y - fromV.y, toV.x - fromV.x))
+        Player(24),
+        FourCC(options.model),
+        options.fromV.x,
+        options.fromV.y,
+        bj_RADTODEG * Atan2(options.toV.y - options.fromV.y, options.toV.x - options.fromV.x))
 
     table.insert(projectiles, {
         unit = projectile,
-        toX = toV.x,
-        toY = toV.y,
-        speed = speed,
-        playerId = playerId,
-        collisionLambda = collisionLambda,
+        options = options,
     })
 
     return projectile
