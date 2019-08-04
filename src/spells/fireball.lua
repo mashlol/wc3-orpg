@@ -5,7 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 1
+local COOLDOWN_S = 0.5
 
 local cooldowns = {}
 
