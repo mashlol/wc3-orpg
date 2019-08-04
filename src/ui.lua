@@ -311,18 +311,37 @@ local updateUnitFrame = function(unit, frames)
     end
 end
 
+local convertCdToString = function(cd)
+    if cd <= 10 and cd >= 0 then
+        local cdStr = SubString(cd, 0, 4)
+
+        return cd > 0 and cdStr.."s" or ""
+    end
+
+    if cd >= 1 and cd < 60 then
+        return R2I(cd).."s"
+    end
+
+    if cd >= 60 and cd < 3600 then
+        local mins = R2I(cd / 60)
+        local sec = R2I(cd % 60)
+
+        return mins.."m"..(sec > 0 and sec.."s" or "")
+    end
+
+    local hours = R2I(cd / 3600)
+    local min = R2I(cd % 3600 / 60)
+
+    return hours.."h"..(min > 0 and min.."m" or "")
+end
+
 local updateActionBar = function()
     for idx,actionItem in pairs(actionBar.actionItems) do
         local cd = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
 
-        local cdStr
-        if cd <= 1 and cd > 0 then
-            cdStr = SubString(cd, 0, 4)
-        end
-
         BlzFrameSetText(
             actionItem.actionCooldownText,
-            cd > 0 and cdStr.."s" or "")
+            convertCdToString(cd))
 
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
