@@ -4,6 +4,7 @@ local mouse = require('src/mouse.lua')
 local projectile = require('src/projectile.lua')
 local cleanup = require('src/cleanup.lua')
 local effect = require('src/effect.lua')
+local ui = require('src/ui.lua')
 
 local debug = require('src/debug.lua')
 
@@ -14,6 +15,7 @@ local mainInit = function()
     projectile.init()
     cleanup.init()
     effect.init()
+    ui.init()
 
     -- TODO remove for release
     debug.init()
