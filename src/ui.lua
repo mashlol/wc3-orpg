@@ -1,4 +1,5 @@
 local hero = require('src/hero.lua')
+local target = require('src/target.lua')
 
 local ACTION_ITEM_SIZE = 0.04
 local BAR_WIDTH = ACTION_ITEM_SIZE * 5
@@ -186,16 +187,38 @@ local initCustomUI = function()
     targetFrames = initUnitFrame(0.54)
 end
 
+local updateUnitFrame = function(unit, frames)
+    if unit == nil then
+        -- TODO hide frames
+    else
+        local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
+        local maxHp = BlzGetUnitMaxHP(unit)
+        local mana = BlzGetUnitRealField(unit, UNIT_RF_MANA)
+        local maxMana = BlzGetUnitMaxMana(unit)
+
+        if maxHp ~= 0 then
+            BlzFrameSetSize(frames.healthBar, BAR_WIDTH * hp / maxHp, BAR_HEIGHT)
+        else
+            BlzFrameSetSize(frames.healthBar, 0, BAR_HEIGHT)
+        end
+        if maxMana ~= 0 then
+            BlzFrameSetSize(frames.energyBar, BAR_WIDTH * mana / maxMana, BAR_HEIGHT)
+        else
+            BlzFrameSetSize(frames.energyBar, 0, BAR_HEIGHT)
+        end
+    end
+end
+
 local updateCustomUI = function()
     -- Loops and updates the custom UI values
-    local hero = hero.getHero(GetPlayerId(GetLocalPlayer()))
-    local hp = BlzGetUnitRealField(hero, UNIT_RF_HP)
-    local maxHp = BlzGetUnitMaxHP(hero)
-    local mana = BlzGetUnitRealField(hero, UNIT_RF_MANA)
-    local maxMana = BlzGetUnitMaxMana(hero)
+    local playerId = GetPlayerId(GetLocalPlayer())
+    local hero = hero.getHero(playerId)
+    local target = target.getTarget(playerId)
 
-    BlzFrameSetSize(myFrames.healthBar, BAR_WIDTH * hp / maxHp, BAR_HEIGHT)
-    BlzFrameSetSize(myFrames.energyBar, BAR_WIDTH * mana / maxMana, BAR_HEIGHT)
+    -- print("Target is ", target)
+
+    updateUnitFrame(hero, myFrames)
+    updateUnitFrame(target, targetFrames)
 end
 
 local init = function()
