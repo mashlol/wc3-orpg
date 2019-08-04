@@ -22,9 +22,13 @@ for FILENAME in src/**/*.lua; do
     fi
 done
 
+echo 'Creating require map'
+
 for FILENAME in src/**/*.lua; do
    printf "requireMap[\"$FILENAME\"] = $(echo $FILENAME | sed -e 's/\//_/g' -e 's/\./_/g')\n" >> bin/war3map_compiled.lua
 done
+
+echo 'Dumping main.lua'
 
 printf "\n\n" >> bin/war3map_compiled.lua
 
@@ -32,7 +36,11 @@ cat src/main.lua >> bin/war3map_compiled.lua
 
 printf "\n\n" >> bin/war3map_compiled.lua
 
+echo 'Compiling final lua file'
+
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
+
+echo 'Moving and cleaning up temp lua files'
 
 mv bin/war3map_replaced.lua bin/war3map.lua
 rm bin/war3map_compiled.lua
