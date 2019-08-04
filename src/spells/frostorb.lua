@@ -5,7 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.5
+local COOLDOWN_S = 160
 
 local cooldowns = {}
 
@@ -14,7 +14,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        print("Fireball is on cooldown!")
+        print("Frost Orb is on cooldown!")
         return false
     end
 
@@ -31,30 +31,32 @@ local cast = function(playerId)
         mouse.getMouseY(playerId))
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 4)
+    SetUnitAnimationByIndex(hero, 7)
 
-    SetUnitFacingTimed(
-            hero,
-            bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
-            0.05)
+    for x=0,30,10 do
+        for i=x,360+x,40 do
+            local toV = vector.fromAngle(bj_DEGTORAD * i)
 
-    projectile.createProjectile{
-        playerId = playerId,
-        model = "eoil",
-        fromV = heroV,
-        toV = mouseV,
-        speed = 900,
-        length = 500,
-        destroyOnCollide = true,
-        onCollide = function(collidedUnit)
-            UnitDamageTargetBJ(
-                hero,
-                collidedUnit,
-                100,
-                ATTACK_TYPE_PIERCE,
-                DAMAGE_TYPE_UNKNOWN)
+            projectile.createProjectile{
+                playerId = playerId,
+                model = "efor",
+                fromV = mouseV,
+                toV = vector.add(mouseV, toV),
+                speed = 300,
+                length = 350,
+                destroyOnCollide = true,
+                onCollide = function(collidedUnit)
+                    UnitDamageTargetBJ(
+                        hero,
+                        collidedUnit,
+                        500,
+                        ATTACK_TYPE_PIERCE,
+                        DAMAGE_TYPE_UNKNOWN)
+                end
+            }
         end
-    }
+        TriggerSleepAction(0.03)
+    end
 
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)

@@ -39,7 +39,12 @@ local getCooldown = function(playerId)
     return 0
 end
 
+local getTotalCooldown = function()
+    return COOLDOWN_S
+end
+
 return {
     cast = cast,
     getCooldown = getCooldown,
+    getTotalCooldown = getTotalCooldown,
 }
