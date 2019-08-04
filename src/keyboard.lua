@@ -6,6 +6,7 @@ local KEY_MAPPING = {
     [OSKEY_W] = 2,
     [OSKEY_E] = 3,
     [OSKEY_R] = 4,
+    [OSKEY_F] = 8,
 }
 
 local keyPressed = function()
@@ -29,6 +30,10 @@ local init = function()
 
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_R, 0, true)
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_R, 0, true)
+
+
+    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_F, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_F, 0, true)
 
     TriggerAddAction(trigger, keyPressed)
 end
