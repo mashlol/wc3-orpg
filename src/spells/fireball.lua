@@ -3,6 +3,7 @@ local mouse = require('src/mouse.lua')
 local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
+local log = require('src/log.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.5
@@ -14,7 +15,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        print("Fireball is on cooldown!")
+        log.log(playerId, "Fireball is on cooldown!", log.TYPE.ERROR)
         return false
     end
 

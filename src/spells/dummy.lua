@@ -3,6 +3,7 @@ local mouse = require('src/mouse.lua')
 local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
+local log = require('src/log.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 1
@@ -14,7 +15,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        print("Dummy spell is on cooldown!")
+        log.log(playerId, "Dummy spell is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
@@ -23,7 +24,7 @@ local cast = function(playerId)
         cooldowns[playerId] = nil
     end
 
-    print("Casting dummy spell")
+    log.log(playerId, "Casting dummy spell", log.TYPE.NORMAL)
 
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)

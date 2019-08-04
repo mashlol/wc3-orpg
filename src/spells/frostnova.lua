@@ -3,6 +3,7 @@ local mouse = require('src/mouse.lua')
 local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
+local log = require('src/log.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 15
@@ -14,7 +15,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        print("Frost Nova is on cooldown!")
+        log.log(playerId, "Frost Nova is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
@@ -33,7 +34,7 @@ local cast = function(playerId)
     local dist = vector.subtract(heroV, mouseV)
     local mag = vector.magnitude(dist)
     if mag > 800 then
-        print("Out of range")
+        log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false
     end
 
