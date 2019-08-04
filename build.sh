@@ -1,5 +1,6 @@
 #!/usr/bin/bash
 set -e
+shopt -s globstar
 
 echo "Copying map.w3x to bin/built.w3x"
 cp map.w3x bin/built.w3x
@@ -11,17 +12,18 @@ echo "Generating bin/war3map_compiled.lua"
 
 cat header.lua > bin/war3map_compiled.lua
 
-for FILENAME in src/*.lua; do
+for FILENAME in src/**/*.lua; do
 	if [ $FILENAME != 'src/main.lua' ]
 	then
+        echo "Compiling $FILENAME"
 		printf "\n$FILENAME = function()\n" | sed -e 's/\//_/g' -e 's/\./_/g' >> bin/war3map_compiled.lua
 	    cat $FILENAME >> bin/war3map_compiled.lua
 	    printf "\nend\n" >> bin/war3map_compiled.lua
     fi
 done
 
-for FILENAME in src/*.lua; do
-	printf "requireMap[\"$FILENAME\"] = $(echo $FILENAME | sed -e 's/\//_/g' -e 's/\./_/g')\n" >> bin/war3map_compiled.lua
+for FILENAME in src/**/*.lua; do
+   printf "requireMap[\"$FILENAME\"] = $(echo $FILENAME | sed -e 's/\//_/g' -e 's/\./_/g')\n" >> bin/war3map_compiled.lua
 done
 
 printf "\n\n" >> bin/war3map_compiled.lua
