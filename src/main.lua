@@ -6,6 +6,7 @@ local cleanup = require('src/cleanup.lua')
 local effect = require('src/effect.lua')
 local ui = require('src/ui.lua')
 local target = require('src/target.lua')
+local leaver = require('src/leaver.lua')
 
 local debug = require('src/debug.lua')
 
@@ -18,6 +19,7 @@ local mainInit = function()
     effect.init()
     ui.init()
     target.init()
+    leaver.init()
 
     -- TODO remove for release
     debug.init()
