@@ -23,7 +23,7 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(50, GetUnitLoc(projectile.unit))
+        local grp = GetUnitsInRangeOfLocAll(1000, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
             local ownerHero = hero.getHero(projectile.options.playerId)
             local collidedUnit = GetEnumUnit()
@@ -32,11 +32,24 @@ local clearProjectiles = function()
                 GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
                 projectile.toRemove ~= true
             then
-                if projectile.options.onCollide then
-                    projectile.options.onCollide(collidedUnit)
-                end
-                if projectile.options.destroyOnCollide then
-                    destroyProjectile(projectile)
+                local collisionSize = BlzGetUnitCollisionSize(collidedUnit)
+                local projectileV = vector.create(curProjectileX, curProjectileY)
+                local collidedV = vector.create(
+                    GetUnitX(collidedUnit), GetUnitY(collidedUnit))
+                local collisionDist = vector.subtract(projectileV, collidedV)
+                collisionDist = vector.normalize(collisionDist)
+                collisionDist = vector.multiply(collisionDist, collisionSize)
+                collisionDist = vector.add(collisionDist, collidedV)
+                collisionDist = vector.subtract(projectileV, collisionDist)
+                collisionDist = vector.magnitude(collisionDist)
+
+                if collisionDist <= 50 then
+                    if projectile.options.onCollide then
+                        projectile.options.onCollide(collidedUnit)
+                    end
+                    if projectile.options.destroyOnCollide then
+                        destroyProjectile(projectile)
+                    end
                 end
             end
         end)
