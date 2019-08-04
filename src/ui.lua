@@ -6,7 +6,7 @@ local BAR_WIDTH = ACTION_ITEM_SIZE * 5
 local BAR_HEIGHT = 0.01
 
 local TEMP_ICONS = {
-    "ReplaceableTextures\\CommandButtons\\BTNAbomination",
+    "ReplaceableTextures\\CommandButtons\\BTNEnchantedGemstone.blp",
     "ReplaceableTextures\\CommandButtons\\BTNAbsorbMagic.blp",
     "ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp",
     "ReplaceableTextures\\CommandButtons\\BTNAmbushDay.blp",
@@ -163,6 +163,50 @@ local initActionBar = function()
             0,
             true)
 
+        local actionCooldownBackdrop = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionCooldownBackdrop",
+            actionItem,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionCooldownBackdrop, ACTION_ITEM_SIZE, ACTION_ITEM_SIZE / 2)
+        BlzFrameSetPoint(
+            actionCooldownBackdrop,
+            FRAMEPOINT_BOTTOM,
+            actionItem,
+            FRAMEPOINT_BOTTOM,
+            0,
+            0)
+        BlzFrameSetTexture(
+            actionCooldownBackdrop,
+            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            0,
+            true)
+        BlzFrameSetAlpha(actionCooldownBackdrop, 200)
+
+        local actionTintBackdrop = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionTintBackdrop",
+            actionItem,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionTintBackdrop, ACTION_ITEM_SIZE, ACTION_ITEM_SIZE)
+        BlzFrameSetPoint(
+            actionTintBackdrop,
+            FRAMEPOINT_BOTTOM,
+            actionItem,
+            FRAMEPOINT_BOTTOM,
+            0,
+            0)
+        BlzFrameSetTexture(
+            actionTintBackdrop,
+            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            0,
+            true)
+        BlzFrameSetAlpha(actionTintBackdrop, 60)
+
         local actionHotkey = BlzCreateFrameByType(
             "TEXT",
             "actionItemHotkey",
@@ -178,6 +222,24 @@ local initActionBar = function()
             FRAMEPOINT_TOP_LEFT,
             0.002,
             -0.002)
+
+         local actionCooldownText = BlzCreateFrameByType(
+            "TEXT",
+            "actionCooldownText",
+            actionItem,
+            "",
+            0)
+        BlzFrameSetSize(actionCooldownText, ACTION_ITEM_SIZE, ACTION_ITEM_SIZE)
+        BlzFrameSetText(actionCooldownText, "3m")
+        BlzFrameSetPoint(
+            actionCooldownText,
+            FRAMEPOINT_CENTER,
+            actionItem,
+            FRAMEPOINT_CENTER,
+            0,
+            0)
+        BlzFrameSetTextAlignment(
+            actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
     end
 end
 
