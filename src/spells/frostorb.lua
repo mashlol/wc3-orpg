@@ -30,6 +30,17 @@ local cast = function(playerId)
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
 
+    local dist = vector.subtract(heroV, mouseV)
+    local mag = vector.magnitude(dist)
+    if mag > 800 then
+        print("Out of range")
+        return false
+    end
+
+    local timer = CreateTimer()
+    TimerStart(timer, COOLDOWN_S, false, nil)
+    cooldowns[playerId] = timer
+
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 7)
 

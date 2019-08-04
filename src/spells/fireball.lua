@@ -23,6 +23,11 @@ local cast = function(playerId)
         cooldowns[playerId] = nil
     end
 
+
+    local timer = CreateTimer()
+    TimerStart(timer, COOLDOWN_S, false, nil)
+    cooldowns[playerId] = timer
+
     local hero = hero.getHero(playerId)
 
     local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
@@ -55,10 +60,6 @@ local cast = function(playerId)
                 DAMAGE_TYPE_UNKNOWN)
         end
     }
-
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
 
     return true
 end

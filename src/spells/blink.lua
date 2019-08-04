@@ -5,7 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 20
+local COOLDOWN_S = 5
 
 local cooldowns = {}
 
@@ -24,9 +24,21 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
+    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
+
+    local dist = vector.subtract(heroV, mouseV)
+    local mag = vector.magnitude(dist)
+    if mag > 800 then
+        print("Out of range")
+        return false
+    end
+
+    local timer = CreateTimer()
+    TimerStart(timer, COOLDOWN_S, false, nil)
+    cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 8)
@@ -37,20 +49,19 @@ local cast = function(playerId)
         duration = 0.5,
     }
 
-    TriggerSleepAction(0.2)
+    TriggerSleepAction(0.3)
 
     SetUnitX(hero, mouseV.x)
     SetUnitY(hero, mouseV.y)
+    SetUnitFacing(
+        hero,
+        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
 
     effect.createEffect{
         model = "eblk",
         unit = hero,
         duration = 0.5,
     }
-
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
 
     return true
 end
