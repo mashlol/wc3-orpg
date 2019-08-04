@@ -1,12 +1,10 @@
 targets = {}
 
 local onUnitSelected = function()
-    print("Selected a unit", GetTriggerUnit())
     targets[GetPlayerId(GetTriggerPlayer())] = GetTriggerUnit()
 end
 
 local onUnitDeselected = function()
-    print("Deselected a unit", GetTriggerUnit())
     targets[GetPlayerId(GetTriggerPlayer())] = nil
 end
 

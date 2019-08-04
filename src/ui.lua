@@ -215,8 +215,6 @@ local updateCustomUI = function()
     local hero = hero.getHero(playerId)
     local target = target.getTarget(playerId)
 
-    -- print("Target is ", target)
-
     updateUnitFrame(hero, myFrames)
     updateUnitFrame(target, targetFrames)
 end
