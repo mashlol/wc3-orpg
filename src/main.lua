@@ -5,6 +5,7 @@ local projectile = require('src/projectile.lua')
 local cleanup = require('src/cleanup.lua')
 local effect = require('src/effect.lua')
 local ui = require('src/ui.lua')
+local target = require('src/target.lua')
 
 local debug = require('src/debug.lua')
 
@@ -16,6 +17,7 @@ local mainInit = function()
     cleanup.init()
     effect.init()
     ui.init()
+    target.init()
 
     -- TODO remove for release
     debug.init()
