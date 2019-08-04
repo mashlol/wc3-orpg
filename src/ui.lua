@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local target = require('src/target.lua')
+local spell = require('src/spell.lua')
 
 local ACTION_ITEM_SIZE = 0.04
 local BAR_WIDTH = ACTION_ITEM_SIZE * 5
@@ -26,6 +27,7 @@ local DEFAULT_HOTKEYS = {
     "Z", "X", "C", "V"
 }
 
+local actionBar
 local myFrames
 local targetFrames
 
@@ -165,6 +167,7 @@ local initActionBar = function()
     BlzFrameSetSize(actionBar, ACTION_ITEM_SIZE * 12, ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(actionBar, FRAMEPOINT_CENTER, 0.4, ACTION_ITEM_SIZE)
 
+    local actionItems = {}
     for i=0,11,1 do
         local actionItem = BlzCreateFrameByType(
             "BACKDROP",
@@ -263,11 +266,20 @@ local initActionBar = function()
             0)
         BlzFrameSetTextAlignment(
             actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
+        table.insert(actionItems, {
+            actionCooldownBackdrop = actionCooldownBackdrop,
+            actionCooldownText = actionCooldownText,
+        })
     end
+
+    return {
+        actionItems = actionItems,
+    }
 end
 
 local initCustomUI = function()
-    initActionBar()
+    actionBar = initActionBar()
     myFrames = initUnitFrame(0.26)
     targetFrames = initUnitFrame(0.54)
 end
@@ -299,6 +311,26 @@ local updateUnitFrame = function(unit, frames)
     end
 end
 
+local updateActionBar = function()
+    for idx,actionItem in pairs(actionBar.actionItems) do
+        local cd = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
+
+        local cdStr
+        if cd <= 1 and cd > 0 then
+            cdStr = SubString(cd, 0, 4)
+        end
+
+        BlzFrameSetText(
+            actionItem.actionCooldownText,
+            cd > 0 and cdStr.."s" or "")
+
+        BlzFrameSetSize(
+            actionItem.actionCooldownBackdrop,
+            ACTION_ITEM_SIZE,
+            ACTION_ITEM_SIZE * cd)
+    end
+end
+
 local updateCustomUI = function()
     -- Loops and updates the custom UI values
     local playerId = GetPlayerId(GetLocalPlayer())
@@ -307,6 +339,7 @@ local updateCustomUI = function()
 
     updateUnitFrame(hero, myFrames)
     updateUnitFrame(target, targetFrames)
+    updateActionBar()
 end
 
 local init = function()

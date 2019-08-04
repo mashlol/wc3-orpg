@@ -1,6 +1,7 @@
 local effects = {}
 
 local clearEffects = function()
+    -- TODO DESTROY THE TIMER
     local elapsedTime = TimerGetElapsed(timer)
 
     for idx, effect in pairs(effects) do
