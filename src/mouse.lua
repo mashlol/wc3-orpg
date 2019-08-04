@@ -27,18 +27,26 @@ local mouseUp = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local btn = BlzGetTriggerPlayerMouseButton()
     if btn == MOUSE_BUTTON_TYPE_RIGHT then
-        -- Move hero to pos
+        local mouseUnit = BlzGetMouseFocusUnit()
         local hero = hero.getHero(playerId)
-        IssuePointOrderLoc(hero, "move", pos)
-        effect.createEffect{
-            model =
-                playerId == GetPlayerId(GetLocalPlayer()) and
-                "econ" or
-                "enon",
-            duration = 1,
-            x = GetLocationX(pos),
-            y = GetLocationY(pos),
-        }
+        if mouseUnit ~= nil then
+            if GetPlayerId(GetLocalPlayer()) == playerId then
+                -- TODO test if this causes a desync
+                SelectUnit(mouseUnit, true)
+                IssueTargetOrder(hero, "attack", mouseUnit)
+            end
+        else
+            IssuePointOrderLoc(hero, "move", pos)
+            effect.createEffect{
+                model =
+                    playerId == GetPlayerId(GetLocalPlayer()) and
+                    "econ" or
+                    "enon",
+                duration = 1,
+                x = GetLocationX(pos),
+                y = GetLocationY(pos),
+            }
+        end
     end
 end
 
