@@ -48,10 +48,17 @@ end
 local initUnitFrame = function(xLoc)
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
+    local unitFrameOrigin = BlzCreateFrameByType(
+        "FRAME",
+        "unitFrameOrigin",
+        originFrame,
+        "",
+        0)
+
     local healthBarFrameBackground = BlzCreateFrameByType(
         "BACKDROP",
         "healthBarFrameBackground",
-        originFrame,
+        unitFrameOrigin,
         "",
         0)
     BlzFrameSetSize(healthBarFrameBackground, BAR_WIDTH, BAR_HEIGHT)
@@ -69,7 +76,7 @@ local initUnitFrame = function(xLoc)
     local healthBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
         "healthBarFrameFilled",
-        originFrame,
+        unitFrameOrigin,
         "",
         0)
     BlzFrameSetSize(healthBarFrameFilled, BAR_WIDTH, BAR_HEIGHT)
@@ -89,7 +96,7 @@ local initUnitFrame = function(xLoc)
     local energyBarFrameBackground = BlzCreateFrameByType(
         "BACKDROP",
         "energyBarFrameBackground",
-        originFrame,
+        unitFrameOrigin,
         "",
         0)
     BlzFrameSetSize(energyBarFrameBackground, BAR_WIDTH, BAR_HEIGHT)
@@ -107,7 +114,7 @@ local initUnitFrame = function(xLoc)
     local energyBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
         "energyBarFrameFilled",
-        originFrame,
+        unitFrameOrigin,
         "",
         0)
     BlzFrameSetSize(energyBarFrameFilled, BAR_WIDTH, BAR_HEIGHT)
@@ -124,9 +131,25 @@ local initUnitFrame = function(xLoc)
         0,
         true)
 
+    local unitNameFrame = BlzCreateFrameByType(
+        "TEXT",
+        "unitNameFrame",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(unitNameFrame, BAR_WIDTH, BAR_HEIGHT)
+    BlzFrameSetAbsPoint(
+        unitNameFrame,
+        FRAMEPOINT_CENTER,
+        xLoc,
+        ACTION_ITEM_SIZE + BAR_HEIGHT * 6)
+    BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
+
     return {
         healthBar = healthBarFrameFilled,
         energyBar = energyBarFrameFilled,
+        origin = unitFrameOrigin,
+        name = unitNameFrame,
     }
 end
 
@@ -250,9 +273,14 @@ local initCustomUI = function()
 end
 
 local updateUnitFrame = function(unit, frames)
-    if unit == nil then
-        -- TODO hide frames
+    if unit == nil or GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
+        BlzFrameSetVisible(frames.origin, false)
     else
+        BlzFrameSetVisible(frames.origin, true)
+
+        local name = GetUnitName(unit)
+        BlzFrameSetText(frames.name, name)
+
         local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
         local maxHp = BlzGetUnitMaxHP(unit)
         local mana = BlzGetUnitRealField(unit, UNIT_RF_MANA)
