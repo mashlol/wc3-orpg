@@ -69,10 +69,6 @@ local cast = function(playerId)
         TriggerSleepAction(0.03)
     end
 
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
-
     return true
 end
 
