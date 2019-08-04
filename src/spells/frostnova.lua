@@ -5,7 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.5
+local COOLDOWN_S = 15
 
 local cooldowns = {}
 
@@ -14,7 +14,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        print("Fireball is on cooldown!")
+        print("Frost Nova is on cooldown!")
         return false
     end
 
@@ -31,30 +31,42 @@ local cast = function(playerId)
         mouse.getMouseY(playerId))
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 4)
+    SetUnitAnimationByIndex(hero, 5)
 
-    SetUnitFacingTimed(
-            hero,
-            bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
-            0.05)
+    for i=0,360,20 do
+        local toV = vector.fromAngle(bj_DEGTORAD * i)
 
-    projectile.createProjectile{
-        playerId = playerId,
-        model = "eoil",
-        fromV = heroV,
-        toV = mouseV,
-        speed = 900,
-        length = 500,
-        destroyOnCollide = true,
-        onCollide = function(collidedUnit)
-            UnitDamageTargetBJ(
-                hero,
-                collidedUnit,
-                100,
-                ATTACK_TYPE_PIERCE,
-                DAMAGE_TYPE_UNKNOWN)
-        end
-    }
+        projectile.createProjectile{
+            playerId = playerId,
+            model = "efnv",
+            fromV = mouseV,
+            toV = vector.add(mouseV, toV),
+            speed = 450,
+            length = 250,
+            onCollide = function(collidedUnit)
+                local dummy = CreateUnit(
+                    Player(playerId),
+                    FourCC("hfoo"),
+                    GetUnitX(collidedUnit),
+                    GetUnitY(collidedUnit), 0)
+
+                effect.createEffect{
+                    model = "efir",
+                    unit = collidedUnit,
+                    duration = 0.5,
+                }
+
+                ShowUnit(dummy, false)
+
+                UnitRemoveAbility(dummy, FourCC('Aatk'))
+                UnitAddAbility(dummy, FourCC('Aenr'))
+
+                IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
+
+                UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+            end
+        }
+    end
 
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)

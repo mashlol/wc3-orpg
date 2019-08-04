@@ -337,16 +337,17 @@ end
 
 local updateActionBar = function()
     for idx,actionItem in pairs(actionBar.actionItems) do
-        local cd = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
+        local cdSec = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
+        local cdPct = spell.getCooldownPct(GetPlayerId(GetLocalPlayer()), idx)
 
         BlzFrameSetText(
             actionItem.actionCooldownText,
-            convertCdToString(cd))
+            convertCdToString(cdSec))
 
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
             ACTION_ITEM_SIZE,
-            ACTION_ITEM_SIZE * cd)
+            ACTION_ITEM_SIZE * cdPct)
     end
 end
 
