@@ -3,12 +3,13 @@ local dummy = require('src/spells/dummy.lua')
 local frostnova = require('src/spells/frostnova.lua')
 local frostorb = require('src/spells/frostorb.lua')
 local blink = require('src/spells/blink.lua')
+local heal = require('src/spells/heal.lua')
 
 -- TODO base on hero or let people customize or w/e
 local SPELL_MAP = {
     [1] = fireball,
     [2] = frostnova,
-    [3] = dummy,
+    [3] = heal,
     [4] = frostorb,
     [8] = blink,
 }
