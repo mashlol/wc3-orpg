@@ -33,38 +33,31 @@ local init = function()
     local trigger = CreateTrigger()
 
     -- TODO make for all players
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_Q, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_Q, 0, true)
-
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_W, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_W, 0, true)
-
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_E, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_E, 0, true)
-
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_R, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_R, 0, true)
-
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_F, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(1), OSKEY_F, 0, true)
+    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_Q, 0, true)
+        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_W, 0, true)
+        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_E, 0, true)
+        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_R, 0, true)
+        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_F, 0, true)
+    end
 
     TriggerAddAction(trigger, keyPressed)
 
     local spaceDownTrigger = CreateTrigger()
 
-    BlzTriggerRegisterPlayerKeyEvent(
-        spaceDownTrigger, Player(0), OSKEY_SPACE, 0, true)
-    BlzTriggerRegisterPlayerKeyEvent(
-        spaceDownTrigger, Player(1), OSKEY_SPACE, 0, true)
+    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+        BlzTriggerRegisterPlayerKeyEvent(
+            spaceDownTrigger, Player(i), OSKEY_SPACE, 0, true)
+    end
 
     TriggerAddAction(spaceDownTrigger, spaceDown)
 
     local spaceUpTrigger = CreateTrigger()
 
-    BlzTriggerRegisterPlayerKeyEvent(
-        spaceUpTrigger, Player(0), OSKEY_SPACE, 0, false)
-    BlzTriggerRegisterPlayerKeyEvent(
-        spaceUpTrigger, Player(1), OSKEY_SPACE, 0, false)
+    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+        BlzTriggerRegisterPlayerKeyEvent(
+            spaceUpTrigger, Player(i), OSKEY_SPACE, 0, false)
+    end
 
     TriggerAddAction(spaceUpTrigger, spaceUp)
 end
