@@ -25,12 +25,14 @@ end
 
 local mouseUp = function()
     local btn = BlzGetTriggerPlayerMouseButton()
-    if btn == MOUSE_BUTTON_TYPE_LEFT then
-        local mouseUnit = BlzGetMouseFocusUnit()
-        local playerId = GetPlayerId(GetTriggerPlayer())
-        if playerId == GetPlayerId(GetLocalPlayer()) then
-            target.setTarget(playerId, mouseUnit)
-        end
+    local mouseUnit = BlzGetMouseFocusUnit()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    if
+        playerId == GetPlayerId(GetLocalPlayer()) and
+            (btn == MOUSE_BUTTON_TYPE_LEFT or
+            mouseUnit ~= nil)
+    then
+        target.setTarget(playerId, mouseUnit)
     end
 end
 
