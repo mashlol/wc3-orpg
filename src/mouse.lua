@@ -38,15 +38,12 @@ local init = function()
     local mouseMoveTrigger = CreateTrigger()
     local mouseUpTrigger = CreateTrigger()
 
-    -- TODO make for all players
-    TriggerRegisterPlayerEvent(
-        mouseMoveTrigger, Player(0), EVENT_PLAYER_MOUSE_MOVE)
-    TriggerRegisterPlayerEvent(
-        mouseMoveTrigger, Player(1), EVENT_PLAYER_MOUSE_MOVE)
-
-    TriggerRegisterPlayerEvent(mouseUpTrigger, Player(0), EVENT_PLAYER_MOUSE_DOWN)
-    TriggerRegisterPlayerEvent(mouseUpTrigger, Player(1), EVENT_PLAYER_MOUSE_DOWN)
-
+    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+        TriggerRegisterPlayerEvent(
+            mouseMoveTrigger, Player(i), EVENT_PLAYER_MOUSE_MOVE)
+        TriggerRegisterPlayerEvent(
+            mouseUpTrigger, Player(i), EVENT_PLAYER_MOUSE_DOWN)
+    end
 
     TriggerAddAction(mouseMoveTrigger, mouseMoved)
     TriggerAddAction(mouseUpTrigger, mouseUp)
