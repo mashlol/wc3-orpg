@@ -11,7 +11,8 @@ local leaver = require('src/leaver.lua')
 local debug = require('src/debug.lua')
 
 local mainInit = function()
-    BlzEnableTargetIndicator(false)
+    BlzEnableTargetIndicator(true)
+    BlzEnableSelections(false, false)
 
     hero.init()
     keyboard.init()

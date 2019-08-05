@@ -1,7 +1,13 @@
+local hero = require('src/hero.lua')
+
 targets = {}
 
 local onUnitSelected = function()
-    targets[GetPlayerId(GetTriggerPlayer())] = GetTriggerUnit()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    local targetedUnit = GetTriggerUnit()
+    if targetedUnit ~= hero.getHero(playerId) then
+        targets[playerId] = targetedUnit
+    end
 end
 
 local onUnitDeselected = function()
@@ -26,7 +32,12 @@ local hasTarget = function(playerId)
     return targets[playerId] ~= nil
 end
 
+local setTarget = function(playerId, unit)
+    targets[playerId] = unit
+end
+
 return {
     init = init,
     getTarget = getTarget,
+    setTarget = setTarget,
 }
