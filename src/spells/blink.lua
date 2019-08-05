@@ -6,7 +6,7 @@ local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 5
+local COOLDOWN_S = 0.1
 
 local cooldowns = {}
 

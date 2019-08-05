@@ -23,14 +23,15 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(1000, GetUnitLoc(projectile.unit))
+        local grp = GetUnitsInRangeOfLocAll(800, GetUnitLoc(projectile.unit))
         ForGroupBJ(grp, function()
             local ownerHero = hero.getHero(projectile.options.playerId)
             local collidedUnit = GetEnumUnit()
             if
                 collidedUnit ~= ownerHero and
                 GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
-                projectile.toRemove ~= true
+                projectile.toRemove ~= true and
+                projectile.alreadyCollided[GetHandleId(collidedUnit)] ~= true
             then
                 local collisionSize = BlzGetUnitCollisionSize(collidedUnit)
                 local projectileV = vector.create(curProjectileX, curProjectileY)
@@ -44,6 +45,7 @@ local clearProjectiles = function()
                 collisionDist = vector.magnitude(collisionDist)
 
                 if collisionDist <= 50 then
+                    projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
                     if projectile.options.onCollide then
                         projectile.options.onCollide(collidedUnit)
                     end
@@ -119,6 +121,7 @@ local createProjectile = function(options)
     table.insert(projectiles, {
         unit = projectile,
         options = options,
+        alreadyCollided = {}
     })
 
     return projectile
