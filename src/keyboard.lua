@@ -33,7 +33,7 @@ local init = function()
     local trigger = CreateTrigger()
 
     -- TODO make for all players
-    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+    for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
         BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_Q, 0, true)
         BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_W, 0, true)
         BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_E, 0, true)
@@ -45,7 +45,7 @@ local init = function()
 
     local spaceDownTrigger = CreateTrigger()
 
-    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+    for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
         BlzTriggerRegisterPlayerKeyEvent(
             spaceDownTrigger, Player(i), OSKEY_SPACE, 0, true)
     end
@@ -54,7 +54,7 @@ local init = function()
 
     local spaceUpTrigger = CreateTrigger()
 
-    for i=0,i<bj_MAX_PLAYER_SLOTS,1 do
+    for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
         BlzTriggerRegisterPlayerKeyEvent(
             spaceUpTrigger, Player(i), OSKEY_SPACE, 0, false)
     end
