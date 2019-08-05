@@ -360,6 +360,10 @@ local updateCustomUI = function()
     updateUnitFrame(hero, myFrames)
     updateUnitFrame(target, targetFrames)
     updateActionBar()
+
+    SelectUnit(
+        hero,
+        true)
 end
 
 local init = function()

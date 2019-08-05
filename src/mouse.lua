@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local effect = require('src/effect.lua')
+local target = require('src/target.lua')
 
 local mousePositions = {}
 
@@ -23,29 +24,12 @@ local mouseMoved = function()
 end
 
 local mouseUp = function()
-    local pos = BlzGetTriggerPlayerMousePosition()
-    local playerId = GetPlayerId(GetTriggerPlayer())
     local btn = BlzGetTriggerPlayerMouseButton()
-    if btn == MOUSE_BUTTON_TYPE_RIGHT then
+    if btn == MOUSE_BUTTON_TYPE_LEFT then
         local mouseUnit = BlzGetMouseFocusUnit()
-        local hero = hero.getHero(playerId)
-        if mouseUnit ~= nil then
-            if GetPlayerId(GetLocalPlayer()) == playerId then
-                -- TODO test if this causes a desync
-                SelectUnit(mouseUnit, true)
-                IssueTargetOrder(hero, "attack", mouseUnit)
-            end
-        else
-            IssuePointOrderLoc(hero, "move", pos)
-            effect.createEffect{
-                model =
-                    playerId == GetPlayerId(GetLocalPlayer()) and
-                    "econ" or
-                    "enon",
-                duration = 1,
-                x = GetLocationX(pos),
-                y = GetLocationY(pos),
-            }
+        local playerId = GetPlayerId(GetTriggerPlayer())
+        if playerId == GetPlayerId(GetLocalPlayer()) then
+            target.setTarget(playerId, mouseUnit)
         end
     end
 end
