@@ -46,10 +46,12 @@ local clearProjectiles = function()
 
                 if collisionDist <= 50 then
                     projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
+                    local destroyOnCollide = false
                     if projectile.options.onCollide then
-                        projectile.options.onCollide(collidedUnit)
+                        destroyOnCollide = projectile.options.onCollide(
+                            collidedUnit)
                     end
-                    if projectile.options.destroyOnCollide then
+                    if destroyOnCollide then
                         destroyProjectile(projectile)
                     end
                 end

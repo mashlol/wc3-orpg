@@ -64,7 +64,6 @@ local cast = function(playerId)
                 toV = vector.add(mouseV, toV),
                 speed = 300,
                 length = 350,
-                destroyOnCollide = true,
                 onCollide = function(collidedUnit)
                     if IsUnitEnemy(collidedUnit, Player(playerId)) then
                         UnitDamageTargetBJ(
@@ -73,7 +72,9 @@ local cast = function(playerId)
                             50,
                             ATTACK_TYPE_PIERCE,
                             DAMAGE_TYPE_UNKNOWN)
+                        return true
                     end
+                    return false
                 end
             }
         end
