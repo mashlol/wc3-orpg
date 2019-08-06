@@ -24,17 +24,16 @@ local cast = function(playerId)
         cooldowns[playerId] = nil
     end
 
-
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
-
     local hero = hero.getHero(playerId)
-
     local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
+
+
+    local timer = CreateTimer()
+    TimerStart(timer, COOLDOWN_S, false, nil)
+    cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 4)

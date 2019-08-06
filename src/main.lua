@@ -7,6 +7,7 @@ local effect = require('src/effect.lua')
 local ui = require('src/ui.lua')
 local target = require('src/target.lua')
 local leaver = require('src/leaver.lua')
+local casttime = require('src/casttime.lua')
 
 local debug = require('src/debug.lua')
 
@@ -23,6 +24,7 @@ local mainInit = function()
     ui.init()
     target.init()
     leaver.init()
+    casttime.init()
 
     -- TODO remove for release
     debug.init()

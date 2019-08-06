@@ -1,10 +1,13 @@
 local hero = require('src/hero.lua')
 local target = require('src/target.lua')
 local spell = require('src/spell.lua')
+local casttime = require('src/casttime.lua')
 
 local ACTION_ITEM_SIZE = 0.04
 local BAR_WIDTH = ACTION_ITEM_SIZE * 5
 local BAR_HEIGHT = 0.01
+local CAST_BAR_WIDTH = ACTION_ITEM_SIZE * 4
+local CAST_BAR_HEIGHT = 0.02
 
 local TEMP_ICONS = {
     "ReplaceableTextures\\CommandButtons\\BTNEnchantedGemstone.blp",
@@ -30,6 +33,7 @@ local DEFAULT_HOTKEYS = {
 local actionBar
 local myFrames
 local targetFrames
+local castBarFrames
 
 local hideBlizzUI = function()
     BlzHideOriginFrames(true)
@@ -152,6 +156,53 @@ local initUnitFrame = function(xLoc)
         energyBar = energyBarFrameFilled,
         origin = unitFrameOrigin,
         name = unitNameFrame,
+    }
+end
+
+local initCastBar = function()
+    local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+
+    local castBarFrameBackground = BlzCreateFrameByType(
+        "BACKDROP",
+        "castBarFrameBackground",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(castBarFrameBackground, CAST_BAR_WIDTH, CAST_BAR_HEIGHT)
+    BlzFrameSetAbsPoint(
+        castBarFrameBackground,
+        FRAMEPOINT_CENTER,
+        0.4,
+        ACTION_ITEM_SIZE + BAR_HEIGHT * 10)
+    BlzFrameSetTexture(
+        castBarFrameBackground,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+
+    local castBarFrameFilled = BlzCreateFrameByType(
+        "BACKDROP",
+        "castBarFrameFilled",
+        castBarFrameBackground,
+        "",
+        0)
+    BlzFrameSetSize(castBarFrameFilled, CAST_BAR_WIDTH, CAST_BAR_HEIGHT)
+    BlzFrameSetPoint(
+        castBarFrameFilled,
+        FRAMEPOINT_LEFT,
+        castBarFrameBackground,
+        FRAMEPOINT_LEFT,
+        0,
+        0)
+    BlzFrameSetTexture(
+        castBarFrameFilled,
+        "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
+        0,
+        true)
+
+    return {
+        castBar = castBarFrameFilled,
+        origin = castBarFrameBackground,
     }
 end
 
@@ -282,6 +333,7 @@ local initCustomUI = function()
     actionBar = initActionBar()
     myFrames = initUnitFrame(0.26)
     targetFrames = initUnitFrame(0.54)
+    castBarFrames = initCastBar()
 end
 
 local updateUnitFrame = function(unit, frames)
@@ -351,6 +403,23 @@ local updateActionBar = function()
     end
 end
 
+local updateCastBar = function()
+    local castRemainder = casttime.getCastDurationRemaining(
+        GetPlayerId(GetLocalPlayer()))
+    local castTotal = casttime.getCastDurationTotal(
+        GetPlayerId(GetLocalPlayer()))
+    if castRemainder ~= nil and castTotal ~= nil then
+        BlzFrameSetVisible(castBarFrames.origin, true)
+        -- print(castRemainder, castTotal, castBarFrames.castBar)
+        BlzFrameSetSize(
+            castBarFrames.castBar,
+            CAST_BAR_WIDTH * (1 - castRemainder / castTotal),
+            CAST_BAR_HEIGHT)
+    else
+        BlzFrameSetVisible(castBarFrames.origin, false)
+    end
+end
+
 local updateCustomUI = function()
     -- Loops and updates the custom UI values
     local playerId = GetPlayerId(GetLocalPlayer())
@@ -360,6 +429,7 @@ local updateCustomUI = function()
     updateUnitFrame(hero, myFrames)
     updateUnitFrame(target, targetFrames)
     updateActionBar()
+    updateCastBar()
 
     SelectUnit(
         hero,

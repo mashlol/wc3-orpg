@@ -4,6 +4,7 @@ local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local casttime = require('src/casttime.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.1
@@ -37,6 +38,12 @@ local cast = function(playerId)
         return false
     end
 
+    local isCasting = casttime.isCasting(playerId)
+
+    if isCasting then
+        return false
+    end
+
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
@@ -50,7 +57,7 @@ local cast = function(playerId)
         duration = 0.5,
     }
 
-    TriggerSleepAction(0.3)
+    casttime.cast(playerId, 0.3, false)
 
     SetUnitX(hero, mouseV.x)
     SetUnitY(hero, mouseV.y)
