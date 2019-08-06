@@ -19,7 +19,10 @@ local cast = function(playerId, time, interruptable)
     TriggerSleepAction(time)
 
     local successfulCast = false
-    if castTimes[playerId] ~= nil then
+    if
+        castTimes[playerId] ~= nil and
+        GetHandleId(castTimes[playerId].timer) == GetHandleId(timer)
+    then
         successfulCast = true
         castTimes[playerId] = nil
         DestroyTimer(timer)
