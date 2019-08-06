@@ -51,7 +51,6 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-
     SetUnitAnimationByIndex(hero, 4)
 
     for x=0,30,10 do
