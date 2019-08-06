@@ -62,7 +62,9 @@ local cast = function(playerId)
                     unit = collidedUnit,
                     duration = 0.5,
                 }
+
             end
+            return false
         end
     }
 

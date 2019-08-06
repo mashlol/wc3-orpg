@@ -49,7 +49,6 @@ local cast = function(playerId)
         toV = mouseV,
         speed = 900,
         length = 500,
-        destroyOnCollide = true,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 UnitDamageTargetBJ(
@@ -58,7 +57,9 @@ local cast = function(playerId)
                     100,
                     ATTACK_TYPE_PIERCE,
                     DAMAGE_TYPE_UNKNOWN)
+                return true
             end
+            return false
         end
     }
 

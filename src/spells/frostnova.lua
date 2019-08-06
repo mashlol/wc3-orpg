@@ -78,6 +78,8 @@ local cast = function(playerId)
 
                     UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
                 end
+
+                return false
             end
         }
     end
