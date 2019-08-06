@@ -53,7 +53,7 @@ local cast = function(playerId)
         length = 1000,
         destroyOnCollide = false,
         onCollide = function(collidedUnit)
-            if IsUnitAlly(collidedUnit, playerId) then
+            if IsUnitAlly(collidedUnit, Player(playerId)) then
                 local curHealth = BlzGetUnitRealField(collidedUnit, UNIT_RF_HP)
                 BlzSetUnitRealField(collidedUnit, UNIT_RF_HP, curHealth + 50)
 
