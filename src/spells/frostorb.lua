@@ -4,6 +4,7 @@ local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local casttime = require('src/casttime.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 160
@@ -38,12 +39,20 @@ local cast = function(playerId)
         return false
     end
 
+    IssueImmediateOrder(hero, "stop")
+    SetUnitAnimationByIndex(hero, 7)
+
+    local castSuccess = casttime.cast(playerId, 1)
+    if not castSuccess then
+        return false
+    end
+
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 7)
+
+    SetUnitAnimationByIndex(hero, 4)
 
     for x=0,30,10 do
         for i=x,360+x,40 do
