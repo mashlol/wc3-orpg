@@ -56,7 +56,7 @@ local cast = function(playerId)
             speed = 450,
             length = 250,
             onCollide = function(collidedUnit)
-                if IsUnitEnemy(collidedUnit, playerId) then
+                if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     local dummy = CreateUnit(
                         Player(playerId),
                         FourCC("hfoo"),

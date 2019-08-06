@@ -66,11 +66,11 @@ local cast = function(playerId)
                 length = 350,
                 destroyOnCollide = true,
                 onCollide = function(collidedUnit)
-                    if IsUnitEnemy(collidedUnit, playerId) then
+                    if IsUnitEnemy(collidedUnit, Player(playerId)) then
                         UnitDamageTargetBJ(
                             hero,
                             collidedUnit,
-                            500,
+                            50,
                             ATTACK_TYPE_PIERCE,
                             DAMAGE_TYPE_UNKNOWN)
                     end

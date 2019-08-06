@@ -30,7 +30,6 @@ local cast = function(playerId)
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
 
-
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
@@ -52,7 +51,7 @@ local cast = function(playerId)
         length = 500,
         destroyOnCollide = true,
         onCollide = function(collidedUnit)
-            if IsUnitEnemy(collidedUnit, playerId) then
+            if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 UnitDamageTargetBJ(
                     hero,
                     collidedUnit,
