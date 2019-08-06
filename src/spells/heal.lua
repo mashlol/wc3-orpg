@@ -53,14 +53,16 @@ local cast = function(playerId)
         length = 1000,
         destroyOnCollide = false,
         onCollide = function(collidedUnit)
-            local curHealth = BlzGetUnitRealField(collidedUnit, UNIT_RF_HP)
-            BlzSetUnitRealField(collidedUnit, UNIT_RF_HP, curHealth + 50)
+            if IsUnitAlly(collidedUnit, playerId) then
+                local curHealth = BlzGetUnitRealField(collidedUnit, UNIT_RF_HP)
+                BlzSetUnitRealField(collidedUnit, UNIT_RF_HP, curHealth + 50)
 
-            effect.createEffect{
-                model = "ehet",
-                unit = collidedUnit,
-                duration = 0.5,
-            }
+                effect.createEffect{
+                    model = "ehet",
+                    unit = collidedUnit,
+                    duration = 0.5,
+                }
+            end
         end
     }
 

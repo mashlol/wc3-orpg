@@ -56,26 +56,28 @@ local cast = function(playerId)
             speed = 450,
             length = 250,
             onCollide = function(collidedUnit)
-                local dummy = CreateUnit(
-                    Player(playerId),
-                    FourCC("hfoo"),
-                    GetUnitX(collidedUnit),
-                    GetUnitY(collidedUnit), 0)
+                if IsUnitEnemy(collidedUnit, playerId) then
+                    local dummy = CreateUnit(
+                        Player(playerId),
+                        FourCC("hfoo"),
+                        GetUnitX(collidedUnit),
+                        GetUnitY(collidedUnit), 0)
 
-                effect.createEffect{
-                    model = "efir",
-                    unit = collidedUnit,
-                    duration = 0.5,
-                }
+                    effect.createEffect{
+                        model = "efir",
+                        unit = collidedUnit,
+                        duration = 0.5,
+                    }
 
-                ShowUnit(dummy, false)
+                    ShowUnit(dummy, false)
 
-                UnitRemoveAbility(dummy, FourCC('Aatk'))
-                UnitAddAbility(dummy, FourCC('Aenr'))
+                    UnitRemoveAbility(dummy, FourCC('Aatk'))
+                    UnitAddAbility(dummy, FourCC('Aenr'))
 
-                IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
+                    IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
 
-                UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+                    UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+                end
             end
         }
     end
