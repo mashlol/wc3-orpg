@@ -35,7 +35,7 @@ local cast = function(playerId)
     cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 4)
+    SetUnitAnimationByIndex(hero, 5)
 
     SetUnitFacingTimed(
             hero,
