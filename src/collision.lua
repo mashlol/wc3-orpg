@@ -25,7 +25,7 @@ function getAllCollisions(vec, radius)
     -- Check they are coliding with the vector/radius
 
     local loc = Location(vec.x, vec.y)
-    local grp = GetUnitsInRangeOfLocAll(800, loc)
+    local grp = GetUnitsInRangeOfLocAll(1000, loc)
     local toReturn = {}
     ForGroupBJ(grp, function()
         local collidedUnit = GetEnumUnit()

@@ -33,7 +33,7 @@ local createEffect = function(options)
         FourCC(options.model),
         x,
         y,
-        0)
+        options.facing or 0)
 
     if options.scale then
         SetUnitScale(dummy, options.scale, options.scale, options.scale)
