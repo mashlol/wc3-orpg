@@ -7,17 +7,17 @@ local respawn = function()
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            heroes[i] = CreateUnit(Player(i), FourCC("Hpal"), -150, -125, 0)
+            heroes[i] = CreateUnit(Player(i), FourCC("stfs"), -150, -125, 0)
         end
     end
 end
 
 local init = function()
-	for i=0, bj_MAX_PLAYERS, 1 do
-		if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
-	    	heroes[i] = CreateUnit(Player(i), FourCC("Hpal"), -150, -125, 0)
-    	end
-	end
+    for i=0, bj_MAX_PLAYERS, 1 do
+        if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
+            heroes[i] = CreateUnit(Player(i), FourCC("stfs"), -150, -125, 0)
+        end
+    end
 
     local trigger = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trigger, EVENT_PLAYER_UNIT_DEATH)
@@ -25,7 +25,7 @@ local init = function()
 end
 
 local getHero = function(playerId)
-	return heroes[playerId]
+    return heroes[playerId]
 end
 
 local isHero = function(unit)
@@ -38,7 +38,7 @@ local isHero = function(unit)
 end
 
 return {
-	init = init,
-	getHero = getHero,
+    init = init,
+    getHero = getHero,
     isHero = isHero
 }
