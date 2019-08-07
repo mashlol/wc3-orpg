@@ -1,19 +1,32 @@
+local vector = require('src/vector.lua')
+local hero = require('src/hero.lua')
+
 local boss
 
 local startFightTrigger
 local endFightTrigger
-local timer
+local slamTimer
+local addTimer
 
 local resetFight
 local onFightStarted
 local onFightEnded
 local castSlam
+local spawnAdds
 local isAllInvolvedHeroesDead
 local cleanupFight
 
 local door
 
 local involvedHeroes = {}
+
+local getNumInvolvedHeroes = function()
+    local i = 0
+    for idx, hero in pairs(involvedHeroes) do
+        i = i + 1
+    end
+    return i
+end
 
 isAllInvolvedHeroesDead = function()
     for idx, hero in pairs(involvedHeroes) do
@@ -25,12 +38,33 @@ isAllInvolvedHeroesDead = function()
 end
 
 castSlam = function()
-    print(IssueImmediateOrder(boss, "creepthunderclap"))
+    IssueImmediateOrder(boss, "creepthunderclap")
+end
+
+spawnAdds = function()
+    for i=0,2,1 do
+        local spawnLocation = vector.fromAngle(GetRandomReal(0, bj_PI))
+        spawnLocation = vector.multiply(
+            spawnLocation, BlzGetUnitCollisionSize(boss) + 150)
+        spawnLocation = vector.add(
+            spawnLocation, vector.create(GetUnitX(boss), GetUnitY(boss)))
+        local add = CreateUnit(
+            Player(24),
+            FourCC("hmbs"),
+            spawnLocation.x,
+            spawnLocation.y,
+            135.939)
+        IssueTargetOrder(
+            add,
+            "attack",
+            involvedHeroes[GetRandomInt(1, getNumInvolvedHeroes())])
+    end
 end
 
 cleanupFight = function()
     DestroyTrigger(endFightTrigger)
-    DestroyTimer(timer)
+    DestroyTimer(slamTimer)
+    DestroyTimer(addTimer)
 end
 
 resetFight = function()
@@ -66,6 +100,11 @@ onFightEnded = function()
 end
 
 onFightStarted = function()
+    local unit = GetEventDamageSource()
+    if GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
+        return
+    end
+
     print("Turtle engaged...")
     DestroyTrigger(startFightTrigger)
 
@@ -75,7 +114,7 @@ onFightStarted = function()
     ForGroupBJ(grp, function()
         local unit = GetEnumUnit()
         -- TODO what about pets and stuff?
-        if unit ~= boss then
+        if hero.isHero(unit) then
             table.insert(involvedHeroes, unit)
             TriggerRegisterUnitEvent(
                 endFightTrigger, unit, EVENT_UNIT_DEATH)
@@ -87,8 +126,11 @@ onFightStarted = function()
 
     TriggerAddAction(endFightTrigger, onFightEnded)
 
-    timer = CreateTimer()
-    TimerStart(timer, 10, true, castSlam)
+    slamTimer = CreateTimer()
+    TimerStart(slamTimer, 10, true, castSlam)
+
+    addTimer = CreateTimer()
+    TimerStart(addTimer, 25, true, spawnAdds)
 
     ModifyGateBJ(bj_GATEOPERATION_CLOSE, door)
 end
