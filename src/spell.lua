@@ -9,24 +9,37 @@ local frostorb = require('src/spells/frostorb.lua')
 local blink = require('src/spells/blink.lua')
 local heal = require('src/spells/heal.lua')
 
--- TODO base on hero or let people customize or w/e
+local hero = require('src/hero.lua')
+
 local SPELL_MAP = {
-    [1] = slash,
-    [2] = throwingstar,
-    [3] = dash,
-    [4] = slashult,
-    -- [8] = blink,
+    slash = slash,
+    throwingstar = throwingstar,
+    dash = dash,
+    slashult = slashult,
+    fireball = fireball,
+    frostnova = frostnova,
+    heal = heal,
+    frostorb = frostorb,
+    blink = blink,
 }
 
+local getSpell = function(playerId, idx)
+    local pickedHero = hero.getPickedHero(playerId)
+    if pickedHero == nil then
+        return nil
+    end
+    return SPELL_MAP[pickedHero.spells[idx]]
+end
+
 local castSpell = function(playerId, idx)
-    local spell = SPELL_MAP[idx]
+    local spell = getSpell(playerId, idx)
     if spell ~= nil then
         spell.cast(playerId)
     end
 end
 
 local getCooldown = function(playerId, idx)
-    local spell = SPELL_MAP[idx]
+    local spell = getSpell(playerId, idx)
     if spell ~= nil then
         return spell.getCooldown(playerId)
     end
@@ -34,11 +47,11 @@ local getCooldown = function(playerId, idx)
 end
 
 local getCooldownPct = function(playerId, idx)
-    local spell = SPELL_MAP[idx]
-    if spell ~= nil then
+    local spell = getSpell(playerId, idx)
+    if spell ~= nil and spell.getTotalCooldown(playerId) ~= 0 then
         return spell.getCooldown(playerId) / spell.getTotalCooldown(playerId)
     end
-    return 0
+    return 1
 end
 
 return {

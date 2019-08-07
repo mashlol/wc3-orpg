@@ -392,6 +392,10 @@ local updateActionBar = function()
         local cdSec = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
         local cdPct = spell.getCooldownPct(GetPlayerId(GetLocalPlayer()), idx)
 
+        if cdPct == 0 then
+            cdPct = 0.0001
+        end
+
         BlzFrameSetText(
             actionItem.actionCooldownText,
             convertCdToString(cdSec))
@@ -410,7 +414,6 @@ local updateCastBar = function()
         GetPlayerId(GetLocalPlayer()))
     if castRemainder ~= nil and castTotal ~= nil then
         BlzFrameSetVisible(castBarFrames.origin, true)
-        -- print(castRemainder, castTotal, castBarFrames.castBar)
         BlzFrameSetSize(
             castBarFrames.castBar,
             CAST_BAR_WIDTH * (1 - castRemainder / castTotal),
