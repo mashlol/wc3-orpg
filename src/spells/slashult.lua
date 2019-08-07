@@ -62,7 +62,7 @@ local cast = function(playerId)
             UnitDamageTargetBJ(
                 hero,
                 unit,
-                500,
+                400,
                 ATTACK_TYPE_PIERCE,
                 DAMAGE_TYPE_UNKNOWN)
 
