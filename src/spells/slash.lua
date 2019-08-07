@@ -95,8 +95,9 @@ local cast = function(playerId)
 
             effect.createEffect{
                 model = "ebld",
-                unit = unit,
-                duration = 0.5,
+                x = facingVec.x,
+                y = facingVec.y,
+                duration = 0.1,
             }
         end
     end
