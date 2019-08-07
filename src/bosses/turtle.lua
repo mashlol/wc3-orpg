@@ -11,9 +11,6 @@ local addTimer
 local resetFight
 local onFightStarted
 local onFightEnded
-local castSlam
-local spawnAdds
-local isAllInvolvedHeroesDead
 local cleanupFight
 
 local door
@@ -28,7 +25,7 @@ local getNumInvolvedHeroes = function()
     return i
 end
 
-isAllInvolvedHeroesDead = function()
+local isAllInvolvedHeroesDead = function()
     for idx, hero in pairs(involvedHeroes) do
         if GetUnitState(hero, UNIT_STATE_LIFE) > 0 then
             return false
@@ -37,11 +34,11 @@ isAllInvolvedHeroesDead = function()
     return true
 end
 
-castSlam = function()
+local castSlam = function()
     IssueImmediateOrder(boss, "creepthunderclap")
 end
 
-spawnAdds = function()
+local spawnAdds = function()
     for i=0,2,1 do
         local spawnLocation = vector.fromAngle(GetRandomReal(0, bj_PI))
         spawnLocation = vector.multiply(
