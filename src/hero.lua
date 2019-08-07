@@ -3,6 +3,8 @@ heroes = {}
 local respawn = function()
     local unit = GetDyingUnit()
 
+    TriggerSleepAction(10)
+
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
             heroes[i] = CreateUnit(Player(i), FourCC("Hpal"), -150, -125, 0)

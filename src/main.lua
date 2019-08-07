@@ -8,6 +8,9 @@ local ui = require('src/ui.lua')
 local leaver = require('src/leaver.lua')
 local casttime = require('src/casttime.lua')
 
+-- TODO create a boss manager
+local turtle = require('src/bosses/turtle.lua')
+
 local debug = require('src/debug.lua')
 
 local mainInit = function()
@@ -23,6 +26,8 @@ local mainInit = function()
     ui.init()
     leaver.init()
     casttime.init()
+
+    turtle.init()
 
     -- TODO remove for release
     debug.init()
