@@ -38,9 +38,9 @@ local cast = function(playerId)
     SetUnitAnimationByIndex(hero, 5)
 
     SetUnitFacingTimed(
-            hero,
-            bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
-            0.05)
+        hero,
+        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
+        0.05)
 
     projectile.createProjectile{
         playerId = playerId,
