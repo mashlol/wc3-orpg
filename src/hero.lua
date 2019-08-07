@@ -28,7 +28,17 @@ local getHero = function(playerId)
 	return heroes[playerId]
 end
 
+local isHero = function(unit)
+    for idx, hero in pairs(heroes) do
+        if unit == hero then
+            return true
+        end
+    end
+    return false
+end
+
 return {
 	init = init,
 	getHero = getHero,
+    isHero = isHero
 }
