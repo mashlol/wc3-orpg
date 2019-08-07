@@ -47,10 +47,8 @@ local showPickHeroDialog = function()
         local pickHeroTrigger = CreateTrigger()
         TriggerRegisterDialogButtonEvent(pickHeroTrigger, pickHeroButton)
         TriggerAddAction(pickHeroTrigger, function()
-            print("Picked a hero")
             local playerId = GetPlayerId(GetTriggerPlayer())
             pickedHeroes[playerId] = hero
-            print("Set picked heroes",hero)
             heroes[playerId] = CreateUnit(
                 Player(playerId), hero.id, -150, -125, 0)
             UnitRemoveAbility(heroes[playerId], FourCC('Aatk'))
