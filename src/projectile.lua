@@ -1,5 +1,6 @@
 local vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
+local collision = require('src/collision.lua')
 
 local projectiles = {}
 local timer
@@ -23,40 +24,28 @@ local clearProjectiles = function()
         local curProjectileX = GetUnitX(projectile.unit)
         local curProjectileY = GetUnitY(projectile.unit)
 
-        local grp = GetUnitsInRangeOfLocAll(800, GetUnitLoc(projectile.unit))
-        ForGroupBJ(grp, function()
-            local ownerHero = hero.getHero(projectile.options.playerId)
-            local collidedUnit = GetEnumUnit()
+        local projectileV = vector.create(curProjectileX, curProjectileY)
+        local ownerHero = hero.getHero(projectile.options.playerId)
+        local collidedUnits = collision.getAllCollisions(
+            projectileV,
+            projectile.options.radius or 50)
+        for idx, collidedUnit in pairs(collidedUnits) do
             if
                 collidedUnit ~= ownerHero and
-                GetUnitState(collidedUnit, UNIT_STATE_LIFE) > 0 and
                 projectile.toRemove ~= true and
                 projectile.alreadyCollided[GetHandleId(collidedUnit)] ~= true
             then
-                local collisionSize = BlzGetUnitCollisionSize(collidedUnit)
-                local projectileV = vector.create(curProjectileX, curProjectileY)
-                local collidedV = vector.create(
-                    GetUnitX(collidedUnit), GetUnitY(collidedUnit))
-                local collisionDist = vector.subtract(projectileV, collidedV)
-                collisionDist = vector.normalize(collisionDist)
-                collisionDist = vector.multiply(collisionDist, collisionSize)
-                collisionDist = vector.add(collisionDist, collidedV)
-                collisionDist = vector.subtract(projectileV, collisionDist)
-                collisionDist = vector.magnitude(collisionDist)
-
-                if collisionDist <= 50 then
-                    projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
-                    local destroyOnCollide = false
-                    if projectile.options.onCollide then
-                        destroyOnCollide = projectile.options.onCollide(
-                            collidedUnit)
-                    end
-                    if destroyOnCollide then
-                        destroyProjectile(projectile)
-                    end
+                projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
+                local destroyOnCollide = false
+                if projectile.options.onCollide then
+                    destroyOnCollide = projectile.options.onCollide(
+                        collidedUnit)
+                end
+                if destroyOnCollide then
+                    destroyProjectile(projectile)
                 end
             end
-        end)
+        end
 
         if projectile.toRemove then
             -- do nothing
