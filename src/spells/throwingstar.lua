@@ -3,12 +3,10 @@ local mouse = require('src/mouse.lua')
 local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
-local collision = require('src/collision.lua')
 local log = require('src/log.lua')
-local casttime = require('src/casttime.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 25
+local COOLDOWN_S = 3.5
 
 local cooldowns = {}
 
@@ -17,7 +15,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        log.log(playerId, "TODO NAME is on cooldown!", log.TYPE.ERROR)
+        log.log(playerId, "Throwing Star is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
@@ -27,51 +25,46 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-
     local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
 
-    IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 8)
-
-    casttime.cast(playerId, 0.3, false)
-
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    for i=0,360,40 do
-        local facing = i * bj_DEGTORAD
-        local spawn = vector.fromAngle(facing)
-        spawn = vector.multiply(spawn, 50)
-        spawn = vector.add(heroV, spawn)
-        effect.createEffect{
-            model = "slsh",
-            x = spawn.x,
-            y = spawn.y,
-            duration = 0.5,
-            facing = i,
+    IssueImmediateOrder(hero, "stop")
+    SetUnitAnimationByIndex(hero, 8)
+
+    local facingDeg =
+        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
+
+    SetUnitFacingTimed(hero, facingDeg, 0.05)
+
+    for i=facingDeg-15,facingDeg+15,15 do
+        local toV = vector.fromAngle(i * bj_DEGTORAD)
+        toV = vector.add(heroV, toV)
+        projectile.createProjectile{
+            playerId = playerId,
+            model = "star",
+            fromV = heroV,
+            toV = toV,
+            speed = 900,
+            length = 500,
+            onCollide = function(collidedUnit)
+                if IsUnitEnemy(collidedUnit, Player(playerId)) then
+                    UnitDamageTargetBJ(
+                        hero,
+                        collidedUnit,
+                        30,
+                        ATTACK_TYPE_PIERCE,
+                        DAMAGE_TYPE_UNKNOWN)
+                    return true
+                end
+                return false
+            end
         }
-    end
-
-    local collidedUnits = collision.getAllCollisions(heroV, 450)
-    for idx, unit in pairs(collidedUnits) do
-        if IsUnitEnemy(unit, Player(playerId)) then
-            UnitDamageTargetBJ(
-                hero,
-                unit,
-                500,
-                ATTACK_TYPE_PIERCE,
-                DAMAGE_TYPE_UNKNOWN)
-
-            effect.createEffect{
-                model = "ebld",
-                unit = unit,
-                duration = 0.1,
-            }
-        end
     end
 
     return true

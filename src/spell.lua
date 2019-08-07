@@ -1,6 +1,7 @@
 local fireball = require('src/spells/fireball.lua')
 local slash = require('src/spells/slash.lua')
 local dash = require('src/spells/dash.lua')
+local throwingstar = require('src/spells/throwingstar.lua')
 local slashult = require('src/spells/slashult.lua')
 local dummy = require('src/spells/dummy.lua')
 local frostnova = require('src/spells/frostnova.lua')
@@ -11,10 +12,10 @@ local heal = require('src/spells/heal.lua')
 -- TODO base on hero or let people customize or w/e
 local SPELL_MAP = {
     [1] = slash,
-    [2] = frostnova,
+    [2] = throwingstar,
     [3] = dash,
     [4] = slashult,
-    [8] = blink,
+    -- [8] = blink,
 }
 
 local castSpell = function(playerId, idx)

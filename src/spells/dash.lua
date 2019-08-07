@@ -79,7 +79,7 @@ local cast = function(playerId)
         end
     }
 
-    casttime.cast(playerId, 0.2, false)
+    casttime.cast(playerId, 0.15, false)
 
     local finalPos = vector.subtract(mouseV, heroV)
     finalPos = vector.normalize(finalPos)
