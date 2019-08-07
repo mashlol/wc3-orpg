@@ -36,7 +36,7 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 8)
 
-    casttime.cast(playerId, 0.3, false)
+    casttime.cast(playerId, 0.3, false, false)
 
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
