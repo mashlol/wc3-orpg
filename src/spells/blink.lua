@@ -11,6 +11,12 @@ local COOLDOWN_S = 0.1
 
 local cooldowns = {}
 
+local isStuck = function(unit)
+    return IsUnitType(unit, UNIT_TYPE_STUNNED) or
+        IsUnitType(unit, UNIT_TYPE_SNARED) or
+        IsUnitType(unit, UNIT_TYPE_POLYMORPHED)
+end
+
 local cast = function(playerId)
     if
         cooldowns[playerId] ~= nil and
@@ -30,6 +36,11 @@ local cast = function(playerId)
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
+
+    if isStuck(hero) then
+        log.log(playerId, "You can't move right now", log.TYPE.ERROR)
+        return false
+    end
 
     local dist = vector.subtract(heroV, mouseV)
     local mag = vector.magnitude(dist)
