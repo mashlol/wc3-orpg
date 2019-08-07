@@ -7,9 +7,11 @@ local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 10
+local COOLDOWN_S = 0.5
+local COOLDOWN_S_LONG = 10
 
 local cooldowns = {}
+local storedData = {}
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -48,8 +50,23 @@ local cast = function(playerId)
         return false
     end
 
+    if storedData[playerId] == nil then
+        storedData[playerId] = {
+            attackCount = -1,
+        }
+    end
+
+    storedData[playerId].attackCount =
+        (storedData[playerId].attackCount + 1) % 2
+
     local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
+    TimerStart(
+        timer,
+        storedData[playerId].attackCount == 1 and
+            COOLDOWN_S_LONG or
+            COOLDOWN_S,
+        false,
+        nil)
     cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
@@ -65,7 +82,7 @@ local cast = function(playerId)
         fromV = heroV,
         toV = mouseV,
         speed = 3000,
-        length = 800,
+        length = 400,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 UnitDamageTargetBJ(
@@ -83,7 +100,7 @@ local cast = function(playerId)
 
     local finalPos = vector.subtract(mouseV, heroV)
     finalPos = vector.normalize(finalPos)
-    finalPos = vector.multiply(finalPos, 800)
+    finalPos = vector.multiply(finalPos, 400)
     finalPos = vector.add(finalPos, heroV)
     SetUnitX(hero, finalPos.x)
     SetUnitY(hero, finalPos.y)
@@ -101,7 +118,10 @@ local getCooldown = function(playerId)
     return 0
 end
 
-local getTotalCooldown = function()
+local getTotalCooldown = function(playerId)
+    if cooldowns[playerId] ~= nil then
+        return TimerGetTimeout(cooldowns[playerId])
+    end
     return COOLDOWN_S
 end
 
