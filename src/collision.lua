@@ -17,11 +17,12 @@ end
 function getAllCollisions(vec, radius)
     -- Loop through all nearby units
     -- Check they are alive
-    -- TODO Check they aren't hidden
+    -- Check they aren't hidden
     -- TODO Check they aren't an effect unit
     -- Check they are coliding with the vector/radius
 
-    local grp = GetUnitsInRangeOfLocAll(800, Location(vec.x, vec.y))
+    local loc = Location(vec.x, vec.y)
+    local grp = GetUnitsInRangeOfLocAll(800, loc)
     local toReturn = {}
     ForGroupBJ(grp, function()
         local collidedUnit = GetEnumUnit()
@@ -33,6 +34,8 @@ function getAllCollisions(vec, radius)
             table.insert(toReturn, collidedUnit)
         end
     end)
+
+    RemoveLocation(loc)
 
     return toReturn
 end
