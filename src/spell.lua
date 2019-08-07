@@ -1,6 +1,7 @@
 local fireball = require('src/spells/fireball.lua')
 local slash = require('src/spells/slash.lua')
 local dash = require('src/spells/dash.lua')
+local slashult = require('src/spells/slashult.lua')
 local dummy = require('src/spells/dummy.lua')
 local frostnova = require('src/spells/frostnova.lua')
 local frostorb = require('src/spells/frostorb.lua')
@@ -12,7 +13,7 @@ local SPELL_MAP = {
     [1] = slash,
     [2] = frostnova,
     [3] = dash,
-    [4] = frostorb,
+    [4] = slashult,
     [8] = blink,
 }
 

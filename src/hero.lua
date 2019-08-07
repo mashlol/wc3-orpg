@@ -8,6 +8,7 @@ local respawn = function()
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
             heroes[i] = CreateUnit(Player(i), FourCC("Hyuj"), -150, -125, 0)
+            UnitRemoveAbility(heroes[i], FourCC('Aatk'))
         end
     end
 end
@@ -16,6 +17,7 @@ local init = function()
     for i=0, bj_MAX_PLAYERS, 1 do
         if GetPlayerController(Player(i)) == MAP_CONTROL_USER then
             heroes[i] = CreateUnit(Player(i), FourCC("Hyuj"), -150, -125, 0)
+            UnitRemoveAbility(heroes[i], FourCC('Aatk'))
         end
     end
 
