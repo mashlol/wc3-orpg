@@ -60,7 +60,7 @@ local cast = function(playerId)
     cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 8)
+    SetUnitAnimationByIndex(hero, 11)
 
     effect.createEffect{
         model = "eblk",

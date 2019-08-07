@@ -40,7 +40,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 7)
+    SetUnitAnimationByIndex(hero, 16)
 
     local castSuccess = casttime.cast(playerId, 1)
     if not castSuccess then
@@ -51,7 +51,7 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    SetUnitAnimationByIndex(hero, 4)
+    SetUnitAnimationByIndex(hero, 8)
 
     for x=0,30,10 do
         for i=x,360+x,40 do

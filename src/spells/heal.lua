@@ -37,7 +37,7 @@ local cast = function(playerId)
         mouse.getMouseY(playerId))
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 4)
+    SetUnitAnimationByIndex(hero, 9)
 
     SetUnitFacingTimed(
             hero,

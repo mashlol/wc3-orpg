@@ -43,7 +43,7 @@ local cast = function(playerId)
     cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 5)
+    SetUnitAnimationByIndex(hero, 6)
 
     for i=0,360,20 do
         local toV = vector.fromAngle(bj_DEGTORAD * i)
