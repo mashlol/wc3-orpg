@@ -42,8 +42,8 @@ local cast = function(playerId)
 
     SetUnitFacingTimed(hero, facingDeg, 0.05)
 
-    for i=facingDeg-15,facingDeg+15,15 do
-        local toV = vector.fromAngle(i * bj_DEGTORAD)
+    for i=-1,1,1 do
+        local toV = vector.fromAngle((facingDeg + i * 15) * bj_DEGTORAD)
         toV = vector.add(heroV, toV)
         projectile.createProjectile{
             playerId = playerId,
