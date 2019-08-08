@@ -7,6 +7,7 @@ local effect = require('src/effect.lua')
 local ui = require('src/ui.lua')
 local leaver = require('src/leaver.lua')
 local casttime = require('src/casttime.lua')
+local buff = require('src/buff.lua')
 
 -- TODO create a boss manager
 local turtle = require('src/bosses/turtle.lua')
@@ -26,6 +27,7 @@ local mainInit = function()
     ui.init()
     leaver.init()
     casttime.init()
+    buff.init()
 
     turtle.init()
 
