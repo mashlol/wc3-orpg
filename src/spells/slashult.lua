@@ -44,6 +44,13 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
+    effect.createEffect{
+        model = "grns",
+        x = heroV.x,
+        y = heroV.y,
+        duration = 0.5,
+    }
+
     SetUnitTimeScale(hero, 3)
     for i=0,320,40 do
         local facing = i * bj_DEGTORAD

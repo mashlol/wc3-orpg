@@ -39,6 +39,10 @@ local createEffect = function(options)
         SetUnitScale(dummy, options.scale, options.scale, options.scale)
     end
 
+    if options.timeScale then
+        SetUnitTimeScale(dummy, options.timeScale)
+    end
+
     local effectTimer = CreateTimer()
     TimerStart(effectTimer, options.duration, false, nil)
     table.insert(effects, {
