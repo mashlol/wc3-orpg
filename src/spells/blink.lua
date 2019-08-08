@@ -49,12 +49,6 @@ local cast = function(playerId)
         return false
     end
 
-    local isCasting = casttime.isCasting(playerId)
-
-    if isCasting then
-        return false
-    end
-
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
