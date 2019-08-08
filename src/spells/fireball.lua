@@ -5,6 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local animations = require('src/animations.lua')
+local buff = require('src/buff.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.5
@@ -55,7 +56,7 @@ local cast = function(playerId)
                 UnitDamageTargetBJ(
                     hero,
                     collidedUnit,
-                    100,
+                    100 * buff.getDamageModifier(hero),
                     ATTACK_TYPE_PIERCE,
                     DAMAGE_TYPE_UNKNOWN)
                 return true
