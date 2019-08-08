@@ -8,6 +8,7 @@ local frostnova = require('src/spells/frostnova.lua')
 local frostorb = require('src/spells/frostorb.lua')
 local blink = require('src/spells/blink.lua')
 local heal = require('src/spells/heal.lua')
+local focus = require('src/spells/focus.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
@@ -22,6 +23,7 @@ local SPELL_MAP = {
     heal = heal,
     frostorb = frostorb,
     blink = blink,
+    focus = focus,
 }
 
 local getSpell = function(playerId, idx)
