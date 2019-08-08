@@ -119,8 +119,13 @@ local getTotalCooldown = function(playerId)
     return COOLDOWN_S
 end
 
+local getIcon = function()
+    return "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp"
+end
+
 return {
     cast = cast,
     getCooldown = getCooldown,
     getTotalCooldown = getTotalCooldown,
+    getIcon = getIcon,
 }

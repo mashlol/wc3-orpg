@@ -93,8 +93,13 @@ local getTotalCooldown = function()
     return COOLDOWN_S
 end
 
+local getIcon = function()
+    return "ReplaceableTextures\\CommandButtons\\BTNWhirlwind.blp"
+end
+
 return {
     cast = cast,
     getCooldown = getCooldown,
     getTotalCooldown = getTotalCooldown,
+    getIcon = getIcon,
 }
