@@ -35,6 +35,7 @@ local cast = function(playerId)
 
     IssueImmediateOrder(hero, "stop")
     SetUnitAnimationByIndex(hero, 9)
+    SetUnitFacing(hero, 0)
 
     casttime.cast(playerId, 0.3, false)
 
