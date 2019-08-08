@@ -39,6 +39,10 @@ local castSpell = function(playerId, idx)
         return
     end
 
+    if GetUnitState(hero.getHero(playerId), UNIT_STATE_LIFE) <= 0 then
+        return
+    end
+
     local spell = getSpell(playerId, idx)
     if spell ~= nil then
         spell.cast(playerId)
