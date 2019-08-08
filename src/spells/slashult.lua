@@ -34,7 +34,7 @@ local cast = function(playerId)
         mouse.getMouseY(playerId))
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 8)
+    SetUnitAnimationByIndex(hero, 9)
 
     casttime.cast(playerId, 0.3, false)
 
@@ -42,8 +42,11 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    for i=0,360,40 do
+    SetUnitTimeScale(hero, 3)
+    for i=0,320,40 do
         local facing = i * bj_DEGTORAD
+        SetUnitFacing(hero, i)
+        SetUnitAnimationByIndex(hero, 8)
         local spawn = vector.fromAngle(facing)
         spawn = vector.multiply(spawn, 50)
         spawn = vector.add(heroV, spawn)
@@ -51,12 +54,12 @@ local cast = function(playerId)
             model = "slsh",
             x = spawn.x,
             y = spawn.y,
-            duration = 0.5,
+            duration = 0.3,
             facing = i,
         }
     end
 
-    local collidedUnits = collision.getAllCollisions(heroV, 450)
+    local collidedUnits = collision.getAllCollisions(heroV, 350)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
             UnitDamageTargetBJ(
@@ -73,6 +76,8 @@ local cast = function(playerId)
             }
         end
     end
+
+    SetUnitTimeScale(hero, 1)
 
     return true
 end
