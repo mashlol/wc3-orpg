@@ -44,12 +44,6 @@ local cast = function(playerId)
         return false
     end
 
-    local isCasting = casttime.isCasting(playerId)
-
-    if isCasting then
-        return false
-    end
-
     if storedData[playerId] == nil then
         storedData[playerId] = {
             attackCount = -1,

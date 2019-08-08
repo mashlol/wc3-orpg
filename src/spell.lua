@@ -9,6 +9,7 @@ local frostorb = require('src/spells/frostorb.lua')
 local blink = require('src/spells/blink.lua')
 local heal = require('src/spells/heal.lua')
 
+local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
 
 local SPELL_MAP = {
@@ -32,6 +33,12 @@ local getSpell = function(playerId, idx)
 end
 
 local castSpell = function(playerId, idx)
+    local isCasting = casttime.isCasting(playerId)
+
+    if isCasting then
+        return
+    end
+
     local spell = getSpell(playerId, idx)
     if spell ~= nil then
         spell.cast(playerId)
