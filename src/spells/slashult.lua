@@ -6,6 +6,7 @@ local projectile = require('src/projectile.lua')
 local collision = require('src/collision.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
+local animations = require('src/animations.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 25
@@ -34,7 +35,7 @@ local cast = function(playerId)
         mouse.getMouseY(playerId))
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 9)
+    animations.queueAnimation(hero, 9, 1)
     SetUnitFacing(hero, 0)
 
     casttime.cast(playerId, 0.3, false)
@@ -47,7 +48,7 @@ local cast = function(playerId)
     for i=0,320,40 do
         local facing = i * bj_DEGTORAD
         SetUnitFacing(hero, i)
-        SetUnitAnimationByIndex(hero, 8)
+        animations.queueAnimation(hero, 8, 1)
         local spawn = vector.fromAngle(facing)
         spawn = vector.multiply(spawn, 50)
         spawn = vector.add(heroV, spawn)

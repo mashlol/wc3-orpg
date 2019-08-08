@@ -5,6 +5,7 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
+local animations = require('src/animations.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.5
@@ -64,7 +65,7 @@ local cast = function(playerId)
     cooldowns[playerId] = timer
 
     IssueImmediateOrder(hero, "stop")
-    SetUnitAnimationByIndex(hero, 8)
+    animations.queueAnimation(hero, 8, 1)
 
     SetUnitFacing(
         hero,
