@@ -234,11 +234,6 @@ local initActionBar = function()
             FRAMEPOINT_LEFT,
             i * ACTION_ITEM_SIZE,
             0)
-        BlzFrameSetTexture(
-            actionItem,
-            TEMP_ICONS[i+1],
-            0,
-            true)
 
         local actionCooldownBackdrop = BlzCreateFrameByType(
             "BACKDROP",
@@ -319,6 +314,7 @@ local initActionBar = function()
             actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
 
         table.insert(actionItems, {
+            actionItemBackground = actionItem,
             actionCooldownBackdrop = actionCooldownBackdrop,
             actionCooldownText = actionCooldownText,
         })
@@ -389,8 +385,10 @@ end
 
 local updateActionBar = function()
     for idx,actionItem in pairs(actionBar.actionItems) do
-        local cdSec = spell.getCooldown(GetPlayerId(GetLocalPlayer()), idx)
-        local cdPct = spell.getCooldownPct(GetPlayerId(GetLocalPlayer()), idx)
+        local playerId = GetPlayerId(GetLocalPlayer())
+        local cdSec = spell.getCooldown(playerId, idx)
+        local cdPct = spell.getCooldownPct(playerId, idx)
+        local spellIcon = spell.getIcon(playerId, idx)
 
         if cdPct == 0 then
             cdPct = 0.0001
@@ -404,6 +402,12 @@ local updateActionBar = function()
             actionItem.actionCooldownBackdrop,
             ACTION_ITEM_SIZE,
             ACTION_ITEM_SIZE * cdPct)
+
+        BlzFrameSetTexture(
+            actionItem.actionItemBackground,
+            spellIcon,
+            0,
+            true)
     end
 end
 

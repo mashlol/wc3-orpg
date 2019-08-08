@@ -82,8 +82,13 @@ local getTotalCooldown = function()
     return COOLDOWN_S
 end
 
+local getIcon = function()
+    return "ReplaceableTextures\\CommandButtons\\BTNHealingWave.blp"
+end
+
 return {
     cast = cast,
     getCooldown = getCooldown,
     getTotalCooldown = getTotalCooldown,
+    getIcon = getIcon,
 }

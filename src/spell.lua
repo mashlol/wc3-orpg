@@ -65,8 +65,17 @@ local getCooldownPct = function(playerId, idx)
     return 1
 end
 
+local getIcon = function(playerId, idx)
+    local spell = getSpell(playerId, idx)
+    if spell ~= nil then
+        return spell.getIcon()
+    end
+    return ""
+end
+
 return {
     castSpell = castSpell,
     getCooldown = getCooldown,
     getCooldownPct = getCooldownPct,
+    getIcon = getIcon,
 }
