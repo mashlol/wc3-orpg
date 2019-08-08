@@ -42,14 +42,11 @@ local cast = function(playerId)
     cooldowns[playerId] = timer
 
     local effect = AddSpecialEffectTarget("Liberty.mdl", hero, "chest")
-    local curSpeed = GetUnitMoveSpeed(hero)
-    SetUnitMoveSpeed(hero, curSpeed + 200)
     buff.addBuff(hero, 'focus')
 
     TriggerSleepAction(20)
 
     buff.removeBuff(hero, 'focus')
-    SetUnitMoveSpeed(hero, curSpeed)
     DestroyEffect(effect)
 
     return true
