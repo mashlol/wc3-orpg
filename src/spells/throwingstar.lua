@@ -50,8 +50,9 @@ local cast = function(playerId)
             model = "star",
             fromV = heroV,
             toV = toV,
-            speed = 900,
+            speed = 1400,
             length = 500,
+            radius = 30,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     UnitDamageTargetBJ(
