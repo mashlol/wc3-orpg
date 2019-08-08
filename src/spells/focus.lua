@@ -7,6 +7,7 @@ local collision = require('src/collision.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
+local buff = require('src/buff.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 120
@@ -43,9 +44,11 @@ local cast = function(playerId)
     local effect = AddSpecialEffectTarget("Liberty.mdl", hero, "chest")
     local curSpeed = GetUnitMoveSpeed(hero)
     SetUnitMoveSpeed(hero, curSpeed + 200)
+    buff.addBuff(hero, 'focus')
 
     TriggerSleepAction(20)
 
+    buff.removeBuff(hero, 'focus')
     SetUnitMoveSpeed(hero, curSpeed)
     DestroyEffect(effect)
 
