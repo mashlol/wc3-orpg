@@ -10,6 +10,7 @@ local ALL_HERO_INFO = {
             [2] = 'throwingstar',
             [3] = 'dash',
             [4] = 'slashult',
+            [8] = 'focus',
         },
     },
     [2] = {
