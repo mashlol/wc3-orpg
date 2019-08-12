@@ -370,6 +370,13 @@ local updateActionBar = function()
             cdPct = 0.0001
         end
 
+        cdSec = cdSec * 100
+        local cd = (cdSec - cdSec % 100) / 100
+
+        BlzFrameSetText(
+            actionItem.actionCooldownText,
+            cd == 0 and "" or cd)
+
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
             ACTION_ITEM_SIZE,
