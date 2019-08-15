@@ -43,10 +43,6 @@ local cast = function(playerId)
 
     buff.addBuff(hero, 'focus', 20)
 
-    TriggerSleepAction(20)
-
-    buff.removeBuff(hero, 'focus')
-
     return true
 end
 

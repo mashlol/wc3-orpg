@@ -75,6 +75,16 @@ function addBuff(unit, buffName, duration)
             unit,
             BUFF_INFO[buffName].vfx.attach)
     end
+
+    buffInstances[unitId].buffs[buffName].timer = CreateTimer()
+    TimerStart(
+        buffInstances[unitId].buffs[buffName].timer,
+        duration,
+        false,
+        function()
+            DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+            removeBuff(unit, buffName)
+        end)
 end
 
 function removeBuff(unit, buffName)
