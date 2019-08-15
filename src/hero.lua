@@ -29,6 +29,7 @@ local ALL_HERO_INFO = {
             [2] = 'armorpot',
             [4] = 'molecregen',
             [5] = 'corrosiveblast',
+            [8] = 'accmist',
         }
     },
     [4] = {
