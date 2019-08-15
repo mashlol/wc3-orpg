@@ -11,6 +11,14 @@ local BUFF_INFO = {
             },
         },
     },
+    armorpot = {
+        effects = {
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0.9,
+            },
+        },
+    },
 }
 
 -- BuffInstances:
@@ -79,13 +87,22 @@ function getBuffs(unit)
 end
 
 -- Iterate over all a units buffs and get the final damage modifier
-function getDamageModifier(unit)
+function getDamageModifier(unit, target)
     local buffs = getBuffs(unit)
     local modifier = 1
     for buffName,val in pairs(buffs) do
         local effects = BUFF_INFO[buffName].effects
         for idx,info in pairs(effects) do
             if info.type == 'multiplyDamage' then
+                modifier = modifier * info.amount
+            end
+        end
+    end
+    local buffs = getBuffs(target)
+    for buffName,val in pairs(buffs) do
+        local effects = BUFF_INFO[buffName].effects
+        for idx,info in pairs(effects) do
+            if info.type == 'multiplyIncomingDamage' then
                 modifier = modifier * info.amount
             end
         end

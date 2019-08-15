@@ -7,6 +7,7 @@ local log = require('src/log.lua')
 local animations = require('src/animations.lua')
 local target = require('src/target.lua')
 local casttime = require('src/casttime.lua')
+local buff = require('src/buff.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 1
@@ -18,7 +19,7 @@ local cast = function(playerId)
         cooldowns[playerId] ~= nil and
         TimerGetRemaining(cooldowns[playerId]) > 0.05
     then
-        log.log(playerId, "Rejuvination Potion is on cooldown!", log.TYPE.ERROR)
+        log.log(playerId, "Armor Potion is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
@@ -70,14 +71,14 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "erej",
+        model = "earm",
         fromV = heroV,
         toV = targetV,
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            local curHealth = BlzGetUnitRealField(target, UNIT_RF_HP)
-            BlzSetUnitRealField(target, UNIT_RF_HP, curHealth + 50)
+            -- TODO add durations to buffs
+            buff.addBuff(target, 'armorpot')
         end
     }
 
@@ -96,7 +97,7 @@ local getTotalCooldown = function()
 end
 
 local getIcon = function()
-    return "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp"
+    return "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp"
 end
 
 return {
