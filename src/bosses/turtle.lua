@@ -46,7 +46,7 @@ local spawnAdds = function()
             spawnLocation, BlzGetUnitCollisionSize(boss) + 150)
         spawnLocation = vector.add(
             spawnLocation, vector.create(GetUnitX(boss), GetUnitY(boss)))
-        local add = CreateUnit(
+        local add = unitmap.createTargetableUnit(
             Player(24),
             FourCC("hmbs"),
             spawnLocation.x,
