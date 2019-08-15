@@ -7,6 +7,7 @@ local log = require('src/log.lua')
 local animations = require('src/animations.lua')
 local target = require('src/target.lua')
 local casttime = require('src/casttime.lua')
+local buff = require('src/buff.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 1
@@ -77,9 +78,14 @@ local cast = function(playerId)
         destroyOnCollide = false,
         onDestroy = function()
             local curHealth = BlzGetUnitRealField(target, UNIT_RF_HP)
-            BlzSetUnitRealField(target, UNIT_RF_HP, curHealth + 50)
+            BlzSetUnitRealField(
+                target,
+                UNIT_RF_HP,
+                curHealth + 70 * buff.getHealingModifier(hero, target))
         end
     }
+
+    buff.addBuff(target, 'rejuvpot', 4)
 
     return true
 end

@@ -19,7 +19,11 @@ local BUFF_INFO = {
         effects = {
             {
                 type = 'multiplyIncomingDamage',
-                amount = 0.9,
+                amount = 0.7,
+            },
+            {
+                type = 'multiplyIncomingHealing',
+                amount = 1.3,
             },
         },
         vfx = {
@@ -31,7 +35,19 @@ local BUFF_INFO = {
         effects = {
             {
                 type = 'modifyMoveSpeed',
-                amount = 1.5,
+                amount = 2,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
+            attach = "chest",
+        },
+    },
+    rejuvpot = {
+        effects = {
+            {
+                type = 'heal',
+                amount = 30,
             },
         },
         vfx = {
@@ -60,6 +76,7 @@ function applyBuffs()
         local unit = unitInfo.unit
         local buffs = unitInfo.buffs
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
+        local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
 
         for buffName,val in pairs(buffs) do
             local effects = BUFF_INFO[buffName].effects
@@ -67,9 +84,13 @@ function applyBuffs()
                 if info.type == 'modifyMoveSpeed' then
                     baseSpeed = baseSpeed * info.amount
                 end
+                if info.type == 'heal' then
+                    hp = hp + info.amount
+                end
             end
         end
 
+        BlzSetUnitRealField(target, UNIT_RF_HP, hp)
         SetUnitMoveSpeed(unit, baseSpeed)
     end
 end
@@ -156,6 +177,29 @@ function getDamageModifier(unit, target)
     return modifier
 end
 
+function getHealingModifier(unit, target)
+    local buffs = getBuffs(unit)
+    local modifier = 1
+    for buffName,val in pairs(buffs) do
+        local effects = BUFF_INFO[buffName].effects
+        for idx,info in pairs(effects) do
+            if info.type == 'multiplyHealing' then
+                modifier = modifier * info.amount
+            end
+        end
+    end
+    local buffs = getBuffs(target)
+    for buffName,val in pairs(buffs) do
+        local effects = BUFF_INFO[buffName].effects
+        for idx,info in pairs(effects) do
+            if info.type == 'multiplyIncomingHealing' then
+                modifier = modifier * info.amount
+            end
+        end
+    end
+    return modifier
+end
+
 function init()
     TimerStart(CreateTimer(), 1, true, applyBuffs)
 end
@@ -166,5 +210,6 @@ return {
     hasBuff = hasBuff,
     getBuffs = getBuffs,
     getDamageModifier = getDamageModifier,
+    getHealingModifier = getHealingModifier,
     init = init,
 }

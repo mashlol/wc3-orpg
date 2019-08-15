@@ -64,13 +64,14 @@ local cast = function(playerId)
                 y = finalVec.y,
                 duration = 10,
                 facing = facingDeg,
+                timeScale = 10,
             }
 
             table.insert(locations, finalVec)
         end
 
         applySpeedBuff(playerId, locations)
-        TriggerSleepAction(0.5)
+        TriggerSleepAction(0.1)
     end
 
     for i=1,15,1 do
