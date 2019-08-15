@@ -18,6 +18,7 @@ local focus = require('src/spells/yuji/focus.lua')
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
 local armorpot = require('src/spells/ivanov/armorpot.lua')
 local molecregen = require('src/spells/ivanov/molecregen.lua')
+local corrosiveblast = require('src/spells/ivanov/corrosiveblast.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
@@ -43,6 +44,7 @@ local SPELL_MAP = {
     rejuvpot = rejuvpot,
     armorpot = armorpot,
     molecregen = molecregen,
+    corrosiveblast = corrosiveblast,
 }
 
 local getSpell = function(playerId, idx)
