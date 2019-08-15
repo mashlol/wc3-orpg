@@ -1,3 +1,6 @@
+-- Generic
+local heal = require('src/spells/generic/heal.lua')
+
 -- Azora
 local fireball = require('src/spells/azora/fireball.lua')
 local frostnova = require('src/spells/azora/frostnova.lua')
@@ -12,13 +15,15 @@ local slashult = require('src/spells/yuji/slashult.lua')
 local focus = require('src/spells/yuji/focus.lua')
 
 -- Ivanov
-local heal = require('src/spells/ivanov/heal.lua')
-
+local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
 
 local SPELL_MAP = {
+    -- Generic
+    heal = heal,
+
     -- Azora
     fireball = fireball,
     frostnova = frostnova,
@@ -33,7 +38,7 @@ local SPELL_MAP = {
     focus = focus,
 
     -- Ivanov
-    heal = heal,
+    rejuvpot = rejuvpot,
 }
 
 local getSpell = function(playerId, idx)
