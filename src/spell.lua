@@ -1,29 +1,39 @@
-local fireball = require('src/spells/fireball.lua')
-local slash = require('src/spells/slash.lua')
-local dash = require('src/spells/dash.lua')
-local throwingstar = require('src/spells/throwingstar.lua')
-local slashult = require('src/spells/slashult.lua')
-local dummy = require('src/spells/dummy.lua')
-local frostnova = require('src/spells/frostnova.lua')
-local frostorb = require('src/spells/frostorb.lua')
-local blink = require('src/spells/blink.lua')
-local heal = require('src/spells/heal.lua')
-local focus = require('src/spells/focus.lua')
+-- Azora
+local fireball = require('src/spells/azora/fireball.lua')
+local frostnova = require('src/spells/azora/frostnova.lua')
+local frostorb = require('src/spells/azora/frostorb.lua')
+local blink = require('src/spells/azora/blink.lua')
+
+-- Yuji
+local slash = require('src/spells/yuji/slash.lua')
+local dash = require('src/spells/yuji/dash.lua')
+local throwingstar = require('src/spells/yuji/throwingstar.lua')
+local slashult = require('src/spells/yuji/slashult.lua')
+local focus = require('src/spells/yuji/focus.lua')
+
+-- Ivanov
+local heal = require('src/spells/ivanov/heal.lua')
+
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
 
 local SPELL_MAP = {
-    slash = slash,
-    throwingstar = throwingstar,
-    dash = dash,
-    slashult = slashult,
+    -- Azora
     fireball = fireball,
     frostnova = frostnova,
-    heal = heal,
     frostorb = frostorb,
     blink = blink,
+
+    -- Yuji
+    slash = slash,
+    dash = dash,
+    throwingstar = throwingstar,
+    slashult = slashult,
     focus = focus,
+
+    -- Ivanov
+    heal = heal,
 }
 
 local getSpell = function(playerId, idx)
@@ -57,6 +67,7 @@ local getCooldown = function(playerId, idx)
         return spell.getCooldown(playerId)
     end
     return 0
+
 end
 
 local getCooldownPct = function(playerId, idx)
