@@ -17,13 +17,25 @@ local ALL_HERO_INFO = {
         name = 'Stormfist',
         id = FourCC("Hstm"),
         spells = {
+        }
+    },
+    [3] = {
+        name = 'Ivanov',
+        id = FourCC("Hivn"),
+        spells = {
+            [1] = 'heal',
+        }
+    },
+    [4] = {
+        name = 'Azora',
+        id = FourCC("HAzr"),
+        spells = {
             [1] = 'fireball',
             [2] = 'frostnova',
-            [3] = 'heal',
             [4] = 'frostorb',
             [8] = 'blink',
         }
-    }
+    },
 }
 
 local respawn = function()
