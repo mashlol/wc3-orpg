@@ -27,6 +27,7 @@ local ALL_HERO_INFO = {
         spells = {
             [1] = 'rejuvpot',
             [2] = 'armorpot',
+            [4] = 'molecregen',
         }
     },
     [4] = {

@@ -17,6 +17,7 @@ local focus = require('src/spells/yuji/focus.lua')
 -- Ivanov
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
 local armorpot = require('src/spells/ivanov/armorpot.lua')
+local molecregen = require('src/spells/ivanov/molecregen.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
@@ -41,6 +42,7 @@ local SPELL_MAP = {
     -- Ivanov
     rejuvpot = rejuvpot,
     armorpot = armorpot,
+    molecregen = molecregen,
 }
 
 local getSpell = function(playerId, idx)
