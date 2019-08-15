@@ -22,6 +22,10 @@ local BUFF_INFO = {
                 amount = 0.9,
             },
         },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
+            attach = "chest",
+        },
     },
 }
 
