@@ -25,7 +25,7 @@ local ALL_HERO_INFO = {
         name = 'Ivanov',
         id = FourCC("Hivn"),
         spells = {
-            [1] = 'heal',
+            [1] = 'rejuvpot',
         }
     },
     [4] = {
