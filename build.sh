@@ -36,6 +36,10 @@ cat src/main.lua >> bin/war3map_compiled.lua
 
 printf "\n\n" >> bin/war3map_compiled.lua
 
+echo 'Mutating original extracted lua file'
+
+sed -i -e 's/CreateUnit/CreateTargetableUnit/g' ./bin/war3map.lua
+
 echo 'Compiling final lua file'
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua

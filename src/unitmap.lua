@@ -1,10 +1,6 @@
 local unitMap = {}
 
 function getUnitByHandleId(handleId)
-    print('getting unit by handle:', handleId)
-    for handle,unit in pairs(unitMap) do
-        print(handle, unit)
-    end
     return unitMap[handleId]
 end
 
