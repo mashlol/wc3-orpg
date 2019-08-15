@@ -27,6 +27,18 @@ local BUFF_INFO = {
             attach = "chest",
         },
     },
+    accpot = {
+        effects = {
+            {
+                type = 'modifyMoveSpeed',
+                amount = 1.5,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
+            attach = "chest",
+        },
+    },
 }
 
 -- BuffInstances:
@@ -69,6 +81,11 @@ function addBuff(unit, buffName, duration)
             unit = unit,
             buffs = {},
         }
+    end
+
+    if buffInstances[unitId].buffs[buffName] ~= nil then
+        DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+        removeBuff(unit, buffName)
     end
 
     buffInstances[unitId].buffs[buffName] = {}
