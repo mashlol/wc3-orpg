@@ -26,6 +26,7 @@ local ALL_HERO_INFO = {
         id = FourCC("Hivn"),
         spells = {
             [1] = 'rejuvpot',
+            [2] = 'armorpot',
         }
     },
     [4] = {

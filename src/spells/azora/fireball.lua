@@ -56,7 +56,7 @@ local cast = function(playerId)
                 UnitDamageTargetBJ(
                     hero,
                     collidedUnit,
-                    100 * buff.getDamageModifier(hero),
+                    100 * buff.getDamageModifier(hero, collidedUnit),
                     ATTACK_TYPE_PIERCE,
                     DAMAGE_TYPE_UNKNOWN)
                 return true
