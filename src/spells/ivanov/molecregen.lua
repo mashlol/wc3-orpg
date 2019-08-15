@@ -43,7 +43,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 16, 2)
+    animations.queueAnimation(hero, 17, 2)
 
     local castSuccess = casttime.cast(playerId, 1)
     if not castSuccess then
@@ -54,7 +54,7 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    animations.queueAnimation(hero, 8, 2)
+    animations.queueAnimation(hero, 18, 2)
 
     projectile.createProjectile{
         playerId = playerId,
