@@ -32,7 +32,7 @@ local mouseUp = function()
             (btn == MOUSE_BUTTON_TYPE_LEFT or
             mouseUnit ~= nil)
     then
-        target.setTarget(playerId, mouseUnit)
+        target.syncTarget(mouseUnit)
     end
 end
 

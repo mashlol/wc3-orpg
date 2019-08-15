@@ -1,5 +1,6 @@
 local vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
+local unitmap = require('src/unitmap.lua')
 
 local boss
 
@@ -134,7 +135,8 @@ end
 
 local init = function()
     door = gg_dest_DTg6_0369
-    boss = CreateUnit(Player(24), FourCC("hbos"), 1268.7, -2846.7, 135.939)
+    boss = unitmap.createTargetableUnit(
+        Player(24), FourCC("hbos"), 1268.7, -2846.7, 135.939)
 
     resetFight()
 end
