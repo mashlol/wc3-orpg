@@ -77,8 +77,7 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            -- TODO add durations to buffs
-            buff.addBuff(target, 'armorpot')
+            buff.addBuff(target, 'armorpot', 10)
         end
     }
 
