@@ -35,19 +35,17 @@ local cast = function(playerId)
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
 
-    animations.queueAnimation(hero, 8, 1)
+    animations.queueAnimation(hero, 4, 1)
 
     local timer = CreateTimer()
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    local effect = AddSpecialEffectTarget("Liberty.mdl", hero, "chest")
-    buff.addBuff(hero, 'focus')
+    buff.addBuff(hero, 'focus', 20)
 
     TriggerSleepAction(20)
 
     buff.removeBuff(hero, 'focus')
-    DestroyEffect(effect)
 
     return true
 end

@@ -10,6 +10,10 @@ local BUFF_INFO = {
                 amount = 1.5,
             },
         },
+        vfx = {
+            model = "Liberty.mdl",
+            attach = "chest",
+        },
     },
     armorpot = {
         effects = {
@@ -25,7 +29,10 @@ local BUFF_INFO = {
 -- {
 --   [unitHandleID] = {
 --     buffs = {
---       [buffName] = true,
+--       [buffName] = {
+--         timer = CreateTimer(),
+--         effect = effect handle or nil,
+--       },
 --     },
 --     unit = unit,
 --   },
@@ -51,7 +58,7 @@ function applyBuffs()
     end
 end
 
-function addBuff(unit, buffName)
+function addBuff(unit, buffName, duration)
     local unitId = GetHandleId(unit)
     if buffInstances[unitId] == nil then
         buffInstances[unitId] = {
@@ -60,8 +67,14 @@ function addBuff(unit, buffName)
         }
     end
 
-    buffInstances[unitId].buffs[buffName] = true
-    applyBuffs(unit)
+    buffInstances[unitId].buffs[buffName] = {}
+
+    if BUFF_INFO[buffName].vfx ~= nil then
+        buffInstances[unitId].buffs[buffName].effect = AddSpecialEffectTarget(
+            BUFF_INFO[buffName].vfx.model,
+            unit,
+            BUFF_INFO[buffName].vfx.attach)
+    end
 end
 
 function removeBuff(unit, buffName)
@@ -70,8 +83,10 @@ function removeBuff(unit, buffName)
         return
     end
 
+    if buffInstances[unitId].buffs[buffName].effect ~= nil then
+        DestroyEffect(buffInstances[unitId].buffs[buffName].effect)
+    end
     buffInstances[unitId].buffs[buffName] = nil
-    applyBuffs(unit)
 end
 
 function hasBuff(unit, buffName)
