@@ -80,7 +80,7 @@ local cast = function(playerId)
         onDestroy = function()
             damage.heal(hero, target, 70)
 
-            buff.addBuff(target, 'rejuvpot', 4)
+            buff.addBuff(hero, target, 'rejuvpot', 4)
         end
     }
 

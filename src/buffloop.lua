@@ -15,7 +15,8 @@ function applyBuffs()
                     baseSpeed = baseSpeed * info.amount
                 end
                 if info.type == 'heal' then
-                    hp = hp + info.amount
+                    hp = hp + info.amount * buff.getHealingModifier(val.source, unit)
+                    print("Healing ", hp)
                 end
             end
         end

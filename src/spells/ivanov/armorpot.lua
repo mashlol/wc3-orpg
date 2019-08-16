@@ -77,7 +77,7 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            buff.addBuff(target, 'armorpot', 10)
+            buff.addBuff(hero, target, 'armorpot', 10)
         end
     }
 
