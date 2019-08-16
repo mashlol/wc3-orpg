@@ -54,7 +54,9 @@ local respawn = function()
         if unit == heroes[i] then
             heroes[i] = unitmap.createTargetableUnit(
                 Player(i), pickedHeroes[i].id, -150, -125, 0)
-            UnitRemoveAbility(heroes[i], FourCC('Aatk'))
+            BlzSetUnitIntegerField(heroes[i], UNIT_IF_STRENGTH, 0)
+            BlzSetUnitIntegerField(heroes[i], UNIT_IF_INTELLIGENCE, 0)
+            BlzSetUnitIntegerField(heroes[i], UNIT_IF_AGILITY, 0)
         end
     end
 end
@@ -72,7 +74,9 @@ local showPickHeroDialog = function()
             pickedHeroes[playerId] = hero
             heroes[playerId] = unitmap.createTargetableUnit(
                 Player(playerId), hero.id, -150, -125, 0)
-            UnitRemoveAbility(heroes[playerId], FourCC('Aatk'))
+            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
+            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)
+            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_AGILITY, 0)
         end)
     end
 
