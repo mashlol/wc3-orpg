@@ -108,7 +108,7 @@ function addBuff(source, target, buffName, duration)
 end
 
 function removeBuff(target, buffName)
-    local unitId = GetHandleId(unit)
+    local unitId = GetHandleId(target)
     if buffInstances[unitId] == nil or buffInstances[unitId].buffs == nil then
         return
     end
