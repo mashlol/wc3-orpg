@@ -410,16 +410,17 @@ local updateCustomUI = function()
     -- Loops and updates the custom UI values
     local playerId = GetPlayerId(GetLocalPlayer())
     local hero = hero.getHero(playerId)
-    local target = target.getTarget(playerId)
 
     updateUnitFrame(hero, myFrames)
-    updateUnitFrame(target, targetFrames)
+    updateUnitFrame(target.getTarget(playerId), targetFrames)
     updateActionBar()
     updateCastBar()
 
     SelectUnit(
         hero,
         true)
+
+    target.updateTargetEffectLocations()
 end
 
 local init = function()
