@@ -11,7 +11,9 @@ function isOnCooldown(playerId, spellId)
 end
 
 function startCooldown(playerId, spellId, duration)
-    -- TODO check if there is an old timer to destroy
+    if cooldowns[playerId][spellId] ~= nil then
+        DestroyTimer(cooldowns[playerId][spellId])
+    end
 
     local timer = CreateTimer()
     TimerStart(timer, duration, false, nil)
