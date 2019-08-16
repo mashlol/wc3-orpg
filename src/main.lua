@@ -10,6 +10,7 @@ local casttime = require('src/casttime.lua')
 local buffloop = require('src/buffloop.lua')
 local target = require('src/target.lua')
 local damage = require('src/damage.lua')
+local cooldowns = require('src/spells/cooldowns.lua')
 
 local unitmap = require('src/unitmap.lua')
 
@@ -34,6 +35,7 @@ local mainInit = function()
     buffloop.init()
     target.init()
     damage.init()
+    cooldowns.init()
 
     turtle.init()
 

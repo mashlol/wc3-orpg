@@ -8,53 +8,44 @@ local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local buff = require('src/buff.lua')
+local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 120
 
-local cooldowns = {}
+local getSpellId = function()
+    return 'focus'
+end
+
+local getSpellName = function()
+    return 'Focus'
+end
 
 local cast = function(playerId)
-    if
-        cooldowns[playerId] ~= nil and
-        TimerGetRemaining(cooldowns[playerId]) > 0.05
-    then
-        log.log(playerId, "Focus is on cooldown!", log.TYPE.ERROR)
+    if cooldowns.isOnCooldown(playerId, getSpellId()) then
+        log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
-    if cooldowns[playerId] ~= nil then
-        DestroyTimer(cooldowns[playerId])
-        cooldowns[playerId] = nil
-    end
-
     local hero = hero.getHero(playerId)
-
     local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
     local mouseV = vector.create(
         mouse.getMouseX(playerId),
         mouse.getMouseY(playerId))
 
     animations.queueAnimation(hero, 4, 1)
-
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
-
+    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
     buff.addBuff(hero, hero, 'focus', 20)
 
     return true
 end
 
 local getCooldown = function(playerId)
-    if cooldowns[playerId] ~= nil then
-        return TimerGetRemaining(cooldowns[playerId])
-    end
-    return 0
+    return cooldowns.getRemainingCooldown(playerId, getSpellId())
 end
 
-local getTotalCooldown = function()
-    return COOLDOWN_S
+local getTotalCooldown = function(playerId)
+    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()
