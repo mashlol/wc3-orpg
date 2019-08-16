@@ -78,7 +78,7 @@ local cast = function(playerId)
             0.2,
         false)
 
-    local damage = storedData[playerId].attackCount == 2 and 300 or 50
+    local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
 
     local facingVec = vector.fromAngle(
         Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
@@ -88,7 +88,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(facingVec, 100)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, damage)
+            damage.dealDamage(hero, unit, dmgAmount)
 
             effect.createEffect{
                 model = "ebld",
