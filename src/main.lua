@@ -9,6 +9,7 @@ local leaver = require('src/leaver.lua')
 local casttime = require('src/casttime.lua')
 local buff = require('src/buff.lua')
 local target = require('src/target.lua')
+local damage = require('src/damage.lua')
 
 local unitmap = require('src/unitmap.lua')
 
@@ -32,6 +33,7 @@ local mainInit = function()
     casttime.init()
     buff.init()
     target.init()
+    damage.init()
 
     turtle.init()
 

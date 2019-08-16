@@ -60,7 +60,7 @@ local cast = function(playerId)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     local dummy = CreateUnit(
                         Player(playerId),
-                        FourCC("hfoo"),
+                        FourCC("hdum"),
                         GetUnitX(collidedUnit),
                         GetUnitY(collidedUnit), 0)
 
