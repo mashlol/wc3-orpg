@@ -57,7 +57,7 @@ local respawn = function()
             BlzSetUnitIntegerField(heroes[i], UNIT_IF_STRENGTH, 0)
             BlzSetUnitIntegerField(heroes[i], UNIT_IF_INTELLIGENCE, 0)
             BlzSetUnitIntegerField(heroes[i], UNIT_IF_AGILITY, 0)
-            SuspendHeroXP(heroes[i])
+            SuspendHeroXP(heroes[i], true)
         end
     end
 end
@@ -78,7 +78,7 @@ local showPickHeroDialog = function()
             BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
             BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)
             BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_AGILITY, 0)
-            SuspendHeroXP(heroes[playerId])
+            SuspendHeroXP(heroes[playerId], true)
         end)
     end
 
