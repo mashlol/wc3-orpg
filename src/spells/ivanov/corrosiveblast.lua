@@ -8,6 +8,7 @@ local animations = require('src/animations.lua')
 local target = require('src/target.lua')
 local casttime = require('src/casttime.lua')
 local buff = require('src/buff.lua')
+local damage = require('src/damage.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 15
@@ -77,12 +78,7 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            UnitDamageTargetBJ(
-                hero,
-                target,
-                200 * buff.getDamageModifier(hero, target),
-                ATTACK_TYPE_PIERCE,
-                DAMAGE_TYPE_UNKNOWN)
+            damage.dealDamage(hero, target, 200)
 
             effect.createEffect{
                 model = "ecrt",

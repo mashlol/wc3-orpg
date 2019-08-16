@@ -6,8 +6,8 @@ local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
-local buff = require('src/buff.lua')
 local collision = require('src/collision.lua')
+local damage = require('src/damage.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 100
@@ -79,11 +79,7 @@ local cast = function(playerId)
         local collidedUnits = collision.getAllCollisions(mouseV, 550)
         for idx, unit in pairs(collidedUnits) do
             if IsUnitAlly(unit, Player(playerId)) then
-                local curHealth = BlzGetUnitRealField(unit, UNIT_RF_HP)
-                BlzSetUnitRealField(
-                    unit,
-                    UNIT_RF_HP,
-                    curHealth + 100 * buff.getHealingModifier(hero, unit))
+                damage.heal(hero, unit, 100)
 
                 effect.createEffect{
                     model = "ehet",
