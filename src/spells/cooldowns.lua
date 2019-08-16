@@ -33,7 +33,6 @@ function getTotalCooldown(playerId, spellId)
 end
 
 function init()
-    print('inited')
     for i=0,bj_MAX_PLAYERS,1 do
         cooldowns[i] = {}
     end

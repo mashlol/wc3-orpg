@@ -23,6 +23,7 @@ local accmist = require('src/spells/ivanov/accmist.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
+local cooldowns = require('src/spells/cooldowns.lua')
 
 local SPELL_MAP = {
     -- Generic
@@ -77,7 +78,7 @@ end
 local getCooldown = function(playerId, idx)
     local spell = getSpell(playerId, idx)
     if spell ~= nil then
-        return spell.getCooldown(playerId)
+        return cooldowns.getRemainingCooldown(playerId, spell.getSpellId())
     end
     return 0
 
@@ -85,8 +86,13 @@ end
 
 local getCooldownPct = function(playerId, idx)
     local spell = getSpell(playerId, idx)
-    if spell ~= nil and spell.getTotalCooldown(playerId) ~= 0 then
-        return spell.getCooldown(playerId) / spell.getTotalCooldown(playerId)
+    if spell ~= nil then
+        local spellId = spell.getSpellId()
+        local totalCd = cooldowns.getTotalCooldown(playerId, spellId)
+        local remainingCd = cooldowns.getRemainingCooldown(playerId, spellId)
+        if totalCd ~= 0 then
+            return remainingCd / totalCd
+        end
     end
     return 1
 end
