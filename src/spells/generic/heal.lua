@@ -82,7 +82,7 @@ end
 
 return {
     cast = cast,
-    getCooldown = getCooldown,
-    getTotalCooldown = getTotalCooldown,
+    getSpellId = getSpellId,
+    getSpellName = getSpellName,
     getIcon = getIcon,
 }
