@@ -17,6 +17,16 @@ local destroyProjectile = function(projectile)
     end
 end
 
+local getGoalV = function(options)
+    if options.toV ~= nil then
+        return options.toV
+    else
+        return vector.create(
+            GetUnitX(options.destUnit),
+            GetUnitY(options.destUnit))
+    end
+end
+
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
@@ -47,18 +57,19 @@ local clearProjectiles = function()
             end
         end
 
+        local goalV = getGoalV(projectile.options)
         if projectile.toRemove then
             -- do nothing
         elseif
-            isCloseTo(curProjectileX, projectile.options.toV.x) and
-            isCloseTo(curProjectileY, projectile.options.toV.y)
+            isCloseTo(curProjectileX, goalV.x) and
+            isCloseTo(curProjectileY, goalV.y)
         then
             -- Already at destination, can finish
             destroyProjectile(projectile)
         else
             -- Move toward destination at speed
-            local totalDistX = projectile.options.toV.x - curProjectileX
-            local totalDistY = projectile.options.toV.y - curProjectileY
+            local totalDistX = goalV.x - curProjectileX
+            local totalDistY = goalV.y - curProjectileY
 
             local distVector = vector.create(totalDistX, totalDistY)
 
@@ -94,8 +105,9 @@ local init = function()
 end
 
 local createProjectile = function(options)
+    local goalV = getGoalV(options)
     if options.length ~= nil then
-        local lengthNormalizedV = vector.subtract(options.toV, options.fromV)
+        local lengthNormalizedV = vector.subtract(goalV, options.fromV)
         lengthNormalizedV = vector.normalize(lengthNormalizedV)
         lengthNormalizedV = vector.multiply(lengthNormalizedV, options.length)
         lengthNormalizedV = vector.add(options.fromV, lengthNormalizedV)
@@ -107,7 +119,7 @@ local createProjectile = function(options)
         FourCC(options.model),
         options.fromV.x,
         options.fromV.y,
-        bj_RADTODEG * Atan2(options.toV.y - options.fromV.y, options.toV.x - options.fromV.x))
+        bj_RADTODEG * Atan2(goalV.y - options.fromV.y, goalV.x - options.fromV.x))
 
     table.insert(projectiles, {
         unit = projectile,
