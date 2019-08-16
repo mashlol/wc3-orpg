@@ -34,10 +34,11 @@ local ALL_HERO_INFO = {
     },
     [4] = {
         name = 'Azora',
-        id = FourCC("HAzr"),
+        id = FourCC("Hazr"),
         spells = {
             [1] = 'fireball',
             [2] = 'frostnova',
+            [3] = 'heal',
             [4] = 'frostorb',
             [8] = 'blink',
         }

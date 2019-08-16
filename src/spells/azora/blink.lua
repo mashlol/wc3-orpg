@@ -8,7 +8,7 @@ local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.1
+local COOLDOWN_S = 15
 
 local cooldowns = {}
 
