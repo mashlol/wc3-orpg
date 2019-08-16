@@ -3,6 +3,7 @@ local log = require('src/log.lua')
 local unitmap = require('src/unitmap.lua')
 
 targets = {}
+targetEffects = {}
 
 local getTarget = function(playerId)
     return targets[playerId]
@@ -21,6 +22,41 @@ local setTarget = function()
     local handleId = S2I(BlzGetTriggerSyncData())
     local unit = unitmap.getUnitByHandleId(handleId)
     targets[playerId] = unit
+
+    if targetEffects[playerId] ~= nil then
+        BlzSetSpecialEffectPosition(targetEffects[playerId], 0, 0, -2000)
+        DestroyEffect(targetEffects[playerId])
+    end
+    if targets[playerId] ~= nil then
+        targetEffects[playerId] = AddSpecialEffect(
+            GetPlayerId(GetLocalPlayer()) == playerId and
+                "UI\\Feedback\\TargetPreSelected\\TargetPreSelected.mdl" or
+                "",
+            GetUnitX(targets[playerId]),
+            GetUnitY(targets[playerId]))
+        BlzSetSpecialEffectHeight(targetEffects[playerId], 0)
+        if IsUnitAlly(targets[playerId], Player(playerId)) then
+            BlzSetSpecialEffectColor(targetEffects[playerId], 0, 255, 0)
+        else
+            BlzSetSpecialEffectColor(targetEffects[playerId], 255, 0, 0)
+        end
+        BlzSetSpecialEffectZ(targetEffects[playerId], -1000)
+        BlzSetSpecialEffectScale(
+            targetEffects[playerId],
+            BlzGetUnitRealField(targets[playerId], UNIT_RF_SELECTION_SCALE))
+    end
+end
+
+function updateTargetEffectLocations()
+    for playerId, targetEffect in pairs(targetEffects) do
+        if targets[playerId] ~= nil then
+            BlzSetSpecialEffectPosition(
+                targetEffect,
+                GetUnitX(targets[playerId]),
+                GetUnitY(targets[playerId]),
+                -60)
+        end
+    end
 end
 
 function init()
@@ -36,4 +72,5 @@ return {
     init = init,
     getTarget = getTarget,
     syncTarget = syncTarget,
+    updateTargetEffectLocations = updateTargetEffectLocations,
 }
