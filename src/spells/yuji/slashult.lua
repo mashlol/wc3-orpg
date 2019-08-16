@@ -8,24 +8,23 @@ local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 25
 
-local cooldowns = {}
+local getSpellId = function()
+    return 'slashult'
+end
+
+local getSpellName = function()
+    return 'Spin'
+end
 
 local cast = function(playerId)
-    if
-        cooldowns[playerId] ~= nil and
-        TimerGetRemaining(cooldowns[playerId]) > 0.05
-    then
-        log.log(playerId, "TODO NAME is on cooldown!", log.TYPE.ERROR)
+    if cooldowns.isOnCooldown(playerId, getSpellId()) then
+        log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
         return false
-    end
-
-    if cooldowns[playerId] ~= nil then
-        DestroyTimer(cooldowns[playerId])
-        cooldowns[playerId] = nil
     end
 
     local hero = hero.getHero(playerId)
@@ -41,9 +40,7 @@ local cast = function(playerId)
 
     casttime.cast(playerId, 0.3, false)
 
-    local timer = CreateTimer()
-    TimerStart(timer, COOLDOWN_S, false, nil)
-    cooldowns[playerId] = timer
+    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     effect.createEffect{
         model = "grns",
@@ -88,14 +85,11 @@ local cast = function(playerId)
 end
 
 local getCooldown = function(playerId)
-    if cooldowns[playerId] ~= nil then
-        return TimerGetRemaining(cooldowns[playerId])
-    end
-    return 0
+    return cooldowns.getRemainingCooldown(playerId, getSpellId())
 end
 
-local getTotalCooldown = function()
-    return COOLDOWN_S
+local getTotalCooldown = function(playerId)
+    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()

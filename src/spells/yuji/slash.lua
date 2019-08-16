@@ -8,26 +8,25 @@ local casttime = require('src/casttime.lua')
 local collision = require('src/collision.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.5
 local COOLDOWN_S_LONG = 1.2
 
-local cooldowns = {}
 local storedData = {}
 
-local isStuck = function(unit)
-    return IsUnitType(unit, UNIT_TYPE_STUNNED) or
-        IsUnitType(unit, UNIT_TYPE_SNARED) or
-        IsUnitType(unit, UNIT_TYPE_POLYMORPHED)
+local getSpellId = function()
+    return 'slash'
+end
+
+local getSpellName = function()
+    return 'Slash'
 end
 
 local cast = function(playerId)
-    if
-        cooldowns[playerId] ~= nil and
-        TimerGetRemaining(cooldowns[playerId]) > 0.05
-    then
-        log.log(playerId, "Slash is on cooldown!", log.TYPE.ERROR)
+    if cooldowns.isOnCooldown(playerId, getSpellId()) then
+        log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
         return false
     end
 
@@ -51,14 +50,12 @@ local cast = function(playerId)
     storedData[playerId].attackCount =
         (storedData[playerId].attackCount + 1) % 3
 
-    local timer = CreateTimer()
-    TimerStart(
-        timer,
+    cooldowns.startCooldown(
+        playerId,
+        getSpellId(),
         storedData[playerId].attackCount == 2 and
             COOLDOWN_S_LONG or
-            COOLDOWN_S, false,
-        nil)
-    cooldowns[playerId] = timer
+            COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(
@@ -106,17 +103,11 @@ local cast = function(playerId)
 end
 
 local getCooldown = function(playerId)
-    if cooldowns[playerId] ~= nil then
-        return TimerGetRemaining(cooldowns[playerId])
-    end
-    return 0
+    return cooldowns.getRemainingCooldown(playerId, getSpellId())
 end
 
 local getTotalCooldown = function(playerId)
-    if cooldowns[playerId] ~= nil then
-        return TimerGetTimeout(cooldowns[playerId])
-    end
-    return COOLDOWN_S
+    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()
