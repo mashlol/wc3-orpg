@@ -41,7 +41,7 @@ local cast = function(playerId)
     TimerStart(timer, COOLDOWN_S, false, nil)
     cooldowns[playerId] = timer
 
-    buff.addBuff(hero, 'focus', 20)
+    buff.addBuff(hero, hero, 'focus', 20)
 
     return true
 end

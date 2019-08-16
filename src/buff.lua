@@ -71,7 +71,7 @@ local BUFF_INFO = {
 -- }
 local buffInstances = {}
 
-function addBuff(unit, buffName, duration)
+function addBuff(source, target, buffName, duration)
     local unitId = GetHandleId(unit)
     if buffInstances[unitId] == nil then
         buffInstances[unitId] = {
@@ -85,7 +85,9 @@ function addBuff(unit, buffName, duration)
         removeBuff(unit, buffName)
     end
 
-    buffInstances[unitId].buffs[buffName] = {}
+    buffInstances[unitId].buffs[buffName] = {
+        source = source,
+    }
 
     if BUFF_INFO[buffName].vfx ~= nil then
         buffInstances[unitId].buffs[buffName].effect = AddSpecialEffectTarget(
@@ -105,7 +107,7 @@ function addBuff(unit, buffName, duration)
         end)
 end
 
-function removeBuff(unit, buffName)
+function removeBuff(target, buffName)
     local unitId = GetHandleId(unit)
     if buffInstances[unitId] == nil or buffInstances[unitId].buffs == nil then
         return

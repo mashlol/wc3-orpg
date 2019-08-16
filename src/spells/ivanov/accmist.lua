@@ -70,24 +70,24 @@ local cast = function(playerId)
             table.insert(locations, finalVec)
         end
 
-        applySpeedBuff(playerId, locations)
+        applySpeedBuff(playerId, locations, hero)
         TriggerSleepAction(0.1)
     end
 
     for i=1,15,1 do
         TriggerSleepAction(0.5)
-        applySpeedBuff(playerId, locations)
+        applySpeedBuff(playerId, locations, hero)
     end
 
     return true
 end
 
-function applySpeedBuff(playerId, locations)
+function applySpeedBuff(playerId, locations, hero)
     for idx, loc in pairs(locations) do
         local collidedUnits = collision.getAllCollisions(loc, 50)
         for idx, unit in pairs(collidedUnits) do
             if IsUnitAlly(unit, Player(playerId)) then
-                buff.addBuff(unit, 'accpot', 3)
+                buff.addBuff(hero, unit, 'accpot', 3)
             end
         end
     end
