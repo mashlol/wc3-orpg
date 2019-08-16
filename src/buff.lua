@@ -72,17 +72,17 @@ local BUFF_INFO = {
 local buffInstances = {}
 
 function addBuff(source, target, buffName, duration)
-    local unitId = GetHandleId(unit)
+    local unitId = GetHandleId(target)
     if buffInstances[unitId] == nil then
         buffInstances[unitId] = {
-            unit = unit,
+            unit = target,
             buffs = {},
         }
     end
 
     if buffInstances[unitId].buffs[buffName] ~= nil then
         DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
-        removeBuff(unit, buffName)
+        removeBuff(target, buffName)
     end
 
     buffInstances[unitId].buffs[buffName] = {
@@ -92,7 +92,7 @@ function addBuff(source, target, buffName, duration)
     if BUFF_INFO[buffName].vfx ~= nil then
         buffInstances[unitId].buffs[buffName].effect = AddSpecialEffectTarget(
             BUFF_INFO[buffName].vfx.model,
-            unit,
+            target,
             BUFF_INFO[buffName].vfx.attach)
     end
 
@@ -103,7 +103,7 @@ function addBuff(source, target, buffName, duration)
         false,
         function()
             DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
-            removeBuff(unit, buffName)
+            removeBuff(target, buffName)
         end)
 end
 
