@@ -71,30 +71,6 @@ local BUFF_INFO = {
 -- }
 local buffInstances = {}
 
-function applyBuffs()
-    for unitId,unitInfo in pairs(buffInstances) do
-        local unit = unitInfo.unit
-        local buffs = unitInfo.buffs
-        local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-        local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
-
-        for buffName,val in pairs(buffs) do
-            local effects = BUFF_INFO[buffName].effects
-            for idx,info in pairs(effects) do
-                if info.type == 'modifyMoveSpeed' then
-                    baseSpeed = baseSpeed * info.amount
-                end
-                if info.type == 'heal' then
-                    hp = hp + info.amount
-                end
-            end
-        end
-
-        BlzSetUnitRealField(target, UNIT_RF_HP, hp)
-        SetUnitMoveSpeed(unit, baseSpeed)
-    end
-end
-
 function addBuff(unit, buffName, duration)
     local unitId = GetHandleId(unit)
     if buffInstances[unitId] == nil then
@@ -200,16 +176,17 @@ function getHealingModifier(unit, target)
     return modifier
 end
 
-function init()
-    TimerStart(CreateTimer(), 1, true, applyBuffs)
+function getBuffInstances()
+    return buffInstances
 end
 
 return {
+    BUFF_INFO = BUFF_INFO,
     addBuff = addBuff,
     removeBuff = removeBuff,
     hasBuff = hasBuff,
     getBuffs = getBuffs,
+    getBuffInstances = getBuffInstances,
     getDamageModifier = getDamageModifier,
     getHealingModifier = getHealingModifier,
-    init = init,
 }
