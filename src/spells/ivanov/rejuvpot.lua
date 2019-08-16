@@ -73,7 +73,7 @@ local cast = function(playerId)
         playerId = playerId,
         model = "erej",
         fromV = heroV,
-        toV = targetV,
+        destUnit = target,
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
@@ -82,10 +82,10 @@ local cast = function(playerId)
                 target,
                 UNIT_RF_HP,
                 curHealth + 70 * buff.getHealingModifier(hero, target))
+
+            buff.addBuff(target, 'rejuvpot', 4)
         end
     }
-
-    buff.addBuff(target, 'rejuvpot', 4)
 
     return true
 end
