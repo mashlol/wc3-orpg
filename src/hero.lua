@@ -19,6 +19,7 @@ local ALL_HERO_INFO = {
         name = 'Stormfist',
         id = FourCC("Hstm"),
         spells = {
+            [1] = 'punch',
         },
     },
     [3] = {

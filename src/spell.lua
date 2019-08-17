@@ -14,6 +14,9 @@ local throwingstar = require('src/spells/yuji/throwingstar.lua')
 local slashult = require('src/spells/yuji/slashult.lua')
 local focus = require('src/spells/yuji/focus.lua')
 
+-- Stormfist
+local punch = require('src/spells/stormfist/punch.lua')
+
 -- Ivanov
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
 local armorpot = require('src/spells/ivanov/armorpot.lua')
@@ -41,6 +44,9 @@ local SPELL_MAP = {
     throwingstar = throwingstar,
     slashult = slashult,
     focus = focus,
+
+    -- Stormfist
+    punch = punch,
 
     -- Ivanov
     rejuvpot = rejuvpot,

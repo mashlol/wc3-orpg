@@ -57,8 +57,15 @@ local interruptCast = function()
         return
     end
     local playerId = GetPlayerId(GetTriggerPlayer())
+    stopCast(playerId, true)
+end
+
+function stopCast(playerId, interuptable)
     local timer = castTimes[playerId]
-    if timer ~= nil and timer.interruptable == true then
+    if
+        timer ~= nil and
+        ((interuptable and timer.interruptable == true) or not interruptable)
+    then
         PauseUnit(hero.getHero(playerId), false)
         castTimes[playerId] = nil
         DestroyTimer(timer.timer)
@@ -93,6 +100,7 @@ end
 return {
     init = init,
     cast = cast,
+    stopCast = stopCast,
     isCasting = isCasting,
     getCastDurationRemaining = getCastDurationRemaining,
     getCastDurationTotal = getCastDurationTotal,
