@@ -2,6 +2,7 @@ local hero = require('src/hero.lua')
 local target = require('src/target.lua')
 local spell = require('src/spell.lua')
 local casttime = require('src/casttime.lua')
+local buff = require('src/buff.lua')
 
 local ACTION_ITEM_SIZE = 0.04
 local BAR_WIDTH = ACTION_ITEM_SIZE * 5
@@ -9,20 +10,7 @@ local BAR_HEIGHT = 0.01
 local CAST_BAR_WIDTH = ACTION_ITEM_SIZE * 4
 local CAST_BAR_HEIGHT = 0.02
 
-local TEMP_ICONS = {
-    "ReplaceableTextures\\CommandButtons\\BTNEnchantedGemstone.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNAbsorbMagic.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNAmbushDay.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNBash.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNBearBlink.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNBlink.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNBreathOfFrost.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNCarrionSwarm.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNCharm.blp",
-    "ReplaceableTextures\\CommandButtons\\BTNClusterRockets.blp",
-}
+local BUFF_ICON_SIZE = 0.02
 
 local DEFAULT_HOTKEYS = {
     "Q", "W", "E", "R",
@@ -61,6 +49,34 @@ local initUnitFrame = function(xLoc)
         "",
         0)
 
+    BlzFrameSetSize(unitFrameOrigin, BAR_WIDTH, BAR_HEIGHT * 5)
+    BlzFrameSetAbsPoint(
+        unitFrameOrigin,
+        FRAMEPOINT_CENTER,
+        xLoc,
+        ACTION_ITEM_SIZE + BAR_HEIGHT * 5)
+
+    local unitFrameBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "unitFrameBackdrop",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(unitFrameBackdrop, BAR_WIDTH, BAR_HEIGHT * 5)
+    BlzFrameSetPoint(
+        unitFrameBackdrop,
+        FRAMEPOINT_BOTTOMLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0,
+        0)
+    BlzFrameSetTexture(
+        unitFrameBackdrop,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+    BlzFrameSetAlpha(unitFrameBackdrop, 255)
+
     local healthBarFrameBackground = BlzCreateFrameByType(
         "BACKDROP",
         "healthBarFrameBackground",
@@ -68,11 +84,13 @@ local initUnitFrame = function(xLoc)
         "",
         0)
     BlzFrameSetSize(healthBarFrameBackground, BAR_WIDTH, BAR_HEIGHT)
-    BlzFrameSetAbsPoint(
+    BlzFrameSetPoint(
         healthBarFrameBackground,
-        FRAMEPOINT_CENTER,
-        xLoc,
-        ACTION_ITEM_SIZE + BAR_HEIGHT * 5)
+        FRAMEPOINT_BOTTOMLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0,
+        BAR_HEIGHT)
     BlzFrameSetTexture(
         healthBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -88,9 +106,9 @@ local initUnitFrame = function(xLoc)
     BlzFrameSetSize(healthBarFrameFilled, BAR_WIDTH, BAR_HEIGHT)
     BlzFrameSetPoint(
         healthBarFrameFilled,
-        FRAMEPOINT_LEFT,
+        FRAMEPOINT_BOTTOMLEFT,
         healthBarFrameBackground,
-        FRAMEPOINT_LEFT,
+        FRAMEPOINT_BOTTOMLEFT,
         0,
         0)
     BlzFrameSetTexture(
@@ -106,11 +124,13 @@ local initUnitFrame = function(xLoc)
         "",
         0)
     BlzFrameSetSize(energyBarFrameBackground, BAR_WIDTH, BAR_HEIGHT)
-    BlzFrameSetAbsPoint(
+    BlzFrameSetPoint(
         energyBarFrameBackground,
-        FRAMEPOINT_CENTER,
-        xLoc,
-        ACTION_ITEM_SIZE + BAR_HEIGHT * 4)
+        FRAMEPOINT_BOTTOMLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0,
+        0)
     BlzFrameSetTexture(
         energyBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -126,9 +146,9 @@ local initUnitFrame = function(xLoc)
     BlzFrameSetSize(energyBarFrameFilled, BAR_WIDTH, BAR_HEIGHT)
     BlzFrameSetPoint(
         energyBarFrameFilled,
-        FRAMEPOINT_LEFT,
+        FRAMEPOINT_BOTTOMLEFT,
         energyBarFrameBackground,
-        FRAMEPOINT_LEFT,
+        FRAMEPOINT_BOTTOMLEFT,
         0,
         0)
     BlzFrameSetTexture(
@@ -144,18 +164,40 @@ local initUnitFrame = function(xLoc)
         "",
         0)
     BlzFrameSetSize(unitNameFrame, BAR_WIDTH, BAR_HEIGHT)
-    BlzFrameSetAbsPoint(
+    BlzFrameSetPoint(
         unitNameFrame,
-        FRAMEPOINT_CENTER,
-        xLoc,
-        ACTION_ITEM_SIZE + BAR_HEIGHT * 6)
+        FRAMEPOINT_BOTTOMLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0,
+        BAR_HEIGHT * 2)
     BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
+
+    local buffIcons = {}
+    for i=0,9,1 do
+        local buffIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "buffIcon",
+            unitFrameOrigin,
+            "",
+            0)
+        BlzFrameSetSize(buffIcon, BUFF_ICON_SIZE, BUFF_ICON_SIZE)
+        BlzFrameSetPoint(
+            buffIcon,
+            FRAMEPOINT_BOTTOMLEFT,
+            unitFrameOrigin,
+            FRAMEPOINT_BOTTOMLEFT,
+            i * BUFF_ICON_SIZE,
+            BAR_HEIGHT * 3)
+        table.insert(buffIcons, buffIcon)
+    end
 
     return {
         healthBar = healthBarFrameFilled,
         energyBar = energyBarFrameFilled,
         origin = unitFrameOrigin,
         name = unitNameFrame,
+        buffIcons = buffIcons,
     }
 end
 
@@ -355,6 +397,29 @@ local updateUnitFrame = function(unit, frames)
             BlzFrameSetSize(frames.energyBar, BAR_WIDTH * mana / maxMana, BAR_HEIGHT)
         else
             BlzFrameSetSize(frames.energyBar, 0, BAR_HEIGHT)
+        end
+
+        local buffs = buff.getBuffs(unit)
+        local i = 1
+        for buffName, buffInfo in pairs(buffs) do
+            local buffIcon = frames.buffIcons[i]
+            local buffInfo = buff.BUFF_INFO[buffName]
+
+            BlzFrameSetVisible(buffIcon, true)
+            BlzFrameSetTexture(
+                buffIcon,
+                buffInfo.icon,
+                0,
+                true)
+
+            i = i + 1
+
+            if i > 10 then
+                break
+            end
+        end
+        for j=i,10,1 do
+            BlzFrameSetVisible(frames.buffIcons[j], false)
         end
     end
 end
