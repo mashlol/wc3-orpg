@@ -40,8 +40,9 @@ local ALL_HERO_INFO = {
             [1] = 'fireball',
             [2] = 'frostnova',
             [3] = 'heal',
-            [4] = 'frostorb',
+            [4] = 'meteor',
             [8] = 'blink',
+            [12] = 'frostorb',
         },
     },
 }
