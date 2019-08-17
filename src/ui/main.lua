@@ -4,30 +4,16 @@ local hero = require('src/hero.lua')
 local target = require('src/target.lua')
 
 -- UI Modules
-local castbar = require('src/ui/castbar.lua')
-local unitframe = require('src/ui/unitframe.lua')
-local actionbar = require('src/ui/actionbar.lua')
+local CastBar = require('src/ui/castbar.lua')
+local UnitFrame = require('src/ui/unitframe.lua')
+local ActionBar = require('src/ui/actionbar.lua')
 
 local UI_MODULES = {
-    castbar = {
-        module = castbar,
-    },
-    heroframe = {
-        module = unitframe,
-        unit = 'hero',
-        xLoc = 0.26,
-    },
-    targetframe = {
-        module = unitframe,
-        unit = 'target',
-        xLoc = 0.54,
-    },
-    actionbar = {
-        module = actionbar,
-    },
+    actionbar = ActionBar:new(),
+    castbar = CastBar:new(),
+    targetframe = UnitFrame:new{xLoc = 0.54, forTarget = true},
+    heroframe = UnitFrame:new{xLoc = 0.26, forTarget = false},
 }
-
-local uiFrames = {}
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)
@@ -47,7 +33,7 @@ end
 
 function initCustomUI()
     for name, mod in pairs(UI_MODULES) do
-        uiFrames[name] = mod.module.init(mod.xLoc or 0, mod.yLoc or 0)
+        mod:init()
     end
 end
 
@@ -61,10 +47,9 @@ function updateCustomUI()
         true)
 
     for name, mod in pairs(UI_MODULES) do
-        mod.module.update(
-            uiFrames[name],
-            playerId,
-            mod.unit == 'hero' and heroUnit or targetUnit)
+        mod.hero = heroUnit
+        mod.target = targetUnit
+        mod:update(playerId)
     end
 
     target.updateTargetEffectLocations()

@@ -7,7 +7,16 @@ local DEFAULT_HOTKEYS = {
     "Z", "X", "C", "V"
 }
 
-function init()
+local ActionBar = {}
+
+function ActionBar:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function ActionBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
     local actionBar = BlzCreateFrameByType(
         "FRAME",
@@ -130,12 +139,16 @@ function init()
         })
     end
 
-    return {
+    self.frames = {
         actionItems = actionItems,
     }
+
+    return self
 end
 
-function update(frame, playerId)
+function ActionBar:update(playerId)
+    local frame = self.frames
+
     for idx,actionItem in pairs(frame.actionItems) do
         local cdSec = spell.getCooldown(playerId, idx)
         local cdPct = spell.getCooldownPct(playerId, idx)
@@ -165,7 +178,4 @@ function update(frame, playerId)
     end
 end
 
-return {
-    init = init,
-    update = update,
-}
+return ActionBar
