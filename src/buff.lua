@@ -14,6 +14,7 @@ local BUFF_INFO = {
             model = "Liberty.mdl",
             attach = "chest",
         },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNMarkOfFire.blp",
     },
     armorpot = {
         effects = {
@@ -30,6 +31,7 @@ local BUFF_INFO = {
             model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
             attach = "chest",
         },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp",
     },
     accpot = {
         effects = {
@@ -42,6 +44,7 @@ local BUFF_INFO = {
             model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
             attach = "chest",
         },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp",
     },
     rejuvpot = {
         effects = {
@@ -54,6 +57,7 @@ local BUFF_INFO = {
             model = "Abilities\\Spells\\Other\\AcidBomb\\BottleImpact.mdl",
             attach = "chest",
         },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
     },
 }
 
