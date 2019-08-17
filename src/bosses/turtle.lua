@@ -1,4 +1,4 @@
-local Vector = require('src/vector2.lua')
+local Vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
 local unitmap = require('src/unitmap.lua')
 

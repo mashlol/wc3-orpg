@@ -1,4 +1,4 @@
-local Vector = require('src/vector2.lua')
+local Vector = require('src/vector.lua')
 
 function isCollided(unit, vec, radius)
     vec = Vector:new(vec)
