@@ -10,7 +10,9 @@ local isCloseTo = function(val, expected)
 end
 
 local destroyProjectile = function(projectile)
-    KillUnit(projectile.unit)
+    if projectile.options.shouldRemove then
+        KillUnit(projectile.unit)
+    end
     projectile.toRemove = true
     if projectile.options.onDestroy then
         projectile.options.onDestroy()
@@ -112,20 +114,25 @@ local createProjectile = function(options)
 
     options.toV = goalV
 
-    local projectile = CreateUnit(
-        Player(PLAYER_NEUTRAL_PASSIVE),
-        FourCC(options.model),
-        options.fromV.x,
-        options.fromV.y,
-        bj_RADTODEG * Atan2(options.toV.y - options.fromV.y, options.toV.x - options.fromV.x))
+    if options.projectile == nil then
+        options.projectile = CreateUnit(
+            Player(PLAYER_NEUTRAL_PASSIVE),
+            FourCC(options.model),
+            options.fromV.x,
+            options.fromV.y,
+            bj_RADTODEG * Atan2(options.toV.y - options.fromV.y, options.toV.x - options.fromV.x))
+        options.shouldRemove = true
+    else
+        options.shouldRemove = false
+    end
 
     table.insert(projectiles, {
-        unit = projectile,
+        unit = options.projectile,
         options = options,
         alreadyCollided = {}
     })
 
-    return projectile
+    return options.projectile
 end
 
 return {

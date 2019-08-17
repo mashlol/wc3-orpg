@@ -19,7 +19,7 @@ local ALL_HERO_INFO = {
         name = 'Stormfist',
         id = FourCC("Hstm"),
         spells = {
-        }
+        },
     },
     [3] = {
         name = 'Ivanov',
@@ -30,7 +30,7 @@ local ALL_HERO_INFO = {
             [4] = 'molecregen',
             [5] = 'corrosiveblast',
             [8] = 'accmist',
-        }
+        },
     },
     [4] = {
         name = 'Azora',
@@ -41,7 +41,7 @@ local ALL_HERO_INFO = {
             [3] = 'heal',
             [4] = 'frostorb',
             [8] = 'blink',
-        }
+        },
     },
 }
 
