@@ -44,7 +44,7 @@ local init = function()
         TriggerRegisterPlayerEvent(
             mouseMoveTrigger, Player(i), EVENT_PLAYER_MOUSE_MOVE)
         TriggerRegisterPlayerEvent(
-            mouseUpTrigger, Player(i), EVENT_PLAYER_MOUSE_UP)
+            mouseUpTrigger, Player(i), EVENT_PLAYER_MOUSE_DOWN)
     end
 
     TriggerAddAction(mouseMoveTrigger, mouseMoved)
