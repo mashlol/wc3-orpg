@@ -40,8 +40,9 @@ end
 function hideBlizzUI()
     BlzHideOriginFrames(true)
 
+    local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
     local worldFrame = BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0)
-    BlzFrameSetAllPoints(worldFrame, BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0))
+    BlzFrameSetAllPoints(worldFrame, originFrame)
 
     for i=0,11,1 do
         local commandFrame = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
@@ -50,7 +51,22 @@ function hideBlizzUI()
     end
 
     local miniMapFrame = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
+
+    local miniMapBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "miniMapBackdrop",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetAllPoints(miniMapBackdrop, miniMapFrame)
+    BlzFrameSetTexture(
+        miniMapBackdrop,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+
     BlzFrameSetVisible(miniMapFrame, true)
+    BlzFrameSetParent(miniMapFrame, miniMapBackdrop)
 end
 
 function initCustomUI()
