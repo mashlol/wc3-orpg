@@ -1,7 +1,16 @@
 local consts = require('src/ui/consts.lua')
 local casttime = require('src/casttime.lua')
 
-function init()
+local CastBar = {}
+
+function CastBar:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function CastBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local castBarFrameBackground = BlzCreateFrameByType(
@@ -44,13 +53,17 @@ function init()
         0,
         true)
 
-    return {
+    self.frames = {
         castBar = castBarFrameFilled,
         origin = castBarFrameBackground,
     }
+
+    return self
 end
 
-function update(frame, playerId)
+function CastBar:update(playerId)
+    local frame = self.frames
+
     local castRemainder = casttime.getCastDurationRemaining(playerId)
     local castTotal = casttime.getCastDurationTotal(playerId)
     if castRemainder ~= nil and castTotal ~= nil then
@@ -64,7 +77,4 @@ function update(frame, playerId)
     end
 end
 
-return {
-    init = init,
-    update = update,
-}
+return CastBar

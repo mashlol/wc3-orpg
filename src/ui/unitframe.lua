@@ -5,12 +5,21 @@
 --  - Unit name
 local consts = require('src/ui/consts.lua')
 local buff = require('src/buff.lua')
+local target = require('src/target.lua')
 
-function init(xLoc, yLoc)
+local UnitFrame = {xLoc = 0, forTarget = false}
+
+function UnitFrame:new(o)
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local unitFrameOrigin = BlzCreateFrameByType(
-        "FRAME",
+        "BUTTON",
         "unitFrameOrigin",
         originFrame,
         "",
@@ -20,7 +29,7 @@ function init(xLoc, yLoc)
     BlzFrameSetAbsPoint(
         unitFrameOrigin,
         FRAMEPOINT_CENTER,
-        xLoc,
+        self.xLoc,
         consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5)
 
     local unitFrameBackdrop = BlzCreateFrameByType(
@@ -159,16 +168,39 @@ function init(xLoc, yLoc)
         table.insert(buffIcons, buffIcon)
     end
 
-    return {
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        trig, unitFrameOrigin, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        self:onClick()
+    end)
+
+    self.frames = {
         healthBar = healthBarFrameFilled,
         energyBar = energyBarFrameFilled,
         origin = unitFrameOrigin,
         name = unitNameFrame,
         buffIcons = buffIcons,
     }
+
+    return self
 end
 
-function update(frames, playerId, unit)
+function UnitFrame:onClick()
+    target.syncTarget(self:getUnit())
+end
+
+function UnitFrame:getUnit()
+    if self.forTarget then
+        return self.target
+    end
+    return self.hero
+end
+
+function UnitFrame:update(playerId)
+    local frames = self.frames
+    local unit = self:getUnit()
+
     if unit == nil or GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
         BlzFrameSetVisible(frames.origin, false)
     else
@@ -224,9 +256,4 @@ function update(frames, playerId, unit)
     end
 end
 
-return {
-    init = init,
-    update = update,
-}
-
-
+return UnitFrame
