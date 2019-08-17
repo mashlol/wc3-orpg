@@ -46,7 +46,7 @@ local spawnAdds = function()
             :multiply(BlzGetUnitCollisionSize(boss) + 150)
             :add(bossV)
         local add = unitmap.createTargetableUnit(
-            Player(24),
+            Player(PLAYER_NEUTRAL_AGGRESSIVE),
             FourCC("hmbs"),
             spawnLocation.x,
             spawnLocation.y,
@@ -135,7 +135,7 @@ end
 local init = function()
     door = gg_dest_DTg6_0369
     boss = unitmap.createTargetableUnit(
-        Player(24), FourCC("hbos"), 1268.7, -2846.7, 135.939)
+        Player(PLAYER_NEUTRAL_AGGRESSIVE), FourCC("hbos"), 1268.7, -2846.7, 135.939)
 
     resetFight()
 end

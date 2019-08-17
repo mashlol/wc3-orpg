@@ -113,7 +113,7 @@ local createProjectile = function(options)
     options.toV = goalV
 
     local projectile = CreateUnit(
-        Player(24),
+        Player(PLAYER_NEUTRAL_PASSIVE),
         FourCC(options.model),
         options.fromV.x,
         options.fromV.y,

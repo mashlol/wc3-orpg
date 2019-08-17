@@ -10,19 +10,32 @@ local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
 
 local UI_MODULES = {
-    actionbar = ActionBar:new(),
-    castbar = CastBar:new(),
-    targetframe = UnitFrame:new{
+    ActionBar:new(),
+    CastBar:new(),
+    UnitFrame:new{
         xLoc = 0.54,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
         forTarget = true,
     },
-    heroframe = UnitFrame:new{
+    UnitFrame:new{
         xLoc = 0.26,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
         forTarget = false,
     },
 }
+
+for i=0,9,1 do
+    local xloC = i % 2 * (consts.BAR_WIDTH / 2 + 0.005)
+
+    table.insert(UI_MODULES, UnitFrame:new{
+        xLoc = xloC,
+        yLoc = 0.5 - (consts.BAR_HEIGHT * 5 + 0.005) * (i - i % 2) / 2,
+        anchor = FRAMEPOINT_TOPLEFT,
+        forTarget = false,
+        forParty = i,
+        width = consts.BAR_WIDTH / 2,
+    })
+end
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)
@@ -58,6 +71,7 @@ function updateCustomUI()
     for name, mod in pairs(UI_MODULES) do
         mod.hero = heroUnit
         mod.target = targetUnit
+        mod.playerId = playerId
         mod:update(playerId)
     end
 
