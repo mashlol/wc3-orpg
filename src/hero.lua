@@ -87,10 +87,22 @@ local showPickHeroDialog = function()
     end
 end
 
+function onRepick()
+    local repickPlayerId = GetPlayerId(GetTriggerPlayer())
+    RemoveUnit(heroes[repickPlayerId])
+    showPickHeroDialog()
+end
+
 local init = function()
     local trigger = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trigger, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(trigger, respawn)
+
+    local repickTrig = CreateTrigger()
+    for i=0,bj_MAX_PLAYERS,1 do
+        TriggerRegisterPlayerChatEvent(repickTrig, Player(i), "-repick", false)
+    end
+    TriggerAddAction(repickTrig, onRepick)
 
     showPickHeroDialog()
 end
