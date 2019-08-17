@@ -7,7 +7,7 @@ local consts = require('src/ui/consts.lua')
 local buff = require('src/buff.lua')
 local target = require('src/target.lua')
 
-local UnitFrame = {xLoc = 0, forTarget = false}
+local UnitFrame = {xLoc = 0, yLoc = 0, forTarget = false}
 
 function UnitFrame:new(o)
     setmetatable(o, self)
@@ -30,7 +30,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         FRAMEPOINT_CENTER,
         self.xLoc,
-        consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5)
+        self.yLoc)
 
     local unitFrameBackdrop = BlzCreateFrameByType(
         "BACKDROP",
