@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -36,10 +36,11 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     if isStuck(hero) then
         log.log(playerId, "You can't move right now", log.TYPE.ERROR)
@@ -86,10 +87,11 @@ local cast = function(playerId)
 
     casttime.cast(playerId, 0.15, false)
 
-    local finalPos = vector.subtract(mouseV, heroV)
-    finalPos = vector.normalize(finalPos)
-    finalPos = vector.multiply(finalPos, 400)
-    finalPos = vector.add(finalPos, heroV)
+    local finalPos = Vector:new(mouseV)
+        :subtract(heroV)
+        :normalize()
+        :multiply(400)
+        :add(heroV)
     SetUnitX(hero, finalPos.x)
     SetUnitY(hero, finalPos.y)
     SetUnitFacing(

@@ -1,6 +1,5 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local collision = require('src/collision.lua')
@@ -28,10 +27,6 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
 
     animations.queueAnimation(hero, 4, 1)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)

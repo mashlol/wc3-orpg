@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -36,10 +36,11 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     if storedData[playerId] == nil then
         storedData[playerId] = {
@@ -80,10 +81,11 @@ local cast = function(playerId)
 
     local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
 
-    local facingVec = vector.fromAngle(
-        Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
-    facingVec = vector.multiply(facingVec, 50)
-    facingVec = vector.add(facingVec, heroV)
+    local facingVec = Vector:new(mouseV)
+        :subtract(heroV)
+        :normalize()
+        :multiply(50)
+        :add(heroV)
 
     local collidedUnits = collision.getAllCollisions(facingVec, 100)
     for idx, unit in pairs(collidedUnits) do
