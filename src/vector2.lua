@@ -1,4 +1,4 @@
-Vector = {x = 0, y = 0}
+local Vector = {x = 0, y = 0}
 
 local abs = function(a)
   if a >= 0 then

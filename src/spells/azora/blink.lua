@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -32,18 +32,19 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     if isStuck(hero) then
         log.log(playerId, "You can't move right now", log.TYPE.ERROR)
         return false
     end
 
-    local dist = vector.subtract(heroV, mouseV)
-    local mag = vector.magnitude(dist)
+    local dist = Vector:new(heroV):subtract(mouseV)
+    local mag = dist:magnitude()
     if mag > 800 then
         log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false
