@@ -76,7 +76,6 @@ function init()
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         for j=0,bj_MAX_PLAYERS-1,1 do
-            print('Allying ', i, j)
             SetPlayerAllianceStateBJ(
                 Player(i),
                 Player(j),
