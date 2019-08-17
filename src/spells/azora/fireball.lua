@@ -6,6 +6,7 @@ local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -41,6 +42,8 @@ local cast = function(playerId)
         hero,
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
         0.05)
+
+    casttime.cast(playerId, 0.4, false)
 
     projectile.createProjectile{
         playerId = playerId,
