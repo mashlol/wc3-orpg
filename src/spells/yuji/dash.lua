@@ -75,8 +75,8 @@ local cast = function(playerId)
         model = "eoil",
         fromV = heroV,
         toV = mouseV,
-        speed = 3000,
-        length = 400,
+        speed = 4000,
+        length = 500,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 damage.dealDamage(hero, collidedUnit, 200)
@@ -85,18 +85,16 @@ local cast = function(playerId)
         end
     }
 
-    casttime.cast(playerId, 0.15, false)
+    projectile.createProjectile{
+        playerId = playerId,
+        projectile = hero,
+        fromV = heroV,
+        toV = mouseV,
+        speed = 4000,
+        length = 500,
+    }
 
-    local finalPos = Vector:new(mouseV)
-        :subtract(heroV)
-        :normalize()
-        :multiply(400)
-        :add(heroV)
-    SetUnitX(hero, finalPos.x)
-    SetUnitY(hero, finalPos.y)
-    SetUnitFacing(
-        hero,
-        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
+    casttime.cast(playerId, 0.15, false)
 
     return true
 end
