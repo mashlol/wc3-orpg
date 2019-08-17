@@ -7,7 +7,7 @@ local createEffect = function(options)
     end
 
     local dummy = CreateUnit(
-        Player(24),
+        Player(PLAYER_NEUTRAL_PASSIVE),
         FourCC(options.model),
         x,
         y,

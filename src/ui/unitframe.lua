@@ -6,8 +6,17 @@
 local consts = require('src/ui/consts.lua')
 local buff = require('src/buff.lua')
 local target = require('src/target.lua')
+local party = require('src/party.lua')
+local hero = require('src/hero.lua')
 
-local UnitFrame = {xLoc = 0, yLoc = 0, forTarget = false}
+local UnitFrame = {
+    xLoc = 0,
+    yLoc = 0,
+    width = consts.BAR_WIDTH,
+    anchor = FRAMEPOINT_CENTER,
+    forTarget = false,
+    farParty = nil,
+}
 
 function UnitFrame:new(o)
     setmetatable(o, self)
@@ -19,16 +28,16 @@ function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local unitFrameOrigin = BlzCreateFrameByType(
-        "BUTTON",
+        "TEXTBUTTON",
         "unitFrameOrigin",
         originFrame,
         "",
         0)
 
-    BlzFrameSetSize(unitFrameOrigin, consts.BAR_WIDTH, consts.BAR_HEIGHT * 5)
+    BlzFrameSetSize(unitFrameOrigin, self.width, consts.BAR_HEIGHT * 5)
     BlzFrameSetAbsPoint(
         unitFrameOrigin,
-        FRAMEPOINT_CENTER,
+        self.anchor,
         self.xLoc,
         self.yLoc)
 
@@ -38,7 +47,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(unitFrameBackdrop, consts.BAR_WIDTH, consts.BAR_HEIGHT * 5)
+    BlzFrameSetSize(unitFrameBackdrop, self.width, consts.BAR_HEIGHT * 5)
     BlzFrameSetPoint(
         unitFrameBackdrop,
         FRAMEPOINT_BOTTOMLEFT,
@@ -59,7 +68,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(healthBarFrameBackground, consts.BAR_WIDTH, consts.BAR_HEIGHT)
+    BlzFrameSetSize(healthBarFrameBackground, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
         healthBarFrameBackground,
         FRAMEPOINT_BOTTOMLEFT,
@@ -79,7 +88,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(healthBarFrameFilled, consts.BAR_WIDTH, consts.BAR_HEIGHT)
+    BlzFrameSetSize(healthBarFrameFilled, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
         healthBarFrameFilled,
         FRAMEPOINT_BOTTOMLEFT,
@@ -99,7 +108,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(energyBarFrameBackground, consts.BAR_WIDTH, consts.BAR_HEIGHT)
+    BlzFrameSetSize(energyBarFrameBackground, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
         energyBarFrameBackground,
         FRAMEPOINT_BOTTOMLEFT,
@@ -119,7 +128,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(energyBarFrameFilled, consts.BAR_WIDTH, consts.BAR_HEIGHT)
+    BlzFrameSetSize(energyBarFrameFilled, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
         energyBarFrameFilled,
         FRAMEPOINT_BOTTOMLEFT,
@@ -139,7 +148,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(unitNameFrame, consts.BAR_WIDTH, consts.BAR_HEIGHT)
+    BlzFrameSetSize(unitNameFrame, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
         unitNameFrame,
         FRAMEPOINT_BOTTOMLEFT,
@@ -173,6 +182,8 @@ function UnitFrame:init()
         trig, unitFrameOrigin, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
         self:onClick()
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
     end)
 
     self.frames = {
@@ -193,6 +204,12 @@ end
 function UnitFrame:getUnit()
     if self.forTarget then
         return self.target
+    end
+    if self.forParty ~= nil then
+        local partyMembers = party.getPlayersInParty(
+            party.getPlayerParty(self.playerId))
+        local framePartyMember = partyMembers[self.forParty + 1]
+        return hero.getHero(framePartyMember)
     end
     return self.hero
 end
@@ -217,7 +234,7 @@ function UnitFrame:update(playerId)
         if maxHp ~= 0 then
             BlzFrameSetSize(
                 frames.healthBar,
-                consts.BAR_WIDTH * hp / maxHp,
+                self.width * hp / maxHp,
                 consts.BAR_HEIGHT)
         else
             BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
@@ -225,7 +242,7 @@ function UnitFrame:update(playerId)
         if maxMana ~= 0 then
             BlzFrameSetSize(
                 frames.energyBar,
-                consts.BAR_WIDTH * mana / maxMana,
+                self.width * mana / maxMana,
                 consts.BAR_HEIGHT)
         else
             BlzFrameSetSize(frames.energyBar, 0, consts.BAR_HEIGHT)
