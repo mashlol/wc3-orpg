@@ -1,3 +1,5 @@
+local Vector = {x = 0, y = 0}
+
 local abs = function(a)
   if a >= 0 then
     return a
@@ -5,59 +7,54 @@ local abs = function(a)
   return -a
 end
 
-local create = function(x, y)
-  return {
-    x = x,
-    y = y,
-  }
+function Vector:new(o)
+    o = {
+        x = o.x,
+        y = o.y,
+    }
+    setmetatable(o, self)
+    self.__index = self
+    return o
 end
 
-local fromAngle = function(angle)
-  return {
-    x = Cos(angle),
-    y = Sin(angle),
-  }
+function Vector:fromAngle(angle)
+    return Vector:new{
+        x = Cos(angle),
+        y = Sin(angle),
+    }
 end
 
-local add = function(a, b)
-  return {
-    x = a.x + b.x,
-    y = a.y + b.y,
-  }
+function Vector:add(v)
+    self.x = self.x + v.x
+    self.y = self.y + v.y
+    return self
 end
 
-local subtract = function(a, b)
-  return {
-    x = a.x - b.x,
-    y = a.y - b.y,
-  }
+function Vector:subtract(v)
+    self.x = self.x - v.x
+    self.y = self.y - v.y
+    return self
 end
 
-local multiply = function(a, b)
-  return {
-    x = a.x * b,
-    y = a.y * b
-  }
+function Vector:multiply(s)
+    self.x = self.x * s
+    self.y = self.y * s
+    return self
 end
 
-local magnitude = function(a)
-  return SquareRoot(a.x^2 + a.y^2)
+function Vector:divide(s)
+    self.x = self.x / s
+    self.y = self.y / s
+    return self
 end
 
-local normalize = function(a)
-  local mag = magnitude(a)
-  return {
-    x = a.x / mag,
-    y = a.y / mag,
-  }
+function Vector:magnitude(s)
+    return abs(SquareRoot(self.x^2 + self.y^2))
 end
 
-return {
-  create = create,
-  fromAngle = fromAngle,
-  add = add,
-  subtract = subtract,
-  multiply = multiply,
-  magnitude = magnitude,
-  normalize = normalize,
-}
+function Vector:normalize()
+    local mag = self:magnitude()
+    return self:divide(mag)
+end
+
+return Vector
