@@ -43,13 +43,6 @@ local cast = function(playerId)
         return false
     end
 
-    local dist = Vector:new(heroV):subtract(mouseV)
-    local mag = dist:magnitude()
-    if mag > 800 then
-        log.log(playerId, "Out of range!", log.TYPE.ERROR)
-        return false
-    end
-
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
@@ -63,11 +56,21 @@ local cast = function(playerId)
 
     casttime.cast(playerId, 0.15, false)
 
-    SetUnitX(hero, mouseV.x)
-    SetUnitY(hero, mouseV.y)
+    local finalV = Vector:new(mouseV)
+        :subtract(heroV)
+
+    if finalV:magnitude() > 800 then
+        finalV:normalize()
+            :multiply(800)
+    end
+
+    finalV:add(heroV)
+
+    SetUnitX(hero, finalV.x)
+    SetUnitY(hero, finalV.y)
     SetUnitFacing(
         hero,
-        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
+        bj_RADTODEG * Atan2(finalV.y - heroV.y, finalV.x - heroV.x))
 
     effect.createEffect{
         model = "eblk",
