@@ -1,21 +1,21 @@
-local vector = require('src/vector.lua')
 local Vector = require('src/vector2.lua')
 
 function isCollided(unit, vec, radius)
+    vec = Vector:new(vec)
     local collisionSize = BlzGetUnitCollisionSize(unit)
     local unitV = Vector:new{x = GetUnitX(unit), y = GetUnitY(unit)}
-    local collisionDist = vector.subtract(vec, unitV)
-    local dist = vector.magnitude(collisionDist)
-    if dist <= collisionSize then
+    local collisionDist = Vector:new(vec):subtract(unitV)
+    if collisionDist:magnitude() <= collisionSize then
         return true
     end
-    collisionDist = vector.normalize(collisionDist)
-    collisionDist = vector.multiply(collisionDist, collisionSize)
-    collisionDist = vector.add(collisionDist, unitV)
-    collisionDist = vector.subtract(vec, collisionDist)
-    collisionDist = vector.magnitude(collisionDist)
+    local mag = collisionDist:normalize()
+        :multiply(collisionSize)
+        :add(unitV)
+        :multiply(-1)
+        :add(vec)
+        :magnitude()
 
-    return collisionDist <= radius
+    return mag <= radius
 end
 
 function getAllCollisions(vec, radius)

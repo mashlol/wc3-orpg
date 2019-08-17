@@ -1,4 +1,4 @@
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local hero = require('src/hero.lua')
 local unitmap = require('src/unitmap.lua')
 
@@ -41,11 +41,10 @@ end
 
 local spawnAdds = function()
     for i=0,2,1 do
-        local spawnLocation = vector.fromAngle(GetRandomReal(0, bj_PI))
-        spawnLocation = vector.multiply(
-            spawnLocation, BlzGetUnitCollisionSize(boss) + 150)
-        spawnLocation = vector.add(
-            spawnLocation, vector.create(GetUnitX(boss), GetUnitY(boss)))
+        local bossV = Vector:new{x = GetUnitX(boss), y = GetUnitY(boss)}
+        local spawnLocation = Vector:fromAngle(GetRandomReal(0, 2 * bj_PI))
+            :multiply(BlzGetUnitCollisionSize(boss) + 150)
+            :add(bossV)
         local add = unitmap.createTargetableUnit(
             Player(24),
             FourCC("hmbs"),
