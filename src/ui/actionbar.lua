@@ -47,6 +47,22 @@ function ActionBar:init()
             i * consts.ACTION_ITEM_SIZE,
             0)
 
+        if i == 4 then
+            BlzFrameSetTexture(
+                actionItem,
+                "ReplaceableTextures\\CommandButtons\\BTNAttack.blp",
+                0,
+                true)
+        end
+
+        if i == 5 then
+            BlzFrameSetTexture(
+                actionItem,
+                "ReplaceableTextures\\CommandButtons\\BTNStop.blp",
+                0,
+                true)
+        end
+
         local actionCooldownBackdrop = BlzCreateFrameByType(
             "BACKDROP",
             "actionCooldownBackdrop",
@@ -56,7 +72,7 @@ function ActionBar:init()
         BlzFrameSetSize(
             actionCooldownBackdrop,
             consts.ACTION_ITEM_SIZE,
-            consts.ACTION_ITEM_SIZE / 2)
+            0)
         BlzFrameSetPoint(
             actionCooldownBackdrop,
             FRAMEPOINT_BOTTOM,
@@ -150,31 +166,33 @@ function ActionBar:update(playerId)
     local frame = self.frames
 
     for idx,actionItem in pairs(frame.actionItems) do
-        local cdSec = spell.getCooldown(playerId, idx)
-        local cdPct = spell.getCooldownPct(playerId, idx)
-        local spellIcon = spell.getIcon(playerId, idx)
+        if idx ~= 5 and idx ~= 6 then
+            local cdSec = spell.getCooldown(playerId, idx)
+            local cdPct = spell.getCooldownPct(playerId, idx)
+            local spellIcon = spell.getIcon(playerId, idx)
 
-        if cdPct == 0 then
-            cdPct = 0.0001
+            if cdPct == 0 then
+                cdPct = 0.0001
+            end
+
+            cdSec = cdSec * 100
+            local cd = (cdSec - cdSec % 100) / 100
+
+            BlzFrameSetText(
+                actionItem.actionCooldownText,
+                cd == 0 and "" or cd)
+
+            BlzFrameSetSize(
+                actionItem.actionCooldownBackdrop,
+                consts.ACTION_ITEM_SIZE,
+                consts.ACTION_ITEM_SIZE * cdPct)
+
+            BlzFrameSetTexture(
+                actionItem.actionItemBackground,
+                spellIcon,
+                0,
+                true)
         end
-
-        cdSec = cdSec * 100
-        local cd = (cdSec - cdSec % 100) / 100
-
-        BlzFrameSetText(
-            actionItem.actionCooldownText,
-            cd == 0 and "" or cd)
-
-        BlzFrameSetSize(
-            actionItem.actionCooldownBackdrop,
-            consts.ACTION_ITEM_SIZE,
-            consts.ACTION_ITEM_SIZE * cdPct)
-
-        BlzFrameSetTexture(
-            actionItem.actionItemBackground,
-            spellIcon,
-            0,
-            true)
     end
 end
 
