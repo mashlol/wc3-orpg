@@ -35,7 +35,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 5, 1)
+    animations.queueAnimation(hero, 3, 1)
 
     SetUnitFacingTimed(
         hero,
@@ -44,7 +44,7 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "eoil",
+        model = "efrb",
         fromV = heroV,
         toV = mouseV,
         speed = 900,

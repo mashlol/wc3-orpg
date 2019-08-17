@@ -53,7 +53,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 11, 1)
+    animations.queueAnimation(hero, 3, 1)
 
     effect.createEffect{
         model = "eblk",

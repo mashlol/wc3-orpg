@@ -41,7 +41,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 6, 1)
+    animations.queueAnimation(hero, 4, 1)
 
     for i=0,360,20 do
         local toV = Vector:fromAngle(bj_DEGTORAD * i):add(mouseV)
