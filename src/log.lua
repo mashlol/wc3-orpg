@@ -12,6 +12,18 @@ local TYPE = {
         x = 0,
         y = 0,
     },
+    SUCCESS = {
+        duration = 3,
+        color = "|cff00ff00",
+        x = 0,
+        y = 0,
+    },
+    INFO = {
+        duration = 5,
+        color = "|cff00cccc",
+        x = 0,
+        y = 0,
+    },
 }
 
 local log = function(playerId, text, type, duration)

@@ -1,3 +1,5 @@
+local log = require('src/log.lua')
+
 local playerParties = {}
 local partyIdx = 0
 local pendingInvites = {}
@@ -37,18 +39,31 @@ function onInviteSent()
         sentString, 7, StringLength(sentString))) - 1
 
     if getPlayerParty(invitedPlayerId) ~= nil then
-        print("That player is already in a party.")
+        log.log(
+            inviterPlayerId,
+            "That player is already in a party.",
+            log.TYPE.ERROR)
         return
     end
 
     pendingInvites[invitedPlayerId] = inviterPlayerId
-    print("Invite sent")
+    log.log(
+        inviterPlayerId,
+        "You invited "..
+            GetPlayerName(Player(invitedPlayerId))..
+            " to join your party.",
+        log.TYPE.INFO)
+    log.log(
+        invitedPlayerId,
+        GetPlayerName(Player(inviterPlayerId))..
+            " invited you to join their party.",
+        log.TYPE.INFO)
 end
 
 function onAcceptInvite()
     local invitedPlayerId = GetPlayerId(GetTriggerPlayer())
     if pendingInvites[invitedPlayerId] == nil then
-        print("You have no pending invites.")
+        log.log(invitedPlayerId, "You have no invites pending.", log.TYPE.ERROR)
         return
     end
     local inviterPlayerId = pendingInvites[invitedPlayerId]
@@ -58,7 +73,13 @@ function onAcceptInvite()
         addPlayerToParty(partyId, inviterPlayerId)
     end
     addPlayerToParty(partyId, invitedPlayerId)
-    print("Joined the party.")
+    local playersInParty = getPlayersInParty(partyId)
+    for idx, playerId in pairs(playersInParty) do
+        log.log(
+            playerId,
+            GetPlayerName(Player(invitedPlayerId)).." joined the party.",
+            log.TYPE.INFO)
+    end
 end
 
 function init()
