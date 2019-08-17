@@ -7,6 +7,7 @@ local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local collision = require('src/collision.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -53,12 +54,10 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 19, 2)
 
-    local castSuccess = casttime.cast(playerId, 1)
-    if not castSuccess then
-        return false
-    end
-
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
+
+    casttime.cast(playerId, 1, false)
+
     animations.queueAnimation(hero, 18, 1)
 
     createTargetEffect(mouseV)
@@ -75,7 +74,7 @@ local cast = function(playerId)
         model = "emet",
         x = mouseV.x,
         y = mouseV.y,
-        timeScale = 0.6,
+        timeScale = 0.7,
         duration = 2,
     }
 
@@ -92,6 +91,14 @@ local cast = function(playerId)
         y = mouseV.y,
         duration = 1,
     }
+
+    local collidedUnits = collision.getAllCollisions(mouseV, 350)
+    for idx, unit in pairs(collidedUnits) do
+        if IsUnitEnemy(unit, Player(playerId)) then
+            print('damaged a unit')
+            damage.dealDamage(hero, unit, 400)
+        end
+    end
 
     return true
 end
