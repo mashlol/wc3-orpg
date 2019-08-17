@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -40,13 +40,11 @@ local cast = function(playerId)
         return
     end
 
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local targetV = vector.create(
-        GetUnitX(target),
-        GetUnitY(target))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
 
-    local dist = vector.subtract(heroV, targetV)
-    local mag = vector.magnitude(dist)
+    local dist = Vector:new(heroV):subtract(targetV)
+    local mag = dist:magnitude()
     if mag > 800 then
         log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false

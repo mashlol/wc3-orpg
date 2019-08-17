@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -28,10 +28,11 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
@@ -49,12 +50,12 @@ local cast = function(playerId)
     for j=0,6,1 do
         for i=-1,1,1 do
             local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
-            local perpendicularVec = vector.fromAngle(perpendicularAngle)
-            perpendicularVec = vector.multiply(perpendicularVec, i * 50)
-            perpendicularVec = vector.add(perpendicularVec, heroV)
-            local straightVec = vector.fromAngle(facingDeg * bj_DEGTORAD)
-            straightVec = vector.multiply(straightVec, j * 100)
-            local finalVec = vector.add(perpendicularVec, straightVec)
+            local perpendicularVec = Vector:fromAngle(perpendicularAngle)
+                :multiply(i * 50)
+                :add(heroV)
+            local finalVec = Vector:fromAngle(facingDeg * bj_DEGTORAD)
+                :multiply(j * 100)
+                :add(perpendicularVec)
             effect.createEffect{
                 model = "eacc",
                 x = finalVec.x,
