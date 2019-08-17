@@ -2,6 +2,7 @@
 -- Also hides the default blizz UI
 local hero = require('src/hero.lua')
 local target = require('src/target.lua')
+local consts = require('src/ui/consts.lua')
 
 -- UI Modules
 local CastBar = require('src/ui/castbar.lua')
@@ -11,8 +12,16 @@ local ActionBar = require('src/ui/actionbar.lua')
 local UI_MODULES = {
     actionbar = ActionBar:new(),
     castbar = CastBar:new(),
-    targetframe = UnitFrame:new{xLoc = 0.54, forTarget = true},
-    heroframe = UnitFrame:new{xLoc = 0.26, forTarget = false},
+    targetframe = UnitFrame:new{
+        xLoc = 0.54,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
+        forTarget = true,
+    },
+    heroframe = UnitFrame:new{
+        xLoc = 0.26,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
+        forTarget = false,
+    },
 }
 
 function hideBlizzUI()
