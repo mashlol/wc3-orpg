@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local collision = require('src/collision.lua')
@@ -29,10 +29,11 @@ local cast = function(playerId)
 
     local hero = hero.getHero(playerId)
 
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 9, 1)
@@ -54,9 +55,9 @@ local cast = function(playerId)
         local facing = i * bj_DEGTORAD
         SetUnitFacing(hero, i)
         animations.queueAnimation(hero, 8, 1)
-        local spawn = vector.fromAngle(facing)
-        spawn = vector.multiply(spawn, 50)
-        spawn = vector.add(heroV, spawn)
+        local spawn = Vector:fromAngle(facing)
+            :multiply(50)
+            :add(heroV)
         effect.createEffect{
             model = "slsh",
             x = spawn.x,

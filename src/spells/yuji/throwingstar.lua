@@ -1,6 +1,6 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
-local vector = require('src/vector.lua')
+local Vector = require('src/vector2.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
@@ -26,10 +26,11 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local heroV = vector.create(GetUnitX(hero), GetUnitY(hero))
-    local mouseV = vector.create(
-        mouse.getMouseX(playerId),
-        mouse.getMouseY(playerId))
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
@@ -42,8 +43,8 @@ local cast = function(playerId)
     SetUnitFacingTimed(hero, facingDeg, 0.05)
 
     for i=-1,1,1 do
-        local toV = vector.fromAngle((facingDeg + i * 15) * bj_DEGTORAD)
-        toV = vector.add(heroV, toV)
+        local toV = Vector:fromAngle((facingDeg + i * 15) * bj_DEGTORAD)
+            :add(heroV)
         projectile.createProjectile{
             playerId = playerId,
             model = "star",
