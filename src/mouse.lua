@@ -27,11 +27,7 @@ local mouseUp = function()
     local btn = BlzGetTriggerPlayerMouseButton()
     local mouseUnit = BlzGetMouseFocusUnit()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    if
-        playerId == GetPlayerId(GetLocalPlayer()) and
-            (btn == MOUSE_BUTTON_TYPE_LEFT or
-            mouseUnit ~= nil)
-    then
+    if playerId == GetPlayerId(GetLocalPlayer()) and mouseUnit ~= nil then
         target.syncTarget(mouseUnit)
     end
 end
