@@ -58,6 +58,7 @@ local BUFF_INFO = {
             attach = "chest",
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
+        maxStacks = 5,
     },
 }
 
@@ -69,6 +70,7 @@ local BUFF_INFO = {
 --         timer = CreateTimer(),
 --         effect = effect handle or nil,
 --         source = source unit who gave the buff,
+--         stacks = {num stacks},
 --       },
 --     },
 --     unit = unit,
@@ -85,13 +87,17 @@ function addBuff(source, target, buffName, duration)
         }
     end
 
+
+    local curNumStacks = 0
     if buffInstances[unitId].buffs[buffName] ~= nil then
+        curNumStacks = buffInstances[unitId].buffs[buffName].stacks
         DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
         removeBuff(target, buffName)
     end
 
     buffInstances[unitId].buffs[buffName] = {
         source = source,
+        stacks = math.min(curNumStacks + 1, BUFF_INFO[buffName].maxStacks or 1),
     }
 
     if BUFF_INFO[buffName].vfx ~= nil then
@@ -144,7 +150,7 @@ function getDamageModifier(unit, target)
         local effects = BUFF_INFO[buffName].effects
         for idx,info in pairs(effects) do
             if info.type == 'multiplyDamage' then
-                modifier = modifier * info.amount
+                modifier = modifier * info.amount * val.stacks
             end
         end
     end
@@ -153,7 +159,7 @@ function getDamageModifier(unit, target)
         local effects = BUFF_INFO[buffName].effects
         for idx,info in pairs(effects) do
             if info.type == 'multiplyIncomingDamage' then
-                modifier = modifier * info.amount
+                modifier = modifier * info.amount * val.stacks
             end
         end
     end
@@ -167,7 +173,7 @@ function getHealingModifier(unit, target)
         local effects = BUFF_INFO[buffName].effects
         for idx,info in pairs(effects) do
             if info.type == 'multiplyHealing' then
-                modifier = modifier * info.amount
+                modifier = modifier * info.amount * val.stacks
             end
         end
     end
@@ -176,7 +182,7 @@ function getHealingModifier(unit, target)
         local effects = BUFF_INFO[buffName].effects
         for idx,info in pairs(effects) do
             if info.type == 'multiplyIncomingHealing' then
-                modifier = modifier * info.amount
+                modifier = modifier * info.amount * val.stacks
             end
         end
     end

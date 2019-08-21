@@ -1,4 +1,5 @@
 local buff = require('src/buff.lua')
+local damage = require('src/damage.lua')
 
 function applyBuffs()
     local buffInstances = buff.getBuffInstances()
@@ -6,23 +7,22 @@ function applyBuffs()
         local unit = unitInfo.unit
         local buffs = unitInfo.buffs
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-        local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
+
 
         for buffName,val in pairs(buffs) do
+            local hpToHeal = 0
             local effects = buff.BUFF_INFO[buffName].effects
             for idx,info in pairs(effects) do
                 if info.type == 'modifyMoveSpeed' then
-                    baseSpeed = baseSpeed * info.amount
+                    baseSpeed = baseSpeed * info.amount * val.stacks
                 end
                 if info.type == 'heal' then
-                    hp = hp +
-                        info.amount *
-                        buff.getHealingModifier(val.source, unit)
+                    hpToHeal = hpToHeal + info.amount * val.stacks
                 end
             end
+            damage.heal(val.source, unit, hpToHeal)
         end
 
-        BlzSetUnitRealField(unit, UNIT_RF_HP, hp)
         SetUnitMoveSpeed(unit, baseSpeed)
     end
 end
