@@ -174,7 +174,27 @@ function UnitFrame:init()
             FRAMEPOINT_BOTTOMLEFT,
             i * consts.BUFF_ICON_SIZE,
             consts.BAR_HEIGHT * 3)
-        table.insert(buffIcons, buffIcon)
+
+        local buffStackCount = BlzCreateFrameByType(
+            "TEXT",
+            "buffStackCount",
+            buffIcon,
+            "",
+            0)
+        BlzFrameSetSize(buffStackCount, 0.01, 0.01)
+        BlzFrameSetText(buffStackCount, "1")
+        BlzFrameSetPoint(
+            buffStackCount,
+            FRAMEPOINT_BOTTOMLEFT,
+            buffIcon,
+            FRAMEPOINT_BOTTOMLEFT,
+            0.002,
+            -0.002)
+
+        table.insert(buffIcons, {
+            buffIcon = buffIcon,
+            buffStackCount = buffStackCount,
+        })
     end
 
     local trig = CreateTrigger()
@@ -254,19 +274,26 @@ function UnitFrame:update(playerId)
     local buffArr = {}
 
     for buffName, buffInfo in pairs(buffs) do
-        table.insert(buffArr, buffName)
+        table.insert(buffArr, {buffName = buffName, buffInfo = buffInfo})
     end
 
     for i=1,10,1 do
         local frame = frames.buffIcons[i]
-        local buffName = buffArr[i]
+        local buffName = buffArr[i] and buffArr[i].buffName
+        local buffInfo = buffArr[i] and buffArr[i].buffInfo
 
-        BlzFrameSetVisible(frame, buffName ~= nil)
+        BlzFrameSetVisible(frame.buffIcon, buffName ~= nil)
         BlzFrameSetTexture(
-            frame,
+            frame.buffIcon,
             buff.BUFF_INFO[buffName] and buff.BUFF_INFO[buffName].icon or "",
             0,
             true)
+        BlzFrameSetVisible(
+            frame.buffStackCount,
+            buffInfo ~= nil and buff.BUFF_INFO[buffName].maxStacks ~= nil)
+        BlzFrameSetText(
+            frame.buffStackCount,
+            buffInfo and buffInfo.stacks or "")
     end
 end
 
