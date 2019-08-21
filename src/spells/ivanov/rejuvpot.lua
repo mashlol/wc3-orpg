@@ -73,9 +73,9 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.heal(hero, target, 70)
+            damage.heal(hero, target, 30)
 
-            buff.addBuff(hero, target, 'rejuvpot', 4)
+            buff.addBuff(hero, target, 'rejuvpot', 10)
         end
     }
 
