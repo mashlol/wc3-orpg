@@ -24,6 +24,16 @@ local getSpellName = function()
     return 'Slash'
 end
 
+function getCollisionPoint(heroV, facingDeg, i, j)
+    local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
+    local perpendicularVec = Vector:fromAngle(perpendicularAngle)
+        :multiply(i * 50)
+        :add(heroV)
+    return Vector:fromAngle(facingDeg * bj_DEGTORAD)
+        :multiply(j * 200)
+        :add(perpendicularVec)
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -81,21 +91,24 @@ local cast = function(playerId)
 
     local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
 
-    local facingVec = Vector:new(mouseV)
-        :subtract(heroV)
-        :normalize()
-        :multiply(50)
-        :add(heroV)
+    local facingDeg =
+        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
 
-    local collidedUnits = collision.getAllCollisions(facingVec, 100)
+    local shape = {
+        getCollisionPoint(heroV, facingDeg, 1, 0),
+        getCollisionPoint(heroV, facingDeg, -1, 0),
+        getCollisionPoint(heroV, facingDeg, -1, 1),
+        getCollisionPoint(heroV, facingDeg, 1, 1),
+    }
+
+    local collidedUnits = collision.getAllCollisions(shape)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
             damage.dealDamage(hero, unit, dmgAmount)
 
             effect.createEffect{
                 model = "ebld",
-                x = facingVec.x,
-                y = facingVec.y,
+                unit = unit,
                 duration = 0.1,
             }
         end
