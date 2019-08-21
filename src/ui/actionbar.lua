@@ -47,22 +47,6 @@ function ActionBar:init()
             i * consts.ACTION_ITEM_SIZE,
             0)
 
-        if i == 4 then
-            BlzFrameSetTexture(
-                actionItem,
-                "ReplaceableTextures\\CommandButtons\\BTNAttack.blp",
-                0,
-                true)
-        end
-
-        if i == 5 then
-            BlzFrameSetTexture(
-                actionItem,
-                "ReplaceableTextures\\CommandButtons\\BTNStop.blp",
-                0,
-                true)
-        end
-
         local actionCooldownBackdrop = BlzCreateFrameByType(
             "BACKDROP",
             "actionCooldownBackdrop",
@@ -166,21 +150,19 @@ function ActionBar:update(playerId)
     local frame = self.frames
 
     for idx,actionItem in pairs(frame.actionItems) do
-        if idx ~= 5 and idx ~= 6 then
-            local cdPct = spell.getCooldownPct(playerId, idx)
-            local spellIcon = spell.getIcon(playerId, idx)
+        local cdPct = spell.getCooldownPct(playerId, idx)
+        local spellIcon = spell.getIcon(playerId, idx)
 
-            BlzFrameSetSize(
-                actionItem.actionCooldownBackdrop,
-                consts.ACTION_ITEM_SIZE,
-                consts.ACTION_ITEM_SIZE * cdPct)
+        BlzFrameSetSize(
+            actionItem.actionCooldownBackdrop,
+            consts.ACTION_ITEM_SIZE,
+            consts.ACTION_ITEM_SIZE * cdPct)
 
-            BlzFrameSetTexture(
-                actionItem.actionItemBackground,
-                spellIcon,
-                0,
-                true)
-        end
+        BlzFrameSetTexture(
+            actionItem.actionItemBackground,
+            spellIcon,
+            0,
+            true)
     end
 end
 

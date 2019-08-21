@@ -1,5 +1,7 @@
 -- Generic
 local heal = require('src/spells/generic/heal.lua')
+local attack = require('src/spells/generic/attack.lua')
+local stop = require('src/spells/generic/stop.lua')
 
 -- Azora
 local fireball = require('src/spells/azora/fireball.lua')
@@ -32,6 +34,8 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local SPELL_MAP = {
     -- Generic
     heal = heal,
+    attack = attack,
+    stop = stop,
 
     -- Azora
     fireball = fireball,
