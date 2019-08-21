@@ -80,18 +80,12 @@ function updateCustomUI()
     local heroUnit = hero.getHero(playerId)
     local targetUnit = target.getTarget(playerId)
 
-    SelectUnit(
-        heroUnit,
-        true)
-
     for name, mod in pairs(UI_MODULES) do
         mod.hero = heroUnit
         mod.target = targetUnit
         mod.playerId = playerId
         mod:update(playerId)
     end
-
-    target.updateTargetEffectLocations()
 end
 
 function init()

@@ -1,6 +1,5 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
-local unitmap = require('src/unitmap.lua')
 
 targets = {}
 targetEffects = {}
@@ -13,64 +12,22 @@ local hasTarget = function(playerId)
     return targets[playerId] ~= nil
 end
 
-local syncTarget = function(unit)
-    BlzSendSyncData("unit-targeted", GetHandleId(unit))
-end
-
-local setTarget = function()
+local onTargetChanged = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    local handleId = S2I(BlzGetTriggerSyncData())
-    local unit = unitmap.getUnitByHandleId(handleId)
-    targets[playerId] = unit
-
-    if targetEffects[playerId] ~= nil then
-        BlzSetSpecialEffectPosition(targetEffects[playerId], 0, 0, -2000)
-        DestroyEffect(targetEffects[playerId])
-    end
-    if targets[playerId] ~= nil then
-        targetEffects[playerId] = AddSpecialEffect(
-            GetPlayerId(GetLocalPlayer()) == playerId and
-                "UI\\Feedback\\TargetPreSelected\\TargetPreSelected.mdl" or
-                "",
-            GetUnitX(targets[playerId]),
-            GetUnitY(targets[playerId]))
-        BlzSetSpecialEffectHeight(targetEffects[playerId], 0)
-        if IsUnitAlly(targets[playerId], Player(playerId)) then
-            BlzSetSpecialEffectColor(targetEffects[playerId], 0, 255, 0)
-        else
-            BlzSetSpecialEffectColor(targetEffects[playerId], 255, 0, 0)
-        end
-        BlzSetSpecialEffectZ(targetEffects[playerId], -1000)
-        BlzSetSpecialEffectScale(
-            targetEffects[playerId],
-            BlzGetUnitRealField(targets[playerId], UNIT_RF_SELECTION_SCALE))
-    end
-end
-
-function updateTargetEffectLocations()
-    for playerId, targetEffect in pairs(targetEffects) do
-        if targets[playerId] ~= nil then
-            BlzSetSpecialEffectPosition(
-                targetEffect,
-                GetUnitX(targets[playerId]),
-                GetUnitY(targets[playerId]),
-                -60)
-        end
-    end
+    local selectedUnit = GetTriggerUnit()
+    targets[playerId] = selectedUnit
 end
 
 function init()
-    local trigger = CreateTrigger()
+    local trig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
-        BlzTriggerRegisterPlayerSyncEvent(
-            trigger, Player(i), "unit-targeted", false)
+        TriggerRegisterPlayerUnitEvent(
+            trig, Player(i), EVENT_PLAYER_UNIT_SELECTED, nil)
     end
-    TriggerAddAction(trigger, setTarget)
+    TriggerAddAction(trig, onTargetChanged)
 end
 
 return {
     init = init,
     getTarget = getTarget,
-    syncTarget = syncTarget,
-    updateTargetEffectLocations = updateTargetEffectLocations,
 }
