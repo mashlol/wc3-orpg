@@ -60,13 +60,22 @@ local respawn = function()
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            heroes[i] = CreateUnit(
-                Player(i), pickedHeroes[i].id, -150, -125, 0)
-            BlzSetUnitIntegerField(heroes[i], UNIT_IF_STRENGTH, 0)
-            BlzSetUnitIntegerField(heroes[i], UNIT_IF_INTELLIGENCE, 0)
-            BlzSetUnitIntegerField(heroes[i], UNIT_IF_AGILITY, 0)
-            SuspendHeroXP(heroes[i], true)
+            createHeroForPlayer(i)
         end
+    end
+end
+
+function createHeroForPlayer(playerId)
+    heroes[playerId] = CreateUnit(
+        Player(playerId), pickedHeroes[playerId].id, -150, -125, 0)
+    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
+    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)
+    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_AGILITY, 0)
+    SuspendHeroXP(heroes[playerId], true)
+
+    if playerId == GetPlayerId(GetLocalPlayer()) then
+        ClearSelection()
+        SelectUnit(heroes[playerId], true)
     end
 end
 
@@ -81,12 +90,7 @@ local showPickHeroDialog = function()
         TriggerAddAction(pickHeroTrigger, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             pickedHeroes[playerId] = hero
-            heroes[playerId] = CreateUnit(
-                Player(playerId), hero.id, -150, -125, 0)
-            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
-            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)
-            BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_AGILITY, 0)
-            SuspendHeroXP(heroes[playerId], true)
+            createHeroForPlayer(playerId)
         end)
     end
 
