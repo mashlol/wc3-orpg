@@ -14,20 +14,6 @@ local getSpellName = function()
 end
 
 local cast = function(playerId)
-    local hero = hero.getHero(playerId)
-    local target = target.getTarget(playerId)
-
-    if target == nil then
-        log.log(playerId, "You don't have a target!", log.TYPE.ERROR)
-        return false
-    end
-
-    if IsUnitAlly(target, Player(playerId)) then
-        log.log(playerId, "The target is friendly.", log.TYPE.ERROR)
-        return false
-    end
-
-    IssueTargetOrder(hero, "attack", target)
     return true
 end
 
