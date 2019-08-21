@@ -40,17 +40,9 @@ local init = function()
 
     -- TODO make for all players
     for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_Q, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_W, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_E, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_R, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_A, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_D, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_F, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_Z, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_X, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_C, 0, true)
-        BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), OSKEY_V, 0, true)
+        for key, idx in pairs(KEY_MAPPING) do
+            BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), key, 0, true)
+        end
     end
 
     TriggerAddAction(trigger, keyPressed)
