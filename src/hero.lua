@@ -1,5 +1,3 @@
-local unitmap = require('src/unitmap.lua')
-
 local heroes = {}
 local pickedHeroes = {}
 
@@ -54,7 +52,7 @@ local respawn = function()
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            heroes[i] = unitmap.createTargetableUnit(
+            heroes[i] = CreateUnit(
                 Player(i), pickedHeroes[i].id, -150, -125, 0)
             BlzSetUnitIntegerField(heroes[i], UNIT_IF_STRENGTH, 0)
             BlzSetUnitIntegerField(heroes[i], UNIT_IF_INTELLIGENCE, 0)
@@ -75,7 +73,7 @@ local showPickHeroDialog = function()
         TriggerAddAction(pickHeroTrigger, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             pickedHeroes[playerId] = hero
-            heroes[playerId] = unitmap.createTargetableUnit(
+            heroes[playerId] = CreateUnit(
                 Player(playerId), hero.id, -150, -125, 0)
             BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
             BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)

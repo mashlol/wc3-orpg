@@ -74,6 +74,10 @@ function CastBar:update(playerId)
             consts.CAST_BAR_HEIGHT)
     else
         BlzFrameSetVisible(frame.origin, false)
+        BlzFrameSetSize(
+            frame.castBar,
+            0,
+            consts.CAST_BAR_HEIGHT)
     end
 end
 

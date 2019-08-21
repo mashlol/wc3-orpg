@@ -12,16 +12,13 @@ local damage = require('src/damage.lua')
 local party = require('src/party.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
-local unitmap = require('src/unitmap.lua')
-
 -- TODO create a boss manager
 local turtle = require('src/bosses/turtle.lua')
 
 local debug = require('src/debug.lua')
 
 local mainInit = function()
-    BlzEnableTargetIndicator(true)
-    BlzEnableSelections(false, false)
+    BlzEnableTargetIndicator(false)
 
     hero.init()
     keyboard.init()
@@ -41,12 +38,6 @@ local mainInit = function()
 
     -- TODO remove for release
     debug.init()
-end
-
--- This is a special top-level function which we will use to replace
--- Instances of CreateUnit from the original lua script in the map.
-function CreateTargetableUnit(player, unit, x, y, facing)
-    return unitmap.createTargetableUnit(player, unit, x, y, facing)
 end
 
 TimerStart(CreateTimer(), 0.0, false, mainInit)
