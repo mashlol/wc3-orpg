@@ -20,7 +20,9 @@ function applyBuffs()
                     hpToHeal = hpToHeal + info.amount * val.stacks
                 end
             end
-            damage.heal(val.source, unit, hpToHeal)
+            if hpToHeal > 0 then
+                damage.heal(val.source, unit, hpToHeal)
+            end
         end
 
         SetUnitMoveSpeed(unit, baseSpeed)
