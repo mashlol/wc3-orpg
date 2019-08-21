@@ -153,6 +153,8 @@ function ActionBar:update(playerId)
         local cdPct = spell.getCooldownPct(playerId, idx)
         local spellIcon = spell.getIcon(playerId, idx)
 
+        BlzFrameSetVisible(actionItem.actionCooldownBackdrop, cdPct ~= 0)
+
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
             consts.ACTION_ITEM_SIZE,
