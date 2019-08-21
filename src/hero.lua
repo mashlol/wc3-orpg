@@ -12,6 +12,7 @@ local ALL_HERO_INFO = {
             [4] = 'slashult',
             [5] = 'attack',
             [6] = 'stop',
+            [7] = 'jab',
             [8] = 'focus',
         },
     },

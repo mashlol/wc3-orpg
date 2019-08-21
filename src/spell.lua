@@ -16,6 +16,7 @@ local dash = require('src/spells/yuji/dash.lua')
 local throwingstar = require('src/spells/yuji/throwingstar.lua')
 local slashult = require('src/spells/yuji/slashult.lua')
 local focus = require('src/spells/yuji/focus.lua')
+local jab = require('src/spells/yuji/jab.lua')
 
 -- Stormfist
 local punch = require('src/spells/stormfist/punch.lua')
@@ -50,6 +51,7 @@ local SPELL_MAP = {
     throwingstar = throwingstar,
     slashult = slashult,
     focus = focus,
+    jab = jab,
 
     -- Stormfist
     punch = punch,
