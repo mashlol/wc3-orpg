@@ -68,6 +68,7 @@ local BUFF_INFO = {
 --       [buffName] = {
 --         timer = CreateTimer(),
 --         effect = effect handle or nil,
+--         source = source unit who gave the buff,
 --       },
 --     },
 --     unit = unit,

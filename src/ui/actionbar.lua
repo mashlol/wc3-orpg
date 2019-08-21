@@ -167,20 +167,8 @@ function ActionBar:update(playerId)
 
     for idx,actionItem in pairs(frame.actionItems) do
         if idx ~= 5 and idx ~= 6 then
-            local cdSec = spell.getCooldown(playerId, idx)
             local cdPct = spell.getCooldownPct(playerId, idx)
             local spellIcon = spell.getIcon(playerId, idx)
-
-            if cdPct == 0 then
-                cdPct = 0.0001
-            end
-
-            cdSec = cdSec * 100
-            local cd = (cdSec - cdSec % 100) / 100
-
-            BlzFrameSetText(
-                actionItem.actionCooldownText,
-                cd == 0 and "" or cd)
 
             BlzFrameSetSize(
                 actionItem.actionCooldownBackdrop,

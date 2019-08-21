@@ -1,6 +1,5 @@
 local Vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
-local unitmap = require('src/unitmap.lua')
 
 local boss
 
@@ -45,7 +44,7 @@ local spawnAdds = function()
         local spawnLocation = Vector:fromAngle(GetRandomReal(0, 2 * bj_PI))
             :multiply(BlzGetUnitCollisionSize(boss) + 150)
             :add(bossV)
-        local add = unitmap.createTargetableUnit(
+        local add = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
             FourCC("hmbs"),
             spawnLocation.x,
@@ -134,7 +133,7 @@ end
 
 local init = function()
     door = gg_dest_DTg6_0369
-    boss = unitmap.createTargetableUnit(
+    boss = CreateUnit(
         Player(PLAYER_NEUTRAL_AGGRESSIVE), FourCC("hbos"), 1268.7, -2846.7, 135.939)
 
     resetFight()

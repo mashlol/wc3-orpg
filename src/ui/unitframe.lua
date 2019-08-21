@@ -198,7 +198,7 @@ function UnitFrame:init()
 end
 
 function UnitFrame:onClick()
-    target.syncTarget(self:getUnit())
+    -- target.syncTarget(self:getUnit())
 end
 
 function UnitFrame:getUnit()
@@ -218,58 +218,52 @@ function UnitFrame:update(playerId)
     local frames = self.frames
     local unit = self:getUnit()
 
-    if unit == nil or GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
-        BlzFrameSetVisible(frames.origin, false)
+    BlzFrameSetVisible(
+        frames.origin,
+        unit ~= nil and GetUnitState(unit, UNIT_STATE_LIFE) > 0)
+
+    local name = GetUnitName(unit)
+    BlzFrameSetText(frames.name, name)
+
+    local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
+    local maxHp = BlzGetUnitMaxHP(unit)
+    local mana = BlzGetUnitRealField(unit, UNIT_RF_MANA)
+    local maxMana = BlzGetUnitMaxMana(unit)
+
+    if maxHp ~= 0 then
+        BlzFrameSetSize(
+            frames.healthBar,
+            self.width * hp / maxHp,
+            consts.BAR_HEIGHT)
     else
-        BlzFrameSetVisible(frames.origin, true)
+        BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
+    end
+    if maxMana ~= 0 then
+        BlzFrameSetSize(
+            frames.energyBar,
+            self.width * mana / maxMana,
+            consts.BAR_HEIGHT)
+    else
+        BlzFrameSetSize(frames.energyBar, 0, consts.BAR_HEIGHT)
+    end
 
-        local name = GetUnitName(unit)
-        BlzFrameSetText(frames.name, name)
+    local buffs = buff.getBuffs(unit)
+    local buffArr = {}
 
-        local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
-        local maxHp = BlzGetUnitMaxHP(unit)
-        local mana = BlzGetUnitRealField(unit, UNIT_RF_MANA)
-        local maxMana = BlzGetUnitMaxMana(unit)
+    for buffName, buffInfo in pairs(buffs) do
+        table.insert(buffArr, buffName)
+    end
 
-        if maxHp ~= 0 then
-            BlzFrameSetSize(
-                frames.healthBar,
-                self.width * hp / maxHp,
-                consts.BAR_HEIGHT)
-        else
-            BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
-        end
-        if maxMana ~= 0 then
-            BlzFrameSetSize(
-                frames.energyBar,
-                self.width * mana / maxMana,
-                consts.BAR_HEIGHT)
-        else
-            BlzFrameSetSize(frames.energyBar, 0, consts.BAR_HEIGHT)
-        end
+    for i=1,10,1 do
+        local frame = frames.buffIcons[i]
+        local buffName = buffArr[i]
 
-        local buffs = buff.getBuffs(unit)
-        local i = 1
-        for buffName, buffInfo in pairs(buffs) do
-            local buffIcon = frames.buffIcons[i]
-            local buffInfo = buff.BUFF_INFO[buffName]
-
-            BlzFrameSetVisible(buffIcon, true)
-            BlzFrameSetTexture(
-                buffIcon,
-                buffInfo.icon,
-                0,
-                true)
-
-            i = i + 1
-
-            if i > 10 then
-                break
-            end
-        end
-        for j=i,10,1 do
-            BlzFrameSetVisible(frames.buffIcons[j], false)
-        end
+        BlzFrameSetVisible(frame, buffName ~= nil)
+        BlzFrameSetTexture(
+            frame,
+            buff.BUFF_INFO[buffName] and buff.BUFF_INFO[buffName].icon or "",
+            0,
+            true)
     end
 end
 
