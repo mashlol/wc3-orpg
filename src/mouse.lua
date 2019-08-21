@@ -23,39 +23,15 @@ local mouseMoved = function()
     mousePositions[playerId].y = GetLocationY(pos)
 end
 
-local mouseDown = function()
-    local btn = BlzGetTriggerPlayerMouseButton()
-    local playerId = GetPlayerId(GetTriggerPlayer())
-
-    if BlzGetTriggerPlayerMouseButton() == MOUSE_BUTTON_TYPE_RIGHT then
-        local hero = hero.getHero(playerId)
-        IssuePointOrder(
-            hero,
-            "move",
-            mousePositions[playerId].x,
-            mousePositions[playerId].y)
-        effect.createEffect{
-            model = playerId == GetPlayerId(GetLocalPlayer()) and "econ" or "enon",
-            x = mousePositions[playerId].x,
-            y = mousePositions[playerId].y,
-            duration = 0,
-        }
-    end
-end
-
 local init = function()
     local mouseMoveTrigger = CreateTrigger()
-    local mouseDownTrigger = CreateTrigger()
 
     for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
         TriggerRegisterPlayerEvent(
             mouseMoveTrigger, Player(i), EVENT_PLAYER_MOUSE_MOVE)
-        TriggerRegisterPlayerEvent(
-            mouseDownTrigger, Player(i), EVENT_PLAYER_MOUSE_DOWN)
     end
 
     TriggerAddAction(mouseMoveTrigger, mouseMoved)
-    TriggerAddAction(mouseDownTrigger, mouseDown)
 end
 
 return {

@@ -13,9 +13,6 @@ local getSpellName = function()
 end
 
 local cast = function(playerId)
-    local hero = hero.getHero(playerId)
-
-    IssueImmediateOrder(hero, "stop")
     return true
 end
 

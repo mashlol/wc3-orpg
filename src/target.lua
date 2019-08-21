@@ -1,8 +1,8 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 
-targets = {}
-targetEffects = {}
+local targets = {}
+local ignoreTargetChange = {}
 
 local getTarget = function(playerId)
     return targets[playerId]
@@ -15,7 +15,17 @@ end
 local onTargetChanged = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local selectedUnit = GetTriggerUnit()
-    targets[playerId] = selectedUnit
+    if not ignoreTargetChange[playerId] then
+        targets[playerId] = selectedUnit
+    end
+    ignoreTargetChange[playerId] = nil
+    if selectedUnit ~= hero.getHero(playerId) then
+        ignoreTargetChange[playerId] = true
+        if playerId == GetPlayerId(GetLocalPlayer()) then
+            ClearSelection()
+            SelectUnit(hero.getHero(playerId), true)
+        end
+    end
 end
 
 function init()

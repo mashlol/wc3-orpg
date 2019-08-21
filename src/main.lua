@@ -18,8 +18,6 @@ local turtle = require('src/bosses/turtle.lua')
 local debug = require('src/debug.lua')
 
 local mainInit = function()
-    BlzEnableTargetIndicator(false)
-
     hero.init()
     keyboard.init()
     mouse.init()
