@@ -198,7 +198,10 @@ function UnitFrame:init()
 end
 
 function UnitFrame:onClick()
-    -- target.syncTarget(self:getUnit())
+    if GetPlayerId(GetTriggerPlayer()) == self.playerId then
+        ClearSelection()
+        SelectUnit(self:getUnit(), true)
+    end
 end
 
 function UnitFrame:getUnit()
