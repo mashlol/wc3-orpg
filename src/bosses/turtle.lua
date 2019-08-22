@@ -8,6 +8,7 @@ local startFightTrigger
 local endFightTrigger
 local slamTimer
 local addTimer
+local engageTimer
 
 local resetFight
 local onFightStarted
@@ -54,7 +55,7 @@ local getHeroesInPoly = function()
             hero ~= nil and
             collision.isCollidedWithPolygon(hero, TURTLE_AREA_BOUNDS)
         then
-            table.insert(toReturn, hero)
+            toReturn[GetHandleId(hero)] = hero
         end
     end
     return toReturn
@@ -62,6 +63,22 @@ end
 
 local castSlam = function()
     IssueImmediateOrder(boss, "creepthunderclap")
+end
+
+local fixEngagement = function()
+    for i=0,bj_MAX_PLAYERS,1 do
+        local hero = hero.getHero(i)
+        if hero ~= nil then
+            local inPoly = collision.isCollidedWithPolygon(hero, TURTLE_AREA_BOUNDS)
+            if involvedHeroes[GetHandleId(hero)] ~= nil and not inPoly then
+                -- Move inside poly
+                SetUnitPosition(hero, 450, -1650)
+            elseif involvedHeroes[GetHandleId(hero)] == nil and inPoly then
+                -- Move out of poly
+                SetUnitPosition(hero, 0, 0)
+            end
+        end
+    end
 end
 
 local spawnAdds = function()
@@ -87,6 +104,7 @@ cleanupFight = function()
     DestroyTrigger(endFightTrigger)
     DestroyTimer(slamTimer)
     DestroyTimer(addTimer)
+    DestroyTimer(engageTimer)
 end
 
 resetFight = function()
@@ -114,11 +132,7 @@ onFightEnded = function()
         return
     end
 
-    for idx, unit in pairs(involvedHeroes) do
-        if unit == GetTriggerUnit() then
-            involvedHeroes[idx] = nil
-        end
-    end
+    involvedHeroes[GetHandleId(GetTriggerUnit())] = nil
 
     if isAllInvolvedHeroesDead() then
         print("You lost.")
@@ -154,6 +168,9 @@ onFightStarted = function()
 
     addTimer = CreateTimer()
     TimerStart(addTimer, 25, true, spawnAdds)
+
+    engageTimer = CreateTimer()
+    TimerStart(engageTimer, 3, true, fixEngagement)
 
     ModifyGateBJ(bj_GATEOPERATION_CLOSE, door)
 end
