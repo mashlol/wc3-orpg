@@ -32,6 +32,7 @@ local ALL_HERO_INFO = {
         spells = {
             [1] = 'rejuvpot',
             [2] = 'armorpot',
+            [3] = 'cleansingpot',
             [4] = 'molecregen',
             [5] = 'attack',
             [6] = 'stop',
