@@ -14,6 +14,8 @@ local cooldowns = require('src/spells/cooldowns.lua')
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 15
 
+local storedData = {}
+
 local getSpellId = function()
     return 'corrosiveblast'
 end
@@ -22,12 +24,58 @@ local getSpellName = function()
     return 'Corrosive Blast'
 end
 
-local cast = function(playerId)
-    if cooldowns.isOnCooldown(playerId, getSpellId()) then
-        log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
+local castCorrosivePull = function(playerId)
+    local hero = hero.getHero(playerId)
+    local target = target.getTarget(playerId)
+
+    if target == nil then
+        log.log(playerId, "You don't have a target!", log.TYPE.ERROR)
         return false
     end
 
+    if not IsUnitAlly(target, Player(playerId)) then
+        log.log(playerId, "The target is not friendly.", log.TYPE.ERROR)
+        return
+    end
+
+    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
+
+    local dist = Vector:new(heroV):subtract(targetV)
+    local mag = dist:magnitude()
+    if mag > 800 then
+        log.log(playerId, "Out of range!", log.TYPE.ERROR)
+        return false
+    end
+
+    IssueImmediateOrder(hero, "stop")
+    animations.queueAnimation(hero, 3, 1)
+    SetUnitFacingTimed(
+        hero,
+        bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),
+        0.05)
+
+    local castSuccess = casttime.cast(playerId, 0.5)
+    if not castSuccess then
+        return false
+    end
+
+    cooldowns.startCooldown(playerId, getSpellId(), 1)
+
+    storedData[playerId] = buff.getBuffStacks(target, 'corrosivedecay')
+    buff.removeBuff(target, 'corrosivedecay')
+
+    projectile.createProjectile{
+        playerId = playerId,
+        model = "etst",
+        fromV = targetV,
+        destUnit = hero,
+        speed = 1000,
+        destroyOnCollide = false,
+    }
+end
+
+local castCorrosiveBlast = function(playerId)
     local hero = hero.getHero(playerId)
     local target = target.getTarget(playerId)
 
@@ -65,6 +113,7 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
+    local dmgAmount = 40 * storedData[playerId]
     projectile.createProjectile{
         playerId = playerId,
         model = "ecrb",
@@ -73,7 +122,7 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.dealDamage(hero, target, 200)
+            damage.dealDamage(hero, target, dmgAmount)
 
             effect.createEffect{
                 model = "ecrt",
@@ -83,7 +132,20 @@ local cast = function(playerId)
         end
     }
 
-    return true
+    storedData[playerId] = nil
+end
+
+local cast = function(playerId)
+    if cooldowns.isOnCooldown(playerId, getSpellId()) then
+        log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
+        return false
+    end
+
+    if storedData[playerId] == nil then
+        return castCorrosivePull(playerId)
+    end
+
+    return castCorrosiveBlast(playerId)
 end
 
 local getCooldown = function(playerId)
