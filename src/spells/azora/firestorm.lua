@@ -72,7 +72,7 @@ local cast = function(playerId)
                 damage.dealDamage(hero, unit, 80)
             end
         end
-        TriggerSleepAction(0.1)
+        TriggerSleepAction(0.01)
     end
 
     return true
