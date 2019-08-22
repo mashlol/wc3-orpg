@@ -24,7 +24,7 @@ local getSpellName = function()
     return 'Slash'
 end
 
-function getCollisionPoint(heroV, facingDeg, i, j)
+local getCollisionPoint = function(heroV, facingDeg, i, j)
     local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
     local perpendicularVec = Vector:fromAngle(perpendicularAngle)
         :multiply(i * 50)
