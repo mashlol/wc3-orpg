@@ -60,6 +60,18 @@ local BUFF_INFO = {
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
         maxStacks = 5,
     },
+    stun = {
+        effects = {
+            {
+                type = 'stun',
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Orc\\StasisTrap\\StasisTotemTarget.mdl",
+            attach = "overhead",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNGauntletsOfOgrePower.blp",
+    },
 }
 
 -- BuffInstances:

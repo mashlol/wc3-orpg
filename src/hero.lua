@@ -14,6 +14,7 @@ local ALL_HERO_INFO = {
             [6] = 'stop',
             [7] = 'jab',
             [8] = 'focus',
+            [9] = 'stun',
         },
     },
     [2] = {

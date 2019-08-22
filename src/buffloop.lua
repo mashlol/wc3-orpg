@@ -7,7 +7,7 @@ function applyBuffs()
         local unit = unitInfo.unit
         local buffs = unitInfo.buffs
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-
+        local isStunned = false
 
         for buffName,val in pairs(buffs) do
             local hpToHeal = 0
@@ -19,12 +19,16 @@ function applyBuffs()
                 if info.type == 'heal' then
                     hpToHeal = hpToHeal + info.amount * val.stacks
                 end
+                if info.type == 'stun' then
+                    isStunned = true
+                end
             end
             if hpToHeal > 0 then
                 damage.heal(val.source, unit, hpToHeal)
             end
         end
 
+        PauseUnit(unit, isStunned)
         SetUnitMoveSpeed(unit, baseSpeed)
     end
 end
