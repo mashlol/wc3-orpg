@@ -76,6 +76,7 @@ local cast = function(playerId)
             damage.heal(hero, target, 30)
 
             buff.addBuff(hero, target, 'rejuvpot', 10)
+            buff.addBuff(hero, target, 'corrosivedecay', 300)
         end
     }
 
