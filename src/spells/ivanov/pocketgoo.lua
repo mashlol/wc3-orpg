@@ -73,7 +73,6 @@ local cast = function(playerId)
         destroyOnCollide = false,
         onDestroy = function()
             buff.addBuff(hero, target, 'stun', 2)
-            buff.addBuff(hero, target, 'corrosivedecay', 300)
         end
     }
 
