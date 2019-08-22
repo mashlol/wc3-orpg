@@ -21,18 +21,8 @@ function createCombatText(text, target, green)
 end
 
 function dealDamage(source, target, amount)
-    local curHealth = BlzGetUnitRealField(target, UNIT_RF_HP)
-    local modifiedAmt = amount * buff.getDamageModifier(source, target)
-    local newHealth = curHealth - modifiedAmt
-
-    BlzSetUnitRealField(
-        target,
-        UNIT_RF_HP,
-        newHealth)
-
-    createCombatText(modifiedAmt, target, false)
-
-    -- TODO feed into threat system
+    UnitDamageTargetBJ(
+        source, target, amount, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL)
 end
 
 function heal(source, target, amount)
@@ -51,10 +41,11 @@ function heal(source, target, amount)
 end
 
 function onDamageTaken()
-    -- All auto attacks will deal 0 damage. We customize it here.
     local source = GetEventDamageSource()
     local target = GetTriggerUnit()
-    dealDamage(source, target, GetUnitPointValue(source))
+    local amount = GetEventDamage() * buff.getDamageModifier(source, target)
+    BlzSetEventDamage(amount)
+    createCombatText(amount, target, false)
 end
 
 function init()
