@@ -21,13 +21,13 @@ local getSpellName = function()
     return 'Jab'
 end
 
-function getCollisionPoint(heroV, facingDeg, i, j)
+local getCollisionPoint = function(heroV, facingDeg, i, j)
     local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
     local perpendicularVec = Vector:fromAngle(perpendicularAngle)
         :multiply(i * 50)
         :add(heroV)
     return Vector:fromAngle(facingDeg * bj_DEGTORAD)
-        :multiply(j * 500)
+        :multiply(j * 400)
         :add(perpendicularVec)
 end
 
@@ -90,7 +90,7 @@ local cast = function(playerId)
         end
     end
 
-    casttime.cast(playerId, 0.4, false)
+    casttime.cast(playerId, 0.35, false)
 
     SetUnitTimeScale(hero, 1)
 
