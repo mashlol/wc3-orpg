@@ -109,7 +109,7 @@ local BUFF_INFO = {
         },
         vfx = {
             model = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl",
-            attach = "chest",
+            attach = "origin",
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNFrostArmor.blp",
     },
