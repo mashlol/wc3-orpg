@@ -72,6 +72,18 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNGauntletsOfOgrePower.blp",
     },
+    firelance = {
+        effects = {
+            {
+                type = 'stun',
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Orc\\StasisTrap\\StasisTotemTarget.mdl",
+            attach = "overhead",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNFire.blp",
+    },
 }
 
 -- BuffInstances:

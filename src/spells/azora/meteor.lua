@@ -23,7 +23,7 @@ end
 
 function createTargetEffect(mouseV)
     effect.createEffect{
-        model = "etst",
+        model = "eprm",
         x = mouseV.x,
         y = mouseV.y,
         timeScale = 0.5,
@@ -100,7 +100,6 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(mouseV, 350)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            print('damaged a unit')
             damage.dealDamage(hero, unit, 400)
         end
     end
