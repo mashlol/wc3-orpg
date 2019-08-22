@@ -85,6 +85,10 @@ local clearProjectiles = function()
 
             SetUnitX(projectile.unit, deltaV.x)
             SetUnitY(projectile.unit, deltaV.y)
+
+            if projectile.options.onMove then
+                projectile.options.onMove(deltaV.x, deltaV.y)
+            end
         end
     end
     local newProjectiles = {}
