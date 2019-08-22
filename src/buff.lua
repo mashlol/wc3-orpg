@@ -233,6 +233,14 @@ function hasBuff(unit, buffName)
         buffInstances[unitId].buffs[buffName]
 end
 
+function getBuffStacks(unit, buffName)
+    local unitId = GetHandleId(unit)
+    if hasBuff(unit, buffName) then
+        return buffInstances[unitId].buffs[buffName].stacks
+    end
+    return 0
+end
+
 function getBuffs(unit)
     local unitId = GetHandleId(unit)
     return buffInstances[unitId] and buffInstances[unitId].buffs or {}
@@ -295,6 +303,7 @@ return {
     addBuff = addBuff,
     removeBuff = removeBuff,
     hasBuff = hasBuff,
+    getBuffStacks = getBuffStacks,
     getBuffs = getBuffs,
     getBuffInstances = getBuffInstances,
     getDamageModifier = getDamageModifier,
