@@ -22,7 +22,8 @@ end
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
         IsUnitType(unit, UNIT_TYPE_SNARED) or
-        IsUnitType(unit, UNIT_TYPE_POLYMORPHED)
+        IsUnitType(unit, UNIT_TYPE_POLYMORPHED) or
+        IsUnitPaused(unit)
 end
 
 local cast = function(playerId)
