@@ -4,6 +4,7 @@ local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local casttime = require('src/casttime.lua')
@@ -57,6 +58,7 @@ local cast = function(playerId)
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 damage.dealDamage(hero, collidedUnit, 100)
+                buff.addBuff(hero, collidedUnit, 'ignite', 8)
                 return true
             end
             return false

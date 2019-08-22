@@ -101,6 +101,8 @@ local cast = function(playerId)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
             damage.dealDamage(hero, unit, 400)
+            buff.addBuff(hero, unit, 'ignite', 8)
+            buff.addBuff(hero, unit, 'ignite', 8)
         end
     end
 

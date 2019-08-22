@@ -144,6 +144,10 @@ local BUFF_INFO = {
 -- }
 local buffInstances = {}
 
+function registerBuff(buffName, buffInfo)
+    BUFF_INFO[buffName] = buffInfo
+end
+
 function addBuff(source, target, buffName, duration)
     local unitId = GetHandleId(target)
     if buffInstances[unitId] == nil then
@@ -165,6 +169,18 @@ function addBuff(source, target, buffName, duration)
         source = source,
         stacks = math.min(curNumStacks + 1, BUFF_INFO[buffName].maxStacks or 1),
     }
+
+    if
+        buffInstances[unitId].buffs[buffName].stacks ==
+            BUFF_INFO[buffName].maxStacks and
+        BUFF_INFO[buffName].onMaxStacks ~= nil
+    then
+        local result = BUFF_INFO[buffName].onMaxStacks(
+            target, buffInstances[unitId].buffs[buffName])
+        if result then
+            return
+        end
+    end
 
     if BUFF_INFO[buffName].vfx ~= nil then
         buffInstances[unitId].buffs[buffName].effect = AddSpecialEffectTarget(
@@ -261,6 +277,7 @@ end
 
 return {
     BUFF_INFO = BUFF_INFO,
+    registerBuff = registerBuff,
     addBuff = addBuff,
     removeBuff = removeBuff,
     hasBuff = hasBuff,

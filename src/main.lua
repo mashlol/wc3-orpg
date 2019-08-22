@@ -10,6 +10,7 @@ local buffloop = require('src/buffloop.lua')
 local target = require('src/target.lua')
 local damage = require('src/damage.lua')
 local party = require('src/party.lua')
+local buffmanager = require('src/buffs/buffmanager.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create a boss manager
@@ -30,6 +31,7 @@ local mainInit = function()
     target.init()
     damage.init()
     party.init()
+    buffmanager.init()
     cooldowns.init()
 
     turtle.init()
