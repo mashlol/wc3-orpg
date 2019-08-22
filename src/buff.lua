@@ -84,6 +84,22 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNFire.blp",
     },
+    fireshell = {
+        effects = {
+            {
+                type = 'stun',
+            },
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\ImmolationRed\\ImmolationRedTarget.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNCloakOfFlames.blp",
+    },
 }
 
 -- BuffInstances:
