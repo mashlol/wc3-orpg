@@ -51,6 +51,7 @@ local ALL_HERO_INFO = {
             [6] = 'stop',
             [8] = 'blink',
             [10] = 'phoenix',
+            [11] = 'fireshell',
             [12] = 'frostorb',
         },
     },
