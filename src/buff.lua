@@ -72,7 +72,7 @@ local BUFF_INFO = {
             attach = "chest",
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
-        maxStacks = 5,
+        maxStacks = 3,
     },
     corrosivedecaydot = {
         effects = {
