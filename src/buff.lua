@@ -61,6 +61,20 @@ local BUFF_INFO = {
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
         maxStacks = 5,
     },
+    corrosivedecaydot = {
+        effects = {
+            {
+                type = 'damage',
+                amount = 160,
+                tickrate = 1,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfOmniscience.blp",
+    },
     stun = {
         effects = {
             {
