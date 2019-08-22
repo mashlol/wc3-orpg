@@ -54,7 +54,7 @@ local cast = function(playerId)
     for i=0,320,40 do
         local facing = i * bj_DEGTORAD
         SetUnitFacing(hero, i)
-        animations.queueAnimation(hero, 8, 1)
+        animations.queueAnimation(hero, 13, 0.4)
         local spawn = Vector:fromAngle(facing)
             :multiply(50)
             :add(heroV)
