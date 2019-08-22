@@ -36,6 +36,7 @@ local accmist = require('src/spells/ivanov/accmist.lua')
 local cleansingpot = require('src/spells/ivanov/cleansingpot.lua')
 local hulkingpot = require('src/spells/ivanov/hulkingpot.lua')
 local dampenpot = require('src/spells/ivanov/dampenpot.lua')
+local pocketgoo = require('src/spells/ivanov/pocketgoo.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
@@ -80,6 +81,7 @@ local SPELL_MAP = {
     cleansingpot = cleansingpot,
     hulkingpot = hulkingpot,
     dampenpot = dampenpot,
+    pocketgoo = pocketgoo,
 }
 
 local getSpell = function(playerId, idx)

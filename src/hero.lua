@@ -40,6 +40,7 @@ local ALL_HERO_INFO = {
             [8] = 'accmist',
             [9] = 'hulkingpot',
             [10] = 'dampenpot',
+            [11] = 'pocketgoo',
         },
     },
     [4] = {
