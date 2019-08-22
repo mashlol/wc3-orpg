@@ -49,6 +49,7 @@ local ALL_HERO_INFO = {
             [4] = 'meteor',
             [5] = 'attack',
             [6] = 'stop',
+            [7] = 'firestorm',
             [8] = 'blink',
             [9] = 'icicle',
             [10] = 'phoenix',
