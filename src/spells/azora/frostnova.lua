@@ -4,6 +4,7 @@ local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local animations = require('src/animations.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
@@ -55,26 +56,13 @@ local cast = function(playerId)
             length = 250,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    local dummy = CreateUnit(
-                        Player(playerId),
-                        FourCC("hdum"),
-                        GetUnitX(collidedUnit),
-                        GetUnitY(collidedUnit), 0)
-
                     effect.createEffect{
                         model = "efir",
                         unit = collidedUnit,
                         duration = 0.5,
                     }
 
-                    ShowUnit(dummy, false)
-
-                    UnitRemoveAbility(dummy, FourCC('Aatk'))
-                    UnitAddAbility(dummy, FourCC('Aenr'))
-
-                    IssueTargetOrder(dummy, "entanglingroots", collidedUnit)
-
-                    UnitApplyTimedLifeBJ(2, FourCC('BTLF'), dummy)
+                    buff.addBuff(hero, collidedUnit, 'frostnova', 4)
                 end
 
                 return false

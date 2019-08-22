@@ -100,6 +100,18 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNCloakOfFlames.blp",
     },
+    frostnova = {
+        effects = {
+            {
+                type = 'root',
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathTargetArt.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNFrostArmor.blp",
+    },
 }
 
 -- BuffInstances:
