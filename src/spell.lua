@@ -35,6 +35,7 @@ local corrosiveblast = require('src/spells/ivanov/corrosiveblast.lua')
 local accmist = require('src/spells/ivanov/accmist.lua')
 local cleansingpot = require('src/spells/ivanov/cleansingpot.lua')
 local hulkingpot = require('src/spells/ivanov/hulkingpot.lua')
+local dampenpot = require('src/spells/ivanov/dampenpot.lua')
 
 local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
@@ -78,6 +79,7 @@ local SPELL_MAP = {
     accmist = accmist,
     cleansingpot = cleansingpot,
     hulkingpot = hulkingpot,
+    dampenpot = dampenpot,
 }
 
 local getSpell = function(playerId, idx)
