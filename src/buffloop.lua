@@ -1,6 +1,9 @@
 local buff = require('src/buff.lua')
 local damage = require('src/damage.lua')
 
+local BUFF_LOOP_INTERVAL = 0.1
+
+local numLoops = 0
 function applyBuffs()
     local buffInstances = buff.getBuffInstances()
     for unitId,unitInfo in pairs(buffInstances) do
@@ -17,7 +20,10 @@ function applyBuffs()
                 if info.type == 'modifyMoveSpeed' then
                     baseSpeed = baseSpeed * info.amount * val.stacks
                 end
-                if info.type == 'heal' then
+                if
+                    info.type == 'heal' and
+                    numLoops % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0
+                then
                     hpToHeal = hpToHeal + info.amount * val.stacks
                 end
                 if info.type == 'stun' then
@@ -39,10 +45,11 @@ function applyBuffs()
         end
         PauseUnit(unit, isStunned)
     end
+    numLoops = numLoops + 1
 end
 
 function init()
-    TimerStart(CreateTimer(), 1, true, applyBuffs)
+    TimerStart(CreateTimer(), BUFF_LOOP_INTERVAL, true, applyBuffs)
 end
 
 return {
