@@ -51,6 +51,7 @@ local BUFF_INFO = {
             {
                 type = 'heal',
                 amount = 30,
+                tickrate = 1,
             },
         },
         vfx = {
