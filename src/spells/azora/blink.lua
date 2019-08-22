@@ -43,6 +43,21 @@ local cast = function(playerId)
         return false
     end
 
+    local finalV = Vector:new(mouseV)
+        :subtract(heroV)
+
+    if finalV:magnitude() > 800 then
+        finalV:normalize()
+            :multiply(800)
+    end
+
+    finalV:add(heroV)
+
+    if not IsVisibleToPlayer(finalV.x, finalV.y, Player(playerId)) then
+        log.log(playerId, "Target not in line of sight.", log.TYPE.ERROR)
+        return false
+    end
+
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
@@ -55,16 +70,6 @@ local cast = function(playerId)
     }
 
     casttime.cast(playerId, 0.15, false)
-
-    local finalV = Vector:new(mouseV)
-        :subtract(heroV)
-
-    if finalV:magnitude() > 800 then
-        finalV:normalize()
-            :multiply(800)
-    end
-
-    finalV:add(heroV)
 
     SetUnitX(hero, finalV.x)
     SetUnitY(hero, finalV.y)

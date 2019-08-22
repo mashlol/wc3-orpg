@@ -51,6 +51,11 @@ local cast = function(playerId)
         return false
     end
 
+    if not IsVisibleToPlayer(mouseV.x, mouseV.y, Player(playerId)) then
+        log.log(playerId, "Target not in line of sight.", log.TYPE.ERROR)
+        return false
+    end
+
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 19, 2)
 
