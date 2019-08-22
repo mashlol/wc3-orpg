@@ -12,7 +12,7 @@ function applyBuffs()
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
         local isStunned = false
         local isRooted = false
-        local scale = 1
+        local scale = GetUnitPointValue(unit) / 100
 
         for buffName,val in pairs(buffs) do
             local hpToHeal = 0

@@ -52,6 +52,10 @@ local BUFF_INFO = {
                 type = 'multiplyDamage',
                 amount = 0.8,
             },
+            {
+                type = 'modifySize',
+                amount = 0.8,
+            },
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNLesserInvulneralbility.blp",
     },
