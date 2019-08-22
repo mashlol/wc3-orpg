@@ -38,6 +38,7 @@ local ALL_HERO_INFO = {
             [6] = 'stop',
             [7] = 'corrosiveblast',
             [8] = 'accmist',
+            [9] = 'hulkingpot',
         },
     },
     [4] = {

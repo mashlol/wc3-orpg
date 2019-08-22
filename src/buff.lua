@@ -33,6 +33,19 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfRestoration.blp",
     },
+    hulkingpot = {
+        effects = {
+            {
+                type = 'multiplyDamage',
+                amount = 1.2,
+            },
+            {
+                type = 'modifySize',
+                amount = 1.3,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionRed.blp",
+    },
     accpot = {
         effects = {
             {

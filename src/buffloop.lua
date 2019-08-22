@@ -12,6 +12,7 @@ function applyBuffs()
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
         local isStunned = false
         local isRooted = false
+        local scale = 1
 
         for buffName,val in pairs(buffs) do
             local hpToHeal = 0
@@ -20,6 +21,9 @@ function applyBuffs()
             for idx,info in pairs(effects) do
                 if info.type == 'modifyMoveSpeed' then
                     baseSpeed = baseSpeed * info.amount * val.stacks
+                end
+                if info.type == 'modifySize' then
+                    scale = scale * info.amount * val.stacks
                 end
                 if
                     info.type == 'heal' and
@@ -54,6 +58,7 @@ function applyBuffs()
             SetUnitMoveSpeed(unit, baseSpeed)
         end
         PauseUnit(unit, isStunned)
+        SetUnitScale(unit, scale, scale, scale)
     end
     numLoops = numLoops + 1
 end
