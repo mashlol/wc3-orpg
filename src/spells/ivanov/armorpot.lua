@@ -31,13 +31,11 @@ local cast = function(playerId)
     local target = target.getTarget(playerId)
 
     if target == nil then
-        log.log(playerId, "You don't have a target!", log.TYPE.ERROR)
-        return false
+        target = hero
     end
 
     if not IsUnitAlly(target, Player(playerId)) then
-        log.log(playerId, "The target is not friendly.", log.TYPE.ERROR)
-        return
+        target = hero
     end
 
     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
