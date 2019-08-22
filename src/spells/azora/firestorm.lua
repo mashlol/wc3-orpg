@@ -55,8 +55,6 @@ local cast = function(playerId)
 
     animations.queueAnimation(hero, 18, 1)
 
-
-    -- Pick random spot
     for i=0,40,1 do
         local randX = GetRandomReal(mouseV.x - 200, mouseV.x + 200)
         local randY = GetRandomReal(mouseV.y - 200, mouseV.y + 200)
