@@ -8,6 +8,7 @@ local buff = require('src/buff.lua')
 local target = require('src/target.lua')
 local party = require('src/party.lua')
 local hero = require('src/hero.lua')
+local casttime = require('src/casttime.lua')
 
 local UnitFrame = {
     xLoc = 0,
@@ -102,43 +103,43 @@ function UnitFrame:init()
         0,
         true)
 
-    local energyBarFrameBackground = BlzCreateFrameByType(
+    local castBarFrameBackground = BlzCreateFrameByType(
         "BACKDROP",
-        "energyBarFrameBackground",
+        "castBarFrameBackground",
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(energyBarFrameBackground, self.width, consts.BAR_HEIGHT)
+    BlzFrameSetSize(castBarFrameBackground, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
-        energyBarFrameBackground,
+        castBarFrameBackground,
         FRAMEPOINT_BOTTOMLEFT,
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
         0,
         0)
     BlzFrameSetTexture(
-        energyBarFrameBackground,
+        castBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
         0,
         true)
 
-    local energyBarFrameFilled = BlzCreateFrameByType(
+    local castBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
-        "energyBarFrameFilled",
+        "castBarFrameFilled",
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(energyBarFrameFilled, self.width, consts.BAR_HEIGHT)
+    BlzFrameSetSize(castBarFrameFilled, self.width, consts.BAR_HEIGHT)
     BlzFrameSetPoint(
-        energyBarFrameFilled,
+        castBarFrameFilled,
         FRAMEPOINT_BOTTOMLEFT,
-        energyBarFrameBackground,
+        castBarFrameBackground,
         FRAMEPOINT_BOTTOMLEFT,
         0,
         0)
     BlzFrameSetTexture(
-        energyBarFrameFilled,
-        "Replaceabletextures\\Teamcolor\\Teamcolor01.blp",
+        castBarFrameFilled,
+        "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
         0,
         true)
 
@@ -208,7 +209,7 @@ function UnitFrame:init()
 
     self.frames = {
         healthBar = healthBarFrameFilled,
-        energyBar = energyBarFrameFilled,
+        castBar = castBarFrameFilled,
         origin = unitFrameOrigin,
         name = unitNameFrame,
         buffIcons = buffIcons,
@@ -250,8 +251,6 @@ function UnitFrame:update(playerId)
 
     local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
     local maxHp = BlzGetUnitMaxHP(unit)
-    local mana = BlzGetUnitRealField(unit, UNIT_RF_MANA)
-    local maxMana = BlzGetUnitMaxMana(unit)
 
     if maxHp ~= 0 then
         BlzFrameSetSize(
@@ -261,13 +260,22 @@ function UnitFrame:update(playerId)
     else
         BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
     end
-    if maxMana ~= 0 then
+
+    local playerIdOfUnitOwner = GetPlayerId(GetOwningPlayer(unit))
+    local castRemainder = casttime.getCastDurationRemaining(playerIdOfUnitOwner)
+    local castTotal = casttime.getCastDurationTotal(playerIdOfUnitOwner)
+    if castRemainder ~= nil and castTotal ~= nil then
+        BlzFrameSetVisible(frames.castBar, true)
         BlzFrameSetSize(
-            frames.energyBar,
-            self.width * mana / maxMana,
+            frames.castBar,
+            self.width * (1 - castRemainder / castTotal),
             consts.BAR_HEIGHT)
     else
-        BlzFrameSetSize(frames.energyBar, 0, consts.BAR_HEIGHT)
+        BlzFrameSetVisible(frames.castBar, false)
+        BlzFrameSetSize(
+            frames.castBar,
+            0,
+            consts.BAR_HEIGHT)
     end
 
     local buffs = buff.getBuffs(unit)
