@@ -10,6 +10,7 @@ local frostorb = require('src/spells/azora/frostorb.lua')
 local blink = require('src/spells/azora/blink.lua')
 local meteor = require('src/spells/azora/meteor.lua')
 local firelance = require('src/spells/azora/firelance.lua')
+local phoenix = require('src/spells/azora/phoenix.lua')
 
 -- Yuji
 local slash = require('src/spells/yuji/slash.lua')
@@ -47,6 +48,7 @@ local SPELL_MAP = {
     blink = blink,
     meteor = meteor,
     firelance = firelance,
+    phoenix = phoenix,
 
     -- Yuji
     slash = slash,
