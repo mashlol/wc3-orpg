@@ -1,5 +1,6 @@
 local Vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
+local collision = require('src/collision.lua')
 
 local boss
 
@@ -15,6 +16,17 @@ local cleanupFight
 
 local door
 
+local TURTLE_AREA_BOUNDS = {
+    {x = -549, y = -3255},
+    {x = 1723, y = -3647},
+    {x = 2206, y = -2984},
+    {x = 2260, y = -1558},
+    {x = 1733, y = -322},
+    {x = 618, y = -866},
+    {x = -430, y = -1754},
+    {x = -991, y = -2655},
+}
+
 local involvedHeroes = {}
 
 local getNumInvolvedHeroes = function()
@@ -27,11 +39,25 @@ end
 
 local isAllInvolvedHeroesDead = function()
     for idx, hero in pairs(involvedHeroes) do
-        if GetUnitState(hero, UNIT_STATE_LIFE) > 0 then
+        if hero ~= nil then
             return false
         end
     end
     return true
+end
+
+local getHeroesInPoly = function()
+    local toReturn = {}
+    for i=0,bj_MAX_PLAYERS,1 do
+        local hero = hero.getHero(i)
+        if
+            hero ~= nil and
+            collision.isCollidedWithPolygon(hero, TURTLE_AREA_BOUNDS)
+        then
+            table.insert(toReturn, hero)
+        end
+    end
+    return toReturn
 end
 
 local castSlam = function()
@@ -88,6 +114,12 @@ onFightEnded = function()
         return
     end
 
+    for idx, unit in pairs(involvedHeroes) do
+        if unit == GetTriggerUnit() then
+            involvedHeroes[idx] = nil
+        end
+    end
+
     if isAllInvolvedHeroesDead() then
         print("You lost.")
         resetFight()
@@ -106,16 +138,11 @@ onFightStarted = function()
 
     endFightTrigger = CreateTrigger()
 
-    local grp = GetUnitsInRangeOfLocAll(3000, GetUnitLoc(boss))
-    ForGroupBJ(grp, function()
-        local unit = GetEnumUnit()
-        -- TODO what about pets and stuff?
-        if hero.isHero(unit) then
-            table.insert(involvedHeroes, unit)
-            TriggerRegisterUnitEvent(
-                endFightTrigger, unit, EVENT_UNIT_DEATH)
-        end
-    end)
+    involvedHeroes = getHeroesInPoly()
+
+    for idx, hero in pairs(involvedHeroes) do
+        TriggerRegisterUnitEvent(endFightTrigger, hero, EVENT_UNIT_DEATH)
+    end
 
     TriggerRegisterUnitEvent(
         endFightTrigger, boss, EVENT_UNIT_DEATH)
