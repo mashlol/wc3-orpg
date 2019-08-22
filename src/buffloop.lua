@@ -15,6 +15,7 @@ function applyBuffs()
 
         for buffName,val in pairs(buffs) do
             local hpToHeal = 0
+            local dmgToDeal = 0
             local effects = buff.BUFF_INFO[buffName].effects
             for idx,info in pairs(effects) do
                 if info.type == 'modifyMoveSpeed' then
@@ -26,6 +27,12 @@ function applyBuffs()
                 then
                     hpToHeal = hpToHeal + info.amount * val.stacks
                 end
+                if
+                    info.type == 'damage' and
+                    numLoops % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0
+                then
+                    dmgToDeal = dmgToDeal + info.amount * val.stacks
+                end
                 if info.type == 'stun' then
                     isStunned = true
                 end
@@ -35,6 +42,9 @@ function applyBuffs()
             end
             if hpToHeal > 0 then
                 damage.heal(val.source, unit, hpToHeal)
+            end
+            if dmgToDeal > 0 then
+                damage.dealDamage(val.source, unit, dmgToDeal)
             end
         end
 

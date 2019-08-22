@@ -4,6 +4,7 @@ local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
@@ -70,6 +71,7 @@ local cast = function(playerId)
         for idx, unit in pairs(collidedUnits) do
             if IsUnitEnemy(unit, Player(playerId)) then
                 damage.dealDamage(hero, unit, 80)
+                buff.addBuff(hero, unit, 'ignite', 8)
             end
         end
         TriggerSleepAction(0.01)
