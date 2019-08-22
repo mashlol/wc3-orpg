@@ -46,6 +46,15 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionRed.blp",
     },
+    dampenpot = {
+        effects = {
+            {
+                type = 'multiplyDamage',
+                amount = 0.8,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNLesserInvulneralbility.blp",
+    },
     accpot = {
         effects = {
             {
