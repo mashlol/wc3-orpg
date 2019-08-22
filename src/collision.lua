@@ -75,6 +75,7 @@ end
 
 
 return {
+    isCollidedWithPolygon = isCollidedWithPolygon,
     getAllCollisions = getAllCollisions,
     isCollided = isCollided,
 }
