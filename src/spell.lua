@@ -12,6 +12,7 @@ local meteor = require('src/spells/azora/meteor.lua')
 local firelance = require('src/spells/azora/firelance.lua')
 local phoenix = require('src/spells/azora/phoenix.lua')
 local fireshell = require('src/spells/azora/fireshell.lua')
+local icicle = require('src/spells/azora/icicle.lua')
 
 -- Yuji
 local slash = require('src/spells/yuji/slash.lua')
@@ -51,6 +52,7 @@ local SPELL_MAP = {
     firelance = firelance,
     phoenix = phoenix,
     fireshell = fireshell,
+    icicle = icicle,
 
     -- Yuji
     slash = slash,

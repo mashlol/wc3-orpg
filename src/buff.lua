@@ -112,6 +112,19 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNFrostArmor.blp",
     },
+    icicle = {
+        effects = {
+            {
+                type = 'modifyMoveSpeed',
+                amount = 0.7,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Items\\AIob\\AIobTarget.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNBreathOfFrost.blp",
+    },
 }
 
 -- BuffInstances:
