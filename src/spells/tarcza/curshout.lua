@@ -42,7 +42,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     effect.createEffect{
-        model = "etst",
+        model = "ecur",
         unit = hero,
         duration = 1,
     }

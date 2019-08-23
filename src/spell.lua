@@ -30,6 +30,7 @@ local punch = require('src/spells/stormfist/punch.lua')
 -- Tarcza
 local whirlwind = require('src/spells/tarcza/whirlwind.lua')
 local curshout = require('src/spells/tarcza/curshout.lua')
+local shieldcharge = require('src/spells/tarcza/shieldcharge.lua')
 
 -- Ivanov
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
@@ -79,6 +80,7 @@ local SPELL_MAP = {
     -- Tarcza
     whirlwind = whirlwind,
     curshout = curshout,
+    shieldcharge = shieldcharge,
 
     -- Ivanov
     rejuvpot = rejuvpot,

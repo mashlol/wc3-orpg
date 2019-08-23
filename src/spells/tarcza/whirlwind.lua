@@ -36,7 +36,6 @@ local cast = function(playerId)
     }
 
     animations.queueAnimation(hero, 17, 1)
-    SetUnitFacing(hero, 0)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
