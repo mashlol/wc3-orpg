@@ -14,7 +14,7 @@ local UI_MODULES = {
     ActionBar:new(),
     CastBar:new(),
     UnitFrame:new{
-        xLoc = 0.54,
+        xLoc = 0.55,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
         forTarget = true,
     },
