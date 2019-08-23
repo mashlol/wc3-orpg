@@ -26,7 +26,7 @@ function Backpack:init()
         backpackBackground,
         FRAMEPOINT_CENTER,
         0.6,
-        0.2)
+        0.24)
     BlzFrameSetTexture(
         backpackBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
