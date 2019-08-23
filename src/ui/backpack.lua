@@ -2,7 +2,16 @@ local consts = require('src/ui/consts.lua')
 local backpack = require('src/items/backpack.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
-local Backpack = {}
+-- backpackToggles = {
+--     [playerId] = true or nil
+-- }
+local backpackToggles = {}
+
+local Backpack = {
+    toggle = function(playerId)
+        backpackToggles[playerId] = not backpackToggles[playerId]
+    end
+}
 
 function Backpack:new(o)
     o = o or {}
@@ -90,6 +99,8 @@ end
 
 function Backpack:update(playerId)
     local frames = self.frames
+
+    BlzFrameSetVisible(frames.origin, backpackToggles[playerId] == true)
 
     for i=1,36,1 do
         local itemFrame = frames.itemFrames[i]
