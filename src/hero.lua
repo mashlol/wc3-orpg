@@ -61,6 +61,14 @@ local ALL_HERO_INFO = {
             [12] = 'frostorb',
         },
     },
+    [5] = {
+        name = 'Tarcza',
+        id = FourCC("Htar"),
+        spells = {
+            [5] = 'attack',
+            [6] = 'stop',
+        },
+    },
 }
 
 local respawn = function()
