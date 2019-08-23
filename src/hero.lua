@@ -65,6 +65,7 @@ local ALL_HERO_INFO = {
         name = 'Tarcza',
         id = FourCC("Htar"),
         spells = {
+            [1] = 'whirlwind',
             [5] = 'attack',
             [6] = 'stop',
         },

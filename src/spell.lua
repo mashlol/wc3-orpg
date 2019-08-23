@@ -27,6 +27,9 @@ local stun = require('src/spells/yuji/stun.lua')
 -- Stormfist
 local punch = require('src/spells/stormfist/punch.lua')
 
+-- Tarcza
+local whirlwind = require('src/spells/tarcza/whirlwind.lua')
+
 -- Ivanov
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
 local armorpot = require('src/spells/ivanov/armorpot.lua')
@@ -71,6 +74,9 @@ local SPELL_MAP = {
 
     -- Stormfist
     punch = punch,
+
+    -- Tarcza
+    whirlwind = whirlwind,
 
     -- Ivanov
     rejuvpot = rejuvpot,
