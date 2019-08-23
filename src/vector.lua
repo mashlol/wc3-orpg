@@ -52,6 +52,10 @@ function Vector:magnitude(s)
     return abs(SquareRoot(self.x^2 + self.y^2))
 end
 
+function Vector:angle()
+    return Atan2(self.y, self.x)
+end
+
 function Vector:normalize()
     local mag = self:magnitude()
     return self:divide(mag)
