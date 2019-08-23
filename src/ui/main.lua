@@ -8,6 +8,7 @@ local consts = require('src/ui/consts.lua')
 local CastBar = require('src/ui/castbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
+local Backpack = require('src/ui/backpack.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
@@ -22,6 +23,7 @@ local UI_MODULES = {
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
         forTarget = false,
     },
+    Backpack:new(),
 }
 
 for i=0,9,1 do
