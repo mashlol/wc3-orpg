@@ -35,21 +35,23 @@ local cast = function(playerId)
         y = mouse.getMouseY(playerId)
     }
 
-    animations.queueAnimation(hero, 4, 1)
+    animations.queueAnimation(hero, 17, 1)
     SetUnitFacing(hero, 0)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    effect.createEffect{
-        model = "grns",
-        x = heroV.x,
-        y = heroV.y,
-        duration = 0.5,
-        scale = 0.5,
-        timeScale = 0.5,
-    }
+    for i=0.5,1,0.1 do
+        effect.createEffect{
+            model = "ersl",
+            x = heroV.x,
+            y = heroV.y,
+            duration = 0.5,
+            scale = 0.6,
+            timeScale = i,
+        }
+    end
 
-    local collidedUnits = collision.getAllCollisions(heroV, 100)
+    local collidedUnits = collision.getAllCollisions(heroV, 150)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
             damage.dealDamage(hero, unit, 100)
@@ -61,6 +63,8 @@ local cast = function(playerId)
             }
         end
     end
+
+    casttime.cast(playerId, 0.3, false)
 
     return true
 end
