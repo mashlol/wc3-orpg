@@ -16,6 +16,19 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNMarkOfFire.blp",
     },
+    curshout = {
+        effects = {
+            {
+                type = 'multiplyDamage',
+                amount = 0.6,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl",
+            attach = "origin",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
+    },
     armorpot = {
         effects = {
             {

@@ -5,20 +5,21 @@ local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local collision = require('src/collision.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 5
+local COOLDOWN_S = 15
 
 local getSpellId = function()
-    return 'whirlwind'
+    return 'curshout'
 end
 
 local getSpellName = function()
-    return 'Whirlwind'
+    return 'Courageous Shout'
 end
 
 local cast = function(playerId)
@@ -35,36 +36,25 @@ local cast = function(playerId)
         y = mouse.getMouseY(playerId)
     }
 
-    animations.queueAnimation(hero, 17, 1)
+    animations.queueAnimation(hero, 9, 1)
     SetUnitFacing(hero, 0)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    for i=0.5,1,0.1 do
-        effect.createEffect{
-            model = "ersl",
-            x = heroV.x,
-            y = heroV.y,
-            duration = 0.5,
-            scale = 0.6,
-            timeScale = i,
-        }
-    end
+    effect.createEffect{
+        model = "etst",
+        unit = hero,
+        duration = 1,
+    }
 
-    local collidedUnits = collision.getAllCollisions(heroV, 150)
+    local collidedUnits = collision.getAllCollisions(heroV, 400)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 100)
-
-            effect.createEffect{
-                model = "ebld",
-                unit = unit,
-                duration = 0.1,
-            }
+            buff.addBuff(hero, unit, 'curshout', 5)
         end
     end
 
-    casttime.cast(playerId, 0.3, false)
+    casttime.cast(playerId, 0.2, false)
 
     return true
 end
@@ -78,7 +68,7 @@ local getTotalCooldown = function(playerId)
 end
 
 local getIcon = function()
-    return "ReplaceableTextures\\CommandButtons\\BTNWhirlwind.blp"
+    return "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp"
 end
 
 return {
@@ -87,3 +77,4 @@ return {
     getSpellName = getSpellName,
     getIcon = getIcon,
 }
+
