@@ -1,6 +1,7 @@
 local Vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
+local backpack = require('src/items/backpack.lua')
 
 local boss
 
@@ -128,6 +129,10 @@ end
 onFightEnded = function()
     if GetUnitState(boss, UNIT_STATE_LIFE) <= 0 then
         print("You killed turtle.")
+        -- TODO implement a loot system
+        for i=0,bj_MAX_PLAYERS,1 do
+            backpack.addItemIdToBackpack(i, 1)
+        end
         cleanupFight()
         return
     end

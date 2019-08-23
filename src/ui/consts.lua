@@ -7,4 +7,6 @@ return {
     BAR_WIDTH = 0.20,
     BAR_HEIGHT = 0.01,
     BUFF_ICON_SIZE = 0.02,
+    BACKPACK_ITEM_SIZE = 0.02,
+    BACKPACK_SIZE = 0.12,
 }
