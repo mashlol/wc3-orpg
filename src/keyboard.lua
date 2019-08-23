@@ -1,5 +1,6 @@
 local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
+local Backpack = require("src/ui/backpack.lua")
 
 -- TODO let people customize keybindings
 local KEY_MAPPING = {
@@ -16,10 +17,35 @@ local KEY_MAPPING = {
     [OSKEY_V] = 12,
 }
 
+local SUPPORTED_KEYS = {
+    OSKEY_Q,
+    OSKEY_W,
+    OSKEY_E,
+    OSKEY_R,
+    OSKEY_A,
+    OSKEY_D,
+    OSKEY_F,
+    OSKEY_Z,
+    OSKEY_X,
+    OSKEY_C,
+    OSKEY_V,
+    OSKEY_B,
+}
+
 local keyPressed = function()
-    spell.castSpell(
-        GetPlayerId(GetTriggerPlayer()),
-        KEY_MAPPING[BlzGetTriggerPlayerKey()])
+    local pressedKey = BlzGetTriggerPlayerKey()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    if KEY_MAPPING[pressedKey] then
+        spell.castSpell(
+            playerId,
+            KEY_MAPPING[pressedKey])
+        return
+    end
+
+    -- TODO figure out key mappings
+    if pressedKey == OSKEY_B then
+        Backpack.toggle(playerId)
+    end
 end
 
 local spaceDown = function()
@@ -40,7 +66,7 @@ local init = function()
 
     -- TODO make for all players
     for i=0,bj_MAX_PLAYER_SLOTS-1,1 do
-        for key, idx in pairs(KEY_MAPPING) do
+        for idx, key in pairs(SUPPORTED_KEYS) do
             BlzTriggerRegisterPlayerKeyEvent(trigger, Player(i), key, 0, true)
         end
     end
