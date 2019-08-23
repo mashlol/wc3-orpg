@@ -58,8 +58,8 @@ function Backpack:init()
             FRAMEPOINT_TOPLEFT,
             backpackBackground,
             FRAMEPOINT_TOPLEFT,
-            (i % 6) * consts.BACKPACK_ITEM_SIZE,
-            -math.floor(i / 6) * consts.BACKPACK_ITEM_SIZE)
+            (i % 6) * (consts.BACKPACK_ITEM_SIZE + 0.001),
+            -math.floor(i / 6) * (consts.BACKPACK_ITEM_SIZE + 0.001))
 
         local itemFrame = BlzCreateFrameByType(
             "BACKDROP",
