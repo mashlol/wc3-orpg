@@ -11,7 +11,7 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 1
+local COOLDOWN_S = 60
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -64,7 +64,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 100)
+                damage.dealDamage(hero, collidedUnit, 400)
 
                 buff.addBuff(hero, collidedUnit, 'stun', 2)
 
@@ -79,7 +79,7 @@ local cast = function(playerId)
 
                 effect.createEffect{
                     unit = collidedUnit,
-                    model = "etst",
+                    model = "eshi",
                     duration = 1,
                 }
             end
@@ -88,7 +88,7 @@ local cast = function(playerId)
         onDestroy = function()
             effect.createEffect{
                 unit = hero,
-                model = "etst",
+                model = "eshi",
                 duration = 1,
             }
         end,
