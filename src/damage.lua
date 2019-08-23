@@ -1,4 +1,5 @@
 local buff = require('src/buff.lua')
+local threat = require('src/threat.lua')
 
 function createCombatText(text, target, green)
     local targetSize = BlzGetUnitCollisionSize(target)
@@ -46,6 +47,7 @@ function onDamageTaken()
     local amount = GetEventDamage() * buff.getDamageModifier(source, target)
     BlzSetEventDamage(amount)
     createCombatText(amount, target, false)
+    threat.addThreat(source, target, amount)
 end
 
 function init()
