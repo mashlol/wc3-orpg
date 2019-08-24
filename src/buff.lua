@@ -40,7 +40,7 @@ local BUFF_INFO = {
             model = "Abilities\\Spells\\Human\\Feedback\\SpellBreakerAttack.mdl",
             attach = "chest",
         },
-        icon = "ReplaceableTextures\\CommandButtons\\BTNDefendStop.blp",
+        icon = "ReplaceableTextures\\CommandButtons\\BTNDefend.blp",
     },
     armorpot = {
         effects = {

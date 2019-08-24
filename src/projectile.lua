@@ -11,11 +11,15 @@ end
 
 local destroyProjectile = function(projectile)
     if projectile.options.shouldRemove then
-        KillUnit(projectile.unit)
+        if projectile.options.removeInsteadOfKill then
+            RemoveUnit(projectile.unit)
+        else
+            KillUnit(projectile.unit)
+        end
     end
     projectile.toRemove = true
     if projectile.options.onDestroy then
-        projectile.options.onDestroy()
+        projectile.options.onDestroy(projectile.unit)
     end
 end
 
