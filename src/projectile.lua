@@ -89,6 +89,10 @@ local clearProjectiles = function()
 
             SetUnitX(projectile.unit, deltaV.x)
             SetUnitY(projectile.unit, deltaV.y)
+            local facingRad = Atan2(
+                goalV.y - projectile.options.fromV.y,
+                goalV.x - projectile.options.fromV.x)
+            SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
 
             if projectile.options.onMove then
                 projectile.options.onMove(deltaV.x, deltaV.y)
