@@ -6,7 +6,6 @@
 -- threatLevels = {
 --     unitId = {
 --         unit = unit,
---         currentTarget = nil,
 --         threats = {
 --             unitId = {
 --                 unit = unit,
@@ -21,11 +20,36 @@
 -- }
 local threatLevels = {}
 
+-- Iterates through the targets & prunes dead units or units which are too far
+-- away
+function pruneThreatLevels()
+    local newThreatLevels = {}
+
+    for targetUnitId,threatInfo in pairs(threatLevels) do
+        local newThreats = {}
+        local hasAnyThreats = false
+        if GetUnitState(threatInfo.unit, UNIT_STATE_LIFE) > 0 then
+            for sourceUnitId,sourceThreatInfo in pairs(threatInfo.threats) do
+                if GetUnitState(sourceThreatInfo.unit, UNIT_STATE_LIFE) > 0 then
+                    hasAnyThreats = true
+                    newThreats[sourceUnitId] = sourceThreatInfo
+                end
+            end
+            if hasAnyThreats then
+                threatInfo.threats = newThreats
+                newThreatLevels[targetUnitId] = threatInfo
+            end
+        end
+    end
+
+    threatLevels = newThreatLevels
+end
+
 -- On tick, we can go through a each units threat on each unit, and make them
 -- attack whoever appropriatly (assuming they are NPC controlled)
--- TODO For non-instance units, reset threat if a certain range is exceeded
--- TODO Clear all threat for dead units
 function onTick()
+    pruneThreatLevels()
+
     for targetUnitId,threatInfo in pairs(threatLevels) do
         local newTarget
         local highestThreat = 0
@@ -40,7 +64,7 @@ function onTick()
         if newTarget ~= nil then
             -- Attack new target
             IssueTargetOrder(targetUnit, "attack", newTarget)
-            -- threatInfo.currentTarget = newTarget
+            threatInfo.currentTarget = newTarget
         end
     end
 end
