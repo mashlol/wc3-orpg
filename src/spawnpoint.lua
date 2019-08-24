@@ -17,6 +17,10 @@ function storeUnit()
         return
     end
 
+    if GetOwningPlayer(unit) ~= Player(PLAYER_NEUTRAL_AGGRESSIVE) then
+        return
+    end
+
     local unitId = #spawnPoints+1
     SetUnitUserData(unit, unitId)
     spawnPoints[unitId] = Vector:new{x = GetUnitX(unit), y = GetUnitY(unit)}
