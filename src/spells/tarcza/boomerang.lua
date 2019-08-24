@@ -72,7 +72,10 @@ local cast = function(playerId)
             projectile.createProjectile{
                 playerId = playerId,
                 model = "etst",
-                fromV = Vector:new{x = GetUnitX(projectileUnit), y = GetUnitY(projectileUnit)},
+                fromV = Vector:new{
+                    x = GetUnitX(projectileUnit),
+                    y = GetUnitY(projectileUnit)
+                },
                 destUnit = hero,
                 speed = 1250,
                 removeInsteadOfKill = true,
