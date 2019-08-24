@@ -56,6 +56,15 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
+        model = "eshc",
+        fromV = heroV,
+        toV = mouseV,
+        speed = 1250,
+        length = 800,
+    }
+
+    projectile.createProjectile{
+        playerId = playerId,
         projectile = hero,
         fromV = heroV,
         toV = mouseV,
