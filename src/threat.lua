@@ -1,5 +1,8 @@
 -- THREAT system
 -- Keep track of every heroes "threat" level on every other unit
+local Vector = require('src/vector.lua')
+local spawnpoint = require('src/spawnpoint.lua')
+local hero = require('src/hero.lua')
 
 -- e.g.
 -- threatLevels = {
@@ -28,25 +31,56 @@ function pruneThreatLevels()
         local newThreats = {}
         local hasAnyThreats = false
         if GetUnitState(threatInfo.unit, UNIT_STATE_LIFE) > 0 then
+            local targetSpawnPos = spawnpoint.getSpawnPoint(threatInfo.unit)
             for sourceUnitId,sourceThreatInfo in pairs(threatInfo.threats) do
-                if GetUnitState(sourceThreatInfo.unit, UNIT_STATE_LIFE) > 0 then
+                local unitIsAlive = GetUnitState(sourceThreatInfo.unit, UNIT_STATE_LIFE) > 0
+                local sourcePos = Vector:new{
+                    x = GetUnitX(sourceThreatInfo.unit),
+                    y = GetUnitY(sourceThreatInfo.unit)}
+                local dist = sourcePos
+                    :subtract(targetSpawnPos)
+                    :magnitude()
+                print(dist)
+                local unitIsWithinRange = dist <= 1500
+
+                if unitIsAlive and unitIsWithinRange then
                     hasAnyThreats = true
                     newThreats[sourceUnitId] = sourceThreatInfo
                 end
             end
-            if hasAnyThreats then
-                threatInfo.threats = newThreats
-                newThreatLevels[targetUnitId] = threatInfo
-            end
+            threatInfo.threats = newThreats
+            newThreatLevels[targetUnitId] = threatInfo
         end
     end
 
     threatLevels = newThreatLevels
 end
 
+function manageAggroRanges()
+    -- Loop through all heroes
+    -- Get all units within x yards of hero
+    -- If its a creep, add some threat to it.
+    for i=0,bj_MAX_PLAYERS,1 do
+        local hero = hero.getHero(i)
+        if hero then
+            local loc = Location(GetUnitX(hero), GetUnitY(hero))
+            ForGroupBJ(GetUnitsInRangeOfLocAll(500, loc), function()
+                local unit = GetEnumUnit()
+                if
+                    GetOwningPlayer(unit) == Player(PLAYER_NEUTRAL_AGGRESSIVE)
+                then
+                    addThreat(hero, unit, 0.01)
+                end
+            end)
+            RemoveLocation(loc)
+        end
+    end
+end
+
 -- On tick, we can go through a each units threat on each unit, and make them
 -- attack whoever appropriatly (assuming they are NPC controlled)
 function onTick()
+    manageAggroRanges()
     pruneThreatLevels()
 
     for targetUnitId,threatInfo in pairs(threatLevels) do
@@ -63,7 +97,10 @@ function onTick()
         if newTarget ~= nil then
             -- Attack new target
             IssueTargetOrder(targetUnit, "attack", newTarget)
-            threatInfo.currentTarget = newTarget
+        else
+            local targetSpawnPos = spawnpoint.getSpawnPoint(targetUnit)
+            IssuePointOrder(
+                targetUnit, "move", targetSpawnPos.x, targetSpawnPos.y)
         end
     end
 end
