@@ -1,5 +1,4 @@
 -- THREAT system
-
 -- Keep track of every heroes "threat" level on every other unit
 
 -- e.g.
