@@ -118,9 +118,8 @@ local createProjectile = function(options)
             :multiply(options.length)
             :add(options.fromV)
         goalV = lengthNormalizedV
+        options.toV = goalV
     end
-
-    options.toV = goalV
 
     if options.projectile == nil then
         options.projectile = CreateUnit(
@@ -128,7 +127,7 @@ local createProjectile = function(options)
             FourCC(options.model),
             options.fromV.x,
             options.fromV.y,
-            bj_RADTODEG * Atan2(options.toV.y - options.fromV.y, options.toV.x - options.fromV.x))
+            bj_RADTODEG * Atan2(goalV.y - options.fromV.y, goalV.x - options.fromV.x))
         options.shouldRemove = true
     else
         options.shouldRemove = false
