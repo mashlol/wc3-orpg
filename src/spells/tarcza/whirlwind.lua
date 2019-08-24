@@ -8,6 +8,7 @@ local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local threat = require('src/threat.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -54,6 +55,7 @@ local cast = function(playerId)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
             damage.dealDamage(hero, unit, 100)
+            threat.addThreat(hero, unit, 400)
 
             effect.createEffect{
                 model = "ebld",
