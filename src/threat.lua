@@ -40,7 +40,6 @@ function pruneThreatLevels()
                 local dist = sourcePos
                     :subtract(targetSpawnPos)
                     :magnitude()
-                print(dist)
                 local unitIsWithinRange = dist <= 1500
 
                 if unitIsAlive and unitIsWithinRange then
