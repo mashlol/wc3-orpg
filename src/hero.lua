@@ -70,6 +70,7 @@ local ALL_HERO_INFO = {
             [4] = 'shieldcharge',
             [5] = 'attack',
             [6] = 'stop',
+            [7] = 'stalwartshell',
         },
     },
 }

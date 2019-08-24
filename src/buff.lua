@@ -29,6 +29,19 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
     },
+    stalwartshell = {
+        effects = {
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\Feedback\\SpellBreakerAttack.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNDefendStop.blp",
+    },
     armorpot = {
         effects = {
             {
