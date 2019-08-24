@@ -56,10 +56,10 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "etst",
+        model = "eboo",
         fromV = heroV,
         toV = mouseV,
-        speed = 1250,
+        speed = 800,
         length = 800,
         removeInsteadOfKill = true,
         onCollide = function(collidedUnit)
@@ -71,13 +71,13 @@ local cast = function(playerId)
         onDestroy = function(projectileUnit)
             projectile.createProjectile{
                 playerId = playerId,
-                model = "etst",
+                model = "eboo",
                 fromV = Vector:new{
                     x = GetUnitX(projectileUnit),
                     y = GetUnitY(projectileUnit)
                 },
                 destUnit = hero,
-                speed = 1250,
+                speed = 800,
                 removeInsteadOfKill = true,
                 onCollide = function(collidedUnit)
                     if IsUnitEnemy(collidedUnit, Player(playerId)) then
