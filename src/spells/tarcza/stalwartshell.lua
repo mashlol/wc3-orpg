@@ -37,6 +37,7 @@ local cast = function(playerId)
         y = mouse.getMouseY(playerId)
     }
 
+    IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 10, 1.5)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
@@ -57,7 +58,7 @@ local getTotalCooldown = function(playerId)
 end
 
 local getIcon = function()
-    return "ReplaceableTextures\\CommandButtons\\BTNDefendStop.blp"
+    return "ReplaceableTextures\\CommandButtons\\BTNDefend.blp"
 end
 
 return {
