@@ -74,6 +74,7 @@ local ALL_HERO_INFO = {
             [7] = 'stalwartshell',
             [8] = 'curshout',
             [9] = 'bulwark',
+            [11] = 'challenge',
         },
     },
 }
