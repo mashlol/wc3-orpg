@@ -42,14 +42,15 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
+    casttime.cast(playerId, 0.3, false)
+
+    animations.queueAnimation(hero, 3, 1.5)
     effect.createEffect{
         model = "ebul",
         unit = hero,
         duration = 8,
         timeScale = 0.05,
     }
-
-    casttime.cast(playerId, 0.5, false)
 
     return true
 end
