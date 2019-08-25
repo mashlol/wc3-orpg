@@ -53,8 +53,8 @@ local cast = function(playerId)
         model = "epht",
         fromV = heroV,
         toV = mouseV,
-        speed = 600,
-        length = 400,
+        speed = 800,
+        length = 600,
         radius = 100,
     }
 
@@ -64,8 +64,8 @@ local cast = function(playerId)
         model = "epho",
         fromV = heroV,
         toV = mouseV,
-        speed = 600,
-        length = 400,
+        speed = 800,
+        length = 600,
         radius = 100,
         onMove = function(x, y)
             if tickNum % 20 == 0 then

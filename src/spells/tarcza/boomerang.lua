@@ -60,7 +60,7 @@ local cast = function(playerId)
         fromV = heroV,
         toV = mouseV,
         speed = 800,
-        length = 800,
+        length = 650,
         removeInsteadOfKill = true,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
@@ -77,7 +77,7 @@ local cast = function(playerId)
                     y = GetUnitY(projectileUnit)
                 },
                 destUnit = hero,
-                speed = 800,
+                speed = 650,
                 removeInsteadOfKill = true,
                 onCollide = function(collidedUnit)
                     if IsUnitEnemy(collidedUnit, Player(playerId)) then

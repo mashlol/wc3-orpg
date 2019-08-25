@@ -51,5 +51,11 @@ echo 'Adding war3map.lua to mpq archive'
 
 echo 'Launching map in wc3'
 
-cp bin/built.w3x /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_1.w3x
-/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe -loadfile /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_1.w3x
+echo 'Deleting old versions'
+
+rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
+
+BUILD_NUM=$RANDOM
+echo "Map: built_$BUILD_NUM.w3x"
+cp bin/built.w3x /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe -loadfile /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
