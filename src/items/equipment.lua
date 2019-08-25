@@ -17,6 +17,10 @@ local SLOT = {
 -- }
 local equipments = {}
 
+-- activeItemPositions = {
+--     [playerId] = nil or 1 (item index, not item id)
+-- }
+local activeItemPositions = {}
 
 function equipItem(playerId, slot, itemId)
     equipments[playerId][slot] = itemId
@@ -28,6 +32,18 @@ end
 
 function getItemInSlot(playerId, slot)
     return equipments[playerId][slot]
+end
+
+local activateItem = function(playerId, slot)
+    if getItemInSlot(playerId, slot) ~= nil then
+        activeItemPositions[playerId] = slot
+    else
+        activeItemPositions[playerId] = nil
+    end
+end
+
+local getActiveItem = function(playerId)
+    return activeItemPositions[playerId]
 end
 
 function init()
@@ -42,4 +58,6 @@ return {
     equipItem = equipItem,
     unequipItem = unequipItem,
     getItemInSlot = getItemInSlot,
+    activateItem = activateItem,
+    getActiveItem = getActiveItem,
 }
