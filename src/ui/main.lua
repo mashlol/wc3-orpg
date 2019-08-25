@@ -9,6 +9,7 @@ local CastBar = require('src/ui/castbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
 local Backpack = require('src/ui/backpack.lua')
+local Equipment = require('src/ui/equipment.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
@@ -38,6 +39,8 @@ for i=0,9,1 do
         width = consts.BAR_WIDTH / 2,
     })
 end
+
+table.insert(UI_MODULES, Equipment:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)

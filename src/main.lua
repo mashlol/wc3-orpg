@@ -16,6 +16,7 @@ local spawnpoint = require('src/spawnpoint.lua')
 local buffmanager = require('src/buffs/buffmanager.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 local backpack = require('src/items/backpack.lua')
+local equipment = require('src/items/equipment.lua')
 
 -- TODO create a boss manager
 local turtle = require('src/bosses/turtle.lua')
@@ -41,6 +42,7 @@ local mainInit = function()
     buffmanager.init()
     cooldowns.init()
     backpack.init()
+    equipment.init()
 
     turtle.init()
 

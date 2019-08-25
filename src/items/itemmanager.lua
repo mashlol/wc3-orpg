@@ -1,7 +1,7 @@
 local ITEMS = {
-    {
+    [1] = {
         name = 'The Sword of a Thousand Truths',
-        icon = "ReplaceableTextures\\CommandButtons\\BTNClawsOfAttack.tga",
+        icon = "ReplaceableTextures\\CommandButtons\\BTNDaggerOfEscape.tga",
         stats = {
             {
                 type = 'rawHp',
