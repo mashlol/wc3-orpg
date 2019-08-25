@@ -32,24 +32,21 @@ function pruneThreatLevels()
         local hasAnyThreats = false
         if GetUnitState(threatInfo.unit, UNIT_STATE_LIFE) > 0 then
             local targetSpawnPos = spawnpoint.getSpawnPoint(threatInfo.unit)
-            local unitIsRespawnable =
-                    BlzGetUnitBooleanField(threatInfo.unit, UNIT_BF_RAISABLE)
             for sourceUnitId,sourceThreatInfo in pairs(threatInfo.threats) do
                 local unitIsAlive =
                     GetUnitState(sourceThreatInfo.unit, UNIT_STATE_LIFE) > 0
                 local sourcePos = Vector:new{
                     x = GetUnitX(sourceThreatInfo.unit),
                     y = GetUnitY(sourceThreatInfo.unit)}
-                local dist = sourcePos
-                    :subtract(targetSpawnPos)
-                    :magnitude()
-                local unitIsWithinRange = dist <= 1500
+                local unitIsWithinRange = true
+                if targetSpawnPos then
+                    local dist = sourcePos
+                        :subtract(targetSpawnPos)
+                        :magnitude()
+                    unitIsWithinRange = dist <= 1500
+                end
 
-                if
-                    unitIsAlive and
-                    (unitIsWithinRange or
-                        not unitIsRespawnable)
-                then
+                if unitIsAlive and unitIsWithinRange then
                     hasAnyThreats = true
                     newThreats[sourceUnitId] = sourceThreatInfo
                 end
@@ -58,7 +55,6 @@ function pruneThreatLevels()
             newThreatLevels[targetUnitId] = threatInfo
         end
     end
-
     threatLevels = newThreatLevels
 end
 
@@ -88,7 +84,6 @@ end
 function onTick()
     manageAggroRanges()
     pruneThreatLevels()
-
     for targetUnitId,threatInfo in pairs(threatLevels) do
         local newTarget
         local highestThreat = 0

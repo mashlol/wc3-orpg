@@ -1,5 +1,6 @@
 local Vector = require('src/vector.lua')
 local hero = require('src/hero.lua')
+local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
 local backpack = require('src/items/backpack.lua')
 
@@ -31,12 +32,13 @@ local TURTLE_AREA_BOUNDS = {
 
 local involvedHeroes = {}
 
-local getNumInvolvedHeroes = function()
-    local i = 0
+local getRandomInvolvedHero = function()
     for idx, hero in pairs(involvedHeroes) do
-        i = i + 1
+        if hero ~= nil then
+            return hero
+        end
     end
-    return i
+    return nil
 end
 
 local isAllInvolvedHeroesDead = function()
@@ -93,11 +95,10 @@ local spawnAdds = function()
             FourCC("hmbs"),
             spawnLocation.x,
             spawnLocation.y,
-            135.939)
-        IssueTargetOrder(
-            add,
-            "attack",
-            involvedHeroes[GetRandomInt(1, getNumInvolvedHeroes())])
+            GetRandomReal(0, 180))
+
+        local targetHero = getRandomInvolvedHero()
+        threat.addThreat(targetHero, add, 100)
     end
 end
 
