@@ -52,7 +52,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 10, 1)
+    animations.queueAnimation(hero, 4, 1)
     SetUnitFacingTimed(
         hero,
         bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),

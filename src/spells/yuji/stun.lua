@@ -46,7 +46,7 @@ local cast = function(playerId)
 
     local dist = Vector:new(heroV):subtract(targetV)
     local mag = dist:magnitude()
-    if mag > 150 then
+    if mag > 250 then
         log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false
     end
