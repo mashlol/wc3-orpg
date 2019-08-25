@@ -1,5 +1,7 @@
+local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local backpack = require('src/items/backpack.lua')
+local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
 -- backpackToggles = {
@@ -74,10 +76,26 @@ function Backpack:init()
             trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
-            local activeItem = backpack.getActiveItem(playerId)
-            if activeItem ~= nil then
-                backpack.swapPositions(playerId, activeItem, i+1)
+            local activeBagItem = backpack.getActiveItem(playerId)
+            local activeEquipmentItem = equipment.getActiveItem(playerId)
+            if activeEquipmentItem ~= nil then
+                if backpack.getItemIdAtPosition(i+1) ~= nil then
+                    log.log(
+                        playerId,
+                        "You already have an item in that bag position.",
+                        log.TYPE.ERROR)
+                else
+                    local activeItemId = equipment.getItemInSlot(
+                        playerId, activeEquipmentItem)
+                    equipment.unequipItem(playerId, activeEquipmentItem)
+                    backpack.addItemIdToBackpackPosition(playerId, i+1, activeItemId)
+                end
                 backpack.activateItem(playerId, nil)
+                equipment.activateItem(playerId, nil)
+            elseif activeBagItem ~= nil then
+                backpack.swapPositions(playerId, activeBagItem, i+1)
+                backpack.activateItem(playerId, nil)
+                equipment.activateItem(playerId, nil)
             else
                 backpack.activateItem(playerId, i+1)
             end

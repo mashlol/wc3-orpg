@@ -67,6 +67,8 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
             backpack.activateItem(playerId, nil)
         else
             -- TODO activate equipment item if one exists
+            equipment.activateItem(playerId, slot)
+            backpack.activateItem(playerId, nil)
         end
 
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)

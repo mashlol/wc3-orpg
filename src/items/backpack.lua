@@ -20,6 +20,10 @@ function addItemIdToBackpack(playerId, itemId)
     table.insert(backpacks[playerId], itemId)
 end
 
+function addItemIdToBackpackPosition(playerId, position, itemId)
+    backpacks[playerId][position] = itemId
+end
+
 function removeItemFromBackpack(playerId, position)
     backpacks[playerId][position] = nil
 end
@@ -38,7 +42,7 @@ function swapPositions(playerId, position1, position2)
     backpacks[playerId][position2] = temp
 end
 
-function activateItem(playerId, position)
+local activateItem = function(playerId, position)
     if getItemIdAtPosition(playerId, position) ~= nil then
         activeItemPositions[playerId] = position
     else
@@ -46,7 +50,7 @@ function activateItem(playerId, position)
     end
 end
 
-function getActiveItem(playerId)
+local getActiveItem = function(playerId)
     return activeItemPositions[playerId]
 end
 
@@ -59,6 +63,7 @@ end
 return {
     init = init,
     addItemIdToBackpack = addItemIdToBackpack,
+    addItemIdToBackpackPosition = addItemIdToBackpackPosition,
     removeItemFromBackpack = removeItemFromBackpack,
     getItemIdsInBackpack = getItemIdsInBackpack,
     getItemIdAtPosition = getItemIdAtPosition,
