@@ -12,7 +12,10 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 10
+local COOLDOWN_S = 0.5
+local COOLDOWN_S_LONG = 10
+
+local storedData = {}
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -57,7 +60,21 @@ local cast = function(playerId)
         return false
     end
 
-    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
+    if storedData[playerId] == nil then
+        storedData[playerId] = {
+            attackCount = -1,
+        }
+    end
+
+    storedData[playerId].attackCount =
+        (storedData[playerId].attackCount + 1) % 2
+
+    cooldowns.startCooldown(
+        playerId,
+        getSpellId(),
+        storedData[playerId].attackCount == 1 and
+            COOLDOWN_S_LONG or
+            COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 12, 2)
