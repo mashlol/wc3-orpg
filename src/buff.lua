@@ -51,6 +51,27 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNDefend.blp",
     },
+    flag = {
+        effects = {
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0.9,
+            },
+            {
+                type = 'multiplyDamage',
+                amount = 1.1,
+            },
+            {
+                type = 'modifyMoveSpeed',
+                amount = 1.1,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\GeneralAuraTarget\\GeneralAuraTarget.mdl",
+            attach = "origin",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNHumanCaptureFlag.blp",
+    },
     armorpot = {
         effects = {
             {
