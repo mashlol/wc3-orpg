@@ -67,6 +67,7 @@ local ALL_HERO_INFO = {
         spells = {
             [1] = 'whirlwind',
             [2] = 'boomerang',
+            [3] = 'blitz',
             [4] = 'shieldcharge',
             [5] = 'attack',
             [6] = 'stop',

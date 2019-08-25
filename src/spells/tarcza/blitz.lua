@@ -6,12 +6,13 @@ local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
+local target = require('src/target.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 60
+local COOLDOWN_S = 10
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -21,11 +22,11 @@ local isStuck = function(unit)
 end
 
 local getSpellId = function()
-    return 'shieldcharge'
+    return 'blitz'
 end
 
 local getSpellName = function()
-    return 'Shield Charge'
+    return 'Blitz / Assist'
 end
 
 local cast = function(playerId)
@@ -35,14 +36,24 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
+    local target = target.getTarget(playerId)
     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
-    local mouseV = Vector:new{
-        x = mouse.getMouseX(playerId),
-        y = mouse.getMouseY(playerId)
-    }
+    local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
+
+    if target == nil then
+        log.log(playerId, "You have no target", log.TYPE.ERROR)
+        return false
+    end
 
     if isStuck(hero) then
         log.log(playerId, "You can't move right now", log.TYPE.ERROR)
+        return false
+    end
+
+    local dist = Vector:new(heroV):subtract(targetV)
+    local mag = dist:magnitude()
+    if mag > 800 then
+        log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false
     end
 
@@ -51,55 +62,42 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 12, 2)
 
-    local facingAngle = bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
+    local facingAngle = bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x)
     SetUnitFacing(hero, facingAngle)
 
-    projectile.createProjectile{
-        playerId = playerId,
-        model = "eshc",
-        fromV = heroV,
-        toV = mouseV,
-        speed = 1250,
-        length = 800,
-    }
+    if IsUnitAlly(target, Player(playerId)) then
+        projectile.createProjectile{
+            playerId = playerId,
+            model = "eshr",
+            fromV = heroV,
+            destUnit = target,
+            speed = 1010,
+        }
+    else
+        projectile.createProjectile{
+            playerId = playerId,
+            model = "eshe",
+            fromV = heroV,
+            destUnit = target,
+            speed = 1010,
+        }
+    end
 
     projectile.createProjectile{
         playerId = playerId,
         projectile = hero,
         fromV = heroV,
-        toV = mouseV,
-        speed = 1200,
-        length = 800,
-        radius = 100,
-        onCollide = function(collidedUnit)
-            if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 400)
-
-                buff.addBuff(hero, collidedUnit, 'stun', 2)
-
-                local rand = GetRandomInt(0, 1)
-                local dir = rand == 0 and 90 or -90
-
-                local normalV = Vector:fromAngle((facingAngle + dir) * bj_DEGTORAD)
-                    :normalize()
-                    :multiply(100)
-                    :add(Vector:new{x = GetUnitX(collidedUnit), y = GetUnitY(collidedUnit)})
-                SetUnitPosition(collidedUnit, normalV.x, normalV.y)
-
-                effect.createEffect{
-                    unit = collidedUnit,
-                    model = "eshi",
-                    duration = 1,
-                }
-            end
-            return false
-        end,
+        destUnit = target,
+        speed = 1000,
         onDestroy = function()
-            effect.createEffect{
-                unit = hero,
-                model = "eshi",
-                duration = 1,
-            }
+            -- TODO if target is ally, do buff, if enemy do damage
+            if IsUnitAlly(target, Player(playerId)) then
+                buff.addBuff(hero, target, 'assist', 2)
+            else
+                damage.dealDamage(hero, target, 40)
+                buff.addBuff(hero, target, 'stun', 2)
+            end
+            casttime.stopCast(playerId)
             animations.queueAnimation(hero, 3, 0.6)
         end,
     }
@@ -118,7 +116,7 @@ local getTotalCooldown = function(playerId)
 end
 
 local getIcon = function()
-    return "ReplaceableTextures\\CommandButtons\\BTNDeathPact.blp"
+    return "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp"
 end
 
 return {

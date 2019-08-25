@@ -34,6 +34,7 @@ local shieldcharge = require('src/spells/tarcza/shieldcharge.lua')
 local stalwartshell = require('src/spells/tarcza/stalwartshell.lua')
 local boomerang = require('src/spells/tarcza/boomerang.lua')
 local bulwark = require('src/spells/tarcza/bulwark.lua')
+local blitz = require('src/spells/tarcza/blitz.lua')
 
 -- Ivanov
 local rejuvpot = require('src/spells/ivanov/rejuvpot.lua')
@@ -87,6 +88,7 @@ local SPELL_MAP = {
     stalwartshell = stalwartshell,
     boomerang = boomerang,
     bulwark = bulwark,
+    blitz = blitz,
 
     -- Ivanov
     rejuvpot = rejuvpot,
