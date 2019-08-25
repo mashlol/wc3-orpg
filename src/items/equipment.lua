@@ -46,6 +46,10 @@ local getActiveItem = function(playerId)
     return activeItemPositions[playerId]
 end
 
+local getEquippedItems = function(playerId)
+    return equipments[playerId]
+end
+
 function init()
     for i=0,bj_MAX_PLAYERS,1 do
         equipments[i] = {}
@@ -60,4 +64,5 @@ return {
     getItemInSlot = getItemInSlot,
     activateItem = activateItem,
     getActiveItem = getActiveItem,
+    getEquippedItems = getEquippedItems,
 }

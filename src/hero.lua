@@ -17,6 +17,7 @@ local ALL_HERO_INFO = {
             [9] = 'stun',
             [10] = 'blind',
         },
+        baseHP = 600,
     },
     [2] = {
         name = 'Stormfist',
@@ -26,6 +27,7 @@ local ALL_HERO_INFO = {
             [5] = 'attack',
             [6] = 'stop',
         },
+        baseHP = 600,
     },
     [3] = {
         name = 'Ivanov',
@@ -43,6 +45,7 @@ local ALL_HERO_INFO = {
             [10] = 'dampenpot',
             [11] = 'pocketgoo',
         },
+        baseHP = 600,
     },
     [4] = {
         name = 'Azora',
@@ -61,6 +64,7 @@ local ALL_HERO_INFO = {
             [11] = 'fireshell',
             [12] = 'frostorb',
         },
+        baseHP = 400,
     },
     [5] = {
         name = 'Tarcza',
@@ -78,6 +82,7 @@ local ALL_HERO_INFO = {
             [10] = 'flag',
             [11] = 'challenge',
         },
+        baseHP = 1000,
     },
 }
 

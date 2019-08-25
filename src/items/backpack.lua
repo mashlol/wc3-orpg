@@ -1,5 +1,3 @@
-
-
 -- backpacks = {
 --     [playerId] = {
 --         [1] = [itemId1],
