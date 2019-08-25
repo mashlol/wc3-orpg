@@ -222,6 +222,19 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNBreathOfFrost.blp",
     },
+    blind = {
+        effects = {
+            {
+                type = 'stun',
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Other\\HowlOfTerror\\HowlTarget.mdl",
+            attach = "overhead",
+        },
+        removeOnDamage = true,
+        icon = "ReplaceableTextures\\CommandButtons\\BTNSentryWard.blp",
+    },
 }
 
 -- BuffInstances:
@@ -308,6 +321,15 @@ function removeBuff(target, buffName)
     buffInstances[unitId].buffs[buffName] = nil
 end
 
+function maybeRemoveBuffsOnDamage(source, target, amount)
+    local targetBuffs = getBuffs(target)
+    for buffName, buffInfo in pairs(targetBuffs) do
+        if BUFF_INFO[buffName].removeOnDamage then
+            removeBuff(target, buffName)
+        end
+    end
+end
+
 function hasBuff(unit, buffName)
     local unitId = GetHandleId(unit)
     return buffInstances[unitId] ~= nil and
@@ -390,4 +412,5 @@ return {
     getBuffInstances = getBuffInstances,
     getDamageModifier = getDamageModifier,
     getHealingModifier = getHealingModifier,
+    maybeRemoveBuffsOnDamage = maybeRemoveBuffsOnDamage,
 }

@@ -48,6 +48,7 @@ function onDamageTaken()
     BlzSetEventDamage(amount)
     createCombatText(amount, target, false)
     threat.addThreat(source, target, amount)
+    buff.maybeRemoveBuffsOnDamage(source, target, amount)
 end
 
 function init()

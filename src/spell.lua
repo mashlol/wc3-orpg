@@ -23,6 +23,7 @@ local slashult = require('src/spells/yuji/slashult.lua')
 local focus = require('src/spells/yuji/focus.lua')
 local jab = require('src/spells/yuji/jab.lua')
 local stun = require('src/spells/yuji/stun.lua')
+local blind = require('src/spells/yuji/blind.lua')
 
 -- Stormfist
 local punch = require('src/spells/stormfist/punch.lua')
@@ -79,6 +80,7 @@ local SPELL_MAP = {
     focus = focus,
     jab = jab,
     stun = stun,
+    blind = blind,
 
     -- Stormfist
     punch = punch,
