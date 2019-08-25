@@ -1,0 +1,78 @@
+// Compiles the final lua file
+
+const fs = require('fs');
+const path = require('path');
+const concat = require('concat');
+
+var walk = function(dir, done) {
+  var results = [];
+  fs.readdir(dir, function(err, list) {
+    if (err) return done(err);
+    var pending = list.length;
+    if (!pending) return done(null, results);
+    list.forEach(function(file) {
+      file = path.resolve(dir, file);
+      fs.stat(file, function(err, stat) {
+        if (stat && stat.isDirectory()) {
+          walk(file, function(err, res) {
+            results = results.concat(res);
+            if (!--pending) done(null, results);
+          });
+        } else {
+          if (path.extname(file) === '.lua') {
+            results.push(file);
+          }
+          if (!--pending) done(null, results);
+        }
+      });
+    });
+  });
+};
+
+const filesToConcat = [];
+walk('./src', (err, res) => {
+  const numFiles = res.length;
+  let numIterated = 0;
+  const writtenFiles = [];
+  const modules = {};
+  res.forEach(srcAbsPath => {
+    const relativeSrcPath = path.relative('.', srcAbsPath);
+    fs.readFile(srcAbsPath, {encoding: 'utf-8'}, (err, data) => {
+      if (err) throw err;
+
+      const funcRequireName = relativeSrcPath.replace(/[\\.]/g, '_');
+      data = "local " + funcRequireName + " = function()\n\n" + data + "\nend\n\n";
+
+      const buildPath = './bin/' + funcRequireName + '.lua';
+      fs.writeFile(buildPath, data, {encoding: 'utf-8', flag: 'w'}, (err) => {
+        if (err) throw err;
+
+        numIterated++;
+
+        writtenFiles.push(buildPath);
+        modules[relativeSrcPath] = funcRequireName;
+
+        if (numIterated == numFiles) {
+
+          // Concat the files into a single one
+          concat(['header.lua'].concat(writtenFiles), './bin/war3map_compiled.lua').then(() => {
+            let requireMap = "\n";
+            for (let k in modules) {
+              requireMap += "requireMap['" + k.replace(/\\/g, '/') + "'] = " + modules[k] + "\n";
+              // console.log();
+            }
+
+            requireMap += "\n\n";
+
+            requireMap += "require('src/main.lua')\n\n";
+
+            fs.appendFile('./bin/war3map_compiled.lua', requireMap, {encoding: 'utf-8'}, (err) => {
+              if (err) throw err;
+            });
+          });
+        }
+      });
+    });
+  });
+});
+
