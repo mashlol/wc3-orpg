@@ -10,33 +10,7 @@ echo "Extracting war3map.lua"
 
 echo "Generating bin/war3map_compiled.lua"
 
-cat header.lua > bin/war3map_compiled.lua
-
-for FILENAME in src/**/*.lua; do
-	if [ $FILENAME != 'src/main.lua' ]
-	then
-        echo "Compiling $FILENAME"
-		printf "\n$FILENAME = function()\n" | sed -e 's/\//_/g' -e 's/\./_/g' >> bin/war3map_compiled.lua
-	    cat $FILENAME >> bin/war3map_compiled.lua
-	    printf "\nend\n" >> bin/war3map_compiled.lua
-    fi
-done
-
-echo 'Creating require map'
-
-for FILENAME in src/**/*.lua; do
-   printf "requireMap[\"$FILENAME\"] = $(echo $FILENAME | sed -e 's/\//_/g' -e 's/\./_/g')\n" >> bin/war3map_compiled.lua
-done
-
-echo 'Dumping main.lua'
-
-printf "\n\n" >> bin/war3map_compiled.lua
-
-cat src/main.lua >> bin/war3map_compiled.lua
-
-printf "\n\n" >> bin/war3map_compiled.lua
-
-echo 'Compiling final lua file'
+node build
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 
@@ -49,11 +23,15 @@ echo 'Adding war3map.lua to mpq archive'
 
 ./MPQEditor.exe -console mopaq
 
-echo 'Launching map in wc3'
-
 echo 'Deleting old versions'
 
 rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
+
+echo 'Deleting build artifacts'
+
+rm ./bin/*.lua
+
+echo 'Launching map in wc3'
 
 BUILD_NUM=$RANDOM
 echo "Map: built_$BUILD_NUM.w3x"
