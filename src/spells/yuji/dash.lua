@@ -80,7 +80,7 @@ local cast = function(playerId)
         length = 500,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 200)
+                damage.dealDamage(hero, collidedUnit, 35)
             end
             return false
         end
