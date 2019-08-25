@@ -47,6 +47,20 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         0)
     BlzFrameSetAllPoints(itemFrame, itemOrigin)
 
+    local itemHighlight = BlzCreateFrameByType(
+        "BACKDROP",
+        "itemHighlight",
+        itemOrigin,
+        "",
+        0)
+    BlzFrameSetAllPoints(itemHighlight, itemOrigin)
+    BlzFrameSetTexture(
+        itemHighlight,
+        "Replaceabletextures\\Teamcolor\\Teamcolor21.blp",
+        0,
+        true)
+    BlzFrameSetAlpha(itemHighlight, 100)
+
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
         trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
@@ -75,7 +89,10 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
     end)
 
-    return itemFrame
+    return {
+        itemFrame = itemFrame,
+        itemHighlight = itemHighlight,
+    }
 end
 
 function Equipment:init()
@@ -142,22 +159,25 @@ function Equipment:update(playerId)
 
     BlzFrameSetVisible(frames.origin, equipmentToggles[playerId] == true)
 
+    local activeItem = equipment.getActiveItem(playerId)
     for i=1,9,1 do
         local itemFrame = frames.itemFrames[i]
         local itemId = equipment.getItemInSlot(playerId, i)
         if itemId ~= nil then
             BlzFrameSetTexture(
-                itemFrame,
+                itemFrame.itemFrame,
                 itemmanager.getItemInfo(itemId).icon,
                 0,
                 true)
         else
             BlzFrameSetTexture(
-                itemFrame,
+                itemFrame.itemFrame,
                 "IconBorder.tga",
                 0,
                 true)
         end
+
+        BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end
 end
 
