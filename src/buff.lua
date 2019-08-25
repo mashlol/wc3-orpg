@@ -29,6 +29,15 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
     },
+    assist = {
+        effects = {
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0.6,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNCleavingAttack.blp",
+    },
     stalwartshell = {
         effects = {
             {
