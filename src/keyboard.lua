@@ -1,6 +1,7 @@
 local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
 local Backpack = require("src/ui/backpack.lua")
+local Equipment = require("src/ui/equipment.lua")
 
 -- TODO let people customize keybindings
 local KEY_MAPPING = {
@@ -30,6 +31,7 @@ local SUPPORTED_KEYS = {
     OSKEY_C,
     OSKEY_V,
     OSKEY_B,
+    OSKEY_O,
 }
 
 local keyPressed = function()
@@ -45,6 +47,7 @@ local keyPressed = function()
     -- TODO figure out key mappings
     if pressedKey == OSKEY_B then
         Backpack.toggle(playerId)
+        Equipment.toggle(playerId)
     end
 end
 
