@@ -1,3 +1,4 @@
+local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
@@ -21,7 +22,7 @@ function Equipment:new(o)
     return o
 end
 
-local createItemFrame = function(originFrame, xPos, yPos)
+local createItemFrame = function(originFrame, xPos, yPos, slot)
     local itemOrigin = BlzCreateFrameByType(
         "GLUETEXTBUTTON",
         "itemOrigin",
@@ -46,7 +47,6 @@ local createItemFrame = function(originFrame, xPos, yPos)
         0)
     BlzFrameSetAllPoints(itemFrame, itemOrigin)
 
-
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
         trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
@@ -54,10 +54,19 @@ local createItemFrame = function(originFrame, xPos, yPos)
         local playerId = GetPlayerId(GetTriggerPlayer())
         local activeItem = backpack.getActiveItem(playerId)
         if activeItem ~= nil then
-        --     backpack.swapPositions(playerId, activeItem, i+1)
+            local activeItemId = backpack.getItemIdAtPosition(playerId, activeItem)
+            if equipment.getItemInSlot(slot) ~= nil then
+                log.log(playerId, "You already have an item in that slot.", log.TYPE.ERROR)
+            elseif itemmanager.getItemInfo(activeItemId).slot ~= slot then
+                log.log(playerId, "That doesn't go in that slot.", log.TYPE.ERROR)
+            else
+                backpack.removeItemFromBackpack(playerId, activeItem)
+                equipment.equipItem(playerId, slot, activeItemId)
+            end
+
             backpack.activateItem(playerId, nil)
         else
-            -- backpack.activateItem(playerId, i+1)
+            -- TODO activate equipment item if one exists
         end
 
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
@@ -104,7 +113,8 @@ function Equipment:init()
         local itemFrame = createItemFrame(
             equipmentBackground,
             math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 3),
-            -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE))
+            -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE),
+            i+1)
 
         table.insert(itemFrames, itemFrame)
     end
@@ -112,7 +122,8 @@ function Equipment:init()
     local itemFrame = createItemFrame(
         equipmentBackground,
         0.06,
-        consts.EQUIPMENT_ITEM_SIZE * -8)
+        consts.EQUIPMENT_ITEM_SIZE * -8,
+        9)
 
     table.insert(itemFrames, itemFrame)
 

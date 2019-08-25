@@ -2,13 +2,15 @@
 
 -- backpacks = {
 --     [playerId] = {
---         [1] = [itemId1], [2] = [itemId2], [4] = [itemId4]
+--         [1] = [itemId1],
+--         [2] = [itemId2],
+--         [4] = [itemId4],
 --     }
 -- }
 local backpacks = {}
 
 -- activeItemPositions = {
---     [playerId] = nil or 1
+--     [playerId] = nil or 1 (item index, not item id)
 -- }
 local activeItemPositions = {}
 
@@ -16,6 +18,10 @@ function addItemIdToBackpack(playerId, itemId)
     -- TODO check if the backpack is full
     -- TODO possibly insert not at the end
     table.insert(backpacks[playerId], itemId)
+end
+
+function removeItemFromBackpack(playerId, position)
+    backpacks[playerId][position] = nil
 end
 
 function getItemIdsInBackpack(playerId)
@@ -53,6 +59,7 @@ end
 return {
     init = init,
     addItemIdToBackpack = addItemIdToBackpack,
+    removeItemFromBackpack = removeItemFromBackpack,
     getItemIdsInBackpack = getItemIdsInBackpack,
     getItemIdAtPosition = getItemIdAtPosition,
     swapPositions = swapPositions,

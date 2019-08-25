@@ -1,3 +1,5 @@
+local equipment = require('src/items/equipment.lua')
+
 local ITEMS = {
     [1] = {
         name = 'The Sword of a Thousand Truths',
@@ -8,6 +10,7 @@ local ITEMS = {
                 amount = 200,
             },
         },
+        slot = equipment.SLOT.WEAPON,
     },
 }
 
