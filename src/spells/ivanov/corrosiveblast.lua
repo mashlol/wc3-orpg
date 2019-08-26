@@ -21,7 +21,19 @@ local getSpellId = function()
 end
 
 local getSpellName = function()
-    return 'Corrosive Blast'
+    return 'Corrosive Pull/Blast'
+end
+
+local getSpellTooltip = function(playerId)
+    return 'On first activation, Ivanov will pull all stacks of corrosive decay from an allied unit and hold them. The next activation will consume the stacks and damage an enemy unit for 40 per stack.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.5
 end
 
 local castCorrosivePull = function(playerId)
@@ -163,4 +175,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

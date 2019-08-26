@@ -21,6 +21,18 @@ local getSpellName = function()
     return 'Accelerator Mist'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Ivanov throws down a cannister of accelerator mist, rolling in front of him. Any friendly target inside the mist gets 200% increased movement speed.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.15
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -91,21 +103,17 @@ function applySpeedBuff(playerId, locations, hero)
     end
 end
 
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
-end
-
 local getIcon = function()
     return "ReplaceableTextures\\CommandButtons\\BTNAcidBomb.blp"
 end
+
 
 return {
     cast = cast,
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

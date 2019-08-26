@@ -22,6 +22,18 @@ local getSpellName = function()
     return 'Rejuvination Potion'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Ivanov\'s main heal, this heals the target for 30 instantly and applies a heal over time effect that will heal them for 30 per second for 10 seconds. Stacks 3 times.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.5
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -98,4 +110,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
