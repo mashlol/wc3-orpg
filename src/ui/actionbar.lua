@@ -16,6 +16,56 @@ function ActionBar:new(o)
     return o
 end
 
+local makeTooltipFrame = function(actionItem)
+    local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+
+    local tooltipOrigin = BlzCreateFrameByType(
+        "FRAME",
+        "tooltipOrigin",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(
+        tooltipOrigin,
+        0.24,
+        0.12)
+    BlzFrameSetPoint(
+        tooltipOrigin,
+        FRAMEPOINT_CENTER,
+        actionItem,
+        FRAMEPOINT_CENTER,
+        0,
+        0.08)
+
+    local tooltipBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "tooltipBackdrop",
+        tooltipOrigin,
+        "",
+        0)
+    BlzFrameSetAllPoints(tooltipBackdrop, tooltipOrigin)
+    BlzFrameSetTexture(
+        tooltipBackdrop,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+    BlzFrameSetAlpha(tooltipBackdrop, 230)
+
+    local tooltipText = BlzCreateFrameByType(
+        "TEXT",
+        "tooltipText",
+        tooltipOrigin,
+        "",
+        0)
+    BlzFrameSetAllPoints(tooltipText, tooltipOrigin)
+    -- BlzFrameSetText(tooltipText, "|cff2222ddFireball|r|n|nCast fireball.")
+
+    return {
+        origin = tooltipOrigin,
+        text = tooltipText,
+    }
+end
+
 function ActionBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
     local actionBar = BlzCreateFrameByType(
@@ -116,7 +166,7 @@ function ActionBar:init()
             0.002,
             -0.002)
 
-         local actionCooldownText = BlzCreateFrameByType(
+        local actionCooldownText = BlzCreateFrameByType(
             "TEXT",
             "actionCooldownText",
             actionItem,
@@ -137,10 +187,22 @@ function ActionBar:init()
         BlzFrameSetTextAlignment(
             actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
 
+        local hoverFrame = BlzCreateFrameByType(
+            "FRAME",
+            "hoverFrame",
+            actionItem,
+            "",
+            0)
+        BlzFrameSetAllPoints(hoverFrame, actionItem)
+
+        local tooltipFrame = makeTooltipFrame(actionItem)
+        BlzFrameSetTooltip(hoverFrame, tooltipFrame.origin)
+
         table.insert(actionItems, {
             actionItemBackground = actionItem,
             actionCooldownBackdrop = actionCooldownBackdrop,
             actionCooldownText = actionCooldownText,
+            tooltipFrame = tooltipFrame,
         })
     end
 
@@ -157,6 +219,7 @@ function ActionBar:update(playerId)
     for idx,actionItem in pairs(frame.actionItems) do
         local cdPct = spell.getCooldownPct(playerId, idx)
         local spellIcon = spell.getIcon(playerId, idx)
+        local spellName = spell.getSpellName(playerId, idx)
 
         BlzFrameSetVisible(actionItem.actionCooldownBackdrop, cdPct ~= 0)
 
@@ -170,6 +233,10 @@ function ActionBar:update(playerId)
             spellIcon,
             0,
             true)
+
+        BlzFrameSetText(
+            actionItem.tooltipFrame.text,
+            "|cff155ed4"..spellName.."|r|n|nTODO: add spell info like CD damage etc.")
     end
 end
 
