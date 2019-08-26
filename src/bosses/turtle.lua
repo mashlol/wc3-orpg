@@ -20,14 +20,11 @@ local cleanupFight
 local door
 
 local TURTLE_AREA_BOUNDS = {
-    {x = -549, y = -3255},
-    {x = 1723, y = -3647},
-    {x = 2206, y = -2984},
-    {x = 2260, y = -1558},
-    {x = 1733, y = -322},
-    {x = 618, y = -866},
-    {x = -430, y = -1754},
-    {x = -991, y = -2655},
+    {x = 3317, y = 3082},
+    {x = 1710, y = 1886},
+    {x = 1650, y = 594},
+    {x = 3099, y = -1069},
+    {x = 4999, y = 1130},
 }
 
 local involvedHeroes = {}
@@ -92,7 +89,7 @@ local spawnAdds = function()
             :add(bossV)
         local add = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
-            FourCC("hmbs"),
+            FourCC("nban"),
             spawnLocation.x,
             spawnLocation.y,
             GetRandomReal(0, 180))
@@ -124,12 +121,12 @@ resetFight = function()
     local maxHp = BlzGetUnitMaxHP(boss)
     BlzSetUnitRealField(boss, UNIT_RF_HP, maxHp)
 
-    IssuePointOrder(boss, "move", 1268.7, -2846.7)
+    IssuePointOrder(boss, "move", 2818.7,  1630.3)
 end
 
 onFightEnded = function()
     if GetUnitState(boss, UNIT_STATE_LIFE) <= 0 then
-        print("You killed turtle.")
+        print("You killed bandit captain.")
         -- TODO implement a loot system
         for i=0,bj_MAX_PLAYERS,1 do
             backpack.addItemIdToBackpack(i, 1)
@@ -153,7 +150,7 @@ onFightStarted = function()
         return
     end
 
-    print("Turtle engaged...")
+    print("Bandit captain engaged...")
     DestroyTrigger(startFightTrigger)
 
     endFightTrigger = CreateTrigger()
@@ -182,9 +179,9 @@ onFightStarted = function()
 end
 
 local init = function()
-    door = gg_dest_DTg6_0369
+    door = gg_dest_LTg2_2324
     boss = CreateUnit(
-        Player(PLAYER_NEUTRAL_AGGRESSIVE), FourCC("hbos"), 1268.7, -2846.7, 135.939)
+        Player(PLAYER_NEUTRAL_AGGRESSIVE), FourCC("hbld"), 2818.7, 1630.3, 300)
 
     resetFight()
 end
