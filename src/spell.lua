@@ -139,7 +139,6 @@ local getCooldown = function(playerId, idx)
         return cooldowns.getRemainingCooldown(playerId, spell.getSpellId())
     end
     return 0
-
 end
 
 local getCooldownPct = function(playerId, idx)
@@ -171,10 +170,37 @@ local getSpellName = function(playerId, idx)
     return ""
 end
 
+local getSpellTooltip = function(playerId, idx)
+    local spell = getSpell(playerId, idx)
+    if spell ~= nil and spell.getSpellTooltip then
+        return spell.getSpellTooltip(playerId)
+    end
+    return ""
+end
+
+local getSpellCooldown = function(playerId, idx)
+    local spell = getSpell(playerId, idx)
+    if spell ~= nil and spell.getSpellCooldown then
+        return spell.getSpellCooldown(playerId)
+    end
+    return 0
+end
+
+local getSpellCasttime = function(playerId, idx)
+    local spell = getSpell(playerId, idx)
+    if spell ~= nil and spell.getSpellCasttime then
+        return spell.getSpellCasttime(playerId)
+    end
+    return 0
+end
+
 return {
     castSpell = castSpell,
     getCooldown = getCooldown,
     getCooldownPct = getCooldownPct,
     getIcon = getIcon,
     getSpellName = getSpellName,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
