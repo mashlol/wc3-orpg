@@ -4,6 +4,7 @@ local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
@@ -19,6 +20,18 @@ end
 
 local getSpellName = function()
     return 'Meteor'
+end
+
+local getSpellTooltip = function(playerId)
+    return 'Azora calls upon the heavens to bring a meteor down to earth. The meteor will fall after 2 seconds, dealing 400 damage to all units in the area.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 1
 end
 
 function createTargetEffect(mouseV)
@@ -126,4 +139,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

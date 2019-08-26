@@ -19,6 +19,18 @@ local getSpellName = function()
     return 'Blink'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Azora channels her inner fire to displace her position in the world by up to 800 yards.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.15
+end
+
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
         IsUnitType(unit, UNIT_TYPE_SNARED) or
@@ -87,14 +99,6 @@ local cast = function(playerId)
     return true
 end
 
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
-end
-
 local getIcon = function()
     return "ReplaceableTextures\\CommandButtons\\BTNBlink.blp"
 end
@@ -104,4 +108,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

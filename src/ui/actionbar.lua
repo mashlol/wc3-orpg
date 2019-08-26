@@ -28,14 +28,14 @@ local makeTooltipFrame = function(actionItem)
     BlzFrameSetSize(
         tooltipOrigin,
         0.24,
-        0.12)
+        0.1)
     BlzFrameSetPoint(
         tooltipOrigin,
         FRAMEPOINT_CENTER,
         actionItem,
         FRAMEPOINT_CENTER,
         0,
-        0.08)
+        0.1)
 
     local tooltipBackdrop = BlzCreateFrameByType(
         "BACKDROP",
@@ -49,7 +49,7 @@ local makeTooltipFrame = function(actionItem)
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
         0,
         true)
-    BlzFrameSetAlpha(tooltipBackdrop, 230)
+    BlzFrameSetAlpha(tooltipBackdrop, 200)
 
     local tooltipText = BlzCreateFrameByType(
         "TEXT",
@@ -57,8 +57,18 @@ local makeTooltipFrame = function(actionItem)
         tooltipOrigin,
         "",
         0)
-    BlzFrameSetAllPoints(tooltipText, tooltipOrigin)
-    -- BlzFrameSetText(tooltipText, "|cff2222ddFireball|r|n|nCast fireball.")
+
+    BlzFrameSetSize(
+        tooltipText,
+        0.23,
+        0.09)
+    BlzFrameSetPoint(
+        tooltipText,
+        FRAMEPOINT_CENTER,
+        tooltipOrigin,
+        FRAMEPOINT_CENTER,
+        0,
+        0)
 
     return {
         origin = tooltipOrigin,
@@ -220,6 +230,9 @@ function ActionBar:update(playerId)
         local cdPct = spell.getCooldownPct(playerId, idx)
         local spellIcon = spell.getIcon(playerId, idx)
         local spellName = spell.getSpellName(playerId, idx)
+        local spellTooltip = spell.getSpellTooltip(playerId, idx)
+        local spellCooldown = spell.getSpellCooldown(playerId, idx)
+        local spellCasttime = spell.getSpellCasttime(playerId, idx)
 
         BlzFrameSetVisible(actionItem.actionCooldownBackdrop, cdPct ~= 0)
 
@@ -236,7 +249,10 @@ function ActionBar:update(playerId)
 
         BlzFrameSetText(
             actionItem.tooltipFrame.text,
-            "|cff155ed4"..spellName.."|r|n|nTODO: add spell info like CD damage etc.")
+            "|cff155ed4"..spellName.."|r|n|n"..
+            "Cooldown: "..spellCooldown.."s|n"..
+            "Cast time: "..spellCasttime.."s|n"..
+            "|n|n"..spellTooltip)
     end
 end
 

@@ -21,6 +21,18 @@ local getSpellName = function()
     return 'Icicle'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Azora fires a blast of frost energy from her, dealing 50 damage to the first enemy struck. If the enemy is frozen, the damage is increased five-fold.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.2
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -89,4 +101,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
