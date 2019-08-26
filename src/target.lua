@@ -14,6 +14,10 @@ end
 
 local onTargetChanged = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
+    if hero.getHero(playerId) == nil then
+        return
+    end
+
     local selectedUnit = GetTriggerUnit()
     if not ignoreTargetChange[playerId] then
         targets[playerId] = selectedUnit

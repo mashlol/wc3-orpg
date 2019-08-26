@@ -29,6 +29,8 @@ rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
 
 echo 'Deleting build artifacts'
 
+mv ./bin/war3map.lua ./bin/script_stored
+
 rm ./bin/*.lua
 
 echo 'Launching map in wc3'
