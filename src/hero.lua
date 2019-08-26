@@ -2,7 +2,7 @@ local heroes = {}
 local pickedHeroes = {}
 
 local ALL_HERO_INFO = {
-    [1] = {
+    [FourCC("Hyuj")] = {
         name = 'Yuji',
         id = FourCC("Hyuj"),
         spells = {
@@ -19,7 +19,7 @@ local ALL_HERO_INFO = {
         },
         baseHP = 600,
     },
-    [2] = {
+    [FourCC("Hstm")] = {
         name = 'Stormfist',
         id = FourCC("Hstm"),
         spells = {
@@ -29,7 +29,7 @@ local ALL_HERO_INFO = {
         },
         baseHP = 600,
     },
-    [3] = {
+    [FourCC("Hivn")] = {
         name = 'Ivanov',
         id = FourCC("Hivn"),
         spells = {
@@ -47,7 +47,7 @@ local ALL_HERO_INFO = {
         },
         baseHP = 600,
     },
-    [4] = {
+    [FourCC("Hazr")] = {
         name = 'Azora',
         id = FourCC("Hazr"),
         spells = {
@@ -66,7 +66,7 @@ local ALL_HERO_INFO = {
         },
         baseHP = 400,
     },
-    [5] = {
+    [FourCC("Htar")] = {
         name = 'Tarcza',
         id = FourCC("Htar"),
         spells = {
@@ -109,33 +109,58 @@ function createHeroForPlayer(playerId)
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
         SelectUnit(heroes[playerId], true)
+        ResetToGameCamera(0)
+        PanCameraToTimed(-150, -125, 0)
     end
 end
 
-local showPickHeroDialog = function()
+local forceCameraTriggers = {}
+local selectHeroTriggers = {}
+
+local forceCameraLocation = function(playerId, camera)
+    CameraSetupApplyForPlayer(true, camera, Player(playerId), 0)
+end
+
+local onHeroPicked = function()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    local selectedUnit = GetTriggerUnit()
+
+    pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
+    createHeroForPlayer(playerId)
+
+    DestroyTrigger(forceCameraTriggers[playerId])
+    DestroyTrigger(selectHeroTriggers[playerId])
+end
+
+local showPickHeroDialog = function(playerId)
     -- TODO a better way to pick heroes
-    local dialog = DialogCreate()
 
-    for idx,hero in pairs(ALL_HERO_INFO) do
-        local pickHeroButton = DialogAddButton(dialog, hero.name, 0)
-        local pickHeroTrigger = CreateTrigger()
-        TriggerRegisterDialogButtonEvent(pickHeroTrigger, pickHeroButton)
-        TriggerAddAction(pickHeroTrigger, function()
-            local playerId = GetPlayerId(GetTriggerPlayer())
-            pickedHeroes[playerId] = hero
-            createHeroForPlayer(playerId)
-        end)
-    end
+    -- Apply camera
+    -- Make zone visible
+    -- Add trigger, when hero is clicked, move to special zone for that hero
+    -- If clicked again, you picked that hero
 
-    for i=0,bj_MAX_PLAYERS,1 do
-        DialogDisplay(Player(i), dialog, true)
-    end
+    CreateFogModifierRectBJ(
+        true, Player(playerId), FOG_OF_WAR_VISIBLE, gg_rct_Region_000)
+
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEvent(trig, 0.1, true)
+    TriggerAddAction(trig, function()
+        forceCameraLocation(playerId, gg_cam_Camera_002)
+    end)
+    forceCameraTriggers[playerId] = trig
+
+    local selectTrig = CreateTrigger()
+    TriggerRegisterPlayerUnitEvent(
+        selectTrig, Player(playerId), EVENT_PLAYER_UNIT_SELECTED, nil)
+    TriggerAddAction(selectTrig, onHeroPicked)
+    selectHeroTriggers[playerId] = selectTrig
 end
 
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
     RemoveUnit(heroes[repickPlayerId])
-    showPickHeroDialog()
+    showPickHeroDialog(repickPlayerId)
 end
 
 local init = function()
@@ -149,7 +174,9 @@ local init = function()
     end
     TriggerAddAction(repickTrig, onRepick)
 
-    showPickHeroDialog()
+    for i=0,bj_MAX_PLAYERS,1 do
+        showPickHeroDialog(i)
+    end
 end
 
 local getHero = function(playerId)
