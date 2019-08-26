@@ -13,6 +13,18 @@ local getSpellName = function()
     return 'Attack'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Just a simple auto attack.'
+end
+
+local getSpellCooldown = function(playerId)
+    return 0
+end
+
+local getSpellCasttime = function(playerId)
+    return 0
+end
+
 local cast = function(playerId)
     return true
 end
@@ -34,4 +46,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
