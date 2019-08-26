@@ -21,6 +21,18 @@ local getSpellName = function()
     return 'Hulking Potion'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Ivanov tosses a concoction that increases the size and damage of a friendly target by 20% for 10 seconds.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.5
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -95,4 +107,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

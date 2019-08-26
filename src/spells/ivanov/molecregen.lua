@@ -21,6 +21,18 @@ local getSpellName = function()
     return 'Molecular Regeneration'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Ivanov creates a cloud of healing mist in an area, healing all friendly targets in the mist for 100 per second.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.5
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -108,4 +120,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
