@@ -21,6 +21,18 @@ local getSpellName = function()
     return 'Jab'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Deal 150 damage to all enemies in a line in front of you.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.35
+end
+
 local getCollisionPoint = function(heroV, facingDeg, i, j)
     local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
     local perpendicularVec = Vector:fromAngle(perpendicularAngle)
@@ -114,4 +126,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

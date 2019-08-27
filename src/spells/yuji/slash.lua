@@ -24,6 +24,18 @@ local getSpellName = function()
     return 'Slash'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'The 1st and 2nd activation have 0.5s cooldown and deal 50 damage to all units in front of Yuji. The 3rd activation deals 300 damage and has a 5 second cooldown.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.4
+end
+
 local getCollisionPoint = function(heroV, facingDeg, i, j)
     local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
     local perpendicularVec = Vector:fromAngle(perpendicularAngle)
@@ -134,4 +146,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
