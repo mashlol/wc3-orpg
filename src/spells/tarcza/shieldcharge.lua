@@ -28,6 +28,18 @@ local getSpellName = function()
     return 'Shield Charge'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Tarcza charges forward with his shield, causing 400 damage to all impacted units, pushing them away and stunning them for 2 seconds.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.6
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
