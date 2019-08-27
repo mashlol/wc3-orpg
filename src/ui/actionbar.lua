@@ -28,14 +28,14 @@ local makeTooltipFrame = function(actionItem)
     BlzFrameSetSize(
         tooltipOrigin,
         0.24,
-        0.1)
+        0.095)
     BlzFrameSetPoint(
         tooltipOrigin,
         FRAMEPOINT_CENTER,
         actionItem,
         FRAMEPOINT_CENTER,
         0,
-        0.1)
+        0.08)
 
     local tooltipBackdrop = BlzCreateFrameByType(
         "BACKDROP",
@@ -61,7 +61,7 @@ local makeTooltipFrame = function(actionItem)
     BlzFrameSetSize(
         tooltipText,
         0.23,
-        0.09)
+        0.085)
     BlzFrameSetPoint(
         tooltipText,
         FRAMEPOINT_CENTER,
@@ -252,7 +252,7 @@ function ActionBar:update(playerId)
             "|cff155ed4"..spellName.."|r|n|n"..
             "Cooldown: "..spellCooldown.."s|n"..
             "Cast time: "..spellCasttime.."s|n"..
-            "|n|n"..spellTooltip)
+            "|n"..spellTooltip)
     end
 end
 
