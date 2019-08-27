@@ -32,6 +32,18 @@ local getSpellName = function()
     return 'Blitz / Assist'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Charge towards the target. To enemies, deal 40 damage and stun them for 2 seconds. To allies, reduce their incoming damage by 40% for 2 seconds. Can be recast quickly after the first cast.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.5
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -141,4 +153,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

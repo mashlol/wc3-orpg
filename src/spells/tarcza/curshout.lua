@@ -22,6 +22,18 @@ local getSpellName = function()
     return 'Courageous Shout'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Tarcza shouts courageously, reducing the movement speed of nearby enemies by 40% for 5 seconds.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.2
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -75,5 +87,8 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
 

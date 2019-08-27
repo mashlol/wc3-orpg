@@ -22,6 +22,20 @@ local getSpellName = function()
     return 'Flag'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Tarcza throws a flag down on the target location, which '..
+        'increases the damage dealt, reduces the damage taken, and increases '..
+        'the move speed of nearby targets by 10% for 10 seconds.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.2
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -91,5 +105,8 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
 

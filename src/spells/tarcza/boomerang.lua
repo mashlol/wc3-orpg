@@ -28,6 +28,18 @@ local getSpellName = function()
     return 'Shield Boomerang'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Tarcza throws a shield of lightning forward, dealing 50 damage to all enemies struck. It will then return to Tarcza, dealing 100 damage on the way back.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.2
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -111,4 +123,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
