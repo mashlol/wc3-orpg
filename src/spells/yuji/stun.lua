@@ -22,6 +22,18 @@ local getSpellName = function()
     return 'Stun'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Stun the target for 2 seconds, has a short range.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -82,4 +94,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }

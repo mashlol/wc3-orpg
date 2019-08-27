@@ -30,6 +30,18 @@ local getSpellName = function()
     return 'Dash'
 end
 
+local getSpellTooltip = function(playerId)
+    return 'Dash forward, dealing 35 damage to all units struck. Can be recast quickly after the first activation.'
+end
+
+local getSpellCooldown = function(playerId)
+    return COOLDOWN_S
+end
+
+local getSpellCasttime = function(playerId)
+    return 0.15
+end
+
 local cast = function(playerId)
     if cooldowns.isOnCooldown(playerId, getSpellId()) then
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
@@ -117,4 +129,7 @@ return {
     getSpellId = getSpellId,
     getSpellName = getSpellName,
     getIcon = getIcon,
+    getSpellTooltip = getSpellTooltip,
+    getSpellCooldown = getSpellCooldown,
+    getSpellCasttime = getSpellCasttime,
 }
