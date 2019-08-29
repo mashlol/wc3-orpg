@@ -101,10 +101,6 @@ end
 function createHeroForPlayer(playerId)
     heroes[playerId] = CreateUnit(
         Player(playerId), pickedHeroes[playerId].id, -150, -125, 0)
-    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_STRENGTH, 0)
-    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_INTELLIGENCE, 0)
-    BlzSetUnitIntegerField(heroes[playerId], UNIT_IF_AGILITY, 0)
-    -- SuspendHeroXP(heroes[playerId], true)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
