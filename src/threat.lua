@@ -107,31 +107,31 @@ function onTick()
 end
 
 function addThreat(source, target, amount)
-    if GetOwningPlayer(target) ~= Player(PLAYER_NEUTRAL_AGGRESSIVE) then
-        -- We don't support threat on non-NPCs
-        return
-    end
+    -- if GetOwningPlayer(target) ~= Player(PLAYER_NEUTRAL_AGGRESSIVE) then
+    --     -- We don't support threat on non-NPCs
+    --     return
+    -- end
 
-    local sourceUnitId = GetHandleId(source)
-    local targetUnitId = GetHandleId(target)
+    -- local sourceUnitId = GetHandleId(source)
+    -- local targetUnitId = GetHandleId(target)
 
-    if threatLevels[targetUnitId] == nil then
-        threatLevels[targetUnitId] = {unit = target, threats = {}}
-    end
+    -- if threatLevels[targetUnitId] == nil then
+    --     threatLevels[targetUnitId] = {unit = target, threats = {}}
+    -- end
 
-    if threatLevels[targetUnitId].threats[sourceUnitId] == nil then
-        threatLevels[targetUnitId].threats[sourceUnitId] = {
-            unit=source,
-            threat = 0,
-        }
-    end
+    -- if threatLevels[targetUnitId].threats[sourceUnitId] == nil then
+    --     threatLevels[targetUnitId].threats[sourceUnitId] = {
+    --         unit=source,
+    --         threat = 0,
+    --     }
+    -- end
 
-    local curThreat = threatLevels[targetUnitId].threats[sourceUnitId].threat
-    threatLevels[targetUnitId].threats[sourceUnitId].threat = curThreat + amount
+    -- local curThreat = threatLevels[targetUnitId].threats[sourceUnitId].threat
+    -- threatLevels[targetUnitId].threats[sourceUnitId].threat = curThreat + amount
 end
 
 function init()
-    TimerStart(CreateTimer(), 0.5, true, onTick)
+    -- TimerStart(CreateTimer(), 0.5, true, onTick)
 end
 
 return {
