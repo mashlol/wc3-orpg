@@ -7,7 +7,7 @@ function onCameraTick()
 end
 
 function init()
-    TimerStart(CreateTimer(), 1, true, onCameraTick)
+    -- TimerStart(CreateTimer(), 1, true, onCameraTick)
 end
 
 return {
