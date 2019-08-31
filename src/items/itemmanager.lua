@@ -44,7 +44,11 @@ function getItemInfo(itemId)
 end
 
 function getItemTooltip(itemId)
-    return TOOLTIPS[itemId]
+    return TOOLTIPS[itemId] and TOOLTIPS[itemId].text or ""
+end
+
+function getItemTooltipNumLines(itemId)
+    return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0.0001
 end
 
 function applyEquippedItemBuffs()
@@ -75,23 +79,28 @@ function init()
     for itemId, itemInfo in pairs(ITEMS) do
         local itemStats = ""
 
+        local numLines = 0
         for idx, statInfo in pairs(itemInfo.stats) do
             if statInfo.type == 'rawHp' then
                 itemStats = itemStats .. '+' .. statInfo.amount .. ' HP|n'
+                numLines = numLines + 1
             end
         end
 
-        TOOLTIPS[itemId] =
-            itemInfo.rarity.color ..
-            itemInfo.name ..
-            "|r|n" ..
-            "|cffe3e312Item level " ..
-            itemInfo.itemLevel ..
-            "|r|n"..
-            "Requires level " ..
-            itemInfo.requiredLevel ..
-            "|n|n|cff00ff00" ..
-            itemStats
+        TOOLTIPS[itemId] = {
+            text =
+                itemInfo.rarity.color ..
+                itemInfo.name ..
+                "|r|n" ..
+                "|cffe3e312Item level " ..
+                itemInfo.itemLevel ..
+                "|r|n"..
+                "Requires level " ..
+                itemInfo.requiredLevel ..
+                "|n|n|cff00ff00" ..
+                itemStats,
+            numLines = numLines + 4,
+        }
     end
 end
 
@@ -100,4 +109,5 @@ return {
     getItemInfo = getItemInfo,
     computeTotalStats = computeTotalStats,
     getItemTooltip = getItemTooltip,
+    getItemTooltipNumLines = getItemTooltipNumLines,
 }
