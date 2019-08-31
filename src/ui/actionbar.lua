@@ -229,10 +229,7 @@ function ActionBar:update(playerId)
     for idx,actionItem in pairs(frame.actionItems) do
         local cdPct = spell.getCooldownPct(playerId, idx)
         local spellIcon = spell.getIcon(playerId, idx)
-        -- local spellName = spell.getSpellName(playerId, idx)
-        -- local spellTooltip = spell.getSpellTooltip(playerId, idx)
-        -- local spellCooldown = spell.getSpellCooldown(playerId, idx)
-        -- local spellCasttime = spell.getSpellCasttime(playerId, idx)
+        local spellTooltip = spell.getSpellTooltip(playerId, idx)
 
         BlzFrameSetVisible(actionItem.actionCooldownBackdrop, cdPct ~= 0)
 
@@ -247,12 +244,7 @@ function ActionBar:update(playerId)
             0,
             true)
 
-        -- BlzFrameSetText(
-        --     actionItem.tooltipFrame.text,
-        --     "|cff155ed4"..spellName.."|r|n|n"..
-        --     "Cooldown: "..spellCooldown.."s|n"..
-        --     "Cast time: "..spellCasttime.."s|n"..
-        --     "|n"..spellTooltip)
+        BlzFrameSetText(actionItem.tooltipFrame.text, spellTooltip)
     end
 end
 
