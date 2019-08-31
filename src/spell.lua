@@ -108,12 +108,22 @@ local SPELL_MAP = {
     pocketgoo = pocketgoo,
 }
 
+local TOOLTIPS = {}
+
 local getSpell = function(playerId, idx)
     local pickedHero = hero.getPickedHero(playerId)
     if pickedHero == nil then
         return nil
     end
     return SPELL_MAP[pickedHero.spells[idx]]
+end
+
+local getSpellKey = function(playerId, idx)
+    local pickedHero = hero.getPickedHero(playerId)
+    if pickedHero == nil then
+        return nil
+    end
+    return pickedHero.spells[idx]
 end
 
 local castSpell = function(playerId, idx)
@@ -162,45 +172,34 @@ local getIcon = function(playerId, idx)
     return ""
 end
 
-local getSpellName = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
-    if spell ~= nil then
-        return spell.getSpellName()
-    end
-    return ""
-end
-
 local getSpellTooltip = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
-    if spell ~= nil and spell.getSpellTooltip then
-        return spell.getSpellTooltip(playerId)
+    local spellKey = getSpellKey(playerId, idx)
+    if spellKey ~= nil then
+        return TOOLTIPS[spellKey]
     end
     return ""
 end
 
-local getSpellCooldown = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
-    if spell ~= nil and spell.getSpellCooldown then
-        return spell.getSpellCooldown(playerId)
-    end
-    return 0
-end
+local init = function()
+    for idx, spell in pairs(SPELL_MAP) do
+        local spellName = spell.getSpellName()
+        local spellCooldown = spell.getSpellCooldown()
+        local spellCasttime = spell.getSpellCasttime()
+        local spellTooltip = spell.getSpellTooltip()
 
-local getSpellCasttime = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
-    if spell ~= nil and spell.getSpellCasttime then
-        return spell.getSpellCasttime(playerId)
+        TOOLTIPS[idx] =
+            "|cff155ed4"..spellName.."|r|n|n"..
+            "Cooldown: "..spellCooldown.."s|n"..
+            "Cast time: "..spellCasttime.."s|n"..
+            "|n"..spellTooltip
     end
-    return 0
 end
 
 return {
+    init = init,
     castSpell = castSpell,
     getCooldown = getCooldown,
     getCooldownPct = getCooldownPct,
     getIcon = getIcon,
-    getSpellName = getSpellName,
     getSpellTooltip = getSpellTooltip,
-    getSpellCooldown = getSpellCooldown,
-    getSpellCasttime = getSpellCasttime,
 }
