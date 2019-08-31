@@ -182,9 +182,19 @@ function Equipment:update(playerId)
                 true)
         end
 
+        local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
+        BlzFrameSetSize(
+            itemFrame.tooltipFrame.origin,
+            0.16,
+            0.012 * numTooltipLines)
+        BlzFrameSetSize(
+            itemFrame.tooltipFrame.text,
+            0.15,
+            0.012 * numTooltipLines - 0.01)
+
         BlzFrameSetText(
             itemFrame.tooltipFrame.text,
-            itemmanager.getItemTooltip(itemId) or "")
+            itemmanager.getItemTooltip(itemId))
 
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end
