@@ -1,5 +1,6 @@
 local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
+local tooltip = require('src/ui/tooltip.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
@@ -85,6 +86,9 @@ function Backpack:init()
             true)
         BlzFrameSetAlpha(itemHighlight, 100)
 
+        local tooltipFrame = tooltip.makeTooltipFrame(
+            itemOrigin, 0.16, 0.24, itemOrigin, false)
+
         local trig = CreateTrigger()
         BlzTriggerRegisterFrameEvent(
             trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
@@ -121,6 +125,7 @@ function Backpack:init()
         table.insert(itemFrames, {
             itemFrame = itemFrame,
             itemHighlight = itemHighlight,
+            tooltipFrame = tooltipFrame,
         })
     end
 
@@ -154,6 +159,10 @@ function Backpack:update(playerId)
                 0,
                 true)
         end
+
+        BlzFrameSetText(
+            itemFrame.tooltipFrame.text,
+            itemmanager.getItemTooltip(itemId) or "")
 
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end
