@@ -1,4 +1,5 @@
 local hero = require('src/hero.lua')
+local backpack = require('src/items/backpack.lua')
 
 local animNum = 0
 
@@ -8,15 +9,20 @@ local animNum = 0
 
 
 local debug = function()
-    local hero = hero.getHero(GetPlayerId(GetTriggerPlayer()))
+    print('debug yo')
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    local hero = hero.getHero(playerId)
 
     SetUnitAnimationByIndex(hero, animNum)
     print(animNum)
 
     animNum = animNum + 1
+
+    backpack.addItemIdToBackpack(playerId, 1)
 end
 
 local init = function()
+    print('init debug yo')
     local trigger = CreateTrigger()
 
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_1, 0, true)

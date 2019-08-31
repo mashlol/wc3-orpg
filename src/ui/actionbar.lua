@@ -1,4 +1,5 @@
 local consts = require('src/ui/consts.lua')
+local tooltip = require('src/ui/tooltip.lua')
 local spell = require('src/spell.lua')
 
 local DEFAULT_HOTKEYS = {
@@ -14,66 +15,6 @@ function ActionBar:new(o)
     setmetatable(o, self)
     self.__index = self
     return o
-end
-
-local makeTooltipFrame = function(actionItem)
-    local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
-
-    local tooltipOrigin = BlzCreateFrameByType(
-        "FRAME",
-        "tooltipOrigin",
-        originFrame,
-        "",
-        0)
-    BlzFrameSetSize(
-        tooltipOrigin,
-        0.24,
-        0.095)
-    BlzFrameSetPoint(
-        tooltipOrigin,
-        FRAMEPOINT_CENTER,
-        actionItem,
-        FRAMEPOINT_CENTER,
-        0,
-        0.08)
-
-    local tooltipBackdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "tooltipBackdrop",
-        tooltipOrigin,
-        "",
-        0)
-    BlzFrameSetAllPoints(tooltipBackdrop, tooltipOrigin)
-    BlzFrameSetTexture(
-        tooltipBackdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-    BlzFrameSetAlpha(tooltipBackdrop, 200)
-
-    local tooltipText = BlzCreateFrameByType(
-        "TEXT",
-        "tooltipText",
-        tooltipOrigin,
-        "",
-        0)
-
-    BlzFrameSetSize(
-        tooltipText,
-        0.23,
-        0.085)
-    BlzFrameSetPoint(
-        tooltipText,
-        FRAMEPOINT_CENTER,
-        tooltipOrigin,
-        FRAMEPOINT_CENTER,
-        0,
-        0)
-
-    return {
-        origin = tooltipOrigin,
-        text = tooltipText,
-    }
 end
 
 function ActionBar:init()
@@ -197,16 +138,7 @@ function ActionBar:init()
         BlzFrameSetTextAlignment(
             actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
 
-        local hoverFrame = BlzCreateFrameByType(
-            "FRAME",
-            "hoverFrame",
-            actionItem,
-            "",
-            0)
-        BlzFrameSetAllPoints(hoverFrame, actionItem)
-
-        local tooltipFrame = makeTooltipFrame(actionItem)
-        BlzFrameSetTooltip(hoverFrame, tooltipFrame.origin)
+        local tooltipFrame = tooltip.makeTooltipFrame(actionItem, 0.24, 0.095)
 
         table.insert(actionItems, {
             actionItemBackground = actionItem,
