@@ -9,20 +9,17 @@ local animNum = 0
 
 
 local debug = function()
-    print('debug yo')
     local playerId = GetPlayerId(GetTriggerPlayer())
     local hero = hero.getHero(playerId)
 
     SetUnitAnimationByIndex(hero, animNum)
-    print(animNum)
 
     animNum = animNum + 1
 
-    backpack.addItemIdToBackpack(playerId, 1)
+    -- backpack.addItemIdToBackpack(playerId, 1)
 end
 
 local init = function()
-    print('init debug yo')
     local trigger = CreateTrigger()
 
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_1, 0, true)
