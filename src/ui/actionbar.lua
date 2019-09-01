@@ -111,9 +111,9 @@ function ActionBar:init()
         BlzFrameSetText(actionHotkey, DEFAULT_HOTKEYS[i+1])
         BlzFrameSetPoint(
             actionHotkey,
-            FRAMEPOINT_TOP_LEFT,
+            FRAMEPOINT_TOPLEFT,
             actionItem,
-            FRAMEPOINT_TOP_LEFT,
+            FRAMEPOINT_TOPLEFT,
             0.002,
             -0.002)
 
