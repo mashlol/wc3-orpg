@@ -55,7 +55,7 @@ walk('./src', (err, res) => {
         if (numIterated == numFiles) {
 
           // Concat the files into a single one
-          concat(['header.lua'].concat(writtenFiles), './bin/war3map_compiled.lua').then(() => {
+          concat(['header._lua'].concat(writtenFiles), './bin/war3map_compiled.lua').then(() => {
             let requireMap = "\n";
             for (let k in modules) {
               requireMap += "requireMap['" + k.replace(/\\/g, '/') + "'] = " + modules[k] + "\n";
