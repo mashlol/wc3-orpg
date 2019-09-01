@@ -9,7 +9,7 @@ function addPlayerToParty(partyId, playerId)
 end
 
 function removePlayerFromParty(playerId)
-    playerPartyies[playerId] = nil
+    playerParties[playerId] = nil
 end
 
 function createParty()
