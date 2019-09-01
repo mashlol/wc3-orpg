@@ -19,9 +19,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
-
--- TODO create a boss manager
-local turtle = require('src/bosses/turtle.lua')
+local bossmanager = require('src/bosses/bossmanager.lua')
 
 local debug = require('src/debug.lua')
 
@@ -47,9 +45,7 @@ local mainInit = function()
     backpack.init()
     equipment.init()
     itemmanager.init()
-
-
-    turtle.init()
+    bossmanager.init()
 
     -- TODO remove for release
     debug.init()
