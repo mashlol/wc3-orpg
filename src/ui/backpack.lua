@@ -1,6 +1,7 @@
 local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local tooltip = require('src/ui/tooltip.lua')
+local utils = require('src/ui/utils.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
@@ -26,24 +27,55 @@ end
 function Backpack:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
-    local backpackBackground = BlzCreateFrameByType(
-        "BACKDROP",
-        "backpackBackground",
+    local backpackOrigin = BlzCreateFrameByType(
+        "FRAME",
+        "backpackOrigin",
         originFrame,
         "",
         0)
     BlzFrameSetSize(
-        backpackBackground, consts.BACKPACK_SIZE, consts.BACKPACK_SIZE)
+        backpackOrigin, consts.BACKPACK_SIZE, consts.BACKPACK_SIZE + 0.02)
     BlzFrameSetAbsPoint(
-        backpackBackground,
+        backpackOrigin,
         FRAMEPOINT_CENTER,
         0.6,
         0.24)
-    BlzFrameSetTexture(
-        backpackBackground,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
+
+    utils.createBorderFrame(backpackOrigin)
+
+    local backpackText = BlzCreateFrameByType(
+        "TEXT",
+        "backpackText",
+        backpackOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        backpackText, consts.BACKPACK_SIZE, 0.012)
+    BlzFrameSetPoint(
+        backpackText,
+        FRAMEPOINT_TOPLEFT,
+        backpackOrigin,
+        FRAMEPOINT_TOPLEFT,
+        0.01,
+        -0.01)
+    BlzFrameSetText(backpackText, "Inventory: 0/36")
+
+    local goldText = BlzCreateFrameByType(
+        "TEXT",
+        "goldText",
+        backpackOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        goldText, consts.BACKPACK_SIZE, 0.012)
+    BlzFrameSetPoint(
+        goldText,
+        FRAMEPOINT_BOTTOMLEFT,
+        backpackOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0.01,
+        0.01)
+    BlzFrameSetText(goldText, "Gold: 0")
 
     local itemFrames = {}
 
@@ -51,7 +83,7 @@ function Backpack:init()
         local itemOrigin = BlzCreateFrameByType(
             "GLUETEXTBUTTON",
             "itemOrigin",
-            backpackBackground,
+            backpackOrigin,
             "",
             0)
         BlzFrameSetSize(
@@ -59,10 +91,10 @@ function Backpack:init()
         BlzFrameSetPoint(
             itemOrigin,
             FRAMEPOINT_TOPLEFT,
-            backpackBackground,
+            backpackOrigin,
             FRAMEPOINT_TOPLEFT,
-            (i % 6) * (consts.BACKPACK_ITEM_SIZE + 0.001),
-            -math.floor(i / 6) * (consts.BACKPACK_ITEM_SIZE + 0.001))
+            (i % 6) * (consts.BACKPACK_ITEM_SIZE + 0.004) + 0.02,
+            -math.floor(i / 6) * (consts.BACKPACK_ITEM_SIZE + 0.004) - 0.03)
 
         local itemFrame = BlzCreateFrameByType(
             "BACKDROP",
@@ -131,7 +163,7 @@ function Backpack:init()
 
     self.frames = {
         itemFrames = itemFrames,
-        origin = backpackBackground,
+        origin = backpackOrigin,
     }
 
     return self
@@ -155,7 +187,7 @@ function Backpack:update(playerId)
         else
             BlzFrameSetTexture(
                 itemFrame.itemFrame,
-                "IconBorder.tga",
+                "InvTile.blp",
                 0,
                 true)
         end

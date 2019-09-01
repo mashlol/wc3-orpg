@@ -1,5 +1,6 @@
 local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
+local utils = require('src/ui/utils.lua')
 local tooltip = require('src/ui/tooltip.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
@@ -103,57 +104,61 @@ end
 function Equipment:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
-    local equipmentBackground = BlzCreateFrameByType(
+    local equipmentOrigin = BlzCreateFrameByType(
         "FRAME",
-        "equipmentBackground",
+        "equipmentOrigin",
         originFrame,
         "",
         0)
     BlzFrameSetSize(
-        equipmentBackground, consts.EQUIPMENT_ITEM_SIZE * 5, consts.EQUIPMENT_ITEM_SIZE * 9)
+        equipmentOrigin, consts.EQUIPMENT_ITEM_SIZE * 5, consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
     BlzFrameSetAbsPoint(
-        equipmentBackground,
+        equipmentOrigin,
         FRAMEPOINT_CENTER,
         0.1,
         0.35)
 
-    local equipmentBackdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "equipmentBackdrop",
-        equipmentBackground,
+    utils.createBorderFrame(equipmentOrigin)
+
+    local equipmentText = BlzCreateFrameByType(
+        "TEXT",
+        "equipmentText",
+        equipmentOrigin,
         "",
         0)
-    BlzFrameSetTexture(
-        equipmentBackdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-    BlzFrameSetAlpha(equipmentBackdrop, 200)
-    BlzFrameSetAllPoints(equipmentBackdrop, equipmentBackground)
+    BlzFrameSetSize(equipmentText, consts.EQUIPMENT_ITEM_SIZE * 5, 0.012)
+    BlzFrameSetPoint(
+        equipmentText,
+        FRAMEPOINT_TOPLEFT,
+        equipmentOrigin,
+        FRAMEPOINT_TOPLEFT,
+        0.01,
+        -0.01)
+    BlzFrameSetText(equipmentText, "Character")
 
     local itemFrames = {}
 
     for i=0,7,1 do
         local itemFrame = createItemFrame(
-            equipmentBackground,
-            math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 3),
-            -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE),
+            equipmentOrigin,
+            math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 2) + 0.015,
+            -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) - 0.025,
             i+1)
 
         table.insert(itemFrames, itemFrame)
     end
 
     local itemFrame = createItemFrame(
-        equipmentBackground,
+        equipmentOrigin,
         0.06,
-        consts.EQUIPMENT_ITEM_SIZE * -8,
+        consts.EQUIPMENT_ITEM_SIZE * -8 + 0.01,
         9)
 
     table.insert(itemFrames, itemFrame)
 
     self.frames = {
         itemFrames = itemFrames,
-        origin = equipmentBackground,
+        origin = equipmentOrigin,
     }
 
     return self
@@ -177,7 +182,7 @@ function Equipment:update(playerId)
         else
             BlzFrameSetTexture(
                 itemFrame.itemFrame,
-                "IconBorder.tga",
+                "InvTile.blp",
                 0,
                 true)
         end
