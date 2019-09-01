@@ -41,7 +41,7 @@ local cast = function(playerId)
 
     local hero = hero.getHero(playerId)
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 46, 10)
+    animations.queueAnimation(hero, 4, 10)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 

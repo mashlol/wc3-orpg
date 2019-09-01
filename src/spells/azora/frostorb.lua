@@ -58,7 +58,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 19, 2)
+    animations.queueAnimation(hero, 4, 2)
 
     local castSuccess = casttime.cast(playerId, 1)
     if not castSuccess then
@@ -67,7 +67,7 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    animations.queueAnimation(hero, 18, 1)
+    animations.queueAnimation(hero, 3, 1)
 
     for x=0,30,10 do
         for i=x,360+x,40 do
