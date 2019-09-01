@@ -60,11 +60,11 @@ local interruptCast = function()
     stopCast(playerId, true)
 end
 
-function stopCast(playerId, interuptable)
+function stopCast(playerId, interruptable)
     local timer = castTimes[playerId]
     if
         timer ~= nil and
-        ((interuptable and timer.interruptable == true) or not interruptable)
+        ((interruptable and timer.interruptable == true) or not interruptable)
     then
         PauseUnit(hero.getHero(playerId), false)
         castTimes[playerId] = nil
