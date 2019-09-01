@@ -1,4 +1,6 @@
 local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, attachToBottom)
+    BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
+
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local tooltipOrigin = BlzCreateFrameByType(
@@ -19,19 +21,12 @@ local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, atta
         0,
         attachToBottom and -0.02 or 0.02)
 
-    local tooltipBackdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "tooltipBackdrop",
+    local tooltipBackdrop = BlzCreateFrame(
+        "BoxedTextBackgroundTemplate",
         tooltipOrigin,
-        "",
+        0,
         0)
     BlzFrameSetAllPoints(tooltipBackdrop, tooltipOrigin)
-    BlzFrameSetTexture(
-        tooltipBackdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-    BlzFrameSetAlpha(tooltipBackdrop, 200)
 
     local tooltipText = BlzCreateFrameByType(
         "TEXT",
