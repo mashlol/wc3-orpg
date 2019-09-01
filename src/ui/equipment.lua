@@ -197,6 +197,8 @@ function Equipment:update(playerId)
             0.15,
             0.012 * numTooltipLines - 0.01)
 
+        BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
+
         BlzFrameSetText(
             itemFrame.tooltipFrame.text,
             itemmanager.getItemTooltip(itemId))
