@@ -48,7 +48,7 @@ function getItemTooltip(itemId)
 end
 
 function getItemTooltipNumLines(itemId)
-    return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0.0001
+    return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0
 end
 
 function applyEquippedItemBuffs()

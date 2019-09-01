@@ -206,6 +206,8 @@ function Backpack:update(playerId)
             itemFrame.tooltipFrame.text,
             itemmanager.getItemTooltip(itemId) or "")
 
+        BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
+
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end
 end

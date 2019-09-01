@@ -61,6 +61,7 @@ local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, atta
     return {
         origin = tooltipOrigin,
         text = tooltipText,
+        backdrop = tooltipBackdrop,
     }
 end
 
