@@ -30,7 +30,7 @@ local cast = function(playerId)
 end
 
 local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
+    return 0
 end
 
 local getTotalCooldown = function(playerId)
