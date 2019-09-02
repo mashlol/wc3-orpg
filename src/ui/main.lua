@@ -16,12 +16,12 @@ local UI_MODULES = {
     CastBar:new(),
     UnitFrame:new{
         xLoc = 0.55,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
         forTarget = true,
     },
     UnitFrame:new{
         xLoc = 0.26,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
         forTarget = false,
     },
     Backpack:new(),
@@ -75,6 +75,8 @@ function hideBlizzUI()
 end
 
 function initCustomUI()
+    BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
+
     for name, mod in pairs(UI_MODULES) do
         mod:init()
     end

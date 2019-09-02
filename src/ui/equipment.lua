@@ -111,7 +111,7 @@ function Equipment:init()
         "",
         0)
     BlzFrameSetSize(
-        equipmentOrigin, consts.EQUIPMENT_ITEM_SIZE * 5, consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
+        equipmentOrigin, consts.EQUIPMENT_ITEM_SIZE * 7 + 0.015, consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
     BlzFrameSetAbsPoint(
         equipmentOrigin,
         FRAMEPOINT_CENTER,
@@ -126,7 +126,7 @@ function Equipment:init()
         equipmentOrigin,
         "",
         0)
-    BlzFrameSetSize(equipmentText, consts.EQUIPMENT_ITEM_SIZE * 5, 0.012)
+    BlzFrameSetSize(equipmentText, consts.EQUIPMENT_ITEM_SIZE * 4 + 0.03, 0.012)
     BlzFrameSetPoint(
         equipmentText,
         FRAMEPOINT_TOPLEFT,
@@ -136,12 +136,36 @@ function Equipment:init()
         -0.01)
     BlzFrameSetText(equipmentText, "Character")
 
+    local portraitBackdropFrame = BlzCreateFrameByType(
+        "BACKDROP",
+        "portraitBackdropFrame",
+        equipmentOrigin,
+        "",
+        0)
+    BlzFrameSetSize(portraitBackdropFrame, 0.105, consts.EQUIPMENT_ITEM_SIZE * 7)
+    BlzFrameSetPoint(portraitBackdropFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, -0.0025, -0.025)
+    BlzFrameSetTexture(
+        portraitBackdropFrame,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+
+    local portraitFrame = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)
+    BlzFrameSetVisible(portraitFrame, true)
+    BlzFrameClearAllPoints(portraitFrame)
+    BlzFrameSetSize(portraitFrame, 0.08, consts.EQUIPMENT_ITEM_SIZE * 7)
+    BlzFrameSetPoint(portraitFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, 0.072, -0.025)
+
+    BlzFrameSetLevel(BlzFrameGetParent(portraitFrame), 10)
+
+    BlzFrameSetParent(BlzFrameGetParent(portraitFrame), equipmentOrigin)
+
     local itemFrames = {}
 
     for i=0,7,1 do
         local itemFrame = createItemFrame(
             equipmentOrigin,
-            math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 2) + 0.015,
+            math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) + 0.015,
             -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) - 0.025,
             i+1)
 
@@ -150,8 +174,8 @@ function Equipment:init()
 
     local itemFrame = createItemFrame(
         equipmentOrigin,
-        0.06,
-        consts.EQUIPMENT_ITEM_SIZE * -8 + 0.01,
+        0.09,
+        consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
         9)
 
     table.insert(itemFrames, itemFrame)

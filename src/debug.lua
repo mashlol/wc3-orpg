@@ -1,7 +1,7 @@
 local hero = require('src/hero.lua')
 local backpack = require('src/items/backpack.lua')
 
-local animNum = 0
+local animNum = 1
 
 -- Blademaster anims
 -- 2, 3, 8 atk
@@ -9,24 +9,40 @@ local animNum = 0
 
 
 local debug = function()
-    local playerId = GetPlayerId(GetTriggerPlayer())
-    local hero = hero.getHero(playerId)
+    -- local playerId = GetPlayerId(GetTriggerPlayer())
+    -- local hero = hero.getHero(playerId)
 
-    SetUnitAnimationByIndex(hero, animNum)
+    -- SetUnitAnimationByIndex(hero, animNum)
+
+
 
     print(animNum)
 
-    animNum = animNum + 1
+    animNum = animNum + 0.01
+
+    -- BlzFrameSetScale(_PORTRAIT, animNum)
+    -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
+end
+
+local debugDown = function()
+    print(animNum)
+
+    animNum = animNum - 0.01
+
+    -- BlzFrameSetScale(_PORTRAIT, animNum)
+    -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
 
     -- backpack.addItemIdToBackpack(playerId, 1)
 end
 
 local init = function()
     local trigger = CreateTrigger()
-
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_1, 0, true)
-
     TriggerAddAction(trigger, debug)
+
+    local trig2 = CreateTrigger()
+    BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_2, 0, true)
+    TriggerAddAction(trig2, debugDown)
 end
 
 return {
