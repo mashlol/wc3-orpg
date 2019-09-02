@@ -151,14 +151,19 @@ function Equipment:init()
         true)
 
     local portraitFrame = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)
+    local portraitParent = BlzFrameGetParent(portraitFrame)
     BlzFrameSetVisible(portraitFrame, true)
-    BlzFrameClearAllPoints(portraitFrame)
-    BlzFrameSetSize(portraitFrame, 0.08, consts.EQUIPMENT_ITEM_SIZE * 7)
-    BlzFrameSetPoint(portraitFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, 0.072, -0.025)
 
-    BlzFrameSetLevel(BlzFrameGetParent(portraitFrame), 10)
+    if BlzGetLocalClientWidth() / BlzGetLocalClientHeight() > 1.7 then
+        BlzFrameClearAllPoints(portraitFrame)
+        BlzFrameSetSize(portraitFrame, 0.08, consts.EQUIPMENT_ITEM_SIZE * 7)
+        BlzFrameSetPoint(portraitFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, 0.072, -0.025)
+    else
+        BlzFrameSetAllPoints(portraitFrame, portraitBackdropFrame)
+    end
 
-    BlzFrameSetParent(BlzFrameGetParent(portraitFrame), equipmentOrigin)
+    BlzFrameSetLevel(portraitParent, 10)
+    BlzFrameSetParent(portraitParent, equipmentOrigin)
 
     local itemFrames = {}
 
