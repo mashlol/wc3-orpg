@@ -1,6 +1,4 @@
 local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, attachToBottom)
-    BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
-
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local tooltipOrigin = BlzCreateFrameByType(

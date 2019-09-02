@@ -19,6 +19,11 @@ end
 
 function ActionBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+
+    local bottomBarBackground = BlzCreateFrame("Leaderboard", originFrame, 0, 0)
+    BlzFrameSetSize(bottomBarBackground, 0.52, 0.06)
+    BlzFrameSetAbsPoint(bottomBarBackground, FRAMEPOINT_BOTTOMLEFT, 0.15, 0)
+
     local actionBar = BlzCreateFrameByType(
         "BACKDROP",
         "actionBar",
@@ -28,7 +33,7 @@ function ActionBar:init()
     BlzFrameSetSize(
         actionBar, consts.ACTION_ITEM_SIZE * 12, consts.ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(
-        actionBar, FRAMEPOINT_CENTER, 0.4, consts.ACTION_ITEM_SIZE)
+        actionBar, FRAMEPOINT_CENTER, 0.4, consts.ACTION_ITEM_SIZE - 0.01)
     BlzFrameSetTexture(
         actionBar,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -50,7 +55,7 @@ function ActionBar:init()
             FRAMEPOINT_LEFT,
             actionBar,
             FRAMEPOINT_LEFT,
-            i * (consts.ACTION_ITEM_SIZE + 0.001),
+            i * (consts.ACTION_ITEM_SIZE + 0.0015),
             0)
 
         local actionCooldownBackdrop = BlzCreateFrameByType(

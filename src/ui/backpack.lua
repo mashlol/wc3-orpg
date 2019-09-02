@@ -38,8 +38,8 @@ function Backpack:init()
     BlzFrameSetAbsPoint(
         backpackOrigin,
         FRAMEPOINT_CENTER,
-        0.6,
-        0.24)
+        0.565,
+        0.32)
 
     utils.createBorderFrame(backpackOrigin)
 
