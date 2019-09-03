@@ -87,7 +87,7 @@ local cast = function(playerId)
         -- Project a new ball
         projectile.createProjectile{
             playerId = playerId,
-            model = "etst",
+            model = "efbl",
             fromV = oldLocation,
             toV = mouseV,
             speed = 900,
@@ -123,7 +123,7 @@ local cast = function(playerId)
         local startRad = i * ((2 * math.pi) / 3)
         local ball = projectile.createProjectile{
             playerId = playerId,
-            model = "etst",
+            model = "efbl",
             fromUnit = hero,
             speed = 200,
             fromRadius = 80,
