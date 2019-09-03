@@ -1,12 +1,7 @@
 local hero = require('src/hero.lua')
-local mouse = require('src/mouse.lua')
-local Vector = require('src/vector.lua')
-local effect = require('src/effect.lua')
-local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local animations = require('src/animations.lua')
 local buff = require('src/buff.lua')
-local damage = require('src/damage.lua')
 local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 

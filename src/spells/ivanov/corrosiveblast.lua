@@ -1,5 +1,4 @@
 local hero = require('src/hero.lua')
-local mouse = require('src/mouse.lua')
 local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local projectile = require('src/projectile.lua')
