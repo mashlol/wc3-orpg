@@ -114,7 +114,6 @@ local clearProjectiles = function()
 
                 facingRad = newRotation + math.pi / 2 * projectile.options.angleDir
             else
-                print('linear')
                 -- Linear projectile
                 local distVector = Vector:new(goalV):subtract(projectileV)
 
@@ -132,7 +131,6 @@ local clearProjectiles = function()
                     goalV.y - projectile.options.fromV.y,
                     goalV.x - projectile.options.fromV.x)
             end
-            print('here', newPos.x, newPos.y)
             SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
             SetUnitPosition(projectile.unit, newPos.x, newPos.y)
             if projectile.options.onMove then
