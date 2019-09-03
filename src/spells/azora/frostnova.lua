@@ -56,16 +56,16 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 4, 1)
 
-    for i=0,360,20 do
-        local toV = Vector:fromAngle(bj_DEGTORAD * i):add(mouseV)
-
+    for i=0,2*math.pi, 1.57 do
         projectile.createProjectile{
             playerId = playerId,
             model = "efnv",
             fromV = mouseV,
-            toV = toV,
-            speed = 450,
-            length = 250,
+            fromAngle = i,
+            toAngle = 8 * math.pi + i,
+            speed = 1000,
+            fromRadius = 30,
+            toRadius = 200,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     effect.createEffect{
@@ -73,12 +73,10 @@ local cast = function(playerId)
                         unit = collidedUnit,
                         duration = 0.5,
                     }
-
                     buff.addBuff(hero, collidedUnit, 'frostnova', 4)
                 end
-
                 return false
-            end
+            end,
         }
     end
 
