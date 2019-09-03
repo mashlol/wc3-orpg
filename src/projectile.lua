@@ -32,9 +32,14 @@ local getGoalV = function(options)
             y = GetUnitY(options.destUnit),
         }
     else
+        local origin = options.fromUnit and
+            Vector:new{
+                x = GetUnitX(options.fromUnit),
+                y = GetUnitY(options.fromUnit)} or
+            options.fromV
         return Vector:fromAngle(options.toAngle)
             :multiply(options.toRadius)
-            :add(options.fromV)
+            :add(origin)
     end
 end
 
@@ -46,7 +51,7 @@ local isAtFinalRotation = function(projectile)
     local curVec = Vector:new(projectileV)
         :subtract(projectile.options.fromV)
     local curRadius = curVec:magnitude()
-    return projectile.options.toRadius ~=  projectile.options.fromRadius and
+    return projectile.options.toRadius ~= projectile.options.fromRadius and
         isCloseTo(curRadius, projectile.options.toRadius, 5)
 end
 
@@ -84,9 +89,10 @@ local clearProjectiles = function()
         if projectile.toRemove then
             -- do nothing
         elseif
-            isCloseTo(curProjectileX, goalV.x, 15) and
+            not projectile.options.permanent and
+            (isCloseTo(curProjectileX, goalV.x, 15) and
             isCloseTo(curProjectileY, goalV.y, 15) or
-            isAtFinalRotation(projectile)
+            isAtFinalRotation(projectile))
         then
             -- Already at destination, can finish
             destroyProjectile(projectile)
@@ -95,10 +101,16 @@ local clearProjectiles = function()
             local facingRad
             if projectile.options.fromAngle ~= nil then
                 -- Rotation projectile
-                local curVec = Vector:new(projectileV)
-                    :subtract(projectile.options.fromV)
-                local curRotation = curVec:angle()
-                local curRadius = curVec:magnitude()
+                local origin = projectile.options.fromUnit and
+                    Vector:new{
+                        x = GetUnitX(projectile.options.fromUnit),
+                        y = GetUnitY(projectile.options.fromUnit)} or
+                    projectile.options.fromV
+
+                -- local curVec = Vector:new(projectileV)
+                --     :subtract(origin)
+                local curRotation = projectile.curRotation
+                local curRadius = projectile.curRadius
 
                 local newRotation = curRotation +
                     (projectile.options.speed * (projectile.options.toAngle - projectile.options.fromAngle)) / (2 * math.pi * curRadius) *
@@ -108,9 +120,12 @@ local clearProjectiles = function()
                     ((projectile.options.toRadius - projectile.options.fromRadius) / ((2 * math.pi * curRadius) / (projectile.options.speed)))  *
                     elapsedTime
 
+                projectile.curRadius = newRadius
+                projectile.curRotation = newRotation
+
                 newPos = Vector:fromAngle(newRotation)
                     :multiply(newRadius)
-                    :add(projectile.options.fromV)
+                    :add(origin)
 
                 facingRad = newRotation + math.pi / 2 * projectile.options.angleDir
             else
@@ -164,39 +179,48 @@ local createProjectile = function(options)
         options.toV = goalV
     end
 
+    local origin = options.fromUnit and
+        Vector:new{
+            x = GetUnitX(options.fromUnit),
+            y = GetUnitY(options.fromUnit)} or
+        options.fromV
     if options.projectile == nil then
         local startV
         if options.fromAngle ~= nil and options.fromRadius ~= nil then
             startV = Vector:fromAngle(options.fromAngle)
                 :multiply(options.fromRadius)
-                :add(options.fromV)
+                :add(origin)
 
             options.radiusDir = options.fromRadius > options.toRadius and -1 or 1
             options.angleDir = options.fromAngle > options.toAngle and -1 or 1
         else
-            startV = Vector:new(options.fromV)
+            startV = Vector:new(origin)
         end
         options.projectile = CreateUnit(
             Player(PLAYER_NEUTRAL_PASSIVE),
             FourCC(options.model),
             startV.x,
             startV.y,
-            bj_RADTODEG * Atan2(goalV.y - options.fromV.y, goalV.x - options.fromV.x))
+            bj_RADTODEG * Atan2(goalV.y - origin.y, goalV.x - origin.x))
         options.shouldRemove = true
     else
         options.shouldRemove = false
     end
 
-    table.insert(projectiles, {
+    local proj = {
         unit = options.projectile,
         options = options,
-        alreadyCollided = {}
-    })
+        alreadyCollided = {},
+        curRadius = options.fromRadius,
+        curRotation = options.fromAngle,
+    }
+    table.insert(projectiles, proj)
 
-    return options.projectile
+    return proj
 end
 
 return {
     init = init,
     createProjectile = createProjectile,
+    destroyProjectile = destroyProjectile,
 }

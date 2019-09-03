@@ -62,7 +62,7 @@ local ALL_HERO_INFO = {
             [9] = 'icicle',
             [10] = 'phoenix',
             [11] = 'fireshell',
-            [12] = 'frostorb',
+            [12] = 'frostballs',
         },
         baseHP = 400,
     },
