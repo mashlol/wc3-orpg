@@ -5,8 +5,8 @@ local collision = require('src/collision.lua')
 local projectiles = {}
 local timer
 
-local isCloseTo = function(val, expected)
-    return val + 15 >= expected and val - 15 <= expected
+local isCloseTo = function(val, expected, range)
+    return val + range >= expected and val - range <= expected
 end
 
 local destroyProjectile = function(projectile)
@@ -26,12 +26,28 @@ end
 local getGoalV = function(options)
     if options.toV ~= nil then
         return Vector:new(options.toV)
-    else
+    elseif options.destUnit ~= nil then
         return Vector:new{
             x = GetUnitX(options.destUnit),
             y = GetUnitY(options.destUnit),
         }
+    else
+        return Vector:fromAngle(options.toAngle)
+            :multiply(options.toRadius)
+            :add(options.fromV)
     end
+end
+
+local isAtFinalRotation = function(projectile)
+    local curProjectileX = GetUnitX(projectile.unit)
+    local curProjectileY = GetUnitY(projectile.unit)
+
+    local projectileV = Vector:new{x = curProjectileX, y = curProjectileY}
+    local curVec = Vector:new(projectileV)
+        :subtract(projectile.options.fromV)
+    local curRadius = curVec:magnitude()
+    return projectile.options.toRadius ~=  projectile.options.fromRadius and
+        isCloseTo(curRadius, projectile.options.toRadius, 5)
 end
 
 local clearProjectiles = function()
@@ -68,34 +84,59 @@ local clearProjectiles = function()
         if projectile.toRemove then
             -- do nothing
         elseif
-            isCloseTo(curProjectileX, goalV.x) and
-            isCloseTo(curProjectileY, goalV.y)
+            isCloseTo(curProjectileX, goalV.x, 15) and
+            isCloseTo(curProjectileY, goalV.y, 15) or
+            isAtFinalRotation(projectile)
         then
             -- Already at destination, can finish
             destroyProjectile(projectile)
         else
-            -- Move toward destination at speed
-            local distVector = Vector:new(goalV):subtract(projectileV)
+            local newPos
+            local facingRad
+            if projectile.options.fromAngle ~= nil then
+                -- Rotation projectile
+                local curVec = Vector:new(projectileV)
+                    :subtract(projectile.options.fromV)
+                local curRotation = curVec:angle()
+                local curRadius = curVec:magnitude()
 
-            local deltaV = Vector:new(distVector)
-                :normalize()
-                :multiply(projectile.options.speed * elapsedTime)
+                local newRotation = curRotation +
+                    (projectile.options.speed * (projectile.options.toAngle - projectile.options.fromAngle)) / (2 * math.pi * curRadius) *
+                    elapsedTime
 
-            if deltaV:magnitude() >= distVector:magnitude() then
-                deltaV = distVector
+                local newRadius = curRadius +
+                    ((projectile.options.toRadius - projectile.options.fromRadius) / ((2 * math.pi * curRadius) / (projectile.options.speed)))  *
+                    elapsedTime
+
+                newPos = Vector:fromAngle(newRotation)
+                    :multiply(newRadius)
+                    :add(projectile.options.fromV)
+
+                facingRad = newRotation + math.pi / 2 * projectile.options.angleDir
+            else
+                print('linear')
+                -- Linear projectile
+                local distVector = Vector:new(goalV):subtract(projectileV)
+
+                newPos = Vector:new(distVector)
+                    :normalize()
+                    :multiply(projectile.options.speed * elapsedTime)
+
+                if newPos:magnitude() >= distVector:magnitude() then
+                    newPos = distVector
+                end
+
+                newPos:add(projectileV)
+
+                facingRad = Atan2(
+                    goalV.y - projectile.options.fromV.y,
+                    goalV.x - projectile.options.fromV.x)
             end
-
-            deltaV:add(projectileV)
-
-            SetUnitX(projectile.unit, deltaV.x)
-            SetUnitY(projectile.unit, deltaV.y)
-            local facingRad = Atan2(
-                goalV.y - projectile.options.fromV.y,
-                goalV.x - projectile.options.fromV.x)
+            print('here', newPos.x, newPos.y)
             SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
-
+            SetUnitPosition(projectile.unit, newPos.x, newPos.y)
             if projectile.options.onMove then
-                projectile.options.onMove(deltaV.x, deltaV.y)
+                projectile.options.onMove(newPos.x, newPos.y)
             end
         end
     end
@@ -126,11 +167,22 @@ local createProjectile = function(options)
     end
 
     if options.projectile == nil then
+        local startV
+        if options.fromAngle ~= nil and options.fromRadius ~= nil then
+            startV = Vector:fromAngle(options.fromAngle)
+                :multiply(options.fromRadius)
+                :add(options.fromV)
+
+            options.radiusDir = options.fromRadius > options.toRadius and -1 or 1
+            options.angleDir = options.fromAngle > options.toAngle and -1 or 1
+        else
+            startV = Vector:new(options.fromV)
+        end
         options.projectile = CreateUnit(
             Player(PLAYER_NEUTRAL_PASSIVE),
             FourCC(options.model),
-            options.fromV.x,
-            options.fromV.y,
+            startV.x,
+            startV.y,
             bj_RADTODEG * Atan2(goalV.y - options.fromV.y, goalV.x - options.fromV.x))
         options.shouldRemove = true
     else
