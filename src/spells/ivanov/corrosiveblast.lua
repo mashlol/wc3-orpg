@@ -76,7 +76,7 @@ local castCorrosivePull = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "etst",
+        model = "ecrp",
         fromV = targetV,
         destUnit = hero,
         speed = 1000,
