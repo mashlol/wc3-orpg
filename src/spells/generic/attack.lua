@@ -1,10 +1,3 @@
-local hero = require('src/hero.lua')
-local log = require('src/log.lua')
-local target = require('src/target.lua')
-
--- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 1
-
 local getSpellId = function()
     return 'attack'
 end
