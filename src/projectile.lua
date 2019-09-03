@@ -186,6 +186,7 @@ local createProjectile = function(options)
         options.fromV
     if options.projectile == nil then
         local startV
+        local startFacing
         if options.fromAngle ~= nil and options.fromRadius ~= nil then
             startV = Vector:fromAngle(options.fromAngle)
                 :multiply(options.fromRadius)
@@ -193,15 +194,17 @@ local createProjectile = function(options)
 
             options.radiusDir = options.fromRadius > options.toRadius and -1 or 1
             options.angleDir = options.fromAngle > options.toAngle and -1 or 1
+            startFacing = options.fromAngle + math.pi / 2 * options.angleDir
         else
             startV = Vector:new(origin)
+            startFacing = Atan2(goalV.y - origin.y, goalV.x - origin.x)
         end
         options.projectile = CreateUnit(
             Player(PLAYER_NEUTRAL_PASSIVE),
             FourCC(options.model),
             startV.x,
             startV.y,
-            bj_RADTODEG * Atan2(goalV.y - origin.y, goalV.x - origin.x))
+            bj_RADTODEG * startFacing)
         options.shouldRemove = true
     else
         options.shouldRemove = false
