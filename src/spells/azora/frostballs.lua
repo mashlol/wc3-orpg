@@ -94,8 +94,11 @@ local cast = function(playerId)
             length = 800,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    -- TODO check if frozen
-                    damage.dealDamage(hero, collidedUnit, 40)
+                    if buff.hasBuff(collidedUnit, 'frostnova') then
+                        damage.dealDamage(hero, collidedUnit, 160)
+                    else
+                        damage.dealDamage(hero, collidedUnit, 40)
+                    end
                     return true
                 end
                 return false
@@ -117,6 +120,8 @@ local cast = function(playerId)
 
     animations.queueAnimation(hero, 3, 1)
 
+    buff.addBuff(hero, hero, 'frostball', 14400)
+
     local balls = {}
 
     for i=0,2,1 do
@@ -133,7 +138,7 @@ local cast = function(playerId)
             permanent = true,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    -- TODO slow target
+                    buff.addBuff(hero, collidedUnit, 'frostballslow', 8)
                     damage.dealDamage(hero, collidedUnit, 40)
 
                     return true
@@ -145,6 +150,7 @@ local cast = function(playerId)
 
                 if getBall(playerId) == nil then
                     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
+                    buff.removeBuff(hero, 'frostball')
                 end
             end
         }
