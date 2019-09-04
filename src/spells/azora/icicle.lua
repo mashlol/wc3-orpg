@@ -21,7 +21,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Azora fires a blast of frost energy from her, dealing 50 damage to the first enemy struck. If the enemy is frozen, the damage is increased five-fold.'
+    return 'Azora fires a blast of frost energy from her, dealing 50 damage to the first enemy struck. If the enemy is frozen, the damage is doubled.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -70,7 +70,7 @@ local cast = function(playerId)
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 if buff.hasBuff(collidedUnit, 'frostnova') then
-                    damage.dealDamage(hero, collidedUnit, 250)
+                    damage.dealDamage(hero, collidedUnit, 100)
                 else
                     damage.dealDamage(hero, collidedUnit, 50)
                 end
