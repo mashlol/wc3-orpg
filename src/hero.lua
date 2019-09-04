@@ -88,17 +88,18 @@ local ALL_HERO_INFO = {
 
 local respawn = function()
     local unit = GetDyingUnit()
+    local level = GetHeroLevel(unit)
 
     TriggerSleepAction(5)
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            createHeroForPlayer(i)
+            createHeroForPlayer(i, level)
         end
     end
 end
 
-function createHeroForPlayer(playerId)
+function createHeroForPlayer(playerId, level)
     heroes[playerId] = CreateUnit(
         Player(playerId), pickedHeroes[playerId].id, -150, -125, 0)
 
@@ -107,6 +108,10 @@ function createHeroForPlayer(playerId)
         SelectUnit(heroes[playerId], true)
         ResetToGameCamera(0)
         PanCameraToTimed(-150, -125, 0)
+    end
+
+    if level ~= nil then
+        SetHeroLevel(heroes[playerId], level, false)
     end
 end
 
