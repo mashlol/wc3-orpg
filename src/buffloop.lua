@@ -1,5 +1,7 @@
 local buff = require('src/buff.lua')
 local damage = require('src/damage.lua')
+local hero = require('src/hero.lua')
+local casttime = require('src/casttime.lua')
 
 local BUFF_LOOP_INTERVAL = 0.1
 
@@ -8,9 +10,11 @@ function applyBuffs()
     local buffInstances = buff.getBuffInstances()
     for unitId,unitInfo in pairs(buffInstances) do
         local unit = unitInfo.unit
+        local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
+        local ownerHero = hero.getHero(ownerPlayerId)
         local buffs = unitInfo.buffs
         local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-        local isStunned = false
+        local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
         local isRooted = false
         local scale = GetUnitPointValue(unit) / 100
 
