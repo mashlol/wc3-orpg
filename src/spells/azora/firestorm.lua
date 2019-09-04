@@ -78,10 +78,10 @@ local cast = function(playerId)
             duration = 1,
         }
         local collidedUnits = collision.getAllCollisions(
-            Vector:new{x = randX, y = randY}, 100)
+            Vector:new{x = randX, y = randY}, 80)
         for idx, unit in pairs(collidedUnits) do
             if IsUnitEnemy(unit, Player(playerId)) then
-                damage.dealDamage(hero, unit, 80)
+                damage.dealDamage(hero, unit, 20)
                 buff.addBuff(hero, unit, 'ignite', 8)
             end
         end

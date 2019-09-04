@@ -21,7 +21,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Azora conjures a ball of flame, dealing 100 damage to the first target hit.'
+    return 'Azora conjures a ball of flame, dealing 60 damage to the first target hit.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -68,7 +68,7 @@ local cast = function(playerId)
         length = 500,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 100)
+                damage.dealDamage(hero, collidedUnit, 60)
                 buff.addBuff(hero, collidedUnit, 'ignite', 8)
                 return true
             end
