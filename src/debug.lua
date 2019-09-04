@@ -14,7 +14,7 @@ local debug = function()
 
     -- SetUnitAnimationByIndex(hero, animNum)
 
-
+    -- BlzSetUnitIntegerField(hero, UNIT_IF_LEVEL, 10)
 
     print(animNum)
 
