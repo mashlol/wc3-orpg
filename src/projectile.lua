@@ -107,8 +107,6 @@ local clearProjectiles = function()
                         y = GetUnitY(projectile.options.fromUnit)} or
                     projectile.options.fromV
 
-                -- local curVec = Vector:new(projectileV)
-                --     :subtract(origin)
                 local curRotation = projectile.curRotation
                 local curRadius = projectile.curRadius
 
@@ -147,7 +145,8 @@ local clearProjectiles = function()
                     goalV.x - projectile.options.fromV.x)
             end
             SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
-            SetUnitPosition(projectile.unit, newPos.x, newPos.y)
+            SetUnitX(projectile.unit, newPos.x)
+            SetUnitY(projectile.unit, newPos.y)
             if projectile.options.onMove then
                 projectile.options.onMove(newPos.x, newPos.y)
             end
