@@ -51,7 +51,6 @@ local hulkingpot = require('src/spells/ivanov/hulkingpot.lua')
 local dampenpot = require('src/spells/ivanov/dampenpot.lua')
 local pocketgoo = require('src/spells/ivanov/pocketgoo.lua')
 
-local casttime = require('src/casttime.lua')
 local hero = require('src/hero.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
@@ -129,9 +128,7 @@ local getSpellKey = function(playerId, idx)
 end
 
 local castSpell = function(playerId, idx)
-    local isCasting = casttime.isCasting(playerId)
-
-    if isCasting then
+    if IsUnitPaused(hero.getHero(playerId)) then
         return
     end
 
