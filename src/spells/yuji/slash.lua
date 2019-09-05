@@ -2,6 +2,7 @@ local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
 local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
+local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local collision = require('src/collision.lua')
@@ -80,6 +81,7 @@ local cast = function(playerId)
             COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
+    SetUnitTimeScale(hero, 2)
     animations.queueAnimation(
         hero,
         storedData[playerId].attackCount == 2 and
@@ -93,37 +95,60 @@ local cast = function(playerId)
         hero,
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x))
 
+    projectile.createProjectile{
+        playerId = playerId,
+        projectile = hero,
+        fromV = heroV,
+        toV = mouseV,
+        speed = 800,
+        length = storedData[playerId].attackCount == 2 and
+            250 or
+            100,
+        radius = 75,
+        onCollide = function()
+            -- Stop projecting if you collide with anything
+            return true
+        end,
+        onDestroy = function()
+            -- Finish up the stuff
+            local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
+
+            -- Update heroV now that we've moved
+            local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+
+            local facingDeg =
+                bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
+
+            local shape = {
+                getCollisionPoint(heroV, facingDeg, 1, 0),
+                getCollisionPoint(heroV, facingDeg, -1, 0),
+                getCollisionPoint(heroV, facingDeg, -1, 1),
+                getCollisionPoint(heroV, facingDeg, 1, 1),
+            }
+
+            local collidedUnits = collision.getAllCollisions(shape)
+            for idx, unit in pairs(collidedUnits) do
+                if IsUnitEnemy(unit, Player(playerId)) then
+                    damage.dealDamage(hero, unit, dmgAmount)
+
+                    effect.createEffect{
+                        model = "ebld",
+                        unit = unit,
+                        duration = 0.1,
+                    }
+                end
+            end
+        end
+    }
+
     casttime.cast(
         playerId,
         storedData[playerId].attackCount == 2 and
-            0.7 or
-            0.2,
+            0.35 or
+            0.1,
         false)
 
-    local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
-
-    local facingDeg =
-        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
-
-    local shape = {
-        getCollisionPoint(heroV, facingDeg, 1, 0),
-        getCollisionPoint(heroV, facingDeg, -1, 0),
-        getCollisionPoint(heroV, facingDeg, -1, 1),
-        getCollisionPoint(heroV, facingDeg, 1, 1),
-    }
-
-    local collidedUnits = collision.getAllCollisions(shape)
-    for idx, unit in pairs(collidedUnits) do
-        if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, dmgAmount)
-
-            effect.createEffect{
-                model = "ebld",
-                unit = unit,
-                duration = 0.1,
-            }
-        end
-    end
+    SetUnitTimeScale(hero, 1)
 
     return true
 end
