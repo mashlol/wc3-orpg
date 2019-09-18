@@ -52,3 +52,5 @@ local mainInit = function()
 end
 
 TimerStart(CreateTimer(), 0.0, false, mainInit)
+
+collectgarbage("stop")
