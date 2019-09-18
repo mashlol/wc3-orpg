@@ -1,4 +1,3 @@
-
 local TYPE = {
     NORMAL = {
         duration = 5,
