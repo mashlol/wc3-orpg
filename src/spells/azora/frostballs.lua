@@ -69,11 +69,11 @@ local cast = function(playerId)
             0.05)
 
         IssueImmediateOrder(hero, "stop")
-        animations.queueAnimation(hero, 4, 1)
+        animations.queueAnimation(hero, 19, 1)
 
         casttime.cast(playerId, 0.2, false)
 
-        animations.queueAnimation(hero, 3, 1)
+        animations.queueAnimation(hero, 18, 1)
 
         local oldLocation = Vector:new{
             x = GetUnitX(existingBall.unit),
@@ -109,7 +109,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 4, 1)
+    animations.queueAnimation(hero, 19, 1)
 
     SetUnitFacingTimed(
         hero,
@@ -118,7 +118,7 @@ local cast = function(playerId)
 
     casttime.cast(playerId, 1, false)
 
-    animations.queueAnimation(hero, 3, 1)
+    animations.queueAnimation(hero, 18, 1)
 
     buff.addBuff(hero, hero, 'frostball', 14400)
 
