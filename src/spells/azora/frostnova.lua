@@ -54,7 +54,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 4, 1)
+    animations.queueAnimation(hero, 38, 1)
 
     for i=0,2*math.pi, 1.57 do
         projectile.createProjectile{

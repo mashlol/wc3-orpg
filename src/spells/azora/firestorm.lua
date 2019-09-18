@@ -59,13 +59,13 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 4, 2)
+    animations.queueAnimation(hero, 19, 2)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     casttime.cast(playerId, 1, false)
 
-    animations.queueAnimation(hero, 13, 1)
+    animations.queueAnimation(hero, 18, 1)
 
     for i=0,40,1 do
         local randX = GetRandomReal(mouseV.x - 200, mouseV.x + 200)
