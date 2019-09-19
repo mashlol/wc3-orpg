@@ -14,13 +14,13 @@ function onSave()
         :addInt(GetHeroLevel(heroUnit), 74)
         :addInt(pickedHeroId, 74)
 
-    for i=0,35,1 do
-        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 74)
-    end
+    -- for i=0,35,1 do
+    --     code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 74)
+    -- end
 
-    for i=1,9,1 do
-        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 74)
-    end
+    -- for i=1,9,1 do
+    --     code:addInt(equipment.getItemInSlot(playerId, i) or 0, 74)
+    -- end
 
     code = code:build()
 

@@ -104,7 +104,13 @@ local respawn = function()
     end
 end
 
+local forceCameraTriggers = {}
+local selectHeroTriggers = {}
+
 function createHeroForPlayer(playerId, level)
+    DestroyTrigger(forceCameraTriggers[playerId])
+    DestroyTrigger(selectHeroTriggers[playerId])
+
     heroes[playerId] = CreateUnit(
         Player(playerId), pickedHeroes[playerId].id, -150, -125, 0)
 
@@ -115,13 +121,11 @@ function createHeroForPlayer(playerId, level)
         PanCameraToTimed(-150, -125, 0)
     end
 
-    if level ~= nil then
+    if level ~= nil and level ~= 1 then
+        print('setting level to ', level)
         SetHeroLevel(heroes[playerId], level, false)
     end
 end
-
-local forceCameraTriggers = {}
-local selectHeroTriggers = {}
 
 local forceCameraLocation = function(playerId, camera)
     CameraSetupApplyForPlayer(true, camera, Player(playerId), 0)
@@ -133,9 +137,6 @@ local onHeroPicked = function()
 
     pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
     createHeroForPlayer(playerId)
-
-    DestroyTrigger(forceCameraTriggers[playerId])
-    DestroyTrigger(selectHeroTriggers[playerId])
 end
 
 local showPickHeroDialog = function(playerId)
@@ -202,9 +203,20 @@ local getPickedHero = function(playerId)
     return pickedHeroes[playerId]
 end
 
+function restorePickedHero(playerId, storedHeroId, level)
+    for idx, info in pairs(ALL_HERO_INFO) do
+        if info.storedId == storedHeroId then
+            pickedHeroes[playerId] = info
+            createHeroForPlayer(playerId, level)
+            return
+        end
+    end
+end
+
 return {
     init = init,
     getHero = getHero,
     isHero = isHero,
     getPickedHero = getPickedHero,
+    restorePickedHero = restorePickedHero,
 }
