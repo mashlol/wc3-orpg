@@ -31,6 +31,9 @@ function getItemIdsInBackpack(playerId)
 end
 
 function getItemIdAtPosition(playerId, position)
+    if backpacks[playerId][position] == 0 then
+        return nil
+    end
     return backpacks[playerId][position]
 end
 

@@ -167,6 +167,8 @@ end
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
     RemoveUnit(heroes[repickPlayerId])
+    heroes[repickPlayerId] = nil
+    pickedHeroes[repickPlayerId] = nil
     showPickHeroDialog(repickPlayerId)
 end
 

@@ -9,7 +9,7 @@ local animNum = 1
 
 
 local debug = function()
-    -- local playerId = GetPlayerId(GetTriggerPlayer())
+    local playerId = GetPlayerId(GetTriggerPlayer())
     -- local hero = hero.getHero(playerId)
 
     -- SetUnitAnimationByIndex(hero, animNum)
@@ -19,6 +19,8 @@ local debug = function()
     print(animNum)
 
     animNum = animNum + 0.01
+
+    -- backpack.addItemIdToBackpack(playerId, 1)
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
