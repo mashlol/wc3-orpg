@@ -33,7 +33,6 @@ function onLoad()
     end
 
     local validCode = decoded:verify()
-    print("Valid code?: ", validCode)
 
     if not validCode then
         print("Code wasnt valid but allowing through during ALPHA anyway")
