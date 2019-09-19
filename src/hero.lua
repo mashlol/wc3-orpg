@@ -1,3 +1,6 @@
+local backpack = require('src/items/backpack.lua')
+local equipment = require('src/items/equipment.lua')
+
 local heroes = {}
 local pickedHeroes = {}
 
@@ -166,6 +169,8 @@ end
 
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
+    equipment.clear(repickPlayerId)
+    backpack.clear(repickPlayerId)
     RemoveUnit(heroes[repickPlayerId])
     heroes[repickPlayerId] = nil
     pickedHeroes[repickPlayerId] = nil
