@@ -5,23 +5,40 @@ shopt -s globstar
 echo "Copying map.w3x to bin/built.w3x"
 cp map.w3x bin/built.w3x
 
+cd build
+
 echo "Extracting war3map.lua"
 ./MPQEditor.exe -console mopaq_extract
 
+cd ..
+
 echo "Generating bin/war3map_compiled.lua"
 
-node build
+node ./build/build
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 
 echo 'Moving and cleaning up temp lua files'
 
-mv bin/war3map_replaced.lua bin/war3map.lua
-rm bin/war3map_compiled.lua
+cp bin/war3map_replaced.lua bin/war3map.lua
+
+echo 'Minifying lua'
+
+cd build/LuaMinify
+
+lua.exe CommandLineMinify.lua ../../bin/war3map.lua war3map_min.lua
+
+cd ../..
+
+mv build/LuaMinify/war3map_min.lua bin/war3map.lua
 
 echo 'Adding war3map.lua to mpq archive'
 
+cd build
+
 ./MPQEditor.exe -console mopaq
+
+cd ..
 
 echo 'Deleting old versions'
 
@@ -29,7 +46,8 @@ rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
 
 echo 'Deleting build artifacts'
 
-mv ./bin/war3map.lua ./bin/script_stored
+mv ./bin/war3map.lua ./bin/script_stored_min
+mv ./bin/war3map_replaced.lua ./bin/script_stored_orig
 
 rm ./bin/*.lua
 

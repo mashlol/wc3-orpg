@@ -1,3 +1,0 @@
-o bin/built.w3x
-e bin/built.w3x war3map.lua bin/
-c

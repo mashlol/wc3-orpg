@@ -1,3 +1,0 @@
-o bin/built.w3x
-a bin/built.w3x bin/war3map.lua war3map.lua /c /auto
-c
