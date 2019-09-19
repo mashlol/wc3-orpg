@@ -162,7 +162,7 @@ function UnitFrame:init()
     local buffIcons = {}
     for i=0,9,1 do
         local buffIcon = BlzCreateFrameByType(
-            "FRAME",
+            "BACKDROP",
             "buffIcon",
             unitFrameOrigin,
             "",
