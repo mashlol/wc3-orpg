@@ -54,11 +54,9 @@ local getEquippedItems = function(playerId)
 end
 
 function clear(playerId)
-    print('clear equipment')
     for i=1,9,1 do
         equipments[playerId][i] = nil
     end
-    print('done clearing')
 end
 
 function init()

@@ -9,7 +9,6 @@ function onSave()
     local heroUnit = hero.getHero(playerId)
     local pickedHeroId = hero.getPickedHero(playerId).storedId
 
-    print(pickedHeroId)
     local code = Code:new()
         :addInt(GetHeroLevel(heroUnit), 73)
         :addInt(pickedHeroId, 73)
