@@ -53,6 +53,14 @@ local getEquippedItems = function(playerId)
     return equipments[playerId]
 end
 
+function clear(playerId)
+    print('clear equipment')
+    for i=1,9,1 do
+        equipments[playerId][i] = nil
+    end
+    print('done clearing')
+end
+
 function init()
     for i=0,bj_MAX_PLAYERS,1 do
         equipments[i] = {}
@@ -62,6 +70,7 @@ end
 return {
     init = init,
     SLOT = SLOT,
+    clear = clear,
     equipItem = equipItem,
     unequipItem = unequipItem,
     getItemInSlot = getItemInSlot,

@@ -55,6 +55,12 @@ local getActiveItem = function(playerId)
     return activeItemPositions[playerId]
 end
 
+function clear(playerId)
+    for i=1,36,1 do
+        backpacks[playerId][i] = nil
+    end
+end
+
 function init()
     for i=0,bj_MAX_PLAYERS,1 do
         backpacks[i] = {}
@@ -63,6 +69,7 @@ end
 
 return {
     init = init,
+    clear = clear,
     addItemIdToBackpack = addItemIdToBackpack,
     addItemIdToBackpackPosition = addItemIdToBackpackPosition,
     removeItemFromBackpack = removeItemFromBackpack,
