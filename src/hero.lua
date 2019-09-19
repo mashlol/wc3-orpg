@@ -125,7 +125,6 @@ function createHeroForPlayer(playerId, level)
     end
 
     if level ~= nil and level ~= 1 then
-        print('setting level to ', level)
         SetHeroLevel(heroes[playerId], level, false)
     end
 end
