@@ -17,6 +17,8 @@ function onSave()
         code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 73)
     end
 
+    code:addInt(string.byte(GetPlayerName(Player(playerId))) % 2500, 2500)
+
     for i=1,9,1 do
         code:addInt(equipment.getItemInSlot(playerId, i) or 0, 73)
     end

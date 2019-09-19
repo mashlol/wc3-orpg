@@ -27,6 +27,11 @@ function onLoad()
         backpack.addItemIdToBackpackPosition(playerId, i, itemId)
     end
 
+    local nameEncoded = decoded:getInt(2500)
+    if nameEncoded ~= string.byte(GetPlayerName(Player(playerId))) % 2500 then
+        print("Code appears to be for another player, but allowing it during alpha anyway")
+    end
+
     for i=1,9,1 do
         local itemId = decoded:getInt(73)
         equipment.equipItem(playerId, i, itemId)
@@ -35,7 +40,7 @@ function onLoad()
     local validCode = decoded:verify()
 
     if not validCode then
-        print("Code wasnt valid but allowing through during ALPHA anyway")
+        print("Code wasnt valid but allowing through during alpha anyway")
     end
 
     hero.restorePickedHero(playerId, heroId, level)
