@@ -1,10 +1,9 @@
 {
-    "Lua.diagnostics.disable": [
-        "lowercase-global"
-    ],
+    "Lua.diagnostics.enable": false,
     "Lua.diagnostics.globals": [
         "gg_rct_Region_000",
         "gg_cam_Camera_002",
-        "gg_dest_LTg2_2324"
+        "gg_dest_LTg2_2324",
+        "createHeroForPlayer"
     ]
 }
