@@ -29,7 +29,7 @@ function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local unitFrameOrigin = BlzCreateFrameByType(
-        "TEXTBUTTON",
+        "BUTTON",
         "unitFrameOrigin",
         originFrame,
         "",
@@ -162,7 +162,7 @@ function UnitFrame:init()
     local buffIcons = {}
     for i=0,9,1 do
         local buffIcon = BlzCreateFrameByType(
-            "BACKDROP",
+            "FRAME",
             "buffIcon",
             unitFrameOrigin,
             "",
@@ -201,6 +201,8 @@ function UnitFrame:init()
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
         trig, unitFrameOrigin, FRAMEEVENT_CONTROL_CLICK)
+    BlzTriggerRegisterFrameEvent(trig, unitNameFrame, FRAMEEVENT_CONTROL_CLICK)
+
     TriggerAddAction(trig, function()
         self:onClick()
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
