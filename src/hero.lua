@@ -4,6 +4,7 @@ local pickedHeroes = {}
 local ALL_HERO_INFO = {
     [FourCC("Hyuj")] = {
         name = 'Yuji',
+        storedId = 1,
         id = FourCC("Hyuj"),
         spells = {
             [1] = 'slash',
@@ -21,6 +22,7 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
+        storedId = 2,
         id = FourCC("Hstm"),
         spells = {
             [1] = 'punch',
@@ -31,6 +33,7 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
+        storedId = 3,
         id = FourCC("Hivn"),
         spells = {
             [1] = 'rejuvpot',
@@ -49,6 +52,7 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
+        storedId = 4,
         id = FourCC("Hazr"),
         spells = {
             [1] = 'fireball',
@@ -68,6 +72,7 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
+        storedId = 5,
         id = FourCC("Htar"),
         spells = {
             [1] = 'whirlwind',
