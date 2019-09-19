@@ -39,8 +39,6 @@ function Code:new()
 end
 
 function Code:fromStr(codeStr)
-    print("Decoding from string ", codeStr)
-
     local o = {
         codeStr = codeStr,
         numDecoded = 0,
@@ -59,10 +57,7 @@ function Code:getInt(max)
 
     local res = 0
     for i=0,numDigits-1,1 do
-        -- First digit value is:
         local val = (REVERSE_LOOKUP[string.sub(strToDecode, i+1, i+1)] - self.numDecoded) % NUM_CHARS
-        print('val was ', val, 'for digit idx', i, string.sub(strToDecode, i+1, i+1))
-        print('that adds ', val * NUM_CHARS ^ (numDigits - i - 1))
         res = res + val * NUM_CHARS ^ (numDigits - i - 1)
     end
     res = math.floor(res)
@@ -75,8 +70,8 @@ function Code:getInt(max)
 end
 
 function Code:verify()
-    local expectedChecksum = self.sum
-    local actualChecksum = self:getInt(CHECKSUM_MAX)
+    local expectedChecksum = math.floor((self.sum * (self.sum + 3)) % CHECKSUM_MAX)
+    local actualChecksum = math.floor(self:getInt(CHECKSUM_MAX))
     return expectedChecksum == actualChecksum
 end
 
@@ -92,7 +87,7 @@ function Code:build()
     for idx, val in pairs(self.vals) do
         checksum = checksum + val.num
     end
-    checksum = checksum % CHECKSUM_MAX
+    checksum = (checksum * (checksum + 3)) % CHECKSUM_MAX
 
     self:addInt(checksum, CHECKSUM_MAX)
 
@@ -100,7 +95,6 @@ function Code:build()
         local num = val.num
         local max = val.max
 
-        -- Get the number of digits we need to store max
         local numDigits = math.floor(math.log(max) / math.log(NUM_CHARS) + 1)
         for i=numDigits-1,0,-1 do
             local divisor = math.floor(num / NUM_CHARS^i)

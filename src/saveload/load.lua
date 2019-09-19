@@ -5,7 +5,6 @@ local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 
 function onLoad()
-    print('onload')
     local fullStr = GetEventPlayerChatString()
     local code = string.sub(fullStr, 7)
     local playerId = GetPlayerId(GetTriggerPlayer())
@@ -16,6 +15,23 @@ function onLoad()
 
     local level = decoded:getInt(74)
     local heroId = decoded:getInt(74)
+
+    print('level is ', level)
+
+    -- for i=0,35,1 do
+    --     local itemId = decoded:getInt(74)
+    --     backpack.addItemIdToBackpackPosition(playerId, i, itemId)
+    -- end
+
+    -- for i=1,9,1 do
+    --     local itemId = decoded:getInt(74)
+    --     equipment.equipItem(playerId, i, itemId)
+    -- end
+
+    -- TODO verify properly
+    print("Valid code?: ", decoded:verify())
+
+    hero.restorePickedHero(playerId, heroId, level)
 end
 
 function init()
