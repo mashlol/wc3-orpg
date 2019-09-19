@@ -9,27 +9,35 @@ function onLoad()
     local code = string.sub(fullStr, 7)
     local playerId = GetPlayerId(GetTriggerPlayer())
 
-    -- TODO make sure they dont already have a hero
+    if hero.getHero(playerId) ~= nil then
+        log.log(
+            playerId,
+            'You already have a hero. Type -repick and then try again.',
+            log.TYPE.ERROR)
+        return
+    end
 
     local decoded = Code:fromStr(code)
 
-    local level = decoded:getInt(74)
-    local heroId = decoded:getInt(74)
+    local level = decoded:getInt(73)
+    local heroId = decoded:getInt(73)
 
-    print('level is ', level)
+    for i=0,35,1 do
+        local itemId = decoded:getInt(73)
+        backpack.addItemIdToBackpackPosition(playerId, i, itemId)
+    end
 
-    -- for i=0,35,1 do
-    --     local itemId = decoded:getInt(74)
-    --     backpack.addItemIdToBackpackPosition(playerId, i, itemId)
-    -- end
+    for i=1,9,1 do
+        local itemId = decoded:getInt(73)
+        equipment.equipItem(playerId, i, itemId)
+    end
 
-    -- for i=1,9,1 do
-    --     local itemId = decoded:getInt(74)
-    --     equipment.equipItem(playerId, i, itemId)
-    -- end
+    local validCode = decoded:verify()
+    print("Valid code?: ", validCode)
 
-    -- TODO verify properly
-    print("Valid code?: ", decoded:verify())
+    if not validCode then
+        print("Code wasnt valid but allowing through during ALPHA anyway")
+    end
 
     hero.restorePickedHero(playerId, heroId, level)
 end

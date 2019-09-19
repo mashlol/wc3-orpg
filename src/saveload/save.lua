@@ -11,16 +11,16 @@ function onSave()
 
     print(pickedHeroId)
     local code = Code:new()
-        :addInt(GetHeroLevel(heroUnit), 74)
-        :addInt(pickedHeroId, 74)
+        :addInt(GetHeroLevel(heroUnit), 73)
+        :addInt(pickedHeroId, 73)
 
-    -- for i=0,35,1 do
-    --     code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 74)
-    -- end
+    for i=0,35,1 do
+        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 73)
+    end
 
-    -- for i=1,9,1 do
-    --     code:addInt(equipment.getItemInSlot(playerId, i) or 0, 74)
-    -- end
+    for i=1,9,1 do
+        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 73)
+    end
 
     code = code:build()
 

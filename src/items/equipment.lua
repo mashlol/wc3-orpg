@@ -31,6 +31,9 @@ function unequipItem(playerId, slot)
 end
 
 function getItemInSlot(playerId, slot)
+    if equipments[playerId][slot] == 0 then
+        return nil
+    end
     return equipments[playerId][slot]
 end
 
