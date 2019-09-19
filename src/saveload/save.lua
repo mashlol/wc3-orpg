@@ -7,18 +7,19 @@ local log = require('src/log.lua')
 function onSave()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local heroUnit = hero.getHero(playerId)
-    local pickedHeroId = hero.getPickedHero(playerId).id
+    local pickedHeroId = hero.getPickedHero(playerId).storedId
 
+    print(pickedHeroId)
     local code = Code:new()
-        :addInt(pickedHeroId, 1934917630)
-        :addInt(GetHeroLevel(heroUnit), 72)
+        :addInt(GetHeroLevel(heroUnit), 74)
+        :addInt(pickedHeroId, 74)
 
     for i=0,35,1 do
-        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 72)
+        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 74)
     end
 
     for i=1,9,1 do
-        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 72)
+        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 74)
     end
 
     code = code:build()
