@@ -53,13 +53,18 @@ local cast = function(playerId)
     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
     local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
 
+    if target == hero then
+        log.log(playerId, "You can't cast that on yourself.", log.TYPE.ERROR)
+        return false
+    end
+
     if target == nil then
-        log.log(playerId, "You have no target", log.TYPE.ERROR)
+        log.log(playerId, "You have no target.", log.TYPE.ERROR)
         return false
     end
 
     if isStuck(hero) then
-        log.log(playerId, "You can't move right now", log.TYPE.ERROR)
+        log.log(playerId, "You can't move right now.", log.TYPE.ERROR)
         return false
     end
 
