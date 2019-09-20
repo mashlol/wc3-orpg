@@ -37,16 +37,16 @@ function onKill()
         for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
             if
                 objectiveInfo.type == TYPE.KILL and
-                objectiveInfo.toKill == GetUnitTypeId(dyingUnit)
+                objectiveInfo.toKill == GetUnitTypeId(dyingUnit) and
+                objectiveInfo.amount ~= progress[playerId][questId].objectives[objectiveIdx]
             then
                 if progress[playerId][questId].objectives[objectiveIdx] == nil then
                     progress[playerId][questId].objectives[objectiveIdx] = 0
                 end
-                progress[playerId][questId].objectives[objectiveIdx] = math.min(
-                    progress[playerId][questId].objectives[objectiveIdx] + 1,
-                    objectiveInfo.amount
-                )
-                local numKilled = progress[playerId][questId].objectives[objectiveIdx]
+                progress[playerId][questId].objectives[objectiveIdx] =
+                    progress[playerId][questId].objectives[objectiveIdx] + 1
+                local numKilled =
+                    progress[playerId][questId].objectives[objectiveIdx]
                 log.log(
                     playerId,
                     'You have killed '..
@@ -124,7 +124,8 @@ function questObjectivesCompleted(playerId, questId)
 end
 
 function questCompleted(playerId, questId)
-    return progress[playerId][questId] ~= nil and progress[playerId][questId].completed
+    return progress[playerId][questId] ~= nil and
+        progress[playerId][questId].completed
 end
 
 function hasQuest(playerId, questId)
@@ -132,8 +133,6 @@ function hasQuest(playerId, questId)
 end
 
 function isEligibleForQuest(playerId, questId)
-    -- Check if they don't already have it, haven't completed it, pass the
-    -- prerequisites and are the right level.
     if hasQuest(playerId, questId) then
         return false
     end
@@ -142,7 +141,16 @@ function isEligibleForQuest(playerId, questId)
         return false
     end
 
-    -- TODO check prereqs and level
+    local level = GetHeroLevel(hero.getHero(playerId))
+    if level < QUESTS[questId].levelRequirement then
+        return false
+    end
+
+    for idx, prereqQuestId in pairs(QUESTS[questId].prerequisites) do
+        if not questCompleted(playerId, prereqQuestId) then
+            return false
+        end
+    end
 
     return true
 end
@@ -245,6 +253,27 @@ function initQuests()
                 }
             },
             prerequisites = {},
+            levelRequirement = 0,
+        },
+        [2] = {
+            getQuestFrom = gg_unit_nvl2_0000,
+            handQuestTo = gg_unit_nvl2_0000,
+            obtainText = "Please kill 10 more turtles.",
+            incompleteText = "You haven't killed 10 more turtles yet.",
+            completedText = "Thanks again.",
+            rewards = {
+                exp = 500,
+                gold = 50,
+            },
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('hmbs'),
+                    name = 'Turtles',
+                }
+            },
+            prerequisites = {1},
             levelRequirement = 0,
         }
     }
