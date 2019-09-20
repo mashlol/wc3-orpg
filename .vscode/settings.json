@@ -3,7 +3,8 @@
         "gg_rct_Region_000",
         "gg_cam_Camera_002",
         "gg_dest_LTg2_2324",
-        "createHeroForPlayer"
+        "createHeroForPlayer",
+        "gg_unit_nvl2_0000"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
