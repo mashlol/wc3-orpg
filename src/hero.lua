@@ -7,6 +7,8 @@ local START_Y = 71
 local heroes = {}
 local pickedHeroes = {}
 
+local listeners = {}
+
 local ALL_HERO_INFO = {
     [FourCC("Hyuj")] = {
         name = 'Yuji',
@@ -177,6 +179,10 @@ function onRepick()
     heroes[repickPlayerId] = nil
     pickedHeroes[repickPlayerId] = nil
     showPickHeroDialog(repickPlayerId)
+
+    for _, listener in pairs(listeners) do
+        listener(repickPlayerId)
+    end
 end
 
 local init = function()
@@ -222,10 +228,15 @@ function restorePickedHero(playerId, storedHeroId, level)
     end
 end
 
+function addRepickedListener(repickedListenerFunc)
+    table.insert(listeners, repickedListenerFunc)
+end
+
 return {
     init = init,
     getHero = getHero,
     isHero = isHero,
     getPickedHero = getPickedHero,
     restorePickedHero = restorePickedHero,
+    addRepickedListener = addRepickedListener,
 }
