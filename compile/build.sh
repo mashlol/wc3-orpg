@@ -5,7 +5,7 @@ shopt -s globstar
 echo "Copying map.w3x to bin/built.w3x"
 cp map.w3x bin/built.w3x
 
-cd build
+cd compile
 
 echo "Extracting war3map.lua"
 ./MPQEditor.exe -console mopaq_extract
@@ -14,7 +14,7 @@ cd ..
 
 echo "Generating bin/war3map_compiled.lua"
 
-node ./build/build
+node ./compile/build
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 
@@ -24,17 +24,17 @@ cp bin/war3map_replaced.lua bin/war3map.lua
 
 echo 'Minifying lua'
 
-cd build/LuaMinify
+cd compile/LuaMinify
 
 lua.exe CommandLineMinify.lua ../../bin/war3map.lua war3map_min.lua
 
 cd ../..
 
-mv build/LuaMinify/war3map_min.lua bin/war3map.lua
+mv compile/LuaMinify/war3map_min.lua bin/war3map.lua
 
 echo 'Adding war3map.lua to mpq archive'
 
-cd build
+cd compile
 
 ./MPQEditor.exe -console mopaq
 
