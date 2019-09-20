@@ -164,6 +164,7 @@ function Backpack:init()
     self.frames = {
         itemFrames = itemFrames,
         origin = backpackOrigin,
+        goldText = goldText,
     }
 
     return self
@@ -173,6 +174,10 @@ function Backpack:update(playerId)
     local frames = self.frames
 
     BlzFrameSetVisible(frames.origin, backpackToggles[playerId] == true)
+
+    BlzFrameSetText(
+        frames.goldText,
+        "Gold: ".. GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD))
 
     local activeItem = backpack.getActiveItem(playerId)
     for i=1,36,1 do
