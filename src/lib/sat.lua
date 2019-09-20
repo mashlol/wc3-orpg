@@ -738,16 +738,7 @@
   --]]
 
   function vornoiRegion(line, point)
-    local len2 = line:len2()
-    local dp = point:dot(line)
-    -- If the point is beyond the start of the line, it is in the
-    -- left vornoi region.
-    if dp < 0 then return LEFT_VORNOI_REGION
-    -- If the point is beyond the end of the line, it is in the
-    -- right vornoi region.
-    elseif dp > len2 then return RIGHT_VORNOI_REGION
-    -- Otherwise, it's in the middle one.
-    else return MIDDLE_VORNOI_REGION end
+    return nil
   end
 
 
