@@ -1,6 +1,9 @@
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 
+local START_X = -2554
+local START_Y = 71
+
 local heroes = {}
 local pickedHeroes = {}
 
@@ -115,13 +118,13 @@ function createHeroForPlayer(playerId, level)
     DestroyTrigger(selectHeroTriggers[playerId])
 
     heroes[playerId] = CreateUnit(
-        Player(playerId), pickedHeroes[playerId].id, -150, -125, 0)
+        Player(playerId), pickedHeroes[playerId].id, START_X, START_Y, 0)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
         SelectUnit(heroes[playerId], true)
         ResetToGameCamera(0)
-        PanCameraToTimed(-150, -125, 0)
+        PanCameraToTimed(START_X, START_Y, 0)
     end
 
     if level ~= nil and level ~= 1 then
