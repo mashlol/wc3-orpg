@@ -718,19 +718,7 @@
     return false
   end
 
-  -- Constants for Vornoi regions
 
-  -- @const
-
-  local LEFT_VORNOI_REGION = -1
-
-  -- @const
-
-  local MIDDLE_VORNOI_REGION = 0
-
-  -- @const
-
-  local RIGHT_VORNOI_REGION = 1
 
 
     -- Calculates which Vornoi region a point is on a line segment.
@@ -761,6 +749,21 @@
     -- Otherwise, it's in the middle one.
     else return MIDDLE_VORNOI_REGION end
   end
+
+
+  -- Constants for Vornoi regions
+
+  -- @const
+
+  local LEFT_VORNOI_REGION = -1
+
+  -- @const
+
+  local MIDDLE_VORNOI_REGION = 0
+
+  -- @const
+
+  local RIGHT_VORNOI_REGION = 1
 
 
   -- ## Collision Tests
