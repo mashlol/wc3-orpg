@@ -23,6 +23,12 @@ local TYPE = {
         x = 0,
         y = 0,
     },
+    QUEST = {
+        duration = 5,
+        color = "|cffcccc00",
+        x = 0,
+        y = 0,
+    },
 }
 
 local log = function(playerId, text, type, duration)

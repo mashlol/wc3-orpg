@@ -1,4 +1,5 @@
 local hero = require('src/hero.lua')
+local log = require('src/log.lua')
 
 local TYPE = {
     KILL = {},
@@ -45,7 +46,16 @@ function onKill()
                     progress[playerId][questId].objectives[objectiveIdx] + 1,
                     objectiveInfo.amount
                 )
-                print("Killed ", progress[playerId][questId].objectives[objectiveIdx], " / ", objectiveInfo.amount)
+                local numKilled = progress[playerId][questId].objectives[objectiveIdx]
+                log.log(
+                    playerId,
+                    'You have killed '..
+                        numKilled..
+                        ' / '..
+                        objectiveInfo.amount..
+                        ' '..
+                        objectiveInfo.name,
+                    log.TYPE.INFO)
                 updateQuestMarks()
             end
         end
@@ -142,14 +152,32 @@ function beginQuest(playerId, questId)
         completed = false,
         objectives = {},
     }
-    print("Starting quest ", questId)
+    log.log(playerId, QUESTS[questId].obtainText, log.TYPE.INFO)
 
     updateQuestMarks()
 end
 
 function finishQuest(playerId, questId)
     progress[playerId][questId].completed = true
-    print("Completed quest ", questId)
+    log.log(playerId, QUESTS[questId].completedText, log.TYPE.INFO)
+
+    local expGained = QUESTS[questId].rewards.exp
+    local goldGained = QUESTS[questId].rewards.gold
+
+    if expGained ~= nil then
+        log.log(
+            playerId, 'You gained '..expGained..' experience.', log.TYPE.QUEST)
+        AddHeroXP(hero.getHero(playerId), expGained, true)
+    end
+
+    if goldGained ~= nil then
+        log.log(
+            playerId, 'You gained '..goldGained..' gold.', log.TYPE.QUEST)
+        local curGold = GetPlayerState(
+            Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
+        SetPlayerState(
+            Player(playerId), PLAYER_STATE_RESOURCE_GOLD, curGold + goldGained)
+    end
 
     updateQuestMarks()
 end
@@ -180,7 +208,7 @@ function onNpcClicked()
             if questObjectivesCompleted(playerId, questId) then
                 finishQuest(playerId, questId)
             else
-                print("You havent finished the objectives yet")
+                log.log(playerId, QUESTS[questId].incompleteText, log.TYPE.ERROR)
             end
         end
     end
@@ -201,11 +229,19 @@ function initQuests()
         [1] = {
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvl2_0000,
+            obtainText = "Please kill 10 turtles.",
+            incompleteText = "You haven't killed 10 turtles yet.",
+            completedText = "Thanks.",
+            rewards = {
+                exp = 500,
+                gold = 50,
+            },
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 10,
+                    amount = 2,
                     toKill = FourCC('hmbs'),
+                    name = 'Turtles',
                 }
             },
             prerequisites = {},
