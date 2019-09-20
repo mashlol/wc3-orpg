@@ -232,6 +232,11 @@ function initObjectiveTriggers()
     TriggerAddAction(killTrig, onKill)
 end
 
+function resetQuestProgress(playerId)
+    progress[playerId] = {}
+    updateQuestMarks()
+end
+
 function initQuests()
     QUESTS = {
         [1] = {
@@ -297,6 +302,8 @@ function init()
 
     initQuests()
     initObjectiveTriggers()
+
+    hero.addRepickedListener(resetQuestProgress)
 end
 
 return {
