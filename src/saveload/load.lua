@@ -21,25 +21,46 @@ function loadChar(playerId, code)
     local level = decoded:getInt(73)
     local heroId = decoded:getInt(73)
 
-    for i=0,35,1 do
+    local backpackItems = {}
+    for i=1,36,1 do
         local itemId = decoded:getInt(73)
-        backpack.addItemIdToBackpackPosition(playerId, i, itemId)
+        if itemId ~= 0 then
+            backpackItems[i] = itemId
+        end
     end
 
     local nameEncoded = decoded:getInt(2500)
     if nameEncoded ~= string.byte(GetPlayerName(Player(playerId))) % 2500 then
-        print("Code appears to be for another player, but allowing it during alpha anyway")
+        log.log(
+            playerId,
+            'Invalid code',
+            log.TYPE.ERROR)
+        return
     end
 
+    local equips = {}
     for i=1,9,1 do
         local itemId = decoded:getInt(73)
-        equipment.equipItem(playerId, i, itemId)
+        if itemId ~= 0 then
+            equips[i] = itemId
+        end
     end
 
     local validCode = decoded:verify()
 
     if not validCode then
-        print("Code wasnt valid but allowing through during alpha anyway")
+        log.log(
+            playerId,
+            'Invalid code',
+            log.TYPE.ERROR)
+        return
+    end
+
+    for idx,itemId in pairs(backpackItems) do
+        backpack.addItemIdToBackpackPosition(playerId, idx, itemId)
+    end
+    for slot,itemId in pairs(equips) do
+        equipment.equipItem(playerId, slot, itemId)
     end
 
     hero.restorePickedHero(playerId, heroId, level)
