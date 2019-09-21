@@ -22,15 +22,15 @@ echo 'Moving and cleaning up temp lua files'
 
 cp bin/war3map_replaced.lua bin/war3map.lua
 
-# echo 'Minifying lua'
+echo 'Minifying lua'
 
-# cd compile/LuaMinify
+cd compile/LuaMinify
 
-# lua.exe CommandLineMinify.lua ../../bin/war3map.lua war3map_min.lua
+lua.exe CommandLineMinify.lua ../../bin/war3map.lua war3map_min.lua
 
-# cd ../..
+cd ../..
 
-# mv compile/LuaMinify/war3map_min.lua bin/war3map.lua
+mv compile/LuaMinify/war3map_min.lua bin/war3map.lua
 
 echo 'Adding war3map.lua to mpq archive'
 
