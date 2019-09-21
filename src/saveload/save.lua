@@ -14,7 +14,7 @@ function onSave()
         :addInt(GetHeroLevel(heroUnit), 73)
         :addInt(pickedHeroId, 73)
 
-    for i=0,35,1 do
+    for i=1,36,1 do
         code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 73)
     end
 
