@@ -1,3 +1,7 @@
+local hero = require('src/hero.lua')
+local equipment = require('src/items/equipment.lua')
+local itemmanager = require('src/items/itemmanager.lua')
+
 local BUFF_INFO = {
     focus = {
         effects = {
@@ -382,7 +386,7 @@ function getDamageModifier(unit, target)
     local modifier = 1
     for buffName,val in pairs(buffs) do
         local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
+        for _, info in pairs(effects) do
             if info.type == 'multiplyDamage' then
                 modifier = modifier * info.amount * val.stacks
             end
@@ -391,9 +395,32 @@ function getDamageModifier(unit, target)
     local buffs = getBuffs(target)
     for buffName,val in pairs(buffs) do
         local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
+        for _, info in pairs(effects) do
             if info.type == 'multiplyIncomingDamage' then
                 modifier = modifier * info.amount * val.stacks
+            end
+        end
+    end
+    -- Repeat for items
+    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
+    if hero.getHero(ownerPlayerId) == unit then
+        local items = equipment.getEquippedItems(ownerPlayerId)
+        for _, itemId in pairs(items) do
+            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
+                if info.type == 'multiplyDamage' then
+                    modifier = modifier * info.amount
+                end
+            end
+        end
+    end
+    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
+    if hero.getHero(targetPlayerId) == target then
+        local items = equipment.getEquippedItems(targetPlayerId)
+        for _, itemId in pairs(items) do
+            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
+                if info.type == 'multiplyIncomingDamage' then
+                    modifier = modifier * info.amount
+                end
             end
         end
     end
@@ -417,6 +444,29 @@ function getHealingModifier(unit, target)
         for idx,info in pairs(effects) do
             if info.type == 'multiplyIncomingHealing' then
                 modifier = modifier * info.amount * val.stacks
+            end
+        end
+    end
+    -- Repeat for items
+    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
+    if hero.getHero(ownerPlayerId) == unit then
+        local items = equipment.getEquippedItems(ownerPlayerId)
+        for _, itemId in pairs(items) do
+            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
+                if info.type == 'multiplyHealing' then
+                    modifier = modifier * info.amount
+                end
+            end
+        end
+    end
+    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
+    if hero.getHero(targetPlayerId) == target then
+        local items = equipment.getEquippedItems(targetPlayerId)
+        for _, itemId in pairs(items) do
+            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
+                if info.type == 'multiplyIncomingHealing' then
+                    modifier = modifier * info.amount
+                end
             end
         end
     end
