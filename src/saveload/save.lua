@@ -30,8 +30,13 @@ function onSave()
     file.writeFile("tvt/tvtsave1.pld", code)
     log.log(
         playerId,
+        'It\'s been saved to a local file too, but you might want to still '..
+        'screenshot it just in case.',
+        log.TYPE.WARNING)
+    log.log(
+        playerId,
         'NOTE THIS IS AN ALPHA AND THE CODE MAY NOT WORK IN FUTURE VERSIONS',
-        log.TYPE.NORMAL)
+        log.TYPE.WARNING)
 end
 
 function init()

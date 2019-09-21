@@ -6,6 +6,8 @@ local TIPS = {
     "Most spells are cast toward the location of your mouse.",
     "Report bugs or give suggestions on discord: https://discord.gg/AbBsrM9",
     "You can type -tips to toggle tips on or off.",
+    "You can save your character with -save (and load with -load)",
+    "Saves are written to a file, so you can just type -load to get it back",
 }
 
 local tipsForce
