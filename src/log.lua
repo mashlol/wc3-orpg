@@ -11,6 +11,12 @@ local TYPE = {
         x = 0,
         y = 0,
     },
+    WARNING = {
+        duration = 5,
+        color = "|cffffee00",
+        x = 0,
+        y = 0,
+    },
     SUCCESS = {
         duration = 3,
         color = "|cff00ff00",
