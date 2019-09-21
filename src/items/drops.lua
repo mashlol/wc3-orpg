@@ -26,7 +26,7 @@ function maybeGetDrop(unit)
     for itemId, weight in pairs(drops) do
         curWeight = curWeight + weight
         if randNum < curWeight then
-            return itemId == 'none' and nil or itemId
+            return itemId ~= 'none' and itemId or nil
         end
     end
 
@@ -41,6 +41,7 @@ function maybeDistributeDrop()
     local drop = maybeGetDrop(unit)
 
     if drop ~= nil then
+        print('drop was ', drop)
         backpack.addItemIdToBackpack(killingPlayerId, drop)
         log.log(
             killingPlayerId,
