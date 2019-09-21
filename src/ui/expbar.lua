@@ -152,7 +152,7 @@ function ExpBar:update(playerId)
     else
         BlzFrameSetSize(
             frame.castBar,
-            0,
+            0.00001,
             consts.EXP_BAR_HEIGHT)
     end
 end
