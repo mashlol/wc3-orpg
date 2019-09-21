@@ -16,12 +16,16 @@ function writeFile(file, contents)
     local len = StringLength(contents)
     local chunk
 
-    -- Begin to generate the file
     PreloadGenClear()
     PreloadGenStart()
     for i=0,len-1,200 do
         chunk = SubString(contents, i, i + 200)
-        Preload("\" )\ncall BlzSetAbilityIcon(" .. I2S(ABILITY_LIST[c + 1]) .. ", \"" .. chunk .. "\")\n//")
+        Preload(
+            "\" )\ncall BlzSetAbilityIcon(" ..
+            I2S(ABILITY_LIST[c + 1]) ..
+            ", \"" ..
+            chunk ..
+            "\")\n//")
         c = c + 1
     end
     Preload("\" )\nendfunction\nfunction a takes nothing returns nothing\n //")
@@ -36,7 +40,6 @@ function readFile(file)
         original[i + 1] = BlzGetAbilityIcon(ABILITY_LIST[i + 1])
     end
 
-    -- Execute the preload file
     Preloader(file)
 
     for i=0,#ABILITY_LIST-1,1 do
