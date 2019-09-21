@@ -71,13 +71,10 @@ function init()
     end
     TriggerAddAction(loadTrigger, onLoad)
 
-    print('making sync load trigger')
     local syncLoadTrigger = CreateTrigger()
     for i=0,bj_MAX_PLAYERS-1, 1 do
-        print(i)
         BlzTriggerRegisterPlayerSyncEvent(syncLoadTrigger, Player(i), SYNC_PREFIX, false)
     end
-    print('done')
     TriggerAddAction(syncLoadTrigger, onDataSynced)
 end
 
