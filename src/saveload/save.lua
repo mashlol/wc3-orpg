@@ -1,4 +1,5 @@
 local Code = require('src/saveload/code.lua')
+local file = require('src/saveload/file.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local hero = require('src/hero.lua')
@@ -26,6 +27,7 @@ function onSave()
     code = code:build()
 
     log.log(playerId, 'Your code is: '..code, log.TYPE.NORMAL)
+    file.writeFile("tvt/tvtsave1.pld", code)
     log.log(
         playerId,
         'NOTE THIS IS AN ALPHA AND THE CODE MAY NOT WORK IN FUTURE VERSIONS',

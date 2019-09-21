@@ -27,6 +27,9 @@ local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 local bossmanager = require('src/bosses/bossmanager.lua')
 
+-- TODO remove this
+local file = require('src/saveload/file.lua')
+
 local debug = require('src/debug.lua')
 
 local mainInit = function()
