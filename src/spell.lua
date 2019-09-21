@@ -111,20 +111,24 @@ local SPELL_MAP = {
 
 local TOOLTIPS = {}
 
-local getSpell = function(playerId, idx)
-    local pickedHero = hero.getPickedHero(playerId)
-    if pickedHero == nil then
-        return nil
-    end
-    return SPELL_MAP[pickedHero.spells[idx]]
-end
-
 local getSpellKey = function(playerId, idx)
     local pickedHero = hero.getPickedHero(playerId)
     if pickedHero == nil then
         return nil
     end
+    local heroLevel = GetHeroLevel(hero.getHero(playerId))
+    if heroLevel < idx then
+        return nil
+    end
     return pickedHero.spells[idx]
+end
+
+local getSpell = function(playerId, idx)
+    local spellKey = getSpellKey(playerId, idx)
+    if spellKey == nil then
+        return nil
+    end
+    return SPELL_MAP[spellKey]
 end
 
 local castSpell = function(playerId, idx)
