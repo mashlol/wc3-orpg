@@ -13,7 +13,7 @@ local ALLOWED_CHARS = {
 local REVERSE_LOOKUP = {
     ['2'] = 00, ['U'] = 01, ['!'] = 02, ['Z'] = 03, [')'] = 04, ['o'] = 05,
     ['j'] = 06, ['n'] = 07, ['a'] = 08, ['m'] = 09, ['7'] = 10, ['z'] = 11,
-    ['q'] = 12, ['('] = 13, ['#'] = 14, ['p'] = 15, ['y'] = 16, ['C']= 17,
+    ['q'] = 12, ['('] = 13, ['#'] = 14, ['p'] = 15, ['y'] = 16, ['C'] = 17,
     ['&'] = 18, ['d'] = 19, ['J'] = 20, ['H'] = 21, ['X'] = 22, ['A'] = 23,
     ['G'] = 24, ['u'] = 25, ['9'] = 26, ['k'] = 27, ['<'] = 28, ['s'] = 29,
     ['f'] = 30, ['^'] = 31, ['D'] = 32, ['Q'] = 33, ['i'] = 34, ['4'] = 35,
@@ -22,8 +22,8 @@ local REVERSE_LOOKUP = {
     ['M'] = 48, ['S'] = 49, ['F'] = 50, ['Y'] = 51, ['N'] = 52, ['g'] = 53,
     ['c'] = 54, ['t'] = 55, ['x'] = 56, ['W'] = 57, ['*'] = 58, ['e'] = 59,
     ['V'] = 60, ['b'] = 61, ['3'] = 62, ['r'] = 63, ['8'] = 64, ['T'] = 65,
-    ['$'] = 66, ['w'] = 67, ['v'] = 68, ['E'] = 69, ['@'] = 70, ['['] = 72,
-    [']'] = 73, ['?'] = 74
+    ['$'] = 66, ['w'] = 67, ['v'] = 68, ['E'] = 69, ['@'] = 70, ['['] = 71,
+    [']'] = 72, ['?'] = 73
 }
 local NUM_CHARS = #ALLOWED_CHARS
 
@@ -57,8 +57,8 @@ function Code:getInt(max)
 
     local res = 0
     for i=0,numDigits-1,1 do
-        local val = (REVERSE_LOOKUP[string.sub(strToDecode, i+1, i+1)] - self.numDecoded) % NUM_CHARS
-        res = res + val * NUM_CHARS ^ (numDigits - i - 1)
+        local val = math.floor((REVERSE_LOOKUP[string.sub(strToDecode, i+1, i+1)] - self.numDecoded) % NUM_CHARS)
+        res = math.floor(res + val * NUM_CHARS ^ (numDigits - i - 1))
     end
     res = math.floor(res)
 
@@ -98,7 +98,7 @@ function Code:build()
         local numDigits = math.floor(math.log(max) / math.log(NUM_CHARS) + 1)
         for i=numDigits-1,0,-1 do
             local divisor = math.floor(num / NUM_CHARS^i)
-            num = num - NUM_CHARS^i * divisor
+            num = math.floor(num - NUM_CHARS^i * divisor)
             code = code .. ALLOWED_CHARS[((divisor + idx - 1) % NUM_CHARS) + 1]
         end
     end
