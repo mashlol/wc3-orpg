@@ -6,6 +6,7 @@ local consts = require('src/ui/consts.lua')
 
 -- UI Modules
 local CastBar = require('src/ui/castbar.lua')
+local ExpBar = require('src/ui/expbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
 local Backpack = require('src/ui/backpack.lua')
@@ -14,6 +15,7 @@ local Equipment = require('src/ui/equipment.lua')
 local UI_MODULES = {
     ActionBar:new(),
     CastBar:new(),
+    ExpBar:new(),
     UnitFrame:new{
         xLoc = 0.55,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
@@ -77,7 +79,7 @@ end
 function initCustomUI()
     BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
 
-    for name, mod in pairs(UI_MODULES) do
+    for _, mod in pairs(UI_MODULES) do
         mod:init()
     end
 end
@@ -87,7 +89,7 @@ function updateCustomUI()
     local heroUnit = hero.getHero(playerId)
     local targetUnit = target.getTarget(playerId)
 
-    for name, mod in pairs(UI_MODULES) do
+    for _, mod in pairs(UI_MODULES) do
         mod.hero = heroUnit
         mod.target = targetUnit
         mod.playerId = playerId
