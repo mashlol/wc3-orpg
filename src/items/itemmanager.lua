@@ -32,13 +32,6 @@ local ITEMS = {
 -- Precompute tooltips at initialization time or you get desyncs
 local TOOLTIPS = {}
 
--- Takes a list of items, and returns a
--- list of total stats as if it were a single item
--- so the same format as ITEMS above.
-function computeTotalStats(itemlist)
-    return {}
-end
-
 function getItemInfo(itemId)
     return ITEMS[itemId]
 end
@@ -51,31 +44,7 @@ function getItemTooltipNumLines(itemId)
     return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0
 end
 
-function applyEquippedItemBuffs()
-    for playerId=0,bj_MAX_PLAYERS,1 do
-        local heroInfo = hero.getPickedHero(playerId)
-        local hero = hero.getHero(playerId)
-        if heroInfo and hero then
-            local baseHP = heroInfo.baseHP
-
-            local equippedItems = equipment.getEquippedItems(playerId)
-            for idx, itemId in pairs(equippedItems) do
-                local itemStats = ITEMS[itemId].stats
-                for idx, statInfo in pairs(itemStats) do
-                    if statInfo.type == 'rawHp' then
-                        baseHP = baseHP + statInfo.amount
-                    end
-                end
-            end
-
-            BlzSetUnitMaxHP(hero, baseHP)
-        end
-    end
-end
-
 function init()
-    TimerStart(CreateTimer(), 0.1, true, applyEquippedItemBuffs)
-
     for itemId, itemInfo in pairs(ITEMS) do
         local itemStats = ""
 
@@ -105,9 +74,9 @@ function init()
 end
 
 return {
+    ITEMS = ITEMS,
     init = init,
     getItemInfo = getItemInfo,
-    computeTotalStats = computeTotalStats,
     getItemTooltip = getItemTooltip,
     getItemTooltipNumLines = getItemTooltipNumLines,
 }
