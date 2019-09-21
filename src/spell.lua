@@ -109,6 +109,8 @@ local SPELL_MAP = {
     pocketgoo = pocketgoo,
 }
 
+local SKILL_LEVELS = {1, 2, 3, 5, 1, 1, 7, 10, 15, 20, 30, 50}
+
 local TOOLTIPS = {}
 
 local getSpellKey = function(playerId, idx)
@@ -117,7 +119,7 @@ local getSpellKey = function(playerId, idx)
         return nil
     end
     local heroLevel = GetHeroLevel(hero.getHero(playerId))
-    if heroLevel < idx then
+    if heroLevel < SKILL_LEVELS[idx] then
         return nil
     end
     return pickedHero.spells[idx]
