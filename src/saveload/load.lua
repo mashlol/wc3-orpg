@@ -4,6 +4,7 @@ local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
+local quests = require('src/quests/main.lua')
 
 local SYNC_PREFIX = "sync-load-code"
 
@@ -22,6 +23,23 @@ function loadChar(playerId, code)
     local heroId = decoded:getInt(73)
     local heroX = decoded:getInt(64000) - 32000
     local heroY = decoded:getInt(64000) - 32000
+
+    local numQuests = decoded:getInt(5000)
+    local progress = {}
+    for i=0, math.floor(numQuests / 6), 1 do
+        local questInfo = decoded:getInt(65)
+        for j=6, 1, -1 do
+            local res = questInfo & 1
+            if res == 1 then
+                progress[j + i * 6] = {
+                    completed = true,
+                    objectives = {},
+                }
+            end
+            questInfo = questInfo >> 1
+        end
+    end
+    quests.restoreProgress(playerId, progress)
 
     local backpackItems = {}
     for i=1,36,1 do
