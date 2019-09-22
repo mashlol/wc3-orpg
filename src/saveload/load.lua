@@ -39,7 +39,6 @@ function loadChar(playerId, code)
             questInfo = questInfo >> 1
         end
     end
-    quests.restoreProgress(playerId, progress)
 
     local backpackItems = {}
     for i=1,36,1 do
@@ -75,6 +74,8 @@ function loadChar(playerId, code)
             log.TYPE.ERROR)
         return
     end
+
+    quests.restoreProgress(playerId, progress)
 
     for idx,itemId in pairs(backpackItems) do
         backpack.addItemIdToBackpackPosition(playerId, idx, itemId)
