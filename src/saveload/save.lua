@@ -11,8 +11,10 @@ function onSave()
     local pickedHeroId = hero.getPickedHero(playerId).storedId
 
     local code = Code:new()
-        :addInt(GetHeroLevel(heroUnit), 73)
+        :addInt(GetHeroXP(heroUnit), 200000)
         :addInt(pickedHeroId, 73)
+        :addInt(math.floor(GetUnitX(heroUnit) + 32000), 64000)
+        :addInt(math.floor(GetUnitY(heroUnit) + 32000), 64000)
 
     for i=1,36,1 do
         code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 73)

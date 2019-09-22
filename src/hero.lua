@@ -101,13 +101,13 @@ local ALL_HERO_INFO = {
 
 local respawn = function()
     local unit = GetDyingUnit()
-    local level = GetHeroLevel(unit)
+    local exp = GetHeroXP(unit)
 
     TriggerSleepAction(5)
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            createHeroForPlayer(i, level)
+            createHeroForPlayer(i, exp)
         end
     end
 end
@@ -115,23 +115,28 @@ end
 local forceCameraTriggers = {}
 local selectHeroTriggers = {}
 
-function createHeroForPlayer(playerId, level)
+function createHeroForPlayer(playerId, exp, heroX, heroY)
     DestroyTrigger(forceCameraTriggers[playerId])
     DestroyTrigger(selectHeroTriggers[playerId])
 
     heroes[playerId] = CreateUnit(
-        Player(playerId), pickedHeroes[playerId].id, START_X, START_Y, 0)
+        Player(playerId),
+        pickedHeroes[playerId].id,
+        heroX or START_X,
+        heroY or START_Y,
+        0)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
         SelectUnit(heroes[playerId], true)
         ResetToGameCamera(0)
-        PanCameraToTimed(START_X, START_Y, 0)
+        PanCameraToTimed(heroX or START_X, heroY or START_Y, 0)
     end
 
-    if level ~= nil and level ~= 1 then
-        SetHeroLevel(heroes[playerId], level, false)
+    if exp ~= nil and exp ~= 0 then
+        SetHeroXP(heroes[playerId], exp, false)
     end
+
 end
 
 local forceCameraLocation = function(playerId, camera)
@@ -218,11 +223,11 @@ local getPickedHero = function(playerId)
     return pickedHeroes[playerId]
 end
 
-function restorePickedHero(playerId, storedHeroId, level)
+function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
     for idx, info in pairs(ALL_HERO_INFO) do
         if info.storedId == storedHeroId then
             pickedHeroes[playerId] = info
-            createHeroForPlayer(playerId, level)
+            createHeroForPlayer(playerId, exp, heroX, heroY)
             return
         end
     end
