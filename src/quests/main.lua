@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
+local party = require('src/party.lua')
 local Dialog = require('src/ui/dialog.lua')
 
 local TYPE = {
@@ -28,37 +29,44 @@ local questMarks = {}
 function onKill()
     -- Check unit id of killed unit, if it matches any active objectives
     -- for the player, then add to them
-    -- TODO add to the entire players party
     local killingUnit = GetKillingUnit()
     local dyingUnit = GetDyingUnit()
 
     local playerId = GetPlayerId(GetOwningPlayer(killingUnit))
 
-    for questId, progressInfo in pairs(progress[playerId]) do
-        if not progressInfo.completed then
-            for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
-                if
-                    objectiveInfo.type == TYPE.KILL and
-                    objectiveInfo.toKill == GetUnitTypeId(dyingUnit) and
-                    objectiveInfo.amount ~= progress[playerId][questId].objectives[objectiveIdx]
-                then
-                    if progress[playerId][questId].objectives[objectiveIdx] == nil then
-                        progress[playerId][questId].objectives[objectiveIdx] = 0
+    local partyId = party.getPlayerParty(playerId)
+    local players = {playerId}
+    if partyId ~= nil then
+        players = party.getPlayersInParty(partyId)
+    end
+
+    for _, playerId in pairs(players) do
+        for questId, progressInfo in pairs(progress[playerId]) do
+            if not progressInfo.completed then
+                for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+                    if
+                        objectiveInfo.type == TYPE.KILL and
+                        objectiveInfo.toKill == GetUnitTypeId(dyingUnit) and
+                        objectiveInfo.amount ~= progress[playerId][questId].objectives[objectiveIdx]
+                    then
+                        if progress[playerId][questId].objectives[objectiveIdx] == nil then
+                            progress[playerId][questId].objectives[objectiveIdx] = 0
+                        end
+                        progress[playerId][questId].objectives[objectiveIdx] =
+                            progress[playerId][questId].objectives[objectiveIdx] + 1
+                        local numKilled =
+                            progress[playerId][questId].objectives[objectiveIdx]
+                        log.log(
+                            playerId,
+                            'You have killed '..
+                                numKilled..
+                                ' / '..
+                                objectiveInfo.amount..
+                                ' '..
+                                objectiveInfo.name,
+                            log.TYPE.INFO)
+                        updateQuestMarks()
                     end
-                    progress[playerId][questId].objectives[objectiveIdx] =
-                        progress[playerId][questId].objectives[objectiveIdx] + 1
-                    local numKilled =
-                        progress[playerId][questId].objectives[objectiveIdx]
-                    log.log(
-                        playerId,
-                        'You have killed '..
-                            numKilled..
-                            ' / '..
-                            objectiveInfo.amount..
-                            ' '..
-                            objectiveInfo.name,
-                        log.TYPE.INFO)
-                    updateQuestMarks()
                 end
             end
         end
