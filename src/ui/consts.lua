@@ -14,4 +14,6 @@ return {
     EQUIPMENT_ITEM_SIZE = 0.03,
     EXP_BAR_WIDTH = 0.50,
     EXP_BAR_HEIGHT = 0.01,
+    DIALOG_WIDTH = 0.4,
+    DIALOG_HEIGHT = 0.4,
 }

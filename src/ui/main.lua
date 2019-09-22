@@ -6,6 +6,7 @@ local consts = require('src/ui/consts.lua')
 
 -- UI Modules
 local CastBar = require('src/ui/castbar.lua')
+local Dialog = require('src/ui/dialog.lua')
 local ExpBar = require('src/ui/expbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
@@ -15,6 +16,7 @@ local Equipment = require('src/ui/equipment.lua')
 local UI_MODULES = {
     ActionBar:new(),
     CastBar:new(),
+    Dialog:new(),
     ExpBar:new(),
     UnitFrame:new{
         xLoc = 0.55,

@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
+local Dialog = require('src/ui/dialog.lua')
 
 local TYPE = {
     KILL = {},
@@ -156,7 +157,7 @@ function isEligibleForQuest(playerId, questId)
         return false
     end
 
-    for idx, prereqQuestId in pairs(QUESTS[questId].prerequisites) do
+    for _, prereqQuestId in pairs(QUESTS[questId].prerequisites) do
         if not questCompleted(playerId, prereqQuestId) then
             return false
         end
@@ -165,12 +166,39 @@ function isEligibleForQuest(playerId, questId)
     return true
 end
 
+function getQuestText(questId)
+    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
+
+    res = res .. QUESTS[questId].obtainText
+    local objectives = ""
+    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        if objectiveInfo.type == TYPE.KILL then
+            objectives = objectives .. "- Kill "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
+        end
+    end
+    if objectives ~= "" then
+        res = res .. "|n|n|cffe0b412Objectives:|r|n"..objectives
+    end
+    res = res .. "|n|n|cffe0b412Rewards:|r|n"
+    if QUESTS[questId].rewards.gold then
+        res = res .. "- " .. QUESTS[questId].rewards.gold .. " gold|n"
+    end
+    if QUESTS[questId].rewards.exp then
+        res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+    end
+    return res
+end
+
 function beginQuest(playerId, questId)
+    Dialog.show(playerId, {
+        text = getQuestText(questId),
+        button = "Accept",
+    })
+
     progress[playerId][questId] = {
         completed = false,
         objectives = {},
     }
-    log.log(playerId, QUESTS[questId].obtainText, log.TYPE.INFO)
 
     updateQuestMarks()
 end
@@ -265,7 +293,7 @@ function initQuests()
         [1] = {
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvl2_0000,
-            obtainText = "Please kill 10 turtles.",
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
             incompleteText = "You haven't killed 10 turtles yet.",
             completedText = "Thanks.",
             rewards = {
