@@ -1,4 +1,5 @@
 local log = require('src/log.lua')
+local Dialog = require('src/ui/dialog.lua')
 
 local playerParties = {}
 local partyIdx = 0
@@ -53,11 +54,39 @@ function onInviteSent()
             GetPlayerName(Player(invitedPlayerId))..
             " to join your party.",
         log.TYPE.INFO)
-    log.log(
-        invitedPlayerId,
-        GetPlayerName(Player(inviterPlayerId))..
-            " invited you to join their party.",
-        log.TYPE.INFO)
+    Dialog.show(
+        invitedPlayerId, {
+            text = GetPlayerName(Player(inviterPlayerId))..
+                " invited you to join their party.",
+            positiveButton = "Accept",
+            negativeButton = "Decline",
+            height = 0.1,
+            onPositiveButtonClicked = function()
+                acceptInvite(invitedPlayerId, inviterPlayerId)
+            end,
+        }
+    )
+    -- log.log(
+    --     invitedPlayerId,
+    --     GetPlayerName(Player(inviterPlayerId))..
+    --         " invited you to join their party.",
+    --     log.TYPE.INFO)
+end
+
+function acceptInvite(invitedPlayerId, inviterPlayerId)
+    local partyId = getPlayerParty(inviterPlayerId)
+    if partyId == nil then
+        partyId = createParty()
+        addPlayerToParty(partyId, inviterPlayerId)
+    end
+    addPlayerToParty(partyId, invitedPlayerId)
+    local playersInParty = getPlayersInParty(partyId)
+    for idx, playerId in pairs(playersInParty) do
+        log.log(
+            playerId,
+            GetPlayerName(Player(invitedPlayerId)).." joined the party.",
+            log.TYPE.INFO)
+    end
 end
 
 function onAcceptInvite()
