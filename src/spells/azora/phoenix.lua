@@ -62,7 +62,7 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "epht",
+        model = "Abilities\\Spells\\Other\\BreathOfFire\\BreathOfFireMissile.mdl",
         fromV = heroV,
         toV = mouseV,
         speed = 800,
@@ -82,7 +82,7 @@ local cast = function(playerId)
         onMove = function(x, y)
             if tickNum % 20 == 0 then
                 effect.createEffect{
-                    model = "ephr",
+                    model = "Abilities\\Spells\\Other\\Doom\\DoomDeath.mdl",
                     x = x,
                     y = y,
                     duration = 4,

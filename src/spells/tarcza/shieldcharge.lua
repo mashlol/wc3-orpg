@@ -100,8 +100,9 @@ local cast = function(playerId)
 
                 effect.createEffect{
                     unit = collidedUnit,
-                    model = "eshi",
+                    model = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl",
                     duration = 1,
+                    scale = 0.7,
                 }
             end
             return false
@@ -109,8 +110,9 @@ local cast = function(playerId)
         onDestroy = function()
             effect.createEffect{
                 unit = hero,
-                model = "eshi",
+                model = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl",
                 duration = 1,
+                scale = 0.7,
             }
             animations.queueAnimation(hero, 3, 0.6)
         end,

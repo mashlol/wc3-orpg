@@ -51,14 +51,15 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    for i=0.5,1,0.1 do
+    for i=0.4,1,0.2 do
         effect.createEffect{
-            model = "ersl",
+            model = "Culling Slash Red.mdl",
             x = heroV.x,
             y = heroV.y,
             duration = 0.5,
             scale = 0.6,
             timeScale = i,
+            z = 60,
         }
     end
 
@@ -69,9 +70,10 @@ local cast = function(playerId)
             threat.addThreat(hero, unit, 400)
 
             effect.createEffect{
-                model = "ebld",
+                model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
                 unit = unit,
                 duration = 0.1,
+                z = 35,
             }
         end
     end

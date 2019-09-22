@@ -27,7 +27,7 @@ return {
         local posV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
 
         effect.createEffect{
-            model = "emei",
+            model = "Pillar of Flame Orange.mdl",
             x = posV.x,
             y = posV.y,
             duration = 1,

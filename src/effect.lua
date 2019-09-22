@@ -6,24 +6,24 @@ local createEffect = function(options)
         y = GetUnitY(options.unit)
     end
 
-    local dummy = CreateUnit(
-        Player(PLAYER_NEUTRAL_PASSIVE),
-        FourCC(options.model),
-        x,
-        y,
-        options.facing or 0)
+    local effect = AddSpecialEffect(options.model, x, y)
 
     if options.scale then
-        SetUnitScale(dummy, options.scale, options.scale, options.scale)
+        BlzSetSpecialEffectScale(effect, options.scale)
     end
-
     if options.timeScale then
-        SetUnitTimeScale(dummy, options.timeScale)
+        BlzSetSpecialEffectTimeScale(effect, options.timeScale)
+    end
+    if options.z then
+        BlzSetSpecialEffectZ(effect, options.z)
+    end
+    if options.facing then
+        BlzSetSpecialEffectYaw(effect, options.facing)
     end
 
     local effectTimer = CreateTimer()
     TimerStart(effectTimer, options.duration, false, function()
-        KillUnit(dummy)
+        DestroyEffect(effect)
         DestroyTimer(effectTimer)
     end)
 end

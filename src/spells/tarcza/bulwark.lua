@@ -54,10 +54,11 @@ local cast = function(playerId)
 
     animations.queueAnimation(hero, 3, 1.5)
     effect.createEffect{
-        model = "ebul",
+        model = "EnergyShield_Full.mdl",
         unit = hero,
         duration = 8,
         timeScale = 0.05,
+        scale = 6,
     }
 
     return true

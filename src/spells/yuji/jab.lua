@@ -74,7 +74,7 @@ local cast = function(playerId)
         facingDeg)
 
     effect.createEffect{
-        model = "slsh",
+        model = "Piercing Thrust.mdl",
         unit = hero,
         duration = 0.3,
         facing = facingDeg,
@@ -94,9 +94,10 @@ local cast = function(playerId)
             damage.dealDamage(hero, unit, 150)
 
             effect.createEffect{
-                model = "ebld",
+                model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
                 unit = unit,
                 duration = 0.1,
+                z = 35,
             }
         end
     end

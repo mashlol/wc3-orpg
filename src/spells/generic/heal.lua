@@ -67,9 +67,10 @@ local cast = function(playerId)
                 damage.heal(hero, collidedUnit, 50)
 
                 effect.createEffect{
-                    model = "ehet",
+                    model = "Abilities\\Spells\\Human\\Heal\\HealTarget.mdl",
                     unit = collidedUnit,
                     duration = 0.5,
+                    z = 35,
                 }
 
             end

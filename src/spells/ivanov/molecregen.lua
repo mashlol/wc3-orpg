@@ -75,7 +75,8 @@ local cast = function(playerId)
         destroyOnCollide = false,
         onDestroy = function()
             effect.createEffect{
-                model = "ecld",
+                model = "Abilities\\Spells\\Human\\CloudOfFog\\CloudOfFog.mdl",
+                scale = 2,
                 duration = 10,
                 x = mouseV.x,
                 y = mouseV.y,
@@ -92,9 +93,10 @@ local cast = function(playerId)
                 damage.heal(hero, unit, 100)
 
                 effect.createEffect{
-                    model = "ehet",
+                    model = "Abilities\\Spells\\Human\\Heal\\HealTarget.mdl",
                     unit = unit,
                     duration = 0.1,
+                    z = 35,
                 }
             end
         end

@@ -51,9 +51,10 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     effect.createEffect{
-        model = "ecur",
+        model = "Abilities\\Spells\\NightElf\\Taunt\\TauntCaster.mdl",
         unit = hero,
         duration = 1,
+        scale = 0.7,
     }
 
     local collidedUnits = collision.getAllCollisions(heroV, 400)
