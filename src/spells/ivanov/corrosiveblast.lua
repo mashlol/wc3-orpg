@@ -134,7 +134,7 @@ local castCorrosiveBlast = function(playerId)
             damage.dealDamage(hero, target, dmgAmount)
 
             effect.createEffect{
-                model = "ecrt",
+                model = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl",
                 unit = target,
                 duration = 1,
             }

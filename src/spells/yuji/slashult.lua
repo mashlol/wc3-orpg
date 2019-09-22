@@ -55,10 +55,12 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     effect.createEffect{
-        model = "grns",
+        model = "Culling Slash.mdl",
         x = heroV.x,
         y = heroV.y,
         duration = 0.5,
+        scale = 0.7,
+        z = 10,
     }
 
     SetUnitTimeScale(hero, 3)
@@ -70,7 +72,7 @@ local cast = function(playerId)
             :multiply(50)
             :add(heroV)
         effect.createEffect{
-            model = "slsh",
+            model = "Piercing Thrust.mdl",
             x = spawn.x,
             y = spawn.y,
             duration = 0.3,
@@ -84,9 +86,10 @@ local cast = function(playerId)
             damage.dealDamage(hero, unit, 400)
 
             effect.createEffect{
-                model = "ebld",
+                model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
                 unit = unit,
                 duration = 0.1,
+                z = 35,
             }
         end
     end

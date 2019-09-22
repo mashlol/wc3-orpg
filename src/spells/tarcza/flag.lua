@@ -67,10 +67,11 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     effect.createEffect{
-        model = "eflg",
+        model = "Objects\\InventoryItems\\OrcCaptureFlag\\OrcCaptureFlag.mdl",
         x = mouseV.x,
         y = mouseV.y,
         duration = 10,
+        scale = 1.2,
     }
 
     for i=0,10,1 do

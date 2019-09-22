@@ -76,7 +76,7 @@ local cast = function(playerId)
     animations.queueAnimation(hero, 14, 1)
 
     effect.createEffect{
-        model = "eblk",
+        model = "Pillar of Flame Blue.mdl",
         unit = hero,
         duration = 0.5,
     }
@@ -90,7 +90,7 @@ local cast = function(playerId)
         bj_RADTODEG * Atan2(finalV.y - heroV.y, finalV.x - heroV.x))
 
     effect.createEffect{
-        model = "eblk",
+        model = "Pillar of Flame Blue.mdl",
         unit = hero,
         duration = 0.5,
     }

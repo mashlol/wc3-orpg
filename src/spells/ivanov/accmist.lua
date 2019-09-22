@@ -68,7 +68,7 @@ local cast = function(playerId)
                 :multiply(j * 100)
                 :add(perpendicularVec)
             effect.createEffect{
-                model = "eacc",
+                model = "Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl",
                 x = finalVec.x,
                 y = finalVec.y,
                 duration = 10,

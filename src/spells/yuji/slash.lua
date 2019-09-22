@@ -132,9 +132,10 @@ local cast = function(playerId)
                     damage.dealDamage(hero, unit, dmgAmount)
 
                     effect.createEffect{
-                        model = "ebld",
+                        model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
                         unit = unit,
                         duration = 0.1,
+                        z = 35,
                     }
                 end
             end

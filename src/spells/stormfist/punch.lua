@@ -93,8 +93,10 @@ local cast = function(playerId)
                 damage.dealDamage(hero, collidedUnit, 350)
                 effect.createEffect{
                     unit = collidedUnit,
-                    model = "epui",
+                    model = "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl",
                     duration = 1,
+                    scale = 0.7,
+                    z = 20,
                 }
                 return true
             end
@@ -103,8 +105,10 @@ local cast = function(playerId)
         onDestroy = function()
             effect.createEffect{
                 unit = hero,
-                model = "epui",
+                model = "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl",
                 duration = 1,
+                scale = 0.7,
+                z = 20,
             }
             casttime.stopCast(playerId)
             DestroyEffect(punchTrail)

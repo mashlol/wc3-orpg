@@ -72,7 +72,7 @@ local cast = function(playerId)
         local randY = GetRandomReal(mouseV.y - 200, mouseV.y + 200)
 
         effect.createEffect{
-            model = "erai",
+            model = "Rain of Fire III.mdl",
             x = randX,
             y = randY,
             duration = 1,

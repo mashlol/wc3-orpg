@@ -35,7 +35,7 @@ end
 
 function createTargetEffect(mouseV)
     effect.createEffect{
-        model = "eprm",
+        model = "Abilities\\Spells\\Other\\Silence\\SilenceAreaBirth.mdl",
         x = mouseV.x,
         y = mouseV.y,
         timeScale = 0.5,
@@ -88,11 +88,12 @@ local cast = function(playerId)
     createTargetEffect(mouseV)
 
     effect.createEffect{
-        model = "emet",
+        model = "Abilities\\Spells\\Demon\\RainOfFire\\RainOfFireTarget.mdl",
         x = mouseV.x,
         y = mouseV.y,
         timeScale = 0.7,
         duration = 2,
+        scale = 3.5,
     }
 
     TriggerSleepAction(0.5)
@@ -103,7 +104,7 @@ local cast = function(playerId)
 
     createTargetEffect(mouseV)
     effect.createEffect{
-        model = "emei",
+        model = "Pillar of Flame Orange.mdl",
         x = mouseV.x,
         y = mouseV.y,
         duration = 1,
