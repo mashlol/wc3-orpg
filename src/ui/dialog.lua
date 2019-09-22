@@ -1,7 +1,5 @@
-local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local utils = require('src/ui/utils.lua')
-local tooltip = require('src/ui/tooltip.lua')
 
 -- dialogToggles = {
 --     [playerId] = {

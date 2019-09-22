@@ -7,6 +7,7 @@ local consts = require('src/ui/consts.lua')
 -- UI Modules
 local CastBar = require('src/ui/castbar.lua')
 local Dialog = require('src/ui/dialog.lua')
+local QuestLog = require('src/ui/questlog.lua')
 local ExpBar = require('src/ui/expbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
@@ -16,7 +17,6 @@ local Equipment = require('src/ui/equipment.lua')
 local UI_MODULES = {
     ActionBar:new(),
     CastBar:new(),
-    Dialog:new(),
     ExpBar:new(),
     UnitFrame:new{
         xLoc = 0.55,
@@ -45,6 +45,8 @@ for i=0,9,1 do
 end
 
 table.insert(UI_MODULES, Equipment:new())
+table.insert(UI_MODULES, Dialog:new())
+table.insert(UI_MODULES, QuestLog:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)

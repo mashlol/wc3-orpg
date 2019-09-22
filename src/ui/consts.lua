@@ -16,4 +16,6 @@ return {
     EXP_BAR_HEIGHT = 0.01,
     DIALOG_WIDTH = 0.4,
     DIALOG_HEIGHT = 0.4,
+    QUEST_LOG_WIDTH = 0.2,
+    QUEST_LOG_HEIGHT = 0.4,
 }
