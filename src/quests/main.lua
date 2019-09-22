@@ -70,27 +70,33 @@ function updateQuestMarks()
         local tag = questMarks[questId]
         local text
         local color
+        local showOnUnit
         if isEligibleForQuest(playerId, questId) then
             text = "!"
             color = {100, 100, 0}
+            showOnUnit = questInfo.getQuestFrom
         elseif
             not questCompleted(playerId, questId) and
             not questObjectivesCompleted(playerId, questId)
         then
             text = "?"
             color = {50, 50, 50}
+            showOnUnit = questInfo.handQuestTo
         elseif
             not questCompleted(playerId, questId) and
             questObjectivesCompleted(playerId, questId)
         then
             text = "?"
             color = {100, 100, 0}
+            showOnUnit = questInfo.handQuestTo
         else
             text = ""
             color = {100, 100, 100}
+            showOnUnit = questInfo.handQuestTo
         end
         SetTextTagText(tag, text, TextTagSize2Height(20))
         SetTextTagColor(tag, color[1], color[2], color[3], 0)
+        SetTextTagPosUnit(tag, showOnUnit, 10)
     end
 end
 
@@ -105,6 +111,8 @@ function initQuestMarks()
 
         questMarks[questId] = tag
     end
+
+    updateQuestMarks()
 end
 
 function questObjectivesCompleted(playerId, questId)
@@ -246,7 +254,7 @@ function initQuests()
             incompleteText = "You haven't killed 10 turtles yet.",
             completedText = "Thanks.",
             rewards = {
-                exp = 500,
+                exp = 150,
                 gold = 50,
             },
             objectives = {
@@ -262,22 +270,15 @@ function initQuests()
         },
         [2] = {
             getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
-            obtainText = "Please kill 10 more turtles.",
-            incompleteText = "You haven't killed 10 more turtles yet.",
-            completedText = "Thanks again.",
+            handQuestTo = gg_unit_nvil_0030,
+            obtainText = "Please talk to Fred",
+            incompleteText = "I don't think its possible to see this text.",
+            completedText = "Hi I'm Fred.",
             rewards = {
-                exp = 500,
+                exp = 50,
                 gold = 50,
             },
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('hmbs'),
-                    name = 'Turtles',
-                }
-            },
+            objectives = {},
             prerequisites = {1},
             levelRequirement = 0,
         }
