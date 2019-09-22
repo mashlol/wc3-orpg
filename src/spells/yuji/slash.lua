@@ -111,7 +111,7 @@ local cast = function(playerId)
         end,
         onDestroy = function()
             -- Finish up the stuff
-            local dmgAmount = storedData[playerId].attackCount == 2 and 300 or 50
+            local dmgAmount = storedData[playerId].attackCount == 2 and 100 or 25
 
             -- Update heroV now that we've moved
             local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}

@@ -382,7 +382,7 @@ function initQuests()
             name = "Fred's Quest",
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvil_0030,
-            obtainText = "A neighbor of mine, Fred, mentioned to me recently he's having some trouble at his farm. He'll likely want your help up there - his farm is north west of here. Go seek out Fred and I'm sure he will be grateful for your help.",
+            obtainText = "A neighbor of mine, Fred, mentioned to me recently he's having some trouble at his farm. He'll likely want your help up there - his farm is north west of here, just follow the dirt trail. Go seek out Fred and I'm sure he will be grateful for your help.",
             incompleteText = "I don't think its possible to see this text.",
             completedText = "Fjorn sent you? Ah, that makes sense. Yes, I have been having some trouble recently, there's a bunch of spiders that seem to have infested my farm and are ruining my crops and infecting my animals with diseases. Do you think you could help with that?",
             rewards = {
