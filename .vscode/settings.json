@@ -5,7 +5,8 @@
         "gg_dest_LTg2_2324",
         "createHeroForPlayer",
         "gg_unit_nvl2_0000",
-        "gg_unit_nvil_0030"
+        "gg_unit_nvil_0030",
+        "gg_unit_nvil_0120"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"

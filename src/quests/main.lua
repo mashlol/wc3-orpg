@@ -272,6 +272,7 @@ function onNpcClicked()
 
     local selectedUnit = GetTriggerUnit()
     for questId, questInfo in pairs(QUESTS) do
+        print('checking quest ', questId, questInfo.getQuestFrom == selectedUnit, isEligibleForQuest(playerId, questId))
         if
             questInfo.getQuestFrom == selectedUnit and
             IsUnitInRange(hero, selectedUnit, 300) and
@@ -412,7 +413,59 @@ function initQuests()
                     name = 'Spiders',
                 }
             },
-            prerequisites = {1, 2},
+            prerequisites = {2},
+            levelRequirement = 0,
+        },
+        [4] = {
+            name = "Return to Fjord",
+            getQuestFrom = gg_unit_nvil_0030,
+            handQuestTo = gg_unit_nvl2_0000,
+            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the beetles across the river.",
+            incompleteText = "Impossible!",
+            completedText = "Fred sent you about the beetles? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
+            objectives = {},
+            rewards = {
+                exp = 30,
+                gold = 30,
+            },
+            prerequisites = {3},
+            levelRequirement = 0,
+        },
+        [5] = {
+            name = "Beetles over the River",
+            getQuestFrom = gg_unit_nvl2_0000,
+            handQuestTo = gg_unit_nvl2_0000,
+            obtainText = "So Fred thinks you can take them on? All right. You can find the beetles across the river, just follow the trail south and over the river. Come back when you've killed at least 8.",
+            incompleteText = "Have you killed the beetles yet?",
+            completedText = "Wow, impressive. Have you ever been to Ironwell city? If you really want to make money, that's where I'd go if I were you.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 8,
+                    toKill = FourCC('hbee'),
+                    name = 'Beetles',
+                }
+            },
+            rewards = {
+                exp = 150,
+                gold = 150,
+            },
+            prerequisites = {4},
+            levelRequirement = 0,
+        },
+        [6] = {
+            name = "Ironwell City",
+            getQuestFrom = gg_unit_nvl2_0000,
+            handQuestTo = gg_unit_nvil_0120,
+            obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
+            incompleteText = "Impossible!",
+            completedText = "Ah, you know Fjord? He's a character he is.",
+            objectives = {},
+            rewards = {
+                exp = 30,
+                gold = 30,
+            },
+            prerequisites = {5},
             levelRequirement = 0,
         },
     }
