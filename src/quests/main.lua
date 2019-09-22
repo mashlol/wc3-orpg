@@ -166,7 +166,26 @@ function isEligibleForQuest(playerId, questId)
     return true
 end
 
-function getQuestText(questId)
+function getQuestIncompletedText(questId)
+    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].handQuestTo) .. "|r|n|n"
+    res = res .. QUESTS[questId].incompleteText
+    return res
+end
+
+function getQuestCompletedText(questId)
+    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].handQuestTo) .. "|r|n|n"
+    res = res .. QUESTS[questId].completedText
+    res = res .. "|n|n|cffe0b412Rewards:|r|n"
+    if QUESTS[questId].rewards.gold then
+        res = res .. "- " .. QUESTS[questId].rewards.gold .. " gold|n"
+    end
+    if QUESTS[questId].rewards.exp then
+        res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+    end
+    return res
+end
+
+function getQuestAcceptText(questId)
     local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
 
     res = res .. QUESTS[questId].obtainText
@@ -191,7 +210,7 @@ end
 
 function beginQuest(playerId, questId)
     Dialog.show(playerId, {
-        text = getQuestText(questId),
+        text = getQuestAcceptText(questId),
         button = "Accept",
     })
 
@@ -205,20 +224,20 @@ end
 
 function finishQuest(playerId, questId)
     progress[playerId][questId].completed = true
-    log.log(playerId, QUESTS[questId].completedText, log.TYPE.INFO)
+
+    Dialog.show(playerId, {
+        text = getQuestCompletedText(questId),
+        button = "Okay",
+    })
 
     local expGained = QUESTS[questId].rewards.exp
     local goldGained = QUESTS[questId].rewards.gold
 
     if expGained ~= nil then
-        log.log(
-            playerId, 'You gained '..expGained..' experience.', log.TYPE.QUEST)
         AddHeroXP(hero.getHero(playerId), expGained, true)
     end
 
     if goldGained ~= nil then
-        log.log(
-            playerId, 'You gained '..goldGained..' gold.', log.TYPE.QUEST)
         local curGold = GetPlayerState(
             Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
         SetPlayerState(
@@ -254,7 +273,10 @@ function onNpcClicked()
             if questObjectivesCompleted(playerId, questId) then
                 finishQuest(playerId, questId)
             else
-                log.log(playerId, QUESTS[questId].incompleteText, log.TYPE.ERROR)
+                Dialog.show(playerId, {
+                    text = getQuestIncompletedText(questId),
+                    button = 'Okay',
+                })
             end
         end
     end
@@ -294,8 +316,8 @@ function initQuests()
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvl2_0000,
             obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
-            incompleteText = "You haven't killed 10 turtles yet.",
-            completedText = "Thanks.",
+            incompleteText = "Have you completed the task?",
+            completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
             rewards = {
                 exp = 150,
                 gold = 50,
