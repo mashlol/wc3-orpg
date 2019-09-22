@@ -88,14 +88,19 @@ function applyBuffs()
     local effectsByUnitId = {}
 
     for playerId=0,bj_MAX_PLAYERS,1 do
-        local hero = hero.getHero(playerId)
-        if hero ~= nil then
+        local heroUnit = hero.getHero(playerId)
+        if heroUnit ~= nil then
             local equippedItems = equipment.getEquippedItems(playerId)
             for _, itemId in pairs(equippedItems) do
                 local stats = itemmanager.ITEMS[itemId].stats
                 for _, statInfo in pairs(stats) do
-                    maybeAddEffectToList(effectsByUnitId, hero, statInfo)
+                    maybeAddEffectToList(effectsByUnitId, heroUnit, statInfo)
                 end
+            end
+            -- print('getting hero stats', hero.getStatEffects)
+            local stats = hero.getStatEffects(playerId)
+            for _, stat in pairs(stats) do
+                maybeAddEffectToList(effectsByUnitId, heroUnit, stat)
             end
         end
     end
@@ -105,7 +110,7 @@ function applyBuffs()
         local unit = unitInfo.unit
         for buffName,val in pairs(unitInfo.buffs) do
             local effects = buff.BUFF_INFO[buffName].effects
-            for idx,info in pairs(effects) do
+            for _,info in pairs(effects) do
                 for i=1,val.stacks,1 do
                     maybeAddEffectToList(effectsByUnitId, unit, info)
                 end

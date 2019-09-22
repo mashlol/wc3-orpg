@@ -238,6 +238,25 @@ function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
     end
 end
 
+function getStatEffects(playerId)
+    local pickedHero = getPickedHero(playerId)
+    local hero = getHero(playerId)
+    if pickedHero == nil or hero == nil then
+        return {}
+    end
+    local level = GetHeroLevel(hero)
+    return {
+        {
+            type = 'multiplyDamage',
+            amount = 1 + 0.1 * level,
+        },
+        {
+            type = 'rawHp',
+            amount = level * 100,
+        }
+    }
+end
+
 function addRepickedListener(repickedListenerFunc)
     table.insert(repickListeners, repickedListenerFunc)
 end
@@ -254,4 +273,5 @@ return {
     restorePickedHero = restorePickedHero,
     addRepickedListener = addRepickedListener,
     addHeroPickedListener = addHeroPickedListener,
+    getStatEffects = getStatEffects,
 }
