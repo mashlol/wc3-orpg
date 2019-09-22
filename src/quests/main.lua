@@ -275,7 +275,7 @@ function initQuests()
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 1,
+                    amount = 10,
                     toKill = FourCC('hmbs'),
                     name = 'Turtles',
                 }
