@@ -87,6 +87,7 @@ function updateQuestMarks()
             color = {100, 100, 0}
             showOnUnit = questInfo.getQuestFrom
         elseif
+            hasQuest(playerId, questId) and
             not questCompleted(playerId, questId) and
             not questObjectivesCompleted(playerId, questId)
         then
@@ -94,6 +95,7 @@ function updateQuestMarks()
             color = {50, 50, 50}
             showOnUnit = questInfo.handQuestTo
         elseif
+            hasQuest(playerId, questId) and
             not questCompleted(playerId, questId) and
             questObjectivesCompleted(playerId, questId)
         then
@@ -277,6 +279,7 @@ function onNpcClicked()
         then
             -- Time to get a new quest
             beginQuest(playerId, questId)
+            return
         elseif
             questInfo.handQuestTo == selectedUnit and
             IsUnitInRange(hero, selectedUnit, 300) and
@@ -285,11 +288,13 @@ function onNpcClicked()
         then
             if questObjectivesCompleted(playerId, questId) then
                 finishQuest(playerId, questId)
+                return
             else
                 Dialog.show(playerId, {
                     text = getQuestIncompletedText(questId),
                     positiveButton = 'Okay',
                 })
+                return
             end
         end
     end
@@ -359,15 +364,15 @@ function initQuests()
             incompleteText = "Have you completed the task?",
             completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
             rewards = {
-                exp = 150,
+                exp = 50,
                 gold = 50,
             },
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 10,
+                    amount = 1,
                     toKill = FourCC('hmbs'),
-                    name = 'Turtles',
+                    name = 'Snapping Turtles',
                 }
             },
             prerequisites = {},
@@ -381,13 +386,35 @@ function initQuests()
             incompleteText = "I don't think its possible to see this text.",
             completedText = "Fjorn sent you? Ah, that makes sense. Yes, I have been having some trouble recently, there's a bunch of spiders that seem to have infested my farm and are ruining my crops and infecting my animals with diseases. Do you think you could help with that?",
             rewards = {
-                exp = 50,
-                gold = 50,
+                exp = 20,
+                gold = 10,
             },
             objectives = {},
             prerequisites = {1},
             levelRequirement = 0,
-        }
+        },
+        [3] = {
+            name = "Spider Infestation",
+            getQuestFrom = gg_unit_nvil_0030,
+            handQuestTo = gg_unit_nvil_0030,
+            obtainText = "Yes, I'd be glad to have your help. As I said before, I've got an infestation of spiders at my farm here and I need some help erradicating them. Could you help?",
+            incompleteText = "Have you completed the task?",
+            completedText = "Thanks so much! This is huge for me. Let me know if you need more work.",
+            rewards = {
+                exp = 100,
+                gold = 100,
+            },
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('hspi'),
+                    name = 'Spiders',
+                }
+            },
+            prerequisites = {1, 2},
+            levelRequirement = 0,
+        },
     }
 end
 
