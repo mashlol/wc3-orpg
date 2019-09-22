@@ -245,6 +245,19 @@ function resetQuestProgress(playerId)
     updateQuestMarks()
 end
 
+function getProgress(playerId)
+    return progress[playerId]
+end
+
+function restoreProgress(playerId, prog)
+    progress[playerId] = prog
+    updateQuestMarks()
+end
+
+function getNumQuests()
+    return #QUESTS
+end
+
 function initQuests()
     QUESTS = {
         [1] = {
@@ -260,7 +273,7 @@ function initQuests()
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 10,
+                    amount = 1,
                     toKill = FourCC('hmbs'),
                     name = 'Turtles',
                 }
@@ -309,5 +322,7 @@ end
 
 return {
     init = init,
+    getProgress = getProgress,
+    getNumQuests = getNumQuests,
+    restoreProgress = restoreProgress,
 }
-
