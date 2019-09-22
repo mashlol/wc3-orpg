@@ -2,6 +2,7 @@ local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
 local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
+local QuestLog = require("src/ui/questlog.lua")
 
 -- TODO let people customize keybindings
 local KEY_MAPPING = {
@@ -32,6 +33,7 @@ local SUPPORTED_KEYS = {
     OSKEY_V,
     OSKEY_B,
     OSKEY_O,
+    OSKEY_L,
 }
 
 local keyPressed = function()
@@ -48,6 +50,10 @@ local keyPressed = function()
     if pressedKey == OSKEY_B then
         Backpack.toggle(playerId)
         Equipment.toggle(playerId)
+    end
+
+    if pressedKey == OSKEY_L then
+        QuestLog.toggle(playerId)
     end
 end
 
