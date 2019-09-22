@@ -189,7 +189,6 @@ local init = function()
 end
 
 local createProjectile = function(options)
-    print('creating projectile')
     local goalV = getGoalV(options)
     if options.length ~= nil then
         local lengthNormalizedV = Vector:new(goalV)
