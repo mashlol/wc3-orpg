@@ -120,7 +120,7 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
     DestroyTrigger(forceCameraTriggers[playerId])
     DestroyTrigger(selectHeroTriggers[playerId])
 
-    heroes[playerId] = CreateUnit(
+    local hero = CreateUnit(
         Player(playerId),
         pickedHeroes[playerId].id,
         heroX or START_X,
@@ -129,15 +129,21 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
-        SelectUnit(heroes[playerId], true)
+        SelectUnit(hero, true)
         ResetToGameCamera(0)
         PanCameraToTimed(heroX or START_X, heroY or START_Y, 0)
     end
 
     if exp ~= nil and exp ~= 0 then
-        SetHeroXP(heroes[playerId], exp, false)
+        SetHeroXP(hero, exp, false)
     end
 
+    heroes[playerId] = hero
+
+    TimerStart(CreateTimer(), 0.2, false, function()
+        local maxHP = BlzGetUnitMaxHP(hero)
+        SetUnitState(hero, UNIT_STATE_LIFE, maxHP)
+    end)
 end
 
 local forceCameraLocation = function(playerId, camera)
