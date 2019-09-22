@@ -172,6 +172,11 @@ local clearProjectiles = function()
             if projectile.options.onMove then
                 projectile.options.onMove(newPos.x, newPos.y)
             end
+            if projectile.options.acceleration then
+                projectile.options.speed = projectile.options.speed +
+                    projectile.options.acceleration *
+                    elapsedTime
+            end
         end
     end
     local newProjectiles = {}
