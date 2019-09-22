@@ -301,10 +301,6 @@ function initQuests()
 end
 
 function init()
-    local trigger = CreateTrigger()
-    TriggerRegisterTimerEvent(trigger, 2, false)
-    TriggerAddAction(trigger, initQuestMarks)
-
     local selectTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS-1,1 do
         TriggerRegisterPlayerUnitEvent(
@@ -318,8 +314,10 @@ function init()
 
     initQuests()
     initObjectiveTriggers()
+    initQuestMarks()
 
     hero.addRepickedListener(resetQuestProgress)
+    hero.addHeroPickedListener(updateQuestMarks)
 end
 
 return {
