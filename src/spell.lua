@@ -110,7 +110,6 @@ local SPELL_MAP = {
 }
 
 local SKILL_LEVELS = {1, 2, 3, 5, 1, 1, 7, 10, 15, 20, 30, 50}
-local SKILL_LEVELS = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}
 
 local TOOLTIPS = {}
 
