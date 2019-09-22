@@ -412,6 +412,12 @@ function getDamageModifier(unit, target)
                 end
             end
         end
+        local stats = hero.getStatEffects(ownerPlayerId)
+        for _, statInfo in pairs(stats) do
+            if statInfo.type == 'multiplyDamage' then
+                modifier = modifier * statInfo.amount
+            end
+        end
     end
     local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
     if hero.getHero(targetPlayerId) == target then
@@ -421,6 +427,12 @@ function getDamageModifier(unit, target)
                 if info.type == 'multiplyIncomingDamage' then
                     modifier = modifier * info.amount
                 end
+            end
+        end
+        local stats = hero.getStatEffects(targetPlayerId)
+        for _, statInfo in pairs(stats) do
+            if statInfo.type == 'multiplyIncomingDamage' then
+                modifier = modifier * statInfo.amount
             end
         end
     end
@@ -458,6 +470,12 @@ function getHealingModifier(unit, target)
                 end
             end
         end
+        local stats = hero.getStatEffects(ownerPlayerId)
+        for _, statInfo in pairs(stats) do
+            if statInfo.type == 'multiplyHealing' then
+                modifier = modifier * statInfo.amount
+            end
+        end
     end
     local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
     if hero.getHero(targetPlayerId) == target then
@@ -467,6 +485,12 @@ function getHealingModifier(unit, target)
                 if info.type == 'multiplyIncomingHealing' then
                     modifier = modifier * info.amount
                 end
+            end
+        end
+        local stats = hero.getStatEffects(targetPlayerId)
+        for _, statInfo in pairs(stats) do
+            if statInfo.type == 'multiplyIncomingHealing' then
+                modifier = modifier * statInfo.amount
             end
         end
     end
