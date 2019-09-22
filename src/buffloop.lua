@@ -135,7 +135,7 @@ function applyBuffs()
         if res.isRooted then
             SetUnitMoveSpeed(unit, 0)
         else
-            SetUnitMoveSpeed(unit, baseSpeed)
+            SetUnitMoveSpeed(unit, res.baseSpeed)
         end
         PauseUnit(unit, res.isStunned)
         SetUnitScale(unit, res.scale, res.scale, res.scale)
