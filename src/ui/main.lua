@@ -32,11 +32,11 @@ local UI_MODULES = {
 }
 
 for i=0,9,1 do
-    local xloC = i % 2 * (consts.BAR_WIDTH / 2 + 0.005)
+    local xloC = math.floor(i / 5) * (consts.BAR_WIDTH / 2 + 0.005)
 
     table.insert(UI_MODULES, UnitFrame:new{
         xLoc = xloC,
-        yLoc = 0.5 - (consts.BAR_HEIGHT * 5 + 0.005) * (i - i % 2) / 2,
+        yLoc = 0.5 - (consts.BAR_HEIGHT * 5 + 0.005) * (i % 5),
         anchor = FRAMEPOINT_TOPLEFT,
         forTarget = false,
         forParty = i,
