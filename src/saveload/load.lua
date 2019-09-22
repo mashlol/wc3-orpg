@@ -18,8 +18,10 @@ function loadChar(playerId, code)
 
     local decoded = Code:fromStr(code)
 
-    local level = decoded:getInt(73)
+    local exp = decoded:getInt(200000)
     local heroId = decoded:getInt(73)
+    local heroX = decoded:getInt(64000) - 32000
+    local heroY = decoded:getInt(64000) - 32000
 
     local backpackItems = {}
     for i=1,36,1 do
@@ -63,7 +65,7 @@ function loadChar(playerId, code)
         equipment.equipItem(playerId, slot, itemId)
     end
 
-    hero.restorePickedHero(playerId, heroId, level)
+    hero.restorePickedHero(playerId, heroId, exp, heroX, heroY)
 end
 
 function onDataSynced()
