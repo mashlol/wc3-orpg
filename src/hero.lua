@@ -195,10 +195,22 @@ function onRepick()
     end
 end
 
+function onLevel()
+    local hero = GetLevelingUnit()
+    TimerStart(CreateTimer(), 0.2, false, function()
+        local maxHP = BlzGetUnitMaxHP(hero)
+        SetUnitState(hero, UNIT_STATE_LIFE, maxHP)
+    end)
+end
+
 local init = function()
     local trigger = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trigger, EVENT_PLAYER_UNIT_DEATH)
     TriggerAddAction(trigger, respawn)
+
+    local levelTrigger = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(levelTrigger, EVENT_PLAYER_HERO_LEVEL)
+    TriggerAddAction(levelTrigger, onLevel)
 
     local repickTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
