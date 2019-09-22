@@ -174,6 +174,7 @@ end
 
 function getQuestCompletedText(questId)
     local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].handQuestTo) .. "|r|n|n"
+    res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
     res = res .. QUESTS[questId].completedText
     res = res .. "|n|n|cffe0b412Rewards:|r|n"
     if QUESTS[questId].rewards.gold then
@@ -187,6 +188,8 @@ end
 
 function getQuestAcceptText(questId)
     local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
+
+    res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
 
     res = res .. QUESTS[questId].obtainText
     local objectives = ""
@@ -315,6 +318,7 @@ end
 function initQuests()
     QUESTS = {
         [1] = {
+            name = "Trouble in Turtle Town",
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvl2_0000,
             obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
@@ -336,6 +340,7 @@ function initQuests()
             levelRequirement = 0,
         },
         [2] = {
+            name = "Fred's Quest",
             getQuestFrom = gg_unit_nvl2_0000,
             handQuestTo = gg_unit_nvil_0030,
             obtainText = "Please talk to Fred",
