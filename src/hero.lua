@@ -7,7 +7,8 @@ local START_Y = 71
 local heroes = {}
 local pickedHeroes = {}
 
-local listeners = {}
+local repickListeners = {}
+local pickListeners = {}
 
 local ALL_HERO_INFO = {
     [FourCC("Hyuj")] = {
@@ -149,6 +150,10 @@ local onHeroPicked = function()
 
     pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
     createHeroForPlayer(playerId)
+
+    for _, listener in pairs(pickListeners) do
+        listener()
+    end
 end
 
 local showPickHeroDialog = function(playerId)
@@ -185,7 +190,7 @@ function onRepick()
     pickedHeroes[repickPlayerId] = nil
     showPickHeroDialog(repickPlayerId)
 
-    for _, listener in pairs(listeners) do
+    for _, listener in pairs(repickListeners) do
         listener(repickPlayerId)
     end
 end
@@ -211,7 +216,7 @@ local getHero = function(playerId)
 end
 
 local isHero = function(unit)
-    for idx, hero in pairs(heroes) do
+    for _, hero in pairs(heroes) do
         if unit == hero then
             return true
         end
@@ -224,7 +229,7 @@ local getPickedHero = function(playerId)
 end
 
 function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
-    for idx, info in pairs(ALL_HERO_INFO) do
+    for _, info in pairs(ALL_HERO_INFO) do
         if info.storedId == storedHeroId then
             pickedHeroes[playerId] = info
             createHeroForPlayer(playerId, exp, heroX, heroY)
@@ -234,7 +239,11 @@ function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
 end
 
 function addRepickedListener(repickedListenerFunc)
-    table.insert(listeners, repickedListenerFunc)
+    table.insert(repickListeners, repickedListenerFunc)
+end
+
+function addHeroPickedListener(onPickedListenerFunc)
+    table.insert(pickListeners, onPickedListenerFunc)
 end
 
 return {
@@ -244,4 +253,5 @@ return {
     getPickedHero = getPickedHero,
     restorePickedHero = restorePickedHero,
     addRepickedListener = addRepickedListener,
+    addHeroPickedListener = addHeroPickedListener,
 }
