@@ -7,8 +7,10 @@ local tooltip = require('src/ui/tooltip.lua')
 --     [playerId] = {
 --         text = "text",
 --         height = 0.4,
---         button = "Accept",
---         onButtonClicked = [function],
+--         positiveButton = "Accept",
+--         onPositiveButtonClicked = [function],
+--         negativeButton = "Decline",
+--         onNegativeButtonClicked = [function],
 --     },
 -- }
 local dialogToggles = {}
@@ -27,6 +29,52 @@ function Dialog:new(o)
     setmetatable(o, self)
     self.__index = self
     return o
+end
+
+function createButton(origin, originFrame, xOffset, isNegative)
+    local button = BlzCreateFrame("ScriptDialogButton", originFrame, 0, 0)
+    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+    BlzFrameSetParent(button, origin)
+    BlzFrameSetSize(button, 0.12, 0.04)
+    BlzFrameSetPoint(
+        button,
+        FRAMEPOINT_BOTTOM,
+        origin,
+        FRAMEPOINT_BOTTOM,
+        xOffset,
+        0.01)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        trig, button, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        local playerId = GetPlayerId(GetTriggerPlayer())
+        if
+            dialogToggles[playerId] ~= nil and
+            not isNegative and
+            dialogToggles[playerId].onPositiveButtonClicked
+        then
+            dialogToggles[playerId].onPositiveButtonClicked()
+        end
+
+        if
+            dialogToggles[playerId] ~= nil and
+            isNegative and
+            dialogToggles[playerId].onNegativeButtonClicked
+        then
+            dialogToggles[playerId].onNegativeButtonClicked()
+        end
+
+        dialogToggles[playerId] = nil
+
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+    end)
+
+    return {
+        button = button,
+        text = buttonText,
+    }
 end
 
 function Dialog:init()
@@ -62,44 +110,15 @@ function Dialog:init()
         FRAMEPOINT_TOPLEFT,
         0.01,
         -0.01)
-    BlzFrameSetText(text, "This is the dialog text|n|nI want you to get some shit for me|n|n|n|nObjectives:|n- Kill 10 spiders|n|nRewards:|n- 50 gold|n- 150 experience")
 
-    local button = BlzCreateFrame("ScriptDialogButton", originFrame, 0, 0)
-    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
-    BlzFrameSetParent(button, origin)
-    BlzFrameSetSize(button, 0.12, 0.04)
-    BlzFrameSetPoint(
-        button,
-        FRAMEPOINT_BOTTOM,
-        origin,
-        FRAMEPOINT_BOTTOM,
-        0,
-        0.01)
-    BlzFrameSetText(buttonText, "Accept")
-
-    local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(
-        trig, button, FRAMEEVENT_CONTROL_CLICK)
-    TriggerAddAction(trig, function()
-        local playerId = GetPlayerId(GetTriggerPlayer())
-        if
-            dialogToggles[playerId] ~= nil and
-            dialogToggles[playerId].onButtonClicked
-        then
-            dialogToggles[playerId].onButtonClicked()
-        end
-
-        dialogToggles[playerId] = nil
-
-        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
-    end)
+    local positiveButton = createButton(origin, originFrame, 0.07, false)
+    local negativeButton = createButton(origin, originFrame, -0.07, true)
 
     self.frames = {
         origin = origin,
         text = text,
-        button = button,
-        buttonText = buttonText,
+        positiveButton = positiveButton,
+        negativeButton = negativeButton,
     }
 
     return self
@@ -113,9 +132,41 @@ function Dialog:update(playerId)
     BlzFrameSetText(
         frames.text,
         dialogToggles[playerId] ~= nil and dialogToggles[playerId].text or "")
+
+    if
+        dialogToggles[playerId] ~= nil and
+        dialogToggles[playerId].positiveButton and
+        not dialogToggles[playerId].negativeButton
+    then
+        BlzFrameSetPoint(
+            frames.positiveButton.button,
+            FRAMEPOINT_BOTTOM,
+            frames.origin,
+            FRAMEPOINT_BOTTOM,
+            0,
+            0.01)
+    else
+        BlzFrameSetPoint(
+            frames.positiveButton.button,
+            FRAMEPOINT_BOTTOM,
+            frames.origin,
+            FRAMEPOINT_BOTTOM,
+            0.07,
+            0.01)
+    end
+
+    BlzFrameSetVisible(
+        frames.positiveButton.button,
+        dialogToggles[playerId] ~= nil and dialogToggles[playerId].positiveButton)
+    BlzFrameSetVisible(
+        frames.negativeButton.button,
+        dialogToggles[playerId] ~= nil and dialogToggles[playerId].negativeButton)
     BlzFrameSetText(
-        frames.buttonText,
-        dialogToggles[playerId] ~= nil and dialogToggles[playerId].button or "")
+        frames.positiveButton.text,
+        dialogToggles[playerId] ~= nil and dialogToggles[playerId].positiveButton or "")
+    BlzFrameSetText(
+        frames.negativeButton.text,
+        dialogToggles[playerId] ~= nil and dialogToggles[playerId].negativeButton or "")
     BlzFrameSetSize(
         frames.origin,
         consts.DIALOG_WIDTH,
