@@ -211,15 +211,17 @@ end
 function beginQuest(playerId, questId)
     Dialog.show(playerId, {
         text = getQuestAcceptText(questId),
-        button = "Accept",
+        positiveButton = "Accept",
+        negativeButton = "Decline",
+        onPositiveButtonClicked = function()
+            progress[playerId][questId] = {
+                completed = false,
+                objectives = {},
+            }
+
+            updateQuestMarks()
+        end,
     })
-
-    progress[playerId][questId] = {
-        completed = false,
-        objectives = {},
-    }
-
-    updateQuestMarks()
 end
 
 function finishQuest(playerId, questId)
@@ -227,7 +229,7 @@ function finishQuest(playerId, questId)
 
     Dialog.show(playerId, {
         text = getQuestCompletedText(questId),
-        button = "Okay",
+        positiveButton = "Okay",
     })
 
     local expGained = QUESTS[questId].rewards.exp
@@ -275,7 +277,7 @@ function onNpcClicked()
             else
                 Dialog.show(playerId, {
                     text = getQuestIncompletedText(questId),
-                    button = 'Okay',
+                    positiveButton = 'Okay',
                 })
             end
         end
