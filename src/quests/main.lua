@@ -370,7 +370,7 @@ function initQuests()
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 1,
+                    amount = 8,
                     toKill = FourCC('hmbs'),
                     name = 'Snapping Turtles',
                 }
@@ -407,7 +407,7 @@ function initQuests()
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 1,
+                    amount = 8,
                     toKill = FourCC('hspi'),
                     name = 'Spiders',
                 }
