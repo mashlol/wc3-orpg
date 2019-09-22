@@ -12,14 +12,24 @@ end
 local destroyProjectile = function(projectile)
     if projectile.options.shouldRemove then
         if projectile.options.removeInsteadOfKill then
-            RemoveUnit(projectile.unit)
+            if projectile.unit then
+                RemoveUnit(projectile.unit)
+            else
+                BlzSetSpecialEffectPosition(
+                    projectile.effect, -30000, -30000, -30000)
+                DestroyEffect(projectile.effect)
+            end
         else
-            KillUnit(projectile.unit)
+            if projectile.unit then
+                KillUnit(projectile.unit)
+            else
+                DestroyEffect(projectile.effect)
+            end
         end
     end
     projectile.toRemove = true
     if projectile.options.onDestroy then
-        projectile.options.onDestroy(projectile.unit)
+        projectile.options.onDestroy(projectile)
     end
 end
 
@@ -44,8 +54,8 @@ local getGoalV = function(options)
 end
 
 local isAtFinalRotation = function(projectile)
-    local curProjectileX = GetUnitX(projectile.unit)
-    local curProjectileY = GetUnitY(projectile.unit)
+    local curProjectileX = projectile.x
+    local curProjectileY = projectile.y
 
     local projectileV = Vector:new{x = curProjectileX, y = curProjectileY}
     local curVec = Vector:new(projectileV)
@@ -58,16 +68,17 @@ end
 local clearProjectiles = function()
     local elapsedTime = TimerGetElapsed(timer)
 
-    for idx, projectile in pairs(projectiles) do
-        local curProjectileX = GetUnitX(projectile.unit)
-        local curProjectileY = GetUnitY(projectile.unit)
+    for _, projectile in pairs(projectiles) do
+        -- TODO extensive testing to see if this can desync
+        local curProjectileX = projectile.x
+        local curProjectileY = projectile.y
 
         local projectileV = Vector:new{x = curProjectileX, y = curProjectileY}
         local ownerHero = hero.getHero(projectile.options.playerId)
         local collidedUnits = collision.getAllCollisions(
             projectileV,
             projectile.options.radius or 50)
-        for idx, collidedUnit in pairs(collidedUnits) do
+        for _, collidedUnit in pairs(collidedUnits) do
             if
                 collidedUnit ~= ownerHero and
                 projectile.toRemove ~= true and
@@ -144,16 +155,27 @@ local clearProjectiles = function()
                     goalV.y - projectile.options.fromV.y,
                     goalV.x - projectile.options.fromV.x)
             end
-            SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
-            SetUnitX(projectile.unit, newPos.x)
-            SetUnitY(projectile.unit, newPos.y)
+            if projectile.unit ~= nil then
+                SetUnitFacing(projectile.unit, bj_RADTODEG * facingRad)
+                SetUnitX(projectile.unit, newPos.x)
+                SetUnitY(projectile.unit, newPos.y)
+            else
+                BlzSetSpecialEffectYaw(projectile.effect, facingRad)
+                BlzSetSpecialEffectPosition(
+                    projectile.effect,
+                    newPos.x,
+                    newPos.y,
+                    projectile.options.z or 0)
+            end
+            projectile.x = newPos.x
+            projectile.y = newPos.y
             if projectile.options.onMove then
                 projectile.options.onMove(newPos.x, newPos.y)
             end
         end
     end
     local newProjectiles = {}
-    for idx, projectile in pairs(projectiles) do
+    for _, projectile in pairs(projectiles) do
         if projectile ~= nil and projectile.toRemove ~= true then
             table.insert(newProjectiles, projectile)
         end
@@ -167,6 +189,7 @@ local init = function()
 end
 
 local createProjectile = function(options)
+    print('creating projectile')
     local goalV = getGoalV(options)
     if options.length ~= nil then
         local lengthNormalizedV = Vector:new(goalV)
@@ -178,13 +201,16 @@ local createProjectile = function(options)
         options.toV = goalV
     end
 
+    local startV
     local origin = options.fromUnit and
         Vector:new{
             x = GetUnitX(options.fromUnit),
             y = GetUnitY(options.fromUnit)} or
         options.fromV
+
+    local unitToProject = nil
+    local effectToProject = nil
     if options.projectile == nil then
-        local startV
         local startFacing
         if options.fromAngle ~= nil and options.fromRadius ~= nil then
             startV = Vector:fromAngle(options.fromAngle)
@@ -198,19 +224,30 @@ local createProjectile = function(options)
             startV = Vector:new(origin)
             startFacing = Atan2(goalV.y - origin.y, goalV.x - origin.x)
         end
-        options.projectile = CreateUnit(
-            Player(PLAYER_NEUTRAL_PASSIVE),
-            FourCC(options.model),
-            startV.x,
-            startV.y,
-            bj_RADTODEG * startFacing)
+        options.projectile = AddSpecialEffect(options.model, startV.x, startV.y)
+        BlzSetSpecialEffectYaw(options.projectile, bj_RADTODEG * startFacing)
+        if options.scale then
+            BlzSetSpecialEffectScale(options.projectile, options.scale)
+        end
+        if options.pitch then
+            BlzSetSpecialEffectPitch(options.projectile, options.pitch)
+        end
+        if options.roll then
+            BlzSetSpecialEffectRoll(options.projectile, options.roll)
+        end
         options.shouldRemove = true
+        effectToProject = options.projectile
     else
+        startV = Vector:new(origin)
         options.shouldRemove = false
+        unitToProject = options.projectile
     end
 
     local proj = {
-        unit = options.projectile,
+        unit = unitToProject,
+        effect = effectToProject,
+        x = startV.x,
+        y = startV.y,
         options = options,
         alreadyCollided = {},
         curRadius = options.fromRadius,

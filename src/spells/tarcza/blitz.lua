@@ -100,7 +100,9 @@ local cast = function(playerId)
     if IsUnitAlly(target, Player(playerId)) then
         projectile.createProjectile{
             playerId = playerId,
-            model = "eshr",
+            model = "Valiant Charge Holy.mdl",
+            scale = 1.3,
+            height = 10,
             fromV = heroV,
             destUnit = target,
             speed = 1010,
@@ -108,7 +110,9 @@ local cast = function(playerId)
     else
         projectile.createProjectile{
             playerId = playerId,
-            model = "eshe",
+            model = "Valiant Charge.mdl",
+            scale = 1.3,
+            height = 10,
             fromV = heroV,
             destUnit = target,
             speed = 1010,

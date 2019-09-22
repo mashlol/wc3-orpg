@@ -61,7 +61,8 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "efrb",
+        model = "Abilities\\Weapons\\FireBallMissile\\FireBallMissile.mdl",
+        z = 50,
         fromV = heroV,
         toV = mouseV,
         speed = 900,

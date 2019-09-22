@@ -75,7 +75,8 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "erej",
+        model = "Abilities\\Weapons\\BrewmasterMissile\\BrewmasterMissile.mdl",
+        height = 35,
         fromV = heroV,
         destUnit = target,
         speed = 500,

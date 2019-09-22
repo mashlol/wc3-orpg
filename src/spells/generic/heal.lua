@@ -56,7 +56,9 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "ehea",
+        model = "Radiance Holy.mdl",
+        scale = 2,
+        z = 35,
         fromV = heroV,
         toV = mouseV,
         speed = 1000,

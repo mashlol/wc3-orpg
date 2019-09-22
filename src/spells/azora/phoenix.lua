@@ -73,7 +73,7 @@ local cast = function(playerId)
     local tickNum = 0
     projectile.createProjectile{
         playerId = playerId,
-        model = "epho",
+        model = "units\\human\\phoenix\\phoenix.mdl",
         fromV = heroV,
         toV = mouseV,
         speed = 800,
