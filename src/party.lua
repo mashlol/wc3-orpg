@@ -66,11 +66,6 @@ function onInviteSent()
             end,
         }
     )
-    -- log.log(
-    --     invitedPlayerId,
-    --     GetPlayerName(Player(inviterPlayerId))..
-    --         " invited you to join their party.",
-    --     log.TYPE.INFO)
 end
 
 function acceptInvite(invitedPlayerId, inviterPlayerId)
