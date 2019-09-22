@@ -3,7 +3,11 @@ local hero = require('src/hero.lua')
 function onCameraTick()
     local playerId = GetPlayerId(GetLocalPlayer())
     local hero = hero.getHero(playerId)
+    if hero == nil then
+        return
+    end
     SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
+    CameraSetupApplyForceDuration(gg_cam_Camera_003, false, 0)
 end
 
 function init()
