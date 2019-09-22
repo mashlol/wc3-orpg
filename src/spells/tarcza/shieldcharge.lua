@@ -68,7 +68,9 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "eshc",
+        model = "Valiant Charge Royal.mdl",
+        scale = 1.3,
+        height = 10,
         fromV = heroV,
         toV = mouseV,
         speed = 1250,

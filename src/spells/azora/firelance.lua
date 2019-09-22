@@ -61,7 +61,9 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "elan",
+        model = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl",
+        scale = 0.5,
+        z = 50,
         fromV = heroV,
         toV = mouseV,
         speed = 2000,

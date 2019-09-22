@@ -76,8 +76,8 @@ local cast = function(playerId)
         animations.queueAnimation(hero, 18, 1)
 
         local oldLocation = Vector:new{
-            x = GetUnitX(existingBall.unit),
-            y = GetUnitY(existingBall.unit)
+            x = existingBall.x,
+            y = existingBall.y,
         }
 
         -- Remove old ball from projectile system
@@ -87,7 +87,7 @@ local cast = function(playerId)
         -- Project a new ball
         projectile.createProjectile{
             playerId = playerId,
-            model = "efbl",
+            model = "Abilities\\Spells\\Other\\FrostBolt\\FrostBoltMissile.mdl",
             fromV = oldLocation,
             toV = mouseV,
             speed = 900,
@@ -128,7 +128,7 @@ local cast = function(playerId)
         local startRad = i * ((2 * math.pi) / 3)
         local ball = projectile.createProjectile{
             playerId = playerId,
-            model = "efbl",
+            model = "Abilities\\Spells\\Other\\FrostBolt\\FrostBoltMissile.mdl",
             fromUnit = hero,
             speed = 200,
             fromRadius = 80,

@@ -61,7 +61,8 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "eici",
+        model = "Abilities\\Weapons\\ZigguratFrostMissile\\ZigguratFrostMissile.mdl",
+        z = 20,
         fromV = heroV,
         toV = mouseV,
         speed = 2000,

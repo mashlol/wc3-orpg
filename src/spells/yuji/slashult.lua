@@ -59,7 +59,6 @@ local cast = function(playerId)
         x = heroV.x,
         y = heroV.y,
         duration = 0.5,
-        scale = 0.7,
         z = 10,
     }
 
@@ -76,7 +75,7 @@ local cast = function(playerId)
             x = spawn.x,
             y = spawn.y,
             duration = 0.3,
-            facing = i,
+            facing = bj_DEGTORAD * i,
         }
     end
 

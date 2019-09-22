@@ -76,7 +76,8 @@ local castCorrosivePull = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "ecrp",
+        model = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl",
+        height = 50,
         fromV = targetV,
         destUnit = hero,
         speed = 1000,
@@ -125,7 +126,8 @@ local castCorrosiveBlast = function(playerId)
     local dmgAmount = 40 * storedData[playerId]
     projectile.createProjectile{
         playerId = playerId,
-        model = "ecrb",
+        model = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl",
+        height = 10,
         fromV = heroV,
         destUnit = target,
         speed = 500,

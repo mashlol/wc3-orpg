@@ -85,7 +85,8 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "eoil",
+        model = "Valiant Charge.mdl",
+        height = 35,
         fromV = heroV,
         toV = mouseV,
         speed = 4000,

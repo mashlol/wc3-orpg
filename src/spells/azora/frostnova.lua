@@ -59,7 +59,8 @@ local cast = function(playerId)
     for i=0,2*math.pi, 1.57 do
         projectile.createProjectile{
             playerId = playerId,
-            model = "efnv",
+            model = "Abilities\\Weapons\\FrostWyrmMissile\\FrostWyrmMissile.mdl",
+            z = 35,
             fromV = mouseV,
             fromAngle = i,
             toAngle = 8 * math.pi + i,

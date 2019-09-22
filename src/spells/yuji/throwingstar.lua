@@ -58,7 +58,9 @@ local cast = function(playerId)
             :add(heroV)
         projectile.createProjectile{
             playerId = playerId,
-            model = "star",
+            model = "Abilities\\Weapons\\GlaiveMissile\\GlaiveMissile.mdl",
+            scale = 0.3,
+            height = 10,
             fromV = heroV,
             toV = toV,
             speed = 1400,

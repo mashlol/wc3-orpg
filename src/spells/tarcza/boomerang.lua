@@ -66,7 +66,11 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "eboo",
+        model = "LightningShield.mdl",
+        pitch = -math.pi,
+        roll = -math.pi / 2,
+        z = 50,
+        scale = 1.5,
         fromV = heroV,
         toV = mouseV,
         speed = 800,
@@ -78,14 +82,18 @@ local cast = function(playerId)
             end
             return false
         end,
-        onDestroy = function(projectileUnit)
+        onDestroy = function(proj)
             projectile.createProjectile{
                 playerId = playerId,
-                model = "eboo",
+                model = "LightningShield.mdl",
                 fromV = Vector:new{
-                    x = GetUnitX(projectileUnit),
-                    y = GetUnitY(projectileUnit)
+                    x = proj.x,
+                    y = proj.y,
                 },
+                pitch = math.pi,
+                roll = math.pi / 2,
+                z = 50,
+                scale = 1.5,
                 destUnit = hero,
                 speed = 650,
                 removeInsteadOfKill = true,

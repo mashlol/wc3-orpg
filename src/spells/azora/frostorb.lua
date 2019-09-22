@@ -74,7 +74,9 @@ local cast = function(playerId)
 
             projectile.createProjectile{
                 playerId = playerId,
-                model = "efor",
+                model = "Abilities\\Spells\\Human\\SpellSteal\\SpellStealMissile.mdl",
+                z = 35,
+                scale = 2,
                 fromV = mouseV,
                 toV = toV,
                 speed = 300,

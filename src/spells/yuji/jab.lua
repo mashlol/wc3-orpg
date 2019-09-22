@@ -66,8 +66,9 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 8, 1)
 
+    local facingRad = Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
     local facingDeg =
-        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x)
+        bj_RADTODEG * facingRad
 
     SetUnitFacing(
         hero,
@@ -77,7 +78,7 @@ local cast = function(playerId)
         model = "Piercing Thrust.mdl",
         unit = hero,
         duration = 0.3,
-        facing = facingDeg,
+        facing = facingRad,
         timeScale = 0.7,
     }
 
