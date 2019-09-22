@@ -2,6 +2,10 @@ local log = require('src/log.lua')
 
 local TIPS = {
     "You can press B to open your equipment and backpack views.",
+    "You can press L to open the quest log.",
+    "You can disband quests from the quest log (press L).",
+    "You can invite players to your party with -party #.",
+    "Quest progress is shared within a party",
     "Join us on discord! https://discord.gg/AbBsrM9",
     "Most spells are cast toward the location of your mouse.",
     "Report bugs or give suggestions on discord: https://discord.gg/AbBsrM9",
