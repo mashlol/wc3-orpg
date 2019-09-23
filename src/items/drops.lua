@@ -54,9 +54,7 @@ function maybeDistributeDrop()
     local killingPlayerId = GetPlayerId(GetOwningPlayer(GetKillingUnit()))
 
     local drop = maybeGetDrop(unit)
-
     if drop ~= nil then
-        print('drop was ', drop)
         backpack.addItemIdToBackpack(killingPlayerId, drop)
         log.log(
             killingPlayerId,
