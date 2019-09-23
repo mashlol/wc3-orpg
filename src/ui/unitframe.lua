@@ -255,6 +255,25 @@ function UnitFrame:update(playerId)
     local maxHp = BlzGetUnitMaxHP(unit)
 
     if maxHp ~= 0 then
+        if hp / maxHp < 0.2 then
+            BlzFrameSetTexture(
+                frames.healthBar,
+                "Replaceabletextures\\Teamcolor\\Teamcolor00.blp",
+                0,
+                true)
+        elseif hp / maxHp < .5 then
+            BlzFrameSetTexture(
+                frames.healthBar,
+                "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
+                0,
+                true)
+        else
+            BlzFrameSetTexture(
+                frames.healthBar,
+                "Replaceabletextures\\Teamcolor\\Teamcolor06.blp",
+                0,
+                true)
+        end
         BlzFrameSetSize(
             frames.healthBar,
             self.width * hp / maxHp,
