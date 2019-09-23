@@ -272,7 +272,6 @@ function onNpcClicked()
 
     local selectedUnit = GetTriggerUnit()
     for questId, questInfo in pairs(QUESTS) do
-        print('checking quest ', questId, questInfo.getQuestFrom == selectedUnit, isEligibleForQuest(playerId, questId))
         if
             questInfo.getQuestFrom == selectedUnit and
             IsUnitInRange(hero, selectedUnit, 300) and
