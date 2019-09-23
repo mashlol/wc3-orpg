@@ -22,17 +22,19 @@ local UI_MODULES = {
         xLoc = 0.55,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
         forTarget = true,
+        buffSize = consts.BUFF_ICON_SIZE,
     },
     UnitFrame:new{
         xLoc = 0.26,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
         forTarget = false,
+        buffSize = consts.BUFF_ICON_SIZE,
     },
     Backpack:new(),
 }
 
 for i=0,9,1 do
-    local xloC = math.floor(i / 5) * (consts.BAR_WIDTH / 2 + 0.005)
+    local xloC = math.floor(i / 5) * (consts.BAR_WIDTH / 3 + 0.005)
 
     table.insert(UI_MODULES, UnitFrame:new{
         xLoc = xloC,
@@ -40,7 +42,10 @@ for i=0,9,1 do
         anchor = FRAMEPOINT_TOPLEFT,
         forTarget = false,
         forParty = i,
+        showCastBar = false,
         width = consts.BAR_WIDTH / 2,
+        height = consts.BAR_HEIGHT * 4 - consts.BUFF_ICON_SIZE / 2,
+        buffSize = consts.BUFF_ICON_SIZE / 2,
     })
 end
 

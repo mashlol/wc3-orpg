@@ -14,9 +14,11 @@ local UnitFrame = {
     xLoc = 0,
     yLoc = 0,
     width = consts.BAR_WIDTH,
+    height = consts.BAR_HEIGHT * 5,
     anchor = FRAMEPOINT_CENTER,
     forTarget = false,
     farParty = nil,
+    showCastBar = true,
 }
 
 function UnitFrame:new(o)
@@ -35,7 +37,7 @@ function UnitFrame:init()
         "",
         0)
 
-    BlzFrameSetSize(unitFrameOrigin, self.width, consts.BAR_HEIGHT * 5)
+    BlzFrameSetSize(unitFrameOrigin, self.width, self.height)
     BlzFrameSetAbsPoint(
         unitFrameOrigin,
         self.anchor,
@@ -48,7 +50,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(unitFrameBackdrop, self.width, consts.BAR_HEIGHT * 5)
+    BlzFrameSetSize(unitFrameBackdrop, self.width, self.height)
     BlzFrameSetPoint(
         unitFrameBackdrop,
         FRAMEPOINT_BOTTOMLEFT,
@@ -76,7 +78,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
         0,
-        consts.BAR_HEIGHT)
+        self.showCastBar and consts.BAR_HEIGHT or 0)
     BlzFrameSetTexture(
         healthBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -156,7 +158,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
         0,
-        consts.BAR_HEIGHT * 2)
+        self.showCastBar and consts.BAR_HEIGHT * 2 or consts.BAR_HEIGHT)
     BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
 
     local buffIcons = {}
@@ -167,14 +169,14 @@ function UnitFrame:init()
             unitFrameOrigin,
             "",
             0)
-        BlzFrameSetSize(buffIcon, consts.BUFF_ICON_SIZE, consts.BUFF_ICON_SIZE)
+        BlzFrameSetSize(buffIcon, self.buffSize, self.buffSize)
         BlzFrameSetPoint(
             buffIcon,
             FRAMEPOINT_BOTTOMLEFT,
             unitFrameOrigin,
             FRAMEPOINT_BOTTOMLEFT,
-            i * consts.BUFF_ICON_SIZE,
-            consts.BAR_HEIGHT * 3)
+            i * self.buffSize,
+            self.showCastBar and consts.BAR_HEIGHT * 3 or consts.BAR_HEIGHT * 2)
 
         local buffStackCount = BlzCreateFrameByType(
             "TEXT",
@@ -210,6 +212,7 @@ function UnitFrame:init()
     end)
 
     self.frames = {
+        castBarOrigin = castBarFrameBackground,
         healthBar = healthBarFrameFilled,
         castBar = castBarFrameFilled,
         origin = unitFrameOrigin,
@@ -285,8 +288,9 @@ function UnitFrame:update(playerId)
     local playerIdOfUnitOwner = GetPlayerId(GetOwningPlayer(unit))
     local castRemainder = casttime.getCastDurationRemaining(playerIdOfUnitOwner)
     local castTotal = casttime.getCastDurationTotal(playerIdOfUnitOwner)
+    BlzFrameSetVisible(frames.castBarOrigin, self.showCastBar)
     if castRemainder ~= nil and castTotal ~= nil then
-        BlzFrameSetVisible(frames.castBar, true)
+        BlzFrameSetVisible(frames.castBar, self.showCastBar)
         BlzFrameSetSize(
             frames.castBar,
             self.width * (1 - castRemainder / castTotal),
