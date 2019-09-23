@@ -266,11 +266,15 @@ function getStatEffects(playerId)
     return {
         {
             type = 'multiplyDamage',
-            amount = 1 + 0.1 * level,
+            amount = 1 + 0.08 * level,
+        },
+        {
+            type = 'multiplyHealing',
+            amount = 1 + 0.08 * level,
         },
         {
             type = 'rawHp',
-            amount = level * 100,
+            amount = level * 10,
         }
     }
 end

@@ -8,7 +8,7 @@ local ExpBar = {}
 --     if level == 1 then
 --         return 20
 --     end
---     return getRequiredExp(level - 1) + (level - 1) * 10
+--     return getRequiredExp(level - 1) + (level + 1) * 10
 -- end
 
 -- for i=1,60,1 do
