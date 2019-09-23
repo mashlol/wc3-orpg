@@ -4,9 +4,24 @@ local log = require('src/log.lua')
 
 local DROP_TABLE = {
     [FourCC('hmbs')] = {
-        none = 99,
-        [1] = 1
-    }
+        none = 90,
+        [1] = 10,
+        [4] = 1,
+    },
+    [FourCC('hspi')] = {
+        none = 90,
+        [1] = 20,
+        [2] = 10,
+        [3] = 10,
+        [4] = 1,
+    },
+    [FourCC('hbee')] = {
+        none = 90,
+        [1] = 20,
+        [2] = 20,
+        [3] = 10,
+        [4] = 5,
+    },
 }
 
 function maybeGetDrop(unit)
