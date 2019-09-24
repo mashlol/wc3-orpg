@@ -104,7 +104,6 @@ local cast = function(playerId)
                     unit = collidedUnit,
                     model = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl",
                     duration = 1,
-                    scale = 0.7,
                 }
             end
             return false
@@ -114,7 +113,6 @@ local cast = function(playerId)
                 unit = hero,
                 model = "Abilities\\Spells\\Orc\\Disenchant\\DisenchantSpecialArt.mdl",
                 duration = 1,
-                scale = 0.7,
             }
             animations.queueAnimation(hero, 3, 0.6)
         end,
