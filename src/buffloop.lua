@@ -64,7 +64,9 @@ function maybeAddEffectToList(effectsByUnitId, unit, effect)
             effects = {},
         }
     end
-    table.insert(effectsByUnitId[unitId].effects, effect)
+    if effect ~= nil then
+        table.insert(effectsByUnitId[unitId].effects, effect)
+    end
 end
 
 function applyBuffs()
@@ -108,6 +110,7 @@ function applyBuffs()
     local buffInstances = buff.getBuffInstances()
     for _, unitInfo in pairs(buffInstances) do
         local unit = unitInfo.unit
+        maybeAddEffectToList(effectsByUnitId, unit)
         for buffName,val in pairs(unitInfo.buffs) do
             local effects = buff.BUFF_INFO[buffName].effects
             for _,info in pairs(effects) do
