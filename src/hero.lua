@@ -189,6 +189,11 @@ end
 
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
+
+    if getHero(repickPlayerId) == nil then
+        return
+    end
+
     equipment.clear(repickPlayerId)
     backpack.clear(repickPlayerId)
     RemoveUnit(heroes[repickPlayerId])
@@ -220,7 +225,7 @@ local init = function()
 
     local repickTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
-        TriggerRegisterPlayerChatEvent(repickTrig, Player(i), "-repick", false)
+        TriggerRegisterPlayerChatEvent(repickTrig, Player(i), "-repick", true)
     end
     TriggerAddAction(repickTrig, onRepick)
 
@@ -229,7 +234,7 @@ local init = function()
     end
 end
 
-local getHero = function(playerId)
+function getHero(playerId)
     return heroes[playerId]
 end
 
