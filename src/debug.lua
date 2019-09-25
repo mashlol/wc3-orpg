@@ -27,9 +27,12 @@ local debug = function()
 end
 
 local debugDown = function()
+    local playerId = GetPlayerId(GetTriggerPlayer())
     print(animNum)
 
     animNum = animNum - 0.01
+
+    backpack.addItemIdToBackpack(playerId, 5)
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)

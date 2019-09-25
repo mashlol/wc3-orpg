@@ -118,12 +118,36 @@ function Backpack:init()
             true)
         BlzFrameSetAlpha(itemHighlight, 100)
 
+        local itemCountFrame = BlzCreateFrameByType(
+            "TEXT",
+            "itemCountFrame",
+            itemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(itemCountFrame, consts.BACKPACK_ITEM_SIZE, 0.012)
+        BlzFrameSetPoint(
+            itemCountFrame,
+            FRAMEPOINT_BOTTOMRIGHT,
+            itemFrame,
+            FRAMEPOINT_BOTTOMRIGHT,
+            0,
+            0)
+        BlzFrameSetTextAlignment(
+            itemCountFrame, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
+
+        local hoverFrame = BlzCreateFrameByType(
+            "BUTTON",
+            "hoverFrame",
+            itemOrigin,
+            "",
+            0)
+
         local tooltipFrame = tooltip.makeTooltipFrame(
-            itemOrigin, 0.16, 0.24, itemOrigin, false)
+            itemOrigin, 0.16, 0.24, hoverFrame, false)
 
         local trig = CreateTrigger()
         BlzTriggerRegisterFrameEvent(
-            trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
+            trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             local activeBagItem = backpack.getActiveItem(playerId)
@@ -156,6 +180,7 @@ function Backpack:init()
 
         table.insert(itemFrames, {
             itemFrame = itemFrame,
+            itemCountFrame = itemCountFrame,
             itemHighlight = itemHighlight,
             tooltipFrame = tooltipFrame,
         })
@@ -183,6 +208,7 @@ function Backpack:update(playerId)
     for i=1,36,1 do
         local itemFrame = frames.itemFrames[i]
         local itemId = backpack.getItemIdAtPosition(playerId, i)
+        local itemCount = backpack.getItemCountAtPosition(playerId, i)
         if itemId ~= nil then
             BlzFrameSetTexture(
                 itemFrame.itemFrame,
@@ -195,6 +221,12 @@ function Backpack:update(playerId)
                 "InvTile.blp",
                 0,
                 true)
+        end
+
+        if itemCount ~= 1 and itemCount ~= nil then
+            BlzFrameSetText(itemFrame.itemCountFrame, itemCount)
+        else
+            BlzFrameSetText(itemFrame.itemCountFrame, "")
         end
 
         local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
