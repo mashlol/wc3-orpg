@@ -1,4 +1,3 @@
-local hero = require('src/hero.lua')
 local equipment = require('src/items/equipment.lua')
 
 local RARITY = {
@@ -20,8 +19,14 @@ local RARITY = {
     },
 }
 
+local TYPE = {
+    EQUIPMENT = 'equipment',
+    CONSUMABLE = 'consumable',
+}
+
 local ITEMS = {
     [1] = {
+        type = TYPE.EQUIPMENT,
         name = 'Old boot',
         icon = "ReplaceableTextures\\CommandButtons\\BTNBoots.blp",
         itemLevel = 1,
@@ -34,8 +39,10 @@ local ITEMS = {
             },
         },
         slot = equipment.SLOT.FEET,
+        stackSize = 1,
     },
     [2] = {
+        type = TYPE.EQUIPMENT,
         name = 'Rusty Ring',
         icon = "ReplaceableTextures\\CommandButtons\\BTNGoldRing.blp",
         itemLevel = 5,
@@ -52,8 +59,10 @@ local ITEMS = {
             },
         },
         slot = equipment.SLOT.RING,
+        stackSize = 1,
     },
     [3] = {
+        type = TYPE.EQUIPMENT,
         name = 'Iron Helmet',
         icon = "ReplaceableTextures\\CommandButtons\\BTNHelmutPurple.blp",
         itemLevel = 3,
@@ -66,8 +75,10 @@ local ITEMS = {
             },
         },
         slot = equipment.SLOT.HELMET,
+        stackSize = 1,
     },
     [4] = {
+        type = TYPE.EQUIPMENT,
         name = 'Copper Dagger',
         icon = "ReplaceableTextures\\CommandButtons\\BTNDaggerOfEscape.blp",
         itemLevel = 20,
@@ -80,6 +91,16 @@ local ITEMS = {
             },
         },
         slot = equipment.SLOT.WEAPON,
+        stackSize = 1,
+    },
+    [5] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Health Potion',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp",
+        itemLevel = 0,
+        requiredLevel = 0,
+        rarity = RARITY.COMMON,
+        stackSize = 5,
     },
 }
 
@@ -108,14 +129,16 @@ function init()
         local itemStats = ""
 
         local numLines = 0
-        for _, statInfo in pairs(itemInfo.stats) do
-            if statInfo.type == 'rawHp' then
-                itemStats = itemStats .. '+' .. statInfo.amount .. ' HP|n'
-                numLines = numLines + 1
-            end
-            if statInfo.type == 'multiplyDamage' then
-                itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. ' % damage|n'
-                numLines = numLines + 1
+        if itemInfo.stats ~= nil then
+            for _, statInfo in pairs(itemInfo.stats) do
+                if statInfo.type == 'rawHp' then
+                    itemStats = itemStats .. '+' .. statInfo.amount .. ' HP|n'
+                    numLines = numLines + 1
+                end
+                if statInfo.type == 'multiplyDamage' then
+                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. ' % damage|n'
+                    numLines = numLines + 1
+                end
             end
         end
 

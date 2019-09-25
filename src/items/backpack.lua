@@ -1,8 +1,10 @@
+local itemmanager = require('src/items/itemmanager.lua')
+
 -- backpacks = {
 --     [playerId] = {
---         [1] = [itemId1],
---         [2] = [itemId2],
---         [4] = [itemId4],
+--         [1] = {itemId = [itemId1], count = 1},
+--         [2] = {itemId = [itemId2], count = 1},
+--         [4] = {itemId = [itemId4], count = 10},
 --     }
 -- }
 local backpacks = {}
@@ -12,18 +14,41 @@ local backpacks = {}
 -- }
 local activeItemPositions = {}
 
-function addItemIdToBackpack(playerId, itemId)
-    -- TODO check if the backpack is full
-    -- TODO possibly insert not at the end
-    table.insert(backpacks[playerId], itemId)
+function addItemIdToBackpack(playerId, itemId, count)
+    count = count or 1
+
+    for idx,itemInfo in pairs(backpacks[playerId]) do
+        if
+            itemInfo.itemId == itemId and
+            itemInfo.count <
+                itemmanager.getItemInfo(itemInfo.itemId).stackSize - count + 1
+        then
+            backpacks[playerId][idx].count =
+                backpacks[playerId][idx].count + count
+            return
+        end
+    end
+
+    table.insert(backpacks[playerId], {
+        itemId = itemId,
+        count = count,
+    })
 end
 
-function addItemIdToBackpackPosition(playerId, position, itemId)
-    backpacks[playerId][position] = itemId
+function addItemIdToBackpackPosition(playerId, position, itemId, count)
+    backpacks[playerId][position] = {itemId = itemId, count = count or 1}
 end
 
-function removeItemFromBackpack(playerId, position)
-    backpacks[playerId][position] = nil
+function removeItemFromBackpack(playerId, position, count)
+    count = count or 1
+
+    if backpacks[playerId][position] ~= nil then
+        backpacks[playerId][position].count =
+            backpacks[playerId][position].count - 1
+        if backpacks[playerId][position].count <= 0 then
+            backpacks[playerId][position] = nil
+        end
+    end
 end
 
 function getItemIdsInBackpack(playerId)
@@ -31,10 +56,17 @@ function getItemIdsInBackpack(playerId)
 end
 
 function getItemIdAtPosition(playerId, position)
-    if backpacks[playerId][position] == 0 then
+    if backpacks[playerId][position] == nil then
         return nil
     end
-    return backpacks[playerId][position]
+    return backpacks[playerId][position].itemId
+end
+
+function getItemCountAtPosition(playerId, position)
+    if backpacks[playerId][position] == nil then
+        return nil
+    end
+    return backpacks[playerId][position].count
 end
 
 function swapPositions(playerId, position1, position2)
@@ -75,6 +107,7 @@ return {
     removeItemFromBackpack = removeItemFromBackpack,
     getItemIdsInBackpack = getItemIdsInBackpack,
     getItemIdAtPosition = getItemIdAtPosition,
+    getItemCountAtPosition = getItemCountAtPosition,
     swapPositions = swapPositions,
     activateItem = activateItem,
     getActiveItem = getActiveItem,
