@@ -1,3 +1,6 @@
+-- Items
+local healpot1 = require('src/spells/items/healpot1.lua')
+
 -- Generic
 local heal = require('src/spells/generic/heal.lua')
 local attack = require('src/spells/generic/attack.lua')
@@ -55,6 +58,9 @@ local hero = require('src/hero.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 local SPELL_MAP = {
+    -- Items
+    healpot1 = healpot1,
+
     -- Generic
     heal = heal,
     attack = attack,
@@ -133,7 +139,7 @@ local getSpell = function(playerId, idx)
     return SPELL_MAP[spellKey]
 end
 
-local castSpell = function(playerId, idx)
+local castSpellByKey = function(playerId, spellKey)
     if IsUnitPaused(hero.getHero(playerId)) then
         return
     end
@@ -142,10 +148,16 @@ local castSpell = function(playerId, idx)
         return
     end
 
-    local spell = getSpell(playerId, idx)
+    local spell = SPELL_MAP[spellKey]
     if spell ~= nil then
-        spell.cast(playerId)
+        return spell.cast(playerId)
     end
+    return false
+end
+
+local castSpell = function(playerId, idx)
+    local spellKey = getSpellKey(playerId, idx)
+    castSpellByKey(playerId, spellKey)
 end
 
 local getCooldown = function(playerId, idx)
@@ -203,6 +215,7 @@ end
 return {
     init = init,
     castSpell = castSpell,
+    castSpellByKey = castSpellByKey,
     getCooldown = getCooldown,
     getCooldownPct = getCooldownPct,
     getIcon = getIcon,

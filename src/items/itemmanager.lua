@@ -101,7 +101,8 @@ local ITEMS = {
         requiredLevel = 1,
         rarity = RARITY.COMMON,
         stackSize = 5,
-        text = "Heal yourself for 200 HP."
+        text = "Heal yourself for 200 HP.",
+        spell = 'healpot1',
     },
 }
 
