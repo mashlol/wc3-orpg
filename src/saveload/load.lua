@@ -43,8 +43,9 @@ function loadChar(playerId, code)
     local backpackItems = {}
     for i=1,36,1 do
         local itemId = decoded:getInt(73)
+        local count = decoded:getInt(73)
         if itemId ~= 0 then
-            backpackItems[i] = itemId
+            backpackItems[i] = {itemId = itemId, count = count}
         end
     end
 
@@ -77,8 +78,11 @@ function loadChar(playerId, code)
 
     quests.restoreProgress(playerId, progress)
 
-    for idx,itemId in pairs(backpackItems) do
-        backpack.addItemIdToBackpackPosition(playerId, idx, itemId)
+    for idx,itemInfo in pairs(backpackItems) do
+        if itemInfo.itemId ~= 0 and itemInfo.count ~= 0 then
+            backpack.addItemIdToBackpackPosition(
+                playerId, idx, itemInfo.itemId, itemInfo.count)
+        end
     end
     for slot,itemId in pairs(equips) do
         equipment.equipItem(playerId, slot, itemId)
