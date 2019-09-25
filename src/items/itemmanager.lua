@@ -97,10 +97,11 @@ local ITEMS = {
         type = TYPE.CONSUMABLE,
         name = 'Health Potion',
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp",
-        itemLevel = 0,
-        requiredLevel = 0,
+        itemLevel = 1,
+        requiredLevel = 1,
         rarity = RARITY.COMMON,
         stackSize = 5,
+        text = "Heal yourself for 200 HP."
     },
 }
 
@@ -130,6 +131,7 @@ function init()
 
         local numLines = 0
         if itemInfo.stats ~= nil then
+            itemStats = itemStats .. "|n|n|cff00ff00"
             for _, statInfo in pairs(itemInfo.stats) do
                 if statInfo.type == 'rawHp' then
                     itemStats = itemStats .. '+' .. statInfo.amount .. ' HP|n'
@@ -140,6 +142,7 @@ function init()
                     numLines = numLines + 1
                 end
             end
+            itemStats = itemStats .. "|r"
         end
 
         local type = ""
@@ -163,6 +166,16 @@ function init()
             type = "Weapon"
         end
 
+        if itemInfo.type == TYPE.CONSUMABLE then
+            type = "Consumable"
+        end
+
+        local itemText = ""
+        if itemInfo.text ~= nil then
+            itemText = "|n|n|cff00ff00" .. itemInfo.text .. "|r"
+            numLines = numLines + 1
+        end
+
         TOOLTIPS[itemId] = {
             text =
                 itemInfo.rarity.color ..
@@ -175,8 +188,8 @@ function init()
                 "|r|n"..
                 "Requires level " ..
                 itemInfo.requiredLevel ..
-                "|n|n|cff00ff00" ..
-                itemStats,
+                itemStats..
+                itemText,
             numLines = numLines + 5,
         }
     end
