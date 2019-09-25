@@ -2,6 +2,7 @@ local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local tooltip = require('src/ui/tooltip.lua')
 local utils = require('src/ui/utils.lua')
+local spell = require('src/spell.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
@@ -150,6 +151,7 @@ function Backpack:init()
             trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
+
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
             if activeEquipmentItem ~= nil then
@@ -167,7 +169,23 @@ function Backpack:init()
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
             elseif activeBagItem ~= nil then
-                backpack.swapPositions(playerId, activeBagItem, i+1)
+                if activeBagItem == i + 1 then
+                    -- Consume the item
+                    local clickedItemPos = i + 1
+                    local itemId = backpack.getItemIdAtPosition(playerId, clickedItemPos)
+                    local success = false
+                    if itemId ~= nil then
+                        local spellKey = itemmanager.getItemInfo(itemId).spell
+                        if spellKey ~= nil then
+                            success = spell.castSpellByKey(playerId, spellKey)
+                        end
+                    end
+                    if success then
+                        backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
+                    end
+                else
+                    backpack.swapPositions(playerId, activeBagItem, i+1)
+                end
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
             else
