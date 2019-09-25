@@ -136,6 +136,30 @@ function Backpack:init()
         BlzFrameSetTextAlignment(
             itemCountFrame, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
 
+        local itemCooldownTint = BlzCreateFrameByType(
+            "BACKDROP",
+            "itemCooldownTint",
+            itemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            itemCooldownTint,
+            consts.BACKPACK_ITEM_SIZE,
+            consts.BACKPACK_ITEM_SIZE)
+        BlzFrameSetPoint(
+            itemCooldownTint,
+            FRAMEPOINT_BOTTOM,
+            itemFrame,
+            FRAMEPOINT_BOTTOM,
+            0,
+            0)
+        BlzFrameSetTexture(
+            itemCooldownTint,
+            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            0,
+            true)
+        BlzFrameSetAlpha(itemCooldownTint, 200)
+
         local hoverFrame = BlzCreateFrameByType(
             "BUTTON",
             "hoverFrame",
@@ -201,6 +225,7 @@ function Backpack:init()
             itemCountFrame = itemCountFrame,
             itemHighlight = itemHighlight,
             tooltipFrame = tooltipFrame,
+            itemCooldownTint = itemCooldownTint,
         })
     end
 
@@ -245,6 +270,28 @@ function Backpack:update(playerId)
             BlzFrameSetText(itemFrame.itemCountFrame, itemCount)
         else
             BlzFrameSetText(itemFrame.itemCountFrame, "")
+        end
+
+        if itemId ~= nil then
+            local itemInfo = itemmanager.getItemInfo(itemId)
+            if itemInfo.spell ~= nil then
+                local cdPct = spell.getCooldownPctBySpellKey(
+                    playerId, itemInfo.spell)
+                BlzFrameSetSize(
+                    itemFrame.itemCooldownTint,
+                    consts.BACKPACK_ITEM_SIZE,
+                    consts.BACKPACK_ITEM_SIZE * cdPct)
+            else
+                BlzFrameSetSize(
+                    itemFrame.itemCooldownTint,
+                    consts.BACKPACK_ITEM_SIZE,
+                    0.000001)
+            end
+        else
+            BlzFrameSetSize(
+                itemFrame.itemCooldownTint,
+                consts.BACKPACK_ITEM_SIZE,
+                0.000001)
         end
 
         local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)

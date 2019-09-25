@@ -168,8 +168,8 @@ local getCooldown = function(playerId, idx)
     return 0
 end
 
-local getCooldownPct = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
+local getCooldownPctBySpellKey = function(playerId, spellKey)
+    local spell = SPELL_MAP[spellKey]
     if spell ~= nil then
         local spellId = spell.getSpellId()
         local totalCd = cooldowns.getTotalCooldown(playerId, spellId)
@@ -179,6 +179,11 @@ local getCooldownPct = function(playerId, idx)
         end
     end
     return 1
+end
+
+local getCooldownPct = function(playerId, idx)
+    local spellKey = getSpellKey(playerId, idx)
+    return getCooldownPctBySpellKey(playerId, spellKey)
 end
 
 local getIcon = function(playerId, idx)
@@ -218,6 +223,7 @@ return {
     castSpellByKey = castSpellByKey,
     getCooldown = getCooldown,
     getCooldownPct = getCooldownPct,
+    getCooldownPctBySpellKey = getCooldownPctBySpellKey,
     getIcon = getIcon,
     getSpellTooltip = getSpellTooltip,
 }
