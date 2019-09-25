@@ -194,18 +194,28 @@ function Backpack:init()
                 equipment.activateItem(playerId, nil)
             elseif activeBagItem ~= nil then
                 if activeBagItem == i + 1 then
-                    -- Consume the item
+
                     local clickedItemPos = i + 1
                     local itemId = backpack.getItemIdAtPosition(playerId, clickedItemPos)
-                    local success = false
                     if itemId ~= nil then
                         local spellKey = itemmanager.getItemInfo(itemId).spell
+                        local itemSlot = itemmanager.getItemInfo(itemId).slot
                         if spellKey ~= nil then
-                            success = spell.castSpellByKey(playerId, spellKey)
+                            -- Consume the item
+                            local success = spell.castSpellByKey(playerId, spellKey)
+                            if success then
+                                backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
+                            end
+                        elseif itemSlot ~= nil then
+                            -- Equip the item to a slot
+                            local existingEquip = equipment.getItemInSlot(playerId, itemSlot)
+                            equipment.unequipItem(playerId, itemSlot)
+                            equipment.equipItem(playerId, itemSlot, itemId)
+                            backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
+                            if existingEquip ~= nil then
+                                backpack.addItemIdToBackpackPosition(playerId, i + 1, existingEquip)
+                            end
                         end
-                    end
-                    if success then
-                        backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
                     end
                 else
                     backpack.swapPositions(playerId, activeBagItem, i+1)
