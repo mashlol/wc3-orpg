@@ -28,7 +28,7 @@ end
 
 function heal(source, target, amount)
     local curHealth = BlzGetUnitRealField(target, UNIT_RF_HP)
-    local modifiedAmt = amount * buff.getHealingModifier(source, target)
+    local modifiedAmt = buff.getModifiedHealing(source, target, amount)
     local newHealth = curHealth + modifiedAmt
 
     BlzSetUnitRealField(
@@ -44,7 +44,7 @@ end
 function onDamageTaken()
     local source = GetEventDamageSource()
     local target = GetTriggerUnit()
-    local amount = GetEventDamage() * buff.getDamageModifier(source, target)
+    local amount = buff.getModifiedDamage(source, target, GetEventDamage())
     BlzSetEventDamage(amount)
     createCombatText(amount, target, false)
     threat.addThreat(source, target, amount)
