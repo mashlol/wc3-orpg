@@ -141,11 +141,11 @@ end
 
 local castSpellByKey = function(playerId, spellKey)
     if IsUnitPaused(hero.getHero(playerId)) then
-        return
+        return false
     end
 
     if GetUnitState(hero.getHero(playerId), UNIT_STATE_LIFE) <= 0 then
-        return
+        return false
     end
 
     local spell = SPELL_MAP[spellKey]
