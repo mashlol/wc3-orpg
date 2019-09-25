@@ -74,7 +74,7 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         local activeItem = backpack.getActiveItem(playerId)
         if activeItem ~= nil then
             local activeItemId = backpack.getItemIdAtPosition(playerId, activeItem)
-            if equipment.getItemInSlot(slot) ~= nil then
+            if equipment.getItemInSlot(playerId, slot) ~= nil then
                 log.log(playerId, "You already have an item in that slot.", log.TYPE.ERROR)
             elseif itemmanager.getItemInfo(activeItemId).slot ~= slot then
                 log.log(playerId, "That doesn't go in that slot.", log.TYPE.ERROR)
