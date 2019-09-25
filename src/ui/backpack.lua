@@ -179,7 +179,7 @@ function Backpack:init()
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
             if activeEquipmentItem ~= nil then
-                if backpack.getItemIdAtPosition(i+1) ~= nil then
+                if backpack.getItemIdAtPosition(playerId, i+1) ~= nil then
                     log.log(
                         playerId,
                         "You already have an item in that bag position.",
