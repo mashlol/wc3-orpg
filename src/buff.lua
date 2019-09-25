@@ -381,7 +381,7 @@ function getBuffs(unit)
 end
 
 -- Iterate over all a units buffs and get the final damage modifier
-function getDamageModifier(unit, target)
+function getModifiedDamage(unit, target, amount)
     local buffs = getBuffs(unit)
     local modifier = 1
     for buffName,val in pairs(buffs) do
@@ -436,10 +436,10 @@ function getDamageModifier(unit, target)
             end
         end
     end
-    return modifier
+    return amount * modifier
 end
 
-function getHealingModifier(unit, target)
+function getModifiedHealing(unit, target, amount)
     local buffs = getBuffs(unit)
     local modifier = 1
     for buffName,val in pairs(buffs) do
@@ -494,7 +494,7 @@ function getHealingModifier(unit, target)
             end
         end
     end
-    return modifier
+    return amount * modifier
 end
 
 function getBuffInstances()
@@ -510,7 +510,7 @@ return {
     getBuffStacks = getBuffStacks,
     getBuffs = getBuffs,
     getBuffInstances = getBuffInstances,
-    getDamageModifier = getDamageModifier,
-    getHealingModifier = getHealingModifier,
+    getModifiedDamage = getModifiedDamage,
+    getModifiedHealing = getModifiedHealing,
     maybeRemoveBuffsOnDamage = maybeRemoveBuffsOnDamage,
 }
