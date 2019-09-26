@@ -35,13 +35,11 @@ function setupEffectForTarget(playerId)
     end
 end
 
-local onTargetChanged = function()
-    local playerId = GetPlayerId(GetTriggerPlayer())
+function updateTargets(playerId, selectedUnit)
     if hero.getHero(playerId) == nil then
         return
     end
 
-    local selectedUnit = GetTriggerUnit()
     if not ignoreTargetChange[playerId] then
         targets[playerId] = selectedUnit
         setupEffectForTarget(playerId)
@@ -54,6 +52,24 @@ local onTargetChanged = function()
             SelectUnit(hero.getHero(playerId), true)
         end
     end
+end
+
+function onOrderIssued()
+    local orderId = GetIssuedOrderId()
+    if orderId == 851971 then -- Unit attacked
+        local selectedUnit = GetOrderTargetUnit()
+
+        if selectedUnit ~= nil then
+            updateTargets(GetPlayerId(GetTriggerPlayer()), selectedUnit)
+        end
+    end
+end
+
+local onUnitSelected = function()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    local selectedUnit = GetTriggerUnit()
+
+    updateTargets(playerId, selectedUnit)
 end
 
 function updateTargetEffectLocations()
@@ -74,7 +90,16 @@ function init()
         TriggerRegisterPlayerUnitEvent(
             trig, Player(i), EVENT_PLAYER_UNIT_SELECTED, nil)
     end
-    TriggerAddAction(trig, onTargetChanged)
+    TriggerAddAction(trig, onUnitSelected)
+
+    local orderTrig = CreateTrigger()
+    for i=0,bj_MAX_PLAYERS,1 do
+        TriggerRegisterPlayerUnitEvent(
+            orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER, nil)
+    end
+    TriggerAddAction(orderTrig, onOrderIssued)
+
+
     TimerStart(CreateTimer(), 0.06, true, updateTargetEffectLocations)
 end
 
