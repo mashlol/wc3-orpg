@@ -7,7 +7,7 @@ local MenuButtons = {}
 
 local MENU_BUTTONS = {
     {
-        text = "Menu",
+        text = "Menu (F10)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             if playerId == GetPlayerId(GetLocalPlayer()) then
@@ -17,7 +17,7 @@ local MENU_BUTTONS = {
         end
     },
     {
-        text = "Inventory",
+        text = "Inventory (B)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Backpack.toggle(playerId)
@@ -25,7 +25,7 @@ local MENU_BUTTONS = {
         end
     },
     {
-        text = "Equipment",
+        text = "Equipment (B)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Backpack.toggle(playerId)
@@ -33,7 +33,7 @@ local MENU_BUTTONS = {
         end
     },
     {
-        text = "Quest Log",
+        text = "Quest Log (L)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             QuestLog.toggle(playerId)
@@ -60,11 +60,11 @@ function MenuButtons:init()
     BlzFrameSetSize(
         menuButtonsOrigin,
         #MENU_BUTTONS * consts.MENU_BUTTON_WIDTH,
-        consts.MENU_BUTTON_HEIGHT)
+        consts.MENU_BUTTON_HEIGHT + 0.025)
     BlzFrameSetAbsPoint(
         menuButtonsOrigin,
         FRAMEPOINT_CENTER,
-        0.44 - (#MENU_BUTTONS * consts.MENU_BUTTON_WIDTH) / 2,
+        0.5 - (#MENU_BUTTONS * consts.MENU_BUTTON_WIDTH) / 2,
         0.6)
 
     for i, buttonInfo in pairs(MENU_BUTTONS) do
@@ -77,7 +77,7 @@ function MenuButtons:init()
             button,
             FRAMEPOINT_LEFT,
             menuButtonsOrigin,
-            FRAMEPOINT_LEFT, i * 0.06,
+            FRAMEPOINT_LEFT, (i - 1) * consts.MENU_BUTTON_WIDTH,
             0)
         BlzFrameSetText(buttonText, buttonInfo.text)
         BlzFrameSetScale(buttonText, 0.5)
