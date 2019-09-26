@@ -193,7 +193,7 @@ local getIcon = function(playerId, idx)
     if spell ~= nil then
         return spell.getIcon()
     end
-    return ""
+    return nil
 end
 
 local getSpellTooltip = function(playerId, idx)
