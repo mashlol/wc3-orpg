@@ -267,7 +267,7 @@ function getStatEffects(playerId)
     if pickedHero == nil or hero == nil then
         return {}
     end
-    local level = GetHeroLevel(hero)
+    local level = GetHeroLevel(hero) - 1
     return {
         {
             type = 'multiplyDamage',
