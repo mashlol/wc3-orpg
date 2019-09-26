@@ -128,8 +128,19 @@ function ExpBar:init()
         0,
         true)
 
+    local expBarStatusText = BlzCreateFrameByType(
+        "TEXT",
+        "expBarStatusText",
+        expBarFrameBackground,
+        "",
+        0)
+    BlzFrameSetAllPoints(expBarStatusText, expBarFrameBackground)
+    BlzFrameSetTextAlignment(
+        expBarStatusText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
     self.frames = {
-        castBar = expBarFrameFilled,
+        expBar = expBarFrameFilled,
+        text = expBarStatusText,
         origin = expBarFrameBackground,
     }
 
@@ -145,13 +156,22 @@ function ExpBar:update(playerId)
         local curExperience = GetHeroXP(hero) - EXP_REQUIRED[curLevel]
         local requiredExperience = EXP_REQUIRED[curLevel + 1] - EXP_REQUIRED[curLevel]
 
-        BlzFrameSetSize(
-            frame.castBar,
-            (curExperience / requiredExperience) * consts.EXP_BAR_WIDTH,
-            consts.EXP_BAR_HEIGHT)
+        BlzFrameSetText(frame.text, curExperience .. ' / ' .. requiredExperience)
+
+        if curExperience == 0 then
+            BlzFrameSetSize(
+                frame.expBar,
+                0.00001,
+                consts.EXP_BAR_HEIGHT)
+        else
+            BlzFrameSetSize(
+                frame.expBar,
+                (curExperience / requiredExperience) * consts.EXP_BAR_WIDTH,
+                consts.EXP_BAR_HEIGHT)
+        end
     else
         BlzFrameSetSize(
-            frame.castBar,
+            frame.expBar,
             0.00001,
             consts.EXP_BAR_HEIGHT)
     end
