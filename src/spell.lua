@@ -1,5 +1,6 @@
 -- Items
 local healpot1 = require('src/spells/items/healpot1.lua')
+local food1 = require('src/spells/items/food1.lua')
 
 -- Generic
 local heal = require('src/spells/generic/heal.lua')
@@ -60,6 +61,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local SPELL_MAP = {
     -- Items
     healpot1 = healpot1,
+    food1 = food1,
 
     -- Generic
     heal = heal,

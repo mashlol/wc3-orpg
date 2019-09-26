@@ -104,6 +104,17 @@ local ITEMS = {
         text = "Heal yourself for 200 HP.",
         spell = 'healpot1',
     },
+    [6] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Cheese',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 20,
+        text = "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
+        spell = 'food1',
+    },
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
@@ -174,7 +185,9 @@ function init()
         local itemText = ""
         if itemInfo.text ~= nil then
             itemText = "|n|n|cff00ff00" .. itemInfo.text .. "|r"
-            numLines = numLines + 1
+
+            _, lines = string.gsub(itemInfo.text, "|n", "")
+            numLines = numLines + lines + 1
         end
 
         TOOLTIPS[itemId] = {
