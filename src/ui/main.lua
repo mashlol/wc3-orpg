@@ -43,7 +43,7 @@ for i=0,9,1 do
         forTarget = false,
         forParty = i,
         showCastBar = false,
-        width = consts.BAR_WIDTH / 2,
+        width = consts.BAR_WIDTH / 3,
         height = consts.BAR_HEIGHT * 4 - consts.BUFF_ICON_SIZE / 2,
         buffSize = consts.BUFF_ICON_SIZE / 2,
     })
