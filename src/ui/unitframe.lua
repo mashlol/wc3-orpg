@@ -108,7 +108,6 @@ function UnitFrame:init()
         FRAMEPOINT_BOTTOMLEFT,
         0.005,
         consts.BAR_HEIGHT + 0.005)
-    BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
 
     local buffIcons = {}
     for i=0,9,1 do
