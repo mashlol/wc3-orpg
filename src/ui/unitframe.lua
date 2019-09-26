@@ -9,6 +9,7 @@ local target = require('src/target.lua')
 local party = require('src/party.lua')
 local hero = require('src/hero.lua')
 local casttime = require('src/casttime.lua')
+local utils = require('src/ui/utils.lua')
 
 local UnitFrame = {
     xLoc = 0,
@@ -31,39 +32,20 @@ function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local unitFrameOrigin = BlzCreateFrameByType(
-        "BUTTON",
+        "FRAME",
         "unitFrameOrigin",
         originFrame,
         "",
         0)
 
-    BlzFrameSetSize(unitFrameOrigin, self.width, self.height)
+    BlzFrameSetSize(unitFrameOrigin, self.width + 0.01, self.height + 0.01)
     BlzFrameSetAbsPoint(
         unitFrameOrigin,
         self.anchor,
         self.xLoc,
         self.yLoc)
 
-    local unitFrameBackdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "unitFrameBackdrop",
-        unitFrameOrigin,
-        "",
-        0)
-    BlzFrameSetSize(unitFrameBackdrop, self.width, self.height)
-    BlzFrameSetPoint(
-        unitFrameBackdrop,
-        FRAMEPOINT_BOTTOMLEFT,
-        unitFrameOrigin,
-        FRAMEPOINT_BOTTOMLEFT,
-        0,
-        0)
-    BlzFrameSetTexture(
-        unitFrameBackdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-    BlzFrameSetAlpha(unitFrameBackdrop, 155)
+    utils.createBorderFrame(unitFrameOrigin)
 
     local healthBarFrameBackground = BlzCreateFrameByType(
         "BACKDROP",
@@ -77,8 +59,8 @@ function UnitFrame:init()
         FRAMEPOINT_BOTTOMLEFT,
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
-        0,
-        self.showCastBar and consts.BAR_HEIGHT or 0)
+        0.005,
+        self.showCastBar and consts.BAR_HEIGHT + 0.005 or 0.005)
     BlzFrameSetTexture(
         healthBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -117,8 +99,8 @@ function UnitFrame:init()
         FRAMEPOINT_BOTTOMLEFT,
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
-        0,
-        0)
+        0.005,
+        0.005)
     BlzFrameSetTexture(
         castBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -157,8 +139,8 @@ function UnitFrame:init()
         FRAMEPOINT_BOTTOMLEFT,
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
-        0,
-        self.showCastBar and consts.BAR_HEIGHT * 2 or consts.BAR_HEIGHT)
+        0.005,
+        (self.showCastBar and consts.BAR_HEIGHT * 2 or consts.BAR_HEIGHT) + 0.005)
     BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
 
     local buffIcons = {}
@@ -175,8 +157,8 @@ function UnitFrame:init()
             FRAMEPOINT_BOTTOMLEFT,
             unitFrameOrigin,
             FRAMEPOINT_BOTTOMLEFT,
-            i * self.buffSize,
-            self.showCastBar and consts.BAR_HEIGHT * 3 or consts.BAR_HEIGHT * 2)
+            i * self.buffSize + 0.005,
+            (self.showCastBar and consts.BAR_HEIGHT * 3 or consts.BAR_HEIGHT * 2) + 0.005)
 
         local buffStackCount = BlzCreateFrameByType(
             "TEXT",
@@ -200,10 +182,17 @@ function UnitFrame:init()
         })
     end
 
+    local hoverFrame = BlzCreateFrameByType(
+        "BUTTON",
+        "hoverFrame",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetAllPoints(hoverFrame, unitFrameOrigin)
+
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
-        trig, unitFrameOrigin, FRAMEEVENT_CONTROL_CLICK)
-    BlzTriggerRegisterFrameEvent(trig, unitNameFrame, FRAMEEVENT_CONTROL_CLICK)
+        trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
 
     TriggerAddAction(trig, function()
         self:onClick()
