@@ -5,21 +5,18 @@
 --  - Unit name
 local consts = require('src/ui/consts.lua')
 local buff = require('src/buff.lua')
-local target = require('src/target.lua')
 local party = require('src/party.lua')
 local hero = require('src/hero.lua')
-local casttime = require('src/casttime.lua')
 local utils = require('src/ui/utils.lua')
 
 local UnitFrame = {
     xLoc = 0,
     yLoc = 0,
     width = consts.BAR_WIDTH,
-    height = consts.BAR_HEIGHT * 5,
+    height = consts.BAR_HEIGHT * 4,
     anchor = FRAMEPOINT_CENTER,
     forTarget = false,
     farParty = nil,
-    showCastBar = true,
 }
 
 function UnitFrame:new(o)
@@ -60,7 +57,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
         0.005,
-        self.showCastBar and consts.BAR_HEIGHT + 0.005 or 0.005)
+        0.005)
     BlzFrameSetTexture(
         healthBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -87,45 +84,15 @@ function UnitFrame:init()
         0,
         true)
 
-    local castBarFrameBackground = BlzCreateFrameByType(
-        "BACKDROP",
-        "castBarFrameBackground",
+    local healthBarStatusText = BlzCreateFrameByType(
+        "TEXT",
+        "healthBarStatusText",
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(castBarFrameBackground, self.width, consts.BAR_HEIGHT)
-    BlzFrameSetPoint(
-        castBarFrameBackground,
-        FRAMEPOINT_BOTTOMLEFT,
-        unitFrameOrigin,
-        FRAMEPOINT_BOTTOMLEFT,
-        0.005,
-        0.005)
-    BlzFrameSetTexture(
-        castBarFrameBackground,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-
-    local castBarFrameFilled = BlzCreateFrameByType(
-        "BACKDROP",
-        "castBarFrameFilled",
-        unitFrameOrigin,
-        "",
-        0)
-    BlzFrameSetSize(castBarFrameFilled, self.width, consts.BAR_HEIGHT)
-    BlzFrameSetPoint(
-        castBarFrameFilled,
-        FRAMEPOINT_BOTTOMLEFT,
-        castBarFrameBackground,
-        FRAMEPOINT_BOTTOMLEFT,
-        0,
-        0)
-    BlzFrameSetTexture(
-        castBarFrameFilled,
-        "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
-        0,
-        true)
+    BlzFrameSetAllPoints(healthBarStatusText, healthBarFrameBackground)
+    BlzFrameSetTextAlignment(
+        healthBarStatusText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_RIGHT)
 
     local unitNameFrame = BlzCreateFrameByType(
         "TEXT",
@@ -140,7 +107,7 @@ function UnitFrame:init()
         unitFrameOrigin,
         FRAMEPOINT_BOTTOMLEFT,
         0.005,
-        (self.showCastBar and consts.BAR_HEIGHT * 2 or consts.BAR_HEIGHT) + 0.005)
+        consts.BAR_HEIGHT + 0.005)
     BlzFrameSetText(unitNameFrame, "There Is a Unit Name")
 
     local buffIcons = {}
@@ -158,7 +125,7 @@ function UnitFrame:init()
             unitFrameOrigin,
             FRAMEPOINT_BOTTOMLEFT,
             i * self.buffSize + 0.005,
-            (self.showCastBar and consts.BAR_HEIGHT * 3 or consts.BAR_HEIGHT * 2) + 0.005)
+            consts.BAR_HEIGHT * 2 + 0.005)
 
         local buffStackCount = BlzCreateFrameByType(
             "TEXT",
@@ -201,9 +168,8 @@ function UnitFrame:init()
     end)
 
     self.frames = {
-        castBarOrigin = castBarFrameBackground,
         healthBar = healthBarFrameFilled,
-        castBar = castBarFrameFilled,
+        healthBarStatusText = healthBarStatusText,
         origin = unitFrameOrigin,
         name = unitNameFrame,
         buffIcons = buffIcons,
@@ -246,6 +212,8 @@ function UnitFrame:update(playerId)
     local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
     local maxHp = BlzGetUnitMaxHP(unit)
 
+    BlzFrameSetText(frames.healthBarStatusText, R2I(hp) .. "/" .. maxHp)
+
     if maxHp ~= 0 then
         if hp / maxHp < 0.2 then
             BlzFrameSetTexture(
@@ -272,24 +240,6 @@ function UnitFrame:update(playerId)
             consts.BAR_HEIGHT)
     else
         BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
-    end
-
-    local playerIdOfUnitOwner = GetPlayerId(GetOwningPlayer(unit))
-    local castRemainder = casttime.getCastDurationRemaining(playerIdOfUnitOwner)
-    local castTotal = casttime.getCastDurationTotal(playerIdOfUnitOwner)
-    BlzFrameSetVisible(frames.castBarOrigin, self.showCastBar)
-    if castRemainder ~= nil and castTotal ~= nil then
-        BlzFrameSetVisible(frames.castBar, self.showCastBar)
-        BlzFrameSetSize(
-            frames.castBar,
-            self.width * (1 - castRemainder / castTotal),
-            consts.BAR_HEIGHT)
-    else
-        BlzFrameSetVisible(frames.castBar, false)
-        BlzFrameSetSize(
-            frames.castBar,
-            0,
-            consts.BAR_HEIGHT)
     end
 
     local buffs = buff.getBuffs(unit)
