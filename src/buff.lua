@@ -265,6 +265,21 @@ local BUFF_INFO = {
         removeOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNSentryWard.blp",
     },
+    food1 = {
+        effects = {
+            {
+                type = 'heal',
+                amount = 60,
+                tickrate = 3,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Items\\HealingSalve\\HealingSalveTarget.mdl",
+            attach = "origin",
+        },
+        removeOnDamage = true,
+        icon = "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
+    },
 }
 
 -- BuffInstances:
