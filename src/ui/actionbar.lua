@@ -25,7 +25,7 @@ function ActionBar:init()
     BlzFrameSetAbsPoint(bottomBarBackground, FRAMEPOINT_BOTTOMLEFT, 0.15, 0)
 
     local actionBar = BlzCreateFrameByType(
-        "BACKDROP",
+        "FRAME",
         "actionBar",
         originFrame,
         "",
@@ -34,11 +34,6 @@ function ActionBar:init()
         actionBar, consts.ACTION_ITEM_SIZE * 12, consts.ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(
         actionBar, FRAMEPOINT_CENTER, 0.4, consts.ACTION_ITEM_SIZE - 0.01)
-    BlzFrameSetTexture(
-        actionBar,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
 
     local actionItems = {}
     for i=0,11,1 do
@@ -88,23 +83,13 @@ function ActionBar:init()
             actionItem,
             "",
             0)
-        BlzFrameSetSize(
-            actionTintBackdrop,
-            consts.ACTION_ITEM_SIZE,
-            consts.ACTION_ITEM_SIZE)
-        BlzFrameSetPoint(
-            actionTintBackdrop,
-            FRAMEPOINT_BOTTOM,
-            actionItem,
-            FRAMEPOINT_BOTTOM,
-            0,
-            0)
+        BlzFrameSetAllPoints(actionTintBackdrop, actionItem)
         BlzFrameSetTexture(
             actionTintBackdrop,
             "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
             0,
             true)
-        BlzFrameSetAlpha(actionTintBackdrop, 60)
+        BlzFrameSetAlpha(actionTintBackdrop, 80)
 
         local actionHotkey = BlzCreateFrameByType(
             "TEXT",
@@ -168,7 +153,9 @@ function ActionBar:update(playerId)
         local spellIcon = spell.getIcon(playerId, idx)
         local spellTooltip = spell.getSpellTooltip(playerId, idx)
 
-        BlzFrameSetVisible(actionItem.actionCooldownBackdrop, cdPct ~= 0)
+        BlzFrameSetVisible(
+            actionItem.actionCooldownBackdrop,
+            cdPct ~= 0 and spellIcon ~= nil)
 
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
@@ -177,7 +164,7 @@ function ActionBar:update(playerId)
 
         BlzFrameSetTexture(
             actionItem.actionItemBackground,
-            spellIcon,
+            spellIcon or "BTNEmpty.tga",
             0,
             true)
 
