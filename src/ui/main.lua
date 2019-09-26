@@ -8,6 +8,7 @@ local consts = require('src/ui/consts.lua')
 local CastBar = require('src/ui/castbar.lua')
 local Dialog = require('src/ui/dialog.lua')
 local QuestLog = require('src/ui/questlog.lua')
+local MenuButtons = require('src/ui/menubuttons.lua')
 local ExpBar = require('src/ui/expbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
@@ -18,6 +19,7 @@ local UI_MODULES = {
     ActionBar:new(),
     CastBar:new(),
     ExpBar:new(),
+    MenuButtons:new(),
     UnitFrame:new{
         xLoc = 0.55,
         yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
