@@ -78,3 +78,7 @@ end
 TimerStart(CreateTimer(), 0.0, false, mainInit)
 
 collectgarbage("stop")
+
+return {
+    mainInit = mainInit,
+}

@@ -59,7 +59,6 @@ walk('./src', (err, res) => {
             let requireMap = "\n";
             for (let k in modules) {
               requireMap += "requireMap['" + k.replace(/\\/g, '/') + "'] = " + modules[k] + "\n";
-              // console.log();
             }
 
             requireMap += "\n\n";

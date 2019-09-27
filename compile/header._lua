@@ -1,9 +1,13 @@
-requireMap = {}
-requireCache = {}
+local requireMap = {}
+local requireCache = {}
 
 function require(path)
     if requireCache[path] == nil then
-        requireCache[path] = requireMap[path]()
+        requireCache[path] = {}
+        local realObj = requireMap[path]()
+        for key, val in pairs(realObj) do
+          requireCache[path][key] = val
+        end
     end
     return requireCache[path]
 end
