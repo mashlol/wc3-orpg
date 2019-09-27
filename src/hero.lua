@@ -1,6 +1,8 @@
 local backpack = require('src/items/backpack.lua')
+local load = require('src/saveload/load.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
+local SimpleButton = require('src/ui/simplebutton.lua')
 
 local START_X = -2554
 local START_Y = 71
@@ -158,6 +160,8 @@ local onHeroPicked = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local selectedUnit = GetTriggerUnit()
 
+    SimpleButton.hide(playerId)
+
     DestroyTrigger(forceCameraTriggers[playerId])
     DestroyTrigger(selectHeroTriggers[playerId])
 
@@ -173,7 +177,7 @@ local onHeroPicked = function()
     local effect = AddSpecialEffect(model, 27463, -30197)
     BlzSetSpecialEffectYaw(effect, 5.32325)
     BlzSetSpecialEffectScale(
-        effect, GetUnitPointValueByType(GetUnitTypeId(selectedUnit)) / 100 * 2)
+        effect, GetUnitPointValueByType(GetUnitTypeId(selectedUnit)) / 100)
 
     Dialog.show(playerId, {
         text = "Pick " .. heroInfo.name .. "?",
@@ -202,6 +206,46 @@ local onHeroPicked = function()
     })
 end
 
+function showLoadHeroDialog(playerId)
+    local dialog = DialogCreate()
+
+    DialogSetMessage(dialog, "Choose hero to load")
+    for i=1,5,1 do
+        local btn = DialogAddButton(dialog, "Load Hero in Slot #" .. i, 0)
+
+        local trig = CreateTrigger()
+        TriggerRegisterDialogButtonEvent(trig, btn)
+        TriggerAddAction(trig, function()
+            DestroyTrigger(trig)
+            DestroyTrigger(forceCameraTriggers[playerId])
+            DestroyTrigger(selectHeroTriggers[playerId])
+
+            load.loadFromFile(playerId, i)
+        end)
+    end
+
+    local btn = DialogAddButton(dialog, "Back", 0)
+
+    local trig = CreateTrigger()
+    TriggerRegisterDialogButtonEvent(trig, btn)
+    TriggerAddAction(trig, function()
+        DestroyTrigger(trig)
+
+        showLoadButton(playerId)
+    end)
+
+    DialogDisplay(Player(playerId), dialog, true)
+end
+
+function showLoadButton(playerId)
+    SimpleButton.show(playerId, {
+        text = "Load Existing Hero",
+        onClick = function()
+            showLoadHeroDialog(playerId)
+        end
+    })
+end
+
 function showPickHeroDialog(playerId)
     -- TODO a better way to pick heroes
 
@@ -225,6 +269,10 @@ function showPickHeroDialog(playerId)
         selectTrig, Player(playerId), EVENT_PLAYER_UNIT_SELECTED, nil)
     TriggerAddAction(selectTrig, onHeroPicked)
     selectHeroTriggers[playerId] = selectTrig
+
+    -- Show load button, if they have any heroes to load
+    -- TODO only show if they have something to load
+    showLoadButton(playerId)
 end
 
 function onRepick()
