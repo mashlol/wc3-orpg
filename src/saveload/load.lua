@@ -95,6 +95,12 @@ function onDataSynced()
     loadChar(GetPlayerId(GetTriggerPlayer()), BlzGetTriggerSyncData())
 end
 
+function loadFromFile(playerId, fileIndex)
+    if playerId == GetPlayerId(GetLocalPlayer()) then
+        BlzSendSyncData(SYNC_PREFIX, file.readFile("tvt/tvtsave" .. fileIndex .. ".pld"))
+    end
+end
+
 function onLoad()
     local fullStr = GetEventPlayerChatString()
     local code = string.sub(fullStr, 7)
@@ -126,4 +132,5 @@ end
 
 return {
     init = init,
+    loadFromFile = loadFromFile,
 }
