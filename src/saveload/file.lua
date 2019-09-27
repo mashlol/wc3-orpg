@@ -34,7 +34,7 @@ end
 
 function readFile(file)
     local original = {}
-    local output= ""
+    local output = ""
 
     for i=0,#ABILITY_LIST-1,1 do
         original[i + 1] = BlzGetAbilityIcon(ABILITY_LIST[i + 1])
@@ -45,7 +45,7 @@ function readFile(file)
     for i=0,#ABILITY_LIST-1,1 do
         chunk = BlzGetAbilityIcon(ABILITY_LIST[i + 1])
         if chunk == original[i + 1] then
-            return output
+            return output ~= "" and output or nil
         end
 
         output = output .. chunk
@@ -53,7 +53,7 @@ function readFile(file)
         BlzSetAbilityIcon(ABILITY_LIST[i + 1], original[i + 1])
     end
 
-    return output
+    return output ~= "" and output or nil
 end
 
 
