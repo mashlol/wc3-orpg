@@ -1,5 +1,7 @@
 local backpack = require('src/items/backpack.lua')
 local load = require('src/saveload/load.lua')
+local meta = require('src/saveload/meta.lua')
+local save = require('src/saveload/save.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
@@ -9,7 +11,7 @@ local START_Y = 71
 
 local heroes = {}
 local pickedHeroes = {}
-local saveSlots = {}
+local saveSlot = nil
 
 local repickListeners = {}
 local pickListeners = {}
@@ -196,12 +198,16 @@ local onHeroPicked = function()
             BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
             DestroyEffect(effect)
 
+            saveSlot = meta.getNumCharacters() + 1
+            meta.setNumCharacters(saveSlot)
             pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
             createHeroForPlayer(playerId)
 
             for _, listener in pairs(pickListeners) do
                 listener()
             end
+
+            save.saveHero(playerId)
         end,
     })
 end
@@ -217,9 +223,12 @@ function showLoadHeroDialog(playerId)
         TriggerRegisterDialogButtonEvent(trig, btn)
         TriggerAddAction(trig, function()
             DestroyTrigger(trig)
+            DialogDestroy(dialog)
+
             DestroyTrigger(forceCameraTriggers[playerId])
             DestroyTrigger(selectHeroTriggers[playerId])
 
+            saveSlot = i
             load.loadFromFile(playerId, i)
         end)
     end
@@ -229,6 +238,7 @@ function showLoadHeroDialog(playerId)
     local trig = CreateTrigger()
     TriggerRegisterDialogButtonEvent(trig, btn)
     TriggerAddAction(trig, function()
+        DialogDestroy(dialog)
         DestroyTrigger(trig)
 
         showLoadButton(playerId)
@@ -282,12 +292,14 @@ function onRepick()
         return
     end
 
+    save.saveHero(repickPlayerId)
+
     equipment.clear(repickPlayerId)
     backpack.clear(repickPlayerId)
     RemoveUnit(heroes[repickPlayerId])
     heroes[repickPlayerId] = nil
     pickedHeroes[repickPlayerId] = nil
-    saveSlots[repickPlayerId] = nil
+    saveSlot = nil
 
     for _, listener in pairs(repickListeners) do
         listener(repickPlayerId)
@@ -374,6 +386,10 @@ function getStatEffects(playerId)
     }
 end
 
+function getSlot()
+    return saveSlot
+end
+
 function addRepickedListener(repickedListenerFunc)
     table.insert(repickListeners, repickedListenerFunc)
 end
@@ -391,4 +407,5 @@ return {
     addRepickedListener = addRepickedListener,
     addHeroPickedListener = addHeroPickedListener,
     getStatEffects = getStatEffects,
+    getSlot = getSlot,
 }

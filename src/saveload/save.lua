@@ -6,9 +6,9 @@ local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 local quests = require('src/quests/main.lua')
 
-function onSave()
-    local playerId = GetPlayerId(GetTriggerPlayer())
+function saveHero(playerId)
     local heroUnit = hero.getHero(playerId)
+    local slot = hero.getSlot(playerId)
     local pickedHeroId = hero.getPickedHero(playerId).storedId
 
     local code = Code:new()
@@ -50,17 +50,18 @@ function onSave()
 
     code = code:build()
 
-    log.log(playerId, 'Your code is: '..code, log.TYPE.NORMAL)
-    file.writeFile("tvt/tvtsave1.pld", code)
+    if playerId == GetPlayerId(GetLocalPlayer()) then
+        file.writeFile("tvt/tvtsave" .. slot .. ".pld", code)
+    end
     log.log(
         playerId,
-        'It\'s been saved to a local file too, but you might want to still '..
-        'screenshot it just in case.',
-        log.TYPE.WARNING)
-    log.log(
-        playerId,
-        'NOTE THIS IS AN ALPHA AND THE CODE MAY NOT WORK IN FUTURE VERSIONS',
-        log.TYPE.WARNING)
+        "Hero has been saved to slot " .. slot .. ".",
+        log.TYPE.NORMAL)
+end
+
+function onSave()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    saveHero(playerId)
 end
 
 function init()
@@ -73,4 +74,5 @@ end
 
 return {
     init = init,
+    saveHero = saveHero,
 }
