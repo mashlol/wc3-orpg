@@ -1,11 +1,13 @@
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
+local Dialog = require('src/ui/dialog.lua')
 
 local START_X = -2554
 local START_Y = 71
 
 local heroes = {}
 local pickedHeroes = {}
+local saveSlots = {}
 
 local repickListeners = {}
 local pickListeners = {}
@@ -27,6 +29,7 @@ local ALL_HERO_INFO = {
             [9] = 'stun',
             [10] = 'blind',
         },
+        model = "units\\demon\\HeroChaosBladeMaster\\HeroChaosBladeMaster.mdl",
         baseHP = 600,
     },
     [FourCC("Hstm")] = {
@@ -38,6 +41,7 @@ local ALL_HERO_INFO = {
             [5] = 'attack',
             [6] = 'stop',
         },
+        model = "Valkyrie.mdl",
         baseHP = 600,
     },
     [FourCC("Hivn")] = {
@@ -57,6 +61,7 @@ local ALL_HERO_INFO = {
             [10] = 'dampenpot',
             [11] = 'pocketgoo',
         },
+        model = "Units\\Creeps\\HeroGoblinAlchemist\\HeroGoblinAlchemist.mdl",
         baseHP = 600,
     },
     [FourCC("Hazr")] = {
@@ -77,6 +82,7 @@ local ALL_HERO_INFO = {
             [11] = 'fireshell',
             [12] = 'frostballs',
         },
+        model = "Magna Aegwynn.mdl",
         baseHP = 400,
     },
     [FourCC("Htar")] = {
@@ -96,6 +102,7 @@ local ALL_HERO_INFO = {
             [10] = 'flag',
             [11] = 'challenge',
         },
+        model = "johanaulty.mdl",
         baseHP = 1000,
     },
 }
@@ -117,9 +124,6 @@ local forceCameraTriggers = {}
 local selectHeroTriggers = {}
 
 function createHeroForPlayer(playerId, exp, heroX, heroY)
-    DestroyTrigger(forceCameraTriggers[playerId])
-    DestroyTrigger(selectHeroTriggers[playerId])
-
     local hero = CreateUnit(
         Player(playerId),
         pickedHeroes[playerId].id,
@@ -154,15 +158,51 @@ local onHeroPicked = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local selectedUnit = GetTriggerUnit()
 
-    pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
-    createHeroForPlayer(playerId)
+    DestroyTrigger(forceCameraTriggers[playerId])
+    DestroyTrigger(selectHeroTriggers[playerId])
 
-    for _, listener in pairs(pickListeners) do
-        listener()
-    end
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEvent(trig, 0.1, true)
+    TriggerAddAction(trig, function()
+        forceCameraLocation(playerId, gg_cam_Camera_003)
+    end)
+    forceCameraTriggers[playerId] = trig
+
+    local heroInfo = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
+    local model = playerId == GetPlayerId(GetLocalPlayer()) and heroInfo.model or ""
+    local effect = AddSpecialEffect(model, 27463, -30197)
+    BlzSetSpecialEffectYaw(effect, 5.32325)
+    BlzSetSpecialEffectScale(
+        effect, GetUnitPointValueByType(GetUnitTypeId(selectedUnit)) / 100 * 2)
+
+    Dialog.show(playerId, {
+        text = "Pick " .. heroInfo.name .. "?",
+        xPos = 0.5,
+        positiveButton = "Confirm",
+        negativeButton = "Back",
+        onNegativeButtonClicked = function()
+            DestroyTrigger(forceCameraTriggers[playerId])
+            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
+            DestroyEffect(effect)
+
+            showPickHeroDialog(playerId)
+        end,
+        onPositiveButtonClicked = function()
+            DestroyTrigger(forceCameraTriggers[playerId])
+            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
+            DestroyEffect(effect)
+
+            pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
+            createHeroForPlayer(playerId)
+
+            for _, listener in pairs(pickListeners) do
+                listener()
+            end
+        end,
+    })
 end
 
-local showPickHeroDialog = function(playerId)
+function showPickHeroDialog(playerId)
     -- TODO a better way to pick heroes
 
     -- Apply camera
@@ -199,11 +239,13 @@ function onRepick()
     RemoveUnit(heroes[repickPlayerId])
     heroes[repickPlayerId] = nil
     pickedHeroes[repickPlayerId] = nil
-    showPickHeroDialog(repickPlayerId)
+    saveSlots[repickPlayerId] = nil
 
     for _, listener in pairs(repickListeners) do
         listener(repickPlayerId)
     end
+
+    showPickHeroDialog(repickPlayerId)
 end
 
 function onLevel()

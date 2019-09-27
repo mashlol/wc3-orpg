@@ -7,7 +7,7 @@ function onCameraTick()
         return
     end
     SetCameraQuickPosition(GetUnitX(hero), GetUnitY(hero))
-    CameraSetupApplyForceDuration(gg_cam_Camera_003, false, 0)
+    CameraSetupApplyForceDuration(gg_cam_Camera_001, false, 0)
 end
 
 function init()

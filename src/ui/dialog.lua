@@ -5,6 +5,7 @@ local utils = require('src/ui/utils.lua')
 --     [playerId] = {
 --         text = "text",
 --         height = 0.4,
+--         xPos = 0.4,
 --         positiveButton = "Accept",
 --         onPositiveButtonClicked = [function],
 --         negativeButton = "Decline",
@@ -126,6 +127,12 @@ function Dialog:update(playerId)
     local frames = self.frames
 
     BlzFrameSetVisible(frames.origin, dialogToggles[playerId] ~= nil)
+
+    BlzFrameSetAbsPoint(
+        frames.origin,
+        FRAMEPOINT_CENTER,
+        dialogToggles[playerId] ~= nil and dialogToggles[playerId].xPos or 0.4,
+        0.35)
 
     BlzFrameSetText(
         frames.text,
