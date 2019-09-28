@@ -1,6 +1,7 @@
 local backpack = require('src/items/backpack.lua')
 local load = require('src/saveload/load.lua')
 local meta = require('src/saveload/meta.lua')
+local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
 local equipment = require('src/items/equipment.lua')
@@ -224,8 +225,34 @@ function showLoadHeroDialog(playerId)
 
         Dialog.show(playerId, {
             text = "Choose a hero to load",
-            positiveButton = 'Back',
+            positiveButton = '|cffff0000Delete A Hero|r',
             onPositiveButtonClicked = function()
+                local buttons = {}
+
+                for slot, metaData in pairs(usedSlots) do
+                    table.insert(buttons, {
+                        text = "|cffff0000Delete " .. metaData .. '|r',
+                        onClick = function()
+                            if playerId == GetPlayerId(GetLocalPlayer()) then
+                                file.writeFile('tvtsave' .. slot .. '.pld', "")
+                                usedSlots = meta.getUsedSlots()
+                                showLoadButton(playerId)
+                            end
+                        end
+                    })
+                end
+
+                Dialog.show(playerId, {
+                    text = "Choose a hero to delete",
+                    positiveButton = "Back",
+                    onPositiveButtonClicked = function()
+                        showLoadButton(playerId)
+                    end,
+                    buttons = buttons,
+                })
+            end,
+            negativeButton = 'Back',
+            onNegativeButtonClicked = function()
                 showLoadButton(playerId)
             end,
             buttons = buttons,
