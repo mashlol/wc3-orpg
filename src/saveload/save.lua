@@ -51,7 +51,14 @@ function saveHero(playerId)
     code = code:build()
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
-        file.writeFile("tvt/tvtsave" .. slot .. ".pld", code)
+        file.writeFile(
+            "tvtsave" .. slot .. ".pld",
+            code ..
+                '|' ..
+                GetUnitName(heroUnit) ..
+                ' (Lv ' ..
+                GetHeroLevel(heroUnit) ..
+                ')')
     end
     log.log(
         playerId,

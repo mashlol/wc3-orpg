@@ -97,35 +97,23 @@ end
 
 function loadFromFile(playerId, fileIndex)
     if playerId == GetPlayerId(GetLocalPlayer()) then
-        BlzSendSyncData(SYNC_PREFIX, file.readFile("tvt/tvtsave" .. fileIndex .. ".pld"))
-    end
-end
-
-function onLoad()
-    local fullStr = GetEventPlayerChatString()
-    local code = string.sub(fullStr, 7)
-    local playerId = GetPlayerId(GetTriggerPlayer())
-
-    if code == "" then
-        if playerId == GetPlayerId(GetLocalPlayer()) then
-            BlzSendSyncData(SYNC_PREFIX, file.readFile("tvt/tvtsave1.pld"))
+        local fileInfo = file.readFile("tvtsave" .. fileIndex .. ".pld")
+        local pipeCharLoc = string.find(fileInfo, '|', 0, true)
+        local code
+        if pipeCharLoc == nil then
+            code = fileInfo
+        else
+            code = string.sub(fileInfo, 1, pipeCharLoc - 1)
         end
-        return
+        BlzSendSyncData(SYNC_PREFIX, code)
     end
-
-    loadChar(playerId, code)
 end
 
 function init()
-    local loadTrigger = CreateTrigger()
-    for i=0,bj_MAX_PLAYERS,1 do
-        TriggerRegisterPlayerChatEvent(loadTrigger, Player(i), "-load", false)
-    end
-    TriggerAddAction(loadTrigger, onLoad)
-
     local syncLoadTrigger = CreateTrigger()
     for i=0,bj_MAX_PLAYERS-1, 1 do
-        BlzTriggerRegisterPlayerSyncEvent(syncLoadTrigger, Player(i), SYNC_PREFIX, false)
+        BlzTriggerRegisterPlayerSyncEvent(
+            syncLoadTrigger, Player(i), SYNC_PREFIX, false)
     end
     TriggerAddAction(syncLoadTrigger, onDataSynced)
 end
