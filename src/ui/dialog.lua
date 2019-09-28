@@ -59,33 +59,35 @@ function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnInde
         trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
         local playerId = GetPlayerId(GetTriggerPlayer())
+
+        local callback
         if
             dialogToggles[playerId] ~= nil and
             isNegative == false and
             dialogToggles[playerId].onPositiveButtonClicked
         then
-            dialogToggles[playerId].onPositiveButtonClicked()
-        end
-
-        if
+            callback = dialogToggles[playerId].onPositiveButtonClicked
+        elseif
             dialogToggles[playerId] ~= nil and
             isNegative == true and
             dialogToggles[playerId].onNegativeButtonClicked
         then
-            dialogToggles[playerId].onNegativeButtonClicked()
-        end
-
-        if
+            callback = dialogToggles[playerId].onNegativeButtonClicked
+        elseif
             dialogToggles[playerId] ~= nil and
             dialogToggles[playerId].buttons ~= nil and
             btnIndex ~= nil and
             dialogToggles[playerId].buttons[btnIndex] ~= nil and
             dialogToggles[playerId].buttons[btnIndex].onClick
         then
-            dialogToggles[playerId].buttons[btnIndex].onClick()
+            callback = dialogToggles[playerId].buttons[btnIndex].onClick
         end
 
         dialogToggles[playerId] = nil
+
+        if callback ~= nil then
+            callback()
+        end
 
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
