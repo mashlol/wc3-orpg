@@ -51,7 +51,6 @@ function saveHero(playerId)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         local slot = hero.getSlot(playerId)
-        print('writing save file ' .. slot)
         file.writeFile(
             "tvtsave" .. slot .. ".pld",
             code ..
@@ -60,10 +59,7 @@ function saveHero(playerId)
                 ' (Lv ' ..
                 GetHeroLevel(heroUnit) ..
                 ')')
-        log.log(
-            playerId,
-            "Hero has been saved to slot " .. slot .. ".",
-            log.TYPE.NORMAL)
+        log.log(playerId, "Your hero has been auto saved.", log.TYPE.NORMAL)
     end
 end
 
