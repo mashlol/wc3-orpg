@@ -8,7 +8,6 @@ local quests = require('src/quests/main.lua')
 
 function saveHero(playerId)
     local heroUnit = hero.getHero(playerId)
-    local slot = hero.getSlot(playerId)
     local pickedHeroId = hero.getPickedHero(playerId).storedId
 
     local code = Code:new()
@@ -51,6 +50,8 @@ function saveHero(playerId)
     code = code:build()
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
+        local slot = hero.getSlot(playerId)
+        print('writing save file ' .. slot)
         file.writeFile(
             "tvtsave" .. slot .. ".pld",
             code ..
@@ -59,11 +60,11 @@ function saveHero(playerId)
                 ' (Lv ' ..
                 GetHeroLevel(heroUnit) ..
                 ')')
+        log.log(
+            playerId,
+            "Hero has been saved to slot " .. slot .. ".",
+            log.TYPE.NORMAL)
     end
-    log.log(
-        playerId,
-        "Hero has been saved to slot " .. slot .. ".",
-        log.TYPE.NORMAL)
 end
 
 function onSave()
