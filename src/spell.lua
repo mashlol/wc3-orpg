@@ -188,20 +188,28 @@ local getCooldownPct = function(playerId, idx)
     return getCooldownPctBySpellKey(playerId, spellKey)
 end
 
-local getIcon = function(playerId, idx)
-    local spell = getSpell(playerId, idx)
+local getIconBySpellKey = function(spellKey)
+    local spell = SPELL_MAP[spellKey]
     if spell ~= nil then
         return spell.getIcon()
     end
     return nil
 end
 
-local getSpellTooltip = function(playerId, idx)
+local getIcon = function(playerId, idx)
     local spellKey = getSpellKey(playerId, idx)
+    return getIconBySpellKey(spellKey)
+end
+
+local getSpellTooltipBySpellKey = function(spellKey)
     if spellKey ~= nil then
         return TOOLTIPS[spellKey]
     end
     return ""
+end
+
+local getSpellTooltip = function(playerId, idx)
+    return getSpellTooltipBySpellKey(getSpellKey(playerId, idx))
 end
 
 local init = function()
@@ -213,8 +221,8 @@ local init = function()
 
         TOOLTIPS[idx] =
             "|cff155ed4"..spellName.."|r|n|n"..
-            "Cooldown: "..spellCooldown.."s|n"..
-            "Cast time: "..spellCasttime.."s|n"..
+            "|cffe0b412Cooldown: |r"..spellCooldown.."s|n"..
+            "|cffe0b412Cast time: |r"..spellCasttime.."s|n"..
             "|n"..spellTooltip
     end
 end
@@ -227,5 +235,7 @@ return {
     getCooldownPct = getCooldownPct,
     getCooldownPctBySpellKey = getCooldownPctBySpellKey,
     getIcon = getIcon,
+    getIconBySpellKey = getIconBySpellKey,
+    getSpellTooltipBySpellKey = getSpellTooltipBySpellKey,
     getSpellTooltip = getSpellTooltip,
 }
