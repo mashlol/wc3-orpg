@@ -1,11 +1,16 @@
 local consts = require('src/ui/consts.lua')
 local utils = require('src/ui/utils.lua')
+local tooltip = require('src/ui/tooltip.lua')
+local spell = require('src/spell.lua')
 
 -- dialogToggles = {
 --     [playerId] = {
 --         text = "text",
 --         height = 0.4,
 --         xPos = 0.4,
+--         spells = {
+--             [1] = 'spellname',
+--         },
 --         positiveButton = "Accept",
 --         onPositiveButtonClicked = [function],
 --         negativeButton = "Decline",
@@ -136,12 +141,39 @@ function Dialog:init()
             createButton(origin, originFrame, 0, (i - 1) * -0.045 - 0.005, nil, i))
     end
 
+    local spellIcons = {}
+    for i=0,8,1 do
+        local spellIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "spellIcon",
+            origin,
+            "",
+            0)
+        BlzFrameSetSize(
+            spellIcon, consts.ACTION_ITEM_SIZE, consts.ACTION_ITEM_SIZE)
+        BlzFrameSetPoint(
+            spellIcon,
+            FRAMEPOINT_LEFT,
+            origin,
+            FRAMEPOINT_LEFT,
+            (i % 3) * (consts.ACTION_ITEM_SIZE + 0.1) + 0.04,
+            -R2I(i / 3) * (consts.ACTION_ITEM_SIZE + 0.03) + 0.06)
+
+        local tooltipFrame = tooltip.makeTooltipFrame(spellIcon, 0.24, 0.095)
+
+        table.insert(spellIcons, {
+            icon = spellIcon,
+            tooltip = tooltipFrame,
+        })
+    end
+
     self.frames = {
         origin = origin,
         text = text,
         positiveButton = positiveButton,
         negativeButton = negativeButton,
         buttons = buttons,
+        spellIcons = spellIcons,
     }
 
     return self
@@ -215,6 +247,26 @@ function Dialog:update(playerId)
                 dialogToggles[playerId].buttons ~= nil and
                 dialogToggles[playerId].buttons[i] ~= nil and
                 dialogToggles[playerId].buttons[i].text or "")
+    end
+
+    for i=1,9,1 do
+        local spellKey = dialogToggles[playerId] ~= nil and
+            dialogToggles[playerId].spells ~= nil and
+            dialogToggles[playerId].spells[i]
+        BlzFrameSetVisible(
+            frames.spellIcons[i].icon,
+            spellKey)
+
+        if spellKey then
+            BlzFrameSetTexture(
+                frames.spellIcons[i].icon,
+                spell.getIconBySpellKey(spellKey),
+                0,
+                true)
+            BlzFrameSetText(
+                frames.spellIcons[i].tooltip.text,
+                spell.getSpellTooltipBySpellKey(spellKey))
+        end
     end
 end
 

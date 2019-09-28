@@ -23,6 +23,11 @@ local pickListeners = {}
 local ALL_HERO_INFO = {
     [FourCC("Hyuj")] = {
         name = 'Yuji',
+        desc = 'Yuji is an extremely mobile, fast paced hero. Yuji deals '..
+            'very high amounts of damage but cannot sustain much damage '..
+            'himself. Yuji excels at engaging and disengaging in combat '..
+            'quickly, assassinating targets.',
+        heroType = 'Assassin',
         storedId = 1,
         id = FourCC("Hyuj"),
         spells = {
@@ -42,6 +47,8 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
+        desc = 'TODO desc ',
+        heroType = 'Bruiser',
         storedId = 2,
         id = FourCC("Hstm"),
         spells = {
@@ -54,6 +61,11 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
+        desc = 'Ivanov is a support healer, who uses his knowledge in '..
+            'science to concoct various potions. Ivanov must be careful when '..
+            'healing, as he can also cause damage if he stacks his dangerous '..
+            'poisons too high on allies.',
+        heroType = 'Support',
         storedId = 3,
         id = FourCC("Hivn"),
         spells = {
@@ -74,6 +86,12 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
+        desc = 'Azora was donned the title "The Wildfire", for being adept '..
+            'at controlling the fire elements to her will. She can deal '..
+            'extraordinary amounts of damage, but is extremely succeptible '..
+            'to death. She has average mobility, focusing more on '..
+            'controlling her opponents.',
+        heroType = 'Caster',
         storedId = 4,
         id = FourCC("Hazr"),
         spells = {
@@ -95,6 +113,12 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
+        desc = 'Tarcza, the Shield of X, is a powerful tank, capable of '..
+            'withstanding great amounts of damage. Tarcza focuses on holding '..
+            'aggro, but has a high level of mobility in order to protect his '..
+            'allies from threats. The longer Tarcza engages in a fight, the '..
+            'stronger he becomes.',
+        heroType = 'Tank',
         storedId = 5,
         id = FourCC("Htar"),
         spells = {
@@ -199,7 +223,7 @@ function showLoadHeroDialog(playerId)
         end
 
         Dialog.show(playerId, {
-            text = "Load?",
+            text = "Choose a hero to load",
             positiveButton = 'Back',
             onPositiveButtonClicked = function()
                 showLoadButton(playerId)
@@ -284,6 +308,15 @@ function onLevel()
     end)
 end
 
+function getDialogTextForHero(heroInfo)
+    local desc = "|cffe0b412Pick " .. heroInfo.name .. " ?|r|n|n"..heroInfo.desc
+
+    desc = desc .. '|n|n|cffe0b412Hero Type: |r' .. heroInfo.heroType
+    desc = desc .. '|n|cffe0b412Base HP: |r' .. heroInfo.baseHP
+
+    return desc
+end
+
 function onCreateSynced()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local data = BlzGetTriggerSyncData()
@@ -313,17 +346,27 @@ function onCreateSynced()
     forceCameraTriggers[playerId] = trig
 
     local heroInfo = ALL_HERO_INFO[unitType]
-    local model = playerId == GetPlayerId(GetLocalPlayer()) and heroInfo.model or ""
+    local model = playerId == GetPlayerId(GetLocalPlayer()) and
+        heroInfo.model or
+        ""
     local effect = AddSpecialEffect(model, 27463, -30197)
     BlzSetSpecialEffectYaw(effect, 5.32325)
     BlzSetSpecialEffectScale(
         effect, GetUnitPointValueByType(unitType) / 100)
 
+    local spellsWithoutAA = {}
+    for idx, spellKey in pairs(heroInfo.spells) do
+        if idx ~= 5 and idx ~= 6 then
+            table.insert(spellsWithoutAA, spellKey)
+        end
+    end
+
     Dialog.show(playerId, {
-        text = "Pick " .. heroInfo.name .. "?",
+        text = getDialogTextForHero(heroInfo),
+        spells = spellsWithoutAA,
         xPos = 0.5,
-        positiveButton = "Confirm",
-        negativeButton = "Back",
+        positiveButton = "Create",
+        negativeButton = "Cancel",
         onNegativeButtonClicked = function()
             DestroyTrigger(forceCameraTriggers[playerId])
             BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
