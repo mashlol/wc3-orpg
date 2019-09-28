@@ -9,13 +9,16 @@ local quests = require('src/quests/main.lua')
 local SYNC_PREFIX = "sync-load-code"
 
 function loadChar(playerId, code)
+    print('Running synced load char for ', playerId)
     if hero.getHero(playerId) ~= nil then
+        print('Already had a char')
         log.log(
             playerId,
             'You already have a hero. Type -repick and then try again.',
             log.TYPE.ERROR)
         return
     end
+    print('decoding')
 
     local decoded = Code:fromStr(code)
 
@@ -51,6 +54,7 @@ function loadChar(playerId, code)
 
     local nameEncoded = decoded:getInt(2500)
     if nameEncoded ~= string.byte(GetPlayerName(Player(playerId))) % 2500 then
+        print('code name was invalid')
         log.log(
             playerId,
             'Invalid code',
@@ -69,6 +73,7 @@ function loadChar(playerId, code)
     local validCode = decoded:verify()
 
     if not validCode then
+        print('code checksum was invalid')
         log.log(
             playerId,
             'Invalid code',
@@ -88,6 +93,7 @@ function loadChar(playerId, code)
         equipment.equipItem(playerId, slot, itemId)
     end
 
+    print('restoring hero in hero module')
     hero.restorePickedHero(playerId, heroId, exp, heroX, heroY)
 end
 

@@ -175,9 +175,8 @@ local onHeroPicked = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local selectedUnit = GetTriggerUnit()
 
-    local slot = getNextEmptySaveSlot()
-
     if GetPlayerId(GetLocalPlayer()) == playerId then
+        local slot = getNextEmptySaveSlot()
         BlzSendSyncData(
             CREATE_SYNC_PREFIX,
             GetUnitTypeId(selectedUnit) .. '|' .. slot)
@@ -185,28 +184,28 @@ local onHeroPicked = function()
 end
 
 function showLoadHeroDialog(playerId)
-    local buttons = {}
+    if GetPlayerId(GetLocalPlayer()) == playerId then
+        local buttons = {}
 
-    for slot, metaData in pairs(usedSlots) do
-        table.insert(buttons, {
-            text = "Load " .. metaData,
-            onClick = function()
-                DestroyTrigger(forceCameraTriggers[playerId])
-                DestroyTrigger(selectHeroTriggers[playerId])
-                saveSlot = slot
-                load.loadFromFile(playerId, slot)
-            end
+        for slot, metaData in pairs(usedSlots) do
+            table.insert(buttons, {
+                text = "Load " .. metaData,
+                onClick = function()
+                    saveSlot = slot
+                    load.loadFromFile(playerId, slot)
+                end
+            })
+        end
+
+        Dialog.show(playerId, {
+            text = "Load?",
+            positiveButton = 'Back',
+            onPositiveButtonClicked = function()
+                showLoadButton(playerId)
+            end,
+            buttons = buttons,
         })
     end
-
-    Dialog.show(playerId, {
-        text = "Load?",
-        positiveButton = 'Back',
-        onPositiveButtonClicked = function()
-            showLoadButton(playerId)
-        end,
-        buttons = buttons,
-    })
 end
 
 function hasACharacter()
@@ -217,20 +216,20 @@ function hasACharacter()
 end
 
 function showLoadButton(playerId)
-    if not hasACharacter() then
-        return
-    end
-    SimpleButton.show(playerId, {
-        text = "Load Existing Hero",
-        onClick = function()
-            showLoadHeroDialog(playerId)
+    if GetPlayerId(GetLocalPlayer()) == playerId then
+        if not hasACharacter() then
+            return
         end
-    })
+        SimpleButton.show(playerId, {
+            text = "Load Existing Hero",
+            onClick = function()
+                showLoadHeroDialog(playerId)
+            end
+        })
+    end
 end
 
 function showPickHeroDialog(playerId)
-    usedSlots = meta.getUsedSlots()
-
     CreateFogModifierRectBJ(
         true, Player(playerId), FOG_OF_WAR_VISIBLE, gg_rct_Region_000)
 
@@ -247,13 +246,19 @@ function showPickHeroDialog(playerId)
     TriggerAddAction(selectTrig, onHeroPicked)
     selectHeroTriggers[playerId] = selectTrig
 
-    showLoadButton(playerId)
+    if playerId == GetPlayerId(GetLocalPlayer()) then
+        usedSlots = meta.getUsedSlots()
+        showLoadButton(playerId)
+    end
 end
 
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
 
+    print('Repicking for ', repickPlayerId)
+
     if getHero(repickPlayerId) == nil then
+        print('Cant repick if you dont have a hero')
         return
     end
 
@@ -390,6 +395,9 @@ local getPickedHero = function(playerId)
 end
 
 function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
+    print('restoring hero for ', playerId)
+    DestroyTrigger(forceCameraTriggers[playerId])
+    DestroyTrigger(selectHeroTriggers[playerId])
     for _, info in pairs(ALL_HERO_INFO) do
         if info.storedId == storedHeroId then
             pickedHeroes[playerId] = info
