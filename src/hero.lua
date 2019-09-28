@@ -2,6 +2,7 @@ local backpack = require('src/items/backpack.lua')
 local load = require('src/saveload/load.lua')
 local meta = require('src/saveload/meta.lua')
 local save = require('src/saveload/save.lua')
+local log = require('src/log.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
@@ -255,10 +256,7 @@ end
 function onRepick()
     local repickPlayerId = GetPlayerId(GetTriggerPlayer())
 
-    print('Repicking for ', repickPlayerId)
-
     if getHero(repickPlayerId) == nil then
-        print('Cant repick if you dont have a hero')
         return
     end
 
@@ -295,8 +293,10 @@ function onCreateSynced()
     local slot = S2I(string.sub(data, pipeLoc + 1))
 
     if slot > meta.MAX_NUM_CHARS then
-        -- TODO log properly
-        print('You have too many characters. Try deleting one.')
+        log.log(
+            playerId,
+            'You have too many characters. Try deleting one first.',
+            log.TYPE.ERROR)
         return
     end
 
@@ -336,7 +336,7 @@ function onCreateSynced()
             BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
             DestroyEffect(effect)
 
-            saveSlot = getNextEmptySaveSlot()
+            saveSlot = slot
 
             pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
             createHeroForPlayer(playerId)
@@ -395,7 +395,6 @@ local getPickedHero = function(playerId)
 end
 
 function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
-    print('restoring hero for ', playerId)
     DestroyTrigger(forceCameraTriggers[playerId])
     DestroyTrigger(selectHeroTriggers[playerId])
     for _, info in pairs(ALL_HERO_INFO) do
