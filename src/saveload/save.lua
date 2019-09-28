@@ -59,8 +59,8 @@ function saveHero(playerId)
                 ' (Lv ' ..
                 GetHeroLevel(heroUnit) ..
                 ')')
-        log.log(playerId, "Your hero has been auto saved.", log.TYPE.NORMAL)
     end
+    log.log(playerId, "Your hero has been saved.", log.TYPE.NORMAL)
 end
 
 function onSave()

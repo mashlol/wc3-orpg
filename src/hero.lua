@@ -318,7 +318,9 @@ function onRepick()
     RemoveUnit(heroes[repickPlayerId])
     heroes[repickPlayerId] = nil
     pickedHeroes[repickPlayerId] = nil
-    saveSlot = nil
+    if GetPlayerId(GetLocalPlayer()) == repickPlayerId then
+        saveSlot = nil
+    end
 
     for _, listener in pairs(repickListeners) do
         listener(repickPlayerId)
@@ -406,7 +408,9 @@ function onCreateSynced()
             BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
             DestroyEffect(effect)
 
-            saveSlot = slot
+            if GetPlayerId(GetLocalPlayer()) == playerId then
+                saveSlot = slot
+            end
 
             pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
             createHeroForPlayer(playerId)
