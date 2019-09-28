@@ -21,18 +21,8 @@ function getUsedSlots()
     return slots
 end
 
-function getNextEmptySlot()
-    local num = 1
-    while true do
-        if not file.exists('tvtsave' .. num .. '.pld') then
-            return num
-        end
-        num = num + 1
-    end
-end
 
 return {
     MAX_NUM_CHARS = MAX_NUM_CHARS,
     getUsedSlots = getUsedSlots,
-    getNextEmptySlot = getNextEmptySlot,
 }

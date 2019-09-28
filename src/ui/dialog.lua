@@ -54,7 +54,6 @@ function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnInde
         trig, button, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
         local playerId = GetPlayerId(GetTriggerPlayer())
-        print('player ', playerId, ' clicked button ', btnIndex)
         if
             dialogToggles[playerId] ~= nil and
             isNegative == false and
