@@ -12,6 +12,7 @@ local START_Y = 71
 local heroes = {}
 local pickedHeroes = {}
 local saveSlot = nil
+local usedSlots
 
 local repickListeners = {}
 local pickListeners = {}
@@ -198,8 +199,15 @@ local onHeroPicked = function()
             BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
             DestroyEffect(effect)
 
-            saveSlot = meta.getNumCharacters() + 1
-            meta.setNumCharacters(saveSlot)
+            saveSlot = meta.getNextEmptySlot()
+            -- TODO sync this whole thing now so everyone knows if it
+            -- was successful or not
+            if saveSlot > meta.MAX_NUM_CHARS then
+                print('You have too many characters. Try deleting one.')
+                showPickHeroDialog(playerId)
+                return
+            end
+
             pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
             createHeroForPlayer(playerId)
 
@@ -213,41 +221,41 @@ local onHeroPicked = function()
 end
 
 function showLoadHeroDialog(playerId)
-    local dialog = DialogCreate()
+    local buttons = {}
 
-    DialogSetMessage(dialog, "Choose hero to load")
-    for i=1,5,1 do
-        local btn = DialogAddButton(dialog, "Load Hero in Slot #" .. i, 0)
-
-        local trig = CreateTrigger()
-        TriggerRegisterDialogButtonEvent(trig, btn)
-        TriggerAddAction(trig, function()
-            DestroyTrigger(trig)
-            DialogDestroy(dialog)
-
-            DestroyTrigger(forceCameraTriggers[playerId])
-            DestroyTrigger(selectHeroTriggers[playerId])
-
-            saveSlot = i
-            load.loadFromFile(playerId, i)
-        end)
+    for slot, metaData in pairs(usedSlots) do
+        table.insert(buttons, {
+            text = "Load " .. metaData,
+            onClick = function()
+                DestroyTrigger(forceCameraTriggers[playerId])
+                DestroyTrigger(selectHeroTriggers[playerId])
+                saveSlot = slot
+                load.loadFromFile(playerId, slot)
+            end
+        })
     end
 
-    local btn = DialogAddButton(dialog, "Back", 0)
+    Dialog.show(playerId, {
+        text = "Load?",
+        positiveButton = 'Back',
+        onPositiveButtonClicked = function()
+            showLoadButton(playerId)
+        end,
+        buttons = buttons,
+    })
+end
 
-    local trig = CreateTrigger()
-    TriggerRegisterDialogButtonEvent(trig, btn)
-    TriggerAddAction(trig, function()
-        DialogDestroy(dialog)
-        DestroyTrigger(trig)
-
-        showLoadButton(playerId)
-    end)
-
-    DialogDisplay(Player(playerId), dialog, true)
+function hasACharacter()
+    for _, _ in pairs(usedSlots) do
+        return true
+    end
+    return false
 end
 
 function showLoadButton(playerId)
+    if not hasACharacter() then
+        return
+    end
     SimpleButton.show(playerId, {
         text = "Load Existing Hero",
         onClick = function()
@@ -257,7 +265,7 @@ function showLoadButton(playerId)
 end
 
 function showPickHeroDialog(playerId)
-    -- TODO a better way to pick heroes
+    usedSlots = meta.getUsedSlots()
 
     -- Apply camera
     -- Make zone visible

@@ -12,6 +12,9 @@ local ABILITY_LIST = {
 }
 
 function writeFile(file, contents)
+    local name = GetPlayerName(GetLocalPlayer())
+    file = 'tvt/' .. name .. '/' .. file
+
     local c = 0
     local len = StringLength(contents)
     local chunk
@@ -32,7 +35,14 @@ function writeFile(file, contents)
     PreloadGenEnd(file)
 end
 
+function exists(file)
+    return readFile(file) ~= nil
+end
+
 function readFile(file)
+    local name = GetPlayerName(GetLocalPlayer())
+    file = 'tvt/' .. name .. '/' .. file
+
     local original = {}
     local output = ""
 
@@ -60,4 +70,5 @@ end
 return {
     writeFile = writeFile,
     readFile = readFile,
+    exists = exists,
 }

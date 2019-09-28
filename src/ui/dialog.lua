@@ -10,6 +10,12 @@ local utils = require('src/ui/utils.lua')
 --         onPositiveButtonClicked = [function],
 --         negativeButton = "Decline",
 --         onNegativeButtonClicked = [function],
+--         buttons = {
+--             [1] = {
+--                 text = "Button Text",
+--                 onClick = [function],
+--             },
+--         },
 --     },
 -- }
 local dialogToggles = {}
@@ -30,18 +36,18 @@ function Dialog:new(o)
     return o
 end
 
-function createButton(origin, originFrame, xOffset, isNegative)
-    local button = BlzCreateFrame("ScriptDialogButton", originFrame, 0, 0)
+function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnIndex)
+    local button = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
     local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
-    BlzFrameSetParent(button, origin)
+    -- BlzFrameSetParent(button, origin)
     BlzFrameSetSize(button, 0.12, 0.04)
     BlzFrameSetPoint(
         button,
-        FRAMEPOINT_BOTTOM,
+        btnIndex and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
         origin,
-        FRAMEPOINT_BOTTOM,
+        btnIndex and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
         xOffset,
-        0.01)
+        yOffset)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -50,7 +56,7 @@ function createButton(origin, originFrame, xOffset, isNegative)
         local playerId = GetPlayerId(GetTriggerPlayer())
         if
             dialogToggles[playerId] ~= nil and
-            not isNegative and
+            isNegative == false and
             dialogToggles[playerId].onPositiveButtonClicked
         then
             dialogToggles[playerId].onPositiveButtonClicked()
@@ -58,10 +64,20 @@ function createButton(origin, originFrame, xOffset, isNegative)
 
         if
             dialogToggles[playerId] ~= nil and
-            isNegative and
+            isNegative == true and
             dialogToggles[playerId].onNegativeButtonClicked
         then
             dialogToggles[playerId].onNegativeButtonClicked()
+        end
+
+        if
+            dialogToggles[playerId] ~= nil and
+            dialogToggles[playerId].buttons ~= nil and
+            btnIndex ~= nil and
+            dialogToggles[playerId].buttons[btnIndex] ~= nil and
+            dialogToggles[playerId].buttons[btnIndex].onClick
+        then
+            dialogToggles[playerId].buttons[btnIndex].onClick()
         end
 
         dialogToggles[playerId] = nil
@@ -110,14 +126,22 @@ function Dialog:init()
         0.01,
         -0.01)
 
-    local positiveButton = createButton(origin, originFrame, 0.07, false)
-    local negativeButton = createButton(origin, originFrame, -0.07, true)
+    local positiveButton = createButton(origin, originFrame, 0.07, 0.01, false)
+    local negativeButton = createButton(origin, originFrame, -0.07, 0.01, true)
+
+    local buttons = {}
+    for i=1,7,1 do
+        table.insert(
+            buttons,
+            createButton(origin, originFrame, 0, (i - 1) * -0.045 - 0.005, nil, i))
+    end
 
     self.frames = {
         origin = origin,
         text = text,
         positiveButton = positiveButton,
         negativeButton = negativeButton,
+        buttons = buttons,
     }
 
     return self
@@ -178,6 +202,20 @@ function Dialog:update(playerId)
         dialogToggles[playerId] ~= nil and
             dialogToggles[playerId].height or
             consts.DIALOG_HEIGHT)
+
+    for i=1,7,1 do
+        BlzFrameSetVisible(
+            frames.buttons[i].button,
+            dialogToggles[playerId] ~= nil and
+                dialogToggles[playerId].buttons ~= nil and
+                dialogToggles[playerId].buttons[i] ~= nil)
+        BlzFrameSetText(
+            frames.buttons[i].text,
+            dialogToggles[playerId] ~= nil and
+                dialogToggles[playerId].buttons ~= nil and
+                dialogToggles[playerId].buttons[i] ~= nil and
+                dialogToggles[playerId].buttons[i].text or "")
+    end
 end
 
 return Dialog
