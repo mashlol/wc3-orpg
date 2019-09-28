@@ -39,7 +39,6 @@ end
 function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnIndex)
     local button = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
     local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
-    -- BlzFrameSetParent(button, origin)
     BlzFrameSetSize(button, 0.12, 0.04)
     BlzFrameSetPoint(
         button,
@@ -48,6 +47,7 @@ function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnInde
         btnIndex and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
         xOffset,
         yOffset)
+    BlzFrameSetScale(buttonText, 0.7)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(

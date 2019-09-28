@@ -6,6 +6,8 @@ local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
 
+local CREATE_SYNC_PREFIX = 'create-hero'
+
 local START_X = -2554
 local START_Y = 71
 
@@ -159,65 +161,27 @@ local forceCameraLocation = function(playerId, camera)
     CameraSetupApplyForPlayer(true, camera, Player(playerId), 0)
 end
 
+function getNextEmptySaveSlot()
+    for idx, _ in pairs(usedSlots) do
+        if usedSlots[idx + 1] == nil then
+            return idx + 1
+        end
+    end
+
+    return 1
+end
+
 local onHeroPicked = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     local selectedUnit = GetTriggerUnit()
 
-    SimpleButton.hide(playerId)
+    local slot = getNextEmptySaveSlot()
 
-    DestroyTrigger(forceCameraTriggers[playerId])
-    DestroyTrigger(selectHeroTriggers[playerId])
-
-    local trig = CreateTrigger()
-    TriggerRegisterTimerEvent(trig, 0.1, true)
-    TriggerAddAction(trig, function()
-        forceCameraLocation(playerId, gg_cam_Camera_003)
-    end)
-    forceCameraTriggers[playerId] = trig
-
-    local heroInfo = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
-    local model = playerId == GetPlayerId(GetLocalPlayer()) and heroInfo.model or ""
-    local effect = AddSpecialEffect(model, 27463, -30197)
-    BlzSetSpecialEffectYaw(effect, 5.32325)
-    BlzSetSpecialEffectScale(
-        effect, GetUnitPointValueByType(GetUnitTypeId(selectedUnit)) / 100)
-
-    Dialog.show(playerId, {
-        text = "Pick " .. heroInfo.name .. "?",
-        xPos = 0.5,
-        positiveButton = "Confirm",
-        negativeButton = "Back",
-        onNegativeButtonClicked = function()
-            DestroyTrigger(forceCameraTriggers[playerId])
-            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
-            DestroyEffect(effect)
-
-            showPickHeroDialog(playerId)
-        end,
-        onPositiveButtonClicked = function()
-            DestroyTrigger(forceCameraTriggers[playerId])
-            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
-            DestroyEffect(effect)
-
-            saveSlot = meta.getNextEmptySlot()
-            -- TODO sync this whole thing now so everyone knows if it
-            -- was successful or not
-            if saveSlot > meta.MAX_NUM_CHARS then
-                print('You have too many characters. Try deleting one.')
-                showPickHeroDialog(playerId)
-                return
-            end
-
-            pickedHeroes[playerId] = ALL_HERO_INFO[GetUnitTypeId(selectedUnit)]
-            createHeroForPlayer(playerId)
-
-            for _, listener in pairs(pickListeners) do
-                listener()
-            end
-
-            save.saveHero(playerId)
-        end,
-    })
+    if GetPlayerId(GetLocalPlayer()) == playerId then
+        BlzSendSyncData(
+            CREATE_SYNC_PREFIX,
+            GetUnitTypeId(selectedUnit) .. '|' .. slot)
+    end
 end
 
 function showLoadHeroDialog(playerId)
@@ -267,11 +231,6 @@ end
 function showPickHeroDialog(playerId)
     usedSlots = meta.getUsedSlots()
 
-    -- Apply camera
-    -- Make zone visible
-    -- Add trigger, when hero is clicked, move to special zone for that hero
-    -- If clicked again, you picked that hero
-
     CreateFogModifierRectBJ(
         true, Player(playerId), FOG_OF_WAR_VISIBLE, gg_rct_Region_000)
 
@@ -288,8 +247,6 @@ function showPickHeroDialog(playerId)
     TriggerAddAction(selectTrig, onHeroPicked)
     selectHeroTriggers[playerId] = selectTrig
 
-    -- Show load button, if they have any heroes to load
-    -- TODO only show if they have something to load
     showLoadButton(playerId)
 end
 
@@ -324,6 +281,70 @@ function onLevel()
     end)
 end
 
+function onCreateSynced()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+    local data = BlzGetTriggerSyncData()
+
+    local pipeLoc = string.find(data, '|', 0, true)
+    local unitType = S2I(string.sub(data, 1, pipeLoc - 1))
+    local slot = S2I(string.sub(data, pipeLoc + 1))
+
+    if slot > meta.MAX_NUM_CHARS then
+        -- TODO log properly
+        print('You have too many characters. Try deleting one.')
+        return
+    end
+
+    SimpleButton.hide(playerId)
+
+    DestroyTrigger(forceCameraTriggers[playerId])
+    DestroyTrigger(selectHeroTriggers[playerId])
+
+    local trig = CreateTrigger()
+    TriggerRegisterTimerEvent(trig, 0.1, true)
+    TriggerAddAction(trig, function()
+        forceCameraLocation(playerId, gg_cam_Camera_003)
+    end)
+    forceCameraTriggers[playerId] = trig
+
+    local heroInfo = ALL_HERO_INFO[unitType]
+    local model = playerId == GetPlayerId(GetLocalPlayer()) and heroInfo.model or ""
+    local effect = AddSpecialEffect(model, 27463, -30197)
+    BlzSetSpecialEffectYaw(effect, 5.32325)
+    BlzSetSpecialEffectScale(
+        effect, GetUnitPointValueByType(unitType) / 100)
+
+    Dialog.show(playerId, {
+        text = "Pick " .. heroInfo.name .. "?",
+        xPos = 0.5,
+        positiveButton = "Confirm",
+        negativeButton = "Back",
+        onNegativeButtonClicked = function()
+            DestroyTrigger(forceCameraTriggers[playerId])
+            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
+            DestroyEffect(effect)
+
+            showPickHeroDialog(playerId)
+        end,
+        onPositiveButtonClicked = function()
+            DestroyTrigger(forceCameraTriggers[playerId])
+            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
+            DestroyEffect(effect)
+
+            saveSlot = getNextEmptySaveSlot()
+
+            pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
+            createHeroForPlayer(playerId)
+
+            for _, listener in pairs(pickListeners) do
+                listener()
+            end
+
+            save.saveHero(playerId)
+        end,
+    })
+end
+
 local init = function()
     local trigger = CreateTrigger()
     TriggerRegisterAnyUnitEventBJ(trigger, EVENT_PLAYER_UNIT_DEATH)
@@ -338,6 +359,13 @@ local init = function()
         TriggerRegisterPlayerChatEvent(repickTrig, Player(i), "-repick", true)
     end
     TriggerAddAction(repickTrig, onRepick)
+
+    local syncCreateTrigger = CreateTrigger()
+    for i=0,bj_MAX_PLAYERS-1, 1 do
+        BlzTriggerRegisterPlayerSyncEvent(
+            syncCreateTrigger, Player(i), CREATE_SYNC_PREFIX, false)
+    end
+    TriggerAddAction(syncCreateTrigger, onCreateSynced)
 
     for i=0,bj_MAX_PLAYERS,1 do
         showPickHeroDialog(i)
