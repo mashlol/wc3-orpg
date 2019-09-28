@@ -64,7 +64,7 @@ function MenuButtons:init()
     BlzFrameSetAbsPoint(
         menuButtonsOrigin,
         FRAMEPOINT_CENTER,
-        0.5 - (#MENU_BUTTONS * consts.MENU_BUTTON_WIDTH) / 2,
+        0.55 - (#MENU_BUTTONS * consts.MENU_BUTTON_WIDTH) / 2,
         0.6)
 
     for i, buttonInfo in pairs(MENU_BUTTONS) do
