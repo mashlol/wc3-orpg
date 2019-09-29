@@ -21,14 +21,12 @@ local MENU_BUTTONS = {
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Backpack.toggle(playerId)
-            Equipment.toggle(playerId)
         end
     },
     {
         text = "Equipment (U)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
-            Backpack.toggle(playerId)
             Equipment.toggle(playerId)
         end
     },
