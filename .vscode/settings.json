@@ -8,7 +8,8 @@
         "gg_unit_nvil_0030",
         "gg_unit_nvil_0120",
         "gg_cam_Camera_003",
-        "gg_unit_nvlw_0015"
+        "gg_unit_nvlw_0015",
+        "gg_cam_Camera_001"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
