@@ -188,7 +188,8 @@ function Backpack:init()
                     local activeItemId = equipment.getItemInSlot(
                         playerId, activeEquipmentItem)
                     equipment.unequipItem(playerId, activeEquipmentItem)
-                    backpack.addItemIdToBackpackPosition(playerId, i+1, activeItemId)
+                    backpack.addItemIdToBackpackPosition(
+                        playerId, i + 1, activeItemId)
                 end
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
@@ -196,24 +197,30 @@ function Backpack:init()
                 if activeBagItem == i + 1 then
 
                     local clickedItemPos = i + 1
-                    local itemId = backpack.getItemIdAtPosition(playerId, clickedItemPos)
+                    local itemId = backpack.getItemIdAtPosition(
+                        playerId, clickedItemPos)
                     if itemId ~= nil then
                         local spellKey = itemmanager.getItemInfo(itemId).spell
                         local itemSlot = itemmanager.getItemInfo(itemId).slot
                         if spellKey ~= nil then
                             -- Consume the item
-                            local success = spell.castSpellByKey(playerId, spellKey)
+                            local success = spell.castSpellByKey(
+                                playerId, spellKey)
                             if success then
-                                backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
+                                backpack.removeItemFromBackpack(
+                                    playerId, clickedItemPos, 1)
                             end
                         elseif itemSlot ~= nil then
                             -- Equip the item to a slot
-                            local existingEquip = equipment.getItemInSlot(playerId, itemSlot)
+                            local existingEquip = equipment.getItemInSlot(
+                                playerId, itemSlot)
                             equipment.unequipItem(playerId, itemSlot)
                             equipment.equipItem(playerId, itemSlot, itemId)
-                            backpack.removeItemFromBackpack(playerId, clickedItemPos, 1)
+                            backpack.removeItemFromBackpack(
+                                playerId, clickedItemPos, 1)
                             if existingEquip ~= nil then
-                                backpack.addItemIdToBackpackPosition(playerId, i + 1, existingEquip)
+                                backpack.addItemIdToBackpackPosition(
+                                    playerId, i + 1, existingEquip)
                             end
                         end
                     end
@@ -318,7 +325,8 @@ function Backpack:update(playerId)
             itemFrame.tooltipFrame.text,
             itemmanager.getItemTooltip(itemId) or "")
 
-        BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
+        BlzFrameSetVisible(
+            itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
 
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end
