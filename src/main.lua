@@ -27,6 +27,7 @@ local drops = require('src/items/drops.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local vendor = require('src/items/vendor.lua')
 local bossmanager = require('src/bosses/bossmanager.lua')
 
 -- TODO remove this
@@ -65,6 +66,7 @@ local mainInit = function()
         backpack.init()
         equipment.init()
         itemmanager.init()
+        vendor.init()
         bossmanager.init()
 
         -- TODO remove for release
