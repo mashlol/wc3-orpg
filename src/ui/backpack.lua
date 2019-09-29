@@ -161,10 +161,10 @@ function Backpack:init()
         BlzFrameSetAlpha(itemCooldownTint, 200)
 
         local hoverFrame = BlzCreateFrameByType(
-            "BUTTON",
+            "GLUEBUTTON",
             "hoverFrame",
             itemOrigin,
-            "",
+            "IconButtonTemplate",
             0)
 
         local tooltipFrame = tooltip.makeTooltipFrame(
