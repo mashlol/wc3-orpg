@@ -22,7 +22,10 @@ local Vendor = {
     end,
     hide = function(playerId)
         vendorToggles[playerId] = nil
-    end
+    end,
+    isVendorActive = function(playerId)
+        return vendorToggles[playerId] ~= nil
+    end,
 }
 
 function Vendor:new(o)
