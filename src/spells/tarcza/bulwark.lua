@@ -5,6 +5,7 @@ local effect = require('src/effect.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
+local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -60,6 +61,8 @@ local cast = function(playerId)
         timeScale = 0.05,
         scale = 6,
     }
+
+    target.restoreOrder(playerId)
 
     return true
 end

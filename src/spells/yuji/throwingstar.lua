@@ -5,6 +5,7 @@ local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -75,6 +76,8 @@ local cast = function(playerId)
             end
         }
     end
+
+    target.restoreOrder(playerId)
 
     return true
 end

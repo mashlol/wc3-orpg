@@ -9,6 +9,7 @@ local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local collision = require('src/collision.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
+local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 35
@@ -87,6 +88,8 @@ local cast = function(playerId)
         end
         TriggerSleepAction(0.01)
     end
+
+    target.restoreOrder(playerId)
 
     return true
 end

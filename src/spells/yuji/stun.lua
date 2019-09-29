@@ -69,6 +69,8 @@ local cast = function(playerId)
 
     buff.addBuff(hero, target, 'stun', 2)
 
+    target.restoreOrder(playerId)
+
     return true
 end
 

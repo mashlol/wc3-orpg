@@ -5,6 +5,7 @@ local log = require('src/log.lua')
 local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
+local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -52,6 +53,8 @@ local cast = function(playerId)
     buff.addBuff(hero, hero, 'stalwartshell', 1.5)
 
     casttime.cast(playerId, 1.5, false)
+
+    target.restoreOrder(playerId)
 
     return true
 end

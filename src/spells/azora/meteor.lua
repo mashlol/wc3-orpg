@@ -7,6 +7,7 @@ local buff = require('src/buff.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local target = require('src/target.lua')
 local collision = require('src/collision.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
@@ -118,6 +119,8 @@ local cast = function(playerId)
             buff.addBuff(hero, unit, 'ignite', 8)
         end
     end
+
+    target.restoreOrder(playerId)
 
     return true
 end
