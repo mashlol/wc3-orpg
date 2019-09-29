@@ -1,7 +1,6 @@
 local hero = require('src/hero.lua')
 
 local castTimes = {}
-local movePrevents = {}
 
 local cast = function(playerId, time, interruptable, canMove)
     if castTimes[playerId] ~= nil then
