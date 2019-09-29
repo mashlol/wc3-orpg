@@ -271,7 +271,7 @@ function Backpack:update(playerId)
         else
             BlzFrameSetTexture(
                 itemFrame.itemFrame,
-                "InvTile.blp",
+                "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
                 0,
                 true)
         end
