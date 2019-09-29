@@ -17,10 +17,9 @@ local getMouseY = function(playerId)
 end
 
 local mouseMoved = function()
-    local pos = BlzGetTriggerPlayerMousePosition()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    mousePositions[playerId].x = GetLocationX(pos)
-    mousePositions[playerId].y = GetLocationY(pos)
+    mousePositions[playerId].x = BlzGetTriggerPlayerMouseX()
+    mousePositions[playerId].y = BlzGetTriggerPlayerMouseY()
 end
 
 local init = function()
