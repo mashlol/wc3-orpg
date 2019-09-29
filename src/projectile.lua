@@ -168,7 +168,8 @@ local clearProjectiles = function()
                     projectile.effect,
                     newPos.x,
                     newPos.y,
-                    GetLocationZ(sharedLocationObj) + (projectile.options.z or 0))
+                    GetLocationZ(sharedLocationObj) +
+                        (projectile.options.z or 0))
             end
             projectile.x = newPos.x
             projectile.y = newPos.y
@@ -224,7 +225,9 @@ local createProjectile = function(options)
                 :multiply(options.fromRadius)
                 :add(origin)
 
-            options.radiusDir = options.fromRadius > options.toRadius and -1 or 1
+            options.radiusDir = options.fromRadius > options.toRadius and
+                -1 or
+                1
             options.angleDir = options.fromAngle > options.toAngle and -1 or 1
             startFacing = options.fromAngle + math.pi / 2 * options.angleDir
         else

@@ -1,7 +1,3 @@
-local hero = require('src/hero.lua')
-local effect = require('src/effect.lua')
-local target = require('src/target.lua')
-
 local mousePositions = {}
 
 for i=0, bj_MAX_PLAYERS, 1 do
