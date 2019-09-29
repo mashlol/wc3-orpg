@@ -1,5 +1,22 @@
-local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, attachToBottom)
+local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, attachToBottom, alignRight)
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
+
+    local attachMain
+    local attachRelative
+
+    if attachToBottom and alignRight then
+        attachMain = FRAMEPOINT_TOPLEFT
+        attachRelative = FRAMEPOINT_BOTTOMLEFT
+    elseif attachToBottom and not alignRight then
+        attachMain = FRAMEPOINT_TOP
+        attachRelative = FRAMEPOINT_BOTTOM
+    elseif not attachToBottom and alignRight then
+        attachMain = FRAMEPOINT_BOTTOMLEFT
+        attachRelative = FRAMEPOINT_TOPLEFT
+    elseif not attachToBottom and not alignRight then
+        attachMain = FRAMEPOINT_BOTTOM
+        attachRelative = FRAMEPOINT_TOP
+    end
 
     local tooltipOrigin = BlzCreateFrameByType(
         "FRAME",
@@ -13,9 +30,9 @@ local makeTooltipFrame = function(relativeFrame, width, height, hoverFrame, atta
         height)
     BlzFrameSetPoint(
         tooltipOrigin,
-        attachToBottom and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
+        attachMain,
         relativeFrame,
-        attachToBottom and FRAMEPOINT_BOTTOM or FRAMEPOINT_TOP,
+        attachRelative,
         0,
         attachToBottom and -0.02 or 0.02)
 

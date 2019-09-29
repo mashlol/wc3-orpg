@@ -64,7 +64,7 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
     BlzFrameSetAlpha(itemHighlight, 100)
 
     local tooltipFrame = tooltip.makeTooltipFrame(
-        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12)
+        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12, xPos <= 0.015)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
