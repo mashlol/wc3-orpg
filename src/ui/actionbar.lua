@@ -164,7 +164,7 @@ function ActionBar:update(playerId)
 
         BlzFrameSetTexture(
             actionItem.actionItemBackground,
-            spellIcon or "BTNEmpty.tga",
+            spellIcon or "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
             0,
             true)
 
