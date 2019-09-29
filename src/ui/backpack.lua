@@ -1,4 +1,6 @@
 local log = require('src/log.lua')
+local effect = require('src/effect.lua')
+local hero = require('src/hero.lua')
 local consts = require('src/ui/consts.lua')
 local tooltip = require('src/ui/tooltip.lua')
 local utils = require('src/ui/utils.lua')
@@ -217,6 +219,12 @@ function Backpack:init()
                                 Player(playerId),
                                 PLAYER_STATE_RESOURCE_GOLD,
                                 curGold + itemInfo.cost * 0.2)
+                            effect.createEffect{
+                                model = "Abilities\\Spells\\Other\\Transmute\\PileofGold.mdl",
+                                x = GetUnitX(hero.getHero(playerId)),
+                                y = GetUnitY(hero.getHero(playerId)),
+                                duration = 0.5,
+                            }
                         elseif spellKey ~= nil then
                             -- Consume the item
                             local success = spell.castSpellByKey(
