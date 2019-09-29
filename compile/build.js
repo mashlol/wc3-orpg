@@ -1,5 +1,6 @@
-// Compiles the final lua file
+// // Compiles the final lua file
 
+const luamin = require('luamin');
 const fs = require('fs');
 const path = require('path');
 const concat = require('concat');
@@ -67,6 +68,10 @@ walk('./src', (err, res) => {
 
             fs.appendFile('./bin/war3map_compiled.lua', requireMap, {encoding: 'utf-8'}, (err) => {
               if (err) throw err;
+
+              // Now minify the file
+              const contents = fs.readFileSync('./bin/war3map_compiled.lua', {encoding: 'utf-8'});
+              fs.writeFileSync('./bin/war3map_compiled.lua', luamin.minify(contents));
             });
           });
         }

@@ -22,16 +22,6 @@ echo 'Moving and cleaning up temp lua files'
 
 cp bin/war3map_replaced.lua bin/war3map.lua
 
-# echo 'Minifying lua'
-
-# cd compile/LuaMinify
-
-# lua.exe CommandLineMinify.lua ../../bin/war3map.lua war3map_min.lua
-
-# cd ../..
-
-# mv compile/LuaMinify/war3map_min.lua bin/war3map.lua
-
 echo 'Adding war3map.lua to mpq archive'
 
 cd compile
@@ -47,7 +37,6 @@ rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
 echo 'Deleting build artifacts'
 
 mv ./bin/war3map.lua ./bin/script_stored_min
-mv ./bin/war3map_replaced.lua ./bin/script_stored_orig
 
 rm ./bin/*.lua
 
