@@ -5,8 +5,8 @@ function createCombatText(text, target, green)
     local targetSize = BlzGetUnitCollisionSize(target)
 
     local tag = CreateTextTag()
-    SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6))
-    SetTextTagPosUnit(tag, target, 10)
+    SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6) * 1.2)
+    SetTextTagPosUnit(tag, target, 7)
     if green then
         SetTextTagColor(tag, 0, 100, 0, 0)
     else
@@ -14,11 +14,16 @@ function createCombatText(text, target, green)
     end
     SetTextTagVelocity(
         tag,
-        TextTagSpeed2Velocity(GetRandomReal(-100, 100)),
-        TextTagSpeed2Velocity(100))
+        TextTagSpeed2Velocity(GetRandomReal(-70, 70)),
+        TextTagSpeed2Velocity(70))
     SetTextTagPermanent(tag, false)
     SetTextTagLifespan(tag, 0.5)
     SetTextTagFadepoint(tag, 0.01)
+
+    TimerStart(CreateTimer(), 0.5, false, function()
+        DestroyTextTag(tag)
+        DestroyTimer(GetExpiredTimer())
+    end)
 end
 
 function dealDamage(source, target, amount)
