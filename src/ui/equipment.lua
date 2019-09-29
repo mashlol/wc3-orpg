@@ -73,11 +73,18 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         local playerId = GetPlayerId(GetTriggerPlayer())
         local activeItem = backpack.getActiveItem(playerId)
         if activeItem ~= nil then
-            local activeItemId = backpack.getItemIdAtPosition(playerId, activeItem)
+            local activeItemId = backpack.getItemIdAtPosition(
+                playerId, activeItem)
             if equipment.getItemInSlot(playerId, slot) ~= nil then
-                log.log(playerId, "You already have an item in that slot.", log.TYPE.ERROR)
+                log.log(
+                    playerId,
+                    "You already have an item in that slot.",
+                    log.TYPE.ERROR)
             elseif itemmanager.getItemInfo(activeItemId).slot ~= slot then
-                log.log(playerId, "That doesn't go in that slot.", log.TYPE.ERROR)
+                log.log(
+                    playerId,
+                    "That doesn't go in that slot.",
+                    log.TYPE.ERROR)
             else
                 backpack.removeItemFromBackpack(playerId, activeItem)
                 equipment.equipItem(playerId, slot, activeItemId)
@@ -111,7 +118,9 @@ function Equipment:init()
         "",
         0)
     BlzFrameSetSize(
-        equipmentOrigin, consts.EQUIPMENT_ITEM_SIZE * 7 + 0.015, consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
+        equipmentOrigin,
+        consts.EQUIPMENT_ITEM_SIZE * 7 + 0.015,
+        consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
     BlzFrameSetAbsPoint(
         equipmentOrigin,
         FRAMEPOINT_CENTER,
@@ -142,8 +151,15 @@ function Equipment:init()
         equipmentOrigin,
         "",
         0)
-    BlzFrameSetSize(portraitBackdropFrame, 0.105, consts.EQUIPMENT_ITEM_SIZE * 7)
-    BlzFrameSetPoint(portraitBackdropFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, -0.0025, -0.025)
+    BlzFrameSetSize(
+        portraitBackdropFrame, 0.105, consts.EQUIPMENT_ITEM_SIZE * 7)
+    BlzFrameSetPoint(
+        portraitBackdropFrame,
+        FRAMEPOINT_TOP,
+        equipmentOrigin,
+        FRAMEPOINT_TOP,
+        -0.0025,
+        -0.025)
     BlzFrameSetTexture(
         portraitBackdropFrame,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -157,7 +173,13 @@ function Equipment:init()
     if BlzGetLocalClientWidth() / BlzGetLocalClientHeight() > 1.7 then
         BlzFrameClearAllPoints(portraitFrame)
         BlzFrameSetSize(portraitFrame, 0.08, consts.EQUIPMENT_ITEM_SIZE * 7)
-        BlzFrameSetPoint(portraitFrame, FRAMEPOINT_TOP, equipmentOrigin, FRAMEPOINT_TOP, 0.072, -0.025)
+        BlzFrameSetPoint(
+            portraitFrame,
+            FRAMEPOINT_TOP,
+            equipmentOrigin,
+            FRAMEPOINT_TOP,
+            0.072,
+            -0.025)
     else
         BlzFrameSetAllPoints(portraitFrame, portraitBackdropFrame)
     end
@@ -170,8 +192,12 @@ function Equipment:init()
     for i=0,7,1 do
         local itemFrame = createItemFrame(
             equipmentOrigin,
-            math.floor(i / 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) + 0.015,
-            -(i % 4) * (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) - 0.025,
+            math.floor(i / 4) *
+                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) +
+                0.015,
+            -(i % 4) *
+                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) -
+                0.025,
             i+1)
 
         table.insert(itemFrames, itemFrame)
@@ -226,7 +252,9 @@ function Equipment:update(playerId)
             0.15,
             0.012 * numTooltipLines - 0.01)
 
-        BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
+        BlzFrameSetVisible(
+            itemFrame.tooltipFrame.backdrop,
+            numTooltipLines ~= 0)
 
         BlzFrameSetText(
             itemFrame.tooltipFrame.text,
