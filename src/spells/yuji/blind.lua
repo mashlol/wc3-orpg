@@ -69,6 +69,8 @@ local cast = function(playerId)
 
     buff.addBuff(hero, target, 'blind', 8)
 
+    target.restoreOrder(playerId)
+
     return true
 end
 

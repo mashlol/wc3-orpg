@@ -7,6 +7,7 @@ local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
+local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 5
@@ -108,6 +109,8 @@ local cast = function(playerId)
     }
 
     casttime.cast(playerId, 0.2, false)
+
+    target.restoreOrder(playerId)
 
     return true
 end

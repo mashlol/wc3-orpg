@@ -70,6 +70,8 @@ local cast = function(playerId)
 
     casttime.cast(playerId, 0.1, false)
 
+    target.restoreOrder(playerId)
+
     return true
 end
 

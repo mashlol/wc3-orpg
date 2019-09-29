@@ -1,9 +1,18 @@
 local hero = require('src/hero.lua')
-local log = require('src/log.lua')
+local Vector = require('src/vector.lua')
 
 local targets = {}
 local targetEffects = {}
 local ignoreTargetChange = {}
+
+-- orders = {
+--     [playerId] = {
+--         target = target or nil,
+--         point = point or nil,
+--         orderId = orderId,
+--     }
+-- }
+local orders = {}
 
 local getTarget = function(playerId)
     return targets[playerId]
@@ -57,10 +66,33 @@ end
 function onOrderIssued()
     local orderId = GetIssuedOrderId()
     if orderId == 851971 or orderId == 851983 then -- Unit attacked
-        local selectedUnit = GetOrderTargetUnit()
+        local target = GetOrderTargetUnit()
+        local point = Vector:new{x = GetOrderPointX(), y = GetOrderPointY()}
 
-        if selectedUnit ~= nil then
-            updateTargets(GetPlayerId(GetTriggerPlayer()), selectedUnit)
+        local playerId = GetPlayerId(GetTriggerPlayer())
+        orders[playerId] = {
+            orderId = orderId,
+            target = target,
+            point = point,
+        }
+
+        if target ~= nil then
+            updateTargets(playerId, target)
+        end
+    end
+end
+
+function restoreOrder(playerId)
+    local order = orders[playerId]
+    if order ~= nil then
+        local target = order.target
+        local point = order.point
+        local orderId = order.orderId
+
+        if target ~= nil then
+            IssueTargetOrderById(hero.getHero(playerId), orderId, target)
+        elseif point ~= nil and point.x ~= nil and point.y ~= nil then
+            IssuePointOrderById(hero.getHero(playerId), orderId, point.x, point.y)
         end
     end
 end
@@ -96,6 +128,8 @@ function init()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerUnitEvent(
             orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER, nil)
+        TriggerRegisterPlayerUnitEvent(
+            orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER, nil)
     end
     TriggerAddAction(orderTrig, onOrderIssued)
 
@@ -106,4 +140,5 @@ end
 return {
     init = init,
     getTarget = getTarget,
+    restoreOrder = restoreOrder,
 }

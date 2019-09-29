@@ -8,6 +8,7 @@ local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
 local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
+local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 30
@@ -105,7 +106,9 @@ local cast = function(playerId)
             end
         }
 
-        return
+        target.restoreOrder(playerId)
+
+        return true
     end
 
     IssueImmediateOrder(hero, "stop")
@@ -161,6 +164,8 @@ local cast = function(playerId)
         storedData[playerId] = {}
     end
     storedData[playerId].balls = balls
+
+    target.restoreOrder(playerId)
 
     return true
 end

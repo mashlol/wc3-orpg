@@ -7,6 +7,7 @@ local log = require('src/log.lua')
 local buff = require('src/buff.lua')
 local animations = require('src/animations.lua')
 local damage = require('src/damage.lua')
+local target = require('src/target.lua')
 local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
@@ -99,6 +100,8 @@ local cast = function(playerId)
             return false
         end
     }
+
+    target.restoreOrder(playerId)
 
     return true
 end
