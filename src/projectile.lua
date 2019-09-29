@@ -5,6 +5,8 @@ local collision = require('src/collision.lua')
 local projectiles = {}
 local timer
 
+local sharedLocationObj = Location(0, 0)
+
 local isCloseTo = function(val, expected, range)
     return val + range >= expected and val - range <= expected
 end
@@ -161,11 +163,12 @@ local clearProjectiles = function()
                 SetUnitY(projectile.unit, newPos.y)
             else
                 BlzSetSpecialEffectYaw(projectile.effect, facingRad)
+                MoveLocation(sharedLocationObj, newPos.x, newPos.y)
                 BlzSetSpecialEffectPosition(
                     projectile.effect,
                     newPos.x,
                     newPos.y,
-                    projectile.options.z or 0)
+                    GetLocationZ(sharedLocationObj) + (projectile.options.z or 0))
             end
             projectile.x = newPos.x
             projectile.y = newPos.y
