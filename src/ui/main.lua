@@ -7,6 +7,7 @@ local consts = require('src/ui/consts.lua')
 -- UI Modules
 local CastBar = require('src/ui/castbar.lua')
 local Dialog = require('src/ui/dialog.lua')
+local Vendor = require('src/ui/vendor.lua')
 local QuestLog = require('src/ui/questlog.lua')
 local MenuButtons = require('src/ui/menubuttons.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
@@ -58,6 +59,7 @@ end
 table.insert(UI_MODULES, Equipment:new())
 table.insert(UI_MODULES, Dialog:new())
 table.insert(UI_MODULES, QuestLog:new())
+table.insert(UI_MODULES, Vendor:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)
@@ -92,7 +94,7 @@ function hideBlizzUI()
 end
 
 function initCustomUI()
-    BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
+    print(BlzLoadTOCFile("war3mapimported\\Tooltip.toc"))
 
     for _, mod in pairs(UI_MODULES) do
         mod:init()
