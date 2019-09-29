@@ -1,3 +1,5 @@
+local sharedLocationObj = Location(0, 0)
+
 local createEffect = function(options)
     local x = options.x
     local y = options.y
@@ -15,7 +17,9 @@ local createEffect = function(options)
         BlzSetSpecialEffectTimeScale(effect, options.timeScale)
     end
     if options.z then
-        BlzSetSpecialEffectZ(effect, options.z)
+        MoveLocation(sharedLocationObj, x, y)
+        BlzSetSpecialEffectZ(
+            effect, GetLocationZ(sharedLocationObj) + options.z)
     end
     if options.facing then
         BlzSetSpecialEffectYaw(effect, options.facing)
