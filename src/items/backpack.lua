@@ -51,6 +51,26 @@ function removeItemFromBackpack(playerId, position, count)
     end
 end
 
+function removeItemIdFromBackpack(playerId, itemId)
+    for idx, itemInfo in pairs(backpacks[playerId]) do
+        if itemInfo.itemId == itemId then
+            removeItemFromBackpack(playerId, idx, 1)
+            return true
+        end
+    end
+    return false
+end
+
+function getItemCount(playerId, itemId)
+    local count = 0
+    for _, itemInfo in pairs(backpacks[playerId]) do
+        if itemInfo.itemId == itemId then
+            count = count + itemInfo.count
+        end
+    end
+    return count
+end
+
 function getItemIdsInBackpack(playerId)
     return backpacks[playerId]
 end
@@ -105,6 +125,8 @@ return {
     addItemIdToBackpack = addItemIdToBackpack,
     addItemIdToBackpackPosition = addItemIdToBackpackPosition,
     removeItemFromBackpack = removeItemFromBackpack,
+    removeItemIdFromBackpack = removeItemIdFromBackpack,
+    getItemCount = getItemCount,
     getItemIdsInBackpack = getItemIdsInBackpack,
     getItemIdAtPosition = getItemIdAtPosition,
     getItemCountAtPosition = getItemCountAtPosition,
