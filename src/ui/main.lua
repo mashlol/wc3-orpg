@@ -13,24 +13,26 @@ local SimpleButton = require('src/ui/simplebutton.lua')
 local ExpBar = require('src/ui/expbar.lua')
 local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
+local ItemBar = require('src/ui/itembar.lua')
 local Backpack = require('src/ui/backpack.lua')
 local Equipment = require('src/ui/equipment.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
+    ItemBar:new(),
     CastBar:new(),
     ExpBar:new(),
     MenuButtons:new(),
     SimpleButton:new(),
     UnitFrame:new{
         xLoc = 0.55,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.03,
         forTarget = true,
         buffSize = consts.BUFF_ICON_SIZE,
     },
     UnitFrame:new{
         xLoc = 0.26,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.01,
+        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.03,
         forTarget = false,
         buffSize = consts.BUFF_ICON_SIZE,
     },

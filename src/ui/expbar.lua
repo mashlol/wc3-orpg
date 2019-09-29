@@ -98,9 +98,9 @@ function ExpBar:init()
         expBarFrameBackground, consts.EXP_BAR_WIDTH, consts.EXP_BAR_HEIGHT)
     BlzFrameSetAbsPoint(
         expBarFrameBackground,
-        FRAMEPOINT_CENTER,
+        FRAMEPOINT_BOTTOM,
         0.41,
-        consts.ACTION_ITEM_SIZE + 0.022)
+        0)
     BlzFrameSetTexture(
         expBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
