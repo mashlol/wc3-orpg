@@ -11,6 +11,7 @@ local TIPS = {
     "Report bugs or give suggestions on discord: https://discord.gg/AbBsrM9",
     "You can type -tips to toggle tips on or off.",
     "You can manually save your character with -save.",
+    "You can sell items at vendors, just double click an item in your inventory.",
 }
 
 local tipsForce
