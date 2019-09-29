@@ -40,6 +40,7 @@ local ITEMS = {
         },
         slot = equipment.SLOT.FEET,
         stackSize = 1,
+        cost = 30,
     },
     [2] = {
         type = TYPE.EQUIPMENT,
@@ -60,6 +61,7 @@ local ITEMS = {
         },
         slot = equipment.SLOT.RING,
         stackSize = 1,
+        cost = 150,
     },
     [3] = {
         type = TYPE.EQUIPMENT,
@@ -76,6 +78,7 @@ local ITEMS = {
         },
         slot = equipment.SLOT.HELMET,
         stackSize = 1,
+        cost = 80,
     },
     [4] = {
         type = TYPE.EQUIPMENT,
@@ -92,6 +95,7 @@ local ITEMS = {
         },
         slot = equipment.SLOT.WEAPON,
         stackSize = 1,
+        cost = 300,
     },
     [5] = {
         type = TYPE.CONSUMABLE,
@@ -103,6 +107,7 @@ local ITEMS = {
         stackSize = 5,
         text = "Heal yourself for 200 HP.",
         spell = 'healpot1',
+        cost = 20,
     },
     [6] = {
         type = TYPE.CONSUMABLE,
@@ -114,6 +119,7 @@ local ITEMS = {
         stackSize = 20,
         text = "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
         spell = 'food1',
+        cost = 5,
     },
 }
 

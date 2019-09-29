@@ -1,7 +1,10 @@
+local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local utils = require('src/ui/utils.lua')
 local tooltip = require('src/ui/tooltip.lua')
+local Dialog = require('src/ui/dialog.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local backpack = require('src/items/backpack.lua')
 
 -- vendorToggles = {
 --     [playerId] = {
@@ -51,7 +54,7 @@ function Vendor:init()
     local ITEM_HEIGHT = 0.03
 
     local items = {}
-    for i=0,9,1 do
+    for i=0,11,1 do
         local itemContainerFrame = BlzCreateFrameByType(
             "FRAME", "itemContainerFrame", origin, "", 0)
         BlzFrameSetSize(
@@ -62,7 +65,7 @@ function Vendor:init()
             origin,
             FRAMEPOINT_TOPLEFT,
             (i % 2)* ((consts.VENDOR_WIDTH - 0.03) / 2 + 0.01) + 0.01,
-            -R2I(i / 2) * (ITEM_HEIGHT + 0.01) - 0.05)
+            -R2I(i / 2) * (ITEM_HEIGHT + 0.01) - 0.01)
 
         local itemBackdropFrame = BlzCreateFrameByType(
             "BACKDROP", "itemBackdropFrame", itemContainerFrame, "", 0)
@@ -161,6 +164,38 @@ function Vendor:init()
         local tooltipFrame = tooltip.makeTooltipFrame(
             itemContainerFrame, 0.16, 0.24, hoverFrame, true, true)
 
+        local trig = CreateTrigger()
+        BlzTriggerRegisterFrameEvent(trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
+        TriggerAddAction(trig, function()
+            local playerId = GetPlayerId(GetTriggerPlayer())
+
+            local itemId = vendorToggles[playerId].items[i+1]
+            local itemInfo = itemmanager.getItemInfo(itemId)
+            Dialog.show(playerId, {
+                text = "Are you sure you want to purchase " ..
+                    itemInfo.name .. " for " .. itemInfo.cost .. " gold?",
+                height = 0.1,
+                positiveButton = "Accept",
+                onPositiveButtonClicked = function()
+                    local curGold = GetPlayerState(
+                        Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
+                    if curGold < itemInfo.cost then
+                        log.log(playerId, 'Not enough gold.', log.TYPE.ERROR)
+                        return
+                    end
+                    SetPlayerState(
+                        Player(playerId),
+                        PLAYER_STATE_RESOURCE_GOLD,
+                        curGold - itemInfo.cost)
+                    backpack.addItemIdToBackpack(playerId, itemId)
+                end,
+                negativeButton = "Cancel",
+            })
+
+            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        end)
+
         table.insert(items, {
             origin = itemContainerFrame,
             itemCostText = itemCostText,
@@ -169,6 +204,30 @@ function Vendor:init()
             tooltipFrame = tooltipFrame,
         })
     end
+
+    local closeButton = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
+    local closeButtonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+    BlzFrameSetSize(closeButton, 0.06, 0.02)
+    BlzFrameSetPoint(
+        closeButton,
+        FRAMEPOINT_BOTTOMLEFT,
+        origin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0.01,
+        0.01)
+    BlzFrameSetText(closeButtonText, "Cancel")
+    BlzFrameSetScale(closeButtonText, 0.4)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, closeButton, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        local playerId = GetPlayerId(GetTriggerPlayer())
+
+        vendorToggles[playerId] = nil
+
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+    end)
 
     self.frames = {
         origin = origin,
@@ -195,6 +254,7 @@ function Vendor:update(playerId)
 
             if itemInfo ~= nil and itemId ~= nil then
                 BlzFrameSetText(itemFrame.itemText, itemInfo.name)
+                BlzFrameSetText(itemFrame.itemCostText, itemInfo.cost)
                 BlzFrameSetTexture(itemFrame.itemIcon, itemInfo.icon, 0, true)
 
                 local numTooltipLines = itemmanager.getItemTooltipNumLines(
