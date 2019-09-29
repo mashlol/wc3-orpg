@@ -24,9 +24,7 @@ end
 
 function init()
     VENDORS = {
-        [GetHandleId(gg_unit_nvlw_0015)] = {
-            5, 6
-        }
+        [GetHandleId(gg_unit_nvlw_0015)] = {5, 6}
     }
 
     local selectTrig = CreateTrigger()

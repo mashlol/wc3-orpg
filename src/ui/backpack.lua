@@ -2,6 +2,7 @@ local log = require('src/log.lua')
 local consts = require('src/ui/consts.lua')
 local tooltip = require('src/ui/tooltip.lua')
 local utils = require('src/ui/utils.lua')
+local Vendor = require('src/ui/vendor.lua')
 local spell = require('src/spell.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
@@ -200,9 +201,23 @@ function Backpack:init()
                     local itemId = backpack.getItemIdAtPosition(
                         playerId, clickedItemPos)
                     if itemId ~= nil then
-                        local spellKey = itemmanager.getItemInfo(itemId).spell
-                        local itemSlot = itemmanager.getItemInfo(itemId).slot
-                        if spellKey ~= nil then
+                        local isInVendor = Vendor.isVendorActive(playerId)
+
+                        local itemInfo = itemmanager.getItemInfo(itemId)
+                        local spellKey = itemInfo.spell
+                        local itemSlot = itemInfo.slot
+                        if isInVendor then
+                            -- Sell 1 of the item
+                            backpack.removeItemFromBackpack(
+                                playerId, clickedItemPos, 1)
+                            local curGold = GetPlayerState(
+                                Player(playerId),
+                                PLAYER_STATE_RESOURCE_GOLD)
+                            SetPlayerState(
+                                Player(playerId),
+                                PLAYER_STATE_RESOURCE_GOLD,
+                                curGold + itemInfo.cost * 0.2)
+                        elseif spellKey ~= nil then
                             -- Consume the item
                             local success = spell.castSpellByKey(
                                 playerId, spellKey)
