@@ -11,7 +11,7 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 100
+local COOLDOWN_S = 65
 
 local getSpellId = function()
     return 'molecregen'
@@ -85,12 +85,10 @@ local cast = function(playerId)
     }
 
     for i=1,10,1 do
-        TriggerSleepAction(1)
-
         local collidedUnits = collision.getAllCollisions(mouseV, 550)
         for idx, unit in pairs(collidedUnits) do
             if IsUnitAlly(unit, Player(playerId)) then
-                damage.heal(hero, unit, 100)
+                damage.heal(hero, unit, 150)
 
                 effect.createEffect{
                     model = "Abilities\\Spells\\Human\\Heal\\HealTarget.mdl",
@@ -100,6 +98,8 @@ local cast = function(playerId)
                 }
             end
         end
+
+        TriggerSleepAction(1)
     end
 
     return true
