@@ -56,7 +56,7 @@ end
 
 function onOrderIssued()
     local orderId = GetIssuedOrderId()
-    if orderId == 851971 then -- Unit attacked
+    if orderId == 851971 or orderId == 851983 then -- Unit attacked
         local selectedUnit = GetOrderTargetUnit()
 
         if selectedUnit ~= nil then
