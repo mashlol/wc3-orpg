@@ -128,8 +128,6 @@ function init()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerUnitEvent(
             orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER, nil)
-        TriggerRegisterPlayerUnitEvent(
-            orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER, nil)
     end
     TriggerAddAction(orderTrig, onOrderIssued)
 
