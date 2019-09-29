@@ -13,6 +13,7 @@ function saveHero(playerId)
     local code = Code:new()
         :addInt(GetHeroXP(heroUnit), 200000)
         :addInt(pickedHeroId, 73)
+        :addInt(GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD), 200000)
         :addInt(math.floor(GetUnitX(heroUnit) + 32000), 64000)
         :addInt(math.floor(GetUnitY(heroUnit) + 32000), 64000)
 

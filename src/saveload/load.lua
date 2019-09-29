@@ -21,6 +21,7 @@ function loadChar(playerId, code)
 
     local exp = decoded:getInt(200000)
     local heroId = decoded:getInt(73)
+    local gold = decoded:getInt(200000)
     local heroX = decoded:getInt(64000) - 32000
     local heroY = decoded:getInt(64000) - 32000
 
@@ -87,6 +88,8 @@ function loadChar(playerId, code)
     for slot,itemId in pairs(equips) do
         equipment.equipItem(playerId, slot, itemId)
     end
+
+    SetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD, gold)
 
     hero.restorePickedHero(playerId, heroId, exp, heroX, heroY)
 end

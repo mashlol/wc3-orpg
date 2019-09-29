@@ -313,6 +313,7 @@ function onRepick()
 
     save.saveHero(repickPlayerId)
 
+    SetPlayerState(Player(repickPlayerId), PLAYER_STATE_RESOURCE_GOLD, 0)
     equipment.clear(repickPlayerId)
     backpack.clear(repickPlayerId)
     RemoveUnit(heroes[repickPlayerId])
