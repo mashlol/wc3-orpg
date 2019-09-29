@@ -59,6 +59,29 @@ function clear(playerId)
     end
 end
 
+function getSlotName(slot)
+    if slot == SLOT.HELMET then
+        return "Head"
+    elseif slot == SLOT.NECK then
+        return "Neck"
+    elseif slot == SLOT.CHEST then
+        return "Chest"
+    elseif slot == SLOT.BACK then
+        return "Back"
+    elseif slot == SLOT.HANDS then
+        return "Hands"
+    elseif slot == SLOT.LEGS then
+        return "Legs"
+    elseif slot == SLOT.FEET then
+        return "Feet"
+    elseif slot == SLOT.RING then
+        return "Ring"
+    elseif slot == SLOT.WEAPON then
+        return "Weapon"
+    end
+    return nil
+end
+
 function init()
     for i=0,bj_MAX_PLAYERS,1 do
         equipments[i] = {}
@@ -69,6 +92,7 @@ return {
     init = init,
     SLOT = SLOT,
     clear = clear,
+    getSlotName = getSlotName,
     equipItem = equipItem,
     unequipItem = unequipItem,
     getItemInSlot = getItemInSlot,

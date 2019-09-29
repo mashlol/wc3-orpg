@@ -157,26 +157,7 @@ function init()
             itemStats = itemStats .. "|r"
         end
 
-        local type = ""
-        if itemInfo.slot == equipment.SLOT.HELMET then
-            type = "Head"
-        elseif itemInfo.slot == equipment.SLOT.NECK then
-            type = "Neck"
-        elseif itemInfo.slot == equipment.SLOT.CHEST then
-            type = "Chest"
-        elseif itemInfo.slot == equipment.SLOT.BACK then
-            type = "Back"
-        elseif itemInfo.slot == equipment.SLOT.HANDS then
-            type = "Hands"
-        elseif itemInfo.slot == equipment.SLOT.LEGS then
-            type = "Legs"
-        elseif itemInfo.slot == equipment.SLOT.FEET then
-            type = "Feet"
-        elseif itemInfo.slot == equipment.SLOT.RING then
-            type = "Ring"
-        elseif itemInfo.slot == equipment.SLOT.WEAPON then
-            type = "Weapon"
-        end
+        local type = equipment.getSlotName(itemInfo.slot)
 
         if itemInfo.type == TYPE.CONSUMABLE then
             type = "Consumable"
