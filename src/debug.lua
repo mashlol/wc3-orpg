@@ -41,11 +41,11 @@ end
 
 local init = function()
     local trigger = CreateTrigger()
-    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_1, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
     TriggerAddAction(trigger, debug)
 
     local trig2 = CreateTrigger()
-    BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_2, 0, true)
+    BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_0, 0, true)
     TriggerAddAction(trig2, debugDown)
 end
 

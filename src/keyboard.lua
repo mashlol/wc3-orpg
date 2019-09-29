@@ -3,6 +3,9 @@ local hero = require("src/hero.lua")
 local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
 local QuestLog = require("src/ui/questlog.lua")
+local ItemBar = require("src/ui/itembar.lua")
+local itemmanager = require("src/items/itemmanager.lua")
+local backpack = require("src/items/backpack.lua")
 
 -- TODO let people customize keybindings
 local KEY_MAPPING = {
@@ -17,6 +20,15 @@ local KEY_MAPPING = {
     [OSKEY_X] = 10,
     [OSKEY_C] = 11,
     [OSKEY_V] = 12,
+}
+
+local ITEMBAR_KEY_MAPPING = {
+    [OSKEY_1] = 1,
+    [OSKEY_2] = 2,
+    [OSKEY_3] = 3,
+    [OSKEY_4] = 4,
+    [OSKEY_5] = 5,
+    [OSKEY_6] = 6,
 }
 
 local SUPPORTED_KEYS = {
@@ -34,6 +46,12 @@ local SUPPORTED_KEYS = {
     OSKEY_B,
     OSKEY_O,
     OSKEY_L,
+    OSKEY_1,
+    OSKEY_2,
+    OSKEY_3,
+    OSKEY_4,
+    OSKEY_5,
+    OSKEY_6,
 }
 
 local keyPressed = function()
@@ -44,6 +62,22 @@ local keyPressed = function()
             playerId,
             KEY_MAPPING[pressedKey])
         return
+    end
+
+    if ITEMBAR_KEY_MAPPING[pressedKey] then
+        local itemId = ItemBar.getItemIdInSlot(
+            playerId, ITEMBAR_KEY_MAPPING[pressedKey])
+        local count = backpack.getItemCount(playerId, itemId)
+        local itemInfo = itemmanager.getItemInfo(itemId)
+        if itemInfo ~= nil and count > 0 then
+            local spellKey = itemInfo.spell
+            if spellKey ~= nil then
+                local result = spell.castSpellByKey(playerId, spellKey)
+                if result == true then
+                    backpack.removeItemIdFromBackpack(playerId, itemId)
+                end
+            end
+        end
     end
 
     -- TODO figure out key mappings

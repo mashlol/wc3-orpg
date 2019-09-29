@@ -5,7 +5,7 @@ local itemmanager = require('src/items/itemmanager.lua')
 local spell = require('src/spell.lua')
 
 local DEFAULT_HOTKEYS = {
-    "1", "2", "3", "4",
+    "1", "2", "3", "4", "5", "6"
 }
 
 -- playerHotbars = {
@@ -16,7 +16,11 @@ local DEFAULT_HOTKEYS = {
 -- }
 local playerHotbars = {}
 
-local ItemBar = {}
+local ItemBar = {
+    getItemIdInSlot = function(playerId, slot)
+        return playerHotbars[playerId][slot]
+    end,
+}
 
 function ItemBar:new(o)
     o = o or {}
@@ -44,7 +48,7 @@ function ItemBar:init()
         actionBar, FRAMEPOINT_BOTTOMLEFT, 0.16, consts.ACTION_ITEM_SIZE + 0.02)
 
     local actionItems = {}
-    for i=0,3,1 do
+    for i=0,5,1 do
         local actionItem = BlzCreateFrameByType(
             "BACKDROP",
             "actionItem",
@@ -120,6 +124,23 @@ function ItemBar:init()
             0.002,
             -0.002)
 
+        local itemCountFrame = BlzCreateFrameByType(
+            "TEXT",
+            "itemCountFrame",
+            actionItem,
+            "",
+            0)
+        BlzFrameSetSize(itemCountFrame, consts.ITEM_ITEM_SIZE, 0.012)
+        BlzFrameSetPoint(
+            itemCountFrame,
+            FRAMEPOINT_BOTTOMRIGHT,
+            actionItem,
+            FRAMEPOINT_BOTTOMRIGHT,
+            0,
+            0)
+        BlzFrameSetTextAlignment(
+            itemCountFrame, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
+
         local actionCooldownText = BlzCreateFrameByType(
             "TEXT",
             "actionCooldownText",
@@ -155,7 +176,6 @@ function ItemBar:init()
             local playerId = GetPlayerId(GetTriggerPlayer())
 
             local slot = i + 1
-            print(playerId, slot)
 
             local activeBagItem = backpack.getActiveItem(playerId)
             if activeBagItem ~= nil then
@@ -176,6 +196,7 @@ function ItemBar:init()
             actionCooldownBackdrop = actionCooldownBackdrop,
             actionCooldownText = actionCooldownText,
             tooltipFrame = tooltipFrame,
+            itemCountFrame = itemCountFrame,
         })
     end
 
@@ -195,12 +216,14 @@ function ItemBar:update(playerId)
         local itemInfo = itemmanager.getItemInfo(itemId)
         local itemIcon = "UI/Widgets/Console/Human/human-inventory-slotfiller.blp"
         local cdPct = 0.000001
+        local itemCount = ""
         if itemInfo ~= nil then
             itemIcon = itemInfo.icon
             if itemInfo.spell ~= nil then
                 cdPct = spell.getCooldownPctBySpellKey(
                     playerId, itemInfo.spell)
             end
+            itemCount = backpack.getItemCount(playerId, itemId)
         end
 
         BlzFrameSetSize(
@@ -227,6 +250,8 @@ function ItemBar:update(playerId)
         BlzFrameSetText(
             actionItem.tooltipFrame.text,
             itemmanager.getItemTooltip(itemId) or "")
+
+        BlzFrameSetText(actionItem.itemCountFrame, itemCount)
 
         BlzFrameSetVisible(
             actionItem.tooltipFrame.backdrop, numTooltipLines ~= 0)
