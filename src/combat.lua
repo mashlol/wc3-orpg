@@ -4,6 +4,10 @@
 local unitCombatMap = {}
 
 function maybePutUnitInCombat(unit)
+    if unit == nil then
+        return
+    end
+
     local unitId = GetHandleId(unit)
 
     local timer = CreateTimer()
@@ -30,6 +34,7 @@ end
 function onAttacked()
     maybePutUnitInCombat(GetAttacker())
     maybePutUnitInCombat(GetTriggerUnit())
+    maybePutUnitInCombat(GetEventDamageSource())
 end
 
 function isInCombat(unit)
@@ -41,6 +46,8 @@ function init()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerUnitEvent(
             attackedTrigger, Player(i), EVENT_PLAYER_UNIT_ATTACKED, nil)
+        TriggerRegisterPlayerUnitEvent(
+            attackedTrigger, Player(i), EVENT_PLAYER_UNIT_DAMAGED, nil)
     end
     TriggerAddAction(attackedTrigger, onAttacked)
 end
