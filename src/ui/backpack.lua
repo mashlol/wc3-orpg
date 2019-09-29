@@ -319,29 +319,44 @@ function Backpack:update(playerId)
                     consts.BACKPACK_ITEM_SIZE,
                     0.000001)
             end
+
+            local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
+            local tooltip = itemmanager.getItemTooltip(itemId)
+
+            if Vendor.isVendorActive(playerId) then
+                numTooltipLines = numTooltipLines + 2
+                tooltip = tooltip ..
+                    "|n|n(Double click to sell for "..
+                    R2I(itemInfo.cost * 0.2) ..
+                    " g)"
+            elseif itemInfo.spell then
+                numTooltipLines = numTooltipLines + 2
+                tooltip = tooltip .. "|n|n(Double click to use)"
+            end
+
+            BlzFrameSetSize(
+                itemFrame.tooltipFrame.origin,
+                0.16,
+                0.012 * numTooltipLines)
+            BlzFrameSetSize(
+                itemFrame.tooltipFrame.text,
+                0.15,
+                0.012 * numTooltipLines - 0.01)
+
+            BlzFrameSetText(
+                itemFrame.tooltipFrame.text,
+                tooltip)
+
+            BlzFrameSetVisible(
+                itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
+
         else
             BlzFrameSetSize(
                 itemFrame.itemCooldownTint,
                 consts.BACKPACK_ITEM_SIZE,
                 0.000001)
+            BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, false)
         end
-
-        local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
-        BlzFrameSetSize(
-            itemFrame.tooltipFrame.origin,
-            0.16,
-            0.012 * numTooltipLines)
-        BlzFrameSetSize(
-            itemFrame.tooltipFrame.text,
-            0.15,
-            0.012 * numTooltipLines - 0.01)
-
-        BlzFrameSetText(
-            itemFrame.tooltipFrame.text,
-            itemmanager.getItemTooltip(itemId) or "")
-
-        BlzFrameSetVisible(
-            itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
 
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
     end

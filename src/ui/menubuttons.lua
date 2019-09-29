@@ -25,7 +25,7 @@ local MENU_BUTTONS = {
         end
     },
     {
-        text = "Equipment (B)",
+        text = "Equipment (U)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Backpack.toggle(playerId)

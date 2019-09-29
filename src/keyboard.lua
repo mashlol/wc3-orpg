@@ -45,6 +45,7 @@ local SUPPORTED_KEYS = {
     OSKEY_V,
     OSKEY_B,
     OSKEY_O,
+    OSKEY_U,
     OSKEY_L,
     OSKEY_1,
     OSKEY_2,
@@ -83,10 +84,9 @@ local keyPressed = function()
     -- TODO figure out key mappings
     if pressedKey == OSKEY_B then
         Backpack.toggle(playerId)
+    elseif pressedKey == OSKEY_U then
         Equipment.toggle(playerId)
-    end
-
-    if pressedKey == OSKEY_L then
+    elseif pressedKey == OSKEY_L then
         QuestLog.toggle(playerId)
     end
 end
