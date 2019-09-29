@@ -1,4 +1,3 @@
-local hero = require('src/hero.lua')
 local backpack = require('src/items/backpack.lua')
 
 local animNum = 1

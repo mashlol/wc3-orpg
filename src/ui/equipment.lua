@@ -242,8 +242,12 @@ function Equipment:update(playerId)
                 true)
         end
 
-        local tooltip = itemId ~= nil and itemmanager.getItemTooltip(itemId) or equipment.getSlotName(i)
-        local numTooltipLines = itemId ~= nil and itemmanager.getItemTooltipNumLines(itemId) or 2
+        local tooltip = itemId ~= nil and
+            itemmanager.getItemTooltip(itemId) or
+            equipment.getSlotName(i)
+        local numTooltipLines = itemId ~= nil and
+            itemmanager.getItemTooltipNumLines(itemId) or
+            2
         local width = itemId ~= nil and 0.16 or 0.08
         local height = 0.012 * numTooltipLines
         local align = itemId ~= nil and TEXT_JUSTIFY_LEFT or TEXT_JUSTIFY_CENTER
@@ -255,13 +259,13 @@ function Equipment:update(playerId)
             itemFrame.tooltipFrame.text,
             width - 0.01,
             height - 0.01)
-
-        BlzFrameSetTextAlignment(itemFrame.tooltipFrame.text, TEXT_JUSTIFY_CENTER, align)
-
+        BlzFrameSetTextAlignment(
+            itemFrame.tooltipFrame.text,
+            TEXT_JUSTIFY_CENTER,
+            align)
         BlzFrameSetVisible(
             itemFrame.tooltipFrame.backdrop,
             numTooltipLines ~= 0)
-
         BlzFrameSetText(
             itemFrame.tooltipFrame.text,
             tooltip)
