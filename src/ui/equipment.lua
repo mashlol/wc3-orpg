@@ -26,10 +26,10 @@ end
 
 local createItemFrame = function(originFrame, xPos, yPos, slot)
     local itemOrigin = BlzCreateFrameByType(
-        "GLUETEXTBUTTON",
+        "GLUEBUTTON",
         "itemOrigin",
         originFrame,
-        "",
+        "IconButtonTemplate",
         0)
     BlzFrameSetSize(
         itemOrigin, consts.EQUIPMENT_ITEM_SIZE, consts.EQUIPMENT_ITEM_SIZE)
