@@ -2,12 +2,21 @@ local hero = require('src/hero.lua')
 local Vendor = require('src/ui/vendor.lua')
 
 local VENDORS
+local forceExitTimers = {}
+
+function startExitTimer(playerId, vendorUnit)
+    forceExitTimers[playerId] = CreateTimer()
+    TimerStart(forceExitTimers[playerId], 1, true, function()
+        local hero = hero.getHero(playerId)
+        if not IsUnitInRange(hero, vendorUnit, 300) then
+            DestroyTimer(forceExitTimers[playerId])
+            Vendor.hide(playerId)
+            forceExitTimers[playerId] = nil
+        end
+    end)
+end
 
 function onNpcVendorClicked()
-    -- Check if its a questgiver, and if the player is close enough.
-    -- If they are, give them the quest.
-    -- TODO If they aren't order them to move to the questgiver and wait X time
-    -- Then check again after X time and try to give quest again
     local playerId = GetPlayerId(GetTriggerPlayer())
     local hero = hero.getHero(playerId)
     local selectedUnit = GetTriggerUnit()
@@ -19,6 +28,8 @@ function onNpcVendorClicked()
         IsUnitInRange(hero, selectedUnit, 300)
     then
         Vendor.show(playerId, {items = VENDORS[unitHandle].items})
+
+        startExitTimer(playerId, selectedUnit)
     end
 end
 
