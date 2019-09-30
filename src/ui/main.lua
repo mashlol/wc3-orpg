@@ -45,7 +45,7 @@ for i=0,9,1 do
 
     table.insert(UI_MODULES, UnitFrame:new{
         xLoc = xloC,
-        yLoc = 0.5 - (consts.BAR_HEIGHT * 5 + 0.005) * (i % 5),
+        yLoc = 0.5 - (consts.BAR_HEIGHT * 4 - consts.BUFF_ICON_SIZE / 2 + 0.005) * (i % 5),
         anchor = FRAMEPOINT_TOPLEFT,
         forTarget = false,
         forParty = i,
