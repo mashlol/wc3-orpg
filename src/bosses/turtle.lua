@@ -11,7 +11,7 @@ function BanditLord:new(o)
 end
 
 function BanditLord:getName()
-    return "Bandit Lord"
+    return "Huge Turtle"
 end
 
 function BanditLord:getBounds()
@@ -31,22 +31,22 @@ function BanditLord:spawnAdds()
             y = GetUnitY(self.bossUnit),
         }
         local spawnLocation = Vector:fromAngle(GetRandomReal(0, 2 * bj_PI))
-            :multiply(BlzGetUnitCollisionSize(self.bossUnit) + 150)
+            :multiply(50)
             :add(bossV)
         local add = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
-            FourCC("nban"),
+            FourCC("hmbs"),
             spawnLocation.x,
             spawnLocation.y,
             GetRandomReal(0, 180))
 
-        local targetHero = self.ctx.getRandomInvolvedHero()
+        local targetHero = self.ctx:getRandomInvolvedHero()
         threat.addThreat(targetHero, add, 100)
     end
 end
 
 function BanditLord:castSlam()
-    IssueImmediateOrder(self.bossUnit, "creepthunderclap")
+    IssueImmediateOrder(self.bossUnit, "thunderclap")
 end
 
 function BanditLord:init()
