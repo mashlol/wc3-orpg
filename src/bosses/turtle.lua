@@ -14,6 +14,7 @@ function BanditLord:getName()
     return "Huge Turtle"
 end
 
+-- Counter-clockwise coords
 function BanditLord:getBounds()
     return {
         {x = 1195, y = 2575},
