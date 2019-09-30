@@ -6,9 +6,9 @@ local collision = require('src/collision.lua')
 local ALL_BOSS_CLASSES = {
     BanditLord:new{
         bossUnitId = FourCC('hbld'),
-        startX = 2818.7,
-        startY = 1630.3,
-        facing = 300,
+        startX = 398,
+        startY = 3416,
+        facing = 280,
     },
 }
 
