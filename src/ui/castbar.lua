@@ -25,7 +25,7 @@ function CastBar:init()
         castBarFrameBackground,
         FRAMEPOINT_CENTER,
         0.4,
-        consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 10)
+        consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 12)
     BlzFrameSetTexture(
         castBarFrameBackground,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
