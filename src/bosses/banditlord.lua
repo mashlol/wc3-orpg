@@ -16,11 +16,11 @@ end
 
 function BanditLord:getBounds()
     return {
-        {x = 3317, y = 3082},
-        {x = 1710, y = 1886},
-        {x = 1650, y = 594},
-        {x = 3099, y = -1069},
-        {x = 4999, y = 1130},
+        {x = 1195, y = 2575},
+        {x = 1073, y = 3334},
+        {x = 337, y = 3799},
+        {x = -327, y = 3264},
+        {x = -128, y = 2457},
     }
 end
 
@@ -61,7 +61,7 @@ function BanditLord:init()
         self:castSlam()
     end)
 
-    self.ctx:registerDoor(gg_dest_LTg2_2324)
+    self.ctx:registerDoor(gg_dest_YTcx_4753)
 end
 
 return BanditLord
