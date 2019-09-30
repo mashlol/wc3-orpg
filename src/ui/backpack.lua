@@ -273,6 +273,7 @@ function Backpack:init()
         itemFrames = itemFrames,
         origin = backpackOrigin,
         goldText = goldText,
+        backpackText = backpackText,
     }
 
     return self
@@ -290,6 +291,10 @@ function Backpack:update(playerId)
     BlzFrameSetText(
         frames.goldText,
         "Gold: ".. GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD))
+
+    BlzFrameSetText(
+        frames.backpackText,
+        'Inventory: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
 
     local activeItem = backpack.getActiveItem(playerId)
     for i=1,36,1 do

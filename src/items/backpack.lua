@@ -95,6 +95,14 @@ function swapPositions(playerId, position1, position2)
     backpacks[playerId][position2] = temp
 end
 
+function getFilledSlotCount(playerId)
+    local count = 0
+    for _, _ in pairs(backpacks[playerId]) do
+        count = count + 1
+    end
+    return count
+end
+
 local activateItem = function(playerId, position)
     if getItemIdAtPosition(playerId, position) ~= nil then
         activeItemPositions[playerId] = position
@@ -127,6 +135,7 @@ return {
     removeItemFromBackpack = removeItemFromBackpack,
     removeItemIdFromBackpack = removeItemIdFromBackpack,
     getItemCount = getItemCount,
+    getFilledSlotCount = getFilledSlotCount,
     getItemIdsInBackpack = getItemIdsInBackpack,
     getItemIdAtPosition = getItemIdAtPosition,
     getItemCountAtPosition = getItemCountAtPosition,
