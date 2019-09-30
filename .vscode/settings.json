@@ -14,7 +14,9 @@
         "gg_dest_DTg4_4763",
         "gg_dest_DTg4_4764",
         "gg_unit_nvl2_0013",
-        "gg_unit_nvlw_0121"
+        "gg_unit_nvlw_0121",
+        "gg_dest_LTe1_1457",
+        "gg_dest_LTe1_1422"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
