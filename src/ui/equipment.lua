@@ -224,6 +224,10 @@ function Equipment:update(playerId)
 
     BlzFrameSetVisible(frames.origin, equipmentToggles[playerId] == true)
 
+    if equipmentToggles[playerId] ~= true then
+        return
+    end
+
     local activeItem = equipment.getActiveItem(playerId)
     for i=1,9,1 do
         local itemFrame = frames.itemFrames[i]

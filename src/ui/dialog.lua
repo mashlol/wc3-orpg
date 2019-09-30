@@ -186,6 +186,10 @@ function Dialog:update(playerId)
 
     BlzFrameSetVisible(frames.origin, dialogToggles[playerId] ~= nil)
 
+    if dialogToggles[playerId] == nil then
+        return
+    end
+
     BlzFrameSetAbsPoint(
         frames.origin,
         FRAMEPOINT_CENTER,

@@ -106,6 +106,10 @@ function QuestLog:update(playerId)
 
     BlzFrameSetVisible(frames.origin, questLogToggles[playerId] == true)
 
+    if questLogToggles[playerId] ~= true then
+        return
+    end
+
     local activeQuests = quests.getActiveQuests(playerId)
 
     for i=1,12,1 do
