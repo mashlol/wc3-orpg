@@ -176,9 +176,8 @@ function Context:onBossEngaged()
         phase.phase:startPhase()
     end
 
-    -- TODO add timer to fix engagement
     self.engageTimer = CreateTimer()
-    TimerStart(self.engageTimer, 3, true, function()
+    TimerStart(self.engageTimer, 1, true, function()
         self:fixEngagement()
     end)
 
