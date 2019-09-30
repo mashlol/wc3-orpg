@@ -68,6 +68,10 @@ local mainInit = function()
 
         -- TODO remove for release
         debug.init()
+
+        -- TODO maybe move to a door module
+        ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1457)
+        ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1422)
     end)
     if not status then
         print(err)
