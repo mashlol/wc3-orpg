@@ -33,12 +33,7 @@ function getPlayerParty(playerId)
     return playerParties[playerId]
 end
 
-function onInviteSent()
-    local inviterPlayerId = GetPlayerId(GetTriggerPlayer())
-    local sentString = GetEventPlayerChatString()
-    local invitedPlayerId = S2I(SubString(
-        sentString, 7, StringLength(sentString))) - 1
-
+function sendInvite(inviterPlayerId, invitedPlayerId)
     if getPlayerParty(invitedPlayerId) ~= nil then
         log.log(
             inviterPlayerId,
@@ -66,6 +61,27 @@ function onInviteSent()
             end,
         }
     )
+end
+
+function onInviteSent()
+    local inviterPlayerId = GetPlayerId(GetTriggerPlayer())
+    local sentString = GetEventPlayerChatString()
+    local invitedPlayerId = SubString(
+        sentString, 7, StringLength(sentString))
+
+    if invitedPlayerId == 'all' then
+        for i=0,bj_MAX_PLAYERS-1,1 do
+            if
+                GetPlayerSlotState(Player(i)) == PLAYER_SLOT_STATE_PLAYING and
+                i ~= inviterPlayerId
+            then
+                sendInvite(inviterPlayerId, i)
+            end
+        end
+    else
+        sendInvite(inviterPlayerId, S2I(invitedPlayerId) - 1)
+    end
+
 end
 
 function acceptInvite(invitedPlayerId, inviterPlayerId)
