@@ -1,4 +1,5 @@
 local Turtle = require('src/bosses/turtle.lua')
+local Wolf = require('src/bosses/wolf.lua')
 local backpack = require('src/items/backpack.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
@@ -9,6 +10,12 @@ local ALL_BOSS_CLASSES = {
         startX = 398,
         startY = 3416,
         facing = 280,
+    },
+    Wolf:new{
+        bossUnitId = FourCC('hbld'),
+        startX = -3077,
+        startY = -8518,
+        facing = 0,
     },
 }
 

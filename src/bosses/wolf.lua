@@ -1,31 +1,31 @@
 local Vector = require('src/vector.lua')
 local threat = require('src/threat.lua')
 
-local Turtle = {}
+local Wolf = {}
 
-function Turtle:new(o)
+function Wolf:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function Turtle:getName()
-    return "Huge Turtle"
+function Wolf:getName()
+    return "Alpha Wolf"
 end
 
 -- Counter-clockwise coords
-function Turtle:getBounds()
+function Wolf:getBounds()
     return {
-        {x = 1195, y = 2575},
-        {x = 1073, y = 3334},
-        {x = 337, y = 3799},
-        {x = -327, y = 3264},
-        {x = -128, y = 2457},
+        {x = -2572, y = -7250},
+        {x = -3695, y = -8242},
+        {x = -3091, y = -9084},
+        {x = -2035, y = -9056},
+        {x = -1254, y = -8577},
     }
 end
 
-function Turtle:spawnAdds()
+function Wolf:spawnAdds()
     for i=0,2,1 do
         local bossV = Vector:new{
             x = GetUnitX(self.bossUnit),
@@ -36,7 +36,7 @@ function Turtle:spawnAdds()
             :add(bossV)
         local add = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
-            FourCC("hmbs"),
+            FourCC("nban"),
             spawnLocation.x,
             spawnLocation.y,
             GetRandomReal(0, 180))
@@ -46,11 +46,11 @@ function Turtle:spawnAdds()
     end
 end
 
-function Turtle:castSlam()
-    IssueImmediateOrder(self.bossUnit, "thunderclap")
+function Wolf:castHowl()
+    IssueImmediateOrder(self.bossUnit, "howlofterror")
 end
 
-function Turtle:init()
+function Wolf:init()
     local phase1 = self.ctx:registerPhase{
         hp = 100,
     }
@@ -59,10 +59,11 @@ function Turtle:init()
         self:spawnAdds()
     end)
     phase1:addTimedEvent(10, function()
-        self:castSlam()
+        self:castHowl()
     end)
 
-    self.ctx:registerDoor(gg_dest_YTcx_4753)
+    self.ctx:registerDoor(gg_dest_DTg4_4763)
+    self.ctx:registerDoor(gg_dest_DTg4_4764)
 end
 
-return Turtle
+return Wolf
