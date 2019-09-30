@@ -205,6 +205,10 @@ function UnitFrame:update(playerId)
         frames.origin,
         unit ~= nil and GetUnitState(unit, UNIT_STATE_LIFE) > 0)
 
+    if unit == nil or GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
+        return
+    end
+
     local name = GetUnitName(unit)
     BlzFrameSetText(frames.name, name)
 

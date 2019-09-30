@@ -283,6 +283,10 @@ function Backpack:update(playerId)
 
     BlzFrameSetVisible(frames.origin, backpackToggles[playerId] == true)
 
+    if backpackToggles[playerId] ~= true then
+        return
+    end
+
     BlzFrameSetText(
         frames.goldText,
         "Gold: ".. GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD))
