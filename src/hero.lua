@@ -1,4 +1,5 @@
 local backpack = require('src/items/backpack.lua')
+local quest = require('src/quests/main.lua')
 local load = require('src/saveload/load.lua')
 local meta = require('src/saveload/meta.lua')
 local file = require('src/saveload/file.lua')
@@ -181,6 +182,8 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
         local maxHP = BlzGetUnitMaxHP(hero)
         SetUnitState(hero, UNIT_STATE_LIFE, maxHP)
     end)
+
+    quest.updateQuestMarks()
 end
 
 local forceCameraLocation = function(playerId, camera)

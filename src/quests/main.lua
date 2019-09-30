@@ -467,7 +467,77 @@ function initQuests()
             prerequisites = {5},
             levelRequirement = 0,
         },
+        [7] = {
+            name = "Alpha Wolf",
+            getQuestFrom = gg_unit_nvlw_0121,
+            handQuestTo = gg_unit_nvlw_0121,
+            obtainText = "The wolves in the south seem to have a alpha of the pack, who resides in the south west corner of the island. If you slay the alpha wolf, perhaps the others will not attach as often for a while. You'd obviously be rewarded well.",
+            incompleteText = "Have you slain the alpha wolf?",
+            completedText = "You did it? I'm amazed!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('hbld'),
+                    name = 'Alpha Wolf',
+                }
+            },
+            rewards = {
+                exp = 350,
+                gold = 350,
+            },
+            prerequisites = {},
+            levelRequirement = 8,
+        },
+        [8] = {
+            name = "Giant Turtle",
+            getQuestFrom = gg_unit_nvl2_0013,
+            handQuestTo = gg_unit_nvl2_0013,
+            obtainText = "There's a giant turtle roaming the lands at night, it's causing a lot of havoc on our operations here at Ironwell...if you could gather a group and slay it you'd be well-rewarded.",
+            incompleteText = "Have you slain the giant turtle",
+            completedText = "You did it? I'm amazed!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('hbos'),
+                    name = 'Giant Turtle',
+                }
+            },
+            rewards = {
+                exp = 300,
+                gold = 300,
+            },
+            prerequisites = {},
+            levelRequirement = 7,
+        },
+        [9] = {
+            name = "Wolves for Lunch",
+            getQuestFrom = gg_unit_nvl2_0000,
+            handQuestTo = gg_unit_nvl2_0000,
+            obtainText = "So Fjord thinks you're pretty hot stuff huh? Well right now we're having some troubles with wolves taking over the forest outside of Ironwell. If you kill 10 of them, we'll all be grateful.",
+            incompleteText = "Are you going to kill the wolves?",
+            completedText = "Wow, impressive.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('hwol'),
+                    name = 'Wolves',
+                }
+            },
+            rewards = {
+                exp = 170,
+                gold = 170,
+            },
+            prerequisites = {6},
+            levelRequirement = 0,
+        },
     }
+end
+
+function onHeroLevel()
+    updateQuestMarks()
 end
 
 function getQuestInfo(questId)
@@ -481,6 +551,14 @@ function init()
             selectTrig, Player(i), EVENT_PLAYER_UNIT_SELECTED, nil)
     end
     TriggerAddAction(selectTrig, onNpcClicked)
+
+    local levelTrig = CreateTrigger()
+    for i=0,bj_MAX_PLAYERS-1,1 do
+        TriggerRegisterPlayerUnitEvent(
+            levelTrig, Player(i), EVENT_PLAYER_HERO_LEVEL, nil)
+    end
+    TriggerAddAction(levelTrig, onHeroLevel)
+
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         progress[i] = {}
@@ -496,6 +574,7 @@ end
 
 return {
     init = init,
+    updateQuestMarks = updateQuestMarks,
     getProgress = getProgress,
     getNumQuests = getNumQuests,
     getQuestInfo = getQuestInfo,
