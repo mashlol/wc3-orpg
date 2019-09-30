@@ -321,6 +321,9 @@ function Backpack:update(playerId)
             if itemInfo.spell ~= nil then
                 local cdPct = spell.getCooldownPctBySpellKey(
                     playerId, itemInfo.spell)
+                if cdPct == 0 then
+                    cdPct = 0.00001
+                end
                 BlzFrameSetSize(
                     itemFrame.itemCooldownTint,
                     consts.BACKPACK_ITEM_SIZE,
@@ -329,7 +332,7 @@ function Backpack:update(playerId)
                 BlzFrameSetSize(
                     itemFrame.itemCooldownTint,
                     consts.BACKPACK_ITEM_SIZE,
-                    0.000001)
+                    0.00001)
             end
 
             local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
@@ -359,15 +362,15 @@ function Backpack:update(playerId)
                 itemFrame.tooltipFrame.text,
                 tooltip)
 
-            BlzFrameSetVisible(
-                itemFrame.tooltipFrame.backdrop, numTooltipLines ~= 0)
-
+            BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, true)
+            BlzFrameSetVisible(itemFrame.tooltipFrame.text, true)
         else
             BlzFrameSetSize(
                 itemFrame.itemCooldownTint,
                 consts.BACKPACK_ITEM_SIZE,
-                0.000001)
-            BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, false)
+                0.00001)
+                BlzFrameSetVisible(itemFrame.tooltipFrame.backdrop, false)
+                BlzFrameSetVisible(itemFrame.tooltipFrame.text, false)
         end
 
         BlzFrameSetVisible(itemFrame.itemHighlight, activeItem == i)
