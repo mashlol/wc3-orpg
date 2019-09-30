@@ -1,11 +1,11 @@
-local BanditLord = require('src/bosses/banditlord.lua')
+local Turtle = require('src/bosses/turtle.lua')
 local backpack = require('src/items/backpack.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
 
 local ALL_BOSS_CLASSES = {
-    BanditLord:new{
-        bossUnitId = FourCC('hbld'),
+    Turtle:new{
+        bossUnitId = FourCC('hbos'),
         startX = 398,
         startY = 3416,
         facing = 280,
@@ -108,6 +108,18 @@ function Context:onFightEnded()
         self:resetFight()
         return
     end
+end
+
+function Context:getRandomInvolvedHero()
+    local compactHeroes = {}
+    for idx, hero in pairs(self.involvedHeroes) do
+        if hero ~= nil then
+            table.insert(compactHeroes, hero)
+        end
+    end
+
+    local randomHero = GetRandomInt(1, #compactHeroes)
+    return compactHeroes[randomHero]
 end
 
 function Context:isAllInvolvedHeroesDead()
