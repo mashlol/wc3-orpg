@@ -10,7 +10,9 @@
         "gg_cam_Camera_003",
         "gg_unit_nvlw_0015",
         "gg_cam_Camera_001",
-        "gg_dest_YTcx_4753"
+        "gg_dest_YTcx_4753",
+        "gg_dest_DTg4_4763",
+        "gg_dest_DTg4_4764"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
