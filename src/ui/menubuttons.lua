@@ -10,8 +10,8 @@ local MENU_BUTTONS = {
         text = "Menu (F10)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
+            local menuFrame = BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 0)
             if playerId == GetPlayerId(GetLocalPlayer()) then
-                local menuFrame = BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 0)
                 BlzFrameClick(menuFrame)
             end
         end
