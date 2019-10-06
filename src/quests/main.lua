@@ -513,8 +513,8 @@ function initQuests()
         },
         [9] = {
             name = "Wolves for Lunch",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
+            getQuestFrom = gg_unit_nvil_0120,
+            handQuestTo = gg_unit_nvil_0120,
             obtainText = "So Fjord thinks you're pretty hot stuff huh? Well right now we're having some troubles with wolves taking over the forest outside of Ironwell. If you kill 10 of them, we'll all be grateful.",
             incompleteText = "Are you going to kill the wolves?",
             completedText = "Wow, impressive.",
