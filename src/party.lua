@@ -100,40 +100,12 @@ function acceptInvite(invitedPlayerId, inviterPlayerId)
     end
 end
 
-function onAcceptInvite()
-    local invitedPlayerId = GetPlayerId(GetTriggerPlayer())
-    if pendingInvites[invitedPlayerId] == nil then
-        log.log(invitedPlayerId, "You have no invites pending.", log.TYPE.ERROR)
-        return
-    end
-    local inviterPlayerId = pendingInvites[invitedPlayerId]
-    local partyId = getPlayerParty(inviterPlayerId)
-    if partyId == nil then
-        partyId = createParty()
-        addPlayerToParty(partyId, inviterPlayerId)
-    end
-    addPlayerToParty(partyId, invitedPlayerId)
-    local playersInParty = getPlayersInParty(partyId)
-    for idx, playerId in pairs(playersInParty) do
-        log.log(
-            playerId,
-            GetPlayerName(Player(invitedPlayerId)).." joined the party.",
-            log.TYPE.INFO)
-    end
-end
-
 function init()
     local inviteTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerChatEvent(inviteTrig, Player(i), "-party", false)
     end
     TriggerAddAction(inviteTrig, onInviteSent)
-
-    local acceptTrig = CreateTrigger()
-    for i=0,bj_MAX_PLAYERS,1 do
-        TriggerRegisterPlayerChatEvent(acceptTrig, Player(i), "-accept", true)
-    end
-    TriggerAddAction(acceptTrig, onAcceptInvite)
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         for j=0,bj_MAX_PLAYERS-1,1 do
