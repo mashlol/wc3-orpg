@@ -30,7 +30,7 @@ local getSpellCooldown = function(playerId)
 end
 
 local getSpellCasttime = function(playerId)
-    return 0.4
+    return 0.7
 end
 
 local cast = function(playerId)
@@ -56,7 +56,7 @@ local cast = function(playerId)
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
         0.05)
 
-    casttime.cast(playerId, 0.4, false)
+    casttime.cast(playerId, 0.7, false)
 
     animations.queueAnimation(hero, 18, 1)
 
@@ -67,7 +67,7 @@ local cast = function(playerId)
         fromV = heroV,
         toV = mouseV,
         speed = 900,
-        length = 500,
+        length = 700,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 damage.dealDamage(hero, collidedUnit, 60)
