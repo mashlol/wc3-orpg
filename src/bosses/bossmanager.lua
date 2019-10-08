@@ -19,13 +19,13 @@ local ALL_BOSS_CLASSES = {
     },
 }
 
-local Phase = {
-    timers = {},
-    timedEvents = {},
-}
+local Phase = {}
 
 function Phase:new(o)
-    o = o or {}
+    o = {
+        timers = {},
+        timedEvents = {},
+    }
     setmetatable(o, self)
     self.__index = self
     return o
@@ -39,7 +39,7 @@ function Phase:addTimedEvent(interval, func)
 end
 
 function Phase:startPhase()
-    for idx, event in pairs(self.timedEvents) do
+    for _, event in pairs(self.timedEvents) do
         local timer = CreateTimer()
         TimerStart(timer, event.interval, true, event.func)
         table.insert(self.timers, timer)
@@ -47,21 +47,22 @@ function Phase:startPhase()
 end
 
 function Phase:endPhase()
-    for idx, timer in pairs(self.timers) do
+    for _, timer in pairs(self.timers) do
         DestroyTimer(timer)
     end
 
     self.timers = {}
 end
 
-local Context = {
-    phases = {},
-    involvedHeroes = {},
-    doors = {},
-}
+local Context = {}
 
 function Context:new(o)
-    o = o or {}
+    o = {
+        phases = o.phases or {},
+        involvedHeroes = o.involvedHeroes or {},
+        doors = o.doors or {},
+        cls = o.cls,
+    }
     setmetatable(o, self)
     self.__index = self
     return o
@@ -99,7 +100,7 @@ end
 
 function Context:onFightEnded()
     if GetUnitState(self.cls.bossUnit, UNIT_STATE_LIFE) <= 0 then
-        print("You killed bandit captain.")
+        print("You killed " .. self.cls:getName() .. '!')
         -- TODO implement a loot system
         for i=0,bj_MAX_PLAYERS,1 do
             backpack.addItemIdToBackpack(i, 1)
@@ -119,7 +120,7 @@ end
 
 function Context:getRandomInvolvedHero()
     local compactHeroes = {}
-    for idx, hero in pairs(self.involvedHeroes) do
+    for _, hero in pairs(self.involvedHeroes) do
         if hero ~= nil then
             table.insert(compactHeroes, hero)
         end
@@ -130,7 +131,7 @@ function Context:getRandomInvolvedHero()
 end
 
 function Context:isAllInvolvedHeroesDead()
-    for idx, hero in pairs(self.involvedHeroes) do
+    for _, hero in pairs(self.involvedHeroes) do
         if hero ~= nil then
             return false
         end
