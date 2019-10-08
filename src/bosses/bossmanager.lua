@@ -7,15 +7,9 @@ local collision = require('src/collision.lua')
 local ALL_BOSS_CLASSES = {
     Turtle:new{
         bossUnitId = FourCC('hbos'),
-        startX = 398,
-        startY = 3416,
+        startX = -651,
+        startY = -1480,
         facing = 280,
-    },
-    Wolf:new{
-        bossUnitId = FourCC('hbld'),
-        startX = -3077,
-        startY = -8518,
-        facing = 0,
     },
 }
 
