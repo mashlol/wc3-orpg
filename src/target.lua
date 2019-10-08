@@ -86,13 +86,10 @@ function restoreOrder(playerId)
     local order = orders[playerId]
     if order ~= nil then
         local target = order.target
-        local point = order.point
         local orderId = order.orderId
 
         if target ~= nil then
             IssueTargetOrderById(hero.getHero(playerId), orderId, target)
-        elseif point ~= nil and point.x ~= nil and point.y ~= nil then
-            IssuePointOrderById(hero.getHero(playerId), orderId, point.x, point.y)
         end
     end
 end
@@ -128,6 +125,8 @@ function init()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerUnitEvent(
             orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_TARGET_ORDER, nil)
+        TriggerRegisterPlayerUnitEvent(
+            orderTrig, Player(i), EVENT_PLAYER_UNIT_ISSUED_POINT_ORDER, nil)
     end
     TriggerAddAction(orderTrig, onOrderIssued)
 
