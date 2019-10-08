@@ -5,7 +5,7 @@ function createCombatText(text, target, green)
     local targetSize = BlzGetUnitCollisionSize(target)
 
     local tag = CreateTextTag()
-    SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6) * 1.2)
+    SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6) * 2)
     SetTextTagPosUnit(tag, target, 7)
     if green then
         SetTextTagColor(tag, 0, 100, 0, 0)
