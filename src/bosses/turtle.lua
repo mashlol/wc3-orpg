@@ -17,11 +17,10 @@ end
 -- Counter-clockwise coords
 function Turtle:getBounds()
     return {
-        {x = 1195, y = 2575},
-        {x = 1073, y = 3334},
-        {x = 337, y = 3799},
-        {x = -327, y = 3264},
-        {x = -128, y = 2457},
+        {x = 782, y = 119},
+        {x = -2158, y = 8},
+        {x = -1868, y = -2180},
+        {x = 650, y = -250},
     }
 end
 
