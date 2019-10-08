@@ -84,7 +84,7 @@ function updateQuestMarks()
         local showOnUnit
         if isEligibleForQuest(playerId, questId) then
             text = "!"
-            color = {100, 100, 0}
+            color = {255, 255, 0}
             showOnUnit = questInfo.getQuestFrom
         elseif
             hasQuest(playerId, questId) and
@@ -100,14 +100,14 @@ function updateQuestMarks()
             questObjectivesCompleted(playerId, questId)
         then
             text = "?"
-            color = {100, 100, 0}
+            color = {255, 255, 0}
             showOnUnit = questInfo.handQuestTo
         else
             text = ""
-            color = {100, 100, 100}
+            color = {255, 255, 255}
             showOnUnit = questInfo.handQuestTo
         end
-        SetTextTagText(tag, text, TextTagSize2Height(20))
+        SetTextTagText(tag, text, TextTagSize2Height(25))
         SetTextTagColor(tag, color[1], color[2], color[3], 0)
         SetTextTagPosUnit(tag, showOnUnit, 10)
     end
@@ -116,7 +116,7 @@ end
 function initQuestMarks()
     for questId, questInfo in pairs(QUESTS) do
         local tag = CreateTextTag()
-        SetTextTagText(tag, "!", TextTagSize2Height(20))
+        SetTextTagText(tag, "!", TextTagSize2Height(25))
         SetTextTagPosUnit(tag, questInfo.getQuestFrom, 10)
         SetTextTagColor(tag, 100, 100, 0, 0)
         SetTextTagPermanent(tag, true)
