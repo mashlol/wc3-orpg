@@ -154,6 +154,15 @@ function Context:fixEngagement()
     end
 end
 
+function Context:ensureEngagingUnitInvolved(engagingUnit)
+    for _, hero in pairs(self.involvedHeroes) do
+        if hero == engagingUnit then
+            return
+        end
+    end
+    self.involvedHeroes[GetHandleId(engagingUnit)] = engagingUnit
+end
+
 function Context:onBossEngaged()
     local unit = GetEventDamageSource()
     if GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
@@ -166,6 +175,8 @@ function Context:onBossEngaged()
     self.endFightTrigger = CreateTrigger()
 
     self.involvedHeroes = self:getHeroesInPoly()
+
+    self:ensureEngagingUnitInvolved(unit)
 
     for idx, hero in pairs(self.involvedHeroes) do
         TriggerRegisterUnitEvent(self.endFightTrigger, hero, EVENT_UNIT_DEATH)
