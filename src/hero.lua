@@ -11,8 +11,8 @@ local SimpleButton = require('src/ui/simplebutton.lua')
 
 local CREATE_SYNC_PREFIX = 'create-hero'
 
-local START_X = -2554
-local START_Y = 71
+local START_X = 4100
+local START_Y = 3000
 
 local heroes = {}
 local pickedHeroes = {}

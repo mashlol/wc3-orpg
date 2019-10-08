@@ -358,8 +358,8 @@ function initQuests()
     QUESTS = {
         [1] = {
             name = "Trouble in Turtle Town",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
             obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
@@ -380,8 +380,8 @@ function initQuests()
         },
         [2] = {
             name = "Fred's Quest",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvil_0030,
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvil_0004,
             obtainText = "A neighbor of mine, Fred, mentioned to me recently he's having some trouble at his farm. He'll likely want your help up there - his farm is north west of here, just follow the dirt trail. Go seek out Fred and I'm sure he will be grateful for your help.",
             incompleteText = "I don't think its possible to see this text.",
             completedText = "Fjorn sent you? Ah, that makes sense. Yes, I have been having some trouble recently, there's a bunch of spiders that seem to have infested my farm and are ruining my crops and infecting my animals with diseases. Do you think you could help with that?",
@@ -395,8 +395,8 @@ function initQuests()
         },
         [3] = {
             name = "Spider Infestation",
-            getQuestFrom = gg_unit_nvil_0030,
-            handQuestTo = gg_unit_nvil_0030,
+            getQuestFrom = gg_unit_nvil_0004,
+            handQuestTo = gg_unit_nvil_0004,
             obtainText = "Yes, I'd be glad to have your help. As I said before, I've got an infestation of spiders at my farm here and I need some help erradicating them. Could you help?",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks so much! This is huge for me. Let me know if you need more work.",
@@ -417,8 +417,8 @@ function initQuests()
         },
         [4] = {
             name = "Return to Fjord",
-            getQuestFrom = gg_unit_nvil_0030,
-            handQuestTo = gg_unit_nvl2_0000,
+            getQuestFrom = gg_unit_nvil_0004,
+            handQuestTo = gg_unit_nvl2_0005,
             obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the beetles across the river.",
             incompleteText = "Impossible!",
             completedText = "Fred sent you about the beetles? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
@@ -432,8 +432,8 @@ function initQuests()
         },
         [5] = {
             name = "Beetles over the River",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
             obtainText = "So Fred thinks you can take them on? All right. You can find the beetles across the river, just follow the trail south and over the river. Come back when you've killed at least 8.",
             incompleteText = "Have you killed the beetles yet?",
             completedText = "Wow, impressive. Have you ever been to Ironwell city? If you really want to make money, that's where I'd go if I were you.",
@@ -454,7 +454,7 @@ function initQuests()
         },
         [6] = {
             name = "Ironwell City",
-            getQuestFrom = gg_unit_nvl2_0000,
+            getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvil_0120,
             obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
             incompleteText = "Impossible!",
