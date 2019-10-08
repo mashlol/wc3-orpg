@@ -8,9 +8,9 @@ function createCombatText(text, target, green)
     SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6) * 2)
     SetTextTagPosUnit(tag, target, 7)
     if green then
-        SetTextTagColor(tag, 0, 100, 0, 0)
+        SetTextTagColor(tag, 0, 255, 0, 0)
     else
-        SetTextTagColor(tag, 100, 0, 0, 0)
+        SetTextTagColor(tag, 255, 0, 0, 0)
     end
     SetTextTagVelocity(
         tag,
