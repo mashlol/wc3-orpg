@@ -382,7 +382,7 @@ function onCreateSynced()
     local model = playerId == GetPlayerId(GetLocalPlayer()) and
         heroInfo.model or
         ""
-    local effect = AddSpecialEffect(model, 27463, -30197)
+    local effect = AddSpecialEffect(model, -22651, 31705)
     BlzSetSpecialEffectYaw(effect, 5.32325)
     BlzSetSpecialEffectScale(
         effect, GetUnitPointValueByType(unitType) / 100)
