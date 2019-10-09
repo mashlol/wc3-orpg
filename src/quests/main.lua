@@ -436,7 +436,7 @@ function initQuests()
                     type = TYPE.KILL,
                     amount = 8,
                     toKill = FourCC('lold'),
-                    name = 'Giant Turtle',
+                    name = 'Giant Turtles',
                 }
             },
             prerequisites = {2},
@@ -458,18 +458,18 @@ function initQuests()
             levelRequirement = 0,
         },
         [5] = {
-            name = "Beetles over the River",
+            name = "Wolves to the North",
             getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvl2_0005,
-            obtainText = "So Fred thinks you can take them on? All right. You can find the beetles across the river, just follow the trail south and over the river. Come back when you've killed at least 8.",
-            incompleteText = "Have you killed the beetles yet?",
+            obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least 8.",
+            incompleteText = "Have you killed the wolves yet?",
             completedText = "Wow, impressive. Have you ever been to Ironwell city? If you really want to make money, that's where I'd go if I were you.",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
                     amount = 8,
-                    toKill = FourCC('hbee'),
-                    name = 'Beetles',
+                    toKill = FourCC('hwol'),
+                    name = 'Wolves',
                 }
             },
             rewards = {
