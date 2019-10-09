@@ -60,7 +60,7 @@ function loadChar(playerId, code)
     end
 
     local equips = {}
-    for i=1,9,1 do
+    for i=1,12,1 do
         local itemId = decoded:getInt(73)
         if itemId ~= 0 then
             equips[i] = itemId
