@@ -155,6 +155,17 @@ local ITEMS = {
         stackSize = 1,
         cost = 35,
     },
+	[9] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Giant Turtle Meat',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNMonsterLure.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 10,
+        text = "The meat of a turtle...I think Fred wants this.",
+        cost = 20,
+	},	
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
