@@ -1,13 +1,16 @@
 local SLOT = {
     HELMET = 1,
     NECK = 2,
-    CHEST = 3,
-    BACK = 4,
-    HANDS = 5,
-    LEGS = 6,
-    FEET = 7,
-    RING = 8,
-    WEAPON = 9,
+    SHOULDERS = 3,
+    CHEST = 4,
+    BACK = 5,
+    HANDS = 6,
+    LEGS = 7,
+    FEET = 8,
+    RING = 9,
+    TRINKET = 10,
+    WEAPON = 11,
+    OFFHAND = 12,
 }
 
 -- equipments = {
@@ -63,7 +66,9 @@ function getSlotName(slot)
     if slot == SLOT.HELMET then
         return "Head"
     elseif slot == SLOT.NECK then
-        return "Neck"
+        return "Necklace"
+    elseif slot == SLOT.SHOULDERS then
+        return "Shoulders"
     elseif slot == SLOT.CHEST then
         return "Chest"
     elseif slot == SLOT.BACK then
@@ -76,8 +81,12 @@ function getSlotName(slot)
         return "Feet"
     elseif slot == SLOT.RING then
         return "Ring"
+    elseif slot == SLOT.TRINKET then
+        return "Trinket"
     elseif slot == SLOT.WEAPON then
         return "Weapon"
+    elseif slot == SLOT.OFFHAND then
+        return "Off-hand"
     end
     return nil
 end

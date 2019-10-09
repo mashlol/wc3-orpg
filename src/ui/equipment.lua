@@ -64,7 +64,7 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
     BlzFrameSetAlpha(itemHighlight, 100)
 
     local tooltipFrame = tooltip.makeTooltipFrame(
-        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12, xPos <= 0.015)
+        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12, xPos <= 0.06)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -189,27 +189,32 @@ function Equipment:init()
 
     local itemFrames = {}
 
-    for i=0,7,1 do
+    for i=0,9,1 do
         local itemFrame = createItemFrame(
             equipmentOrigin,
-            math.floor(i / 4) *
+            math.floor(i / 5) *
                 (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) +
                 0.015,
-            -(i % 4) *
-                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) -
+            -(i % 5) *
+                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE / 2) -
                 0.025,
             i+1)
 
         table.insert(itemFrames, itemFrame)
     end
 
-    local itemFrame = createItemFrame(
+    local weapon = createItemFrame(
         equipmentOrigin,
-        0.09,
+        0.06,
         consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
-        9)
-
-    table.insert(itemFrames, itemFrame)
+        11)
+    table.insert(itemFrames, weapon)
+    local offHand = createItemFrame(
+        equipmentOrigin,
+        0.12,
+        consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
+        12)
+    table.insert(itemFrames, offHand)
 
     self.frames = {
         itemFrames = itemFrames,
@@ -229,7 +234,7 @@ function Equipment:update(playerId)
     end
 
     local activeItem = equipment.getActiveItem(playerId)
-    for i=1,9,1 do
+    for i=1,12,1 do
         local itemFrame = frames.itemFrames[i]
         local itemId = equipment.getItemInSlot(playerId, i)
         if itemId ~= nil then
