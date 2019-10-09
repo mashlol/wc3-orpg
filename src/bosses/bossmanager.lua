@@ -102,9 +102,6 @@ function Context:onFightEnded()
     if GetUnitState(self.cls.bossUnit, UNIT_STATE_LIFE) <= 0 then
         print("You killed " .. self.cls:getName() .. '!')
         -- TODO implement a loot system
-        for i=0,bj_MAX_PLAYERS,1 do
-            backpack.addItemIdToBackpack(i, 1)
-        end
         self:cleanupFight()
         return
     end
@@ -207,10 +204,12 @@ end
 
 function Context:cleanupFight()
     for idx, phase in pairs(self.phases) do
+        print('ending phase')
         phase.phase:endPhase()
     end
     DestroyTrigger(self.endFightTrigger)
     DestroyTimer(self.engageTimer)
+    print('done cleanup')
 end
 
 function Context:resetFight()
