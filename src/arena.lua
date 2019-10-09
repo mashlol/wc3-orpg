@@ -89,6 +89,12 @@ function maybeEndArenaMatch()
         "You lost the duel.",
         log.TYPE.INFO)
 
+    PauseUnit(winnerHero, true)
+
+    TriggerSleepAction(3)
+
+    PauseUnit(winnerHero, false)
+
     SetUnitPosition(
         winnerHero,
         originalLocations[winnerPlayerId].x,
@@ -108,6 +114,9 @@ function maybeEndArenaMatch()
         bj_ALLIANCE_ALLIED_VISION)
 
     DestroyTrigger(onDeathTrig)
+
+    duelingPlayers[1] = {}
+    duelingPlayers[2] = {}
 end
 
 function acceptDuel(challengedPlayerId, challengerPlayerId)
