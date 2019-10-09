@@ -1,6 +1,8 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 local party = require('src/party.lua')
+local itemmanager = require('src/items/itemmanager.lua')
+local backpack = require('src/items/backpack.lua')
 local Dialog = require('src/ui/dialog.lua')
 
 local TYPE = {
@@ -193,6 +195,11 @@ function getQuestCompletedText(questId)
     if QUESTS[questId].rewards.exp then
         res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
     end
+    if QUESTS[questId].rewards.items then
+        for itemId,amount in pairs(QUESTS[questId].rewards.items) do
+            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+        end
+    end
     return res
 end
 
@@ -217,6 +224,11 @@ function getQuestAcceptText(questId)
     end
     if QUESTS[questId].rewards.exp then
         res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+    end
+    if QUESTS[questId].rewards.items then
+        for itemId,amount in pairs(QUESTS[questId].rewards.items) do
+            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+        end
     end
     return res
 end
@@ -247,6 +259,7 @@ function finishQuest(playerId, questId)
 
     local expGained = QUESTS[questId].rewards.exp
     local goldGained = QUESTS[questId].rewards.gold
+    local itemsGained = QUESTS[questId].rewards.items
 
     if expGained ~= nil then
         AddHeroXP(hero.getHero(playerId), expGained, true)
@@ -257,6 +270,19 @@ function finishQuest(playerId, questId)
             Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
         SetPlayerState(
             Player(playerId), PLAYER_STATE_RESOURCE_GOLD, curGold + goldGained)
+    end
+
+    if itemsGained ~= nil then
+        for itemId, amount in pairs(itemsGained) do
+            backpack.addItemIdToBackpack(playerId, itemId, amount)
+            log.log(
+                playerId,
+                'You received ' ..
+                    amount ..
+                    ' ' ..
+                    itemmanager.getItemInfo(itemId).name,
+                log.TYPE.INFO)
+        end
     end
 
     updateQuestMarks()
@@ -366,11 +392,12 @@ function initQuests()
             rewards = {
                 exp = 50,
                 gold = 50,
+                items = {[6] = 5},
             },
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 8,
+                    amount = 10,
                     toKill = FourCC('hmbs'),
                     name = 'Snapping Turtles',
                 }
