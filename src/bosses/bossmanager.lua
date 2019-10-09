@@ -1,6 +1,5 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
-local backpack = require('src/items/backpack.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
 
@@ -204,12 +203,10 @@ end
 
 function Context:cleanupFight()
     for idx, phase in pairs(self.phases) do
-        print('ending phase')
         phase.phase:endPhase()
     end
     DestroyTrigger(self.endFightTrigger)
     DestroyTimer(self.engageTimer)
-    print('done cleanup')
 end
 
 function Context:resetFight()
