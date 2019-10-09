@@ -514,47 +514,27 @@ function initQuests()
             prerequisites = {4},
             levelRequirement = 0,
         },
-        [6] = {
-            name = "Ironwell City",
+		[6] = {
+            name = "Talk to Elder John",
             getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvil_0120,
-            obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
-            incompleteText = "Impossible!",
-            completedText = "Ah, you know Fjord? He's a character he is.",
-            objectives = {},
+            handQuestTo = gg_unit_nvil_0087,
+            obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
+            incompleteText = "Have you talked to Elder John?",
+            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you.",
+            objectives = {
+
+            },
             rewards = {
-                exp = 30,
-                gold = 30,
+                exp = 20,
+                gold = 20,
             },
             prerequisites = {5},
-            levelRequirement = 0,
-        },
-        [7] = {
-            name = "Alpha Wolf",
-            getQuestFrom = gg_unit_nvlw_0121,
-            handQuestTo = gg_unit_nvlw_0121,
-            obtainText = "The wolves in the south seem to have a alpha of the pack, who resides in the south west corner of the island. If you slay the alpha wolf, perhaps the others will not attach as often for a while. You'd obviously be rewarded well.",
-            incompleteText = "Have you slain the alpha wolf?",
-            completedText = "You did it? I'm amazed!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('hbld'),
-                    name = 'Alpha Wolf',
-                }
-            },
-            rewards = {
-                exp = 350,
-                gold = 350,
-            },
-            prerequisites = {},
             levelRequirement = 8,
         },
-        [8] = {
+		[7] = {
             name = "Giant Turtle",
-            getQuestFrom = gg_unit_nvl2_0013,
-            handQuestTo = gg_unit_nvl2_0013,
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_nvil_0087,
             obtainText = "There's a giant turtle roaming the lands at night, it's causing a lot of havoc on our operations here at Ironwell...if you could gather a group and slay it you'd be well-rewarded.",
             incompleteText = "Have you slain the giant turtle",
             completedText = "You did it? I'm amazed!",
@@ -570,32 +550,47 @@ function initQuests()
                 exp = 300,
                 gold = 300,
             },
-            prerequisites = {},
+            prerequisites = {6},
             levelRequirement = 7,
         },
-        [9] = {
-            name = "Wolves for Lunch",
-            getQuestFrom = gg_unit_nvil_0120,
-            handQuestTo = gg_unit_nvil_0120,
-            obtainText = "So Fjord thinks you're pretty hot stuff huh? Well right now we're having some troubles with wolves taking over the forest outside of Ironwell. If you kill 10 of them, we'll all be grateful.",
-            incompleteText = "Are you going to kill the wolves?",
-            completedText = "Wow, impressive.",
+		[8] = {
+            name = "Alpha Wolf",
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_nvil_0087,
+            obtainText = "The wolves in the south seem to have a alpha of the pack, who resides in the south west corner of the island. If you slay the alpha wolf, perhaps the others will not attach as often for a while. You'd obviously be rewarded well.",
+            incompleteText = "Have you slain the alpha wolf?",
+            completedText = "You did it? I'm amazed!",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('hwol'),
-                    name = 'Wolves',
+                    amount = 1,
+                    toKill = FourCC('hbld'),
+                    name = 'Alpha Wolf',
                 }
             },
             rewards = {
-                exp = 170,
-                gold = 170,
+                exp = 350,
+                gold = 350,
             },
-            prerequisites = {6},
+            prerequisites = {7},
+            levelRequirement = 8,
+        },
+        [9] = {
+            name = "Ironwell City",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvil_0120,
+            obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
+            incompleteText = "Impossible!",
+            completedText = "Ah, you know Fjord? He's a character he is.",
+            objectives = {},
+            rewards = {
+                exp = 30,
+                gold = 30,
+            },
+            prerequisites = {8},
             levelRequirement = 0,
         },
-    }
+}
 end
 
 function onHeroLevel()
