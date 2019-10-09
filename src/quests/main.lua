@@ -445,7 +445,7 @@ function initQuests()
         [4] = {
             name = "Return to Freydell Village",
             getQuestFrom = gg_unit_nvil_0085,
-            handQuestTo = gg_unit_nvl2_0085,
+            handQuestTo = gg_unit_nvl2_0005,
             obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
             incompleteText = "Impossible!",
             completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
