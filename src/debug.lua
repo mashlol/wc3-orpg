@@ -1,4 +1,6 @@
 local backpack = require('src/items/backpack.lua')
+local hero = require('src/hero.lua')
+local mouse = require('src/mouse.lua')
 
 local animNum = 1
 
@@ -7,7 +9,7 @@ local animNum = 1
 -- 13 bladestorm
 
 
-local debug = function()
+local debug9 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     -- local hero = hero.getHero(playerId)
 
@@ -25,7 +27,7 @@ local debug = function()
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
 end
 
-local debugDown = function()
+local debug0 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     print(animNum)
 
@@ -39,6 +41,13 @@ local debugDown = function()
     -- backpack.addItemIdToBackpack(playerId, 1)
 end
 
+local debug8 = function()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+
+    local heroUnit = hero.getHero(playerId)
+    SetUnitPosition(heroUnit, mouse.getMouseX(playerId), mouse.getMouseY(playerId))
+end
+
 local init = function()
     local trigger = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
@@ -46,7 +55,11 @@ local init = function()
 
     local trig2 = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_0, 0, true)
-    TriggerAddAction(trig2, debugDown)
+    TriggerAddAction(trig2, debug0)
+
+    local trig3 = CreateTrigger()
+    BlzTriggerRegisterPlayerKeyEvent(trig3, Player(0), OSKEY_8, 0, true)
+    TriggerAddAction(trig3, debug8)
 end
 
 return {

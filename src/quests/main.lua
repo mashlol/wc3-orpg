@@ -7,6 +7,7 @@ local Dialog = require('src/ui/dialog.lua')
 
 local TYPE = {
     KILL = {},
+    ITEM = {},
 }
 
 local QUESTS
@@ -69,6 +70,35 @@ function onKill()
                             log.TYPE.INFO)
                         updateQuestMarks()
                     end
+                end
+            end
+        end
+    end
+end
+
+function maybeUpdateLootProgress(playerId)
+    for questId, progressInfo in pairs(progress[playerId]) do
+        if not progressInfo.completed then
+            for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+                if objectiveInfo.type == TYPE.ITEM then
+                    local count = backpack.getItemCount(
+                        playerId, objectiveInfo.itemId)
+
+                    local existing =
+                        progress[playerId][questId].objectives[objectiveIdx]
+                    if existing ~= count and count ~= 0 then
+                        log.log(
+                            playerId,
+                            'You have obtained '..
+                                count..
+                                ' / '..
+                                objectiveInfo.amount..
+                                ' '..
+                                itemmanager.getItemInfo(objectiveInfo.itemId).name,
+                            log.TYPE.INFO)
+                    end
+                    progress[playerId][questId].objectives[objectiveIdx] = count
+                    updateQuestMarks()
                 end
             end
         end
@@ -214,6 +244,10 @@ function getQuestAcceptText(questId)
         if objectiveInfo.type == TYPE.KILL then
             objectives = objectives .. "- Kill "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
         end
+        if objectiveInfo.type == TYPE.ITEM then
+            local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
+            objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name.."|n"
+        end
     end
     if objectives ~= "" then
         res = res .. "|n|n|cffe0b412Objectives:|r|n"..objectives
@@ -244,6 +278,7 @@ function beginQuest(playerId, questId)
                 objectives = {},
             }
 
+            maybeUpdateLootProgress(playerId)
             updateQuestMarks()
         end,
     })
@@ -400,7 +435,7 @@ function initQuests()
                     amount = 10,
                     toKill = FourCC('hmbs'),
                     name = 'Snapping Turtles',
-                }
+                },
             },
             prerequisites = {},
             levelRequirement = 0,
@@ -581,6 +616,7 @@ function init()
     end
     TriggerAddAction(levelTrig, onHeroLevel)
 
+    backpack.addBackpackChangedListener(maybeUpdateLootProgress)
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         progress[i] = {}
