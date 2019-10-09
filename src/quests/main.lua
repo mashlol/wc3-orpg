@@ -421,7 +421,7 @@ function initQuests()
             name = "Trouble in Turtle Town",
             getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvl2_0005,
-            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They have been attacking the town lately.",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
             rewards = {
@@ -459,7 +459,7 @@ function initQuests()
             name = "Fred's Soup",
             getQuestFrom = gg_unit_nvil_0085,
             handQuestTo = gg_unit_nvil_0085,
-            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect eight Giant Turtle Meat and bring it back to me?",
+            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect ten Giant Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
@@ -468,10 +468,9 @@ function initQuests()
             },
             objectives = {
                 [1] = {
-                    type = TYPE.KILL,
-                    amount = 8,
-                    toKill = FourCC('lold'),
-                    name = 'Giant Turtles',
+                    type = TYPE.ITEM,
+                    amount = 10,
+                    itemId = 9,
                 }
             },
             prerequisites = {2},
@@ -496,13 +495,13 @@ function initQuests()
             name = "Wolves to the North",
             getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvl2_0005,
-            obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least 8.",
+            obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least fifteen.",
             incompleteText = "Have you killed the wolves yet?",
-            completedText = "Wow, impressive. Have you ever been to Ironwell city? If you really want to make money, that's where I'd go if I were you.",
+            completedText = "Wow! You're skilled!",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 8,
+                    amount = 15,
                     toKill = FourCC('hwol'),
                     name = 'Wolves',
                 }
