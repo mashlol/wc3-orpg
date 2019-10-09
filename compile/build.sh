@@ -46,5 +46,5 @@ echo 'Launching map in wc3'
 
 BUILD_NUM=$RANDOM
 echo "Map: built_$BUILD_NUM.w3x"
-cp bin/built.w3x /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
-/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe -loadfile /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+cp bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
