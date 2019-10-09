@@ -444,7 +444,7 @@ function initQuests()
             name = "Fred's Quest",
             getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvil_0085,
-            obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forrest.",
+            obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
             incompleteText = "I don't think its possible to see this text.",
             completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
             rewards = {
@@ -520,7 +520,7 @@ function initQuests()
             handQuestTo = gg_unit_nvil_0087,
             obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
             incompleteText = "Have you talked to Elder John?",
-            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you.",
+            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
             objectives = {
 
             },
@@ -533,9 +533,9 @@ function initQuests()
         },
 		[7] = {
             name = "Giant Turtle",
-            getQuestFrom = gg_unit_nvil_0087,
-            handQuestTo = gg_unit_nvil_0087,
-            obtainText = "There's a giant turtle roaming the lands at night, it's causing a lot of havoc on our operations here at Ironwell...if you could gather a group and slay it you'd be well-rewarded.",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
+            obtainText = "There's a giant turtle just west of Freydell Village, We believe it's the leader of the turtles invading the forest. Slay it and I will reward you fairly.",
             incompleteText = "Have you slain the giant turtle",
             completedText = "You did it? I'm amazed!",
             objectives = {
@@ -557,7 +557,7 @@ function initQuests()
             name = "Alpha Wolf",
             getQuestFrom = gg_unit_nvil_0087,
             handQuestTo = gg_unit_nvil_0087,
-            obtainText = "The wolves in the south seem to have a alpha of the pack, who resides in the south west corner of the island. If you slay the alpha wolf, perhaps the others will not attach as often for a while. You'd obviously be rewarded well.",
+            obtainText = "There is a cave just north of the village where the Alpha Wolf resides, though it is probably being controlled I need you to slay it. If you follow the road west you should be able to find him.",
             incompleteText = "Have you slain the alpha wolf?",
             completedText = "You did it? I'm amazed!",
             objectives = {
@@ -572,7 +572,7 @@ function initQuests()
                 exp = 350,
                 gold = 350,
             },
-            prerequisites = {7},
+            prerequisites = {6},
             levelRequirement = 8,
         },
         [9] = {
