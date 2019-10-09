@@ -121,6 +121,41 @@ local ITEMS = {
         spell = 'food1',
         cost = 5,
     },
+	[7] = {
+        type = TYPE.EQUIPMENT,
+        name = 'Chain Vest',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNMantleOfIntelligence.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stats = {
+            {
+                type = 'multiplyIncomingDamage',
+                amount = 0.98,
+            },
+        },
+        slot = equipment.SLOT.CHEST,
+        stackSize = 1,
+        cost = 35,
+    },
+	[8] = {
+        type = TYPE.EQUIPMENT,
+        name = 'Cloak',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNCloak.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stats = {
+            {
+                type = 'modifyMoveSpeed',
+                amount = 1.03,
+            },
+        },
+        slot = equipment.SLOT.BACK,
+        stackSize = 1,
+        cost = 35,
+    },
+	
 }
 
 -- Precompute tooltips at initialization time or you get desyncs

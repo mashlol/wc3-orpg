@@ -408,10 +408,10 @@ function initQuests()
         [2] = {
             name = "Fred's Quest",
             getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvil_0004,
-            obtainText = "A neighbor of mine, Fred, mentioned to me recently he's having some trouble at his farm. He'll likely want your help up there - his farm is north west of here, just follow the dirt trail. Go seek out Fred and I'm sure he will be grateful for your help.",
+            handQuestTo = gg_unit_nvil_0085,
+            obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forrest.",
             incompleteText = "I don't think its possible to see this text.",
-            completedText = "Fjorn sent you? Ah, that makes sense. Yes, I have been having some trouble recently, there's a bunch of spiders that seem to have infested my farm and are ruining my crops and infecting my animals with diseases. Do you think you could help with that?",
+            completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
             rewards = {
                 exp = 20,
                 gold = 10,
@@ -421,12 +421,12 @@ function initQuests()
             levelRequirement = 0,
         },
         [3] = {
-            name = "Spider Infestation",
-            getQuestFrom = gg_unit_nvil_0004,
-            handQuestTo = gg_unit_nvil_0004,
-            obtainText = "Yes, I'd be glad to have your help. As I said before, I've got an infestation of spiders at my farm here and I need some help erradicating them. Could you help?",
+            name = "Fred's Soup",
+            getQuestFrom = gg_unit_nvil_0085,
+            handQuestTo = gg_unit_nvil_0085,
+            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect eight Giant Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
-            completedText = "Thanks so much! This is huge for me. Let me know if you need more work.",
+            completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
                 exp = 100,
                 gold = 100,
@@ -435,20 +435,20 @@ function initQuests()
                 [1] = {
                     type = TYPE.KILL,
                     amount = 8,
-                    toKill = FourCC('hspi'),
-                    name = 'Spiders',
+                    toKill = FourCC('lold'),
+                    name = 'Giant Turtle',
                 }
             },
             prerequisites = {2},
             levelRequirement = 0,
         },
         [4] = {
-            name = "Return to Fjord",
-            getQuestFrom = gg_unit_nvil_0004,
+            name = "Return to Freydell Village",
+            getQuestFrom = gg_unit_nvil_0085,
             handQuestTo = gg_unit_nvl2_0005,
-            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the beetles across the river.",
+            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
             incompleteText = "Impossible!",
-            completedText = "Fred sent you about the beetles? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
+            completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
             objectives = {},
             rewards = {
                 exp = 30,
