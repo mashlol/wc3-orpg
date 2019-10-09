@@ -19,7 +19,7 @@ local debug = function()
 
     animNum = animNum + 0.01
 
-    backpack.addItemIdToBackpack(playerId, 1)
+    backpack.addItemIdToBackpack(playerId, 8)
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
