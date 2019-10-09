@@ -1,6 +1,5 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
-local backpack = require('src/items/backpack.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
 
@@ -102,9 +101,6 @@ function Context:onFightEnded()
     if GetUnitState(self.cls.bossUnit, UNIT_STATE_LIFE) <= 0 then
         print("You killed " .. self.cls:getName() .. '!')
         -- TODO implement a loot system
-        for i=0,bj_MAX_PLAYERS,1 do
-            backpack.addItemIdToBackpack(i, 1)
-        end
         self:cleanupFight()
         return
     end
