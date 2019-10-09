@@ -2,6 +2,8 @@
 set -e
 shopt -s globstar
 
+mkdir -p bin
+
 echo "Copying map.w3x to bin/built.w3x"
 cp map.w3x bin/built.w3x
 
@@ -32,7 +34,7 @@ cd ..
 
 echo 'Deleting old versions'
 
-rm /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
+rm -f /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
 
 echo 'Deleting build artifacts'
 
