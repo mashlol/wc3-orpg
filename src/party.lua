@@ -81,7 +81,6 @@ function onInviteSent()
     else
         sendInvite(inviterPlayerId, S2I(invitedPlayerId) - 1)
     end
-
 end
 
 function acceptInvite(invitedPlayerId, inviterPlayerId)
@@ -100,12 +99,40 @@ function acceptInvite(invitedPlayerId, inviterPlayerId)
     end
 end
 
+function onLeave()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+
+    local partyId = getPlayerParty(playerId)
+    if partyId ~= nil then
+        -- Leave the party
+        removePlayerFromParty(playerId)
+        log.log(
+            playerId,
+            "You left the party.",
+            log.TYPE.INFO)
+
+        local players = getPlayersInParty(partyId)
+        for _, playerId in pairs(players) do
+            log.log(
+                playerId,
+                GetPlayerName(Player(playerId)).." left the party.",
+                log.TYPE.INFO)
+        end
+    end
+end
+
 function init()
     local inviteTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerChatEvent(inviteTrig, Player(i), "-party", false)
     end
     TriggerAddAction(inviteTrig, onInviteSent)
+
+    local leaveTrig = CreateTrigger()
+    for i=0,bj_MAX_PLAYERS,1 do
+        TriggerRegisterPlayerChatEvent(leaveTrig, Player(i), "-leaveparty", true)
+    end
+    TriggerAddAction(leaveTrig, onLeave)
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         for j=0,bj_MAX_PLAYERS-1,1 do
@@ -116,7 +143,6 @@ function init()
         end
     end
 end
-
 
 return {
     init = init,
