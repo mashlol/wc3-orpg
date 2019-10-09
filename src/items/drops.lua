@@ -9,7 +9,7 @@ local DROP_TABLE = {
         [5] = 10,
         [1] = 5,
         [4] = 1,
-		[8] = 8,
+		[8] = 5,
     },
     [FourCC('hspi')] = {
         none = 90,
