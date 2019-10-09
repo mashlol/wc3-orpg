@@ -511,6 +511,12 @@ function getSlot()
     return saveSlot
 end
 
+function removeHero(playerId)
+    RemoveUnit(heroes[playerId])
+    heroes[playerId] = nil
+    pickedHeroes[playerId] = nil
+end
+
 function addRepickedListener(repickedListenerFunc)
     table.insert(repickListeners, repickedListenerFunc)
 end
@@ -529,4 +535,5 @@ return {
     addHeroPickedListener = addHeroPickedListener,
     getStatEffects = getStatEffects,
     getSlot = getSlot,
+    removeHero = removeHero,
 }

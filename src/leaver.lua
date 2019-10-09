@@ -1,7 +1,11 @@
+local hero = require('src/hero.lua')
+
 local onLeave = function()
     DisplayTextToForce(
         GetPlayersAll(),
         GetPlayerName(GetTriggerPlayer()).." has left the game.")
+
+    hero.removeHero(GetPlayerId(GetTriggerPlayer()))
 end
 
 local init = function()
