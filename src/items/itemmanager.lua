@@ -155,7 +155,6 @@ local ITEMS = {
         stackSize = 1,
         cost = 35,
     },
-	
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
@@ -191,7 +190,15 @@ function init()
                     numLines = numLines + 1
                 end
                 if statInfo.type == 'multiplyDamage' then
-                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. ' % damage|n'
+                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. '% damage|n'
+                    numLines = numLines + 1
+                end
+                if statInfo.type == 'modifyMoveSpeed' then
+                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. '% move speed|n'
+                    numLines = numLines + 1
+                end
+                if statInfo.type == 'multiplyIncomingDamage' then
+                    itemStats = itemStats .. '-' .. math.abs(round((statInfo.amount - 1) * 100, 2)) .. '% damage received|n'
                     numLines = numLines + 1
                 end
             end
