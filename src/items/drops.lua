@@ -9,6 +9,7 @@ local DROP_TABLE = {
         [5] = 10,
         [1] = 5,
         [4] = 1,
+		[8] = 8,
     },
     [FourCC('hspi')] = {
         none = 90,
@@ -19,7 +20,7 @@ local DROP_TABLE = {
         [3] = 5,
         [4] = 1,
     },
-    [FourCC('hbee')] = {
+    [FourCC('hwol')] = {
         none = 90,
         [6] = 30,
         [5] = 10,
@@ -28,6 +29,7 @@ local DROP_TABLE = {
         [3] = 5,
         [4] = 2,
     },
+	
 }
 
 function maybeGetDrop(unit)
