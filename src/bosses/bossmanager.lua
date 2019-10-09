@@ -11,6 +11,12 @@ local ALL_BOSS_CLASSES = {
         startY = -1480,
         facing = 280,
     },
+    Wolf:new{
+        bossUnitId = FourCC('hbld'),
+        startX = 15195,
+        startY = 7531,
+        facing = 280,
+    },
 }
 
 local Phase = {}
