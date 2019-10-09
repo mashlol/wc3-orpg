@@ -542,11 +542,11 @@ function initQuests()
         },
         [9] = {
             name = "Ironwell City",
-            getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvil_0120,
-            obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
-            incompleteText = "Impossible!",
-            completedText = "Ah, you know Fjord? He's a character he is.",
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_Hlgr_0088,
+            obtainText = "Find General Smith outside of Ironwell, he might have some work for you to do before you can enter the city.",
+            incompleteText = "Did you find General Smith?",
+            completedText = "Fjord sent you? Good. I need some help around here.",
             objectives = {},
             rewards = {
                 exp = 30,
