@@ -101,7 +101,10 @@ local spaceDown = function()
 end
 
 local spaceUp = function()
-    ResetToGameCameraForPlayer(GetTriggerPlayer(), 0)
+    if GetLocalPlayer() == GetTriggerPlayer() then
+        ResetToGameCamera(0)
+        CameraSetupApplyForceDuration(gg_cam_Camera_001, false, 0)
+    end
 end
 
 local init = function()
