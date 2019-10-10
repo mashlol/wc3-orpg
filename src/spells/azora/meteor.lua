@@ -114,7 +114,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(mouseV, 350)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 400)
+            damage.dealDamage(hero, unit, 400, damage.TYPE.SPELL)
             buff.addBuff(hero, unit, 'ignite', 8)
             buff.addBuff(hero, unit, 'ignite', 8)
         end

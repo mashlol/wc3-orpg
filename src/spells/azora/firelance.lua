@@ -72,7 +72,7 @@ local cast = function(playerId)
         radius = 30,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 200)
+                damage.dealDamage(hero, collidedUnit, 200, damage.TYPE.SPELL)
                 buff.addBuff(hero, collidedUnit, 'firelance', 2)
                 buff.addBuff(hero, collidedUnit, 'ignite', 8)
             end

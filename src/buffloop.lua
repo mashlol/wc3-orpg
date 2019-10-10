@@ -20,7 +20,7 @@ function applyBuffSpecificEffects(unit, source, effects, stacks)
         damage.heal(source, unit, obj.hpToHeal)
     end
     if obj.dmgToDeal > 0 then
-        damage.dealDamage(source, unit, obj.dmgToDeal)
+        damage.dealDamage(source, unit, obj.dmgToDeal, damage.TYPE.SPELL)
     end
 end
 
