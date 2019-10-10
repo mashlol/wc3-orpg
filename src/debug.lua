@@ -51,7 +51,7 @@ end
 local init = function()
     local trigger = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
-    TriggerAddAction(trigger, debug)
+    TriggerAddAction(trigger, debug9)
 
     local trig2 = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_0, 0, true)

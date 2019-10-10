@@ -5,6 +5,7 @@ local meta = require('src/saveload/meta.lua')
 local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
+local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
@@ -493,15 +494,15 @@ function getStatEffects(playerId)
     local level = GetHeroLevel(hero) - 1
     return {
         {
-            type = 'multiplyDamage',
+            type = stats.PERCENT_DAMAGE,
             amount = 1 + 0.08 * level,
         },
         {
-            type = 'multiplyHealing',
+            type = stats.PERCENT_HEALING,
             amount = 1 + 0.08 * level,
         },
         {
-            type = 'rawHp',
+            type = stats.RAW_HIT_POINTS,
             amount = level * 10,
         }
     }

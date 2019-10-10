@@ -10,49 +10,25 @@ local BUFF_LOOP_INTERVAL = 0.1
 local numLoops = 0
 
 function applyEffectList(obj, effectList)
-    for idx,info in pairs(effectList) do
-        if info.type == 'modifyMoveSpeed' then
-            obj.baseSpeed = obj.baseSpeed * info.amount
-        end
-        if info.type == 'modifySize' then
-            obj.scale = obj.scale * info.amount
-        end
-        if info.type == 'stun' then
-            obj.isStunned = true
-        end
-        if info.type == 'root' then
-            obj.isRooted = true
-        end
-        if info.type == 'rawHp' and obj.baseHP ~= nil then
-            obj.baseHP = obj.baseHP + info.amount
-        end
+    for _,info in pairs(effectList) do
+        info.type.effect(info, obj)
     end
 
     return obj
 end
 
 function applyBuffSpecificEffects(unit, source, effects, stacks)
-    local hpToHeal = 0
-    local dmgToDeal = 0
-    for idx,info in pairs(effects) do
-        if
-            info.type == 'heal' and
-            numLoops % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0
-        then
-            hpToHeal = hpToHeal + info.amount * stacks
-        end
-        if
-            info.type == 'damage' and
-            numLoops % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0
-        then
-            dmgToDeal = dmgToDeal + info.amount * stacks
+    local obj = getObjForUnit(unit)
+    for _,info in pairs(effects) do
+        for i=1,stacks,1 do
+            info.type.effect(info, obj, numLoops)
         end
     end
-    if hpToHeal > 0 then
-        damage.heal(source, unit, hpToHeal)
+    if obj.hpToHeal > 0 then
+        damage.heal(source, unit, obj.hpToHeal)
     end
-    if dmgToDeal > 0 then
-        damage.dealDamage(source, unit, dmgToDeal)
+    if obj.dmgToDeal > 0 then
+        damage.dealDamage(source, unit, obj.dmgToDeal)
     end
 end
 
@@ -67,6 +43,32 @@ function maybeAddEffectToList(effectsByUnitId, unit, effect)
     if effect ~= nil then
         table.insert(effectsByUnitId[unitId].effects, effect)
     end
+end
+
+function getObjForUnit(unit)
+    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
+    local ownerHero = hero.getHero(ownerPlayerId)
+    local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
+    local baseSpeed = GetUnitDefaultMoveSpeed(unit)
+    local scale = GetUnitPointValue(unit) / 100
+    local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
+    local isRooted = false
+
+    return {
+        baseSpeed = baseSpeed,
+        scale = scale,
+        isStunned = isStunned,
+        isRooted = isRooted,
+        baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
+        dmgToDeal = 0,
+        hpToHeal = 0,
+        pctDamage = 1,
+        pctHealing = 1,
+        rawDamage = 0,
+        rawHealing = 0,
+        pctIncomingDamage = 1,
+        pctIncomingHealing = 1,
+    }
 end
 
 function applyBuffs()
@@ -99,7 +101,6 @@ function applyBuffs()
                     maybeAddEffectToList(effectsByUnitId, heroUnit, statInfo)
                 end
             end
-            -- print('getting hero stats', hero.getStatEffects)
             local stats = hero.getStatEffects(playerId)
             for _, stat in pairs(stats) do
                 maybeAddEffectToList(effectsByUnitId, heroUnit, stat)
@@ -124,21 +125,9 @@ function applyBuffs()
 
     for _,unitInfo in pairs(effectsByUnitId) do
         local unit = unitInfo.unit
-        local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-        local ownerHero = hero.getHero(ownerPlayerId)
-        local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
-        local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-        local scale = GetUnitPointValue(unit) / 100
-        local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
-        local isRooted = false
 
-        local res = applyEffectList({
-            baseSpeed = baseSpeed,
-            scale = scale,
-            isStunned = isStunned,
-            isRooted = isRooted,
-            baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
-        }, unitInfo.effects)
+        local obj = getObjForUnit(unit)
+        local res = applyEffectList(obj, unitInfo.effects)
 
         if res.isRooted then
             SetUnitMoveSpeed(unit, 0)

@@ -1,3 +1,4 @@
+local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 
 local RARITY = {
@@ -34,7 +35,7 @@ local ITEMS = {
         rarity = RARITY.COMMON,
         stats = {
             {
-                type = 'rawHp',
+                type = stats.RAW_HIT_POINTS,
                 amount = 10,
             },
         },
@@ -51,11 +52,11 @@ local ITEMS = {
         rarity = RARITY.UNCOMMON,
         stats = {
             {
-                type = 'rawHp',
+                type = stats.RAW_HIT_POINTS,
                 amount = 10,
             },
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.01,
             },
         },
@@ -72,7 +73,7 @@ local ITEMS = {
         rarity = RARITY.UNCOMMON,
         stats = {
             {
-                type = 'rawHp',
+                type = stats.RAW_HIT_POINTS,
                 amount = 40,
             },
         },
@@ -89,7 +90,7 @@ local ITEMS = {
         rarity = RARITY.RARE,
         stats = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.1,
             },
         },
@@ -130,7 +131,7 @@ local ITEMS = {
         rarity = RARITY.COMMON,
         stats = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.98,
             },
         },
@@ -147,7 +148,7 @@ local ITEMS = {
         rarity = RARITY.COMMON,
         stats = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.03,
             },
         },
@@ -165,7 +166,7 @@ local ITEMS = {
         stackSize = 10,
         text = "The meat of a turtle...I think Fred wants this.",
         cost = 20,
-	},	
+	},
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
@@ -196,22 +197,8 @@ function init()
         if itemInfo.stats ~= nil then
             itemStats = itemStats .. "|n|n|cff00ff00"
             for _, statInfo in pairs(itemInfo.stats) do
-                if statInfo.type == 'rawHp' then
-                    itemStats = itemStats .. '+' .. statInfo.amount .. ' HP|n'
-                    numLines = numLines + 1
-                end
-                if statInfo.type == 'multiplyDamage' then
-                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. '% damage|n'
-                    numLines = numLines + 1
-                end
-                if statInfo.type == 'modifyMoveSpeed' then
-                    itemStats = itemStats .. '+' .. round((statInfo.amount - 1) * 100, 2) .. '% move speed|n'
-                    numLines = numLines + 1
-                end
-                if statInfo.type == 'multiplyIncomingDamage' then
-                    itemStats = itemStats .. '-' .. math.abs(round((statInfo.amount - 1) * 100, 2)) .. '% damage received|n'
-                    numLines = numLines + 1
-                end
+                itemStats = itemStats .. statInfo.type.getTooltip(statInfo) .. "|n"
+                numLines = numLines + 1
             end
             itemStats = itemStats .. "|r"
         end

@@ -1,4 +1,5 @@
 local hero = require('src/hero.lua')
+local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
@@ -6,11 +7,11 @@ local BUFF_INFO = {
     focus = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.2,
             },
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.5,
             },
         },
@@ -23,7 +24,7 @@ local BUFF_INFO = {
     curshout = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.6,
             },
         },
@@ -36,7 +37,7 @@ local BUFF_INFO = {
     assist = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.6,
             },
         },
@@ -45,7 +46,7 @@ local BUFF_INFO = {
     stalwartshell = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0,
             },
         },
@@ -58,15 +59,15 @@ local BUFF_INFO = {
     flag = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.9,
             },
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.1,
             },
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.1,
             },
         },
@@ -79,11 +80,11 @@ local BUFF_INFO = {
     armorpot = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.7,
             },
             {
-                type = 'multiplyIncomingHealing',
+                type = stats.PERCENT_INCOMING_HEALING,
                 amount = 1.3,
             },
         },
@@ -96,11 +97,11 @@ local BUFF_INFO = {
     hulkingpot = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.2,
             },
             {
-                type = 'modifySize',
+                type = stats.PERCENT_SCALE,
                 amount = 1.3,
             },
         },
@@ -109,11 +110,11 @@ local BUFF_INFO = {
     dampenpot = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 0.8,
             },
             {
-                type = 'modifySize',
+                type = stats.PERCENT_SCALE,
                 amount = 0.8,
             },
         },
@@ -122,7 +123,7 @@ local BUFF_INFO = {
     accpot = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 2,
             },
         },
@@ -135,7 +136,7 @@ local BUFF_INFO = {
     rejuvpot = {
         effects = {
             {
-                type = 'heal',
+                type = stats.HEALTH_REGEN,
                 amount = 30,
                 tickrate = 1,
             },
@@ -150,7 +151,7 @@ local BUFF_INFO = {
     corrosivedecaydot = {
         effects = {
             {
-                type = 'damage',
+                type = stats.DAMAGE_OVER_TIME,
                 amount = 160,
                 tickrate = 1,
             },
@@ -164,7 +165,7 @@ local BUFF_INFO = {
     stun = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -176,7 +177,7 @@ local BUFF_INFO = {
     firelance = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -188,10 +189,10 @@ local BUFF_INFO = {
     fireshell = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0,
             },
         },
@@ -204,7 +205,7 @@ local BUFF_INFO = {
     frostball = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.9,
             },
         },
@@ -217,7 +218,7 @@ local BUFF_INFO = {
     frostballslow = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.6,
             },
         },
@@ -230,7 +231,7 @@ local BUFF_INFO = {
     frostnova = {
         effects = {
             {
-                type = 'root',
+                type = stats.ROOT,
             },
         },
         vfx = {
@@ -242,7 +243,7 @@ local BUFF_INFO = {
     icicle = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.7,
             },
         },
@@ -255,7 +256,7 @@ local BUFF_INFO = {
     blind = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -268,7 +269,7 @@ local BUFF_INFO = {
     food1 = {
         effects = {
             {
-                type = 'heal',
+                type = stats.HEALTH_REGEN,
                 amount = 60,
                 tickrate = 3,
             },
