@@ -83,7 +83,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(heroV, 200)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 400)
+            damage.dealDamage(hero, unit, 400, damage.TYPE.PHYSICAL)
 
             effect.createEffect{
                 model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",

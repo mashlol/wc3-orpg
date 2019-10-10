@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local stats = require('src/stats.lua')
+local damage = require('src/damage.lua')
 local buffloop = require('src/buffloop.lua')
 local equipment = require('src/items/equipment.lua')
 local casttime = require('src/casttime.lua')
@@ -419,13 +420,20 @@ function maybeAddEffectToList(effectsByUnitId, unit, effect)
     end
 end
 
-function getModifiedDamage(unit, target, amount)
+function getModifiedDamage(unit, target, amount, type)
     local unitInfo = buffloop.getUnitInfo(unit)
     local targetInfo = buffloop.getUnitInfo(target)
-    return amount *
-        unitInfo.pctDamage *
-        targetInfo.pctIncomingDamage +
-        unitInfo.rawDamage
+    if type == damage.TYPE.PHYSICAL then
+        return amount *
+            unitInfo.pctDamage *
+            targetInfo.pctIncomingDamage +
+            unitInfo.rawDamage
+    elseif type == damage.TYPE.SPELL then
+        return amount *
+            unitInfo.pctSpellDamage *
+            targetInfo.pctIncomingSpellDamage +
+            unitInfo.rawSpellDamage
+    end
 end
 
 function getModifiedHealing(unit, target, amount)
@@ -455,11 +463,16 @@ function getBaseObjForUnit(unit)
         dmgToDeal = 0,
         hpToHeal = 0,
         pctDamage = 1,
+        pctSpellDamage= 1,
         pctHealing = 1,
         rawDamage = 0,
+        rawSpellDamage = 0,
         rawHealing = 0,
         pctIncomingDamage = 1,
+        pctIncomingSpellDamage = 1,
         pctIncomingHealing = 1,
+        cooldownReduction = 1,
+        castSpeed = 1,
     }
 end
 

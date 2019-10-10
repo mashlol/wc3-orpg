@@ -66,7 +66,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(heroV, 200)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 100)
+            damage.dealDamage(hero, unit, 100, damage.TYPE.PHYSICAL)
             threat.addThreat(hero, unit, 400)
 
             effect.createEffect{

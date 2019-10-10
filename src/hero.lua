@@ -495,11 +495,15 @@ function getStatEffects(playerId)
     return {
         {
             type = stats.PERCENT_DAMAGE,
-            amount = 1 + 0.08 * level,
+            amount = 1 + 0.02 * level,
+        },
+        {
+            type = stats.PERCENT_SPELL_DAMAGE,
+            amount = 1 + 0.02 * level,
         },
         {
             type = stats.PERCENT_HEALING,
-            amount = 1 + 0.08 * level,
+            amount = 1 + 0.02 * level,
         },
         {
             type = stats.RAW_HIT_POINTS,

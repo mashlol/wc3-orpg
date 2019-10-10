@@ -133,7 +133,7 @@ local castCorrosiveBlast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.dealDamage(hero, target, dmgAmount)
+            damage.dealDamage(hero, target, dmgAmount, damage.TYPE.SPELL)
 
             effect.createEffect{
                 model = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl",
