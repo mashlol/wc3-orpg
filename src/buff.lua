@@ -424,53 +424,62 @@ function getModifiedDamage(unit, target, amount, type)
     local unitInfo = buffloop.getUnitInfo(unit)
     local targetInfo = buffloop.getUnitInfo(target)
     if type == damage.TYPE.PHYSICAL then
-        return amount *
+        return math.max(0, amount *
             unitInfo.pctDamage *
             targetInfo.pctIncomingDamage +
-            unitInfo.rawDamage
+            unitInfo.rawDamage +
+            targetInfo.rawIncomingDamage)
     elseif type == damage.TYPE.SPELL then
-        return amount *
+        return math.max(0, amount *
             unitInfo.pctSpellDamage *
             targetInfo.pctIncomingSpellDamage +
-            unitInfo.rawSpellDamage
+            unitInfo.rawSpellDamage +
+            targetInfo.rawIncomingSpellDamage)
     end
 end
 
 function getModifiedHealing(unit, target, amount)
     local unitInfo = buffloop.getUnitInfo(unit)
     local targetInfo = buffloop.getUnitInfo(target)
-    return amount *
+    return math.max(0, amount *
         unitInfo.pctHealing *
         targetInfo.pctIncomingHealing +
-        unitInfo.rawHealing
+        unitInfo.rawHealing +
+        targetInfo.rawIncomingHealing)
 end
 
 function getBaseObjForUnit(unit)
     local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
     local ownerHero = hero.getHero(ownerPlayerId)
     local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
-    local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-    local scale = GetUnitPointValue(unit) / 100
-    local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
-    local isRooted = false
 
     return {
-        baseSpeed = baseSpeed,
-        scale = scale,
-        isStunned = isStunned,
-        isRooted = isRooted,
+        baseSpeed = GetUnitDefaultMoveSpeed(unit),
+        scale =  GetUnitPointValue(unit) / 100,
+        isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId),
+        isRooted = false,
         baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
+        attackSpeed = ownerHeroInfo and ownerHeroInfo.attackSpeed,
+
         dmgToDeal = 0,
         hpToHeal = 0,
+
         pctDamage = 1,
         pctSpellDamage= 1,
         pctHealing = 1,
+
         rawDamage = 0,
         rawSpellDamage = 0,
         rawHealing = 0,
+
         pctIncomingDamage = 1,
         pctIncomingSpellDamage = 1,
         pctIncomingHealing = 1,
+
+        rawIncomingDamage = 0,
+        rawIncomingSpellDamage = 0,
+        rawIncomingHealing = 0,
+
         cooldownReduction = 1,
         castSpeed = 1,
     }
