@@ -156,6 +156,16 @@ local STATS = {
         end,
         priority = 2,
     },
+
+    PERCENT_COOLDOWN_REDUCTION = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% cooldown reduction'
+        end,
+        effect = function(info, obj)
+            obj.cooldownReduction = obj.cooldownReduction * info.amount
+        end,
+        priority = 2,
+    },
 }
 
 function round(num, numDecimalPlaces)
