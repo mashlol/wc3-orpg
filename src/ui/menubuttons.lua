@@ -1,6 +1,7 @@
 local consts = require('src/ui/consts.lua')
 local Backpack = require('src/ui/backpack.lua')
 local Equipment = require('src/ui/equipment.lua')
+local Stats = require('src/ui/stats.lua')
 local QuestLog = require('src/ui/questlog.lua')
 
 local MenuButtons = {}
@@ -28,6 +29,7 @@ local MENU_BUTTONS = {
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Equipment.toggle(playerId)
+            Stats.toggle(playerId)
         end
     },
     {

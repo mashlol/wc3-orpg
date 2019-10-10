@@ -2,6 +2,7 @@ local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
 local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
+local Stats = require("src/ui/stats.lua")
 local QuestLog = require("src/ui/questlog.lua")
 local ItemBar = require("src/ui/itembar.lua")
 local itemmanager = require("src/items/itemmanager.lua")
@@ -86,6 +87,7 @@ local keyPressed = function()
         Backpack.toggle(playerId)
     elseif pressedKey == OSKEY_U then
         Equipment.toggle(playerId)
+        Stats.toggle(playerId)
     elseif pressedKey == OSKEY_L then
         QuestLog.toggle(playerId)
     end
