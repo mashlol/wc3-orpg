@@ -79,7 +79,7 @@ local cast = function(playerId)
         removeInsteadOfKill = true,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 50)
+                damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.SPELL)
             end
             return false
         end,
@@ -100,7 +100,7 @@ local cast = function(playerId)
                 removeInsteadOfKill = true,
                 onCollide = function(collidedUnit)
                     if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                        damage.dealDamage(hero, collidedUnit, 100)
+                        damage.dealDamage(hero, collidedUnit, 100, damage.TYPE.SPELL)
                     end
                     return false
                 end

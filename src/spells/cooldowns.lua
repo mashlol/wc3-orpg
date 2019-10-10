@@ -1,3 +1,6 @@
+local buffloop = require('src/buffloop.lua')
+local hero = require('src/hero.lua')
+
 -- cooldowns = {
 --   [playerId] = {
 --     [spellId] = {timer},
@@ -14,6 +17,9 @@ function startCooldown(playerId, spellId, duration)
     if cooldowns[playerId][spellId] ~= nil then
         DestroyTimer(cooldowns[playerId][spellId])
     end
+
+    local heroUnit = hero.getHero(playerId)
+    duration = buffloop.getUnitInfo(heroUnit).cooldownReduction * duration
 
     local timer = CreateTimer()
     TimerStart(timer, duration, false, nil)

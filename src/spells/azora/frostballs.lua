@@ -96,9 +96,9 @@ local cast = function(playerId)
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     if buff.hasBuff(collidedUnit, 'frostnova') then
-                        damage.dealDamage(hero, collidedUnit, 160)
+                        damage.dealDamage(hero, collidedUnit, 160, damage.TYPE.SPELL)
                     else
-                        damage.dealDamage(hero, collidedUnit, 40)
+                        damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
                     end
                     return true
                 end
@@ -142,7 +142,7 @@ local cast = function(playerId)
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     buff.addBuff(hero, collidedUnit, 'frostballslow', 8)
-                    damage.dealDamage(hero, collidedUnit, 40)
+                    damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
 
                     return true
                 end

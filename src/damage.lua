@@ -1,6 +1,19 @@
 local buff = require('src/buff.lua')
 local threat = require('src/threat.lua')
 
+local TYPE = {
+    SPELL = {
+        attackType = ATTACK_TYPE_HERO,
+        damageType = DAMAGE_TYPE_UNKNOWN,
+        weaponType = WEAPON_TYPE_WHOKNOWS,
+    },
+    PHYSICAL = {
+        attackType = ATTACK_TYPE_NORMAL,
+        damageType = DAMAGE_TYPE_UNKNOWN,
+        weaponType = WEAPON_TYPE_WHOKNOWS,
+    },
+}
+
 function createCombatText(text, target, green, isCrit)
     local targetSize = BlzGetUnitCollisionSize(target)
 
@@ -29,9 +42,16 @@ function createCombatText(text, target, green, isCrit)
     end)
 end
 
-function dealDamage(source, target, amount)
-    UnitDamageTargetBJ(
-        source, target, amount, ATTACK_TYPE_NORMAL, DAMAGE_TYPE_UNIVERSAL)
+function dealDamage(source, target, amount, type)
+    UnitDamageTarget(
+        source,
+        target,
+        amount,
+        true,
+        false,
+        type.attackType,
+        type.damageType,
+        type.weaponType)
 end
 
 function heal(source, target, amount)
@@ -49,10 +69,31 @@ function heal(source, target, amount)
     -- TODO feed into threat system
 end
 
+function getTypeFromTypes(damageType, weaponType, attackType)
+    for _, type in pairs(TYPE) do
+        if
+            type.damageType == damageType and
+            type.weaponType == weaponType and
+            type.attackType == attackType
+        then
+            return type
+        end
+    end
+    -- All auto attacks are physical
+    return TYPE.PHYSICAL
+end
+
 function onDamageTaken()
     local source = GetEventDamageSource()
     local target = GetTriggerUnit()
-    local amount = buff.getModifiedDamage(source, target, GetEventDamage())
+    local damageType = BlzGetEventDamageType()
+    local weaponType = BlzGetEventWeaponType()
+    local attackType = BlzGetEventAttackType()
+
+    local type = getTypeFromTypes(damageType, weaponType, attackType)
+
+    local amount = buff.getModifiedDamage(
+        source, target, GetEventDamage(), type)
     -- TODO pull from buffs to get crit chance & crit modifier
     -- Roll a dice to check if its a crit
     local critChance = GetRandomInt(0, 100)
@@ -77,6 +118,7 @@ function init()
 end
 
 return {
+    TYPE = TYPE,
     init = init,
     dealDamage = dealDamage,
     heal = heal,

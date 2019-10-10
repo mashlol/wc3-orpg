@@ -87,7 +87,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 400)
+                damage.dealDamage(hero, collidedUnit, 400, damage.TYPE.PHYSICAL)
 
                 buff.addBuff(hero, collidedUnit, 'stun', 2)
 
@@ -118,7 +118,7 @@ local cast = function(playerId)
         end,
     }
 
-    casttime.cast(playerId, 0.6, false)
+    casttime.cast(playerId, 0.6, false, false, true)
 
     return true
 end

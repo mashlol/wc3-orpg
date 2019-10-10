@@ -77,7 +77,7 @@ local STATS = {
     -- -------------------------------------------------------------------------
     RAW_DAMAGE = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' damage'
+            return '+ ' .. info.amount .. ' attack damage'
         end,
         effect = function(info, obj)
             obj.rawDamage = obj.rawDamage + info.amount
@@ -86,10 +86,28 @@ local STATS = {
     },
     PERCENT_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% damage'
+            return '+' .. round((info.amount - 1) * 100, 2) .. '% attack damage'
         end,
         effect = function(info, obj)
             obj.pctDamage = obj.pctDamage * info.amount
+        end,
+        priority = 2,
+    },
+    RAW_SPELL_DAMAGE = {
+        getTooltip = function(info)
+            return '+ ' .. info.amount .. ' spell damage'
+        end,
+        effect = function(info, obj)
+            obj.rawSpellDamage = obj.rawSpellDamage + info.amount
+        end,
+        priority = 1,
+    },
+    PERCENT_SPELL_DAMAGE = {
+        getTooltip = function(info)
+            return '+' .. round((info.amount - 1) * 100, 2) .. '% spell damage'
+        end,
+        effect = function(info, obj)
+            obj.pctSpellDamage = obj.pctSpellDamage * info.amount
         end,
         priority = 2,
     },
@@ -111,13 +129,21 @@ local STATS = {
         end,
         priority = 2,
     },
-
     PERCENT_INCOMING_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% damage taken'
+            return '+' .. round((info.amount - 1) * 100, 2) .. '% physical damage taken'
         end,
         effect = function(info, obj)
             obj.pctIncomingDamage = obj.pctIncomingDamage * info.amount
+        end,
+        priority = 2,
+    },
+    PERCENT_INCOMING_SPELL_DAMAGE = {
+        getTooltip = function(info)
+            return '+' .. round((info.amount - 1) * 100, 2) .. '% spell damage taken'
+        end,
+        effect = function(info, obj)
+            obj.pctIncomingSpellDamage = obj.pctIncomingSpellDamage * info.amount
         end,
         priority = 2,
     },
@@ -127,6 +153,25 @@ local STATS = {
         end,
         effect = function(info, obj)
             obj.pctIncomingHealing = obj.pctIncomingHealing * info.amount
+        end,
+        priority = 2,
+    },
+
+    PERCENT_COOLDOWN_REDUCTION = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% cooldown reduction'
+        end,
+        effect = function(info, obj)
+            obj.cooldownReduction = obj.cooldownReduction * info.amount
+        end,
+        priority = 2,
+    },
+    PERCENT_CAST_SPEED = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% casting speed'
+        end,
+        effect = function(info, obj)
+            obj.castSpeed = obj.castSpeed * info.amount
         end,
         priority = 2,
     },
