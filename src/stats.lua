@@ -156,6 +156,33 @@ local STATS = {
         end,
         priority = 2,
     },
+    RAW_INCOMING_DAMAGE = {
+        getTooltip = function(info)
+            return '+' .. info.amount .. ' physical damage taken'
+        end,
+        effect = function(info, obj)
+            obj.rawIncomingDamage = obj.rawIncomingDamage + info.amount
+        end,
+        priority = 1,
+    },
+    RAW_INCOMING_SPELL_DAMAGE = {
+        getTooltip = function(info)
+            return '+' .. info.amount .. ' spell damage taken'
+        end,
+        effect = function(info, obj)
+            obj.rawIncomingSpellDamage = obj.rawIncomingSpellDamage + info.amount
+        end,
+        priority = 1,
+    },
+    RAW_INCOMING_HEALING = {
+        getTooltip = function(info)
+            return '+' .. info.amount .. ' healing received'
+        end,
+        effect = function(info, obj)
+            obj.rawIncomingHealing = obj.rawIncomingHealing + info.amount
+        end,
+        priority = 1,
+    },
 
     PERCENT_COOLDOWN_REDUCTION = {
         getTooltip = function(info)
@@ -172,6 +199,15 @@ local STATS = {
         end,
         effect = function(info, obj)
             obj.castSpeed = obj.castSpeed * info.amount
+        end,
+        priority = 2,
+    },
+    PERCENT_ATTACK_SPEED = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% attack speed'
+        end,
+        effect = function(info, obj)
+            obj.attackSpeed = obj.attackSpeed * info.amount
         end,
         priority = 2,
     },

@@ -47,6 +47,7 @@ local ALL_HERO_INFO = {
         },
         model = "units\\demon\\HeroChaosBladeMaster\\HeroChaosBladeMaster.mdl",
         baseHP = 600,
+        attackSpeed = 2.2,
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
@@ -61,6 +62,7 @@ local ALL_HERO_INFO = {
         },
         model = "Valkyrie.mdl",
         baseHP = 600,
+        attackSpeed = 2.2,
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
@@ -86,6 +88,7 @@ local ALL_HERO_INFO = {
         },
         model = "Units\\Creeps\\HeroGoblinAlchemist\\HeroGoblinAlchemist.mdl",
         baseHP = 600,
+        attackSpeed = 2.2,
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
@@ -113,6 +116,7 @@ local ALL_HERO_INFO = {
         },
         model = "Magna Aegwynn.mdl",
         baseHP = 400,
+        attackSpeed = 2.2,
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
@@ -139,6 +143,7 @@ local ALL_HERO_INFO = {
         },
         model = "johanaulty.mdl",
         baseHP = 1000,
+        attackSpeed = 2.2,
     },
 }
 

@@ -90,8 +90,11 @@ function applyBuffs()
         end
         PauseUnit(unit, res.isStunned)
         SetUnitScale(unit, res.scale, res.scale, res.scale)
-        if res.baseHP ~= nil then
+        if res.baseHP then
             BlzSetUnitMaxHP(unit, res.baseHP)
+        end
+        if res.attackSpeed then
+            BlzSetUnitAttackCooldown(unit, res.attackSpeed, 0)
         end
     end
 
