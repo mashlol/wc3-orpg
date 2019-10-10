@@ -1,24 +1,16 @@
 local buff = require('src/buff.lua')
 local damage = require('src/damage.lua')
 local hero = require('src/hero.lua')
-local casttime = require('src/casttime.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
 local BUFF_LOOP_INTERVAL = 0.1
 
+local finalBuffList = {}
 local numLoops = 0
 
-function applyEffectList(obj, effectList)
-    for _,info in pairs(effectList) do
-        info.type.effect(info, obj)
-    end
-
-    return obj
-end
-
 function applyBuffSpecificEffects(unit, source, effects, stacks)
-    local obj = getObjForUnit(unit)
+    local obj = buff.getBaseObjForUnit(unit)
     for _,info in pairs(effects) do
         for i=1,stacks,1 do
             info.type.effect(info, obj, numLoops)
@@ -32,53 +24,14 @@ function applyBuffSpecificEffects(unit, source, effects, stacks)
     end
 end
 
-function maybeAddEffectToList(effectsByUnitId, unit, effect)
-    local unitId = GetHandleId(unit)
-    if effectsByUnitId[unitId] == nil then
-        effectsByUnitId[unitId] = {
-            unit = unit,
-            effects = {},
-        }
-    end
-    if effect ~= nil then
-        table.insert(effectsByUnitId[unitId].effects, effect)
-    end
-end
-
-function getObjForUnit(unit)
-    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-    local ownerHero = hero.getHero(ownerPlayerId)
-    local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
-    local baseSpeed = GetUnitDefaultMoveSpeed(unit)
-    local scale = GetUnitPointValue(unit) / 100
-    local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
-    local isRooted = false
-
-    return {
-        baseSpeed = baseSpeed,
-        scale = scale,
-        isStunned = isStunned,
-        isRooted = isRooted,
-        baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
-        dmgToDeal = 0,
-        hpToHeal = 0,
-        pctDamage = 1,
-        pctHealing = 1,
-        rawDamage = 0,
-        rawHealing = 0,
-        pctIncomingDamage = 1,
-        pctIncomingHealing = 1,
-    }
-end
-
 function applyBuffs()
     -- Get all affected units (all buff units + all units with equipped items)
     -- Loop through each unit
     -- Grab the buffs for that unit
-    -- Go through each effect on that buff and run applyEffectList and also
+    -- Go through each effect on that buff and run buff.applyEffectList and also
     -- manually do the heal/dmg part
     -- Go through each item for that unit
-    -- Go through each stat on each item and run applyEffectList
+    -- Go through each stat on each item and run buff.applyEffectList
 
     -- effectsByUnitId = {
     --     [unitHandleId] = {
@@ -98,12 +51,12 @@ function applyBuffs()
             for _, itemId in pairs(equippedItems) do
                 local stats = itemmanager.ITEMS[itemId].stats
                 for _, statInfo in pairs(stats) do
-                    maybeAddEffectToList(effectsByUnitId, heroUnit, statInfo)
+                    buff.maybeAddEffectToList(effectsByUnitId, heroUnit, statInfo)
                 end
             end
             local stats = hero.getStatEffects(playerId)
             for _, stat in pairs(stats) do
-                maybeAddEffectToList(effectsByUnitId, heroUnit, stat)
+                buff.maybeAddEffectToList(effectsByUnitId, heroUnit, stat)
             end
         end
     end
@@ -111,23 +64,24 @@ function applyBuffs()
     local buffInstances = buff.getBuffInstances()
     for _, unitInfo in pairs(buffInstances) do
         local unit = unitInfo.unit
-        maybeAddEffectToList(effectsByUnitId, unit)
+        buff.maybeAddEffectToList(effectsByUnitId, unit)
         for buffName,val in pairs(unitInfo.buffs) do
             local effects = buff.BUFF_INFO[buffName].effects
             for _,info in pairs(effects) do
                 for i=1,val.stacks,1 do
-                    maybeAddEffectToList(effectsByUnitId, unit, info)
+                    buff.maybeAddEffectToList(effectsByUnitId, unit, info)
                 end
             end
             applyBuffSpecificEffects(unit, val.source, effects, val.stacks)
         end
     end
 
-    for _,unitInfo in pairs(effectsByUnitId) do
+    for idx,unitInfo in pairs(effectsByUnitId) do
         local unit = unitInfo.unit
 
-        local obj = getObjForUnit(unit)
-        local res = applyEffectList(obj, unitInfo.effects)
+        local obj = buff.getBaseObjForUnit(unit)
+        local res = buff.applyEffectList(obj, unitInfo.effects)
+        finalBuffList[idx] = res
 
         if res.isRooted then
             SetUnitMoveSpeed(unit, 0)
@@ -144,10 +98,15 @@ function applyBuffs()
     numLoops = numLoops + 1
 end
 
+function getUnitInfo(unit)
+    return finalBuffList[GetHandleId(unit)] or buff.getBaseObjForUnit(unit)
+end
+
 function init()
     TimerStart(CreateTimer(), BUFF_LOOP_INTERVAL, true, applyBuffs)
 end
 
 return {
     init = init,
+    getUnitInfo = getUnitInfo,
 }
