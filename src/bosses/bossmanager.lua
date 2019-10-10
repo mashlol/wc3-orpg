@@ -9,12 +9,14 @@ local ALL_BOSS_CLASSES = {
         startX = -651,
         startY = -1480,
         facing = 280,
+        respawnable = true,
     },
     Wolf:new{
         bossUnitId = FourCC('hbld'),
         startX = 15195,
         startY = 7531,
         facing = 280,
+        respawnable = true,
     },
 }
 
@@ -102,6 +104,10 @@ function Context:onFightEnded()
         print("You killed " .. self.cls:getName() .. '!')
         -- TODO implement a loot system
         self:cleanupFight()
+
+        if self.cls.respawnable then
+            self:startRespawn()
+        end
         return
     end
 
@@ -175,7 +181,7 @@ function Context:onBossEngaged()
 
     self:ensureEngagingUnitInvolved(unit)
 
-    for idx, hero in pairs(self.involvedHeroes) do
+    for _, hero in pairs(self.involvedHeroes) do
         TriggerRegisterUnitEvent(self.endFightTrigger, hero, EVENT_UNIT_DEATH)
     end
 
@@ -187,7 +193,7 @@ function Context:onBossEngaged()
     end)
 
     -- TODO make proper phase detection
-    for idx, phase in pairs(self.phases) do
+    for _, phase in pairs(self.phases) do
         phase.phase:startPhase()
     end
 
@@ -196,17 +202,28 @@ function Context:onBossEngaged()
         self:fixEngagement()
     end)
 
-    for idx, door in pairs(self.doors) do
+    for _, door in pairs(self.doors) do
         ModifyGateBJ(bj_GATEOPERATION_CLOSE, door)
     end
 end
 
 function Context:cleanupFight()
-    for idx, phase in pairs(self.phases) do
+    for _, phase in pairs(self.phases) do
         phase.phase:endPhase()
     end
     DestroyTrigger(self.endFightTrigger)
     DestroyTimer(self.engageTimer)
+end
+
+function Context:startRespawn()
+    TriggerSleepAction(60)
+    self.cls.bossUnit =  CreateUnit(
+        Player(PLAYER_NEUTRAL_AGGRESSIVE),
+        self.cls.bossUnitId,
+        self.cls.startX,
+        self.cls.startY,
+        self.cls.facing)
+    self:resetFight()
 end
 
 function Context:resetFight()
