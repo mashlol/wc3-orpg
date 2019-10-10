@@ -138,7 +138,7 @@ local cast = function(playerId)
         end,
     }
 
-    casttime.cast(playerId, 0.5, false)
+    casttime.cast(playerId, 0.5, false, false, true)
 
     if not IsUnitAlly(target, Player(playerId)) then
         target.restoreOrder(playerId)

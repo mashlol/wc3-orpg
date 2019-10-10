@@ -81,7 +81,7 @@ local cast = function(playerId)
         duration = 0.5,
     }
 
-    casttime.cast(playerId, 0.15, false)
+    casttime.cast(playerId, 0.15, false, false, true)
 
     SetUnitX(hero, finalV.x)
     SetUnitY(hero, finalV.y)

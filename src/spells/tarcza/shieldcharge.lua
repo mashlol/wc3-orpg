@@ -118,7 +118,7 @@ local cast = function(playerId)
         end,
     }
 
-    casttime.cast(playerId, 0.6, false)
+    casttime.cast(playerId, 0.6, false, false, true)
 
     return true
 end

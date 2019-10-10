@@ -4,7 +4,7 @@ local hero = require('src/hero.lua')
 
 local castTimes = {}
 
-local cast = function(playerId, time, interruptable, canMove)
+local cast = function(playerId, time, interruptable, canMove, notRealCast)
     if castTimes[playerId] ~= nil then
         return false
     end
@@ -22,8 +22,10 @@ local cast = function(playerId, time, interruptable, canMove)
         canMove = true
     end
 
-    local heroUnit = hero.getHero(playerId)
-    time = time * buffloop.getUnitInfo(heroUnit).castSpeed
+    if not notRealCast then
+        local heroUnit = hero.getHero(playerId)
+        time = time * buffloop.getUnitInfo(heroUnit).castSpeed
+    end
 
     local timer = CreateTimer()
     TimerStart(timer, time, false, nil)
