@@ -130,7 +130,7 @@ local cast = function(playerId)
             if IsUnitAlly(target, Player(playerId)) then
                 buff.addBuff(hero, target, 'assist', 2)
             else
-                damage.dealDamage(hero, target, 40)
+                damage.dealDamage(hero, target, 40, damage.TYPE.PHYSICAL)
                 buff.addBuff(hero, target, 'stun', 2)
             end
             casttime.stopCast(playerId)
