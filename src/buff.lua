@@ -472,6 +472,7 @@ function getBaseObjForUnit(unit)
         pctIncomingSpellDamage = 1,
         pctIncomingHealing = 1,
         cooldownReduction = 1,
+        castSpeed = 1,
     }
 end
 
