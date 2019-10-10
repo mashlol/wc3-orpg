@@ -6,7 +6,7 @@ local STATS = {
     -- -------------------------------------------------------------------------
     PERCENT_MOVE_SPEED = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% move speed'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% move speed'
         end,
         effect = function(info, obj)
             obj.baseSpeed = obj.baseSpeed * info.amount
@@ -15,7 +15,7 @@ local STATS = {
     },
     PERCENT_SCALE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% size'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% size'
         end,
         effect = function(info, obj)
             obj.scale = obj.scale * info.amount
@@ -33,7 +33,7 @@ local STATS = {
     },
     RAW_HIT_POINTS = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' HP'
+            return maybeAddPlus(info.amount) .. ' HP'
         end,
         effect = function(info, obj)
             obj.baseHP = obj.baseHP + info.amount
@@ -51,7 +51,7 @@ local STATS = {
     },
     HEALTH_REGEN = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' HP / s'
+            return maybeAddPlus(info.amount) .. ' HP / s'
         end,
         effect = function(info, obj, tick)
             if tick ~= nil and tick % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0 then
@@ -62,7 +62,7 @@ local STATS = {
     },
     DAMAGE_OVER_TIME = {
         getTooltip = function(info)
-            return '- ' .. info.amount .. ' HP / s'
+            return maybeAddPlus(-1 * info.amount) .. ' HP / s'
         end,
         effect = function(info, obj, tick)
             if tick ~= nil and tick % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0 then
@@ -77,7 +77,7 @@ local STATS = {
     -- -------------------------------------------------------------------------
     RAW_DAMAGE = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' attack damage'
+            return maybeAddPlus(info.amount) .. ' attack damage'
         end,
         effect = function(info, obj)
             obj.rawDamage = obj.rawDamage + info.amount
@@ -86,7 +86,7 @@ local STATS = {
     },
     PERCENT_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% attack damage'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% attack damage'
         end,
         effect = function(info, obj)
             obj.pctDamage = obj.pctDamage * info.amount
@@ -95,7 +95,7 @@ local STATS = {
     },
     RAW_SPELL_DAMAGE = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' spell damage'
+            return maybeAddPlus(info.amount) .. ' spell damage'
         end,
         effect = function(info, obj)
             obj.rawSpellDamage = obj.rawSpellDamage + info.amount
@@ -104,7 +104,7 @@ local STATS = {
     },
     PERCENT_SPELL_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% spell damage'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% spell damage'
         end,
         effect = function(info, obj)
             obj.pctSpellDamage = obj.pctSpellDamage * info.amount
@@ -113,7 +113,7 @@ local STATS = {
     },
     RAW_HEALING = {
         getTooltip = function(info)
-            return '+ ' .. info.amount .. ' healing'
+            return maybeAddPlus(info.amount) .. ' healing'
         end,
         effect = function(info, obj)
             obj.rawHealing = obj.rawHealing + info.amount
@@ -122,7 +122,7 @@ local STATS = {
     },
     PERCENT_HEALING = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% healing'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% healing'
         end,
         effect = function(info, obj)
             obj.pctHealing = obj.pctHealing * info.amount
@@ -131,7 +131,7 @@ local STATS = {
     },
     PERCENT_INCOMING_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% physical damage taken'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% physical damage taken'
         end,
         effect = function(info, obj)
             obj.pctIncomingDamage = obj.pctIncomingDamage * info.amount
@@ -140,7 +140,7 @@ local STATS = {
     },
     PERCENT_INCOMING_SPELL_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% spell damage taken'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% spell damage taken'
         end,
         effect = function(info, obj)
             obj.pctIncomingSpellDamage = obj.pctIncomingSpellDamage * info.amount
@@ -149,7 +149,7 @@ local STATS = {
     },
     PERCENT_INCOMING_HEALING = {
         getTooltip = function(info)
-            return '+' .. round((info.amount - 1) * 100, 2) .. '% healing received'
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% healing received'
         end,
         effect = function(info, obj)
             obj.pctIncomingHealing = obj.pctIncomingHealing * info.amount
@@ -158,7 +158,7 @@ local STATS = {
     },
     RAW_INCOMING_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. info.amount .. ' physical damage taken'
+            return maybeAddPlus(info.amount) .. ' physical damage taken'
         end,
         effect = function(info, obj)
             obj.rawIncomingDamage = obj.rawIncomingDamage + info.amount
@@ -167,7 +167,7 @@ local STATS = {
     },
     RAW_INCOMING_SPELL_DAMAGE = {
         getTooltip = function(info)
-            return '+' .. info.amount .. ' spell damage taken'
+            return maybeAddPlus(info.amount) .. ' spell damage taken'
         end,
         effect = function(info, obj)
             obj.rawIncomingSpellDamage = obj.rawIncomingSpellDamage + info.amount
@@ -176,7 +176,7 @@ local STATS = {
     },
     RAW_INCOMING_HEALING = {
         getTooltip = function(info)
-            return '+' .. info.amount .. ' healing received'
+            return maybeAddPlus(info.amount) .. ' healing received'
         end,
         effect = function(info, obj)
             obj.rawIncomingHealing = obj.rawIncomingHealing + info.amount
@@ -186,7 +186,7 @@ local STATS = {
 
     PERCENT_COOLDOWN_REDUCTION = {
         getTooltip = function(info)
-            return '+' .. round((1 - info.amount) * 100, 2) .. '% cooldown reduction'
+            return maybeAddPlus(round((1 - info.amount) * 100, 2)) .. '% cooldown reduction'
         end,
         effect = function(info, obj)
             obj.cooldownReduction = obj.cooldownReduction * info.amount
@@ -195,7 +195,7 @@ local STATS = {
     },
     PERCENT_CAST_SPEED = {
         getTooltip = function(info)
-            return '+' .. round((1 - info.amount) * 100, 2) .. '% casting speed'
+            return maybeAddPlus(round((1 - info.amount) * 100, 2)) .. '% casting speed'
         end,
         effect = function(info, obj)
             obj.castSpeed = obj.castSpeed * info.amount
@@ -204,7 +204,7 @@ local STATS = {
     },
     PERCENT_ATTACK_SPEED = {
         getTooltip = function(info)
-            return '+' .. round((1 - info.amount) * 100, 2) .. '% attack speed'
+            return maybeAddPlus(round((1 - info.amount) * 100, 2)) .. '% attack speed'
         end,
         effect = function(info, obj)
             obj.attackSpeed = obj.attackSpeed * info.amount
@@ -212,6 +212,13 @@ local STATS = {
         priority = 2,
     },
 }
+
+function maybeAddPlus(num)
+    if num >= 0 then
+        return '+' .. num
+    end
+    return num
+end
 
 function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
