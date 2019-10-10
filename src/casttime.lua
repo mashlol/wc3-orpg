@@ -1,4 +1,6 @@
 local hero = require('src/hero.lua')
+local buffloop = require('src/buffloop.lua')
+local hero = require('src/hero.lua')
 
 local castTimes = {}
 
@@ -19,6 +21,9 @@ local cast = function(playerId, time, interruptable, canMove)
         -- Allow move so you can interupt by moving
         canMove = true
     end
+
+    local heroUnit = hero.getHero(playerId)
+    time = time * buffloop.getUnitInfo(heroUnit).castSpeed
 
     local timer = CreateTimer()
     TimerStart(timer, time, false, nil)

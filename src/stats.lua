@@ -166,6 +166,15 @@ local STATS = {
         end,
         priority = 2,
     },
+    PERCENT_CAST_SPEED = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% casting speed'
+        end,
+        effect = function(info, obj)
+            obj.castSpeed = obj.castSpeed * info.amount
+        end,
+        priority = 2,
+    },
 }
 
 function round(num, numDecimalPlaces)
