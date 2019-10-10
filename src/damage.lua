@@ -1,11 +1,14 @@
 local buff = require('src/buff.lua')
 local threat = require('src/threat.lua')
 
-function createCombatText(text, target, green)
+function createCombatText(text, target, green, isCrit)
     local targetSize = BlzGetUnitCollisionSize(target)
 
     local tag = CreateTextTag()
-    SetTextTagText(tag, I2S(S2I(text)), TextTagSize2Height(targetSize * 0.04 + 6) * 2)
+    SetTextTagText(
+        tag,
+        I2S(S2I(text)),
+        TextTagSize2Height(targetSize * 0.04 + 6) * 1.5 * (isCrit and 1.5 or 1))
     SetTextTagPosUnit(tag, target, 7)
     if green then
         SetTextTagColor(tag, 0, 255, 0, 0)
@@ -50,8 +53,16 @@ function onDamageTaken()
     local source = GetEventDamageSource()
     local target = GetTriggerUnit()
     local amount = buff.getModifiedDamage(source, target, GetEventDamage())
+    -- TODO pull from buffs to get crit chance & crit modifier
+    -- Roll a dice to check if its a crit
+    local critChance = GetRandomInt(0, 100)
+    local isCrit = critChance < 1
+    if isCrit then
+        amount = amount * 2
+    end
+
     BlzSetEventDamage(amount)
-    createCombatText(amount, target, false)
+    createCombatText(amount, target, false, isCrit)
     threat.addThreat(source, target, amount)
     buff.maybeRemoveBuffsOnDamage(source, target, amount)
 end
