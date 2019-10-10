@@ -1,6 +1,8 @@
 local hero = require('src/hero.lua')
 local stats = require('src/stats.lua')
+local buffloop = require('src/buffloop.lua')
 local equipment = require('src/items/equipment.lua')
+local casttime = require('src/casttime.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
 local BUFF_INFO = {
@@ -396,121 +398,69 @@ function getBuffs(unit)
     return buffInstances[unitId] and buffInstances[unitId].buffs or {}
 end
 
--- Iterate over all a units buffs and get the final damage modifier
+function applyEffectList(obj, effectList)
+    for _,info in pairs(effectList) do
+        info.type.effect(info, obj)
+    end
+
+    return obj
+end
+
+function maybeAddEffectToList(effectsByUnitId, unit, effect)
+    local unitId = GetHandleId(unit)
+    if effectsByUnitId[unitId] == nil then
+        effectsByUnitId[unitId] = {
+            unit = unit,
+            effects = {},
+        }
+    end
+    if effect ~= nil then
+        table.insert(effectsByUnitId[unitId].effects, effect)
+    end
+end
+
 function getModifiedDamage(unit, target, amount)
-    local buffs = getBuffs(unit)
-    local modifier = 1
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for _, info in pairs(effects) do
-            if info.type == 'multiplyDamage' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    local buffs = getBuffs(target)
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for _, info in pairs(effects) do
-            if info.type == 'multiplyIncomingDamage' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    -- Repeat for items
-    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-    if hero.getHero(ownerPlayerId) == unit then
-        local items = equipment.getEquippedItems(ownerPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyDamage' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(ownerPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyDamage' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
-    if hero.getHero(targetPlayerId) == target then
-        local items = equipment.getEquippedItems(targetPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyIncomingDamage' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(targetPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyIncomingDamage' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    return amount * modifier
+    local unitInfo = buffloop.getUnitInfo(unit)
+    local targetInfo = buffloop.getUnitInfo(target)
+    return amount *
+        unitInfo.pctDamage *
+        targetInfo.pctIncomingDamage +
+        unitInfo.rawDamage
 end
 
 function getModifiedHealing(unit, target, amount)
-    local buffs = getBuffs(unit)
-    local modifier = 1
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
-            if info.type == 'multiplyHealing' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    local buffs = getBuffs(target)
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
-            if info.type == 'multiplyIncomingHealing' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    -- Repeat for items
+    local unitInfo = buffloop.getUnitInfo(unit)
+    local targetInfo = buffloop.getUnitInfo(target)
+    return amount *
+        unitInfo.pctHealing *
+        targetInfo.pctIncomingHealing +
+        unitInfo.rawHealing
+end
+
+function getBaseObjForUnit(unit)
     local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-    if hero.getHero(ownerPlayerId) == unit then
-        local items = equipment.getEquippedItems(ownerPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyHealing' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(ownerPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyHealing' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
-    if hero.getHero(targetPlayerId) == target then
-        local items = equipment.getEquippedItems(targetPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyIncomingHealing' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(targetPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyIncomingHealing' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    return amount * modifier
+    local ownerHero = hero.getHero(ownerPlayerId)
+    local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
+    local baseSpeed = GetUnitDefaultMoveSpeed(unit)
+    local scale = GetUnitPointValue(unit) / 100
+    local isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId)
+    local isRooted = false
+
+    return {
+        baseSpeed = baseSpeed,
+        scale = scale,
+        isStunned = isStunned,
+        isRooted = isRooted,
+        baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
+        dmgToDeal = 0,
+        hpToHeal = 0,
+        pctDamage = 1,
+        pctHealing = 1,
+        rawDamage = 0,
+        rawHealing = 0,
+        pctIncomingDamage = 1,
+        pctIncomingHealing = 1,
+    }
 end
 
 function getBuffInstances()
@@ -529,4 +479,7 @@ return {
     getModifiedDamage = getModifiedDamage,
     getModifiedHealing = getModifiedHealing,
     maybeRemoveBuffsOnDamage = maybeRemoveBuffsOnDamage,
+    applyEffectList = applyEffectList,
+    maybeAddEffectToList = maybeAddEffectToList,
+    getBaseObjForUnit = getBaseObjForUnit,
 }
