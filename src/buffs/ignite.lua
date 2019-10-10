@@ -3,11 +3,12 @@ local Vector = require('src/vector.lua')
 local collision = require('src/collision.lua')
 local damage = require('src/damage.lua')
 local buff = require('src/buff.lua')
+local stats = require('src/stats.lua')
 
 return {
     effects = {
         {
-            type = 'damage',
+            type = stats.DAMAGE_OVER_TIME,
             amount = 10,
             tickrate = 1,
         }
