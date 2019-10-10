@@ -148,7 +148,9 @@ local cast = function(playerId)
         storedData[playerId].attackCount == 2 and
             0.35 or
             0.1,
-        false)
+        false,
+        false,
+        true)
 
     SetUnitTimeScale(hero, 1)
 
