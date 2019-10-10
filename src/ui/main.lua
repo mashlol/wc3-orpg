@@ -16,6 +16,7 @@ local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
 local ItemBar = require('src/ui/itembar.lua')
 local Backpack = require('src/ui/backpack.lua')
+local Stats = require('src/ui/stats.lua')
 local Equipment = require('src/ui/equipment.lua')
 
 local UI_MODULES = {
@@ -56,6 +57,7 @@ for i=0,9,1 do
     })
 end
 
+table.insert(UI_MODULES, Stats:new())
 table.insert(UI_MODULES, Equipment:new())
 table.insert(UI_MODULES, Dialog:new())
 table.insert(UI_MODULES, QuestLog:new())

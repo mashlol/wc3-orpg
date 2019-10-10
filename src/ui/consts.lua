@@ -23,4 +23,6 @@ return {
     QUEST_LOG_HEIGHT = 0.4,
     MENU_BUTTON_WIDTH = 0.07,
     MENU_BUTTON_HEIGHT = 0.025,
+    STATS_WIDTH = 0.12,
+    STATS_HEIGHT = 0.16,
 }
