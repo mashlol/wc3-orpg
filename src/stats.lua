@@ -202,6 +202,15 @@ local STATS = {
         end,
         priority = 2,
     },
+    PERCENT_ATTACK_SPEED = {
+        getTooltip = function(info)
+            return '+' .. round((1 - info.amount) * 100, 2) .. '% attack speed'
+        end,
+        effect = function(info, obj)
+            obj.attackSpeed = obj.attackSpeed * info.amount
+        end,
+        priority = 2,
+    },
 }
 
 function round(num, numDecimalPlaces)

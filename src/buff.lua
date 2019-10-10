@@ -459,6 +459,7 @@ function getBaseObjForUnit(unit)
         isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId),
         isRooted = false,
         baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
+        attackSpeed = ownerHeroInfo and ownerHeroInfo.attackSpeed,
 
         dmgToDeal = 0,
         hpToHeal = 0,
