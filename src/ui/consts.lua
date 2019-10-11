@@ -6,7 +6,7 @@ return {
     ACTION_ITEM_SIZE = 0.04,
     ITEM_ITEM_SIZE = 0.03,
     CAST_BAR_WIDTH = 0.16,
-    CAST_BAR_HEIGHT = 0.02,
+    CAST_BAR_HEIGHT = 0.028,
     BAR_WIDTH = 0.19,
     BAR_HEIGHT = 0.01,
     BUFF_ICON_SIZE = 0.02,
