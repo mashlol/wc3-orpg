@@ -211,6 +211,33 @@ local STATS = {
         end,
         priority = 2,
     },
+    RAW_PERCENT_CRITICAL = {
+        getTooltip = function(info)
+            return maybeAddPlus(info.amount) .. '% crit chance'
+        end,
+        effect = function(info, obj)
+            obj.critChance = obj.critChance + info.amount
+        end,
+        priority = 2,
+    },
+    RAW_CRITICAL_DAMAGE = {
+        getTooltip = function(info)
+            return maybeAddPlus(info.amount) .. ' crit damage'
+        end,
+        effect = function(info, obj)
+            obj.rawCritDamage = obj.rawCritDamage + info.amount
+        end,
+        priority = 2,
+    },
+    PERCENT_CRITICAL_DAMAGE = {
+        getTooltip = function(info)
+            return maybeAddPlus(round((info.amount - 1) * 100, 2)) .. '% crit damage'
+        end,
+        effect = function(info, obj)
+            obj.pctCritDamage = obj.pctCritDamage * info.amount
+        end,
+        priority = 2,
+    },
 }
 
 function maybeAddPlus(num)
