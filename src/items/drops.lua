@@ -10,7 +10,7 @@ local DROP_TABLE = {
         [6] = 30,
         [5] = 10,
         [1] = 5,
-        [4] = 1,
+        [4] = 50,
         [8] = 5,
         [2] = 50,
     },
@@ -94,7 +94,7 @@ function maybeDistributeDrop()
 
         if
             playerPartyId ~= nil and
-            itemmanager.getRarityInt(itemInfo.rarity) >= itemmanager.getRarityInt(itemmanager.RARITY.UNCOMMON)
+            itemInfo.rarity.priority >= itemmanager.RARITY.UNCOMMON.priority
         then
             local playersInParty = party.getPlayersInParty(playerPartyId)
             local localRollId = rollId

@@ -5,18 +5,22 @@ local RARITY = {
     COMMON = {
         color = "|cffffffff",
         text = "Common",
+        priority = 0,
     },
     UNCOMMON = {
         color = "|cff2cfc03",
         text = "Uncommon",
+        priority = 1,
     },
     RARE = {
         color = "|cff036ffc",
         text = "Rare",
+        priority = 2,
     },
     LEGENDARY = {
         color = "|cffc4ab1a",
         text = "Legendary",
+        priority = 3,
     },
 }
 
@@ -184,16 +188,6 @@ function getItemTooltipNumLines(itemId)
     return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0
 end
 
-function getRarityInt(rarity)
-    for idx, rarityB in pairs(RARITY) do
-        if rarity == rarityB then
-            return idx
-        end
-    end
-
-    return nil
-end
-
 function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
     return math.floor(num * mult + 0.5) / mult
@@ -253,5 +247,4 @@ return {
     getItemInfo = getItemInfo,
     getItemTooltip = getItemTooltip,
     getItemTooltipNumLines = getItemTooltipNumLines,
-    getRarityInt = getRarityInt,
 }
