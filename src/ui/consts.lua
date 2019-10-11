@@ -25,4 +25,6 @@ return {
     MENU_BUTTON_HEIGHT = 0.025,
     STATS_WIDTH = 0.12,
     STATS_HEIGHT = 0.16,
+    LOOT_ROLL_WIDTH = 0.24,
+    LOOT_ROLL_HEIGHT = 0.08,
 }
