@@ -69,12 +69,23 @@ function onSave()
     saveHero(playerId)
 end
 
+function onAutoSave()
+    -- Go through all players, check if they have a hero and save it if they do
+    for i=0,bj_MAX_PLAYERS,1 do
+        if hero.getHero(i) ~= nil then
+            saveHero(i)
+        end
+    end
+end
+
 function init()
     local saveTrigger = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerChatEvent(saveTrigger, Player(i), "-save", true)
     end
     TriggerAddAction(saveTrigger, onSave)
+
+    TimerStart(CreateTimer(), 58, true, onAutoSave)
 end
 
 return {
