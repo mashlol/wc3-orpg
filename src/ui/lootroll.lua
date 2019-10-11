@@ -2,6 +2,7 @@ local consts = require('src/ui/consts.lua')
 local tooltip = require('src/ui/tooltip.lua')
 local utils = require('src/ui/utils.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local drops = require('src/items/drops.lua')
 
 local ITEM_ICON_PADDING = 0.0035
 local BUTTONS = {
@@ -10,12 +11,37 @@ local BUTTONS = {
 
 -- playerRolls = {
 --     [playerId] = {
---         1, 2, 3, -- itemIds in a list
+--         1, 2, 3, -- rollIds (see src/items/drops.lua) in a list
 --     }
 -- }
 local playerRolls = {}
 
-local LootRoll = {}
+local LootRoll = {
+    startRoll = function(playerId, rollId)
+        if playerRolls[playerId] == nil then
+            playerRolls[playerId] = {}
+        end
+        table.insert(playerRolls[playerId], rollId)
+    end,
+    pruneRoll = function(rollId)
+        -- When the roll ends, we'll ensure that no player still has the UI
+        for i=0,bj_MAX_PLAYERS,1 do
+            if playerRolls[i] ~= nil then
+                local idxToPrune = nil
+                for idx, rollIdB in pairs(playerRolls[i]) do
+                    if rollIdB == rollId then
+                        idxToPrune = idx
+                    end
+                end
+                if idxToPrune ~= nil then
+                    -- Force a pass
+                    drops.onRollMade(i, playerRolls[i][idxToPrune], 2)
+                    table.remove(playerRolls[i], idxToPrune)
+                end
+            end
+        end
+    end,
+}
 
 function LootRoll:new(o)
     o = o or {}
@@ -158,6 +184,7 @@ function LootRoll:init()
         TriggerAddAction(trig, function()
             local playerId = GetPlayerId(GetTriggerPlayer())
 
+            drops.onRollMade(playerId, playerRolls[playerId][1], i)
             table.remove(playerRolls[playerId], 1)
 
             BlzFrameSetEnable(BlzGetTriggerFrame(), false)
@@ -170,6 +197,7 @@ function LootRoll:init()
         tooltipFrame = tooltipFrame,
         itemIcon = itemIconBackdropFrame,
         itemText = itemTextFrame,
+        progressFilled = progressBarFilledBackdropFrame,
     }
 
     return self
@@ -186,14 +214,20 @@ function LootRoll:update(playerId)
         return
     end
 
-    local itemId = playerRolls[playerId][1]
+    local timer = drops.getTimerForRoll(playerRolls[playerId][1])
+    local duration = TimerGetElapsed(timer) / TimerGetTimeout(timer)
+    BlzFrameSetSize(
+        frames.progressFilled,
+        (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4 * duration,
+        consts.LOOT_ROLL_HEIGHT * 1 / 6)
+
+    local itemId = drops.getItemIdForRoll(playerRolls[playerId][1])
     local itemInfo = itemmanager.getItemInfo(itemId)
     if itemId ~= nil and itemInfo ~= nil then
         BlzFrameSetText(frames.itemText, itemInfo.name)
         BlzFrameSetTexture(frames.itemIcon, itemInfo.icon, 0, true)
 
-        local numTooltipLines = itemmanager.getItemTooltipNumLines(
-            itemId)
+        local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
         BlzFrameSetSize(
             frames.tooltipFrame.origin,
             0.16,
