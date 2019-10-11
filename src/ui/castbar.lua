@@ -23,6 +23,29 @@ function CastBar:init()
         0.4,
         consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 12)
 
+    local castBarFrameBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "castBarFrameBackdrop",
+        castBarFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        castBarFrameBackdrop,
+        consts.CAST_BAR_WIDTH - 0.04,
+        consts.CAST_BAR_HEIGHT - 0.012)
+    BlzFrameSetPoint(
+        castBarFrameBackdrop,
+        FRAMEPOINT_LEFT,
+        castBarFrameOrigin,
+        FRAMEPOINT_LEFT,
+        0.02,
+        0)
+    BlzFrameSetTexture(
+        castBarFrameBackdrop,
+        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        0,
+        true)
+
     local castBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
         "castBarFrameFilled",
