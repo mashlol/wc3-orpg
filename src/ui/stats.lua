@@ -67,6 +67,18 @@ local STATS_TO_SHOW = {
             return round((1 - unitInfo.pctIncomingSpellDamage) * 100, 1) .. '% + ' .. (-1 * unitInfo.rawIncomingSpellDamage)
         end
     },
+    {
+        prefix = 'Crit Chance: ',
+        getAmount = function(unitInfo)
+            return unitInfo.critChance .. '%'
+        end
+    },
+    {
+        prefix = 'Crit Damage: ',
+        getAmount = function(unitInfo)
+            return round((unitInfo.pctCritDamage) * 100, 1) .. '% + ' .. (unitInfo.rawCritDamage)
+        end
+    },
 }
 
 -- statsToggles = {
@@ -119,7 +131,7 @@ function Stats:init()
             statsOrigin,
             FRAMEPOINT_TOP,
             consts.STATS_WIDTH / 2 - 0.01,
-            i * (-0.02) - 0.01)
+            i * (-0.016) - 0.01)
         BlzFrameSetScale(infoText, 0.75)
 
         table.insert(textFrames, {
