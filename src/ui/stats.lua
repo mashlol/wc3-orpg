@@ -40,31 +40,31 @@ local STATS_TO_SHOW = {
     {
         prefix = 'Physical Damage: ',
         getAmount = function(unitInfo)
-            return round(unitInfo.pctDamage * 100, 1) .. '% + ' .. unitInfo.rawDamage
+            return maybeAddRawDamage(round(unitInfo.pctDamage * 100, 1) .. '%', unitInfo.rawDamage)
         end
     },
     {
         prefix = 'Spell Damage: ',
         getAmount = function(unitInfo)
-            return round(unitInfo.pctSpellDamage * 100, 1) .. '% + ' .. unitInfo.rawSpellDamage
+            return maybeAddRawDamage(round(unitInfo.pctSpellDamage * 100, 1) .. '%', unitInfo.rawSpellDamage)
         end
     },
     {
         prefix = 'Healing Power: ',
         getAmount = function(unitInfo)
-            return round(unitInfo.pctHealing * 100, 1) .. '% + ' .. unitInfo.rawHealing
+            return maybeAddRawDamage(round(unitInfo.pctHealing * 100, 1) .. '%', unitInfo.rawHealing)
         end
     },
     {
         prefix = 'Physical Defense: ',
         getAmount = function(unitInfo)
-            return round((1 - unitInfo.pctIncomingDamage) * 100, 1) .. '% + ' .. (-1 * unitInfo.rawIncomingDamage)
+            return maybeAddRawDamage(round((1 - unitInfo.pctIncomingDamage) * 100, 1) .. '%', (-1 * unitInfo.rawIncomingDamage))
         end
     },
     {
         prefix = 'Spell Defense: ',
         getAmount = function(unitInfo)
-            return round((1 - unitInfo.pctIncomingSpellDamage) * 100, 1) .. '% + ' .. (-1 * unitInfo.rawIncomingSpellDamage)
+            return maybeAddRawDamage(round((1 - unitInfo.pctIncomingSpellDamage) * 100, 1) .. '%', (-1 * unitInfo.rawIncomingSpellDamage))
         end
     },
     {
@@ -76,10 +76,17 @@ local STATS_TO_SHOW = {
     {
         prefix = 'Crit Damage: ',
         getAmount = function(unitInfo)
-            return round((unitInfo.pctCritDamage) * 100, 1) .. '% + ' .. (unitInfo.rawCritDamage)
+            return maybeAddRawDamage(round((unitInfo.pctCritDamage) * 100, 1) .. '%', unitInfo.rawCritDamage)
         end
     },
 }
+
+function maybeAddRawDamage(text, rawDmg)
+    if rawDmg > 0 then
+        text = text .. ' + ' .. rawDmg
+    end
+    return text
+end
 
 -- statsToggles = {
 --     [playerId] = true or nil
