@@ -482,6 +482,9 @@ function getBaseObjForUnit(unit)
 
         cooldownReduction = 1,
         castSpeed = 1,
+        critChance = 1,
+        pctCritDamage = 1.5,
+        rawCritDamage = 0,
     }
 end
 
