@@ -184,6 +184,16 @@ function getItemTooltipNumLines(itemId)
     return TOOLTIPS[itemId] and TOOLTIPS[itemId].numLines or 0
 end
 
+function getRarityInt(rarity)
+    for idx, rarityB in pairs(RARITY) do
+        if rarity == rarityB then
+            return idx
+        end
+    end
+
+    return nil
+end
+
 function round(num, numDecimalPlaces)
     local mult = 10^(numDecimalPlaces or 0)
     return math.floor(num * mult + 0.5) / mult
@@ -238,8 +248,10 @@ end
 
 return {
     ITEMS = ITEMS,
+    RARITY = RARITY,
     init = init,
     getItemInfo = getItemInfo,
     getItemTooltip = getItemTooltip,
     getItemTooltipNumLines = getItemTooltipNumLines,
+    getRarityInt = getRarityInt,
 }
