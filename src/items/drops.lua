@@ -6,13 +6,12 @@ local party = require('src/party.lua')
 
 local DROP_TABLE = {
     [FourCC('hmbs')] = {
-        -- none = 90,
+        none = 90,
         [6] = 30,
         [5] = 10,
         [1] = 5,
-        [4] = 50,
+        [4] = 1,
         [8] = 5,
-        [2] = 50,
     },
     [FourCC('hspi')] = {
         none = 90,
