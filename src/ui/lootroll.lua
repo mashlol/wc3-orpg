@@ -224,7 +224,8 @@ function LootRoll:update(playerId)
     local itemId = drops.getItemIdForRoll(playerRolls[playerId][1])
     local itemInfo = itemmanager.getItemInfo(itemId)
     if itemId ~= nil and itemInfo ~= nil then
-        BlzFrameSetText(frames.itemText, itemInfo.name)
+        BlzFrameSetText(
+            frames.itemText, itemInfo.rarity.color .. itemInfo.name .. '|r')
         BlzFrameSetTexture(frames.itemIcon, itemInfo.icon, 0, true)
 
         local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
