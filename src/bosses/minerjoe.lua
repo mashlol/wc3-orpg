@@ -73,6 +73,8 @@ function MinerJoe:init()
     phase1:addTimedEvent(10, function()
         self:throwBomb()
     end)
+
+    self.ctx:registerDoor(gg_dest_DTg3_18751, false)
 end
 
 return MinerJoe
