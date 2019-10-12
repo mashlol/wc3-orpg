@@ -57,6 +57,14 @@ const COLUMNS = {
         name: 'itemLevel',
         type: 'int',
     },
+    'Sell': {
+        name: 'cost',
+        type: 'int',
+    },
+    'Can wear': {
+        name: 'usableClasses',
+        type: 'classList',
+    },
 };
 
 const STATS = {
@@ -135,6 +143,23 @@ for (const x in parsed) {
                 value = '0';
             }
             itemResult += '    ' + column.name + " = " + value + ",\n";
+        } else if (column && column.type === 'classList') {
+            if (value.toLowerCase() == 'all') {
+                // Ignored
+            } else {
+                const allowedClasses = value.replace(/\s/g, "").split(',').map(x => {
+                    if (x == 'Ta') {
+                        return 'tarczaId';
+                    } else if (x == 'Yu') {
+                        return 'yujiId';
+                    } else if (x == 'Az') {
+                        return 'azoraId';
+                    } else if (x == 'Iv') {
+                        return 'ivanovId';
+                    }
+                }).join(',');
+                itemResult += '    ' + column.name + ' = ' + '{' + allowedClasses + '},\n';
+            }
         }
 
         const stat = STATS[y];
