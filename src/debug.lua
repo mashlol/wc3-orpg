@@ -8,6 +8,7 @@ local animNum = 1
 -- 2, 3, 8 atk
 -- 13 bladestorm
 
+local itemId = 1
 
 local debug9 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
@@ -21,7 +22,9 @@ local debug9 = function()
 
     animNum = animNum + 0.01
 
-    backpack.addItemIdToBackpack(playerId, 8)
+    backpack.addItemIdToBackpack(playerId, itemId)
+
+    itemId = itemId + 1
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
