@@ -35,6 +35,12 @@ local TYPE = {
         x = 0,
         y = 0,
     },
+    EQUIPMENT_ERROR = {
+        duration = 2,
+        color = "|cffff0000",
+        x = 1,
+        y = 1,
+    }
 }
 
 local log = function(playerId, text, type, duration)

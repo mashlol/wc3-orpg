@@ -186,7 +186,7 @@ function Backpack:init()
                     log.log(
                         playerId,
                         "You already have an item in that bag position.",
-                        log.TYPE.ERROR)
+                        log.TYPE.EQUIPMENT_ERROR)
                 else
                     local activeItemId = equipment.getItemInSlot(
                         playerId, activeEquipmentItem)
