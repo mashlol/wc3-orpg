@@ -1,0 +1,78 @@
+local Vector = require('src/vector.lua')
+local threat = require('src/threat.lua')
+local effect = require('src/effect.lua')
+local collision = require('src/collision.lua')
+local damage = require('src/damage.lua')
+
+local CultistOne = {}
+
+function CultistOne:new(o)
+    o = o or {}
+    setmetatable(o, self)
+    self.__index = self
+    return o
+end
+
+function CultistOne:getName()
+    return "Cultist Boss 1"
+end
+
+-- Counter-clockwise coords
+function CultistOne:getBounds()
+    return {
+        {x = 25060, y = 28207},
+        {x = 23599, y = 27921},
+        {x = 23746, y = 26637},
+        {x = 25189, y = 26639},
+    }
+end
+
+function CultistOne:throwBomb()
+    local target = self.ctx:getRandomInvolvedHero()
+
+    local bombV = Vector:new{
+        x = GetUnitX(target),
+        y = GetUnitY(target),
+    }
+
+    effect.createEffect{
+        model = 'ui\\feedback\\selectioncircleenemy\\selectioncircleenemy.mdx',
+        x = bombV.x,
+        y = bombV.y,
+        z = 0,
+        duration = 3,
+        scale = 3,
+        remove = true,
+    }
+
+    local timer = CreateTimer()
+    TimerStart(timer, 3, false, function()
+        DestroyTimer(timer)
+        effect.createEffect{
+            model = 'Pillar of Flame Orange.mdl',
+            x = bombV.x,
+            y = bombV.y,
+            duration = 0.5,
+            scale = 1,
+        }
+
+        local collidedUnits = collision.getAllCollisions(bombV, 250)
+        for _, unit in pairs(collidedUnits) do
+            if IsUnitEnemy(unit, Player(PLAYER_NEUTRAL_AGGRESSIVE)) then
+                damage.dealDamage(self.bossUnit, unit, 400, damage.TYPE.SPELL)
+            end
+        end
+    end)
+end
+
+function CultistOne:init()
+    local phase1 = self.ctx:registerPhase{
+        hp = 100,
+    }
+
+    phase1:addTimedEvent(10, function()
+        self:throwBomb()
+    end)
+end
+
+return CultistOne
