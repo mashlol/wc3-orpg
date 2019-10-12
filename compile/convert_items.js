@@ -65,6 +65,7 @@ const STATS = {
     },
     '%AS': {
         lua: 'stats.PERCENT_ATTACK_SPEED',
+        fn: (x) => 1 - (x / 100),
     },
     'SP': {
         lua: 'stats.RAW_SPELL_DAMAGE',
@@ -118,7 +119,7 @@ for (const x in parsed) {
         continue;
     }
 
-    let itemResult = "[" + currentId + "] = {\n    type = TYPE.EQUIPMENT,\n    itemLevel = 1,\n";
+    let itemResult = "[" + currentId + "] = {\n    type = TYPE.EQUIPMENT,\n";
     let stats = "{\n";
     for (const y in row) {
         const column = COLUMNS[y];
