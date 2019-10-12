@@ -85,8 +85,11 @@ function Context:new(o)
     return o
 end
 
-function Context:registerDoor(door)
-    table.insert(self.doors, door)
+function Context:registerDoor(door, openByDefault)
+    table.insert(self.doors, {
+        door = door,
+        openByDefault = openByDefault,
+    })
 end
 
 function Context:registerPhase(options)
@@ -118,7 +121,10 @@ end
 function Context:onFightEnded()
     if GetUnitState(self.cls.bossUnit, UNIT_STATE_LIFE) <= 0 then
         print("You killed " .. self.cls:getName() .. '!')
-        -- TODO implement a loot system
+        for _, door in pairs(self.doors) do
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, door.door)
+        end
+
         self:cleanupFight()
 
         if self.cls.respawnable then
@@ -219,7 +225,7 @@ function Context:onBossEngaged()
     end)
 
     for _, door in pairs(self.doors) do
-        ModifyGateBJ(bj_GATEOPERATION_CLOSE, door)
+        ModifyGateBJ(bj_GATEOPERATION_CLOSE, door.door)
     end
 end
 
@@ -252,8 +258,10 @@ function Context:resetFight()
         self:onBossEngaged()
     end)
 
-    for idx, door in pairs(self.doors) do
-        ModifyGateBJ(bj_GATEOPERATION_OPEN, door)
+    for _, door in pairs(self.doors) do
+        if door.openByDefault then
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, door.door)
+        end
     end
 
     local maxHp = BlzGetUnitMaxHP(self.cls.bossUnit)

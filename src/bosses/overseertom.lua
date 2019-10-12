@@ -86,6 +86,8 @@ function OverseerTom:init()
     phase1:addTimedEvent(15, function()
         self:pullCenter()
     end)
+
+    self.ctx:registerDoor(gg_dest_DTg3_18339, false)
 end
 
 return OverseerTom
