@@ -18,7 +18,12 @@
         "gg_dest_LTe1_1457",
         "gg_dest_LTe1_1422",
         "gg_dest_YTce_2973",
-        "gg_dest_YTce_2974"
+        "gg_dest_YTce_2974",
+        "gg_rct_mineentrance",
+        "gg_rct_mineexit",
+        "gg_rct_mineenter",
+        "gg_rct_minefinish",
+        "gg_rct_mineleave"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
