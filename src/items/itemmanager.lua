@@ -1,4 +1,5 @@
 local stats = require('src/stats.lua')
+local hero = require('src/hero.lua')
 local equipment = require('src/items/equipment.lua')
 
 local RARITY = {
@@ -39,6 +40,9 @@ local TYPE = {
     CONSUMABLE = 'consumable',
 }
 
+local yujiId = FourCC('Hyuj')
+local azoraId = FourCC('Hazr')
+
 local ITEMS = {
     [1] = {
         type = TYPE.EQUIPMENT,
@@ -56,7 +60,7 @@ local ITEMS = {
         slot = equipment.SLOT.FEET,
         stackSize = 1,
         cost = 30,
-        usableClasses = {FourCC('Hyuj')},
+        usableClasses = {yujiId, azoraId},
     },
     [2] = {
         type = TYPE.EQUIPMENT,
@@ -993,6 +997,19 @@ function init()
 
             _, lines = string.gsub(itemInfo.text, "|n", "")
             numLines = numLines + lines + 1
+        end
+
+        if itemInfo.usableClasses ~= nil then
+            itemText = itemText .. '|n|cff12deb2Usable by: '
+            local numUsable = #(itemInfo.usableClasses)
+            for idx, classId in pairs(itemInfo.usableClasses) do
+                itemText = itemText .. hero.ALL_HERO_INFO[classId].name
+                if idx ~= numUsable then
+                    itemText = itemText .. ', '
+                end
+            end
+            itemText = itemText .. '|r'
+            numLines = numLines + 1
         end
 
         TOOLTIPS[itemId] = {
