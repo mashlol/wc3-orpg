@@ -48,7 +48,7 @@ function equipItem(playerId, slot, itemId)
             'You must be level ' ..
                 itemInfo.requiredLevel ..
                 ' to equip that item.',
-            log.TYPE.ERROR)
+            log.TYPE.EQUIPMENT_ERROR)
         return false
     end
     local heroType = hero.getPickedHero(playerId).id
@@ -59,7 +59,7 @@ function equipItem(playerId, slot, itemId)
         log.log(
             playerId,
             'You are not able to equip that item.',
-            log.TYPE.ERROR)
+            log.TYPE.EQUIPMENT_ERROR)
         return false
     end
 

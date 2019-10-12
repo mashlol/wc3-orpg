@@ -79,12 +79,12 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
                 log.log(
                     playerId,
                     "You already have an item in that slot.",
-                    log.TYPE.ERROR)
+                    log.TYPE.EQUIPMENT_ERROR)
             elseif itemmanager.getItemInfo(activeItemId).slot ~= slot then
                 log.log(
                     playerId,
                     "That doesn't go in that slot.",
-                    log.TYPE.ERROR)
+                    log.TYPE.EQUIPMENT_ERROR)
             else
                 local canEquip = equipment.equipItem(
                     playerId, slot, activeItemId)
