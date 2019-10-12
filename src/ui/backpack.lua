@@ -186,7 +186,7 @@ function Backpack:init()
                     log.log(
                         playerId,
                         "You already have an item in that bag position.",
-                        log.TYPE.ERROR)
+                        log.TYPE.EQUIPMENT_ERROR)
                 else
                     local activeItemId = equipment.getItemInSlot(
                         playerId, activeEquipmentItem)
@@ -237,13 +237,15 @@ function Backpack:init()
                             -- Equip the item to a slot
                             local existingEquip = equipment.getItemInSlot(
                                 playerId, itemSlot)
-                            equipment.unequipItem(playerId, itemSlot)
-                            equipment.equipItem(playerId, itemSlot, itemId)
-                            backpack.removeItemFromBackpack(
-                                playerId, clickedItemPos, 1)
-                            if existingEquip ~= nil then
-                                backpack.addItemIdToBackpackPosition(
-                                    playerId, i + 1, existingEquip)
+                            local canEquip = equipment.equipItem(
+                                playerId, itemSlot, itemId)
+                            if canEquip then
+                                backpack.removeItemFromBackpack(
+                                    playerId, clickedItemPos, 1)
+                                if existingEquip ~= nil then
+                                    backpack.addItemIdToBackpackPosition(
+                                        playerId, i + 1, existingEquip)
+                                end
                             end
                         end
                     end
