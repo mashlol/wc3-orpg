@@ -1,5 +1,6 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
+local CultistOne = require('src/bosses/cultist1.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
 
@@ -16,6 +17,13 @@ local ALL_BOSS_CLASSES = {
         startX = 15195,
         startY = 7531,
         facing = 280,
+        respawnable = true,
+    },
+    CultistOne:new{
+        bossUnitId = FourCC('hclt'),
+        startX = 24141,
+        startY = 27609,
+        facing = 0,
         respawnable = true,
     },
 }

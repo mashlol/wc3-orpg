@@ -27,6 +27,9 @@ local createEffect = function(options)
 
     local effectTimer = CreateTimer()
     TimerStart(effectTimer, options.duration, false, function()
+        if options.remove then
+            BlzSetSpecialEffectPosition(effect, -10000, -10000, -10000)
+        end
         DestroyEffect(effect)
         DestroyTimer(effectTimer)
     end)
