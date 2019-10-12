@@ -56,6 +56,7 @@ local ITEMS = {
         slot = equipment.SLOT.FEET,
         stackSize = 1,
         cost = 30,
+        usableClasses = {FourCC('Hyuj')},
     },
     [2] = {
         type = TYPE.EQUIPMENT,
