@@ -218,7 +218,7 @@ function Backpack:init()
                             SetPlayerState(
                                 Player(playerId),
                                 PLAYER_STATE_RESOURCE_GOLD,
-                                curGold + itemInfo.cost * 0.2)
+                                curGold + R2I(itemInfo.cost * 0.2))
                             effect.createEffect{
                                 model = "Abilities\\Spells\\Other\\Transmute\\PileofGold.mdl",
                                 x = GetUnitX(hero.getHero(playerId)),
