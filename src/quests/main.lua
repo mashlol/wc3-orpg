@@ -59,9 +59,10 @@ function onKill()
                             progress[playerId][questId].objectives[objectiveIdx] + 1
                         local numKilled =
                             progress[playerId][questId].objectives[objectiveIdx]
+                        local verb = objectiveInfo.verbPast or 'killed'
                         log.log(
                             playerId,
-                            'You have killed '..
+                            'You have ' .. verb .. ' '..
                                 numKilled..
                                 ' / '..
                                 objectiveInfo.amount..
@@ -242,7 +243,8 @@ function getQuestAcceptText(questId)
     local objectives = ""
     for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
         if objectiveInfo.type == TYPE.KILL then
-            objectives = objectives .. "- Kill "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
+            local verb = objectiveInfo.verb or 'Kill'
+            objectives = objectives.."- "..verb.." "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
         end
         if objectiveInfo.type == TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
