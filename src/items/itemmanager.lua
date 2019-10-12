@@ -183,11 +183,11 @@ local ITEMS = {
     },
     [10] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Wolf Helmet",
         icon = "",
         slot = equipment.SLOT.HELMET,
         requiredLevel = 6,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -199,11 +199,11 @@ local ITEMS = {
     },
     [11] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Giant Wolf Helmet",
         icon = "",
         slot = equipment.SLOT.HELMET,
         requiredLevel = 12,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -215,11 +215,11 @@ local ITEMS = {
     },
     [12] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Leather Helmet",
         icon = "",
         slot = equipment.SLOT.HELMET,
         requiredLevel = 18,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -236,11 +236,11 @@ local ITEMS = {
     },
     [13] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Green Iron Helm",
         icon = "",
         slot = equipment.SLOT.HELMET,
         requiredLevel = 20,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -257,11 +257,11 @@ local ITEMS = {
     },
     [14] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Pendant",
         icon = "",
         slot = equipment.SLOT.NECK,
         requiredLevel = 20,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -278,11 +278,11 @@ local ITEMS = {
     },
     [15] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Shell Pads",
         icon = "",
         slot = equipment.SLOT.SHOULDERS,
         requiredLevel = 10,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -299,11 +299,11 @@ local ITEMS = {
     },
     [16] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Epaulets",
-        icon = "",
+        icon = "war3mapImported\\BTNShoulderplate.blp",
         slot = equipment.SLOT.SHOULDERS,
         requiredLevel = 14,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -315,11 +315,11 @@ local ITEMS = {
     },
     [17] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Miner Spaulders",
         icon = "",
         slot = equipment.SLOT.SHOULDERS,
         requiredLevel = 22,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -341,11 +341,11 @@ local ITEMS = {
     },
     [18] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Turtle Carapace",
         icon = "",
         slot = equipment.SLOT.CHEST,
         requiredLevel = 3,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -357,11 +357,11 @@ local ITEMS = {
     },
     [19] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Robes",
         icon = "",
         slot = equipment.SLOT.CHEST,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -378,11 +378,11 @@ local ITEMS = {
     },
     [20] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Cuirass",
         icon = "",
         slot = equipment.SLOT.CHEST,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -394,16 +394,16 @@ local ITEMS = {
     },
     [21] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Overseer's Cloth Robes",
         icon = "",
         slot = equipment.SLOT.CHEST,
         requiredLevel = 24,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
                 type = stats.PERCENT_CAST_SPEED,
-                amount = 3,
+                amount = 0.97,
                 tickrate = 5,
             },
             {
@@ -420,44 +420,59 @@ local ITEMS = {
     },
     [22] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Wolf Pelt",
         icon = "",
         slot = equipment.SLOT.BACK,
         requiredLevel = 6,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
+            {
+                type = stats.PERCENT_CAST_SPEED,
+                amount = 0.99,
+                tickrate = 5,
+            },
         },
     },
     [23] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Worn Cape",
         icon = "",
         slot = equipment.SLOT.BACK,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
+            {
+                type = stats.PERCENT_CAST_SPEED,
+                amount = 0.98,
+                tickrate = 5,
+            },
         },
     },
     [24] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Overseer's Drape",
         icon = "",
         slot = equipment.SLOT.BACK,
         requiredLevel = 24,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
+            {
+                type = stats.PERCENT_CAST_SPEED,
+                amount = 0.96,
+                tickrate = 5,
+            },
         },
     },
     [25] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Fur-Lined Leggings",
         icon = "",
         slot = equipment.SLOT.LEGS,
         requiredLevel = 6,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -469,11 +484,11 @@ local ITEMS = {
     },
     [26] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Spiritual Wolf Kilt",
         icon = "",
         slot = equipment.SLOT.LEGS,
         requiredLevel = 11,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -483,7 +498,7 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_CAST_SPEED,
-                amount = 1,
+                amount = 0.99,
                 tickrate = 5,
             },
             {
@@ -495,11 +510,11 @@ local ITEMS = {
     },
     [27] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Leggings",
         icon = "",
         slot = equipment.SLOT.LEGS,
         requiredLevel = 12,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -511,16 +526,16 @@ local ITEMS = {
     },
     [28] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Overseer's Leggings",
         icon = "",
         slot = equipment.SLOT.LEGS,
         requiredLevel = 24,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 2,
+                amount = 0.98,
                 tickrate = 5,
             },
             {
@@ -537,44 +552,59 @@ local ITEMS = {
     },
     [29] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Old Boots",
         icon = "",
         slot = equipment.SLOT.FEET,
         requiredLevel = 1,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 1.02,
+                tickrate = 5,
+            },
         },
     },
     [30] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Worn Running Boots",
         icon = "",
         slot = equipment.SLOT.FEET,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 1.03,
+                tickrate = 5,
+            },
         },
     },
     [31] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Sabatons",
         icon = "",
         slot = equipment.SLOT.FEET,
         requiredLevel = 20,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 1.04,
+                tickrate = 5,
+            },
         },
     },
     [32] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Fur-lined Gloves",
         icon = "",
         slot = equipment.SLOT.HANDS,
         requiredLevel = 6,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -584,18 +614,18 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 2,
+                amount = 0.98,
                 tickrate = 5,
             },
         },
     },
     [33] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Leather Gloves",
-        icon = "",
+        icon = "war3mapImported\\BTNLeather Gauntlet.blp",
         slot = equipment.SLOT.HANDS,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -605,18 +635,18 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 3,
+                amount = 0.97,
                 tickrate = 5,
             },
         },
     },
     [34] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Conjurer's Gloves",
         icon = "",
         slot = equipment.SLOT.HANDS,
         requiredLevel = 22,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -626,7 +656,7 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_CAST_SPEED,
-                amount = 5,
+                amount = 0.95,
                 tickrate = 5,
             },
             {
@@ -638,11 +668,11 @@ local ITEMS = {
     },
     [35] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Brass Ring",
         icon = "",
         slot = equipment.SLOT.RING,
-        requiredLevel = 0,
+        requiredLevel = 20,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -659,11 +689,11 @@ local ITEMS = {
     },
     [36] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Overseer's Ring",
         icon = "",
         slot = equipment.SLOT.RING,
-        requiredLevel = 0,
+        requiredLevel = 24,
+        itemLevel = 0,
         rarity = RARITY.RARE,
         stats = {
             {
@@ -680,11 +710,11 @@ local ITEMS = {
     },
     [37] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Turtle Claw",
         icon = "",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 3,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -696,11 +726,11 @@ local ITEMS = {
     },
     [38] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Giant Wolf Fang",
         icon = "",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 10,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -710,18 +740,18 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 1,
+                amount = 0.99,
                 tickrate = 5,
             },
         },
     },
     [39] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Wand",
-        icon = "",
+        icon = "war3mapImported\\BTNMurgulStaff.blp",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -731,18 +761,18 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_CAST_SPEED,
-                amount = 5,
+                amount = 0.95,
                 tickrate = 5,
             },
         },
     },
     [40] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Overseer's Whip",
-        icon = "",
+        icon = "war3mapImported\\BTNRidingCrop.blp",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 24,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -752,7 +782,7 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 2,
+                amount = 0.98,
                 tickrate = 5,
             },
             {
@@ -764,11 +794,11 @@ local ITEMS = {
     },
     [41] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Bone Club",
         icon = "",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 6,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -780,11 +810,11 @@ local ITEMS = {
     },
     [42] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Giant Bone Club",
         icon = "",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 12,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -801,11 +831,11 @@ local ITEMS = {
     },
     [43] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Broadsword",
-        icon = "",
+        icon = "war3mapImported\\BTNAncientRelic.blp",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 13,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -817,11 +847,11 @@ local ITEMS = {
     },
     [44] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Joe's Mining Pick",
-        icon = "",
+        icon = "war3mapImported\\BTNOrcPickAxe.blp",
         slot = equipment.SLOT.WEAPON,
         requiredLevel = 22,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
@@ -831,7 +861,7 @@ local ITEMS = {
             },
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 3,
+                amount = 0.97,
                 tickrate = 5,
             },
             {
@@ -848,11 +878,11 @@ local ITEMS = {
     },
     [45] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Shell Shield",
         icon = "",
         slot = equipment.SLOT.OFFHAND,
         requiredLevel = 1,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -869,11 +899,11 @@ local ITEMS = {
     },
     [46] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Cultist Blocker",
         icon = "",
         slot = equipment.SLOT.OFFHAND,
         requiredLevel = 12,
+        itemLevel = 0,
         rarity = RARITY.COMMON,
         stats = {
             {
@@ -890,11 +920,11 @@ local ITEMS = {
     },
     [47] = {
         type = TYPE.EQUIPMENT,
-        itemLevel = 1,
         name = "Miner's Lamp",
         icon = "",
         slot = equipment.SLOT.OFFHAND,
-        requiredLevel = 0,
+        requiredLevel = 22,
+        itemLevel = 0,
         rarity = RARITY.UNCOMMON,
         stats = {
             {
