@@ -1,6 +1,7 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
-local CultistOne = require('src/bosses/cultist1.lua')
+local MinerJoe = require('src/bosses/minerjoe.lua')
+local OverseerTom = require('src/bosses/overseertom.lua')
 local hero = require('src/hero.lua')
 local collision = require('src/collision.lua')
 
@@ -19,13 +20,20 @@ local ALL_BOSS_CLASSES = {
         facing = 280,
         respawnable = true,
     },
-    CultistOne:new{
-        bossUnitId = FourCC('hclt'),
-        startX = 24141,
-        startY = 27609,
-        facing = 0,
+    MinerJoe:new{
+        bossUnitId = FourCC('mine'),
+        startX = 24237,
+        startY = 27062,
+        facing = 37,
         respawnable = true,
     },
+    OverseerTom:new{
+        bossUnitId = FourCC('over'),
+        startX = 23428,
+        startY = 30510,
+        facing = 270,
+        respawnable = true,
+    }
 }
 
 local Phase = {}

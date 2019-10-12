@@ -284,6 +284,19 @@ local BUFF_INFO = {
         removeOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
     },
+    tomslow = {
+        effects = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 0.3,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl",
+            attach = "origin",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
+    },
 }
 
 -- BuffInstances:
