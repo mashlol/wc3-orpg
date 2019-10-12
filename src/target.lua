@@ -1,6 +1,8 @@
 local hero = require('src/hero.lua')
 local Vector = require('src/vector.lua')
 
+local sharedLocationObj = Location(0, 0)
+
 local targets = {}
 local targetEffects = {}
 local ignoreTargetChange = {}
@@ -104,11 +106,15 @@ end
 function updateTargetEffectLocations()
     for playerId, targetEffect in pairs(targetEffects) do
         if targets[playerId] ~= nil then
+            MoveLocation(
+                sharedLocationObj,
+                GetUnitX(targets[playerId]),
+                GetUnitY(targets[playerId]))
             BlzSetSpecialEffectPosition(
                 targetEffect,
                 GetUnitX(targets[playerId]),
                 GetUnitY(targets[playerId]),
-                -60)
+                GetLocationZ(sharedLocationObj) - 10)
         end
     end
 end
