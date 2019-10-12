@@ -1,3 +1,7 @@
+local log = require('src/log.lua')
+local hero = require('src/hero.lua')
+local itemmanager = require('src/items/itemmanager.lua')
+
 local SLOT = {
     HELMET = 1,
     NECK = 2,
@@ -26,7 +30,22 @@ local equipments = {}
 local activeItemPositions = {}
 
 function equipItem(playerId, slot, itemId)
+    local itemInfo = itemmanager.getItemInfo(itemId)
+    local heroUnit = hero.getHero(playerId)
+    local currentLevel = GetHeroLevel(heroUnit)
+    if currentLevel < itemInfo.requiredLevel then
+        log.log(
+            playerId,
+            'You must be level ' ..
+                itemInfo.requiredLevel ..
+                ' to equip that item.',
+            log.TYPE.ERROR)
+        return false
+    end
+
     equipments[playerId][slot] = itemId
+
+    return true
 end
 
 function unequipItem(playerId, slot)

@@ -86,8 +86,11 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
                     "That doesn't go in that slot.",
                     log.TYPE.ERROR)
             else
-                backpack.removeItemFromBackpack(playerId, activeItem)
-                equipment.equipItem(playerId, slot, activeItemId)
+                local canEquip = equipment.equipItem(
+                    playerId, slot, activeItemId)
+                if canEquip then
+                    backpack.removeItemFromBackpack(playerId, activeItem)
+                end
             end
 
             backpack.activateItem(playerId, nil)
