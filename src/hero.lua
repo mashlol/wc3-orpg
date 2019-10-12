@@ -536,6 +536,7 @@ function addHeroPickedListener(onPickedListenerFunc)
 end
 
 return {
+    ALL_HERO_INFO = ALL_HERO_INFO,
     init = init,
     getHero = getHero,
     isHero = isHero,
