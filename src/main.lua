@@ -32,6 +32,9 @@ local itemmanager = require('src/items/itemmanager.lua')
 local vendor = require('src/items/vendor.lua')
 local bossmanager = require('src/bosses/bossmanager.lua')
 
+-- TODO add dungeon manager
+local mine = require('src/dungeons/mine.lua')
+
 local debug = require('src/debug.lua')
 
 local mainInit = function()
@@ -69,6 +72,7 @@ local mainInit = function()
         itemmanager.init()
         vendor.init()
         bossmanager.init()
+        mine.init()
 
         -- TODO remove for release
         debug.init()
