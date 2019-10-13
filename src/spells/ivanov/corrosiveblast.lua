@@ -11,20 +11,19 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 10
+local COOLDOWN_S = 5
 
-local storedData = {}
 
 local getSpellId = function()
     return 'corrosiveblast'
 end
 
 local getSpellName = function()
-    return 'Corrosive Pull/Blast'
+    return 'Corrosive Blast'
 end
 
 local getSpellTooltip = function(playerId)
-    return 'On first activation, Ivanov will pull all stacks of corrosive decay from an allied unit and hold them. The next activation will consume the stacks and damage an enemy unit for 40 per stack.'
+    return 'Deals 80 damage to the target'
 end
 
 local getSpellCooldown = function(playerId)
@@ -35,55 +34,55 @@ local getSpellCasttime = function(playerId)
     return 0.5
 end
 
-local castCorrosivePull = function(playerId)
-    local hero = hero.getHero(playerId)
-    local target = target.getTarget(playerId)
+-- local castCorrosivePull = function(playerId)
+--     local hero = hero.getHero(playerId)
+--     local target = target.getTarget(playerId)
 
-    if target == nil then
-        target = hero
-    end
+--     if target == nil then
+--         target = hero
+--     end
 
-    if not IsUnitAlly(target, Player(playerId)) then
-        target = hero
-    end
+--     if not IsUnitAlly(target, Player(playerId)) then
+--         target = hero
+--     end
 
-    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
-    local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
+--     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+--     local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
 
-    local dist = Vector:new(heroV):subtract(targetV)
-    local mag = dist:magnitude()
-    if mag > 800 then
-        log.log(playerId, "Out of range!", log.TYPE.ERROR)
-        return false
-    end
+--     local dist = Vector:new(heroV):subtract(targetV)
+--     local mag = dist:magnitude()
+--     if mag > 800 then
+--         log.log(playerId, "Out of range!", log.TYPE.ERROR)
+--         return false
+--     end
 
-    IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 3, 1)
-    SetUnitFacingTimed(
-        hero,
-        bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),
-        0.05)
+--     IssueImmediateOrder(hero, "stop")
+--     animations.queueAnimation(hero, 3, 1)
+--     SetUnitFacingTimed(
+--         hero,
+--         bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),
+--         0.05)
 
-    local castSuccess = casttime.cast(playerId, 0.5)
-    if not castSuccess then
-        return false
-    end
+--     local castSuccess = casttime.cast(playerId, 0.5)
+--     if not castSuccess then
+--         return false
+--     end
 
-    cooldowns.startCooldown(playerId, getSpellId(), 1)
+--     cooldowns.startCooldown(playerId, getSpellId(), 1)
 
-    storedData[playerId] = buff.getBuffStacks(target, 'corrosivedecay')
-    buff.removeBuff(target, 'corrosivedecay')
+--     storedData[playerId] = buff.getBuffStacks(target, 'corrosivedecay')
+--     buff.removeBuff(target, 'corrosivedecay')
 
-    projectile.createProjectile{
-        playerId = playerId,
-        model = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl",
-        height = 50,
-        fromV = targetV,
-        destUnit = hero,
-        speed = 1000,
-        destroyOnCollide = false,
-    }
-end
+--     projectile.createProjectile{
+--         playerId = playerId,
+--         model = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl",
+--         height = 50,
+--         fromV = targetV,
+--         destUnit = hero,
+--         speed = 1000,
+--         destroyOnCollide = false,
+--     }
+-- end
 
 local castCorrosiveBlast = function(playerId)
     local hero = hero.getHero(playerId)
@@ -123,7 +122,6 @@ local castCorrosiveBlast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    local dmgAmount = 40 * storedData[playerId]
     projectile.createProjectile{
         playerId = playerId,
         model = "Abilities\\Weapons\\ChimaeraAcidMissile\\ChimaeraAcidMissile.mdl",
@@ -133,7 +131,7 @@ local castCorrosiveBlast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.dealDamage(hero, target, dmgAmount, damage.TYPE.SPELL)
+            damage.dealDamage(hero, target, 80, damage.TYPE.SPELL)
 
             effect.createEffect{
                 model = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl",
@@ -143,7 +141,7 @@ local castCorrosiveBlast = function(playerId)
         end
     }
 
-    storedData[playerId] = nil
+    return true
 end
 
 local cast = function(playerId)
@@ -152,19 +150,11 @@ local cast = function(playerId)
         return false
     end
 
-    if storedData[playerId] == nil then
-        return castCorrosivePull(playerId)
-    end
+    -- if storedData[playerId] == nil then
+    --     return castCorrosivePull(playerId)
+    -- end
 
     return castCorrosiveBlast(playerId)
-end
-
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()
