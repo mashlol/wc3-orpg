@@ -38,7 +38,11 @@ function init()
         [GetHandleId(gg_unit_nvlw_0006)] = {
             unit = gg_unit_nvlw_0006,
             items = {5, 6,}
-        }
+        },
+		[GetHandleId(gg_unit_nvlw_0332)] = {
+            unit = gg_unit_nvlw_0332,
+            items = {5, 6,}
+        },
     }
 
     for _, vendorInfo in pairs(VENDORS) do
