@@ -185,6 +185,8 @@ function Backpack:init()
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
             if activeEquipmentItem ~= nil then
+                backpack.activateItem(playerId, nil)
+                equipment.activateItem(playerId, nil)
                 if backpack.getItemIdAtPosition(playerId, i+1) ~= nil then
                     log.log(
                         playerId,
@@ -197,9 +199,9 @@ function Backpack:init()
                     backpack.addItemIdToBackpackPosition(
                         playerId, i + 1, activeItemId)
                 end
+            elseif activeBagItem ~= nil then
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
-            elseif activeBagItem ~= nil then
                 if activeBagItem == i + 1 then
 
                     local clickedItemPos = i + 1
@@ -259,8 +261,6 @@ function Backpack:init()
                 else
                     backpack.swapPositions(playerId, activeBagItem, i+1)
                 end
-                backpack.activateItem(playerId, nil)
-                equipment.activateItem(playerId, nil)
             else
                 backpack.activateItem(playerId, i+1)
             end
