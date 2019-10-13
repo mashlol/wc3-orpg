@@ -173,7 +173,7 @@ function Context:fixEngagement()
                 SetUnitPosition(hero, self.cls.startX, self.cls.startY)
             elseif self.involvedHeroes[GetHandleId(hero)] == nil and inPoly then
                 -- Move out of poly
-                SetUnitPosition(hero, 0, 0)
+                SetUnitPosition(hero, 4100, 3000)
             end
         end
     end
