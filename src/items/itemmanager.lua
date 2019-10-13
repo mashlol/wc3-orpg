@@ -385,7 +385,7 @@ local ITEMS = {
         stats = {
             {
                 type = stats.RAW_SPELL_DAMAGE,
-                amount = 5,
+                amount = 8,
                 tickrate = 5,
             },
             {
@@ -456,6 +456,11 @@ local ITEMS = {
                 amount = 0.99,
                 tickrate = 5,
             },
+			{
+                type = stats.RAW_SPELL_DAMAGE,
+                amount = 10,
+                tickrate = 5,
+            },
         },
     },
     [23] = {
@@ -471,6 +476,11 @@ local ITEMS = {
             {
                 type = stats.PERCENT_CAST_SPEED,
                 amount = 0.98,
+                tickrate = 5,
+            },
+			{
+                type = stats.PERCENT_SPELL_DAMAGE,
+                amount = 1.10,
                 tickrate = 5,
             },
         },
@@ -613,6 +623,11 @@ local ITEMS = {
             {
                 type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.03,
+                tickrate = 5,
+            },
+			{
+                type = stats.RAW_SPELL_DAMAGE,
+                amount = 8,
                 tickrate = 5,
             },
         },
@@ -801,7 +816,7 @@ local ITEMS = {
         stats = {
             {
                 type = stats.RAW_SPELL_DAMAGE,
-                amount = 7,
+                amount = 15,
                 tickrate = 5,
             },
             {
