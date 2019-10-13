@@ -31,9 +31,10 @@ function distributeExp()
         local playersInParty = party.getPlayersInParty(playerPartyId)
         local partySize = #playersInParty
         for _, playerId in pairs(playersInParty) do
-            local heroLevel = GetHeroLevel(hero.getHero(playerId))
+            local heroUnit = hero.getHero(playerId)
+            local heroLevel = GetHeroLevel(heroUnit)
             AddHeroXP(
-                killingUnit,
+                heroUnit,
                 getExp(heroLevel, dyingUnitLevel, partySize, isElite),
                 true)
         end
