@@ -656,7 +656,13 @@ function initQuests()
                     amount = 1,
                     toKill = FourCC('clea'),
                     name = 'Cultist Commander',
-                }
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('cled'),
+                    name = 'Cultist Commander Audric',
+                },
             },
             rewards = {
                 exp = 300,
@@ -758,7 +764,7 @@ function initQuests()
                 exp = 150,
                 gold = 50,
             },
-            prerequisites = {9},
+            prerequisites = {8},
             levelRequirement = 0,
         },
 }
