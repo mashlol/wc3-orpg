@@ -7,7 +7,7 @@ local clearDeadUnits = function()
     local unitType = GetUnitTypeId(unit)
 
     if spawnV then
-        TriggerSleepAction(30)
+        TriggerSleepAction(45)
 
         local newUnit = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
