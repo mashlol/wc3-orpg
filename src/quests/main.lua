@@ -83,8 +83,10 @@ function maybeUpdateLootProgress(playerId)
         if not progressInfo.completed then
             for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
                 if objectiveInfo.type == TYPE.ITEM then
-                    local count = backpack.getItemCount(
-                        playerId, objectiveInfo.itemId)
+                    local count = math.min(
+                        objectiveInfo.amount,
+                        backpack.getItemCount(
+                            playerId, objectiveInfo.itemId))
 
                     local existing =
                         progress[playerId][questId].objectives[objectiveIdx]
@@ -347,6 +349,14 @@ function finishQuest(playerId, questId)
                     ' ' ..
                     itemmanager.getItemInfo(itemId).name,
                 log.TYPE.INFO)
+        end
+    end
+
+    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        if objectiveInfo.type == TYPE.ITEM then
+            for i=1,objectiveInfo.amount,1 do
+                backpack.removeItemIdFromBackpack(playerId, objectiveInfo.itemId)
+            end
         end
     end
 
