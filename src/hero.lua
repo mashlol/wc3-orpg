@@ -425,6 +425,8 @@ function onCreateSynced()
             pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
             createHeroForPlayer(playerId)
 
+            backpack.addItemIdToBackpack(playerId, 48)
+
             for _, listener in pairs(pickListeners) do
                 listener()
             end

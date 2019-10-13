@@ -1003,6 +1003,19 @@ local ITEMS = {
             },
         },
     },
+    [48] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Return Stone',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 1,
+        text = "Return to town.|nMust be out of combat.",
+        spell = 'hearthstone',
+        cost = -1,
+        consume = false,
+    },
 }
 
 -- Precompute tooltips at initialization time or you get desyncs

@@ -55,7 +55,7 @@ local cast = function(playerId, time, interruptable, canMove, notRealCast)
 end
 
 local isCasting = function(playerId)
-    return castTimes[playerId] ~= nil
+    return castTimes[playerId] ~= nil and not castTimes[playerId].interruptable
 end
 
 local interruptCast = function()
