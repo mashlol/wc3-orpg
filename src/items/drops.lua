@@ -51,6 +51,18 @@ local DROP_TABLE = {
         [6] = 30,
         [5] = 10,
     },
+    [FourCC('cled')] = { -- Cultist Commander
+        none = 50,
+        [12] = 1,
+        [35] = 1,
+        [16] = 5,
+        [23] = 5,
+        [27] = 5,
+        [30] = 5,
+        [33] = 5,
+        [6] = 30,
+        [5] = 10,
+    },
     [FourCC('cspe')] = { -- Cultist Emissary
         none = 50,
         [16] = 5,
