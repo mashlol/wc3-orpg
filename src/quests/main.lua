@@ -665,7 +665,7 @@ function initQuests()
                     type = TYPE.KILL,
                     amount = 1,
                     toKill = FourCC('clea'),
-                    name = 'Cultist Commander',
+                    name = 'Cultist Commander Siddel',
                 },
 				[2] = {
                     type = TYPE.KILL,
