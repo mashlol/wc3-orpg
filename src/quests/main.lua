@@ -680,7 +680,7 @@ function initQuests()
                 exp = 250,
                 gold = 25,
             },
-            prerequisites = {9},
+            prerequisites = {12},
             levelRequirement = 0,
         },
 		[14] = {
