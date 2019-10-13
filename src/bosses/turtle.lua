@@ -16,12 +16,7 @@ end
 
 -- Counter-clockwise coords
 function Turtle:getBounds()
-    return {
-        {x = 100, y = -358},
-        {x = -2677, y = -389},
-        {x = -2664, y = -2245},
-        {x = 100, y = -2490},
-    }
+    return false
 end
 
 function Turtle:spawnAdds()
