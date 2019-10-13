@@ -58,6 +58,12 @@ function applyBuffs()
             for _, stat in pairs(stats) do
                 buff.maybeAddEffectToList(effectsByUnitId, heroUnit, stat)
             end
+
+            applyBuffSpecificEffects(
+                heroUnit,
+                heroUnit,
+                effectsByUnitId[GetHandleId(heroUnit)].effects,
+                1)
         end
     end
 
