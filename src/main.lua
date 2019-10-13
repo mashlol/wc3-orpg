@@ -57,12 +57,10 @@ local mainInit = function()
         exp.init()
         camera.init()
         kill.init()
-        spawnpoint.init()
         spell.init()
         gc.init()
         tips.init()
         combat.init()
-        respawncreeps.init()
         questMain.init()
         save.init()
         load.init()
@@ -75,6 +73,10 @@ local mainInit = function()
         vendor.init()
         bossmanager.init()
         mine.init()
+
+        -- Intentionally after bossmanager to record boss locations
+        spawnpoint.init()
+        respawncreeps.init()
 
         -- TODO remove for release
         debug.init()
