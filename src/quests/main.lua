@@ -352,6 +352,14 @@ function finishQuest(playerId, questId)
         end
     end
 
+    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        if objectiveInfo.type == TYPE.ITEM then
+            for i=1,objectiveInfo.amount,1 do
+                backpack.removeItemIdFromBackpack(playerId, objectiveInfo.itemId)
+            end
+        end
+    end
+
     updateQuestMarks()
 end
 
