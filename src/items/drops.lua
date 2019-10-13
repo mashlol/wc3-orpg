@@ -9,14 +9,14 @@ local DROP_TABLE = {
     -- UNITS
     -- -------------------------------------------------------------------------
     [FourCC('hmbs')] = { -- Small turtles
-        none = 90,
+        none = 50,
         [6] = 30,
         [5] = 10,
         [45] = 10,
         [29] = 20,
     },
     [FourCC('lold')] = { -- River turtles
-        none = 70,
+        none = 50,
         [6] = 20,
         [5] = 10,
 		[9] = 275,
@@ -24,7 +24,7 @@ local DROP_TABLE = {
         [37] = 5,
     },
     [FourCC('hwol')] = { -- Wolves
-        none = 90,
+        none = 50,
         [10] = 5,
         [22] = 5,
         [25] = 5,
@@ -34,13 +34,13 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('hwol')] = { -- Elite Wolves
-        none = 90,
+        none = 50,
         [38] = 5,
         [6] = 30,
         [5] = 10,
     },
     [FourCC('clea')] = { -- Cultist Commander
-        none = 90,
+        none = 50,
         [12] = 1,
         [35] = 1,
         [16] = 5,
@@ -52,7 +52,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('cspe')] = { -- Cultist Emissary
-        none = 90,
+        none = 50,
         [16] = 5,
         [19] = 5,
         [23] = 5,
@@ -64,7 +64,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('h000')] = { -- Cultist Raider
-        none = 90,
+        none = 50,
         [16] = 5,
         [20] = 5,
         [23] = 5,
