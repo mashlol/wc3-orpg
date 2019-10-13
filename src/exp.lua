@@ -4,17 +4,22 @@ local hero = require('src/hero.lua')
 local BASE_EXP = 10
 local ELITE_BASE_EXP = 30
 
+local PARTY_MULTIPLIER = {1, 0.9, 0.8, 0.7, 0.6}
+
 function getExp(heroLevel, mobLevel, numShared, isElite)
     local delta = mobLevel - heroLevel
 
     -- No exp for anything 5 levels above or 5 levels below
-    if delta > 5 or delta < -5 then
+    if delta < -5 then
         return 0
     end
 
     local baseExp = isElite and ELITE_BASE_EXP or BASE_EXP
 
-    return R2I(math.max((baseExp + baseExp * delta / 5) / numShared, 1))
+    delta = math.min(delta, 5)
+    numShared = math.min(numShared, 5)
+    local multiplier = PARTY_MULTIPLIER[numShared]
+    return R2I(math.max((baseExp + baseExp * delta / 5) * multiplier, 1))
 end
 
 function distributeExp()
