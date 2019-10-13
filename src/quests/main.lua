@@ -461,7 +461,7 @@ function initQuests()
             name = "Fred's Soup",
             getQuestFrom = gg_unit_nvil_0085,
             handQuestTo = gg_unit_nvil_0085,
-            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect ten Giant Turtle Meat and bring it back to me?",
+            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect ten River Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
