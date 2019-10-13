@@ -15,7 +15,7 @@ function OverseerTom:new(o)
 end
 
 function OverseerTom:getName()
-    return "Overseer Tom"
+    return "The Overseer"
 end
 
 -- Counter-clockwise coords

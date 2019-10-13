@@ -11,7 +11,7 @@ function Turtle:new(o)
 end
 
 function Turtle:getName()
-    return "Huge Turtle"
+    return "Giant Turtle"
 end
 
 -- Counter-clockwise coords
