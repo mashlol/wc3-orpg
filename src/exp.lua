@@ -14,7 +14,7 @@ function getExp(heroLevel, mobLevel, numShared, isElite)
 
     local baseExp = isElite and ELITE_BASE_EXP or BASE_EXP
 
-    return math.max((baseExp + baseExp * delta / 5) / numShared, 1)
+    return R2I(math.max((baseExp + baseExp * delta / 5) / numShared, 1))
 end
 
 function distributeExp()
