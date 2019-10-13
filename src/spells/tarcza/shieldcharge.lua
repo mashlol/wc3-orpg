@@ -29,7 +29,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Tarcza charges forward with his shield, causing 400 damage to all impacted units, pushing them away and stunning them for 2 seconds.'
+    return 'Tarcza charges forward with his shield, causing 200 damage to all impacted units, pushing them away and stunning them for 2 seconds.'
 end
 
 local getSpellCooldown = function(playerId)
