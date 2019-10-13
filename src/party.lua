@@ -148,4 +148,5 @@ return {
     init = init,
     getPlayersInParty = getPlayersInParty,
     getPlayerParty = getPlayerParty,
+    removePlayerFromParty = removePlayerFromParty,
 }
