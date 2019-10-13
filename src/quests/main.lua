@@ -601,11 +601,11 @@ function initQuests()
            objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 1,
+                    amount = 5,
                     toKill = FourCC('fire'),
                     name = 'Bonfires',
-					verb = 'Extinguish'
-					verbPast = 'extinguished'
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
                 }
             },
             rewards = {
@@ -670,11 +670,11 @@ function initQuests()
                 [1] = {
                     type = TYPE.KILL,
                     amount = 1,
-                    toKill = FourCC('fire'),
-                    name = 'Bonfires',
-					verb = 'Burn'
-					verbPast = 'burned'
-                }
+                    toKill = FourCC('plan'),
+                    name = 'Attack Plans',
+					verb = 'Burn',
+					verbPast = 'burned',
+                },
             },
             rewards = {
                 exp = 250,
