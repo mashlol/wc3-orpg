@@ -713,8 +713,8 @@ function initQuests()
         },
 		[14] = {
             name = "Kill Them All!",
-            getQuestFrom = gg_unit_nvil_0087,
-            handQuestTo = gg_unit_nvil_0087,
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
             obtainText = "The Cultists are harvesting gold and gems in order to fuel their cause. Crush them. Find anyone who resembles a leader and take their head.",
             incompleteText = "Did you crush those Cultist bastards?",
             completedText = "You're a natural, good work. I might know someone else who has more work for you if you're interested.",
