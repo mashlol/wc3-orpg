@@ -177,6 +177,9 @@ function Backpack:init()
         BlzTriggerRegisterFrameEvent(
             trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
+            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+
             local playerId = GetPlayerId(GetTriggerPlayer())
 
             local activeBagItem = backpack.getActiveItem(playerId)
@@ -208,7 +211,7 @@ function Backpack:init()
                         local itemInfo = itemmanager.getItemInfo(itemId)
                         local spellKey = itemInfo.spell
                         local itemSlot = itemInfo.slot
-                        if isInVendor then
+                        if isInVendor and itemInfo.cost > 0 then
                             -- Sell 1 of the item
                             backpack.removeItemFromBackpack(
                                 playerId, clickedItemPos, 1)
@@ -229,7 +232,11 @@ function Backpack:init()
                             -- Consume the item
                             local success = spell.castSpellByKey(
                                 playerId, spellKey)
-                            if success then
+                            if
+                                success and
+                                itemInfo.consume == true or
+                                itemInfo.consume == nil
+                            then
                                 backpack.removeItemFromBackpack(
                                     playerId, clickedItemPos, 1)
                             end
@@ -257,9 +264,6 @@ function Backpack:init()
             else
                 backpack.activateItem(playerId, i+1)
             end
-
-            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         end)
 
         table.insert(itemFrames, {
@@ -345,7 +349,7 @@ function Backpack:update(playerId)
             local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
             local tooltip = itemmanager.getItemTooltip(itemId)
 
-            if Vendor.isVendorActive(playerId) then
+            if Vendor.isVendorActive(playerId) and itemInfo.cost > 0 then
                 numTooltipLines = numTooltipLines + 2
                 tooltip = tooltip ..
                     "|n|n(Double click to sell for "..

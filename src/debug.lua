@@ -22,7 +22,7 @@ local debug9 = function()
 
     animNum = animNum + 0.01
 
-    backpack.addItemIdToBackpack(playerId, itemId)
+    backpack.addItemIdToBackpack(playerId, 48)
 
     itemId = itemId + 1
 
