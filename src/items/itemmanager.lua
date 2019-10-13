@@ -179,7 +179,7 @@ local ITEMS = {
     },
 	[9] = {
         type = TYPE.CONSUMABLE,
-        name = 'Giant Turtle Meat',
+        name = 'River Turtle Meat',
         icon = "ReplaceableTextures\\CommandButtons\\BTNMonsterLure.blp",
         itemLevel = 1,
         requiredLevel = 1,
