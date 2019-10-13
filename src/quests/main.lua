@@ -8,6 +8,7 @@ local Dialog = require('src/ui/dialog.lua')
 local TYPE = {
     KILL = {},
     ITEM = {},
+    DISCOVER = {},
 }
 
 local QUESTS
@@ -104,6 +105,29 @@ function maybeUpdateLootProgress(playerId)
             end
         end
     end
+end
+
+function maybeUpdateDiscoverProgress()
+    local playerId = GetPlayerId(GetOwningPlayer(GetEnteringUnit()))
+    local enteredRegion = GetTriggeringRegion()
+
+    for questId, progressInfo in pairs(progress[playerId]) do
+        if not progressInfo.completed then
+            for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+                if objectiveInfo.type == TYPE.DISCOVER then
+                    if enteredRegion == objectiveInfo.region then
+                        progress[playerId][questId].objectives[objectiveIdx] = 1
+                        log.log(
+                            playerId,
+                            'You discovered the ' .. objectiveInfo.name,
+                            log.TYPE.INFO)
+                        updateQuestMarks()
+                    end
+                end
+            end
+        end
+    end
+
 end
 
 function updateQuestMarks()
@@ -249,6 +273,9 @@ function getQuestAcceptText(questId)
         if objectiveInfo.type == TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
             objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name.."|n"
+        end
+        if objectiveInfo.type == TYPE.DISCOVER then
+            objectives = objectives .. "- Discover the "..objectiveInfo.name.."|n"
         end
     end
     if objectives ~= "" then
@@ -646,11 +673,11 @@ function initQuests()
             completedText = "I knew it. This is much worse than I thought.",
             objectives = {
                 [1] = {
-                    type = TYPE.KILL,
+                    type = TYPE.DISCOVER,
+                    rect = gg_rct_mineexit,
+                    name = 'Mine Entrance',
                     amount = 1,
-                    toKill = FourCC('clea'),
-                    name = 'Cultist Commander',
-                }
+                },
             },
             rewards = {
                 exp = 75,
@@ -744,6 +771,22 @@ function getQuestInfo(questId)
     return QUESTS[questId]
 end
 
+function initRegionTriggers()
+    for _, questInfo in pairs(QUESTS) do
+        for _, objectiveInfo in pairs(questInfo.objectives) do
+            if objectiveInfo.type == TYPE.DISCOVER then
+                local region = CreateRegion()
+                RegionAddRect(region, objectiveInfo.rect)
+                objectiveInfo.region = region
+                local enterDungeonTrig = CreateTrigger()
+                TriggerRegisterEnterRegionSimple(
+                    enterDungeonTrig, region)
+                TriggerAddAction(enterDungeonTrig, maybeUpdateDiscoverProgress)
+            end
+        end
+    end
+end
+
 function init()
     local selectTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS-1,1 do
@@ -768,6 +811,7 @@ function init()
     initQuests()
     initObjectiveTriggers()
     initQuestMarks()
+    initRegionTriggers()
 
     hero.addRepickedListener(resetQuestProgress)
     hero.addHeroPickedListener(updateQuestMarks)
