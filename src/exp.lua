@@ -4,7 +4,7 @@ local hero = require('src/hero.lua')
 local BASE_EXP = 10
 local ELITE_BASE_EXP = 30
 
-function getExp(heroLevel, mobLevel, numShared)
+function getExp(heroLevel, mobLevel, numShared, isElite)
     local delta = mobLevel - heroLevel
 
     -- No exp for anything 5 levels above or 5 levels below
@@ -12,9 +12,9 @@ function getExp(heroLevel, mobLevel, numShared)
         return 0
     end
 
-    -- TODO determine if the unit is "elite" and give more exp
+    local baseExp = isElite and ELITE_BASE_EXP or BASE_EXP
 
-    return math.max((BASE_EXP + BASE_EXP * delta / 5) / numShared, 1)
+    return math.max((baseExp + baseExp * delta / 5) / numShared, 1)
 end
 
 function distributeExp()
@@ -23,6 +23,7 @@ function distributeExp()
     local killingPlayerId = GetPlayerId(GetOwningPlayer())
 
     local dyingUnitLevel = GetUnitLevel(dyingUnit)
+    local isElite = not BlzGetUnitBooleanField(dyingUnit, UNIT_BF_DECAYABLE)
 
     local playerPartyId = party.getPlayerParty(killingPlayerId)
 
@@ -33,13 +34,13 @@ function distributeExp()
             local heroLevel = GetHeroLevel(hero.getHero(playerId))
             AddHeroXP(
                 killingUnit,
-                getExp(heroLevel, dyingUnitLevel, partySize),
+                getExp(heroLevel, dyingUnitLevel, partySize, isElite),
                 true)
         end
     else
         local heroLevel = GetHeroLevel(killingUnit)
-        -- No party, give full exp
-        AddHeroXP(killingUnit, getExp(heroLevel, dyingUnitLevel, 1), true)
+        AddHeroXP(
+            killingUnit, getExp(heroLevel, dyingUnitLevel, 1, isElite), true)
     end
 end
 
