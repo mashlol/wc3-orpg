@@ -606,7 +606,7 @@ function initQuests()
         [9] = {
             name = "Ironwell City",
             getQuestFrom = gg_unit_nvil_0087,
-            handQuestTo = gg_unit_Hlgr_0335,
+            handQuestTo = gg_unit_gens_0335,
             obtainText = "Find General Smith outside of Ironwell, he might have some work for you to do before you can enter the city.",
             incompleteText = "Did you find General Smith?",
             completedText = "Fjord sent you? Good. I need some help around here.",
@@ -620,8 +620,8 @@ function initQuests()
         },
 		[10] = {
             name = "Stamping out the Fires",
-            getQuestFrom = gg_unit_Hlgr_0335,
-            handQuestTo = gg_unit_Hlgr_0335,
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
             obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
             incompleteText = "Have you extinguished the Cultist Bonfires?",
             completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
@@ -644,8 +644,8 @@ function initQuests()
         },
 		[11] = {
             name = "Full Momentum",
-            getQuestFrom = gg_unit_Hlgr_0335,
-            handQuestTo = gg_unit_Hlgr_0335,
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
             obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with!",
             incompleteText = "Have you slain those Commanders yet?",
             completedText = "Nicely done.",
@@ -666,8 +666,8 @@ function initQuests()
         },
 		[12] = {
             name = "Scouting the Mines",
-            getQuestFrom = gg_unit_Hlgr_0335,
-            handQuestTo = gg_unit_Hlgr_0335,
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
             obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
             incompleteText = "Did you find anything in the pass?",
             completedText = "I knew it. This is much worse than I thought.",
