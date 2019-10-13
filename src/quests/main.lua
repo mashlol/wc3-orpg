@@ -469,9 +469,9 @@ function initQuests()
             name = "Trouble in Turtle Town",
             getQuestFrom = gg_unit_nvl2_0005,
             handQuestTo = gg_unit_nvl2_0005,
-            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They have been attacking the town lately.",
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
             incompleteText = "Have you completed the task?",
-            completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
             rewards = {
                 exp = 50,
                 gold = 5,
@@ -490,7 +490,7 @@ function initQuests()
         },
         [2] = {
             name = "Fred's Quest",
-            getQuestFrom = gg_unit_nvl2_0005,
+            getQuestFrom = gg_unit_nvil_0004,
             handQuestTo = gg_unit_nvil_0085,
             obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
             incompleteText = "I don't think its possible to see this text.",
@@ -500,7 +500,7 @@ function initQuests()
                 gold = 5,
             },
             objectives = {},
-            prerequisites = {1},
+            prerequisites = {},
             levelRequirement = 0,
         },
         [3] = {
@@ -623,10 +623,10 @@ function initQuests()
             levelRequirement = 0,
         },
         [9] = {
-            name = "Ironwell City",
+            name = "General Smith",
             getQuestFrom = gg_unit_nvil_0087,
             handQuestTo = gg_unit_gens_0335,
-            obtainText = "Find General Smith outside of Ironwell, he might have some work for you to do before you can enter the city.",
+            obtainText = "If you follow the path east and go left at the fork in the road you should be able to find General Smith at an army encampment just outside of Ironwell City.",
             incompleteText = "Did you find General Smith?",
             completedText = "Fjord sent you? Good. I need some help around here.",
             objectives = {},
@@ -639,8 +639,8 @@ function initQuests()
         },
 		[10] = {
             name = "Stamping out the Fires",
-            getQuestFrom = gg_unit_gens_0335,
-            handQuestTo = gg_unit_gens_0335,
+            getQuestFrom = gg_unit_hcth_0104,
+            handQuestTo = gg_unit_hcth_0104,
             obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
             incompleteText = "Have you extinguished the Cultist Bonfires?",
             completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
@@ -665,7 +665,7 @@ function initQuests()
             name = "Full Momentum",
             getQuestFrom = gg_unit_gens_0335,
             handQuestTo = gg_unit_gens_0335,
-            obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with!",
+            obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with! You can find them in the encampments to the east.",
             incompleteText = "Have you slain those Commanders yet?",
             completedText = "Nicely done.",
             objectives = {
@@ -686,7 +686,7 @@ function initQuests()
                 exp = 300,
                 gold = 30,
             },
-            prerequisites = {10},
+            prerequisites = {9},
             levelRequirement = 0,
         },
 		[12] = {
@@ -715,7 +715,7 @@ function initQuests()
             name = "Attack Plans",
             getQuestFrom = gg_unit_hcth_0104,
             handQuestTo = gg_unit_hcth_0104,
-            obtainText = "Those Cultists are planning something. Try to find anything that looks like attack plans and destroy them!",
+            obtainText = "Those Cultists are planning something. Enter the mines and find something that resembles attack plans and destroy them.",
             incompleteText = "Have you destroyed those attack plans?",
             completedText = "Nice work! You've saved the day",
            objectives = {
@@ -724,8 +724,8 @@ function initQuests()
                     amount = 1,
                     toKill = FourCC('plan'),
                     name = 'Attack Plans',
-					verb = 'Burn',
-					verbPast = 'burned',
+					verb = 'Destroy',
+					verbPast = 'destroyed',
                 },
             },
             rewards = {
@@ -739,9 +739,9 @@ function initQuests()
             name = "Kill Them All!",
             getQuestFrom = gg_unit_gens_0335,
             handQuestTo = gg_unit_gens_0335,
-            obtainText = "The Cultists are harvesting gold and gems in order to fuel their cause. Crush them. Find anyone who resembles a leader and take their head.",
+            obtainText = "Enter the mines and kill the leaders in there. If we can do that then we will be able to slow down the progress of the Cultists.",
             incompleteText = "Did you crush those Cultist bastards?",
-            completedText = "You're a natural, good work. I might know someone else who has more work for you if you're interested.",
+            completedText = "Thanks for playing TVT ORPG PRE-ALPHA. Please give any feedback here at our discord: https://discord.gg/7wqQ3Az",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
@@ -767,14 +767,14 @@ function initQuests()
             name = "A Friend In Need is a Friend Indeed",
             getQuestFrom = gg_unit_nvil_0083,
             handQuestTo = gg_unit_nvil_0084,
-            obtainText = "Help! My friend is being ambushed by some Cultists! He's just down the road!",
+            obtainText = "Help! My friend is being ambushed by some Cultists! He's just down this road behind me!",
             incompleteText = "Is my friend still alive?",
             completedText = "Thank you so much!",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
                     amount = 4,
-                    toKill = FourCC('h000'),
+                    toKill = FourCC('h001'),
                     name = 'Cultist Raider',
                 }
             },
