@@ -268,7 +268,8 @@ function getQuestAcceptText(questId)
     for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
         if objectiveInfo.type == TYPE.KILL then
             local verb = objectiveInfo.verb or 'Kill'
-            objectives = objectives.."- "..verb.." "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
+            local amount = objectiveInfo.amount > 1 and (objectiveInfo.amount .. ' ')  or ''
+            objectives = objectives.."- "..verb.." "..amount..objectiveInfo.name.."|n"
         end
         if objectiveInfo.type == TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
