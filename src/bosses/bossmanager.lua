@@ -3,6 +3,7 @@ local Wolf = require('src/bosses/wolf.lua')
 local MinerJoe = require('src/bosses/minerjoe.lua')
 local OverseerTom = require('src/bosses/overseertom.lua')
 local hero = require('src/hero.lua')
+local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
 
 local ALL_BOSS_CLASSES = {
@@ -103,6 +104,21 @@ function Context:registerPhase(options)
 end
 
 function Context:getHeroesInPoly()
+    if self.cls:getBounds() == false then
+        -- Just get all heroes within 1500 yards
+        local toReturn = {}
+        for i=0,bj_MAX_PLAYERS,1 do
+            local heroUnit = hero.getHero(i)
+            if
+                heroUnit ~= nil and
+                IsUnitInRange(heroUnit, self.cls.bossUnit, 1500)
+            then
+                toReturn[GetHandleId(heroUnit)] = heroUnit
+            end
+        end
+        return toReturn
+    end
+
     local toReturn = {}
     for i=0,bj_MAX_PLAYERS,1 do
         local heroUnit = hero.getHero(i)
@@ -133,7 +149,19 @@ function Context:onFightEnded()
         return
     end
 
-    self.involvedHeroes[GetHandleId(GetTriggerUnit())] = nil
+    if not threat.hasAnyThreat(self.cls.bossUnit) then
+        print('You ran away')
+        self.involvedHeroes = {}
+        self:resetFight()
+        return
+    end
+
+    if
+        GetTriggerUnit() ~= nil and
+        GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) <= 0
+    then
+        self.involvedHeroes[GetHandleId(GetTriggerUnit())] = nil
+    end
 
     if self:isAllInvolvedHeroesDead() then
         print("You lost.")
@@ -164,6 +192,11 @@ function Context:isAllInvolvedHeroesDead()
 end
 
 function Context:fixEngagement()
+    if self.cls:getBounds() == false then
+        self:onFightEnded()
+        return
+    end
+
     for i=0,bj_MAX_PLAYERS,1 do
         local hero = hero.getHero(i)
         if hero ~= nil then
@@ -177,6 +210,8 @@ function Context:fixEngagement()
             end
         end
     end
+
+    self:onFightEnded()
 end
 
 function Context:ensureEngagingUnitInvolved(engagingUnit)

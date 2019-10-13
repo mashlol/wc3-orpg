@@ -22,6 +22,16 @@ local hero = require('src/hero.lua')
 -- }
 local threatLevels = {}
 
+function hasAnyThreat(unit)
+    if threatLevels[GetHandleId(unit)] == nil then
+        return false
+    end
+    for _, _ in pairs(threatLevels[GetHandleId(unit)].threats) do
+        return true
+    end
+    return false
+end
+
 -- Iterates through the targets & prunes dead units or units which are too far
 -- away
 function pruneThreatLevels()
@@ -137,4 +147,5 @@ end
 return {
     init = init,
     addThreat = addThreat,
+    hasAnyThreat = hasAnyThreat,
 }
