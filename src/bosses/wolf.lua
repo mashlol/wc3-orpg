@@ -16,12 +16,7 @@ end
 
 -- Counter-clockwise coords
 function Wolf:getBounds()
-    return {
-        {x = 15803, y = 8166},
-        {x = 14305, y = 8050},
-        {x = 14203, y = 6700},
-        {x = 15820, y = 6500},
-    }
+    return false
 end
 
 function Wolf:spawnAdds()
@@ -31,11 +26,11 @@ function Wolf:spawnAdds()
             y = GetUnitY(self.bossUnit),
         }
         local spawnLocation = Vector:fromAngle(GetRandomReal(0, 2 * bj_PI))
-            :multiply(50)
+            :multiply(150)
             :add(bossV)
         local add = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
-            FourCC("nban"),
+            FourCC("hwol"),
             spawnLocation.x,
             spawnLocation.y,
             GetRandomReal(0, 180))

@@ -263,26 +263,31 @@ function getQuestCompletedText(questId)
     return res
 end
 
-function getQuestAcceptText(questId)
+function getQuestAcceptText(questId, playerId)
     local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
 
     res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
 
     res = res .. QUESTS[questId].obtainText
     local objectives = ""
-    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+    for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
         if objectiveInfo.type == TYPE.KILL then
             local verb = objectiveInfo.verb or 'Kill'
             local amount = objectiveInfo.amount > 1 and (objectiveInfo.amount .. ' ')  or ''
-            objectives = objectives.."- "..verb.." "..amount..objectiveInfo.name.."|n"
+            objectives = objectives.."- "..verb.." "..amount..objectiveInfo.name
         end
         if objectiveInfo.type == TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
-            objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name.."|n"
+            objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name
         end
         if objectiveInfo.type == TYPE.DISCOVER then
-            objectives = objectives .. "- Discover the "..objectiveInfo.name.."|n"
+            objectives = objectives .. "- Discover the "..objectiveInfo.name
         end
+        if playerId ~= nil and progress[playerId][questId].objectives[objectiveIdx] ~= nil then
+            local amountDone = progress[playerId][questId].objectives[objectiveIdx]
+            objectives = objectives .. " ( ".. amountDone .." / ".. objectiveInfo.amount .." )"
+        end
+        objectives = objectives .. "|n"
     end
     if objectives ~= "" then
         res = res .. "|n|n|cffe0b412Objectives:|r|n"..objectives
@@ -407,7 +412,7 @@ end
 function showDialogForActiveQuest(playerId, activeQuestId)
     local activeQuests = getActiveQuests(playerId)
     Dialog.show(playerId, {
-        text = getQuestAcceptText(activeQuests[activeQuestId]),
+        text = getQuestAcceptText(activeQuests[activeQuestId], playerId),
         positiveButton = "Okay",
         negativeButton = "Disband",
         onNegativeButtonClicked = function()
@@ -846,4 +851,5 @@ return {
     restoreProgress = restoreProgress,
     getActiveQuests = getActiveQuests,
     showDialogForActiveQuest = showDialogForActiveQuest,
+    questObjectivesCompleted = questObjectivesCompleted,
 }

@@ -33,6 +33,7 @@ function createQuestButton(origin, originFrame, yOffset, index)
         0,
         yOffset)
     BlzFrameSetText(buttonText, "This is a quest name")
+    BlzFrameSetScale(buttonText, 0.5)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -40,7 +41,6 @@ function createQuestButton(origin, originFrame, yOffset, index)
     TriggerAddAction(trig, function()
         local playerId = GetPlayerId(GetTriggerPlayer())
         quests.showDialogForActiveQuest(playerId, index)
-
 
         BlzFrameSetEnable(BlzGetTriggerFrame(), false)
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
@@ -116,11 +116,16 @@ function QuestLog:update(playerId)
         local button = frames.buttons[i]
 
         BlzFrameSetVisible(button.button, activeQuests[i] ~= nil)
-        BlzFrameSetText(
-            button.text,
-            activeQuests[i] ~= nil and
-                quests.getQuestInfo(activeQuests[i]).name or
-                "")
+
+        local btnText = ""
+        if activeQuests[i] ~= nil then
+            btnText = quests.getQuestInfo(activeQuests[i]).name
+            if quests.questObjectivesCompleted(playerId, activeQuests[i]) then
+                btnText = btnText .. ' (Completed)'
+            end
+        end
+
+        BlzFrameSetText(button.text, btnText)
     end
 end
 
