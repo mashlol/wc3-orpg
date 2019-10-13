@@ -116,7 +116,10 @@ function maybeUpdateDiscoverProgress()
     for questId, progressInfo in pairs(progress[playerId]) do
         if not progressInfo.completed then
             for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
-                if objectiveInfo.type == TYPE.DISCOVER then
+                if
+                    objectiveInfo.type == TYPE.DISCOVER and
+                    progress[playerId][questId].objectives[objectiveIdx] ~= objectiveInfo.amount
+                then
                     if enteredRegion == objectiveInfo.region then
                         progress[playerId][questId].objectives[objectiveIdx] = 1
                         log.log(
