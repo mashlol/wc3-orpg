@@ -428,7 +428,7 @@ function initQuests()
             completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
             rewards = {
                 exp = 50,
-                gold = 50,
+                gold = 5,
                 items = {[6] = 5},
             },
             objectives = {
@@ -451,7 +451,7 @@ function initQuests()
             completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
             rewards = {
                 exp = 20,
-                gold = 10,
+                gold = 5,
             },
             objectives = {},
             prerequisites = {1},
@@ -466,7 +466,7 @@ function initQuests()
             completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
                 exp = 100,
-                gold = 100,
+                gold = 5,
             },
             objectives = {
                 [1] = {
@@ -488,7 +488,7 @@ function initQuests()
             objectives = {},
             rewards = {
                 exp = 30,
-                gold = 30,
+                gold = 3,
             },
             prerequisites = {3},
             levelRequirement = 0,
@@ -510,7 +510,7 @@ function initQuests()
             },
             rewards = {
                 exp = 150,
-                gold = 150,
+                gold = 10,
             },
             prerequisites = {4},
             levelRequirement = 0,
@@ -527,10 +527,10 @@ function initQuests()
             },
             rewards = {
                 exp = 20,
-                gold = 20,
+                gold = 5,
             },
             prerequisites = {5},
-            levelRequirement = 8,
+            levelRequirement = 0,
         },
 		[7] = {
             name = "Giant Turtle",
@@ -549,10 +549,10 @@ function initQuests()
             },
             rewards = {
                 exp = 300,
-                gold = 300,
+                gold = 25,
             },
             prerequisites = {6},
-            levelRequirement = 7,
+            levelRequirement = 0,
         },
 		[8] = {
             name = "Alpha Wolf",
@@ -571,10 +571,10 @@ function initQuests()
             },
             rewards = {
                 exp = 350,
-                gold = 350,
+                gold = 30,
             },
             prerequisites = {6},
-            levelRequirement = 8,
+            levelRequirement = 0,
         },
         [9] = {
             name = "Ironwell City",
@@ -586,9 +586,151 @@ function initQuests()
             objectives = {},
             rewards = {
                 exp = 30,
-                gold = 30,
+                gold = 5,
             },
             prerequisites = {8},
+            levelRequirement = 0,
+        },
+		[10] = {
+            name = "Stamping out the Fires",
+            getQuestFrom = gg_unit_Hlgr_0088,
+            handQuestTo = gg_unit_Hlgr_0088,
+            obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
+            incompleteText = "Have you extinguished the Cultist Bonfires?",
+            completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
+           objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('fire'),
+                    name = 'Bonfires',
+					verb = 'Extinguish'
+					verbPast = 'extinguished'
+                }
+            },
+            rewards = {
+                exp = 200,
+                gold = 25,
+            },
+            prerequisites = {9},
+            levelRequirement = 0,
+        },
+		[11] = {
+            name = "Full Momentum",
+            getQuestFrom = gg_unit_Hlgr_0088,
+            handQuestTo = gg_unit_Hlgr_0088,
+            obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with!",
+            incompleteText = "Have you slain those Commanders yet?",
+            completedText = "Nicely done.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('clea'),
+                    name = 'Cultist Commander',
+                }
+            },
+            rewards = {
+                exp = 300,
+                gold = 30,
+            },
+            prerequisites = {10},
+            levelRequirement = 0,
+        },
+		[12] = {
+            name = "Scouting the Mines",
+            getQuestFrom = gg_unit_Hlgr_0088,
+            handQuestTo = gg_unit_Hlgr_0088,
+            obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
+            incompleteText = "Did you find anything in the pass?",
+            completedText = "I knew it. This is much worse than I thought.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('clea'),
+                    name = 'Cultist Commander',
+                }
+            },
+            rewards = {
+                exp = 75,
+                gold = 10,
+            },
+            prerequisites = {11},
+            levelRequirement = 0,
+        },
+		[13] = {
+            name = "Attack Plans",
+            getQuestFrom = gg_unit_hcth_0104,
+            handQuestTo = gg_unit_hcth_0104,
+            obtainText = "Those Cultists are planning something. Try to find anything that looks like attack plans and destroy them!",
+            incompleteText = "Have you destroyed those attack plans?",
+            completedText = "Nice work! You've saved the day",
+           objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('fire'),
+                    name = 'Bonfires',
+					verb = 'Burn'
+					verbPast = 'burned'
+                }
+            },
+            rewards = {
+                exp = 250,
+                gold = 25,
+            },
+            prerequisites = {9},
+            levelRequirement = 0,
+        },
+		[14] = {
+            name = "Kill Them All!",
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_nvil_0087,
+            obtainText = "The Cultists are harvesting gold and gems in order to fuel their cause. Crush them. Find anyone who resembles a leader and take their head.",
+            incompleteText = "Did you crush those Cultist bastards?",
+            completedText = "You're a natural, good work. I might know someone else who has more work for you if you're interested.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('mine'),
+                    name = 'Miner Joe',
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('over'),
+                    name = 'The Overseer',
+                }
+            },
+            rewards = {
+                exp = 500,
+                gold = 75,
+            },
+            prerequisites = {12},
+            levelRequirement = 0,
+        },
+		[15] = {
+            name = "A Friend In Need is a Friend Indeed",
+            getQuestFrom = gg_unit_nvil_0083,
+            handQuestTo = gg_unit_nvil_0084,
+            obtainText = "Help! My friend is being ambushed by some Cultists! He's just down the road!",
+            incompleteText = "Is my friend still alive?",
+            completedText = "Thank you so much!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 4,
+                    toKill = FourCC('h000'),
+                    name = 'Cultist Raider',
+                }
+            },
+            rewards = {
+                exp = 150,
+                gold = 50,
+            },
+            prerequisites = {6},
             levelRequirement = 0,
         },
 }
