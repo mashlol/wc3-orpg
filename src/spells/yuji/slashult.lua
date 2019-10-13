@@ -11,7 +11,7 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 25
+local COOLDOWN_S = 45
 
 local getSpellId = function()
     return 'slashult'

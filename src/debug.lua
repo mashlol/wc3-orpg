@@ -12,19 +12,24 @@ local itemId = 1
 
 local debug9 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    -- local hero = hero.getHero(playerId)
+    local hero = hero.getHero(playerId)
+
+    local curLevel = GetHeroLevel(hero)
+    SetHeroLevel(hero, curLevel + 1, true)
 
     -- SetUnitAnimationByIndex(hero, animNum)
 
     -- BlzSetUnitIntegerField(hero, UNIT_IF_LEVEL, 10)
 
-    print(animNum)
 
-    animNum = animNum + 0.01
 
-    backpack.addItemIdToBackpack(playerId, 48)
+    -- print(animNum)
 
-    itemId = itemId + 1
+    -- animNum = animNum + 0.01
+
+    -- backpack.addItemIdToBackpack(playerId, 48)
+
+    -- itemId = itemId + 1
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
@@ -32,11 +37,13 @@ end
 
 local debug0 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    print(animNum)
+    -- print(animNum)
 
-    animNum = animNum - 0.01
+    -- animNum = animNum - 0.01
 
-    backpack.addItemIdToBackpack(playerId, 6)
+    backpack.addItemIdToBackpack(playerId, itemId)
+
+    itemId = itemId + 1
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
