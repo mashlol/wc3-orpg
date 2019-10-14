@@ -5,15 +5,14 @@ local meta = require('src/saveload/meta.lua')
 local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
+local zones = require('src/zones.lua')
+local Vector = require('src/vector.lua')
 local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
 
 local CREATE_SYNC_PREFIX = 'create-hero'
-
-local START_X = 4100
-local START_Y = 3000
 
 local heroes = {}
 local pickedHeroes = {}
@@ -149,13 +148,16 @@ local ALL_HERO_INFO = {
 
 local respawn = function()
     local unit = GetDyingUnit()
+    local playerId = GetPlayerId(GetOwningPlayer(unit))
     local exp = GetHeroXP(unit)
+
+    local respawnPoint = zones.getSpawnPoint(playerId)
 
     TriggerSleepAction(5)
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            createHeroForPlayer(i, exp)
+            createHeroForPlayer(i, exp, respawnPoint.x, respawnPoint.y)
         end
     end
 end
@@ -167,15 +169,15 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
     local hero = CreateUnit(
         Player(playerId),
         pickedHeroes[playerId].id,
-        heroX or START_X,
-        heroY or START_Y,
+        heroX or zones.DEFAULT_SPAWN_POINT.x,
+        heroY or zones.DEFAULT_SPAWN_POINT.y,
         0)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
         SelectUnit(hero, true)
         ResetToGameCamera(0)
-        PanCameraToTimed(heroX or START_X, heroY or START_Y, 0)
+        PanCameraToTimed(heroX or zones.DEFAULT_SPAWN_POINT.x, heroY or zones.DEFAULT_SPAWN_POINT.y, 0)
     end
 
     if exp ~= nil and exp ~= 0 then
