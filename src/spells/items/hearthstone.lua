@@ -3,6 +3,7 @@ local effect = require('src/effect.lua')
 local log = require('src/log.lua')
 local casttime = require('src/casttime.lua')
 local combat = require('src/combat.lua')
+local zones = require('src/zones.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
@@ -52,7 +53,9 @@ local cast = function(playerId)
         duration = 0.5,
     }
 
-    SetUnitPosition(hero, 4100, 3000)
+    local spawnPoint = zones.getSpawnPoint(playerId)
+
+    SetUnitPosition(hero, spawnPoint.x, spawnPoint.y)
 
     effect.createEffect{
         model = "Abilities\\Spells\\Human\\DispelMagic\\DispelMagicTarget.mdl",
@@ -61,7 +64,7 @@ local cast = function(playerId)
     }
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
-        PanCameraToTimed(4100, 3000, 0)
+        PanCameraToTimed(spawnPoint.x, spawnPoint.y, 0)
     end
 
     return true
