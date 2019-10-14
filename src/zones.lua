@@ -11,6 +11,11 @@ local DEFAULT_SPAWN_POINT = {
 -- }
 local spawnPoints = {}
 
+-- zones = {
+--     [playerId] = [ZONE_KEY]
+-- }
+local zones = {}
+
 function getSpawnPoint(playerId)
     if spawnPoints[playerId] == nil then
         return DEFAULT_SPAWN_POINT
@@ -67,29 +72,33 @@ function init()
         },
     }
 
-    for _, zoneInfo in pairs(ZONES) do
+    for zoneKey, zoneInfo in pairs(ZONES) do
         for _, rect in pairs(zoneInfo.rects) do
             local enterZoneTrig = CreateTrigger()
             TriggerRegisterEnterRectSimple(enterZoneTrig, rect)
             TriggerAddAction(enterZoneTrig, function()
                 local playerId = GetPlayerId(GetOwningPlayer(GetEnteringUnit()))
-                log.log(
-                    playerId,
-                    "You entered " .. zoneInfo.name .. ".",
-                    log.TYPE.INFO)
 
-                local curSpawnPoint = getSpawnPoint(playerId)
-                if zoneInfo.spawnPoint ~= nil then
-                    if
-                        curSpawnPoint.x ~= zoneInfo.spawnPoint.x or
-                        curSpawnPoint.y ~= zoneInfo.spawnPoint.y
-                    then
-                        log.log(
-                            playerId,
-                            "Updating spawn point to " .. zoneInfo.name .. ".",
-                            log.TYPE.INFO)
+                if zones[playerId] ~= zoneKey then
+                    zones[playerId] = zoneKey
+                    log.log(
+                        playerId,
+                        "You entered " .. zoneInfo.name .. ".",
+                        log.TYPE.INFO)
+
+                    local curSpawnPoint = getSpawnPoint(playerId)
+                    if zoneInfo.spawnPoint ~= nil then
+                        if
+                            curSpawnPoint.x ~= zoneInfo.spawnPoint.x or
+                            curSpawnPoint.y ~= zoneInfo.spawnPoint.y
+                        then
+                            log.log(
+                                playerId,
+                                "Updating spawn point to " .. zoneInfo.name .. ".",
+                                log.TYPE.INFO)
+                        end
+                        spawnPoints[playerId] = zoneInfo.spawnPoint
                     end
-                    spawnPoints[playerId] = zoneInfo.spawnPoint
                 end
             end)
         end
