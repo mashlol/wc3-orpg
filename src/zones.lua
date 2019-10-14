@@ -37,12 +37,14 @@ function init()
         },
         FOREST = {
             name = "Forest",
+            levelRange = {1, 6},
             rects = {
                 gg_rct_forestenter1,
             },
         },
         WOLVES = {
             name = "Wolf Forest",
+            levelRange = {7, 12},
             rects = {
                 gg_rct_wolvesenter1,
                 gg_rct_wolvesenter2,
@@ -50,12 +52,14 @@ function init()
         },
         WOLF_CAVE = {
             name = 'Wolf Cave',
+            levelRange = {10, 14},
             rects = {
                 gg_rct_wolfcaveenter1,
             },
         },
         CULTIST_CAMP = {
             name = 'Cultist Camp',
+            levelRange = {15, 20},
             rects = {
                 gg_rct_cultistenter1,
             },
