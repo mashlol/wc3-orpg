@@ -36,14 +36,14 @@ function init()
             },
         },
         FOREST = {
-            name = "Forest",
+            name = "Freydell Forest",
             levelRange = {1, 6},
             rects = {
                 gg_rct_forestenter1,
             },
         },
         WOLVES = {
-            name = "Wolf Forest",
+            name = "Wolf Plains",
             levelRange = {7, 12},
             rects = {
                 gg_rct_wolvesenter1,
