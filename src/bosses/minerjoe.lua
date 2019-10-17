@@ -1,5 +1,4 @@
 local Vector = require('src/vector.lua')
-local threat = require('src/threat.lua')
 local effect = require('src/effect.lua')
 local collision = require('src/collision.lua')
 local damage = require('src/damage.lua')

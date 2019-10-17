@@ -297,6 +297,14 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
     },
+    stunnoeffect = {
+        effects = {
+            {
+                type = stats.STUN,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNGauntletsOfOgrePower.blp",
+    },
 }
 
 -- BuffInstances:

@@ -1,9 +1,9 @@
 local Vector = require('src/vector.lua')
-local threat = require('src/threat.lua')
 local effect = require('src/effect.lua')
 local collision = require('src/collision.lua')
 local damage = require('src/damage.lua')
 local buff = require('src/buff.lua')
+local animations = require('src/animations.lua')
 
 local OverseerTom = {}
 
@@ -29,6 +29,10 @@ function OverseerTom:getBounds()
 end
 
 function OverseerTom:pullCenter()
+    buff.addBuff(self.bossUnit, self.bossUnit, 'stunnoeffect', 5)
+    PauseUnit(self.bossUnit, true)
+    animations.queueAnimation(self.bossUnit, 15, 5)
+
     local bombV = Vector:new{
         x = GetUnitX(self.bossUnit),
         y = GetUnitY(self.bossUnit),
@@ -46,6 +50,7 @@ function OverseerTom:pullCenter()
         x = bombV.x,
         y = bombV.y,
         duration = 0.5,
+        timeScale = 0.3,
     }
 
     effect.createEffect{
@@ -58,6 +63,7 @@ function OverseerTom:pullCenter()
         remove = true,
     }
 
+    animations.queueAnimation(self.bossUnit, 15, 5)
     local timer = CreateTimer()
     TimerStart(timer, 5, false, function()
         DestroyTimer(timer)
