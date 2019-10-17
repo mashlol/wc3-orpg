@@ -507,7 +507,7 @@ function initQuests()
             name = "Fred's Soup",
             getQuestFrom = gg_unit_nvil_0085,
             handQuestTo = gg_unit_nvil_0085,
-            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect ten River Turtle Meat and bring it back to me?",
+            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect five River Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
@@ -527,7 +527,7 @@ function initQuests()
         [4] = {
             name = "Return to Freydell Village",
             getQuestFrom = gg_unit_nvil_0085,
-            handQuestTo = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvil_0004,
             obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
             incompleteText = "Impossible!",
             completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",

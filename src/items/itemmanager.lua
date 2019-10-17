@@ -908,7 +908,7 @@ local ITEMS = {
         stats = {
             {
                 type = stats.RAW_DAMAGE,
-                amount = 25,
+                amount = 35,
                 tickrate = 5,
             },
         },
