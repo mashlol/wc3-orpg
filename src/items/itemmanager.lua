@@ -1040,6 +1040,11 @@ function getItemInfo(itemId)
     return ITEMS[itemId]
 end
 
+function getItemNameWithColor(itemId)
+    local itemInfo = ITEMS[itemId]
+    return itemInfo.rarity.color .. itemInfo.name .. "|r"
+end
+
 function getItemTooltip(itemId)
     return TOOLTIPS[itemId] and TOOLTIPS[itemId].text or ""
 end
@@ -1120,4 +1125,5 @@ return {
     getItemInfo = getItemInfo,
     getItemTooltip = getItemTooltip,
     getItemTooltipNumLines = getItemTooltipNumLines,
+    getItemNameWithColor = getItemNameWithColor,
 }

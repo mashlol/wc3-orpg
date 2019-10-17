@@ -218,8 +218,8 @@ function maybeDistributeDrop()
             backpack.addItemIdToBackpack(playerId, drop)
             log.log(
                 playerId,
-                'You looted ' .. itemInfo.name,
-                log.TYPE.INFO)
+                'You looted ' .. itemmanager.getItemNameWithColor(drop),
+                log.TYPE.DROP)
         end
     end
 end
@@ -266,8 +266,8 @@ function onRollMade(playerId, rollId, type)
                 '(' ..
                 randomRoll ..
                 ') on ' ..
-                itemmanager.getItemInfo(drop).name,
-            log.TYPE.INFO)
+                itemmanager.getItemNameWithColor(drop),
+            log.TYPE.ROLL)
         for _, otherPlayerId in pairs(rolls[rollId].players) do
             if otherPlayerId ~= playerId then
                 log.log(
@@ -278,24 +278,24 @@ function onRollMade(playerId, rollId, type)
                         '(' ..
                         randomRoll ..
                         ') on ' ..
-                        itemmanager.getItemInfo(drop).name,
-                    log.TYPE.INFO)
+                        itemmanager.getItemNameWithColor(drop),
+                    log.TYPE.ROLL)
             end
         end
     end
     if type == 2 then -- pass
         log.log(
             playerId,
-            'You passed on ' .. itemmanager.getItemInfo(drop).name,
-            log.TYPE.INFO)
+            'You passed on ' .. itemmanager.getItemNameWithColor(drop),
+            log.TYPE.ROLL)
         for _, otherPlayerId in pairs(rolls[rollId].players) do
             if otherPlayerId ~= playerId then
                 log.log(
                     otherPlayerId,
                     GetPlayerName(Player(playerId)) ..
                         ' passed on ' ..
-                        itemmanager.getItemInfo(drop).name,
-                    log.TYPE.INFO)
+                        itemmanager.getItemNameWithColor(drop),
+                    log.TYPE.ROLL)
             end
         end
     end
@@ -312,9 +312,9 @@ function maybeDistributeRoll(rollId)
             log.log(
                 playerId,
                 'Everyone passed on ' ..
-                    itemmanager.getItemInfo(drop).name ..
+                    itemmanager.getItemNameWithColor(drop) ..
                     '.',
-                log.TYPE.INFO)
+                log.TYPE.ROLL)
         end
 
         DestroyTimer(rolls[rollId].timer)
@@ -323,17 +323,17 @@ function maybeDistributeRoll(rollId)
         backpack.addItemIdToBackpack(winnerPlayerId, drop)
         log.log(
             winnerPlayerId,
-            'You won ' .. itemmanager.getItemInfo(drop).name .. '!',
-            log.TYPE.INFO)
+            'You won ' .. itemmanager.getItemNameWithColor(drop) .. '!',
+            log.TYPE.ROLL)
         for _, playerId in pairs(rolls[rollId].players) do
             if playerId ~= winnerPlayerId then
                 log.log(
                     playerId,
                     GetPlayerName(Player(winnerPlayerId)) ..
                         ' won ' ..
-                        itemmanager.getItemInfo(drop).name ..
+                        itemmanager.getItemNameWithColor(drop) ..
                         '.',
-                    log.TYPE.INFO)
+                    log.TYPE.ROLL)
             end
         end
 

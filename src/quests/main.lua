@@ -69,7 +69,7 @@ function onKill()
                                 objectiveInfo.amount..
                                 ' '..
                                 objectiveInfo.name,
-                            log.TYPE.INFO)
+                            log.TYPE.QUEST)
                         updateQuestMarks()
                     end
                 end
@@ -99,7 +99,7 @@ function maybeUpdateLootProgress(playerId)
                                 objectiveInfo.amount..
                                 ' '..
                                 itemmanager.getItemInfo(objectiveInfo.itemId).name,
-                            log.TYPE.INFO)
+                            log.TYPE.QUEST)
                     end
                     progress[playerId][questId].objectives[objectiveIdx] = count
                     updateQuestMarks()
@@ -125,7 +125,7 @@ function maybeUpdateDiscoverProgress()
                         log.log(
                             playerId,
                             'You discovered the ' .. objectiveInfo.name,
-                            log.TYPE.INFO)
+                            log.TYPE.QUEST)
                         updateQuestMarks()
                     end
                 end
@@ -356,7 +356,7 @@ function finishQuest(playerId, questId)
                     amount ..
                     ' ' ..
                     itemmanager.getItemInfo(itemId).name,
-                log.TYPE.INFO)
+                log.TYPE.QUEST)
         end
     end
 
