@@ -35,6 +35,18 @@ local TYPE = {
         x = 0,
         y = 0,
     },
+    DROP = {
+        duration = 5,
+        color = "|cff0fd156",
+        x = 0,
+        y = 0,
+    },
+    ROLL = {
+        duration = 5,
+        color = "|cffd1800f",
+        x = 0,
+        y = 0,
+    },
     EQUIPMENT_ERROR = {
         duration = 2,
         color = "|cffff0000",
