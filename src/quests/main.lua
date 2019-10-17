@@ -26,7 +26,7 @@ local QUESTS
 local progress = {}
 
 -- questMarks = {
---     [questId] = texttag
+--     [unit handle of receiver/giver] = {unit = unit, tag = texttag}
 -- }
 local questMarks = {}
 
@@ -132,59 +132,71 @@ function maybeUpdateDiscoverProgress()
             end
         end
     end
+end
 
+function getMarkForQuestGiver(playerId, unit)
+    for questId, questInfo in pairs(QUESTS) do
+        if
+            questInfo.getQuestFrom == unit and
+            isEligibleForQuest(playerId, questId)
+        then
+            return "!", {255, 255, 0}
+        elseif
+            questInfo.handQuestTo == unit and
+            hasQuest(playerId, questId) and
+            not questCompleted(playerId, questId)
+        then
+            if questObjectivesCompleted(playerId, questId) then
+                return "?", {255, 255, 0}
+            else
+                return "?", {50, 50, 50}
+            end
+        end
+    end
+
+    return "", {255, 255, 255}
 end
 
 function updateQuestMarks()
-    -- Loop through each quest, and update the questgiver
-    -- mark to match the quest progress.
+    -- Loop through each quest mark and check which action would happen if you
+    -- click on that unit. Based on that we set the text of the quest mark
+
+    -- TODO optimize n^2?
+
     local playerId = GetPlayerId(GetLocalPlayer())
-    for questId, questInfo in pairs(QUESTS) do
-        local tag = questMarks[questId]
-        local text
-        local color
-        local showOnUnit
-        if isEligibleForQuest(playerId, questId) then
-            text = "!"
-            color = {255, 255, 0}
-            showOnUnit = questInfo.getQuestFrom
-        elseif
-            hasQuest(playerId, questId) and
-            not questCompleted(playerId, questId) and
-            not questObjectivesCompleted(playerId, questId)
-        then
-            text = "?"
-            color = {50, 50, 50}
-            showOnUnit = questInfo.handQuestTo
-        elseif
-            hasQuest(playerId, questId) and
-            not questCompleted(playerId, questId) and
-            questObjectivesCompleted(playerId, questId)
-        then
-            text = "?"
-            color = {255, 255, 0}
-            showOnUnit = questInfo.handQuestTo
-        else
-            text = ""
-            color = {255, 255, 255}
-            showOnUnit = questInfo.handQuestTo
-        end
+    for _, questMarkInfo in pairs(questMarks) do
+        -- print('check quest mark info for ', questMarkInfo.unit)
+        local tag = questMarkInfo.tag
+
+        local text, color = getMarkForQuestGiver(playerId, questMarkInfo.unit)
+
         SetTextTagText(tag, text, TextTagSize2Height(25))
         SetTextTagColor(tag, color[1], color[2], color[3], 0)
-        SetTextTagPosUnit(tag, showOnUnit, 10)
     end
 end
 
-function initQuestMarks()
-    for questId, questInfo in pairs(QUESTS) do
-        local tag = CreateTextTag()
-        SetTextTagText(tag, "!", TextTagSize2Height(25))
-        SetTextTagPosUnit(tag, questInfo.getQuestFrom, 10)
-        SetTextTagColor(tag, 100, 100, 0, 0)
-        SetTextTagPermanent(tag, true)
-        SetTextTagFadepoint(tag, 0.01)
+function maybeAddQuestMarkToUnit(unit)
+    if questMarks[GetHandleId(unit)] ~= nil then
+        return
+    end
 
-        questMarks[questId] = tag
+    local tag = CreateTextTag()
+    SetTextTagText(tag, "!", TextTagSize2Height(25))
+    SetTextTagPosUnit(tag, unit, 10)
+    SetTextTagColor(tag, 100, 100, 0, 0)
+    SetTextTagPermanent(tag, true)
+    SetTextTagFadepoint(tag, 0.01)
+
+    questMarks[GetHandleId(unit)] = {
+        unit = unit,
+        tag = tag,
+    }
+end
+
+function initQuestMarks()
+    for _, questInfo in pairs(QUESTS) do
+        maybeAddQuestMarkToUnit(questInfo.getQuestFrom)
+        maybeAddQuestMarkToUnit(questInfo.handQuestTo)
     end
 
     updateQuestMarks()
@@ -840,6 +852,8 @@ function init()
 
     hero.addRepickedListener(resetQuestProgress)
     hero.addHeroPickedListener(updateQuestMarks)
+
+    TimerStart(CreateTimer(), 3, true, updateQuestMarks)
 end
 
 return {
