@@ -96,7 +96,10 @@ local cast = function(playerId)
                 damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.PHYSICAL)
             end
             return false
-        end
+        end,
+        onDoodadCollide = function(doodad)
+            return true
+        end,
     }
 
     projectile.createProjectile{
@@ -106,6 +109,9 @@ local cast = function(playerId)
         toV = mouseV,
         speed = 4000,
         length = 500,
+        onDoodadCollide = function(doodad)
+            return true
+        end,
     }
 
     casttime.cast(playerId, 0.15, false, false, true)
