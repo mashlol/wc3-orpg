@@ -49,13 +49,6 @@ function Turtle:init()
         hp = 100,
     }
 
-    phase1:addTimedEvent(25, function()
-        self:spawnAdds()
-    end)
-    phase1:addTimedEvent(10, function()
-        self:castSlam()
-    end)
-
     self.ctx:registerDoor(gg_dest_YTcx_4753)
 end
 
