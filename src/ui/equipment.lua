@@ -146,7 +146,7 @@ function Equipment:init()
         FRAMEPOINT_TOPLEFT,
         0.01,
         -0.01)
-    BlzFrameSetText(equipmentText, "Character")
+    BlzFrameSetText(equipmentText, "Character (Lv. 2)")
 
     local portraitBackdropFrame = BlzCreateFrameByType(
         "BACKDROP",
@@ -222,6 +222,7 @@ function Equipment:init()
     self.frames = {
         itemFrames = itemFrames,
         origin = equipmentOrigin,
+        equipmentText = equipmentText,
     }
 
     return self
@@ -235,6 +236,9 @@ function Equipment:update(playerId)
     if equipmentToggles[playerId] ~= true then
         return
     end
+
+    local level = GetHeroLevel(self.hero)
+    BlzFrameSetText(frames.equipmentText, "Character (Lv. " .. level .. ")")
 
     local activeItem = equipment.getActiveItem(playerId)
     for i=1,12,1 do
