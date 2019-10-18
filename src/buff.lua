@@ -52,6 +52,10 @@ local BUFF_INFO = {
                 type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0,
             },
+            {
+                type = stats.PERCENT_INCOMING_SPELL_DAMAGE,
+                amount = 0,
+            },
         },
         vfx = {
             model = "Abilities\\Spells\\Human\\Feedback\\SpellBreakerAttack.mdl",
