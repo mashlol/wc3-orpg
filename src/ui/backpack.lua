@@ -300,7 +300,7 @@ function Backpack:update(playerId)
 
     BlzFrameSetText(
         frames.backpackText,
-        'Inventory: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
+        'Backpack: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
 
     local activeItem = backpack.getActiveItem(playerId)
     for i=1,36,1 do

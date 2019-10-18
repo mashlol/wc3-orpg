@@ -21,8 +21,8 @@ local STATS_TO_SHOW = {
     {
         prefix = 'Attack Speed: ',
         getAmount = function(unitInfo, heroUnit, ownerHeroInfo)
-            local pct =  unitInfo.attackSpeed / ownerHeroInfo.attackSpeed
-            return '+' .. round((pct - 1) * 100, 0) .. '%'
+            local pct = unitInfo.attackSpeed / ownerHeroInfo.attackSpeed
+            return '+' .. round((1 - pct) * 100, 0) .. '%'
         end,
     },
     {

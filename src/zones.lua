@@ -91,9 +91,19 @@ function init()
 
                 if zones[playerId] ~= zoneKey then
                     zones[playerId] = zoneKey
+
+                    local levelRange = ""
+                    if zoneInfo.levelRange ~= nil then
+                        levelRange = "|cffffffff (Recommended Lv: " ..
+                            zoneInfo.levelRange[1] ..
+                            " - " ..
+                            zoneInfo.levelRange[2] ..
+                            ')'
+                    end
+
                     log.log(
                         playerId,
-                        "You entered " .. zoneInfo.name .. ".",
+                        "You entered " .. zoneInfo.name .. levelRange,
                         log.TYPE.INFO)
 
                     local curSpawnPoint = getSpawnPoint(playerId)

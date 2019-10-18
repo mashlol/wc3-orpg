@@ -47,7 +47,7 @@ function init()
 
     for _, vendorInfo in pairs(VENDORS) do
         AddSpecialEffectTarget(
-            "Abilities\\Spells\\NightElf\\FaerieDragonInvis\\FaerieDragon_Invis.mdl",
+            "Objects\\InventoryItems\\PotofGold\\PotofGold.mdl",
             vendorInfo.unit,
             'overhead')
     end
