@@ -567,7 +567,7 @@ function initQuests()
                 }
             },
             rewards = {
-                exp = 150,
+                exp = 125,
                 gold = 10,
             },
             prerequisites = {4},
@@ -606,7 +606,7 @@ function initQuests()
                 }
             },
             rewards = {
-                exp = 300,
+                exp = 150,
                 gold = 25,
             },
             prerequisites = {6},
@@ -628,7 +628,7 @@ function initQuests()
                 }
             },
             rewards = {
-                exp = 350,
+                exp = 225,
                 gold = 30,
             },
             prerequisites = {6},
@@ -727,7 +727,7 @@ function initQuests()
                 },
             },
             rewards = {
-                exp = 300,
+                exp = 250,
                 gold = 30,
             },
             prerequisites = {9},
@@ -773,7 +773,7 @@ function initQuests()
                 },
             },
             rewards = {
-                exp = 250,
+                exp = 300,
                 gold = 25,
             },
             prerequisites = {12},
@@ -801,7 +801,7 @@ function initQuests()
                 }
             },
             rewards = {
-                exp = 500,
+                exp = 350,
                 gold = 75,
             },
             prerequisites = {12},
