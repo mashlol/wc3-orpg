@@ -156,7 +156,7 @@ function ExpBar:update(playerId)
         local curExperience = GetHeroXP(hero) - EXP_REQUIRED[curLevel]
         local requiredExperience = EXP_REQUIRED[curLevel + 1] - EXP_REQUIRED[curLevel]
 
-        BlzFrameSetText(frame.text, curExperience .. ' / ' .. requiredExperience)
+        BlzFrameSetText(frame.text, 'XP: ' .. curExperience .. ' / ' .. requiredExperience)
 
         if curExperience == 0 then
             BlzFrameSetSize(
