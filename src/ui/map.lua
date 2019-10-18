@@ -1,4 +1,5 @@
 local utils = require('src/ui/utils.lua')
+local zones = require('src/zones.lua')
 
 -- mapToggles = {
 --     [playerId] = true or nil
@@ -6,8 +7,28 @@ local utils = require('src/ui/utils.lua')
 local mapToggles = {}
 
 local PADDING = 0.015
-local WIDTH = 0.59758620
+local WIDTH = 0.6
 local HEIGHT = 0.4
+
+-- KEYS MUST MATCH ZONE NAMES IN `zones.lua`
+local MAPS = {
+    FREYDELL = {
+        minX = -1364.1,
+        minY = -841.7,
+        maxX = 6866.4,
+        maxY = 4941.7,
+        mapFile = "mapfreydell.tga",
+        mapAspectRatio = 1.4939655,
+    },
+    FOREST = {
+        minX = -6638.4,
+        minY = -2192.9,
+        maxX = 3607.9,
+        maxY = 9704.1,
+        mapFile = "mapforest.tga",
+        mapAspectRatio = 0.916491649,
+    },
+}
 
 local Map = {
     toggle = function(playerId)
@@ -36,7 +57,6 @@ function Map:init()
     BlzFrameSetSize(mapFrame, WIDTH, HEIGHT)
     BlzFrameSetPoint(
         mapFrame, FRAMEPOINT_CENTER, mapOrigin, FRAMEPOINT_CENTER, 0, 0)
-    BlzFrameSetTexture(mapFrame, "map1.tga", 0, true)
 
     local yourPosFrame = BlzCreateFrameByType("SPRITE", "pos", mapFrame, "", 0)
     BlzFrameSetSize(yourPosFrame, 0.01, 0.01)
@@ -65,15 +85,30 @@ function Map:update(playerId)
         return
     end
 
-    if self.hero ~= nil then
+    local zone = zones.getCurrentZone(playerId)
+    if self.hero ~= nil and zone ~= nil then
+        local mapToUse = MAPS[zone]
+
         local heroX = GetUnitX(self.hero)
         local heroY = GetUnitY(self.hero)
 
-        if heroX >= -1364.1 and heroX <= 6866.4 and heroY >= -841.7 and heroY <= 4941.7 then
-            local yourPosX = ((heroX + 1364.1) / (6866.4 + 1364.1)) * WIDTH
-            local yourPosY = ((heroY + 841.7) / (4941.7 + 841.7)) * HEIGHT
+        if mapToUse ~= nil then
+            BlzFrameSetTexture(frames.mapFrame, mapToUse.mapFile, 0, true)
+            local width
+            local height
+            if mapToUse.mapAspectRatio > 1 then
+                width = WIDTH
+                height = WIDTH / mapToUse.mapAspectRatio
 
+            else
+                width = HEIGHT * mapToUse.mapAspectRatio
+                height = HEIGHT
+            end
+            BlzFrameSetSize(frames.mapFrame, width, height)
             BlzFrameSetVisible(frames.yourPosFrame, true)
+
+            local yourPosX = ((heroX - mapToUse.minX) / (mapToUse.maxX - mapToUse.minX)) * width
+            local yourPosY = ((heroY - mapToUse.minY) / (mapToUse.maxY - mapToUse.minY)) * height
             BlzFrameSetPoint(
                 frames.yourPosFrame,
                 FRAMEPOINT_CENTER,

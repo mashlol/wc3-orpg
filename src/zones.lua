@@ -1,6 +1,8 @@
 -- Manages zones (text when you enter/leave zones and which zone is your respawn point)
 local log = require('src/log.lua')
 
+local ZONES
+
 local DEFAULT_SPAWN_POINT = {
     x = 4100,
     y = 3000,
@@ -23,8 +25,12 @@ function getSpawnPoint(playerId)
     return spawnPoints[playerId]
 end
 
+function getCurrentZone(playerId)
+    return zones[playerId]
+end
+
 function init()
-    local ZONES = {
+    ZONES = {
         FREYDELL = {
             name = "Freydell Village",
             rects = {
@@ -110,7 +116,9 @@ function init()
 end
 
 return {
+    ZONES = ZONES,
     DEFAULT_SPAWN_POINT = DEFAULT_SPAWN_POINT,
     init = init,
     getSpawnPoint = getSpawnPoint,
+    getCurrentZone = getCurrentZone,
 }
