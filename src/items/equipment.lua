@@ -2,6 +2,8 @@ local log = require('src/log.lua')
 local hero = require('src/hero.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
+
+local NUM_SLOTS = 12
 local SLOT = {
     HELMET = 1,
     NECK = 2,
@@ -96,7 +98,7 @@ local getEquippedItems = function(playerId)
 end
 
 function clear(playerId)
-    for i=1,9,1 do
+    for i=1,NUM_SLOTS,1 do
         equipments[playerId][i] = nil
     end
 end
