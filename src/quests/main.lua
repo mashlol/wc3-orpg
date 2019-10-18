@@ -659,12 +659,44 @@ function initQuests()
            objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 5,
+                    amount = 1,
                     toKill = FourCC('fire'),
-                    name = 'Bonfires',
+                    name = 'Northwest Bonfire',
 					verb = 'Extinguish',
 					verbPast = 'extinguished',
-                }
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('sfir'),
+                    name = 'Southwest Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[3] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('cfir'),
+                    name = 'Central Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[4] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('nefi'),
+                    name = 'Northeast Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[5] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('sefi'),
+                    name = 'Southeast Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
             },
             rewards = {
                 exp = 200,
