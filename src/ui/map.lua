@@ -1,5 +1,6 @@
 local utils = require('src/ui/utils.lua')
 local zones = require('src/zones.lua')
+local quests = require('src/quests/main.lua')
 
 -- mapToggles = {
 --     [playerId] = true or nil
@@ -65,13 +66,44 @@ function Map:init()
     BlzFrameSetModel(yourPosFrame, "ui\\minimap\\minimap-ping.mdx", 0)
     BlzFrameSetVertexColor(yourPosFrame, 0xffff0000)
 
+    local markFrames = {}
+    for i=1,20,1 do
+        local markFrame = BlzCreateFrameByType("TEXT", "mark", mapFrame, "", 0)
+        BlzFrameSetSize(markFrame, 0.01, 0.01)
+        BlzFrameSetPoint(
+            markFrame, FRAMEPOINT_CENTER, mapFrame, FRAMEPOINT_BOTTOMLEFT, 0, 0)
+        BlzFrameSetText(markFrame, "|cffffff00?|r")
+        BlzFrameSetTextAlignment(markFrame, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+        table.insert(markFrames, markFrame)
+    end
+
     self.frames = {
         origin = mapOrigin,
         mapFrame = mapFrame,
         yourPosFrame = yourPosFrame,
+        markFrames = markFrames,
     }
 
     return self
+end
+
+function getRelativeUnitPoint(unit, mapToUse, width, height)
+    local x = GetUnitX(unit)
+    local y = GetUnitY(unit)
+
+    local rX = ((x - mapToUse.minX) / (mapToUse.maxX - mapToUse.minX)) * width
+    local rY = ((y - mapToUse.minY) / (mapToUse.maxY - mapToUse.minY)) * height
+
+    return rX, rY
+end
+
+function isUnitInMap(unit, mapToUse)
+    local x = GetUnitX(unit)
+    local y = GetUnitY(unit)
+    return x >= mapToUse.minX and
+        x <= mapToUse.maxX and
+        y >= mapToUse.minY and
+        y <= mapToUse.maxY
 end
 
 function Map:update(playerId)
@@ -89,11 +121,7 @@ function Map:update(playerId)
     if self.hero ~= nil and zone ~= nil then
         local mapToUse = MAPS[zone]
 
-        local heroX = GetUnitX(self.hero)
-        local heroY = GetUnitY(self.hero)
-
         if mapToUse ~= nil then
-            BlzFrameSetTexture(frames.mapFrame, mapToUse.mapFile, 0, true)
             local width
             local height
             if mapToUse.mapAspectRatio > 1 then
@@ -104,11 +132,42 @@ function Map:update(playerId)
                 width = HEIGHT * mapToUse.mapAspectRatio
                 height = HEIGHT
             end
+
+            local activeQuests = quests.getActiveQuests(playerId)
+            local i = 1
+            for _,activeQuestId in pairs(activeQuests) do
+                local questReceiver = quests.getQuestInfo(activeQuestId).handQuestTo
+                if
+                    quests.questObjectivesCompleted(playerId, activeQuestId) and
+                    isUnitInMap(questReceiver, mapToUse)
+                then
+                    local questX, questY = getRelativeUnitPoint(
+                        questReceiver, mapToUse, width, height)
+
+                    BlzFrameSetVisible(frames.markFrames[i], true)
+                    BlzFrameSetPoint(
+                        frames.markFrames[i],
+                        FRAMEPOINT_CENTER,
+                        frames.mapFrame,
+                        FRAMEPOINT_BOTTOMLEFT,
+                        questX,
+                        questY)
+
+                    i = i + 1
+                end
+            end
+
+            for j=i,20,1 do
+                BlzFrameSetVisible(frames.markFrames[j], false)
+            end
+
+            BlzFrameSetTexture(frames.mapFrame, mapToUse.mapFile, 0, true)
+
             BlzFrameSetSize(frames.mapFrame, width, height)
             BlzFrameSetVisible(frames.yourPosFrame, true)
 
-            local yourPosX = ((heroX - mapToUse.minX) / (mapToUse.maxX - mapToUse.minX)) * width
-            local yourPosY = ((heroY - mapToUse.minY) / (mapToUse.maxY - mapToUse.minY)) * height
+            local yourPosX, yourPosY = getRelativeUnitPoint(
+                self.hero, mapToUse, width, height)
             BlzFrameSetPoint(
                 frames.yourPosFrame,
                 FRAMEPOINT_CENTER,
@@ -120,7 +179,6 @@ function Map:update(playerId)
             BlzFrameSetVisible(frames.yourPosFrame, false)
         end
     end
-
 end
 
 return Map
