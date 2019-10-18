@@ -19,6 +19,7 @@ local Backpack = require('src/ui/backpack.lua')
 local Stats = require('src/ui/stats.lua')
 local Equipment = require('src/ui/equipment.lua')
 local LootRoll = require('src/ui/lootroll.lua')
+local Map = require('src/ui/map.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
@@ -64,6 +65,7 @@ table.insert(UI_MODULES, Dialog:new())
 table.insert(UI_MODULES, QuestLog:new())
 table.insert(UI_MODULES, Vendor:new())
 table.insert(UI_MODULES, LootRoll:new())
+table.insert(UI_MODULES, Map:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)
