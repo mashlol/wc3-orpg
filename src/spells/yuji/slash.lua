@@ -110,6 +110,10 @@ local cast = function(playerId)
             -- Stop projecting if you collide with anything
             return true
         end,
+        onDoodadCollide = function(doodad)
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
         onDestroy = function()
             -- Finish up the stuff
             local dmgAmount = storedData[playerId].attackCount == 2 and 100 or 25

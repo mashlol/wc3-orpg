@@ -108,6 +108,10 @@ local cast = function(playerId)
             end
             return false
         end,
+        onDoodadCollide = function()
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
         onDestroy = function()
             effect.createEffect{
                 unit = hero,

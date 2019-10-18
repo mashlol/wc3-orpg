@@ -1,10 +1,9 @@
 local Vector = require('src/vector.lua')
 local SAT = require('src/lib/sat.lua')
 
-function isCollided(unit, vec, radius)
+function isWidgetCollided(widget, vec, radius, collisionSize)
     vec = Vector:new(vec)
-    local collisionSize = BlzGetUnitCollisionSize(unit)
-    local unitV = Vector:new{x = GetUnitX(unit), y = GetUnitY(unit)}
+    local unitV = Vector:new{x = GetWidgetX(widget), y = GetWidgetY(widget)}
     local collisionDist = Vector:new(vec):subtract(unitV)
     if collisionDist:magnitude() <= collisionSize then
         return true
@@ -19,7 +18,12 @@ function isCollided(unit, vec, radius)
     return mag <= radius
 end
 
-function isCollidedWithPolygon(unit, shape)
+function isCollided(unit, vec, radius)
+    local collisionSize = BlzGetUnitCollisionSize(unit)
+    return isWidgetCollided(unit, vec, radius, collisionSize)
+end
+
+function isWidgetCollidedWithPolygon(widget, shape, collisionSize)
     local pts = {}
     for idx, vec in pairs(shape) do
         table.insert(pts, SAT.Vector(vec.x, vec.y))
@@ -27,12 +31,17 @@ function isCollidedWithPolygon(unit, shape)
 
     local poly = SAT.Polygon(SAT.Vector(0, 0), pts)
     local circ = SAT.Circle(
-        SAT.Vector(GetUnitX(unit), GetUnitY(unit)),
-        BlzGetUnitCollisionSize(unit))
+        SAT.Vector(GetWidgetX(widget), GetWidgetY(widget)),
+        collisionSize)
     local response = SAT.Response()
     local collided = SAT.testPolygonCircle(poly, circ, response)
 
     return collided
+end
+
+function isCollidedWithPolygon(unit, shape)
+    local collisionSize = BlzGetUnitCollisionSize(unit)
+    return isWidgetCollidedWithPolygon(unit, shape, collisionSize)
 end
 
 function getAllCollisions(vec, radius)
@@ -50,7 +59,7 @@ function getAllCollisions(vec, radius)
         loc = Location(vec.x, vec.y)
     end
     local grp = GetUnitsInRangeOfLocAll(1000, loc)
-    local toReturn = {}
+    local collidedUnits = {}
     ForGroupBJ(grp, function()
         local collidedUnit = GetEnumUnit()
         if
@@ -63,14 +72,34 @@ function getAllCollisions(vec, radius)
                 isCollidedWithPolygon(collidedUnit, vec) or
                 isCollided(collidedUnit, vec, radius)
             then
-                table.insert(toReturn, collidedUnit)
+                table.insert(collidedUnits, collidedUnit)
             end
         end
     end)
 
-    RemoveLocation(loc)
+    local doodadRect = Rect(
+        GetLocationX(loc) - 500,
+        GetLocationY(loc) - 500,
+        GetLocationX(loc) + 500,
+        GetLocationY(loc) + 500)
 
-    return toReturn
+    local collidedDoodads = {}
+    EnumDestructablesInRect(doodadRect, nil, function()
+        local doodad = GetEnumDestructable()
+        if
+                vec[1] and
+                vec[1].x and
+                isWidgetCollidedWithPolygon(doodad, vec, 60) or
+                isWidgetCollided(doodad, vec, radius, 60)
+            then
+                table.insert(collidedDoodads, doodad)
+            end
+    end)
+
+    RemoveLocation(loc)
+    RemoveRect(doodadRect)
+
+    return collidedUnits, collidedDoodads
 end
 
 

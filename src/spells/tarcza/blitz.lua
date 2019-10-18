@@ -125,8 +125,12 @@ local cast = function(playerId)
         fromV = heroV,
         destUnit = target,
         speed = 1000,
-        onDestroy = function()
-            -- TODO if target is ally, do buff, if enemy do damage
+        onDoodadCollide = function(doodad)
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
+        onCollide = function()
+            -- Stop projecting if you collide with any units
             if IsUnitAlly(target, Player(playerId)) then
                 buff.addBuff(hero, target, 'assist', 2)
             else
@@ -135,6 +139,7 @@ local cast = function(playerId)
             end
             casttime.stopCast(playerId)
             animations.queueAnimation(hero, 3, 0.6)
+            return true
         end,
     }
 
