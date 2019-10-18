@@ -224,7 +224,7 @@ function Context:ensureEngagingUnitInvolved(engagingUnit)
 end
 
 function Context:onBossEngaged()
-    local unit = GetEventDamageSource()
+    local unit = GetEventDamageSource() or GetEventTargetUnit()
     if GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
         return
     end
@@ -289,6 +289,8 @@ function Context:resetFight()
     self.startFightTrigger = CreateTrigger()
     TriggerRegisterUnitEvent(
         self.startFightTrigger, self.cls.bossUnit, EVENT_UNIT_DAMAGED)
+    TriggerRegisterUnitEvent(
+        self.startFightTrigger, self.cls.bossUnit, EVENT_UNIT_ACQUIRED_TARGET)
     TriggerAddAction(self.startFightTrigger, function()
         self:onBossEngaged()
     end)
