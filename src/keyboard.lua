@@ -15,13 +15,12 @@ local KEY_MAPPING = {
     [OSKEY_W] = 2,
     [OSKEY_E] = 3,
     [OSKEY_R] = 4,
-    [OSKEY_A] = 5,
-    [OSKEY_D] = 7,
-    [OSKEY_F] = 8,
-    [OSKEY_Z] = 9,
-    [OSKEY_X] = 10,
-    [OSKEY_C] = 11,
-    [OSKEY_V] = 12,
+    [OSKEY_D] = 5,
+    [OSKEY_F] = 6,
+    -- [OSKEY_Z] = 9,
+    -- [OSKEY_X] = 10,
+    -- [OSKEY_C] = 11,
+    -- [OSKEY_V] = 12,
 }
 
 local ITEMBAR_KEY_MAPPING = {
@@ -87,7 +86,7 @@ local keyPressed = function()
     -- TODO figure out key mappings
     if pressedKey == OSKEY_B then
         Backpack.toggle(playerId)
-    elseif pressedKey == OSKEY_U then
+    elseif pressedKey == OSKEY_C then
         Equipment.toggle(playerId)
         Stats.toggle(playerId)
     elseif pressedKey == OSKEY_L then

@@ -99,7 +99,7 @@ function ExpBar:init()
     BlzFrameSetAbsPoint(
         expBarFrameBackground,
         FRAMEPOINT_BOTTOM,
-        0.41,
+        0.4045,
         0)
     BlzFrameSetTexture(
         expBarFrameBackground,

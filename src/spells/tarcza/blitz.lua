@@ -3,6 +3,7 @@ local Vector = require('src/vector.lua')
 local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local buff = require('src/buff.lua')
+local mouse = require('src/mouse.lua')
 local casttime = require('src/casttime.lua')
 local target = require('src/target.lua')
 local animations = require('src/animations.lua')
@@ -11,7 +12,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 1
-local COOLDOWN_S_LONG = 10
+local COOLDOWN_S_LONG = 3
 
 local storedData = {}
 
@@ -49,29 +50,14 @@ local cast = function(playerId)
     end
 
     local hero = hero.getHero(playerId)
-    local target = target.getTarget(playerId)
     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
-    local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
-
-    if target == hero then
-        log.log(playerId, "You can't cast that on yourself.", log.TYPE.ERROR)
-        return false
-    end
-
-    if target == nil then
-        log.log(playerId, "You have no target.", log.TYPE.ERROR)
-        return false
-    end
+    local mouseV = Vector:new{
+        x = mouse.getMouseX(playerId),
+        y = mouse.getMouseY(playerId)
+    }
 
     if isStuck(hero) then
         log.log(playerId, "You can't move right now.", log.TYPE.ERROR)
-        return false
-    end
-
-    local dist = Vector:new(heroV):subtract(targetV)
-    local mag = dist:magnitude()
-    if mag > 800 then
-        log.log(playerId, "Out of range!", log.TYPE.ERROR)
         return false
     end
 
@@ -94,70 +80,50 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 12, 2)
 
-    local facingAngle = bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x)
-    SetUnitFacing(hero, facingAngle)
-
-    if IsUnitAlly(target, Player(playerId)) then
-        projectile.createProjectile{
-            playerId = playerId,
-            model = "Valiant Charge Holy.mdl",
-            scale = 1.3,
-            height = 10,
-            fromV = heroV,
-            destUnit = target,
-            speed = 1010,
-        }
-    else
-        projectile.createProjectile{
-            playerId = playerId,
-            model = "Valiant Charge.mdl",
-            scale = 1.3,
-            height = 10,
-            fromV = heroV,
-            destUnit = target,
-            speed = 1010,
-        }
-    end
+    projectile.createProjectile{
+        playerId = playerId,
+        model = "Valiant Charge.mdl",
+        scale = 1.3,
+        height = 10,
+        fromV = heroV,
+        toV = mouseV,
+        speed = 1010,
+        length = 650,
+        onDoodadCollide = function(doodad)
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
+    }
 
     projectile.createProjectile{
         playerId = playerId,
         projectile = hero,
         fromV = heroV,
-        destUnit = target,
+        toV = mouseV,
         speed = 1000,
+        length = 650,
         onDoodadCollide = function(doodad)
             -- Stop projecting if you collide with any doodads
             return true
         end,
-        onCollide = function()
+        onCollide = function(target)
             -- Stop projecting if you collide with any units
             if IsUnitAlly(target, Player(playerId)) then
                 buff.addBuff(hero, target, 'assist', 2)
             else
-                damage.dealDamage(hero, target, 40, damage.TYPE.PHYSICAL)
-                buff.addBuff(hero, target, 'stun', 2)
+                damage.dealDamage(hero, target, 50, damage.TYPE.PHYSICAL)
+                buff.addBuff(hero, target, 'stun', 1)
             end
-            casttime.stopCast(playerId)
+            return false
+        end,
+        onDestroy = function()
             animations.queueAnimation(hero, 3, 0.6)
-            return true
         end,
     }
 
     casttime.cast(playerId, 0.5, false, false, true)
 
-    if not IsUnitAlly(target, Player(playerId)) then
-        target.restoreOrder(playerId)
-    end
-
     return true
-end
-
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()
