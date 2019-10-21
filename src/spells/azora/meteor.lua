@@ -12,7 +12,7 @@ local collision = require('src/collision.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 35
+local COOLDOWN_S = 10
 
 local getSpellId = function()
     return 'meteor'
@@ -114,7 +114,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(mouseV, 350)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 400, damage.TYPE.SPELL)
+            damage.dealDamage(hero, unit, 250, damage.TYPE.SPELL)
             buff.addBuff(hero, unit, 'ignite', 8)
             buff.addBuff(hero, unit, 'ignite', 8)
         end

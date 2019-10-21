@@ -69,7 +69,7 @@ local cast = function(playerId)
         toV = mouseV,
         speed = 2000,
         length = 800,
-        radius = 30,
+        radius = 80,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
                 damage.dealDamage(hero, collidedUnit, 120, damage.TYPE.SPELL)

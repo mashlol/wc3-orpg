@@ -11,7 +11,7 @@ local threat = require('src/threat.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 5
+local COOLDOWN_S = 2
 
 local getSpellId = function()
     return 'whirlwind'

@@ -8,7 +8,7 @@ local animations = require('src/animations.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 15
+local COOLDOWN_S = 6
 
 local getSpellId = function()
     return 'blink'

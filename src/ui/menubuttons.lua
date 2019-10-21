@@ -3,6 +3,7 @@ local Backpack = require('src/ui/backpack.lua')
 local Equipment = require('src/ui/equipment.lua')
 local Stats = require('src/ui/stats.lua')
 local QuestLog = require('src/ui/questlog.lua')
+local Map = require('src/ui/map.lua')
 
 local MenuButtons = {}
 
@@ -25,7 +26,7 @@ local MENU_BUTTONS = {
         end
     },
     {
-        text = "Equipment (U)",
+        text = "Character (C)",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Equipment.toggle(playerId)
@@ -37,6 +38,13 @@ local MENU_BUTTONS = {
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             QuestLog.toggle(playerId)
+        end
+    },
+    {
+        text = "Map (M)",
+        callback = function()
+            local playerId = GetPlayerId(GetTriggerPlayer())
+            Map.toggle(playerId)
         end
     },
 }
