@@ -383,16 +383,14 @@ function onCreateSynced()
     BlzSetSpecialEffectScale(
         effect, GetUnitPointValueByType(unitType) / 100)
 
-    local spellsWithoutAA = {}
-    for idx, spellKey in pairs(heroInfo.spells) do
-        if idx ~= 5 and idx ~= 6 then
-            table.insert(spellsWithoutAA, spellKey)
-        end
-    end
+    -- local spellList = {}
+    -- for _, spellKey in pairs(heroInfo.spells) do
+    --     table.insert(spellList, spellKey)
+    -- end
 
     Dialog.show(playerId, {
         text = getDialogTextForHero(heroInfo),
-        spells = spellsWithoutAA,
+        spells = heroInfo.spells,
         xPos = 0.5,
         positiveButton = "Create",
         negativeButton = "Cancel",
