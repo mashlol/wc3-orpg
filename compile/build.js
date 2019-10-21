@@ -5,6 +5,9 @@ const fs = require('fs');
 const path = require('path');
 const concat = require('concat');
 
+console.log('build args: ', process.argv);
+var skipMin = process.argv[2] == '--no-min';
+
 var walk = function(dir, done) {
   var results = [];
   fs.readdir(dir, function(err, list) {
@@ -69,9 +72,12 @@ walk('./src', (err, res) => {
             fs.appendFile('./bin/war3map_compiled.lua', requireMap, {encoding: 'utf-8'}, (err) => {
               if (err) throw err;
 
-              // Now minify the file
-              const contents = fs.readFileSync('./bin/war3map_compiled.lua', {encoding: 'utf-8'});
-              fs.writeFileSync('./bin/war3map_compiled.lua', luamin.minify(contents));
+              if (!skipMin) {
+                console.log("Minifying")
+                // Now minify the file
+                const contents = fs.readFileSync('./bin/war3map_compiled.lua', {encoding: 'utf-8'});
+                fs.writeFileSync('./bin/war3map_compiled.lua', luamin.minify(contents));
+              }
             });
           });
         }

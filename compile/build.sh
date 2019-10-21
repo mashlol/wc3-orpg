@@ -16,7 +16,7 @@ cd ..
 
 echo "Generating bin/war3map_compiled.lua"
 
-node ./compile/build
+node ./compile/build --no-min
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 

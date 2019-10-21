@@ -96,6 +96,17 @@ TimerStart(CreateTimer(), 0.0, false, mainInit)
 
 collectgarbage("stop")
 
+local realTriggerAddAction = TriggerAddAction
+TriggerAddAction = function(trig, callback)
+    local pcallback = function()
+        local status, err = pcall(callback)
+        if not status then
+            print(err)
+        end
+    end
+    realTriggerAddAction(trig, pcallback)
+end
+
 return {
     mainInit = mainInit,
 }
