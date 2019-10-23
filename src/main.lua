@@ -40,61 +40,64 @@ local mine = require('src/dungeons/mine.lua')
 local debug = require('src/debug.lua')
 
 local mainInit = function()
-    local status, err = pcall(function()
-        hero.init()
-        keyboard.init()
-        mouse.init()
-        projectile.init()
-        cleanup.init()
-        uiMain.init()
-        leaver.init()
-        casttime.init()
-        buffloop.init()
-        target.init()
-        damage.init()
-        party.init()
-        arena.init()
-        threat.init()
-        exp.init()
-        camera.init()
-        kill.init()
-        zones.init()
-        spell.init()
-        gc.init()
-        tips.init()
-        combat.init()
-        questMain.init()
-        save.init()
-        load.init()
-        buffmanager.init()
-        cooldowns.init()
-        drops.init()
-        backpack.init()
-        equipment.init()
-        itemmanager.init()
-        vendor.init()
-        bossmanager.init()
-        mine.init()
+    hero.init()
+    keyboard.init()
+    mouse.init()
+    projectile.init()
+    cleanup.init()
+    uiMain.init()
+    leaver.init()
+    casttime.init()
+    buffloop.init()
+    target.init()
+    damage.init()
+    party.init()
+    arena.init()
+    threat.init()
+    exp.init()
+    camera.init()
+    kill.init()
+    zones.init()
+    spell.init()
+    gc.init()
+    tips.init()
+    combat.init()
+    questMain.init()
+    save.init()
+    load.init()
+    buffmanager.init()
+    cooldowns.init()
+    drops.init()
+    backpack.init()
+    equipment.init()
+    itemmanager.init()
+    vendor.init()
+    bossmanager.init()
+    mine.init()
 
-        -- Intentionally after bossmanager to record boss locations
-        spawnpoint.init()
-        respawncreeps.init()
+    -- Intentionally after bossmanager to record boss locations
+    spawnpoint.init()
+    respawncreeps.init()
 
-        -- TODO remove for release
-        debug.init()
+    -- TODO remove for release
+    debug.init()
 
-        -- TODO maybe move to a door module
-        ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1457)
-        ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1422)
-    end)
-    if not status then
-        print(err)
-    end
+    -- TODO maybe move to a door module
+    ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1457)
+    ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1422)
 end
 
-TimerStart(CreateTimer(), 0.0, false, mainInit)
-
-collectgarbage("stop")
+local realTimerStart = TimerStart
+TimerStart = function(timer, duration, repeating, callback)
+    local pcallback = function()
+        if callback == nil then return end
+        local status, err = pcall(callback)
+        if not status then
+            print(err)
+        end
+    end
+    realTimerStart(timer, duration, repeating, pcallback)
+end
 
 local realTriggerAddAction = TriggerAddAction
 TriggerAddAction = function(trig, callback)
@@ -106,6 +109,10 @@ TriggerAddAction = function(trig, callback)
     end
     realTriggerAddAction(trig, pcallback)
 end
+
+TimerStart(CreateTimer(), 0.0, false, mainInit)
+
+collectgarbage("stop")
 
 return {
     mainInit = mainInit,
