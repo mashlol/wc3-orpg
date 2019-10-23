@@ -20,10 +20,10 @@ function addItemIdToBackpack(playerId, itemId, count)
     count = count or 1
 
     for idx,itemInfo in pairs(backpacks[playerId]) do
+        local stackSize = itemmanager.getItemInfo(itemInfo.itemId).stackSize or 1
         if
             itemInfo.itemId == itemId and
-            itemInfo.count <
-                itemmanager.getItemInfo(itemInfo.itemId).stackSize - count + 1
+            itemInfo.count < stackSize - count + 1
         then
             backpacks[playerId][idx].count =
                 backpacks[playerId][idx].count + count
