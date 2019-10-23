@@ -144,7 +144,7 @@ local BUFF_INFO = {
         effects = {
             {
                 type = stats.HEALTH_REGEN,
-                amount = 30,
+                amount = 45,
                 tickrate = 1,
             },
         },
@@ -153,7 +153,20 @@ local BUFF_INFO = {
             attach = "chest",
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
-        maxStacks = 3,
+    },
+    corrosiveblast = {
+        effects = {
+            {
+                type = stats.DAMAGE_OVER_TIME,
+                amount = 30,
+                tickrate = 1,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
     },
     corrosivedecaydot = {
         effects = {

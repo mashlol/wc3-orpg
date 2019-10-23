@@ -34,56 +34,6 @@ local getSpellCasttime = function(playerId)
     return 0.5
 end
 
--- local castCorrosivePull = function(playerId)
---     local hero = hero.getHero(playerId)
---     local target = target.getTarget(playerId)
-
---     if target == nil then
---         target = hero
---     end
-
---     if not IsUnitAlly(target, Player(playerId)) then
---         target = hero
---     end
-
---     local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
---     local targetV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
-
---     local dist = Vector:new(heroV):subtract(targetV)
---     local mag = dist:magnitude()
---     if mag > 800 then
---         log.log(playerId, "Out of range!", log.TYPE.ERROR)
---         return false
---     end
-
---     IssueImmediateOrder(hero, "stop")
---     animations.queueAnimation(hero, 3, 1)
---     SetUnitFacingTimed(
---         hero,
---         bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),
---         0.05)
-
---     local castSuccess = casttime.cast(playerId, 0.5)
---     if not castSuccess then
---         return false
---     end
-
---     cooldowns.startCooldown(playerId, getSpellId(), 1)
-
---     storedData[playerId] = buff.getBuffStacks(target, 'corrosivedecay')
---     buff.removeBuff(target, 'corrosivedecay')
-
---     projectile.createProjectile{
---         playerId = playerId,
---         model = "Abilities\\Weapons\\AvengerMissile\\AvengerMissile.mdl",
---         height = 50,
---         fromV = targetV,
---         destUnit = hero,
---         speed = 1000,
---         destroyOnCollide = false,
---     }
--- end
-
 local castCorrosiveBlast = function(playerId)
     local hero = hero.getHero(playerId)
     local target = target.getTarget(playerId)
@@ -131,7 +81,8 @@ local castCorrosiveBlast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.dealDamage(hero, target, 80, damage.TYPE.SPELL)
+            damage.dealDamage(hero, target, 50, damage.TYPE.SPELL)
+            buff.addBuff(hero, target, 'corrosiveblast', 10)
 
             effect.createEffect{
                 model = "Abilities\\Spells\\Undead\\AnimateDead\\AnimateDeadTarget.mdl",
@@ -149,10 +100,6 @@ local cast = function(playerId)
         log.log(playerId, getSpellName().." is on cooldown!", log.TYPE.ERROR)
         return false
     end
-
-    -- if storedData[playerId] == nil then
-    --     return castCorrosivePull(playerId)
-    -- end
 
     return castCorrosiveBlast(playerId)
 end
