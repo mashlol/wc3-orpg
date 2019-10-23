@@ -51,7 +51,7 @@ local STATS = {
     },
     HEALTH_REGEN = {
         getTooltip = function(info)
-            return maybeAddPlus(info.amount / info.tickrate) .. ' HP / s'
+            return maybeAddPlus(round(info.amount / info.tickrate, 2)) .. ' HP / s'
         end,
         effect = function(info, obj, tick)
             if tick ~= nil and tick % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0 then
@@ -62,7 +62,7 @@ local STATS = {
     },
     DAMAGE_OVER_TIME = {
         getTooltip = function(info)
-            return maybeAddPlus(-1 * info.amount / info.tickrate) .. ' HP / s'
+            return maybeAddPlus(round(-1 * info.amount / info.tickrate, 2)) .. ' HP / s'
         end,
         effect = function(info, obj, tick)
             if tick ~= nil and tick % (1 / BUFF_LOOP_INTERVAL * info.tickrate) == 0 then
