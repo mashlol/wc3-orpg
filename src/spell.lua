@@ -120,7 +120,7 @@ local SPELL_MAP = {
     pocketgoo = pocketgoo,
 }
 
-local SKILL_LEVELS = {1, 2, 3, 5, 7, 10, 15, 20, 30, 50}
+local SKILL_LEVELS = {1, 2, 3, 5, 7, 10}
 
 local TOOLTIPS = {}
 
@@ -222,12 +222,14 @@ function checkNewSpellsOnLevel()
     for spellIdx, requiredLevel in pairs(SKILL_LEVELS) do
         if requiredLevel == level then
             local unlockedSpell = getSpell(playerId, spellIdx)
-            log.log(
-                playerId,
-                "You learned |cff155ed4" ..
-                    unlockedSpell.getSpellName() ..
-                    ".|r",
-                log.TYPE.INFO)
+            if unlockedSpell ~= nil then
+                log.log(
+                    playerId,
+                    "You learned |cff155ed4" ..
+                        unlockedSpell.getSpellName() ..
+                        ".|r",
+                    log.TYPE.INFO)
+            end
         end
     end
 end
