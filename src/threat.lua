@@ -113,8 +113,10 @@ function onTick()
             IssueTargetOrder(targetUnit, "attack", newTarget)
         else
             local targetSpawnPos = spawnpoint.getSpawnPoint(targetUnit)
-            IssuePointOrder(
-                targetUnit, "move", targetSpawnPos.x, targetSpawnPos.y)
+            if targetSpawnPos ~= nil then
+                IssuePointOrder(
+                    targetUnit, "move", targetSpawnPos.x, targetSpawnPos.y)
+            end
         end
     end
 end

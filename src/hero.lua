@@ -142,6 +142,7 @@ local respawn = function()
     local respawnPoint = zones.getSpawnPoint(playerId)
 
     TriggerSleepAction(5)
+    RemoveUnit(unit)
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
