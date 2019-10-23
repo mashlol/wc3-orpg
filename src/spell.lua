@@ -57,6 +57,7 @@ local dampenpot = require('src/spells/ivanov/dampenpot.lua')
 local pocketgoo = require('src/spells/ivanov/pocketgoo.lua')
 
 local hero = require('src/hero.lua')
+local log = require('src/log.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 local SPELL_MAP = {
@@ -214,6 +215,23 @@ local getSpellTooltip = function(playerId, idx)
     return getSpellTooltipBySpellKey(getSpellKey(playerId, idx))
 end
 
+function checkNewSpellsOnLevel()
+    local heroUnit = GetLevelingUnit()
+    local playerId = GetPlayerId(GetOwningPlayer(heroUnit))
+    local level = GetHeroLevel(heroUnit)
+    for spellIdx, requiredLevel in pairs(SKILL_LEVELS) do
+        if requiredLevel == level then
+            local unlockedSpell = getSpell(playerId, spellIdx)
+            log.log(
+                playerId,
+                "You learned |cff155ed4" ..
+                    unlockedSpell.getSpellName() ..
+                    ".|r",
+                log.TYPE.INFO)
+        end
+    end
+end
+
 local init = function()
     for idx, spell in pairs(SPELL_MAP) do
         local spellName = spell.getSpellName()
@@ -227,6 +245,10 @@ local init = function()
             "|cffe0b412Cast time: |r"..spellCasttime.."s|n"..
             "|n"..spellTooltip
     end
+
+    local levelTrigger = CreateTrigger()
+    TriggerRegisterAnyUnitEventBJ(levelTrigger, EVENT_PLAYER_HERO_LEVEL)
+    TriggerAddAction(levelTrigger, checkNewSpellsOnLevel)
 end
 
 return {
