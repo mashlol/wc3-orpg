@@ -11,14 +11,14 @@ local ALL_BOSS_CLASSES = {
         bossUnitId = FourCC('hbos'),
         startX = -651,
         startY = -1480,
-        facing = 280,
+        facing = 134,
         respawnable = false,
     },
     Wolf:new{
         bossUnitId = FourCC('hbld'),
         startX = 15195,
         startY = 7531,
-        facing = 280,
+        facing = 223,
         respawnable = false,
     },
     MinerJoe:new{
@@ -304,7 +304,8 @@ function Context:resetFight()
     local maxHp = BlzGetUnitMaxHP(self.cls.bossUnit)
     BlzSetUnitRealField(self.cls.bossUnit, UNIT_RF_HP, maxHp)
 
-    IssuePointOrder(self.cls.bossUnit, "move", self.cls.startX, self.cls.startY)
+    SetUnitPosition(self.cls.bossUnit, self.cls.startX, self.cls.startY)
+    SetUnitFacing(self.cls.bossUnit, self.cls.facing)
 end
 
 function init()
