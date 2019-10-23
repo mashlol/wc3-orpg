@@ -21,10 +21,12 @@ end
 -- Counter-clockwise coords
 function OverseerTom:getBounds()
     return {
-        {x = 24002, y = 30978},
-        {x = 22933, y = 30785},
-        {x = 22611, y = 29791},
-        {x = 24360, y = 29845},
+        {x = 24409, y = 30890},
+        {x = 22824, y = 31008},
+        {x = 22831, y = 30254},
+        {x = 22606, y = 30235},
+        {x = 22641, y = 29757},
+        {x = 24429, y = 29744},
     }
 end
 
@@ -94,6 +96,8 @@ function OverseerTom:init()
     end)
 
     self.ctx:registerDoor(gg_dest_DTg3_18339, false)
+    self.ctx:registerDoor(gg_dest_YTcx_17815, true)
+    self.ctx:registerDoor(gg_dest_YTcx_17816, true)
 end
 
 return OverseerTom
