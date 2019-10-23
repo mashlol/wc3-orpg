@@ -12,28 +12,28 @@ local ALL_BOSS_CLASSES = {
         startX = -651,
         startY = -1480,
         facing = 280,
-        respawnable = true,
+        respawnable = false,
     },
     Wolf:new{
         bossUnitId = FourCC('hbld'),
         startX = 15195,
         startY = 7531,
         facing = 280,
-        respawnable = true,
+        respawnable = false,
     },
     MinerJoe:new{
         bossUnitId = FourCC('mine'),
         startX = 24237,
         startY = 27062,
         facing = 37,
-        respawnable = true,
+        respawnable = false,
     },
     OverseerTom:new{
         bossUnitId = FourCC('over'),
         startX = 23428,
         startY = 30510,
         facing = 270,
-        respawnable = true,
+        respawnable = false,
     }
 }
 
