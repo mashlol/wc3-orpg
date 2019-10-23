@@ -819,7 +819,7 @@ function initQuests()
                     type = TYPE.KILL,
                     amount = 4,
                     toKill = FourCC('h001'),
-                    name = 'Cultist Raider',
+                    name = 'Cultist Ambushers',
                 }
             },
             rewards = {
