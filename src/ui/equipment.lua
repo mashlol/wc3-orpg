@@ -231,9 +231,10 @@ end
 function Equipment:update(playerId)
     local frames = self.frames
 
-    BlzFrameSetVisible(frames.origin, equipmentToggles[playerId] == true)
+    local isVisible = equipmentToggles[playerId] == true and self.hero ~= nil
+    BlzFrameSetVisible(frames.origin, isVisible)
 
-    if equipmentToggles[playerId] ~= true then
+    if not isVisible then
         return
     end
 

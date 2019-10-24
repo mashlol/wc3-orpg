@@ -52,7 +52,7 @@ function ItemBar:init()
         local actionItem = BlzCreateFrameByType(
             "BACKDROP",
             "actionItem",
-            BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0),
+            actionBar,
             "",
             0)
         BlzFrameSetSize(
@@ -201,6 +201,7 @@ function ItemBar:init()
     end
 
     self.frames = {
+        origin = actionBar,
         actionItems = actionItems,
     }
 
@@ -209,6 +210,13 @@ end
 
 function ItemBar:update(playerId)
     local frame = self.frames
+
+    local isVisible = self.hero ~= nil
+    BlzFrameSetVisible(frame.origin, isVisible)
+
+    if not isVisible then
+        return
+    end
 
     for idx,actionItem in pairs(frame.actionItems) do
         local itemId = playerHotbars[playerId][idx]

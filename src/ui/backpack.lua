@@ -288,9 +288,10 @@ end
 function Backpack:update(playerId)
     local frames = self.frames
 
-    BlzFrameSetVisible(frames.origin, backpackToggles[playerId] == true)
+    local isVisible = backpackToggles[playerId] == true and self.hero ~= nil
+    BlzFrameSetVisible(frames.origin, isVisible)
 
-    if backpackToggles[playerId] ~= true then
+    if not isVisible then
         return
     end
 
