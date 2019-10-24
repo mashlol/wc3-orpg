@@ -104,9 +104,10 @@ end
 function QuestLog:update(playerId)
     local frames = self.frames
 
-    BlzFrameSetVisible(frames.origin, questLogToggles[playerId] == true)
+    local isVisible = questLogToggles[playerId] == true and self.hero ~= nil
+    BlzFrameSetVisible(frames.origin, isVisible)
 
-    if questLogToggles[playerId] ~= true then
+    if not isVisible then
         return
     end
 

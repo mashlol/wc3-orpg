@@ -147,9 +147,16 @@ function ExpBar:init()
     return self
 end
 
-function ExpBar:update(playerId)
+function ExpBar:update()
     local frame = self.frames
-    local hero = hero.getHero(playerId)
+    local hero = self.hero
+
+    local isVisible = hero ~= nil
+    BlzFrameSetVisible(frame.origin, isVisible)
+
+    if not isVisible then
+        return
+    end
 
     if hero ~= nil then
         local curLevel = GetHeroLevel(hero)

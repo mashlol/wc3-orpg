@@ -32,7 +32,7 @@ function SimpleButton:init()
         button,
         FRAMEPOINT_CENTER,
         0.4,
-        0.16)
+        0.08)
     BlzFrameSetText(buttonText, "Load Existing Hero")
     BlzFrameSetScale(buttonText, 0.8)
 

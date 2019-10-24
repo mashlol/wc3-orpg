@@ -6,11 +6,11 @@ local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
 local zones = require('src/zones.lua')
-local Vector = require('src/vector.lua')
 local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
+local HeroSelect = require('src/ui/heroselect.lua')
 
 local CREATE_SYNC_PREFIX = 'create-hero'
 
@@ -41,21 +41,10 @@ local ALL_HERO_INFO = {
             [6] = 'focus',
         },
         model = "units\\demon\\HeroChaosBladeMaster\\HeroChaosBladeMaster.mdl",
+        portrait = "war3mapImported\\yuji_crop.blp",
+        portraitFullBlurred = "war3mapImported\\yuji_blur_crop.blp",
         baseHP = 600,
         attackSpeed = 1.5,
-    },
-    [FourCC("Hstm")] = {
-        name = 'Stormfist',
-        desc = 'TODO desc ',
-        heroType = 'Bruiser',
-        storedId = 2,
-        id = FourCC("Hstm"),
-        spells = {
-            [1] = 'punch',
-        },
-        model = "Valkyrie.mdl",
-        baseHP = 600,
-        attackSpeed = 2.2,
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
@@ -73,11 +62,10 @@ local ALL_HERO_INFO = {
             [4] = 'molecregen',
             [5] = 'armorpot',
             [6] = 'accmist',
-            -- [9] = 'hulkingpot',
-            -- [10] = 'dampenpot',
-            -- [11] = 'pocketgoo',
         },
         model = "Units\\Creeps\\HeroGoblinAlchemist\\HeroGoblinAlchemist.mdl",
+        portrait = "war3mapImported\\ivanov_crop.blp",
+        portraitFullBlurred = "war3mapImported\\ivanov_blur_crop.blp",
         baseHP = 600,
         attackSpeed = 2.2,
     },
@@ -98,12 +86,10 @@ local ALL_HERO_INFO = {
             [4] = 'meteor',
             [5] = 'firestorm',
             [6] = 'blink',
-            -- [9] = 'icicle',
-            -- [10] = 'phoenix',
-            -- [11] = 'fireshell',
-            -- [12] = 'frostballs',
         },
         model = "Magna Aegwynn.mdl",
+        portrait = "war3mapImported\\azora_crop.blp",
+        portraitFullBlurred = "war3mapImported\\azora_blur_crop.blp",
         baseHP = 400,
         attackSpeed = 2.2,
     },
@@ -124,11 +110,10 @@ local ALL_HERO_INFO = {
             [4] = 'shieldcharge',
             [5] = 'stalwartshell',
             [6] = 'curshout',
-            -- [9] = 'bulwark',
-            -- [10] = 'flag',
-            -- [11] = 'challenge',
         },
         model = "johanaulty.mdl",
+        portrait = "war3mapImported\\tarcza_crop.blp",
+        portraitFullBlurred = "war3mapImported\\tarcza_blur_crop.blp",
         baseHP = 1000,
         attackSpeed = 1.7,
     },
@@ -150,9 +135,6 @@ local respawn = function()
         end
     end
 end
-
-local forceCameraTriggers = {}
-local selectHeroTriggers = {}
 
 function createHeroForPlayer(playerId, exp, heroX, heroY)
     local hero = CreateUnit(
@@ -183,11 +165,11 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
     quest.updateQuestMarks()
 end
 
-local forceCameraLocation = function(playerId, camera)
-    CameraSetupApplyForPlayer(true, camera, Player(playerId), 0)
-end
-
 function getNextEmptySaveSlot()
+    if usedSlots[1] == nil then
+        return 1
+    end
+
     for idx, _ in pairs(usedSlots) do
         if usedSlots[idx + 1] == nil then
             return idx + 1
@@ -195,18 +177,6 @@ function getNextEmptySaveSlot()
     end
 
     return 1
-end
-
-local onHeroPicked = function()
-    local playerId = GetPlayerId(GetTriggerPlayer())
-    local selectedUnit = GetTriggerUnit()
-
-    if GetPlayerId(GetLocalPlayer()) == playerId then
-        local slot = getNextEmptySaveSlot()
-        BlzSendSyncData(
-            CREATE_SYNC_PREFIX,
-            GetUnitTypeId(selectedUnit) .. '|' .. slot)
-    end
 end
 
 function showLoadHeroDialog(playerId)
@@ -219,6 +189,7 @@ function showLoadHeroDialog(playerId)
                 onClick = function()
                     saveSlot = slot
                     load.loadFromFile(playerId, slot)
+                    HeroSelect.hide(playerId)
                 end
             })
         end
@@ -282,21 +253,14 @@ function showLoadButton(playerId)
 end
 
 function showPickHeroDialog(playerId)
-    CreateFogModifierRectBJ(
-        true, Player(playerId), FOG_OF_WAR_VISIBLE, gg_rct_Region_000)
-
-    local trig = CreateTrigger()
-    TriggerRegisterTimerEvent(trig, 0.1, true)
-    TriggerAddAction(trig, function()
-        forceCameraLocation(playerId, gg_cam_Camera_002)
+    HeroSelect.show(playerId, function(unitType)
+        if GetPlayerId(GetLocalPlayer()) == playerId then
+            local slot = getNextEmptySaveSlot()
+            BlzSendSyncData(
+                CREATE_SYNC_PREFIX,
+                unitType .. '|' .. slot)
+        end
     end)
-    forceCameraTriggers[playerId] = trig
-
-    local selectTrig = CreateTrigger()
-    TriggerRegisterPlayerUnitEvent(
-        selectTrig, Player(playerId), EVENT_PLAYER_UNIT_SELECTED, nil)
-    TriggerAddAction(selectTrig, onHeroPicked)
-    selectHeroTriggers[playerId] = selectTrig
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         usedSlots = meta.getUsedSlots()
@@ -359,70 +323,27 @@ function onCreateSynced()
         log.log(
             playerId,
             'You have too many characters. Try deleting one first.',
-            log.TYPE.ERROR)
+            log.TYPE.PICK_HERO_ERROR)
+        showPickHeroDialog(playerId)
         return
+    end
+
+    if GetPlayerId(GetLocalPlayer()) == playerId then
+        saveSlot = slot
     end
 
     SimpleButton.hide(playerId)
 
-    DestroyTrigger(forceCameraTriggers[playerId])
-    DestroyTrigger(selectHeroTriggers[playerId])
+    pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
+    createHeroForPlayer(playerId)
 
-    local trig = CreateTrigger()
-    TriggerRegisterTimerEvent(trig, 0.1, true)
-    TriggerAddAction(trig, function()
-        forceCameraLocation(playerId, gg_cam_Camera_003)
-    end)
-    forceCameraTriggers[playerId] = trig
+    backpack.addItemIdToBackpack(playerId, 48)
 
-    local heroInfo = ALL_HERO_INFO[unitType]
-    local model = playerId == GetPlayerId(GetLocalPlayer()) and
-        heroInfo.model or
-        ""
-    local effect = AddSpecialEffect(model, -22651, 31705)
-    BlzSetSpecialEffectYaw(effect, 5.32325)
-    BlzSetSpecialEffectScale(
-        effect, GetUnitPointValueByType(unitType) / 100)
+    for _, listener in pairs(pickListeners) do
+        listener()
+    end
 
-    -- local spellList = {}
-    -- for _, spellKey in pairs(heroInfo.spells) do
-    --     table.insert(spellList, spellKey)
-    -- end
-
-    Dialog.show(playerId, {
-        text = getDialogTextForHero(heroInfo),
-        spells = heroInfo.spells,
-        xPos = 0.5,
-        positiveButton = "Create",
-        negativeButton = "Cancel",
-        onNegativeButtonClicked = function()
-            DestroyTrigger(forceCameraTriggers[playerId])
-            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
-            DestroyEffect(effect)
-
-            showPickHeroDialog(playerId)
-        end,
-        onPositiveButtonClicked = function()
-            DestroyTrigger(forceCameraTriggers[playerId])
-            BlzSetSpecialEffectPosition(effect, 30000, 30000, -30000)
-            DestroyEffect(effect)
-
-            if GetPlayerId(GetLocalPlayer()) == playerId then
-                saveSlot = slot
-            end
-
-            pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
-            createHeroForPlayer(playerId)
-
-            backpack.addItemIdToBackpack(playerId, 48)
-
-            for _, listener in pairs(pickListeners) do
-                listener()
-            end
-
-            save.saveHero(playerId)
-        end,
-    })
+    save.saveHero(playerId)
 end
 
 local init = function()
@@ -470,8 +391,6 @@ local getPickedHero = function(playerId)
 end
 
 function restorePickedHero(playerId, storedHeroId, exp, heroX, heroY)
-    DestroyTrigger(forceCameraTriggers[playerId])
-    DestroyTrigger(selectHeroTriggers[playerId])
     for _, info in pairs(ALL_HERO_INFO) do
         if info.storedId == storedHeroId then
             pickedHeroes[playerId] = info
