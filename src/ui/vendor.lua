@@ -243,7 +243,7 @@ end
 function Vendor:update(playerId)
     local frames = self.frames
 
-    local isVisible = vendorToggles[playerId] == true and self.hero ~= nil
+    local isVisible = vendorToggles[playerId] ~= nil and self.hero ~= nil
     BlzFrameSetVisible(frames.origin, isVisible)
 
     if not isVisible then
