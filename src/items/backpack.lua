@@ -32,11 +32,16 @@ function addItemIdToBackpack(playerId, itemId, count)
         end
     end
 
-    table.insert(backpacks[playerId], {
-        itemId = itemId,
-        count = count,
-    })
-    notifyListeners(playerId)
+    for idx=1,36,1 do
+        if backpacks[playerId][idx] == nil then
+            backpacks[playerId][idx] = {
+                itemId = itemId,
+                count = count,
+            }
+            notifyListeners(playerId)
+            return
+        end
+    end
 end
 
 function addItemIdToBackpackPosition(playerId, position, itemId, count)
