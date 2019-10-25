@@ -76,7 +76,7 @@ local keyPressed = function()
             local spellKey = itemInfo.spell
             if spellKey ~= nil then
                 local result = spell.castSpellByKey(playerId, spellKey)
-                if result == true then
+                if result == true and itemInfo.consume ~= false then
                     backpack.removeItemIdFromBackpack(playerId, itemId)
                 end
             end
