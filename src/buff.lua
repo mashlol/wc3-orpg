@@ -385,13 +385,14 @@ function addBuff(source, target, buffName, duration)
             BUFF_INFO[buffName].vfx.attach)
     end
 
-    buffInstances[unitId].buffs[buffName].timer = CreateTimer()
+    local timer = CreateTimer()
+    buffInstances[unitId].buffs[buffName].timer = timer
     TimerStart(
-        buffInstances[unitId].buffs[buffName].timer,
+        timer,
         duration,
         false,
         function()
-            DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+            DestroyTimer(timer)
             removeBuff(target, buffName)
         end)
 end
