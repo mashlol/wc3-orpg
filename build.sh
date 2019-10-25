@@ -1,3 +1,3 @@
 #!/bin/bash
 
-./compile/build.sh
+./compile/build.sh $@

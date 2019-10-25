@@ -14,7 +14,7 @@ cp bin/built.w3x/war3map.lua bin/
 
 echo "Generating bin/war3map_compiled.lua"
 
-node ./compile/build --no-min
+node ./compile/build $@
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 
