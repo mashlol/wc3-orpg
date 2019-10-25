@@ -5,14 +5,14 @@ local meta = require('src/saveload/meta.lua')
 local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
+local zones = require('src/zones.lua')
+local Vector = require('src/vector.lua')
+local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
 local Dialog = require('src/ui/dialog.lua')
 local SimpleButton = require('src/ui/simplebutton.lua')
 
 local CREATE_SYNC_PREFIX = 'create-hero'
-
-local START_X = -2554
-local START_Y = 71
 
 local heroes = {}
 local pickedHeroes = {}
@@ -37,15 +37,12 @@ local ALL_HERO_INFO = {
             [2] = 'throwingstar',
             [3] = 'dash',
             [4] = 'slashult',
-            [5] = 'attack',
-            [6] = 'stop',
-            [7] = 'jab',
-            [8] = 'focus',
-            [9] = 'stun',
-            [10] = 'blind',
+            [5] = 'jab',
+            [6] = 'focus',
         },
         model = "units\\demon\\HeroChaosBladeMaster\\HeroChaosBladeMaster.mdl",
         baseHP = 600,
+        attackSpeed = 1.5,
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
@@ -55,11 +52,10 @@ local ALL_HERO_INFO = {
         id = FourCC("Hstm"),
         spells = {
             [1] = 'punch',
-            [5] = 'attack',
-            [6] = 'stop',
         },
         model = "Valkyrie.mdl",
         baseHP = 600,
+        attackSpeed = 2.2,
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
@@ -72,19 +68,18 @@ local ALL_HERO_INFO = {
         id = FourCC("Hivn"),
         spells = {
             [1] = 'rejuvpot',
-            [2] = 'armorpot',
+            [2] = 'corrosiveblast',
             [3] = 'cleansingpot',
             [4] = 'molecregen',
-            [5] = 'attack',
-            [6] = 'stop',
-            [7] = 'corrosiveblast',
-            [8] = 'accmist',
-            [9] = 'hulkingpot',
-            [10] = 'dampenpot',
-            [11] = 'pocketgoo',
+            [5] = 'armorpot',
+            [6] = 'accmist',
+            -- [9] = 'hulkingpot',
+            -- [10] = 'dampenpot',
+            -- [11] = 'pocketgoo',
         },
         model = "Units\\Creeps\\HeroGoblinAlchemist\\HeroGoblinAlchemist.mdl",
         baseHP = 600,
+        attackSpeed = 2.2,
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
@@ -101,17 +96,16 @@ local ALL_HERO_INFO = {
             [2] = 'frostnova',
             [3] = 'firelance',
             [4] = 'meteor',
-            [5] = 'attack',
-            [6] = 'stop',
-            [7] = 'firestorm',
-            [8] = 'blink',
-            [9] = 'icicle',
-            [10] = 'phoenix',
-            [11] = 'fireshell',
-            [12] = 'frostballs',
+            [5] = 'firestorm',
+            [6] = 'blink',
+            -- [9] = 'icicle',
+            -- [10] = 'phoenix',
+            -- [11] = 'fireshell',
+            -- [12] = 'frostballs',
         },
         model = "Magna Aegwynn.mdl",
         baseHP = 400,
+        attackSpeed = 2.2,
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
@@ -128,28 +122,31 @@ local ALL_HERO_INFO = {
             [2] = 'boomerang',
             [3] = 'blitz',
             [4] = 'shieldcharge',
-            [5] = 'attack',
-            [6] = 'stop',
-            [7] = 'stalwartshell',
-            [8] = 'curshout',
-            [9] = 'bulwark',
-            [10] = 'flag',
-            [11] = 'challenge',
+            [5] = 'stalwartshell',
+            [6] = 'curshout',
+            -- [9] = 'bulwark',
+            -- [10] = 'flag',
+            -- [11] = 'challenge',
         },
         model = "johanaulty.mdl",
         baseHP = 1000,
+        attackSpeed = 1.7,
     },
 }
 
 local respawn = function()
     local unit = GetDyingUnit()
+    local playerId = GetPlayerId(GetOwningPlayer(unit))
     local exp = GetHeroXP(unit)
 
+    local respawnPoint = zones.getSpawnPoint(playerId)
+
     TriggerSleepAction(5)
+    RemoveUnit(unit)
 
     for i=0, bj_MAX_PLAYERS, 1 do
         if unit == heroes[i] then
-            createHeroForPlayer(i, exp)
+            createHeroForPlayer(i, exp, respawnPoint.x, respawnPoint.y)
         end
     end
 end
@@ -161,15 +158,15 @@ function createHeroForPlayer(playerId, exp, heroX, heroY)
     local hero = CreateUnit(
         Player(playerId),
         pickedHeroes[playerId].id,
-        heroX or START_X,
-        heroY or START_Y,
+        heroX or zones.DEFAULT_SPAWN_POINT.x,
+        heroY or zones.DEFAULT_SPAWN_POINT.y,
         0)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         ClearSelection()
         SelectUnit(hero, true)
         ResetToGameCamera(0)
-        PanCameraToTimed(heroX or START_X, heroY or START_Y, 0)
+        PanCameraToTimed(heroX or zones.DEFAULT_SPAWN_POINT.x, heroY or zones.DEFAULT_SPAWN_POINT.y, 0)
     end
 
     if exp ~= nil and exp ~= 0 then
@@ -382,21 +379,19 @@ function onCreateSynced()
     local model = playerId == GetPlayerId(GetLocalPlayer()) and
         heroInfo.model or
         ""
-    local effect = AddSpecialEffect(model, 27463, -30197)
+    local effect = AddSpecialEffect(model, -22651, 31705)
     BlzSetSpecialEffectYaw(effect, 5.32325)
     BlzSetSpecialEffectScale(
         effect, GetUnitPointValueByType(unitType) / 100)
 
-    local spellsWithoutAA = {}
-    for idx, spellKey in pairs(heroInfo.spells) do
-        if idx ~= 5 and idx ~= 6 then
-            table.insert(spellsWithoutAA, spellKey)
-        end
-    end
+    -- local spellList = {}
+    -- for _, spellKey in pairs(heroInfo.spells) do
+    --     table.insert(spellList, spellKey)
+    -- end
 
     Dialog.show(playerId, {
         text = getDialogTextForHero(heroInfo),
-        spells = spellsWithoutAA,
+        spells = heroInfo.spells,
         xPos = 0.5,
         positiveButton = "Create",
         negativeButton = "Cancel",
@@ -418,6 +413,8 @@ function onCreateSynced()
 
             pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
             createHeroForPlayer(playerId)
+
+            backpack.addItemIdToBackpack(playerId, 48)
 
             for _, listener in pairs(pickListeners) do
                 listener()
@@ -493,22 +490,32 @@ function getStatEffects(playerId)
     local level = GetHeroLevel(hero) - 1
     return {
         {
-            type = 'multiplyDamage',
-            amount = 1 + 0.08 * level,
+            type = stats.PERCENT_DAMAGE,
+            amount = 1 + 0.1 * level,
         },
         {
-            type = 'multiplyHealing',
-            amount = 1 + 0.08 * level,
+            type = stats.PERCENT_SPELL_DAMAGE,
+            amount = 1 + 0.1 * level,
         },
         {
-            type = 'rawHp',
-            amount = level * 10,
+            type = stats.PERCENT_HEALING,
+            amount = 1 + 0.10 * level,
+        },
+        {
+            type = stats.RAW_HIT_POINTS,
+            amount = level * 20,
         }
     }
 end
 
 function getSlot()
     return saveSlot
+end
+
+function removeHero(playerId)
+    RemoveUnit(heroes[playerId])
+    heroes[playerId] = nil
+    pickedHeroes[playerId] = nil
 end
 
 function addRepickedListener(repickedListenerFunc)
@@ -520,6 +527,7 @@ function addHeroPickedListener(onPickedListenerFunc)
 end
 
 return {
+    ALL_HERO_INFO = ALL_HERO_INFO,
     init = init,
     getHero = getHero,
     isHero = isHero,
@@ -529,4 +537,5 @@ return {
     addHeroPickedListener = addHeroPickedListener,
     getStatEffects = getStatEffects,
     getSlot = getSlot,
+    removeHero = removeHero,
 }

@@ -5,12 +5,14 @@ local TIPS = {
     "You can press L to open the quest log.",
     "You can disband quests from the quest log (press L).",
     "You can invite players to your party with -party #.",
+    "You can leave a party with -leaveparty.",
     "Quest progress is shared within a party",
     "Join us on discord! https://discord.gg/AbBsrM9",
     "Most spells are cast toward the location of your mouse.",
     "Report bugs or give suggestions on discord: https://discord.gg/AbBsrM9",
     "You can type -tips to toggle tips on or off.",
     "You can manually save your character with -save.",
+    "Your hero will automatically save every minute or so.",
     "You can sell items at vendors, just double click an item in your inventory.",
 }
 

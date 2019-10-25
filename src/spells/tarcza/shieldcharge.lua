@@ -11,7 +11,7 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 60
+local COOLDOWN_S = 10
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -29,7 +29,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Tarcza charges forward with his shield, causing 400 damage to all impacted units, pushing them away and stunning them for 2 seconds.'
+    return 'Tarcza charges forward with his shield, causing 200 damage to all impacted units, pushing them away and stunning them for 2 seconds.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -75,6 +75,10 @@ local cast = function(playerId)
         toV = mouseV,
         speed = 1250,
         length = 800,
+        onDoodadCollide = function()
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
     }
 
     projectile.createProjectile{
@@ -87,7 +91,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 400)
+                damage.dealDamage(hero, collidedUnit, 100, damage.TYPE.PHYSICAL)
 
                 buff.addBuff(hero, collidedUnit, 'stun', 2)
 
@@ -108,6 +112,10 @@ local cast = function(playerId)
             end
             return false
         end,
+        onDoodadCollide = function()
+            -- Stop projecting if you collide with any doodads
+            return true
+        end,
         onDestroy = function()
             effect.createEffect{
                 unit = hero,
@@ -118,7 +126,7 @@ local cast = function(playerId)
         end,
     }
 
-    casttime.cast(playerId, 0.6, false)
+    casttime.cast(playerId, 0.6, false, false, true)
 
     return true
 end

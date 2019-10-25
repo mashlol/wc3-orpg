@@ -11,7 +11,7 @@ local threat = require('src/threat.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 5
+local COOLDOWN_S = 2
 
 local getSpellId = function()
     return 'whirlwind'
@@ -66,7 +66,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(heroV, 200)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 100)
+            damage.dealDamage(hero, unit, 75, damage.TYPE.PHYSICAL)
             threat.addThreat(hero, unit, 400)
 
             effect.createEffect{

@@ -64,7 +64,7 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
     BlzFrameSetAlpha(itemHighlight, 100)
 
     local tooltipFrame = tooltip.makeTooltipFrame(
-        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12, xPos <= 0.015)
+        itemOrigin, 0.16, 0.24, itemOrigin, yPos >= -0.12, xPos <= 0.06)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -79,15 +79,18 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
                 log.log(
                     playerId,
                     "You already have an item in that slot.",
-                    log.TYPE.ERROR)
+                    log.TYPE.EQUIPMENT_ERROR)
             elseif itemmanager.getItemInfo(activeItemId).slot ~= slot then
                 log.log(
                     playerId,
                     "That doesn't go in that slot.",
-                    log.TYPE.ERROR)
+                    log.TYPE.EQUIPMENT_ERROR)
             else
-                backpack.removeItemFromBackpack(playerId, activeItem)
-                equipment.equipItem(playerId, slot, activeItemId)
+                local canEquip = equipment.equipItem(
+                    playerId, slot, activeItemId)
+                if canEquip then
+                    backpack.removeItemFromBackpack(playerId, activeItem)
+                end
             end
 
             backpack.activateItem(playerId, nil)
@@ -143,7 +146,7 @@ function Equipment:init()
         FRAMEPOINT_TOPLEFT,
         0.01,
         -0.01)
-    BlzFrameSetText(equipmentText, "Character")
+    BlzFrameSetText(equipmentText, "Character (Lv. 2)")
 
     local portraitBackdropFrame = BlzCreateFrameByType(
         "BACKDROP",
@@ -189,31 +192,37 @@ function Equipment:init()
 
     local itemFrames = {}
 
-    for i=0,7,1 do
+    for i=0,9,1 do
         local itemFrame = createItemFrame(
             equipmentOrigin,
-            math.floor(i / 4) *
+            math.floor(i / 5) *
                 (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) +
                 0.015,
-            -(i % 4) *
-                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE) -
+            -(i % 5) *
+                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE / 2) -
                 0.025,
             i+1)
 
         table.insert(itemFrames, itemFrame)
     end
 
-    local itemFrame = createItemFrame(
+    local weapon = createItemFrame(
         equipmentOrigin,
-        0.09,
+        0.06,
         consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
-        9)
-
-    table.insert(itemFrames, itemFrame)
+        11)
+    table.insert(itemFrames, weapon)
+    local offHand = createItemFrame(
+        equipmentOrigin,
+        0.12,
+        consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
+        12)
+    table.insert(itemFrames, offHand)
 
     self.frames = {
         itemFrames = itemFrames,
         origin = equipmentOrigin,
+        equipmentText = equipmentText,
     }
 
     return self
@@ -228,8 +237,11 @@ function Equipment:update(playerId)
         return
     end
 
+    local level = GetHeroLevel(self.hero)
+    BlzFrameSetText(frames.equipmentText, "Character (Lv. " .. level .. ")")
+
     local activeItem = equipment.getActiveItem(playerId)
-    for i=1,9,1 do
+    for i=1,12,1 do
         local itemFrame = frames.itemFrames[i]
         local itemId = equipment.getItemInSlot(playerId, i)
         if itemId ~= nil then

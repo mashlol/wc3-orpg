@@ -1,16 +1,20 @@
 local hero = require('src/hero.lua')
+local stats = require('src/stats.lua')
+local damage = require('src/damage.lua')
+local buffloop = require('src/buffloop.lua')
 local equipment = require('src/items/equipment.lua')
+local casttime = require('src/casttime.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 
 local BUFF_INFO = {
     focus = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.2,
             },
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.5,
             },
         },
@@ -23,7 +27,7 @@ local BUFF_INFO = {
     curshout = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.6,
             },
         },
@@ -36,7 +40,7 @@ local BUFF_INFO = {
     assist = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.6,
             },
         },
@@ -45,7 +49,11 @@ local BUFF_INFO = {
     stalwartshell = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
+                amount = 0,
+            },
+            {
+                type = stats.PERCENT_INCOMING_SPELL_DAMAGE,
                 amount = 0,
             },
         },
@@ -58,15 +66,15 @@ local BUFF_INFO = {
     flag = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.9,
             },
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.1,
             },
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 1.1,
             },
         },
@@ -79,11 +87,11 @@ local BUFF_INFO = {
     armorpot = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.7,
             },
             {
-                type = 'multiplyIncomingHealing',
+                type = stats.PERCENT_INCOMING_HEALING,
                 amount = 1.3,
             },
         },
@@ -96,11 +104,11 @@ local BUFF_INFO = {
     hulkingpot = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 1.2,
             },
             {
-                type = 'modifySize',
+                type = stats.PERCENT_SCALE,
                 amount = 1.3,
             },
         },
@@ -109,11 +117,11 @@ local BUFF_INFO = {
     dampenpot = {
         effects = {
             {
-                type = 'multiplyDamage',
+                type = stats.PERCENT_DAMAGE,
                 amount = 0.8,
             },
             {
-                type = 'modifySize',
+                type = stats.PERCENT_SCALE,
                 amount = 0.8,
             },
         },
@@ -122,7 +130,7 @@ local BUFF_INFO = {
     accpot = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 2,
             },
         },
@@ -135,8 +143,8 @@ local BUFF_INFO = {
     rejuvpot = {
         effects = {
             {
-                type = 'heal',
-                amount = 30,
+                type = stats.HEALTH_REGEN,
+                amount = 45,
                 tickrate = 1,
             },
         },
@@ -145,12 +153,25 @@ local BUFF_INFO = {
             attach = "chest",
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
-        maxStacks = 3,
+    },
+    corrosiveblast = {
+        effects = {
+            {
+                type = stats.DAMAGE_OVER_TIME,
+                amount = 30,
+                tickrate = 1,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\Banish\\BanishTarget.mdl",
+            attach = "chest",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNPotionOfClarity.blp",
     },
     corrosivedecaydot = {
         effects = {
             {
-                type = 'damage',
+                type = stats.DAMAGE_OVER_TIME,
                 amount = 160,
                 tickrate = 1,
             },
@@ -164,7 +185,7 @@ local BUFF_INFO = {
     stun = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -176,7 +197,7 @@ local BUFF_INFO = {
     firelance = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -188,10 +209,10 @@ local BUFF_INFO = {
     fireshell = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0,
             },
         },
@@ -204,7 +225,7 @@ local BUFF_INFO = {
     frostball = {
         effects = {
             {
-                type = 'multiplyIncomingDamage',
+                type = stats.PERCENT_INCOMING_DAMAGE,
                 amount = 0.9,
             },
         },
@@ -217,7 +238,7 @@ local BUFF_INFO = {
     frostballslow = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.6,
             },
         },
@@ -230,7 +251,7 @@ local BUFF_INFO = {
     frostnova = {
         effects = {
             {
-                type = 'root',
+                type = stats.ROOT,
             },
         },
         vfx = {
@@ -242,7 +263,7 @@ local BUFF_INFO = {
     icicle = {
         effects = {
             {
-                type = 'modifyMoveSpeed',
+                type = stats.PERCENT_MOVE_SPEED,
                 amount = 0.7,
             },
         },
@@ -255,7 +276,7 @@ local BUFF_INFO = {
     blind = {
         effects = {
             {
-                type = 'stun',
+                type = stats.STUN,
             },
         },
         vfx = {
@@ -268,7 +289,7 @@ local BUFF_INFO = {
     food1 = {
         effects = {
             {
-                type = 'heal',
+                type = stats.HEALTH_REGEN,
                 amount = 60,
                 tickrate = 3,
             },
@@ -279,6 +300,27 @@ local BUFF_INFO = {
         },
         removeOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
+    },
+    tomslow = {
+        effects = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 0.3,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Human\\slow\\slowtarget.mdl",
+            attach = "origin",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNBattleRoar.blp",
+    },
+    stunnoeffect = {
+        effects = {
+            {
+                type = stats.STUN,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNGauntletsOfOgrePower.blp",
     },
 }
 
@@ -343,13 +385,14 @@ function addBuff(source, target, buffName, duration)
             BUFF_INFO[buffName].vfx.attach)
     end
 
-    buffInstances[unitId].buffs[buffName].timer = CreateTimer()
+    local timer = CreateTimer()
+    buffInstances[unitId].buffs[buffName].timer = timer
     TimerStart(
-        buffInstances[unitId].buffs[buffName].timer,
+        timer,
         duration,
         false,
         function()
-            DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+            DestroyTimer(timer)
             removeBuff(target, buffName)
         end)
 end
@@ -395,121 +438,93 @@ function getBuffs(unit)
     return buffInstances[unitId] and buffInstances[unitId].buffs or {}
 end
 
--- Iterate over all a units buffs and get the final damage modifier
-function getModifiedDamage(unit, target, amount)
-    local buffs = getBuffs(unit)
-    local modifier = 1
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for _, info in pairs(effects) do
-            if info.type == 'multiplyDamage' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
+function applyEffectList(obj, effectList)
+    for _,info in pairs(effectList) do
+        info.type.effect(info, obj)
     end
-    local buffs = getBuffs(target)
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for _, info in pairs(effects) do
-            if info.type == 'multiplyIncomingDamage' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
+
+    return obj
+end
+
+function maybeAddEffectToList(effectsByUnitId, unit, effect)
+    local unitId = GetHandleId(unit)
+    if effectsByUnitId[unitId] == nil then
+        effectsByUnitId[unitId] = {
+            unit = unit,
+            effects = {},
+        }
     end
-    -- Repeat for items
-    local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-    if hero.getHero(ownerPlayerId) == unit then
-        local items = equipment.getEquippedItems(ownerPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyDamage' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(ownerPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyDamage' then
-                modifier = modifier * statInfo.amount
-            end
-        end
+    if effect ~= nil then
+        table.insert(effectsByUnitId[unitId].effects, effect)
     end
-    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
-    if hero.getHero(targetPlayerId) == target then
-        local items = equipment.getEquippedItems(targetPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyIncomingDamage' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(targetPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyIncomingDamage' then
-                modifier = modifier * statInfo.amount
-            end
-        end
+end
+
+function getModifiedDamage(unit, target, amount, type)
+    local unitInfo = buffloop.getUnitInfo(unit)
+    local targetInfo = buffloop.getUnitInfo(target)
+    if type == damage.TYPE.PHYSICAL then
+        return math.max(0, amount *
+            unitInfo.pctDamage *
+            targetInfo.pctIncomingDamage +
+            unitInfo.rawDamage +
+            targetInfo.rawIncomingDamage)
+    elseif type == damage.TYPE.SPELL then
+        return math.max(0, amount *
+            unitInfo.pctSpellDamage *
+            targetInfo.pctIncomingSpellDamage +
+            unitInfo.rawSpellDamage +
+            targetInfo.rawIncomingSpellDamage)
     end
-    return amount * modifier
 end
 
 function getModifiedHealing(unit, target, amount)
-    local buffs = getBuffs(unit)
-    local modifier = 1
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
-            if info.type == 'multiplyHealing' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    local buffs = getBuffs(target)
-    for buffName,val in pairs(buffs) do
-        local effects = BUFF_INFO[buffName].effects
-        for idx,info in pairs(effects) do
-            if info.type == 'multiplyIncomingHealing' then
-                modifier = modifier * info.amount * val.stacks
-            end
-        end
-    end
-    -- Repeat for items
+    local unitInfo = buffloop.getUnitInfo(unit)
+    local targetInfo = buffloop.getUnitInfo(target)
+    return math.max(0, amount *
+        unitInfo.pctHealing *
+        targetInfo.pctIncomingHealing +
+        unitInfo.rawHealing +
+        targetInfo.rawIncomingHealing)
+end
+
+function getBaseObjForUnit(unit)
     local ownerPlayerId = GetPlayerId(GetOwningPlayer(unit))
-    if hero.getHero(ownerPlayerId) == unit then
-        local items = equipment.getEquippedItems(ownerPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyHealing' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(ownerPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyHealing' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    local targetPlayerId = GetPlayerId(GetOwningPlayer(target))
-    if hero.getHero(targetPlayerId) == target then
-        local items = equipment.getEquippedItems(targetPlayerId)
-        for _, itemId in pairs(items) do
-            for _, info in pairs(itemmanager.ITEMS[itemId].stats) do
-                if info.type == 'multiplyIncomingHealing' then
-                    modifier = modifier * info.amount
-                end
-            end
-        end
-        local stats = hero.getStatEffects(targetPlayerId)
-        for _, statInfo in pairs(stats) do
-            if statInfo.type == 'multiplyIncomingHealing' then
-                modifier = modifier * statInfo.amount
-            end
-        end
-    end
-    return amount * modifier
+    local ownerHero = hero.getHero(ownerPlayerId)
+    local ownerHeroInfo = hero.getPickedHero(ownerPlayerId)
+
+    return {
+        baseSpeed = GetUnitDefaultMoveSpeed(unit),
+        scale =  GetUnitPointValue(unit) / 100,
+        isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId),
+        isRooted = false,
+        baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
+        attackSpeed = ownerHeroInfo and ownerHeroInfo.attackSpeed,
+
+        dmgToDeal = 0,
+        hpToHeal = 0,
+
+        pctDamage = 1,
+        pctSpellDamage= 1,
+        pctHealing = 1,
+
+        rawDamage = 0,
+        rawSpellDamage = 0,
+        rawHealing = 0,
+
+        pctIncomingDamage = 1,
+        pctIncomingSpellDamage = 1,
+        pctIncomingHealing = 1,
+
+        rawIncomingDamage = 0,
+        rawIncomingSpellDamage = 0,
+        rawIncomingHealing = 0,
+
+        cooldownReduction = 1,
+        castSpeed = 1,
+        critChance = 1,
+        pctCritDamage = 1.5,
+        rawCritDamage = 0,
+    }
 end
 
 function getBuffInstances()
@@ -528,4 +543,7 @@ return {
     getModifiedDamage = getModifiedDamage,
     getModifiedHealing = getModifiedHealing,
     maybeRemoveBuffsOnDamage = maybeRemoveBuffsOnDamage,
+    applyEffectList = applyEffectList,
+    maybeAddEffectToList = maybeAddEffectToList,
+    getBaseObjForUnit = getBaseObjForUnit,
 }

@@ -1,10 +1,14 @@
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 local party = require('src/party.lua')
+local itemmanager = require('src/items/itemmanager.lua')
+local backpack = require('src/items/backpack.lua')
 local Dialog = require('src/ui/dialog.lua')
 
 local TYPE = {
     KILL = {},
+    ITEM = {},
+    DISCOVER = {},
 }
 
 local QUESTS
@@ -22,7 +26,7 @@ local QUESTS
 local progress = {}
 
 -- questMarks = {
---     [questId] = texttag
+--     [unit handle of receiver/giver] = {unit = unit, tag = texttag}
 -- }
 local questMarks = {}
 
@@ -56,15 +60,16 @@ function onKill()
                             progress[playerId][questId].objectives[objectiveIdx] + 1
                         local numKilled =
                             progress[playerId][questId].objectives[objectiveIdx]
+                        local verb = objectiveInfo.verbPast or 'killed'
                         log.log(
                             playerId,
-                            'You have killed '..
+                            'You have ' .. verb .. ' '..
                                 numKilled..
                                 ' / '..
                                 objectiveInfo.amount..
                                 ' '..
                                 objectiveInfo.name,
-                            log.TYPE.INFO)
+                            log.TYPE.QUEST)
                         updateQuestMarks()
                     end
                 end
@@ -73,56 +78,125 @@ function onKill()
     end
 end
 
-function updateQuestMarks()
-    -- Loop through each quest, and update the questgiver
-    -- mark to match the quest progress.
-    local playerId = GetPlayerId(GetLocalPlayer())
-    for questId, questInfo in pairs(QUESTS) do
-        local tag = questMarks[questId]
-        local text
-        local color
-        local showOnUnit
-        if isEligibleForQuest(playerId, questId) then
-            text = "!"
-            color = {255, 255, 0}
-            showOnUnit = questInfo.getQuestFrom
-        elseif
-            hasQuest(playerId, questId) and
-            not questCompleted(playerId, questId) and
-            not questObjectivesCompleted(playerId, questId)
-        then
-            text = "?"
-            color = {50, 50, 50}
-            showOnUnit = questInfo.handQuestTo
-        elseif
-            hasQuest(playerId, questId) and
-            not questCompleted(playerId, questId) and
-            questObjectivesCompleted(playerId, questId)
-        then
-            text = "?"
-            color = {255, 255, 0}
-            showOnUnit = questInfo.handQuestTo
-        else
-            text = ""
-            color = {255, 255, 255}
-            showOnUnit = questInfo.handQuestTo
+function maybeUpdateLootProgress(playerId)
+    for questId, progressInfo in pairs(progress[playerId]) do
+        if not progressInfo.completed then
+            for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+                if objectiveInfo.type == TYPE.ITEM then
+                    local count = math.min(
+                        objectiveInfo.amount,
+                        backpack.getItemCount(
+                            playerId, objectiveInfo.itemId))
+
+                    local existing =
+                        progress[playerId][questId].objectives[objectiveIdx]
+                    if existing ~= count and count ~= 0 then
+                        log.log(
+                            playerId,
+                            'You have obtained '..
+                                count..
+                                ' / '..
+                                objectiveInfo.amount..
+                                ' '..
+                                itemmanager.getItemInfo(objectiveInfo.itemId).name,
+                            log.TYPE.QUEST)
+                    end
+                    progress[playerId][questId].objectives[objectiveIdx] = count
+                    updateQuestMarks()
+                end
+            end
         end
-        SetTextTagText(tag, text, TextTagSize2Height(25))
-        SetTextTagColor(tag, color[1], color[2], color[3], 0)
-        SetTextTagPosUnit(tag, showOnUnit, 10)
     end
 end
 
-function initQuestMarks()
-    for questId, questInfo in pairs(QUESTS) do
-        local tag = CreateTextTag()
-        SetTextTagText(tag, "!", TextTagSize2Height(25))
-        SetTextTagPosUnit(tag, questInfo.getQuestFrom, 10)
-        SetTextTagColor(tag, 100, 100, 0, 0)
-        SetTextTagPermanent(tag, true)
-        SetTextTagFadepoint(tag, 0.01)
+function maybeUpdateDiscoverProgress()
+    local playerId = GetPlayerId(GetOwningPlayer(GetEnteringUnit()))
+    local enteredRegion = GetTriggeringRegion()
 
-        questMarks[questId] = tag
+    for questId, progressInfo in pairs(progress[playerId]) do
+        if not progressInfo.completed then
+            for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+                if
+                    objectiveInfo.type == TYPE.DISCOVER and
+                    progress[playerId][questId].objectives[objectiveIdx] ~= objectiveInfo.amount
+                then
+                    if enteredRegion == objectiveInfo.region then
+                        progress[playerId][questId].objectives[objectiveIdx] = 1
+                        log.log(
+                            playerId,
+                            'You discovered the ' .. objectiveInfo.name,
+                            log.TYPE.QUEST)
+                        updateQuestMarks()
+                    end
+                end
+            end
+        end
+    end
+end
+
+function getMarkForQuestGiver(playerId, unit)
+    for questId, questInfo in pairs(QUESTS) do
+        if
+            questInfo.getQuestFrom == unit and
+            isEligibleForQuest(playerId, questId)
+        then
+            return "!", {255, 255, 0}
+        elseif
+            questInfo.handQuestTo == unit and
+            hasQuest(playerId, questId) and
+            not questCompleted(playerId, questId)
+        then
+            if questObjectivesCompleted(playerId, questId) then
+                return "?", {255, 255, 0}
+            else
+                return "?", {50, 50, 50}
+            end
+        end
+    end
+
+    return "", {255, 255, 255}
+end
+
+function updateQuestMarks()
+    -- Loop through each quest mark and check which action would happen if you
+    -- click on that unit. Based on that we set the text of the quest mark
+
+    -- TODO optimize n^2?
+
+    local playerId = GetPlayerId(GetLocalPlayer())
+    for _, questMarkInfo in pairs(questMarks) do
+        -- print('check quest mark info for ', questMarkInfo.unit)
+        local tag = questMarkInfo.tag
+
+        local text, color = getMarkForQuestGiver(playerId, questMarkInfo.unit)
+
+        SetTextTagText(tag, text, TextTagSize2Height(25))
+        SetTextTagColor(tag, color[1], color[2], color[3], 0)
+    end
+end
+
+function maybeAddQuestMarkToUnit(unit)
+    if questMarks[GetHandleId(unit)] ~= nil then
+        return
+    end
+
+    local tag = CreateTextTag()
+    SetTextTagText(tag, "!", TextTagSize2Height(25))
+    SetTextTagPosUnit(tag, unit, 10)
+    SetTextTagColor(tag, 100, 100, 0, 0)
+    SetTextTagPermanent(tag, true)
+    SetTextTagFadepoint(tag, 0.01)
+
+    questMarks[GetHandleId(unit)] = {
+        unit = unit,
+        tag = tag,
+    }
+end
+
+function initQuestMarks()
+    for _, questInfo in pairs(QUESTS) do
+        maybeAddQuestMarkToUnit(questInfo.getQuestFrom)
+        maybeAddQuestMarkToUnit(questInfo.handQuestTo)
     end
 
     updateQuestMarks()
@@ -193,20 +267,39 @@ function getQuestCompletedText(questId)
     if QUESTS[questId].rewards.exp then
         res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
     end
+    if QUESTS[questId].rewards.items then
+        for itemId,amount in pairs(QUESTS[questId].rewards.items) do
+            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+        end
+    end
     return res
 end
 
-function getQuestAcceptText(questId)
+function getQuestAcceptText(questId, playerId)
     local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
 
     res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
 
     res = res .. QUESTS[questId].obtainText
     local objectives = ""
-    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+    for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
         if objectiveInfo.type == TYPE.KILL then
-            objectives = objectives .. "- Kill "..objectiveInfo.amount.." "..objectiveInfo.name.."|n"
+            local verb = objectiveInfo.verb or 'Kill'
+            local amount = objectiveInfo.amount > 1 and (objectiveInfo.amount .. ' ')  or ''
+            objectives = objectives.."- "..verb.." "..amount..objectiveInfo.name
         end
+        if objectiveInfo.type == TYPE.ITEM then
+            local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
+            objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name
+        end
+        if objectiveInfo.type == TYPE.DISCOVER then
+            objectives = objectives .. "- Discover the "..objectiveInfo.name
+        end
+        if playerId ~= nil and progress[playerId][questId].objectives[objectiveIdx] ~= nil then
+            local amountDone = progress[playerId][questId].objectives[objectiveIdx]
+            objectives = objectives .. " ( ".. amountDone .." / ".. objectiveInfo.amount .." )"
+        end
+        objectives = objectives .. "|n"
     end
     if objectives ~= "" then
         res = res .. "|n|n|cffe0b412Objectives:|r|n"..objectives
@@ -217,6 +310,11 @@ function getQuestAcceptText(questId)
     end
     if QUESTS[questId].rewards.exp then
         res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+    end
+    if QUESTS[questId].rewards.items then
+        for itemId,amount in pairs(QUESTS[questId].rewards.items) do
+            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+        end
     end
     return res
 end
@@ -232,6 +330,7 @@ function beginQuest(playerId, questId)
                 objectives = {},
             }
 
+            maybeUpdateLootProgress(playerId)
             updateQuestMarks()
         end,
     })
@@ -247,6 +346,7 @@ function finishQuest(playerId, questId)
 
     local expGained = QUESTS[questId].rewards.exp
     local goldGained = QUESTS[questId].rewards.gold
+    local itemsGained = QUESTS[questId].rewards.items
 
     if expGained ~= nil then
         AddHeroXP(hero.getHero(playerId), expGained, true)
@@ -257,6 +357,27 @@ function finishQuest(playerId, questId)
             Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
         SetPlayerState(
             Player(playerId), PLAYER_STATE_RESOURCE_GOLD, curGold + goldGained)
+    end
+
+    if itemsGained ~= nil then
+        for itemId, amount in pairs(itemsGained) do
+            backpack.addItemIdToBackpack(playerId, itemId, amount)
+            log.log(
+                playerId,
+                'You received ' ..
+                    amount ..
+                    ' ' ..
+                    itemmanager.getItemInfo(itemId).name,
+                log.TYPE.QUEST)
+        end
+    end
+
+    for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        if objectiveInfo.type == TYPE.ITEM then
+            for i=1,objectiveInfo.amount,1 do
+                backpack.removeItemIdFromBackpack(playerId, objectiveInfo.itemId)
+            end
+        end
     end
 
     updateQuestMarks()
@@ -303,7 +424,7 @@ end
 function showDialogForActiveQuest(playerId, activeQuestId)
     local activeQuests = getActiveQuests(playerId)
     Dialog.show(playerId, {
-        text = getQuestAcceptText(activeQuests[activeQuestId]),
+        text = getQuestAcceptText(activeQuests[activeQuestId], playerId),
         positiveButton = "Okay",
         negativeButton = "Disband",
         onNegativeButtonClicked = function()
@@ -358,142 +479,122 @@ function initQuests()
     QUESTS = {
         [1] = {
             name = "Trouble in Turtle Town",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
-            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles in the area. They are interfering with my fishing lately.",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
             incompleteText = "Have you completed the task?",
-            completedText = "Thanks, this will be a great help to me and my work around here. Talk to me again if you're interested in more work.",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
             rewards = {
                 exp = 50,
-                gold = 50,
+                gold = 5,
+                items = {[6] = 5},
             },
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 8,
+                    amount = 10,
                     toKill = FourCC('hmbs'),
                     name = 'Snapping Turtles',
-                }
+                },
             },
             prerequisites = {},
             levelRequirement = 0,
         },
         [2] = {
             name = "Fred's Quest",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvil_0030,
-            obtainText = "A neighbor of mine, Fred, mentioned to me recently he's having some trouble at his farm. He'll likely want your help up there - his farm is north west of here, just follow the dirt trail. Go seek out Fred and I'm sure he will be grateful for your help.",
+            getQuestFrom = gg_unit_nvil_0004,
+            handQuestTo = gg_unit_nvil_0085,
+            obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
             incompleteText = "I don't think its possible to see this text.",
-            completedText = "Fjorn sent you? Ah, that makes sense. Yes, I have been having some trouble recently, there's a bunch of spiders that seem to have infested my farm and are ruining my crops and infecting my animals with diseases. Do you think you could help with that?",
+            completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
             rewards = {
                 exp = 20,
-                gold = 10,
+                gold = 5,
             },
             objectives = {},
-            prerequisites = {1},
+            prerequisites = {},
             levelRequirement = 0,
         },
         [3] = {
-            name = "Spider Infestation",
-            getQuestFrom = gg_unit_nvil_0030,
-            handQuestTo = gg_unit_nvil_0030,
-            obtainText = "Yes, I'd be glad to have your help. As I said before, I've got an infestation of spiders at my farm here and I need some help erradicating them. Could you help?",
+            name = "Fred's Soup",
+            getQuestFrom = gg_unit_nvil_0085,
+            handQuestTo = gg_unit_nvil_0085,
+            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect five River Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
-            completedText = "Thanks so much! This is huge for me. Let me know if you need more work.",
+            completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
             rewards = {
                 exp = 100,
-                gold = 100,
+                gold = 5,
             },
             objectives = {
                 [1] = {
-                    type = TYPE.KILL,
-                    amount = 8,
-                    toKill = FourCC('hspi'),
-                    name = 'Spiders',
+                    type = TYPE.ITEM,
+                    amount = 5,
+                    itemId = 9,
                 }
             },
             prerequisites = {2},
             levelRequirement = 0,
         },
         [4] = {
-            name = "Return to Fjord",
-            getQuestFrom = gg_unit_nvil_0030,
-            handQuestTo = gg_unit_nvl2_0000,
-            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the beetles across the river.",
+            name = "Return to Freydell Village",
+            getQuestFrom = gg_unit_nvil_0085,
+            handQuestTo = gg_unit_nvil_0004,
+            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
             incompleteText = "Impossible!",
-            completedText = "Fred sent you about the beetles? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
+            completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
             objectives = {},
             rewards = {
                 exp = 30,
-                gold = 30,
+                gold = 3,
             },
             prerequisites = {3},
             levelRequirement = 0,
         },
         [5] = {
-            name = "Beetles over the River",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvl2_0000,
-            obtainText = "So Fred thinks you can take them on? All right. You can find the beetles across the river, just follow the trail south and over the river. Come back when you've killed at least 8.",
-            incompleteText = "Have you killed the beetles yet?",
-            completedText = "Wow, impressive. Have you ever been to Ironwell city? If you really want to make money, that's where I'd go if I were you.",
+            name = "Wolves to the North",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
+            obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least fifteen.",
+            incompleteText = "Have you killed the wolves yet?",
+            completedText = "Wow! You're skilled!",
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 8,
-                    toKill = FourCC('hbee'),
-                    name = 'Beetles',
+                    amount = 15,
+                    toKill = FourCC('hwol'),
+                    name = 'Wolves',
                 }
             },
             rewards = {
-                exp = 150,
-                gold = 150,
+                exp = 125,
+                gold = 10,
             },
             prerequisites = {4},
             levelRequirement = 0,
         },
-        [6] = {
-            name = "Ironwell City",
-            getQuestFrom = gg_unit_nvl2_0000,
-            handQuestTo = gg_unit_nvil_0120,
-            obtainText = "I have a cousin Frjl in Ironwell, see if you can find him there. I'm sure he needs help - if not there are plenty of people there. Someone will surely need your help.",
-            incompleteText = "Impossible!",
-            completedText = "Ah, you know Fjord? He's a character he is.",
-            objectives = {},
+		[6] = {
+            name = "Talk to Elder John",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvil_0087,
+            obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
+            incompleteText = "Have you talked to Elder John?",
+            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
+            objectives = {
+
+            },
             rewards = {
-                exp = 30,
-                gold = 30,
+                exp = 20,
+                gold = 5,
             },
             prerequisites = {5},
             levelRequirement = 0,
         },
-        [7] = {
-            name = "Alpha Wolf",
-            getQuestFrom = gg_unit_nvlw_0121,
-            handQuestTo = gg_unit_nvlw_0121,
-            obtainText = "The wolves in the south seem to have a alpha of the pack, who resides in the south west corner of the island. If you slay the alpha wolf, perhaps the others will not attach as often for a while. You'd obviously be rewarded well.",
-            incompleteText = "Have you slain the alpha wolf?",
-            completedText = "You did it? I'm amazed!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('hbld'),
-                    name = 'Alpha Wolf',
-                }
-            },
-            rewards = {
-                exp = 350,
-                gold = 350,
-            },
-            prerequisites = {},
-            levelRequirement = 8,
-        },
-        [8] = {
+		[7] = {
             name = "Giant Turtle",
-            getQuestFrom = gg_unit_nvl2_0013,
-            handQuestTo = gg_unit_nvl2_0013,
-            obtainText = "There's a giant turtle roaming the lands at night, it's causing a lot of havoc on our operations here at Ironwell...if you could gather a group and slay it you'd be well-rewarded.",
+            getQuestFrom = gg_unit_nvl2_0005,
+            handQuestTo = gg_unit_nvl2_0005,
+            obtainText = "There's a giant turtle just west of Freydell Village, We believe it's the leader of the turtles invading the forest. Slay it and I will reward you fairly.",
             incompleteText = "Have you slain the giant turtle",
             completedText = "You did it? I'm amazed!",
             objectives = {
@@ -505,35 +606,230 @@ function initQuests()
                 }
             },
             rewards = {
-                exp = 300,
-                gold = 300,
-            },
-            prerequisites = {},
-            levelRequirement = 7,
-        },
-        [9] = {
-            name = "Wolves for Lunch",
-            getQuestFrom = gg_unit_nvil_0120,
-            handQuestTo = gg_unit_nvil_0120,
-            obtainText = "So Fjord thinks you're pretty hot stuff huh? Well right now we're having some troubles with wolves taking over the forest outside of Ironwell. If you kill 10 of them, we'll all be grateful.",
-            incompleteText = "Are you going to kill the wolves?",
-            completedText = "Wow, impressive.",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('hwol'),
-                    name = 'Wolves',
-                }
-            },
-            rewards = {
-                exp = 170,
-                gold = 170,
+                exp = 150,
+                gold = 25,
             },
             prerequisites = {6},
             levelRequirement = 0,
         },
-    }
+		[8] = {
+            name = "Alpha Wolf",
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_nvil_0087,
+            obtainText = "There is a cave just north of the village where the Alpha Wolf resides, though it is probably being controlled I need you to slay it. If you follow the road west you should be able to find him.",
+            incompleteText = "Have you slain the alpha wolf?",
+            completedText = "You did it? I'm amazed!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('hbld'),
+                    name = 'Alpha Wolf',
+                }
+            },
+            rewards = {
+                exp = 225,
+                gold = 30,
+            },
+            prerequisites = {6},
+            levelRequirement = 0,
+        },
+        [9] = {
+            name = "General Smith",
+            getQuestFrom = gg_unit_nvil_0087,
+            handQuestTo = gg_unit_gens_0335,
+            obtainText = "If you follow the path east and go left at the fork in the road you should be able to find General Smith at an army encampment just outside of Ironwell City.",
+            incompleteText = "Did you find General Smith?",
+            completedText = "Fjord sent you? Good. I need some help around here.",
+            objectives = {},
+            rewards = {
+                exp = 30,
+                gold = 5,
+            },
+            prerequisites = {8},
+            levelRequirement = 0,
+        },
+		[10] = {
+            name = "Stamping out the Fires",
+            getQuestFrom = gg_unit_hcth_0104,
+            handQuestTo = gg_unit_hcth_0104,
+            obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
+            incompleteText = "Have you extinguished the Cultist Bonfires?",
+            completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
+           objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('fire'),
+                    name = 'Northwest Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('sfir'),
+                    name = 'Southwest Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[3] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('cfir'),
+                    name = 'Central Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[4] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('nefi'),
+                    name = 'Northeast Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+				[5] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('sefi'),
+                    name = 'Southeast Bonfire',
+					verb = 'Extinguish',
+					verbPast = 'extinguished',
+                },
+            },
+            rewards = {
+                exp = 200,
+                gold = 25,
+            },
+            prerequisites = {9},
+            levelRequirement = 0,
+        },
+		[11] = {
+            name = "Full Momentum",
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
+            obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with! You can find them in the encampments to the east.",
+            incompleteText = "Have you slain those Commanders yet?",
+            completedText = "Nicely done.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('clea'),
+                    name = 'Cultist Commander Siddel',
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('cled'),
+                    name = 'Cultist Commander Audric',
+                },
+            },
+            rewards = {
+                exp = 250,
+                gold = 30,
+            },
+            prerequisites = {9},
+            levelRequirement = 0,
+        },
+		[12] = {
+            name = "Scouting the Mines",
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
+            obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
+            incompleteText = "Did you find anything in the pass?",
+            completedText = "I knew it. This is much worse than I thought.",
+            objectives = {
+                [1] = {
+                    type = TYPE.DISCOVER,
+                    rect = gg_rct_mineexit,
+                    name = 'Mine Entrance',
+                    amount = 1,
+                },
+            },
+            rewards = {
+                exp = 75,
+                gold = 10,
+            },
+            prerequisites = {11},
+            levelRequirement = 0,
+        },
+		[13] = {
+            name = "Attack Plans",
+            getQuestFrom = gg_unit_hcth_0104,
+            handQuestTo = gg_unit_hcth_0104,
+            obtainText = "Those Cultists are planning something. Enter the mines and find something that resembles attack plans and destroy them.",
+            incompleteText = "Have you destroyed those attack plans?",
+            completedText = "Nice work! You've saved the day",
+           objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('plan'),
+                    name = 'Attack Plans',
+					verb = 'Destroy',
+					verbPast = 'destroyed',
+                },
+            },
+            rewards = {
+                exp = 300,
+                gold = 25,
+            },
+            prerequisites = {12},
+            levelRequirement = 0,
+        },
+		[14] = {
+            name = "Kill Them All!",
+            getQuestFrom = gg_unit_gens_0335,
+            handQuestTo = gg_unit_gens_0335,
+            obtainText = "Enter the mines and kill the leaders in there. If we can do that then we will be able to slow down the progress of the Cultists.",
+            incompleteText = "Did you crush those Cultist bastards?",
+            completedText = "Thanks for playing TVT ORPG PRE-ALPHA. Please give any feedback here at our discord: https://discord.gg/7wqQ3Az",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('mine'),
+                    name = 'Miner Joe',
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('over'),
+                    name = 'The Overseer',
+                }
+            },
+            rewards = {
+                exp = 350,
+                gold = 75,
+            },
+            prerequisites = {12},
+            levelRequirement = 0,
+        },
+		[15] = {
+            name = "A Friend In Need is a Friend Indeed",
+            getQuestFrom = gg_unit_nvil_0083,
+            handQuestTo = gg_unit_nvil_0084,
+            obtainText = "Help! My friend is being ambushed by some Cultists! He's just down this road behind me!",
+            incompleteText = "Is my friend still alive?",
+            completedText = "Thank you so much!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 4,
+                    toKill = FourCC('h001'),
+                    name = 'Cultist Ambushers',
+                }
+            },
+            rewards = {
+                exp = 150,
+                gold = 50,
+            },
+            prerequisites = {8},
+            levelRequirement = 0,
+        },
+}
 end
 
 function onHeroLevel()
@@ -542,6 +838,22 @@ end
 
 function getQuestInfo(questId)
     return QUESTS[questId]
+end
+
+function initRegionTriggers()
+    for _, questInfo in pairs(QUESTS) do
+        for _, objectiveInfo in pairs(questInfo.objectives) do
+            if objectiveInfo.type == TYPE.DISCOVER then
+                local region = CreateRegion()
+                RegionAddRect(region, objectiveInfo.rect)
+                objectiveInfo.region = region
+                local enterDungeonTrig = CreateTrigger()
+                TriggerRegisterEnterRegionSimple(
+                    enterDungeonTrig, region)
+                TriggerAddAction(enterDungeonTrig, maybeUpdateDiscoverProgress)
+            end
+        end
+    end
 end
 
 function init()
@@ -559,6 +871,7 @@ function init()
     end
     TriggerAddAction(levelTrig, onHeroLevel)
 
+    backpack.addBackpackChangedListener(maybeUpdateLootProgress)
 
     for i=0,bj_MAX_PLAYERS-1,1 do
         progress[i] = {}
@@ -567,9 +880,12 @@ function init()
     initQuests()
     initObjectiveTriggers()
     initQuestMarks()
+    initRegionTriggers()
 
     hero.addRepickedListener(resetQuestProgress)
     hero.addHeroPickedListener(updateQuestMarks)
+
+    TimerStart(CreateTimer(), 3, true, updateQuestMarks)
 end
 
 return {
@@ -581,4 +897,5 @@ return {
     restoreProgress = restoreProgress,
     getActiveQuests = getActiveQuests,
     showDialogForActiveQuest = showDialogForActiveQuest,
+    questObjectivesCompleted = questObjectivesCompleted,
 }

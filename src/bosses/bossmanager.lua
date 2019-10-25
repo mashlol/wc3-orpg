@@ -1,22 +1,40 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
-local backpack = require('src/items/backpack.lua')
+local MinerJoe = require('src/bosses/minerjoe.lua')
+local OverseerTom = require('src/bosses/overseertom.lua')
 local hero = require('src/hero.lua')
+local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
 
 local ALL_BOSS_CLASSES = {
     Turtle:new{
         bossUnitId = FourCC('hbos'),
-        startX = 398,
-        startY = 3416,
-        facing = 280,
+        startX = -651,
+        startY = -1480,
+        facing = 134,
+        respawnable = false,
     },
     Wolf:new{
         bossUnitId = FourCC('hbld'),
-        startX = -3077,
-        startY = -8518,
-        facing = 0,
+        startX = 15195,
+        startY = 7531,
+        facing = 223,
+        respawnable = false,
     },
+    MinerJoe:new{
+        bossUnitId = FourCC('mine'),
+        startX = 24237,
+        startY = 27062,
+        facing = 37,
+        respawnable = false,
+    },
+    OverseerTom:new{
+        bossUnitId = FourCC('over'),
+        startX = 23428,
+        startY = 30510,
+        facing = 270,
+        respawnable = false,
+    }
 }
 
 local Phase = {}
@@ -68,8 +86,11 @@ function Context:new(o)
     return o
 end
 
-function Context:registerDoor(door)
-    table.insert(self.doors, door)
+function Context:registerDoor(door, openByDefault)
+    table.insert(self.doors, {
+        door = door,
+        openByDefault = openByDefault,
+    })
 end
 
 function Context:registerPhase(options)
@@ -83,6 +104,21 @@ function Context:registerPhase(options)
 end
 
 function Context:getHeroesInPoly()
+    if self.cls:getBounds() == false then
+        -- Just get all heroes within 1500 yards
+        local toReturn = {}
+        for i=0,bj_MAX_PLAYERS,1 do
+            local heroUnit = hero.getHero(i)
+            if
+                heroUnit ~= nil and
+                IsUnitInRange(heroUnit, self.cls.bossUnit, 1500)
+            then
+                toReturn[GetHandleId(heroUnit)] = heroUnit
+            end
+        end
+        return toReturn
+    end
+
     local toReturn = {}
     for i=0,bj_MAX_PLAYERS,1 do
         local heroUnit = hero.getHero(i)
@@ -101,15 +137,31 @@ end
 function Context:onFightEnded()
     if GetUnitState(self.cls.bossUnit, UNIT_STATE_LIFE) <= 0 then
         print("You killed " .. self.cls:getName() .. '!')
-        -- TODO implement a loot system
-        for i=0,bj_MAX_PLAYERS,1 do
-            backpack.addItemIdToBackpack(i, 1)
+        for _, door in pairs(self.doors) do
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, door.door)
         end
+
         self:cleanupFight()
+
+        if self.cls.respawnable then
+            self:startRespawn()
+        end
         return
     end
 
-    self.involvedHeroes[GetHandleId(GetTriggerUnit())] = nil
+    if not threat.hasAnyThreat(self.cls.bossUnit) then
+        print('You ran away')
+        self.involvedHeroes = {}
+        self:resetFight()
+        return
+    end
+
+    if
+        GetTriggerUnit() ~= nil and
+        GetUnitState(GetTriggerUnit(), UNIT_STATE_LIFE) <= 0
+    then
+        self.involvedHeroes[GetHandleId(GetTriggerUnit())] = nil
+    end
 
     if self:isAllInvolvedHeroesDead() then
         print("You lost.")
@@ -140,6 +192,11 @@ function Context:isAllInvolvedHeroesDead()
 end
 
 function Context:fixEngagement()
+    if self.cls:getBounds() == false then
+        self:onFightEnded()
+        return
+    end
+
     for i=0,bj_MAX_PLAYERS,1 do
         local hero = hero.getHero(i)
         if hero ~= nil then
@@ -149,10 +206,12 @@ function Context:fixEngagement()
                 SetUnitPosition(hero, self.cls.startX, self.cls.startY)
             elseif self.involvedHeroes[GetHandleId(hero)] == nil and inPoly then
                 -- Move out of poly
-                SetUnitPosition(hero, 0, 0)
+                SetUnitPosition(hero, 4100, 3000)
             end
         end
     end
+
+    self:onFightEnded()
 end
 
 function Context:ensureEngagingUnitInvolved(engagingUnit)
@@ -165,7 +224,7 @@ function Context:ensureEngagingUnitInvolved(engagingUnit)
 end
 
 function Context:onBossEngaged()
-    local unit = GetEventDamageSource()
+    local unit = GetEventDamageSource() or GetEventTargetUnit()
     if GetUnitState(unit, UNIT_STATE_LIFE) <= 0 then
         return
     end
@@ -179,7 +238,7 @@ function Context:onBossEngaged()
 
     self:ensureEngagingUnitInvolved(unit)
 
-    for idx, hero in pairs(self.involvedHeroes) do
+    for _, hero in pairs(self.involvedHeroes) do
         TriggerRegisterUnitEvent(self.endFightTrigger, hero, EVENT_UNIT_DEATH)
     end
 
@@ -191,7 +250,7 @@ function Context:onBossEngaged()
     end)
 
     -- TODO make proper phase detection
-    for idx, phase in pairs(self.phases) do
+    for _, phase in pairs(self.phases) do
         phase.phase:startPhase()
     end
 
@@ -200,17 +259,28 @@ function Context:onBossEngaged()
         self:fixEngagement()
     end)
 
-    for idx, door in pairs(self.doors) do
-        ModifyGateBJ(bj_GATEOPERATION_CLOSE, door)
+    for _, door in pairs(self.doors) do
+        ModifyGateBJ(bj_GATEOPERATION_CLOSE, door.door)
     end
 end
 
 function Context:cleanupFight()
-    for idx, phase in pairs(self.phases) do
+    for _, phase in pairs(self.phases) do
         phase.phase:endPhase()
     end
     DestroyTrigger(self.endFightTrigger)
     DestroyTimer(self.engageTimer)
+end
+
+function Context:startRespawn()
+    TriggerSleepAction(60)
+    self.cls.bossUnit =  CreateUnit(
+        Player(PLAYER_NEUTRAL_AGGRESSIVE),
+        self.cls.bossUnitId,
+        self.cls.startX,
+        self.cls.startY,
+        self.cls.facing)
+    self:resetFight()
 end
 
 function Context:resetFight()
@@ -219,18 +289,23 @@ function Context:resetFight()
     self.startFightTrigger = CreateTrigger()
     TriggerRegisterUnitEvent(
         self.startFightTrigger, self.cls.bossUnit, EVENT_UNIT_DAMAGED)
+    TriggerRegisterUnitEvent(
+        self.startFightTrigger, self.cls.bossUnit, EVENT_UNIT_ACQUIRED_TARGET)
     TriggerAddAction(self.startFightTrigger, function()
         self:onBossEngaged()
     end)
 
-    for idx, door in pairs(self.doors) do
-        ModifyGateBJ(bj_GATEOPERATION_OPEN, door)
+    for _, door in pairs(self.doors) do
+        if door.openByDefault then
+            ModifyGateBJ(bj_GATEOPERATION_OPEN, door.door)
+        end
     end
 
     local maxHp = BlzGetUnitMaxHP(self.cls.bossUnit)
     BlzSetUnitRealField(self.cls.bossUnit, UNIT_RF_HP, maxHp)
 
-    IssuePointOrder(self.cls.bossUnit, "move", self.cls.startX, self.cls.startY)
+    SetUnitPosition(self.cls.bossUnit, self.cls.startX, self.cls.startY)
+    SetUnitFacing(self.cls.bossUnit, self.cls.facing)
 end
 
 function init()

@@ -11,7 +11,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 0.5
-local COOLDOWN_S_LONG = 10
+local COOLDOWN_S_LONG = 3
 
 local storedData = {}
 
@@ -93,10 +93,13 @@ local cast = function(playerId)
         length = 500,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 35)
+                damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.PHYSICAL)
             end
             return false
-        end
+        end,
+        onDoodadCollide = function(doodad)
+            return true
+        end,
     }
 
     projectile.createProjectile{
@@ -106,9 +109,12 @@ local cast = function(playerId)
         toV = mouseV,
         speed = 4000,
         length = 500,
+        onDoodadCollide = function(doodad)
+            return true
+        end,
     }
 
-    casttime.cast(playerId, 0.15, false)
+    casttime.cast(playerId, 0.15, false, false, true)
 
     return true
 end

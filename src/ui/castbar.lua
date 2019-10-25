@@ -13,21 +13,35 @@ end
 function CastBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
-    local castBarFrameBackground = BlzCreateFrameByType(
-        "BACKDROP",
-        "castBarFrameBackground",
-        originFrame,
-        "",
-        0)
+    local castBarFrameOrigin = BlzCreateFrameByType(
+        "FRAME", "castBarFrameOrigin", originFrame, "", 0)
     BlzFrameSetSize(
-        castBarFrameBackground, consts.CAST_BAR_WIDTH, consts.CAST_BAR_HEIGHT)
+        castBarFrameOrigin, consts.CAST_BAR_WIDTH, consts.CAST_BAR_HEIGHT)
     BlzFrameSetAbsPoint(
-        castBarFrameBackground,
+        castBarFrameOrigin,
         FRAMEPOINT_CENTER,
         0.4,
         consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 12)
+
+    local castBarFrameBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "castBarFrameBackdrop",
+        castBarFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        castBarFrameBackdrop,
+        consts.CAST_BAR_WIDTH - 0.04,
+        consts.CAST_BAR_HEIGHT - 0.012)
+    BlzFrameSetPoint(
+        castBarFrameBackdrop,
+        FRAMEPOINT_LEFT,
+        castBarFrameOrigin,
+        FRAMEPOINT_LEFT,
+        0.02,
+        0)
     BlzFrameSetTexture(
-        castBarFrameBackground,
+        castBarFrameBackdrop,
         "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
         0,
         true)
@@ -35,27 +49,50 @@ function CastBar:init()
     local castBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
         "castBarFrameFilled",
-        castBarFrameBackground,
+        castBarFrameOrigin,
         "",
         0)
     BlzFrameSetSize(
-        castBarFrameFilled, consts.CAST_BAR_WIDTH, consts.CAST_BAR_HEIGHT)
+        castBarFrameFilled,
+        consts.CAST_BAR_WIDTH - 0.02,
+        consts.CAST_BAR_HEIGHT - 0.01)
     BlzFrameSetPoint(
         castBarFrameFilled,
         FRAMEPOINT_LEFT,
+        castBarFrameOrigin,
+        FRAMEPOINT_LEFT,
+        0.02,
+        0)
+    BlzFrameSetTexture(
+        castBarFrameFilled,
+        "Replaceabletextures\\Teamcolor\\Teamcolor09.blp",
+        0,
+        true)
+
+    local castBarFrameBackground = BlzCreateFrameByType(
+        "BACKDROP",
+        "castBarFrameBackground",
+        castBarFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        castBarFrameBackground, consts.CAST_BAR_WIDTH, consts.CAST_BAR_HEIGHT)
+    BlzFrameSetPoint(
         castBarFrameBackground,
+        FRAMEPOINT_LEFT,
+        castBarFrameOrigin,
         FRAMEPOINT_LEFT,
         0,
         0)
     BlzFrameSetTexture(
-        castBarFrameFilled,
-        "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
+        castBarFrameBackground,
+        "ui\\glues\\battlenet\\progressbar\\bnetprogress-barborder.blp",
         0,
         true)
 
     self.frames = {
         castBar = castBarFrameFilled,
-        origin = castBarFrameBackground,
+        origin = castBarFrameOrigin,
     }
 
     return self
@@ -70,8 +107,8 @@ function CastBar:update(playerId)
         BlzFrameSetVisible(frame.origin, true)
         BlzFrameSetSize(
             frame.castBar,
-            consts.CAST_BAR_WIDTH * (1 - castRemainder / castTotal),
-            consts.CAST_BAR_HEIGHT)
+            (consts.CAST_BAR_WIDTH - 0.04) * (1 - castRemainder / castTotal),
+            (consts.CAST_BAR_HEIGHT - 0.012))
     else
         BlzFrameSetVisible(frame.origin, false)
         BlzFrameSetSize(

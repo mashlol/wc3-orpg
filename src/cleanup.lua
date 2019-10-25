@@ -1,6 +1,10 @@
 local clearDeadUnits = function()
+    local dyingUnit = GetDyingUnit()
+    if IsHeroUnitId(GetUnitTypeId(dyingUnit)) then
+        return
+    end
     TriggerSleepAction(3)
-    RemoveUnit(GetDyingUnit())
+    RemoveUnit(dyingUnit)
 end
 
 local init = function()
