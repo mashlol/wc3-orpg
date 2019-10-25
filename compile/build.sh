@@ -4,15 +4,13 @@ shopt -s globstar
 
 mkdir -p bin
 
-echo "Copying map.w3x to bin/built.w3x"
-cp map.w3x bin/built.w3x
+rm -rf bin/built.w3x
 
-cd compile
+echo "Copying map.w3x to bin/built.w3x"
+cp -r map.w3x bin/built.w3x
 
 echo "Extracting war3map.lua"
-./MPQEditor.exe -console mopaq_extract
-
-cd ..
+cp bin/built.w3x/war3map.lua bin/
 
 echo "Generating bin/war3map_compiled.lua"
 
@@ -26,15 +24,11 @@ cp bin/war3map_replaced.lua bin/war3map.lua
 
 echo 'Adding war3map.lua to mpq archive'
 
-cd compile
-
-./MPQEditor.exe -console mopaq
-
-cd ..
+cp bin/war3map.lua bin/built.w3x/war3map.lua
 
 echo 'Deleting old versions'
 
-rm -f /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
+rm -rf /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
 
 echo 'Deleting build artifacts'
 
@@ -46,7 +40,7 @@ echo 'Launching map in wc3'
 
 BUILD_NUM=$RANDOM
 echo "Map: built_$BUILD_NUM.w3x"
-cp bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+cp -r bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
 
 WC=/c/Program\ Files\ \(x86\)/Warcraft\ III/x86_64/Warcraft\ III.exe
 if [ -f "$WC" ]; then
