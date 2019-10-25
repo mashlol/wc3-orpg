@@ -18,7 +18,7 @@ local MAPS = {
         minY = -841.7,
         maxX = 6866.4,
         maxY = 4941.7,
-        mapFile = "mapfreydell.tga",
+        mapFile = "mapfreydell.blp",
         mapAspectRatio = 1.4939655,
     },
     FOREST = {
@@ -26,7 +26,7 @@ local MAPS = {
         minY = -2192.9,
         maxX = 3607.9,
         maxY = 9704.1,
-        mapFile = "mapforest.tga",
+        mapFile = "mapforest.blp",
         mapAspectRatio = 0.916491649,
     },
 }
