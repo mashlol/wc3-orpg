@@ -14,17 +14,20 @@ local backpacks = {}
 -- }
 local activeItemPositions = {}
 
+local listeners = {}
+
 function addItemIdToBackpack(playerId, itemId, count)
     count = count or 1
 
     for idx,itemInfo in pairs(backpacks[playerId]) do
+        local stackSize = itemmanager.getItemInfo(itemInfo.itemId).stackSize or 1
         if
             itemInfo.itemId == itemId and
-            itemInfo.count <
-                itemmanager.getItemInfo(itemInfo.itemId).stackSize - count + 1
+            itemInfo.count < stackSize - count + 1
         then
             backpacks[playerId][idx].count =
                 backpacks[playerId][idx].count + count
+            notifyListeners(playerId)
             return
         end
     end
@@ -33,10 +36,12 @@ function addItemIdToBackpack(playerId, itemId, count)
         itemId = itemId,
         count = count,
     })
+    notifyListeners(playerId)
 end
 
 function addItemIdToBackpackPosition(playerId, position, itemId, count)
     backpacks[playerId][position] = {itemId = itemId, count = count or 1}
+    notifyListeners(playerId, itemId, count)
 end
 
 function removeItemFromBackpack(playerId, position, count)
@@ -49,12 +54,14 @@ function removeItemFromBackpack(playerId, position, count)
             backpacks[playerId][position] = nil
         end
     end
+    notifyListeners(playerId)
 end
 
 function removeItemIdFromBackpack(playerId, itemId)
     for idx, itemInfo in pairs(backpacks[playerId]) do
         if itemInfo.itemId == itemId then
             removeItemFromBackpack(playerId, idx, 1)
+            notifyListeners(playerId)
             return true
         end
     end
@@ -93,6 +100,7 @@ function swapPositions(playerId, position1, position2)
     local temp = backpacks[playerId][position1]
     backpacks[playerId][position1] = backpacks[playerId][position2]
     backpacks[playerId][position2] = temp
+    notifyListeners(playerId)
 end
 
 function getFilledSlotCount(playerId)
@@ -121,6 +129,16 @@ function clear(playerId)
     end
 end
 
+function addBackpackChangedListener(listener)
+    table.insert(listeners, listener)
+end
+
+function notifyListeners(playerId)
+    for _, listener in pairs(listeners) do
+        listener(playerId)
+    end
+end
+
 function init()
     for i=0,bj_MAX_PLAYERS,1 do
         backpacks[i] = {}
@@ -142,4 +160,5 @@ return {
     swapPositions = swapPositions,
     activateItem = activateItem,
     getActiveItem = getActiveItem,
+    addBackpackChangedListener = addBackpackChangedListener,
 }

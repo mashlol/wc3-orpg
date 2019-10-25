@@ -11,18 +11,12 @@ function Turtle:new(o)
 end
 
 function Turtle:getName()
-    return "Huge Turtle"
+    return "Giant Turtle"
 end
 
 -- Counter-clockwise coords
 function Turtle:getBounds()
-    return {
-        {x = 1195, y = 2575},
-        {x = 1073, y = 3334},
-        {x = 337, y = 3799},
-        {x = -327, y = 3264},
-        {x = -128, y = 2457},
-    }
+    return false
 end
 
 function Turtle:spawnAdds()
@@ -54,13 +48,6 @@ function Turtle:init()
     local phase1 = self.ctx:registerPhase{
         hp = 100,
     }
-
-    phase1:addTimedEvent(25, function()
-        self:spawnAdds()
-    end)
-    phase1:addTimedEvent(10, function()
-        self:castSlam()
-    end)
 
     self.ctx:registerDoor(gg_dest_YTcx_4753)
 end

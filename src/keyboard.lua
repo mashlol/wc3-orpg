@@ -2,8 +2,10 @@ local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
 local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
+local Stats = require("src/ui/stats.lua")
 local QuestLog = require("src/ui/questlog.lua")
 local ItemBar = require("src/ui/itembar.lua")
+local Map = require("src/ui/map.lua")
 local itemmanager = require("src/items/itemmanager.lua")
 local backpack = require("src/items/backpack.lua")
 
@@ -13,13 +15,12 @@ local KEY_MAPPING = {
     [OSKEY_W] = 2,
     [OSKEY_E] = 3,
     [OSKEY_R] = 4,
-    [OSKEY_A] = 5,
-    [OSKEY_D] = 7,
-    [OSKEY_F] = 8,
-    [OSKEY_Z] = 9,
-    [OSKEY_X] = 10,
-    [OSKEY_C] = 11,
-    [OSKEY_V] = 12,
+    [OSKEY_D] = 5,
+    [OSKEY_F] = 6,
+    -- [OSKEY_Z] = 9,
+    -- [OSKEY_X] = 10,
+    -- [OSKEY_C] = 11,
+    -- [OSKEY_V] = 12,
 }
 
 local ITEMBAR_KEY_MAPPING = {
@@ -47,6 +48,7 @@ local SUPPORTED_KEYS = {
     OSKEY_O,
     OSKEY_U,
     OSKEY_L,
+    OSKEY_M,
     OSKEY_1,
     OSKEY_2,
     OSKEY_3,
@@ -84,10 +86,17 @@ local keyPressed = function()
     -- TODO figure out key mappings
     if pressedKey == OSKEY_B then
         Backpack.toggle(playerId)
-    elseif pressedKey == OSKEY_U then
+    elseif pressedKey == OSKEY_C then
         Equipment.toggle(playerId)
+        Stats.toggle(playerId)
     elseif pressedKey == OSKEY_L then
         QuestLog.toggle(playerId)
+    elseif pressedKey == OSKEY_M then
+        -- Prevent move hotkey
+        if GetPlayerId(GetLocalPlayer()) == playerId then
+            ForceUICancel()
+        end
+        Map.toggle(playerId)
     end
 end
 
@@ -101,7 +110,10 @@ local spaceDown = function()
 end
 
 local spaceUp = function()
-    ResetToGameCameraForPlayer(GetTriggerPlayer(), 0)
+    if GetLocalPlayer() == GetTriggerPlayer() then
+        ResetToGameCamera(0)
+        CameraSetupApplyForceDuration(gg_cam_Camera_001, false, 0)
+    end
 end
 
 local init = function()

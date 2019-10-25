@@ -16,7 +16,10 @@ local UnitFrame = require('src/ui/unitframe.lua')
 local ActionBar = require('src/ui/actionbar.lua')
 local ItemBar = require('src/ui/itembar.lua')
 local Backpack = require('src/ui/backpack.lua')
+local Stats = require('src/ui/stats.lua')
 local Equipment = require('src/ui/equipment.lua')
+local LootRoll = require('src/ui/lootroll.lua')
+local Map = require('src/ui/map.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
@@ -26,14 +29,16 @@ local UI_MODULES = {
     MenuButtons:new(),
     SimpleButton:new(),
     UnitFrame:new{
-        xLoc = 0.55,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.03,
+        xLoc = 0.595,
+        yLoc = 0.03,
+        width = consts.BAR_WIDTH * 2 / 4 + 0.026,
         forTarget = true,
         buffSize = consts.BUFF_ICON_SIZE,
     },
     UnitFrame:new{
-        xLoc = 0.26,
-        yLoc = consts.ACTION_ITEM_SIZE + consts.BAR_HEIGHT * 5 + 0.03,
+        xLoc = 0.215,
+        yLoc = 0.03,
+        width = consts.BAR_WIDTH * 2 / 4 + 0.026,
         forTarget = false,
         buffSize = consts.BUFF_ICON_SIZE,
     },
@@ -56,10 +61,13 @@ for i=0,9,1 do
     })
 end
 
+table.insert(UI_MODULES, Stats:new())
 table.insert(UI_MODULES, Equipment:new())
 table.insert(UI_MODULES, Dialog:new())
 table.insert(UI_MODULES, QuestLog:new())
 table.insert(UI_MODULES, Vendor:new())
+table.insert(UI_MODULES, LootRoll:new())
+table.insert(UI_MODULES, Map:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)

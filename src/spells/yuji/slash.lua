@@ -12,8 +12,8 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.5
-local COOLDOWN_S_LONG = 5
+local COOLDOWN_S = 0.2
+local COOLDOWN_S_LONG = 1
 
 local storedData = {}
 
@@ -101,13 +101,17 @@ local cast = function(playerId)
         projectile = hero,
         fromV = heroV,
         toV = mouseV,
-        speed = 800,
+        speed = 1200,
         length = storedData[playerId].attackCount == 2 and
-            250 or
-            100,
+            500 or
+            200,
         radius = 75,
         onCollide = function()
             -- Stop projecting if you collide with anything
+            return true
+        end,
+        onDoodadCollide = function(doodad)
+            -- Stop projecting if you collide with any doodads
             return true
         end,
         onDestroy = function()
@@ -130,7 +134,7 @@ local cast = function(playerId)
             local collidedUnits = collision.getAllCollisions(shape)
             for idx, unit in pairs(collidedUnits) do
                 if IsUnitEnemy(unit, Player(playerId)) then
-                    damage.dealDamage(hero, unit, dmgAmount)
+                    damage.dealDamage(hero, unit, dmgAmount, damage.TYPE.PHYSICAL)
 
                     effect.createEffect{
                         model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
@@ -148,7 +152,9 @@ local cast = function(playerId)
         storedData[playerId].attackCount == 2 and
             0.35 or
             0.1,
-        false)
+        false,
+        false,
+        true)
 
     SetUnitTimeScale(hero, 1)
 

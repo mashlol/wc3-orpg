@@ -3,12 +3,13 @@ local Vector = require('src/vector.lua')
 local collision = require('src/collision.lua')
 local damage = require('src/damage.lua')
 local buff = require('src/buff.lua')
+local stats = require('src/stats.lua')
 
 return {
     effects = {
         {
-            type = 'damage',
-            amount = 10,
+            type = stats.DAMAGE_OVER_TIME,
+            amount = 5,
             tickrate = 1,
         }
     },
@@ -34,9 +35,9 @@ return {
         }
 
         local collidedUnits = collision.getAllCollisions(posV, 100)
-        for idx, unit in pairs(collidedUnits) do
+        for _, unit in pairs(collidedUnits) do
             if IsUnitEnemy(unit, Player(playerId)) then
-                damage.dealDamage(sourceUnit, unit, 100)
+                damage.dealDamage(sourceUnit, unit, 75, damage.TYPE.SPELL)
             end
         end
         return true

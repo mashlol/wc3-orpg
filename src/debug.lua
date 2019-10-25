@@ -1,4 +1,6 @@
 local backpack = require('src/items/backpack.lua')
+local hero = require('src/hero.lua')
+local mouse = require('src/mouse.lua')
 
 local animNum = 1
 
@@ -6,32 +8,42 @@ local animNum = 1
 -- 2, 3, 8 atk
 -- 13 bladestorm
 
+local itemId = 1
 
-local debug = function()
+local debug9 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    -- local hero = hero.getHero(playerId)
+    local hero = hero.getHero(playerId)
+
+    local curLevel = GetHeroLevel(hero)
+    SetHeroLevel(hero, curLevel + 1, true)
 
     -- SetUnitAnimationByIndex(hero, animNum)
 
     -- BlzSetUnitIntegerField(hero, UNIT_IF_LEVEL, 10)
 
-    print(animNum)
 
-    animNum = animNum + 0.01
 
-    backpack.addItemIdToBackpack(playerId, 1)
+    -- print(animNum)
+
+    -- animNum = animNum + 0.01
+
+    -- backpack.addItemIdToBackpack(playerId, 48)
+
+    -- itemId = itemId + 1
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
 end
 
-local debugDown = function()
+local debug0 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
-    print(animNum)
+    -- print(animNum)
 
-    animNum = animNum - 0.01
+    -- animNum = animNum - 0.01
 
-    backpack.addItemIdToBackpack(playerId, 6)
+    backpack.addItemIdToBackpack(playerId, itemId)
+
+    itemId = itemId + 1
 
     -- BlzFrameSetScale(_PORTRAIT, animNum)
     -- BlzFrameSetSpriteAnimate(_PORTRAIT, animNum, 0)
@@ -39,14 +51,25 @@ local debugDown = function()
     -- backpack.addItemIdToBackpack(playerId, 1)
 end
 
+local debug8 = function()
+    local playerId = GetPlayerId(GetTriggerPlayer())
+
+    local heroUnit = hero.getHero(playerId)
+    SetUnitPosition(heroUnit, mouse.getMouseX(playerId), mouse.getMouseY(playerId))
+end
+
 local init = function()
     local trigger = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
-    TriggerAddAction(trigger, debug)
+    TriggerAddAction(trigger, debug9)
 
     local trig2 = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trig2, Player(0), OSKEY_0, 0, true)
-    TriggerAddAction(trig2, debugDown)
+    TriggerAddAction(trig2, debug0)
+
+    local trig3 = CreateTrigger()
+    BlzTriggerRegisterPlayerKeyEvent(trig3, Player(0), OSKEY_8, 0, true)
+    TriggerAddAction(trig3, debug8)
 end
 
 return {

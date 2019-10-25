@@ -82,7 +82,6 @@ local cast = function(playerId)
         destroyOnCollide = false,
         onDestroy = function()
             buff.addBuff(hero, target, 'hulkingpot', 10)
-            buff.addBuff(hero, target, 'corrosivedecay', 300)
         end
     }
 

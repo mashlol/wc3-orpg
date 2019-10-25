@@ -177,16 +177,21 @@ function Backpack:init()
         BlzTriggerRegisterFrameEvent(
             trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
+            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+
             local playerId = GetPlayerId(GetTriggerPlayer())
 
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
             if activeEquipmentItem ~= nil then
+                backpack.activateItem(playerId, nil)
+                equipment.activateItem(playerId, nil)
                 if backpack.getItemIdAtPosition(playerId, i+1) ~= nil then
                     log.log(
                         playerId,
                         "You already have an item in that bag position.",
-                        log.TYPE.ERROR)
+                        log.TYPE.EQUIPMENT_ERROR)
                 else
                     local activeItemId = equipment.getItemInSlot(
                         playerId, activeEquipmentItem)
@@ -194,9 +199,9 @@ function Backpack:init()
                     backpack.addItemIdToBackpackPosition(
                         playerId, i + 1, activeItemId)
                 end
+            elseif activeBagItem ~= nil then
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
-            elseif activeBagItem ~= nil then
                 if activeBagItem == i + 1 then
 
                     local clickedItemPos = i + 1
@@ -208,7 +213,7 @@ function Backpack:init()
                         local itemInfo = itemmanager.getItemInfo(itemId)
                         local spellKey = itemInfo.spell
                         local itemSlot = itemInfo.slot
-                        if isInVendor then
+                        if isInVendor and itemInfo.cost > 0 then
                             -- Sell 1 of the item
                             backpack.removeItemFromBackpack(
                                 playerId, clickedItemPos, 1)
@@ -218,7 +223,7 @@ function Backpack:init()
                             SetPlayerState(
                                 Player(playerId),
                                 PLAYER_STATE_RESOURCE_GOLD,
-                                curGold + itemInfo.cost * 0.2)
+                                curGold + R2I(itemInfo.cost * 0.2))
                             effect.createEffect{
                                 model = "Abilities\\Spells\\Other\\Transmute\\PileofGold.mdl",
                                 x = GetUnitX(hero.getHero(playerId)),
@@ -229,7 +234,11 @@ function Backpack:init()
                             -- Consume the item
                             local success = spell.castSpellByKey(
                                 playerId, spellKey)
-                            if success then
+                            if
+                                success and
+                                itemInfo.consume == true or
+                                itemInfo.consume == nil
+                            then
                                 backpack.removeItemFromBackpack(
                                     playerId, clickedItemPos, 1)
                             end
@@ -237,27 +246,24 @@ function Backpack:init()
                             -- Equip the item to a slot
                             local existingEquip = equipment.getItemInSlot(
                                 playerId, itemSlot)
-                            equipment.unequipItem(playerId, itemSlot)
-                            equipment.equipItem(playerId, itemSlot, itemId)
-                            backpack.removeItemFromBackpack(
-                                playerId, clickedItemPos, 1)
-                            if existingEquip ~= nil then
-                                backpack.addItemIdToBackpackPosition(
-                                    playerId, i + 1, existingEquip)
+                            local canEquip = equipment.equipItem(
+                                playerId, itemSlot, itemId)
+                            if canEquip then
+                                backpack.removeItemFromBackpack(
+                                    playerId, clickedItemPos, 1)
+                                if existingEquip ~= nil then
+                                    backpack.addItemIdToBackpackPosition(
+                                        playerId, i + 1, existingEquip)
+                                end
                             end
                         end
                     end
                 else
                     backpack.swapPositions(playerId, activeBagItem, i+1)
                 end
-                backpack.activateItem(playerId, nil)
-                equipment.activateItem(playerId, nil)
             else
                 backpack.activateItem(playerId, i+1)
             end
-
-            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         end)
 
         table.insert(itemFrames, {
@@ -294,7 +300,7 @@ function Backpack:update(playerId)
 
     BlzFrameSetText(
         frames.backpackText,
-        'Inventory: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
+        'Backpack: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
 
     local activeItem = backpack.getActiveItem(playerId)
     for i=1,36,1 do
@@ -343,7 +349,7 @@ function Backpack:update(playerId)
             local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
             local tooltip = itemmanager.getItemTooltip(itemId)
 
-            if Vendor.isVendorActive(playerId) then
+            if Vendor.isVendorActive(playerId) and itemInfo.cost > 0 then
                 numTooltipLines = numTooltipLines + 2
                 tooltip = tooltip ..
                     "|n|n(Double click to sell for "..

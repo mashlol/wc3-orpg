@@ -90,7 +90,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 350)
+                damage.dealDamage(hero, collidedUnit, 350, damage.TYPE.PHYSICAL)
                 effect.createEffect{
                     unit = collidedUnit,
                     model = "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl",
@@ -117,7 +117,7 @@ local cast = function(playerId)
         end,
     }
 
-    casttime.cast(playerId, 0.5, false)
+    casttime.cast(playerId, 0.5, false, false, true)
 
     return true
 end

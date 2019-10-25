@@ -10,18 +10,18 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.5
+local COOLDOWN_S = 4
 
 local getSpellId = function()
     return 'cleansingpot'
 end
 
 local getSpellName = function()
-    return 'Cleansing Potion'
+    return 'Health Potion'
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Invanov clears all stacks of corrosive decay from the targeted ally, instantly healing them for 40 per stack.'
+    return 'Ivanov throws a health potion at the target, healing them for 250 upon impact.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -29,7 +29,7 @@ local getSpellCooldown = function(playerId)
 end
 
 local getSpellCasttime = function(playerId)
-    return 0.5
+    return 0.6
 end
 
 local cast = function(playerId)
@@ -66,7 +66,7 @@ local cast = function(playerId)
         bj_RADTODEG * Atan2(targetV.y - heroV.y, targetV.x - heroV.x),
         0.05)
 
-    local castSuccess = casttime.cast(playerId, 0.5)
+    local castSuccess = casttime.cast(playerId, 0.6)
     if not castSuccess then
         return false
     end
@@ -82,10 +82,7 @@ local cast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            local numCorrsiveStacks = buff.getBuffStacks(target, 'corrosivedecay')
-            buff.removeBuff(target, 'corrosivedecay')
-
-            damage.heal(hero, target, 40 * numCorrsiveStacks)
+            damage.heal(hero, target, 250)
         end
     }
 

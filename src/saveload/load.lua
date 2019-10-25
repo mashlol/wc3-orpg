@@ -60,7 +60,7 @@ function loadChar(playerId, code)
     end
 
     local equips = {}
-    for i=1,9,1 do
+    for i=1,12,1 do
         local itemId = decoded:getInt(73)
         if itemId ~= 0 then
             equips[i] = itemId
@@ -77,6 +77,8 @@ function loadChar(playerId, code)
         return
     end
 
+    hero.restorePickedHero(playerId, heroId, exp, heroX, heroY)
+
     quests.restoreProgress(playerId, progress)
 
     for idx,itemInfo in pairs(backpackItems) do
@@ -90,8 +92,6 @@ function loadChar(playerId, code)
     end
 
     SetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD, gold)
-
-    hero.restorePickedHero(playerId, heroId, exp, heroX, heroY)
 end
 
 function onDataSynced()

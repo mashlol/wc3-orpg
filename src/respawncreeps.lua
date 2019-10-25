@@ -3,18 +3,19 @@ local spawnpoint = require('src/spawnpoint.lua')
 local clearDeadUnits = function()
     local unit = GetTriggerUnit()
     local spawnV = spawnpoint.getSpawnPoint(unit)
+    local facing = spawnpoint.getFacing(unit)
     local unitId = GetUnitUserData(unit)
     local unitType = GetUnitTypeId(unit)
 
-    if spawnV then
-        TriggerSleepAction(15)
+    if spawnV and facing then
+        TriggerSleepAction(30)
 
         local newUnit = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
             unitType,
             spawnV.x,
             spawnV.y,
-            0)
+            facing)
         SetUnitUserData(newUnit, unitId)
     end
 end

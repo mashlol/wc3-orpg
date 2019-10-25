@@ -44,7 +44,7 @@ function saveHero(playerId)
 
     code:addInt(string.byte(GetPlayerName(Player(playerId))) % 2500, 2500)
 
-    for i=1,9,1 do
+    for i=1,12,1 do
         code:addInt(equipment.getItemInSlot(playerId, i) or 0, 73)
     end
 
@@ -69,12 +69,23 @@ function onSave()
     saveHero(playerId)
 end
 
+function onAutoSave()
+    -- Go through all players, check if they have a hero and save it if they do
+    for i=0,bj_MAX_PLAYERS,1 do
+        if hero.getHero(i) ~= nil then
+            saveHero(i)
+        end
+    end
+end
+
 function init()
     local saveTrigger = CreateTrigger()
     for i=0,bj_MAX_PLAYERS,1 do
         TriggerRegisterPlayerChatEvent(saveTrigger, Player(i), "-save", true)
     end
     TriggerAddAction(saveTrigger, onSave)
+
+    TimerStart(CreateTimer(), 58, true, onAutoSave)
 end
 
 return {

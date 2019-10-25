@@ -4,6 +4,8 @@ local Vector = require('src/vector.lua')
 local spawnpoint = require('src/spawnpoint.lua')
 local hero = require('src/hero.lua')
 
+local AGGRO_RADIUS = 500
+
 -- e.g.
 -- threatLevels = {
 --     unitId = {
@@ -21,6 +23,16 @@ local hero = require('src/hero.lua')
 --     },
 -- }
 local threatLevels = {}
+
+function hasAnyThreat(unit)
+    if threatLevels[GetHandleId(unit)] == nil then
+        return false
+    end
+    for _, _ in pairs(threatLevels[GetHandleId(unit)].threats) do
+        return true
+    end
+    return false
+end
 
 -- Iterates through the targets & prunes dead units or units which are too far
 -- away
@@ -66,10 +78,11 @@ function manageAggroRanges()
         local hero = hero.getHero(i)
         if hero then
             local loc = Location(GetUnitX(hero), GetUnitY(hero))
-            ForGroupBJ(GetUnitsInRangeOfLocAll(500, loc), function()
+            ForGroupBJ(GetUnitsInRangeOfLocAll(AGGRO_RADIUS, loc), function()
                 local unit = GetEnumUnit()
                 if
-                    GetOwningPlayer(unit) == Player(PLAYER_NEUTRAL_AGGRESSIVE)
+                    GetOwningPlayer(unit) == Player(PLAYER_NEUTRAL_AGGRESSIVE) and
+                    IsVisibleToPlayer(GetUnitX(unit), GetUnitY(unit), Player(i))
                 then
                     addThreat(hero, unit, 0.01)
                 end
@@ -84,11 +97,11 @@ end
 function onTick()
     manageAggroRanges()
     pruneThreatLevels()
-    for targetUnitId,threatInfo in pairs(threatLevels) do
+    for _,threatInfo in pairs(threatLevels) do
         local newTarget
         local highestThreat = 0
         local targetUnit = threatInfo.unit
-        for sourceUnitId,sourceThreatInfo in pairs(threatInfo.threats) do
+        for _,sourceThreatInfo in pairs(threatInfo.threats) do
             if sourceThreatInfo.threat > highestThreat then
                 highestThreat = sourceThreatInfo.threat
                 newTarget = sourceThreatInfo.unit
@@ -100,8 +113,10 @@ function onTick()
             IssueTargetOrder(targetUnit, "attack", newTarget)
         else
             local targetSpawnPos = spawnpoint.getSpawnPoint(targetUnit)
-            IssuePointOrder(
-                targetUnit, "move", targetSpawnPos.x, targetSpawnPos.y)
+            if targetSpawnPos ~= nil then
+                IssuePointOrder(
+                    targetUnit, "move", targetSpawnPos.x, targetSpawnPos.y)
+            end
         end
     end
 end
@@ -137,4 +152,5 @@ end
 return {
     init = init,
     addThreat = addThreat,
+    hasAnyThreat = hasAnyThreat,
 }
