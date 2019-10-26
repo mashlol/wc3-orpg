@@ -36,20 +36,47 @@ mv ./bin/war3map.lua ./bin/script_stored_min
 
 rm ./bin/*.lua
 
-echo 'Launching map in wc3'
+if [ "$1" == "--bump" ]; then
+    echo "Bumping the version: $2"
 
-BUILD_NUM=$RANDOM
-echo "Map: built_$BUILD_NUM.w3x"
-cp -r bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+    echo "Replacing string files in w3x folder with version: $2"
+    sed -e "s/PLACEHOLDER_NAME_REPLACED/The Veiled Throne ORPG $2/g" -e "s/PLACEHOLDER_DESC_REPLACED/Pre alpha release of TVT ORPG. $2/g" -e "s/PLACEHOLDER_TITLE_REPLACED/The Veiled Throne ORPG $2/g" bin/built.w3x/war3map.wts > bin/temp_strings.wts
+    awk 'sub("$", "\r")' bin/temp_strings.wts > bin/built.w3x/war3map.wts
 
-WC=/c/Program\ Files\ \(x86\)/Warcraft\ III/x86_64/Warcraft\ III.exe
-if [ -f "$WC" ]; then
-    echo "Found wc3 in Program Files (x86), using $WC"
-    "$WC" -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
-fi
+    rm -f bin/compiled_map.w3x
 
-WC=/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe
-if [ -f "$WC" ]; then
-    echo "Found wc3 in Program Files, using $WC"
-    "$WC" -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+    echo 'Converting folder back into an MPQ archive'
+    cd compile
+    ./MPQEditor.exe -console mopaq
+    cd ..
+
+    echo 'Copying MPQ archive to ../tvt-releases/tvt-orpg-$2.w3x'
+    rm -f ../tvt-releases/*.w3x
+    cp bin/compiled_map.w3x "../tvt-releases/tvt-orpg-$2.w3x"
+
+    echo 'Committing and pushing'
+    cd ../tvt-releases
+    git add .
+    git commit -m "Version bump: $2"
+    git push
+
+    cd ../map
+else
+    echo 'Launching map in wc3'
+
+    BUILD_NUM=$RANDOM
+    echo "Map: built_$BUILD_NUM.w3x"
+    cp -r bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+
+    WC=/c/Program\ Files\ \(x86\)/Warcraft\ III/x86_64/Warcraft\ III.exe
+    if [ -f "$WC" ]; then
+        echo "Found wc3 in Program Files (x86), using $WC"
+        "$WC" -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+    fi
+
+    WC=/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe
+    if [ -f "$WC" ]; then
+        echo "Found wc3 in Program Files, using $WC"
+        "$WC" -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+    fi
 fi
