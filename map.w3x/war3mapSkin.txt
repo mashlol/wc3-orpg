@@ -1,3 +1,0 @@
-[Errors]
-Nottownhall=TRIGSTR_839
-
