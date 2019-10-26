@@ -59,6 +59,7 @@ local pocketgoo = require('src/spells/ivanov/pocketgoo.lua')
 local hero = require('src/hero.lua')
 local log = require('src/log.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
+local casttime = require('src/casttime.lua')
 
 local SPELL_MAP = {
     -- Items
@@ -145,6 +146,10 @@ local getSpell = function(playerId, idx)
 end
 
 local castSpellByKey = function(playerId, spellKey)
+    if casttime.isCasting(playerId) then
+        return false
+    end
+
     if IsUnitPaused(hero.getHero(playerId)) then
         return false
     end

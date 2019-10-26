@@ -495,7 +495,7 @@ function getBaseObjForUnit(unit)
     return {
         baseSpeed = GetUnitDefaultMoveSpeed(unit),
         scale =  GetUnitPointValue(unit) / 100,
-        isStunned = unit == ownerHero and casttime.isCasting(ownerPlayerId),
+        isStunned = unit == ownerHero and casttime.isPausedByCasting(ownerPlayerId),
         isRooted = false,
         baseHP = ownerHeroInfo and ownerHeroInfo.baseHP,
         attackSpeed = ownerHeroInfo and ownerHeroInfo.attackSpeed,
