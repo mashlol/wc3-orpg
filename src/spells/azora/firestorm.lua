@@ -64,7 +64,11 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    casttime.cast(playerId, 1, false)
+    local success = casttime.cast(playerId, 1, true, false)
+    if not success then
+        animations.resetAnimation(hero)
+        return
+    end
 
     animations.queueAnimation(hero, 18, 1)
 

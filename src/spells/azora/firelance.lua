@@ -56,7 +56,10 @@ local cast = function(playerId)
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
         0.05)
 
-    casttime.cast(playerId, 0.4, false)
+    local success = casttime.cast(playerId, 0.4, true, false)
+    if not success then
+        return
+    end
 
     animations.queueAnimation(hero, 18, 1)
 
