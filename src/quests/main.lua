@@ -733,28 +733,29 @@ function initQuests()
             prerequisites = {9},
             levelRequirement = 0,
         },
-		[12] = {
-            name = "Scouting the Mines",
-            getQuestFrom = gg_unit_gens_0335,
-            handQuestTo = gg_unit_gens_0335,
-            obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
-            incompleteText = "Did you find anything in the pass?",
-            completedText = "I knew it. This is much worse than I thought.",
-            objectives = {
-                [1] = {
-                    type = TYPE.DISCOVER,
-                    rect = gg_rct_mineexit,
-                    name = 'Mine Entrance',
-                    amount = 1,
-                },
-            },
-            rewards = {
-                exp = 75,
-                gold = 10,
-            },
-            prerequisites = {11},
-            levelRequirement = 0,
-        },
+        -- DELETED QUEST, DO NOT REMOVE
+		-- [12] = {
+        --     name = "Scouting the Mines",
+        --     getQuestFrom = gg_unit_gens_0335,
+        --     handQuestTo = gg_unit_gens_0335,
+        --     obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
+        --     incompleteText = "Did you find anything in the pass?",
+        --     completedText = "I knew it. This is much worse than I thought.",
+        --     objectives = {
+        --         [1] = {
+        --             type = TYPE.DISCOVER,
+        --             rect = gg_rct_mineexit,
+        --             name = 'Mine Entrance',
+        --             amount = 1,
+        --         },
+        --     },
+        --     rewards = {
+        --         exp = 75,
+        --         gold = 10,
+        --     },
+        --     prerequisites = {11},
+        --     levelRequirement = 0,
+        -- },
 		[13] = {
             name = "Attack Plans",
             getQuestFrom = gg_unit_hcth_0104,
@@ -776,7 +777,7 @@ function initQuests()
                 exp = 300,
                 gold = 25,
             },
-            prerequisites = {12},
+            prerequisites = {10},
             levelRequirement = 0,
         },
 		[14] = {
@@ -804,7 +805,7 @@ function initQuests()
                 exp = 350,
                 gold = 75,
             },
-            prerequisites = {12},
+            prerequisites = {11},
             levelRequirement = 0,
         },
 		[15] = {
