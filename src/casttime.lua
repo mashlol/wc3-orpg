@@ -1,6 +1,6 @@
-local hero = require('src/hero.lua')
 local buffloop = require('src/buffloop.lua')
 local hero = require('src/hero.lua')
+local animations = require('src/animations.lua')
 
 local castTimes = {}
 
@@ -68,6 +68,8 @@ local interruptCast = function()
     end
     local playerId = GetPlayerId(GetTriggerPlayer())
     stopCast(playerId, true)
+    local heroUnit = hero.getHero(playerId)
+    animations.resetAnimation(heroUnit)
 end
 
 function stopCast(playerId, interruptable)

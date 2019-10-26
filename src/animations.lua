@@ -17,6 +17,11 @@ function queueAnimation(unit, animNum, duration)
     SetUnitAnimationByIndex(unit, animNum)
 end
 
+function resetAnimation(unit)
+    SetUnitAnimationByIndex(unit, 0)
+end
+
 return {
     queueAnimation = queueAnimation,
+    resetAnimation = resetAnimation,
 }
