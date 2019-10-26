@@ -45,6 +45,13 @@ if [ "$1" == "--bump" ]; then
 
     rm -f bin/compiled_map.w3x
 
+    echo "Removing editor only files"
+    rm -f bin/built.w3x/war3map.wtg
+    rm -f bin/built.w3x/war3map.w3c
+    rm -f bin/built.w3x/war3map.w3s
+    rm -f bin/built.w3x/war3map.w3r
+    rm -f bin/built.w3x/war3mapUnits.doo
+
     echo 'Converting folder back into an MPQ archive'
     cd compile
     ./MPQEditor.exe -console mopaq
