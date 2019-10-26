@@ -1,9 +1,4 @@
-﻿STRING 1
-{
-Player 1
-}
-
-STRING 3
+﻿STRING 3
 // Doodads: D000 (Well Anywhere), Name (Name)
 {
 Well Anywhere
@@ -271,29 +266,6 @@ STRING 47
 // Doodads: D018 (Treasure Chest), Name (Name)
 {
 Treasure Chest
-}
-
-STRING 48
-{
-TVT ORPG
-}
-
-STRING 49
-{
-2-10
-}
-
-STRING 50
-{
-Veiled Throne Pre-Alpha
-
-https://discord.gg/7wqQ3Az
-Please join and give feedback!
-}
-
-STRING 51
-{
-Mash - Spoon
 }
 
 STRING 52
@@ -1056,26 +1028,6 @@ STRING 296
 // Abilities: A003 (Hearth), Name (Name)
 {
 Hearth
-}
-
-STRING 297
-{
-Player 2
-}
-
-STRING 298
-{
-Player 3
-}
-
-STRING 299
-{
-Player 4
-}
-
-STRING 300
-{
-Player 5
 }
 
 STRING 312
@@ -3274,11 +3226,6 @@ STRING 838
 The diviner calls upon the power of the gods to smite down his enemies, causing powerful light beacons to be cast upon all nearby foes. While channeling this ability, any enemy near him will take 150 damage per 2 seconds. As this is nearly the only offensive ability the diviner has, he can cast it more often than other classes.
 }
 
-STRING 839
-{
-Must target friendly Town Obelisk.
-}
-
 STRING 840
 // Abilities: A01H (Fire Nova), Name (Name)
 {
@@ -5371,14 +5318,6 @@ STRING 1316
 // Abilities: A029 (Twister), Ubertip (Tooltip - Normal - Extended)
 {
 The aeromancer can incapacitate enemies by sending high in the air for 30 seconds. Enemies flying inside a cyclone cannot attack or be attacked in any way.
-}
-
-STRING 1319
-{
-Veiled Throne Pre-Alpha
-
-https://discord.gg/7wqQ3Az
-Please join and give feedback!
 }
 
 STRING 1322
@@ -7685,21 +7624,6 @@ STRING 1762
 Giant Turtle
 }
 
-STRING 1763
-{
-The Veiled Throne ORPG
-}
-
-STRING 1767
-{
-Player 12
-}
-
-STRING 1768
-{
-Champions of Valburn
-}
-
 STRING 1769
 // Doodads: rten (Tent 1), Name (Name)
 {
@@ -7838,36 +7762,6 @@ STRING 1797
 Cultist Commander Audric
 }
 
-STRING 1798
-{
-Player 6
-}
-
-STRING 1799
-{
-Player 7
-}
-
-STRING 1800
-{
-Player 8
-}
-
-STRING 1801
-{
-Player 9
-}
-
-STRING 1802
-{
-Player 10
-}
-
-STRING 1803
-{
-Player 11
-}
-
 STRING 1804
 // Units: h001 (Cultist Ambusher), Tip (Tooltip - Basic)
 {
@@ -7942,6 +7836,29 @@ Central Bonfire
 
 STRING 1816
 {
-The Veiled Throne
+PLACEHOLDER_NAME_REPLACED
+}
+
+STRING 1817
+{
+PLACEHOLDER_DESC_REPLACED
+}
+
+STRING 1818
+{
+Mash & Spoon
+}
+
+STRING 1819
+{
+PLACEHOLDER_TITLE_REPLACED
+}
+
+STRING 1820
+{
+Please give feedback at https://discord.gg/AbBsrM9
+
+This is a pre-alpha release, please keep that in mind while playing!
+
 }
 
