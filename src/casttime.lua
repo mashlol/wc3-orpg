@@ -55,6 +55,10 @@ local cast = function(playerId, time, interruptable, canMove, notRealCast)
 end
 
 local isCasting = function(playerId)
+    return castTimes[playerId] ~= nil
+end
+
+local isPausedByCasting = function(playerId)
     return castTimes[playerId] ~= nil and not castTimes[playerId].interruptable
 end
 
@@ -108,6 +112,7 @@ return {
     cast = cast,
     stopCast = stopCast,
     isCasting = isCasting,
+    isPausedByCasting = isPausedByCasting,
     getCastDurationRemaining = getCastDurationRemaining,
     getCastDurationTotal = getCastDurationTotal,
 }
