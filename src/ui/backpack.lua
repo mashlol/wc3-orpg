@@ -174,9 +174,6 @@ function Backpack:init()
         local tooltipFrame = tooltip.makeTooltipFrame(
             itemOrigin, 0.16, 0.24, hoverFrame, false)
 
-            for key, val in pairs(uieventhandler) do
-                print(key, val)
-            end
         uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
