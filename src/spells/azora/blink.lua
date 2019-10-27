@@ -70,6 +70,11 @@ local cast = function(playerId)
         return false
     end
 
+    if IsTerrainPathable(finalV.x, finalV.y, PATHING_TYPE_WALKABILITY) then
+        log.log(playerId, "You can't blink there.", log.TYPE.ERROR)
+        return false
+    end
+
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
