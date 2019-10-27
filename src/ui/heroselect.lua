@@ -181,14 +181,32 @@ function HeroSelect:init()
 
             if playerDeletingToggles[playerId] then
                 if playerId == GetPlayerId(GetLocalPlayer()) then
-                    file.writeFile('tvtsave' .. idx .. '.pld', "")
+                    local allSlots = hero.getUsedSlots()
+                    local condensedSlots = {}
+                    local i = 1
+                    for slotIdx, _ in pairs(allSlots) do
+                        condensedSlots[i] = slotIdx
+                        i = i + 1
+                    end
+
+                    file.writeFile('tvtsave' .. condensedSlots[idx] .. '.pld', "")
                     hero.refreshUsedSlots()
                 end
                 playerDeletingToggles[playerId] = nil
             elseif playerLoadingToggles[playerId] then
                 if playerId == GetPlayerId(GetLocalPlayer()) then
-                    hero.setSlot(idx)
-                    load.loadFromFile(playerId, idx)
+                    local allSlots = hero.getUsedSlots()
+                    local condensedSlots = {}
+                    local i = 1
+                    for slotIdx, _ in pairs(allSlots) do
+                        condensedSlots[i] = slotIdx
+                        i = i + 1
+                    end
+
+                    local realIdx = condensedSlots[idx]
+
+                    hero.setSlot(realIdx)
+                    load.loadFromFile(playerId, realIdx)
                 end
                 HeroSelect.hide(playerId)
             else
@@ -588,10 +606,13 @@ function HeroSelect:update(playerId)
     local shouldShowHeroSelect = heroSelectToggles[playerId] ~= nil
     BlzFrameSetVisible(frames.origin, shouldShowHeroSelect)
     BlzFrameSetVisible(frames.confirmOrigin, shouldShowHeroSelect)
+
     local miniMapFrame = BlzGetFrameByName("miniMapBackdrop", 0)
     BlzFrameSetVisible(miniMapFrame, not shouldShowHeroSelect)
 
     if not shouldShowHeroSelect then
+        BlzFrameSetVisible(frames.deleteButton, false)
+        BlzFrameSetVisible(frames.backButton, false)
         return
     end
 
@@ -630,17 +651,24 @@ function HeroSelect:update(playerId)
     if isLoading or isDeleting then
         local slotMetadata = hero.getUsedSlots()
 
+        local condensedSlotMetadata = {}
+        for _, meta in pairs(slotMetadata) do
+            if meta ~= nil then
+                table.insert(condensedSlotMetadata, meta)
+            end
+        end
+
         for idx, button in pairs(frames.buttons) do
-            if slotMetadata[idx] ~= nil then
+            if condensedSlotMetadata[idx] ~= nil then
                 BlzFrameSetVisible(button.origin, true)
                 if isDeleting then
                     BlzFrameSetText(
-                        button.text, "|cffff0000Delete " .. slotMetadata[idx])
+                        button.text, "|cffff0000Delete " .. condensedSlotMetadata[idx])
                 else
-                    BlzFrameSetText(button.text, slotMetadata[idx])
+                    BlzFrameSetText(button.text, condensedSlotMetadata[idx])
                 end
                 for _, heroInfo in pairs(HERO_INFO_AS_LIST) do
-                    if string.match(slotMetadata[idx], heroInfo.name) then
+                    if string.match(condensedSlotMetadata[idx], heroInfo.name) then
                         BlzFrameSetTexture(
                             button.origin, heroInfo.portrait, 0, true)
                         break
