@@ -113,12 +113,26 @@ function HeroSelect:init()
         FULL_WIDTH_RELATIVE / 2 + 0.05,
         0.3)
 
+    local buttonContainer = BlzCreateFrameByType(
+        "FRAME",
+        "buttonContainer",
+        origin,
+        "",
+        0)
+    BlzFrameSetSize(
+        buttonContainer, FULL_WIDTH_RELATIVE, FULL_HEIGHT_RELATIVE)
+    BlzFrameSetAbsPoint(
+        buttonContainer,
+        FRAMEPOINT_CENTER,
+        FULL_WIDTH_RELATIVE / 2 + 0.05,
+        0.3)
+
     local buttons = {}
     for idx=1,NUM_CHOICES,1 do
         local heroButton = BlzCreateFrameByType(
             "BACKDROP",
             "heroButton",
-            origin,
+            buttonContainer,
             "",
             0)
         BlzFrameSetSize(
@@ -126,7 +140,7 @@ function HeroSelect:init()
         BlzFrameSetPoint(
             heroButton,
             FRAMEPOINT_CENTER,
-            origin,
+            buttonContainer,
             FRAMEPOINT_LEFT,
             (idx - 1) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
             0)
@@ -586,6 +600,7 @@ function HeroSelect:init()
 
     self.frames = {
         origin = origin,
+        buttonContainer = buttonContainer,
         buttons = buttons,
         confirmOrigin = confirmOrigin,
         heroInfoDesc = heroInfoDesc,
@@ -658,8 +673,10 @@ function HeroSelect:update(playerId)
             end
         end
 
+        local numButtons = 0
         for idx, button in pairs(frames.buttons) do
             if condensedSlotMetadata[idx] ~= nil then
+                numButtons = numButtons + 1
                 BlzFrameSetVisible(button.origin, true)
                 if isDeleting then
                     BlzFrameSetText(
@@ -678,9 +695,17 @@ function HeroSelect:update(playerId)
                 BlzFrameSetVisible(button.origin, false)
             end
         end
+
+        BlzFrameSetAbsPoint(
+            frames.buttonContainer,
+            FRAMEPOINT_CENTER,
+            FULL_WIDTH_RELATIVE / 2 + 0.05 + (NUM_CHOICES - numButtons) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) / 2,
+            0.3)
     elseif isCreating then
+        local numButtons = 0
         for idx, button in pairs(frames.buttons) do
             if HERO_INFO_AS_LIST[idx] ~= nil then
+                numButtons = numButtons + 1
                 BlzFrameSetVisible(button.origin, true)
                 BlzFrameSetText(button.text, HERO_INFO_AS_LIST[idx].name)
                 BlzFrameSetTexture(
@@ -689,6 +714,12 @@ function HeroSelect:update(playerId)
                 BlzFrameSetVisible(button.origin, false)
             end
         end
+
+        BlzFrameSetAbsPoint(
+            frames.buttonContainer,
+            FRAMEPOINT_CENTER,
+            FULL_WIDTH_RELATIVE / 2 + 0.05 + (NUM_CHOICES - numButtons) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) / 2,
+            0.3)
     end
 
     if isConfirming then
