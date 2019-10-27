@@ -346,12 +346,12 @@ function Backpack:update(playerId)
             if Vendor.isVendorActive(playerId) and itemInfo.cost > 0 then
                 numTooltipLines = numTooltipLines + 2
                 tooltip = tooltip ..
-                    "|n|n(Double click to sell for "..
+                    "|n|n(Right click to sell for "..
                     R2I(itemInfo.cost * 0.2) ..
                     " g)"
             elseif itemInfo.spell then
                 numTooltipLines = numTooltipLines + 2
-                tooltip = tooltip .. "|n|n(Double click to use)"
+                tooltip = tooltip .. "|n|n(Right click to use)"
             end
 
             BlzFrameSetSize(
