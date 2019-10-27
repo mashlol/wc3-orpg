@@ -9,6 +9,7 @@ local spell = require('src/spell.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local uieventhandler = require('src/ui/uieventhandler.lua')
 
 -- backpackToggles = {
 --     [playerId] = true or nil
@@ -173,15 +174,10 @@ function Backpack:init()
         local tooltipFrame = tooltip.makeTooltipFrame(
             itemOrigin, 0.16, 0.24, hoverFrame, false)
 
-        local trig = CreateTrigger()
-        BlzTriggerRegisterFrameEvent(
-            trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
-        TriggerAddAction(trig, function()
-            BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-            BlzFrameSetEnable(BlzGetTriggerFrame(), true)
-
-            local playerId = GetPlayerId(GetTriggerPlayer())
-
+            for key, val in pairs(uieventhandler) do
+                print(key, val)
+            end
+        uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
             local activeBagItem = backpack.getActiveItem(playerId)
             local activeEquipmentItem = equipment.getActiveItem(playerId)
             if activeEquipmentItem ~= nil then
@@ -199,10 +195,10 @@ function Backpack:init()
                     backpack.addItemIdToBackpackPosition(
                         playerId, i + 1, activeItemId)
                 end
-            elseif activeBagItem ~= nil then
+            elseif activeBagItem ~= nil or button == MOUSE_BUTTON_TYPE_RIGHT then
                 backpack.activateItem(playerId, nil)
                 equipment.activateItem(playerId, nil)
-                if activeBagItem == i + 1 then
+                if activeBagItem == i + 1 or button == MOUSE_BUTTON_TYPE_RIGHT then
 
                     local clickedItemPos = i + 1
                     local itemId = backpack.getItemIdAtPosition(
@@ -258,7 +254,7 @@ function Backpack:init()
                             end
                         end
                     end
-                else
+                elseif activeBagItem ~= nil then
                     backpack.swapPositions(playerId, activeBagItem, i+1)
                 end
             else
