@@ -1,6 +1,6 @@
 local file = require('src/saveload/file.lua')
 
-local MAX_NUM_CHARS = 7
+local MAX_NUM_CHARS = 5
 
 function getUsedSlots()
     local slots = {}
