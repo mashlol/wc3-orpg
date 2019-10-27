@@ -1,15 +1,11 @@
 local backpack = require('src/items/backpack.lua')
 local quest = require('src/quests/main.lua')
-local load = require('src/saveload/load.lua')
 local meta = require('src/saveload/meta.lua')
-local file = require('src/saveload/file.lua')
 local save = require('src/saveload/save.lua')
 local log = require('src/log.lua')
 local zones = require('src/zones.lua')
 local stats = require('src/stats.lua')
 local equipment = require('src/items/equipment.lua')
-local Dialog = require('src/ui/dialog.lua')
-local SimpleButton = require('src/ui/simplebutton.lua')
 local HeroSelect = require('src/ui/heroselect.lua')
 
 local CREATE_SYNC_PREFIX = 'create-hero'
@@ -179,77 +175,11 @@ function getNextEmptySaveSlot()
     return 1
 end
 
-function showLoadHeroDialog(playerId)
-    if GetPlayerId(GetLocalPlayer()) == playerId then
-        local buttons = {}
-
-        for slot, metaData in pairs(usedSlots) do
-            table.insert(buttons, {
-                text = "Load " .. metaData,
-                onClick = function()
-                    saveSlot = slot
-                    load.loadFromFile(playerId, slot)
-                    HeroSelect.hide(playerId)
-                end
-            })
-        end
-
-        Dialog.show(playerId, {
-            text = "Choose a hero to load",
-            positiveButton = '|cffff0000Delete A Hero|r',
-            onPositiveButtonClicked = function()
-                local buttons = {}
-
-                for slot, metaData in pairs(usedSlots) do
-                    table.insert(buttons, {
-                        text = "|cffff0000Delete " .. metaData .. '|r',
-                        onClick = function()
-                            if playerId == GetPlayerId(GetLocalPlayer()) then
-                                file.writeFile('tvtsave' .. slot .. '.pld', "")
-                                usedSlots = meta.getUsedSlots()
-                                showLoadButton(playerId)
-                            end
-                        end
-                    })
-                end
-
-                Dialog.show(playerId, {
-                    text = "Choose a hero to delete",
-                    positiveButton = "Back",
-                    onPositiveButtonClicked = function()
-                        showLoadButton(playerId)
-                    end,
-                    buttons = buttons,
-                })
-            end,
-            negativeButton = 'Back',
-            onNegativeButtonClicked = function()
-                showLoadButton(playerId)
-            end,
-            buttons = buttons,
-        })
-    end
-end
-
 function hasACharacter()
     for _, _ in pairs(usedSlots) do
         return true
     end
     return false
-end
-
-function showLoadButton(playerId)
-    if GetPlayerId(GetLocalPlayer()) == playerId then
-        if not hasACharacter() then
-            return
-        end
-        SimpleButton.show(playerId, {
-            text = "Load Existing Hero",
-            onClick = function()
-                showLoadHeroDialog(playerId)
-            end
-        })
-    end
 end
 
 function showPickHeroDialog(playerId)
@@ -264,7 +194,6 @@ function showPickHeroDialog(playerId)
 
     if playerId == GetPlayerId(GetLocalPlayer()) then
         usedSlots = meta.getUsedSlots()
-        showLoadButton(playerId)
     end
 end
 
@@ -331,8 +260,6 @@ function onCreateSynced()
     if GetPlayerId(GetLocalPlayer()) == playerId then
         saveSlot = slot
     end
-
-    SimpleButton.hide(playerId)
 
     pickedHeroes[playerId] = ALL_HERO_INFO[unitType]
     createHeroForPlayer(playerId)
@@ -431,6 +358,10 @@ function getSlot()
     return saveSlot
 end
 
+function setSlot(newSlot)
+    saveSlot = newSlot
+end
+
 function removeHero(playerId)
     RemoveUnit(heroes[playerId])
     heroes[playerId] = nil
@@ -445,6 +376,14 @@ function addHeroPickedListener(onPickedListenerFunc)
     table.insert(pickListeners, onPickedListenerFunc)
 end
 
+function getUsedSlots()
+    return usedSlots
+end
+
+function refreshUsedSlots()
+    usedSlots = meta.getUsedSlots()
+end
+
 return {
     ALL_HERO_INFO = ALL_HERO_INFO,
     init = init,
@@ -456,5 +395,8 @@ return {
     addHeroPickedListener = addHeroPickedListener,
     getStatEffects = getStatEffects,
     getSlot = getSlot,
+    setSlot = setSlot,
     removeHero = removeHero,
+    getUsedSlots = getUsedSlots,
+    refreshUsedSlots = refreshUsedSlots,
 }

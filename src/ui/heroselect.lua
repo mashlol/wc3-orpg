@@ -1,12 +1,14 @@
 local hero = require('src/hero.lua')
 local spell = require('src/spell.lua')
+local load = require('src/saveload/load.lua')
+local file = require('src/saveload/file.lua')
 local tooltip = require('src/ui/tooltip.lua')
 
 local FULL_WIDTH_RELATIVE = 0.7
 local BUTTON_WIDTH_PX = 300
 local BUTTON_HEIGHT_PX = 450
 local BUTTON_MARGIN_PX = 20
-local NUM_CHOICES = 4
+local NUM_CHOICES = 5
 local FULL_WIDTH_PX = NUM_CHOICES * BUTTON_WIDTH_PX + (NUM_CHOICES - 1) * BUTTON_MARGIN_PX
 local RATIO = FULL_WIDTH_PX / BUTTON_HEIGHT_PX
 local FULL_HEIGHT_RELATIVE = FULL_WIDTH_RELATIVE / RATIO
@@ -47,14 +49,34 @@ local heroSelectToggles = {}
 -- }
 local heroHoverAnims = {}
 
+-- playerCreatingToggles = {
+--     [playerId] = true/false or nil
+-- }
+local playerCreatingToggles = {}
+
+-- playerLoadingToggles = {
+--     [playerId] = true/false or nil
+-- }
+local playerLoadingToggles = {}
+
+-- playerDeletingToggles = {
+--     [playerId] = true/false or nil
+-- }
+local playerDeletingToggles = {}
+
 -- heroConfirms = {
 --     [playerId] = idx or nil
 -- }
 local heroConfirms = {}
 
+local HERO_INFO_AS_LIST = {}
+
 local HeroSelect = {
     show = function(playerId, info)
         heroSelectToggles[playerId] = info
+        playerCreatingToggles[playerId] = nil
+        playerLoadingToggles[playerId] = nil
+        playerDeletingToggles[playerId] = nil
     end,
     hide = function(playerId)
         heroSelectToggles[playerId] = nil
@@ -69,6 +91,12 @@ function HeroSelect:new(o)
 end
 
 function HeroSelect:init()
+
+    -- Create HERO_INFO_AS_LIST
+    for _, heroInfo in pairs(hero.ALL_HERO_INFO) do
+        table.insert(HERO_INFO_AS_LIST, heroInfo)
+    end
+
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local origin = BlzCreateFrameByType(
@@ -85,11 +113,8 @@ function HeroSelect:init()
         FULL_WIDTH_RELATIVE / 2 + 0.05,
         0.3)
 
-    local allHeroInfo = hero.ALL_HERO_INFO
-
     local buttons = {}
-    local i = 0
-    for heroUnitId, heroInfo in pairs(allHeroInfo) do
+    for idx=1,NUM_CHOICES,1 do
         local heroButton = BlzCreateFrameByType(
             "BACKDROP",
             "heroButton",
@@ -103,9 +128,8 @@ function HeroSelect:init()
             FRAMEPOINT_CENTER,
             origin,
             FRAMEPOINT_LEFT,
-            i * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
+            (idx - 1) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
             0)
-        BlzFrameSetTexture(heroButton, heroInfo.portrait, 0, true)
 
         local heroText = BlzCreateFrameByType(
             "TEXT",
@@ -116,7 +140,6 @@ function HeroSelect:init()
         BlzFrameSetAllPoints(heroText, heroButton)
         BlzFrameSetTextAlignment(
             heroText, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_CENTER)
-        BlzFrameSetText(heroText, heroInfo.name)
 
         local hoverFrame = BlzCreateFrameByType(
             "GLUEBUTTON",
@@ -126,7 +149,6 @@ function HeroSelect:init()
             0)
         BlzFrameSetAllPoints(hoverFrame, heroButton)
 
-        local idx = i
         local mouseEnterTrigger = CreateTrigger()
         BlzTriggerRegisterFrameEvent(
             mouseEnterTrigger, hoverFrame, FRAMEEVENT_MOUSE_ENTER)
@@ -157,14 +179,27 @@ function HeroSelect:init()
             BlzFrameSetEnable(BlzGetTriggerFrame(), true)
             local playerId = GetPlayerId(GetTriggerPlayer())
 
-            heroConfirms[playerId] = heroUnitId
+            if playerDeletingToggles[playerId] then
+                if playerId == GetPlayerId(GetLocalPlayer()) then
+                    file.writeFile('tvtsave' .. idx .. '.pld', "")
+                    hero.refreshUsedSlots()
+                end
+                playerDeletingToggles[playerId] = nil
+            elseif playerLoadingToggles[playerId] then
+                if playerId == GetPlayerId(GetLocalPlayer()) then
+                    hero.setSlot(idx)
+                    load.loadFromFile(playerId, idx)
+                end
+                HeroSelect.hide(playerId)
+            else
+                heroConfirms[playerId] = idx
+            end
         end)
 
-        buttons[i] = {
+        buttons[idx] = {
             origin = heroButton,
+            text = heroText,
         }
-
-        i = i + 1
     end
 
     local confirmOrigin = BlzCreateFrameByType(
@@ -329,7 +364,8 @@ function HeroSelect:init()
         BlzFrameSetEnable(BlzGetTriggerFrame(), true)
         local playerId = GetPlayerId(GetTriggerPlayer())
 
-        heroSelectToggles[playerId](heroConfirms[playerId])
+        heroSelectToggles[playerId](
+            HERO_INFO_AS_LIST[heroConfirms[playerId]].id)
 
         heroSelectToggles[playerId] = nil
         heroConfirms[playerId] = nil
@@ -361,6 +397,175 @@ function HeroSelect:init()
         })
     end
 
+    local loadButton = BlzCreateFrameByType(
+        "BACKDROP",
+        "loadButton",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(
+        loadButton,
+        CONFIRM_BUTTON_WIDTH_RELATIVE,
+        CONFIRM_BUTTON_HEIGHT_RELATIVE)
+    BlzFrameSetPoint(
+        loadButton,
+        FRAMEPOINT_RIGHT,
+        origin,
+        FRAMEPOINT_CENTER,
+        -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE,
+        0)
+    BlzFrameSetTexture(loadButton, "war3mapImported\\btn_crop.blp", 0, true)
+
+    local loadButtonText = BlzCreateFrameByType(
+        "TEXT",
+        "loadButtonText",
+        loadButton,
+        "",
+        0)
+    BlzFrameSetAllPoints(loadButtonText, loadButton)
+    BlzFrameSetText(loadButtonText, "|cff000000LOAD HERO|r")
+    BlzFrameSetTextAlignment(
+        loadButtonText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
+    local startLoadingTrigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        startLoadingTrigger, loadButtonText, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(startLoadingTrigger, function()
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        local playerId = GetPlayerId(GetTriggerPlayer())
+
+        playerLoadingToggles[playerId] = true
+    end)
+
+    local createButton = BlzCreateFrameByType(
+        "BACKDROP",
+        "createButton",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(
+        createButton,
+        CONFIRM_BUTTON_WIDTH_RELATIVE,
+        CONFIRM_BUTTON_HEIGHT_RELATIVE)
+    BlzFrameSetPoint(
+        createButton,
+        FRAMEPOINT_LEFT,
+        origin,
+        FRAMEPOINT_CENTER,
+        CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE,
+        0)
+    BlzFrameSetTexture(createButton, "war3mapImported\\btn_crop.blp", 0, true)
+
+    local createButtonText = BlzCreateFrameByType(
+        "TEXT",
+        "createButtonText",
+        createButton,
+        "",
+        0)
+    BlzFrameSetAllPoints(createButtonText, createButton)
+    BlzFrameSetText(createButtonText, "|cff000000CREATE HERO|r")
+    BlzFrameSetTextAlignment(
+        createButtonText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
+    local startCreatingTrigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        startCreatingTrigger, createButtonText, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(startCreatingTrigger, function()
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        local playerId = GetPlayerId(GetTriggerPlayer())
+
+        playerCreatingToggles[playerId] = true
+    end)
+
+    local backButton = BlzCreateFrameByType(
+        "BACKDROP",
+        "backButton",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(
+        backButton,
+        CONFIRM_BUTTON_WIDTH_RELATIVE,
+        CONFIRM_BUTTON_HEIGHT_RELATIVE)
+    BlzFrameSetPoint(
+        backButton,
+        FRAMEPOINT_TOPRIGHT,
+        origin,
+        FRAMEPOINT_BOTTOM,
+        -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE,
+        -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE)
+    BlzFrameSetTexture(backButton, "war3mapImported\\btn_crop.blp", 0, true)
+
+    local backButtonText = BlzCreateFrameByType(
+        "TEXT",
+        "backButtonText",
+        backButton,
+        "",
+        0)
+    BlzFrameSetAllPoints(backButtonText, backButton)
+    BlzFrameSetText(backButtonText, "|cff000000BACK|r")
+    BlzFrameSetTextAlignment(
+        backButtonText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
+    local backButtonTrigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        backButtonTrigger, backButtonText, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(backButtonTrigger, function()
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        local playerId = GetPlayerId(GetTriggerPlayer())
+
+        if playerDeletingToggles[playerId] then
+            playerDeletingToggles[playerId] = nil
+        else
+            playerLoadingToggles[playerId] = nil
+            playerCreatingToggles[playerId] = nil
+        end
+    end)
+
+    local deleteButton = BlzCreateFrameByType(
+        "BACKDROP",
+        "deleteButton",
+        originFrame,
+        "",
+        0)
+    BlzFrameSetSize(
+        deleteButton,
+        CONFIRM_BUTTON_WIDTH_RELATIVE,
+        CONFIRM_BUTTON_HEIGHT_RELATIVE)
+    BlzFrameSetPoint(
+        deleteButton,
+        FRAMEPOINT_TOPLEFT,
+        origin,
+        FRAMEPOINT_BOTTOM,
+        CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE,
+        -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE)
+    BlzFrameSetTexture(deleteButton, "war3mapImported\\btn_crop.blp", 0, true)
+
+    local deleteButtonText = BlzCreateFrameByType(
+        "TEXT",
+        "deleteButtonText",
+        deleteButton,
+        "",
+        0)
+    BlzFrameSetAllPoints(deleteButtonText, deleteButton)
+    BlzFrameSetText(deleteButtonText, "|cff000000DELETE A HERO|r")
+    BlzFrameSetTextAlignment(
+        deleteButtonText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+
+    local deleteToggleTrigger = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(
+        deleteToggleTrigger, deleteButtonText, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(deleteToggleTrigger, function()
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+        local playerId = GetPlayerId(GetTriggerPlayer())
+
+        playerDeletingToggles[playerId] = true
+    end)
+
     self.frames = {
         origin = origin,
         buttons = buttons,
@@ -368,6 +573,10 @@ function HeroSelect:init()
         heroInfoDesc = heroInfoDesc,
         heroInfoTitle = heroInfoTitle,
         spellIcons = spellIcons,
+        loadButton = loadButton,
+        createButton = createButton,
+        deleteButton = deleteButton,
+        backButton = backButton,
     }
 
     return self
@@ -406,10 +615,56 @@ function HeroSelect:update(playerId)
         end
     end
 
-    BlzFrameSetVisible(frames.origin, heroConfirms[playerId] == nil)
-    BlzFrameSetVisible(frames.confirmOrigin, heroConfirms[playerId] ~= nil)
-    if heroConfirms[playerId] ~= nil then
-        local heroInfo = hero.ALL_HERO_INFO[heroConfirms[playerId]]
+    local isConfirming = heroConfirms[playerId] ~= nil
+    local isCreating = playerCreatingToggles[playerId]
+    local isLoading = playerLoadingToggles[playerId]
+    local isDeleting = playerDeletingToggles[playerId]
+
+    BlzFrameSetVisible(frames.origin, not isConfirming and (isCreating or isLoading or isDeleting))
+    BlzFrameSetVisible(frames.confirmOrigin, isConfirming and isCreating)
+    BlzFrameSetVisible(frames.loadButton, not isCreating and not isLoading and not isDeleting)
+    BlzFrameSetVisible(frames.createButton, not isCreating and not isLoading and not isDeleting)
+    BlzFrameSetVisible(frames.deleteButton, isLoading)
+    BlzFrameSetVisible(frames.backButton, isLoading or isCreating and not isConfirming)
+
+    if isLoading or isDeleting then
+        local slotMetadata = hero.getUsedSlots()
+
+        for idx, button in pairs(frames.buttons) do
+            if slotMetadata[idx] ~= nil then
+                BlzFrameSetVisible(button.origin, true)
+                if isDeleting then
+                    BlzFrameSetText(
+                        button.text, "|cffff0000Delete " .. slotMetadata[idx])
+                else
+                    BlzFrameSetText(button.text, slotMetadata[idx])
+                end
+                for _, heroInfo in pairs(HERO_INFO_AS_LIST) do
+                    if string.match(slotMetadata[idx], heroInfo.name) then
+                        BlzFrameSetTexture(
+                            button.origin, heroInfo.portrait, 0, true)
+                        break
+                    end
+                end
+            else
+                BlzFrameSetVisible(button.origin, false)
+            end
+        end
+    elseif isCreating then
+        for idx, button in pairs(frames.buttons) do
+            if HERO_INFO_AS_LIST[idx] ~= nil then
+                BlzFrameSetVisible(button.origin, true)
+                BlzFrameSetText(button.text, HERO_INFO_AS_LIST[idx].name)
+                BlzFrameSetTexture(
+                    button.origin, HERO_INFO_AS_LIST[idx].portrait, 0, true)
+            else
+                BlzFrameSetVisible(button.origin, false)
+            end
+        end
+    end
+
+    if isConfirming then
+        local heroInfo = HERO_INFO_AS_LIST[heroConfirms[playerId]]
         BlzFrameSetTexture(
             frames.confirmOrigin,
             heroInfo.portraitFullBlurred,
