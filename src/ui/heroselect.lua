@@ -664,6 +664,14 @@ function HeroSelect:update(playerId)
     BlzFrameSetVisible(frames.backButton, isLoading or isCreating and not isConfirming)
 
     if isLoading or isDeleting then
+        BlzFrameSetPoint(
+            frames.backButton,
+            FRAMEPOINT_TOPRIGHT,
+            frames.origin,
+            FRAMEPOINT_BOTTOM,
+            -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE,
+            -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE)
+
         local slotMetadata = hero.getUsedSlots()
 
         local condensedSlotMetadata = {}
@@ -702,6 +710,14 @@ function HeroSelect:update(playerId)
             FULL_WIDTH_RELATIVE / 2 + 0.05 + (NUM_CHOICES - numButtons) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) / 2,
             0.3)
     elseif isCreating then
+        BlzFrameSetPoint(
+            frames.backButton,
+            FRAMEPOINT_TOPRIGHT,
+            frames.origin,
+            FRAMEPOINT_BOTTOM,
+            CONFIRM_BUTTON_WIDTH_RELATIVE / 2,
+            -CONFIRM_BUTTON_MARGIN_BOTTOM_RELATIVE)
+
         local numButtons = 0
         for idx, button in pairs(frames.buttons) do
             if HERO_INFO_AS_LIST[idx] ~= nil then
