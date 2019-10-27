@@ -403,7 +403,10 @@ function removeBuff(target, buffName)
         return
     end
 
-    if buffInstances[unitId].buffs[buffName].effect ~= nil then
+    if
+        buffInstances[unitId].buffs[buffName] ~= nil and
+        buffInstances[unitId].buffs[buffName].effect ~= nil
+    then
         DestroyEffect(buffInstances[unitId].buffs[buffName].effect)
     end
     buffInstances[unitId].buffs[buffName] = nil
@@ -411,9 +414,18 @@ end
 
 function maybeRemoveBuffsOnDamage(source, target, amount)
     local targetBuffs = getBuffs(target)
-    for buffName, buffInfo in pairs(targetBuffs) do
+    for buffName, _ in pairs(targetBuffs) do
         if BUFF_INFO[buffName].removeOnDamage then
             removeBuff(target, buffName)
+        end
+        if BUFF_INFO[buffName].onDamageReceived ~= nil then
+            BUFF_INFO[buffName].onDamageReceived(source, target, amount)
+        end
+    end
+    local sourceBuffs = getBuffs(source)
+    for buffName, _ in pairs(sourceBuffs) do
+        if BUFF_INFO[buffName].onDamageDealt ~= nil then
+            BUFF_INFO[buffName].onDamageDealt(source, target, amount)
         end
     end
 end

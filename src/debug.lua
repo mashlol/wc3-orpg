@@ -37,11 +37,16 @@ end
 
 local debug0 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
+    local hero = hero.getHero(playerId)
     -- print(animNum)
 
     -- animNum = animNum - 0.01
 
-    backpack.addItemIdToBackpack(playerId, itemId)
+    -- backpack.addItemIdToBackpack(playerId, itemId)
+
+    SetUnitAnimationByIndex(hero, itemId)
+
+    print(itemId)
 
     itemId = itemId + 1
 
