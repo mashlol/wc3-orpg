@@ -21,8 +21,13 @@ return {
 
         effect.createEffect{
             model = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl",
-            x = posV.x,
-            y = posV.y,
+            unit = target,
+            duration = 1,
+        }
+
+        effect.createEffect{
+            model = "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl",
+            unit = target,
             duration = 1,
         }
 
