@@ -54,7 +54,7 @@ local ALL_HERO_INFO = {
             [3] = 'blitz',
             [4] = 'shieldcharge',
             [5] = 'stalwartshell',
-            [6] = 'curshout',
+            [6] = 'thunderlightning',
         },
         model = "Valkyrie.mdl",
         portrait = "war3mapImported\\stormfist_crop.blp",

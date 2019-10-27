@@ -14,13 +14,12 @@ return {
     onDamageDealt = function(source, target, amount)
         buff.removeBuff(source, 'lightninggauntlet')
 
-        -- local sourceUnit = buffInstance.source
         local playerId = GetPlayerId(GetOwningPlayer(source))
 
         local posV = Vector:new{x = GetUnitX(target), y = GetUnitY(target)}
 
         effect.createEffect{
-            model = "Abilities\\Spells\\Human\\ManaFlare\\ManaFlareBoltImpact.mdl",
+            model = "Abilities\\Spells\\Other\\Monsoon\\MonsoonBoltTarget.mdl",
             unit = target,
             duration = 1,
         }

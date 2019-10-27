@@ -322,6 +322,24 @@ local BUFF_INFO = {
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNGauntletsOfOgrePower.blp",
     },
+    thunder = {
+        effects = {
+            {
+                type = stats.PERCENT_DAMAGE,
+                amount = 1.1,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
+    },
+    lightning = {
+        effects = {
+            {
+                type = stats.PERCENT_ATTACK_SPEED,
+                amount = 0.9,
+            },
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNMonsoon.blp",
+    },
 }
 
 -- BuffInstances:
