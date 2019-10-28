@@ -52,7 +52,7 @@ local ALL_HERO_INFO = {
             [1] = 'punch',
             [2] = 'gauntlet',
             [3] = 'blitz',
-            [4] = 'shieldcharge',
+            [4] = 'tornado',
             [5] = 'stalwartshell',
             [6] = 'thunderlightning',
         },
