@@ -36,6 +36,7 @@ local punch = require('src/spells/stormfist/punch.lua')
 local gauntlet = require('src/spells/stormfist/gauntlet.lua')
 local thunderclap = require('src/spells/stormfist/thunderclap.lua')
 local tornado = require('src/spells/stormfist/tornado.lua')
+local barrier = require('src/spells/stormfist/barrier.lua')
 local thunderlightning = require('src/spells/stormfist/thunderlightning.lua')
 
 -- Tarcza
@@ -104,6 +105,7 @@ local SPELL_MAP = {
     gauntlet = gauntlet,
     thunderclap = thunderclap,
     tornado = tornado,
+    barrier = barrier,
     thunderlightning = thunderlightning,
 
     -- Tarcza
