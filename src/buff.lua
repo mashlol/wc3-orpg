@@ -329,7 +329,7 @@ local BUFF_INFO = {
                 amount = 1.1,
             },
         },
-        icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
+        icon = "ReplaceableTextures\\CommandButtons\\BTNGolemThunderclap.blp",
     },
     lightning = {
         effects = {
@@ -339,6 +339,21 @@ local BUFF_INFO = {
             },
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNMonsoon.blp",
+    },
+    thunderbarrier = {
+        effects = {
+            {
+                type = stats.PERCENT_INCOMING_DAMAGE,
+                amount = 0,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Orc\\LightningShield\\LightningShieldTarget.mdl",
+            attach = "origin",
+        },
+        maxStacks = 2,
+        removeStackOnDamage = true,
+        icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
     },
 }
 
@@ -415,19 +430,31 @@ function addBuff(source, target, buffName, duration)
         end)
 end
 
-function removeBuff(target, buffName)
+function removeBuff(target, buffName, numStacks)
+    if numStacks == nil then
+        numStacks = 1000000
+    end
+
     local unitId = GetHandleId(target)
     if buffInstances[unitId] == nil or buffInstances[unitId].buffs == nil then
         return
     end
 
-    if
-        buffInstances[unitId].buffs[buffName] ~= nil and
-        buffInstances[unitId].buffs[buffName].effect ~= nil
-    then
-        DestroyEffect(buffInstances[unitId].buffs[buffName].effect)
+    local curNumStacks = getBuffStacks(target, buffName)
+
+    local newNumStacks = math.max(0, curNumStacks - numStacks)
+
+    if newNumStacks == 0 then
+        if
+            buffInstances[unitId].buffs[buffName] ~= nil and
+            buffInstances[unitId].buffs[buffName].effect ~= nil
+        then
+            DestroyEffect(buffInstances[unitId].buffs[buffName].effect)
+        end
+        buffInstances[unitId].buffs[buffName] = nil
+    else
+        buffInstances[unitId].buffs[buffName].stacks = newNumStacks
     end
-    buffInstances[unitId].buffs[buffName] = nil
 end
 
 function maybeRemoveBuffsOnDamage(source, target, amount)
@@ -435,6 +462,9 @@ function maybeRemoveBuffsOnDamage(source, target, amount)
     for buffName, _ in pairs(targetBuffs) do
         if BUFF_INFO[buffName].removeOnDamage then
             removeBuff(target, buffName)
+        end
+        if BUFF_INFO[buffName].removeStackOnDamage then
+            removeBuff(target, buffName, 1)
         end
         if BUFF_INFO[buffName].onDamageReceived ~= nil then
             BUFF_INFO[buffName].onDamageReceived(source, target, amount)

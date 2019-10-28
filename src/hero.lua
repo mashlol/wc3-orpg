@@ -53,7 +53,7 @@ local ALL_HERO_INFO = {
             [2] = 'gauntlet',
             [3] = 'thunderclap',
             [4] = 'tornado',
-            [5] = 'stalwartshell',
+            [5] = 'barrier',
             [6] = 'thunderlightning',
         },
         model = "Valkyrie.mdl",
