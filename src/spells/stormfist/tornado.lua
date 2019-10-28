@@ -31,7 +31,7 @@ local getSpellCooldown = function(playerId)
 end
 
 local getSpellCasttime = function(playerId)
-    return 1
+    return 0.5
 end
 
 local cast = function(playerId)
@@ -55,7 +55,7 @@ local cast = function(playerId)
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
         0.05)
 
-    local success = casttime.cast(playerId, 1, true, false)
+    local success = casttime.cast(playerId, 0.5, true, false)
     if not success then
         return false
     end
