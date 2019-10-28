@@ -115,6 +115,9 @@ local cast = function(playerId)
             DestroyEffect(lightningTrail)
             DestroyEffect(blueTrail)
         end,
+        onDoodadCollide = function(doodad)
+            return true
+        end,
     }
 
     casttime.cast(playerId, 0.5, false, false, true)
