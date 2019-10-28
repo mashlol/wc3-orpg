@@ -10,7 +10,7 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 5
+local COOLDOWN_S = 3
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or

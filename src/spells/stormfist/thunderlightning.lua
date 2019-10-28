@@ -16,7 +16,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Toggle between Thunder and Lightning. With Thunder you deal 10% more damage on each hit, lightning increases your attack speed by 10%.'
+    return 'Toggle between Thunder and Lightning. With Thunder you deal 25% more damage on each hit, lightning increases your attack speed by 25%.'
 end
 
 local getSpellCooldown = function(playerId)

@@ -326,7 +326,7 @@ local BUFF_INFO = {
         effects = {
             {
                 type = stats.PERCENT_DAMAGE,
-                amount = 1.1,
+                amount = 1.25,
             },
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNGolemThunderclap.blp",
@@ -335,7 +335,7 @@ local BUFF_INFO = {
         effects = {
             {
                 type = stats.PERCENT_ATTACK_SPEED,
-                amount = 0.9,
+                amount = 0.75,
             },
         },
         icon = "ReplaceableTextures\\CommandButtons\\BTNMonsoon.blp",
