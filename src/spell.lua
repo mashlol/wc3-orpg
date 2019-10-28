@@ -34,8 +34,9 @@ local blind = require('src/spells/yuji/blind.lua')
 -- Stormfist
 local punch = require('src/spells/stormfist/punch.lua')
 local gauntlet = require('src/spells/stormfist/gauntlet.lua')
-local thunderlightning = require('src/spells/stormfist/thunderlightning.lua')
+local thunderclap = require('src/spells/stormfist/thunderclap.lua')
 local tornado = require('src/spells/stormfist/tornado.lua')
+local thunderlightning = require('src/spells/stormfist/thunderlightning.lua')
 
 -- Tarcza
 local whirlwind = require('src/spells/tarcza/whirlwind.lua')
@@ -101,8 +102,9 @@ local SPELL_MAP = {
     -- Stormfist
     punch = punch,
     gauntlet = gauntlet,
-    thunderlightning = thunderlightning,
+    thunderclap = thunderclap,
     tornado = tornado,
+    thunderlightning = thunderlightning,
 
     -- Tarcza
     whirlwind = whirlwind,
