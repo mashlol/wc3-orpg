@@ -44,7 +44,10 @@ local ALL_HERO_INFO = {
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
-        desc = 'TODO',
+        desc = 'Stormfist is a close quarters fighter, adept at controlling '..
+            'the elements to deal massive amounts of burst damage to her '..
+            'foes. While she can deal high burst damage, she must be careful'..
+            'not to get stuck nearby too many opponents.',
         heroType = 'Fighter',
         storedId = 2,
         id = FourCC("Hstm"),
