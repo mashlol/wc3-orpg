@@ -1,3 +1,5 @@
+__DEBUG__ = false
+
 local requireMap = {}
 local requireCache = {}
 

@@ -23,7 +23,8 @@
         "gg_rct_mineexit",
         "gg_rct_mineenter",
         "gg_rct_minefinish",
-        "gg_rct_mineleave"
+        "gg_rct_mineleave",
+        "__DEBUG__"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
