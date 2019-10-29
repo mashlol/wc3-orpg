@@ -81,8 +81,10 @@ local mainInit = function()
     spawnpoint.init()
     respawncreeps.init()
 
-    -- TODO remove for release
-    debug.init()
+    if __DEBUG__ == true then
+        print('Running in debug mode.')
+        debug.init()
+    end
 
     -- TODO maybe move to a door module
     ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1457)
