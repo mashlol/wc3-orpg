@@ -122,7 +122,7 @@ function Stats:init()
     BlzFrameSetAbsPoint(
         statsOrigin,
         FRAMEPOINT_CENTER,
-        0.265,
+        0.295,
         0.35)
 
     utils.createBorderFrame(statsOrigin)
