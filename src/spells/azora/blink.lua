@@ -3,6 +3,7 @@ local mouse = require('src/mouse.lua')
 local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local log = require('src/log.lua')
+local collision = require('src/collision.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
@@ -73,6 +74,19 @@ local cast = function(playerId)
     if IsTerrainPathable(finalV.x, finalV.y, PATHING_TYPE_WALKABILITY) then
         log.log(playerId, "You can't blink there.", log.TYPE.ERROR)
         return false
+    end
+
+    -- Raycast to destination
+    local curPos = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
+    local deltaVec = Vector:new(finalV):subtract(curPos):divide(20)
+    for _=0,19,1 do
+        local _, doodads = collision.getAllCollisions(curPos, 40)
+        if #doodads > 0 then
+            log.log(playerId, "You can't blink there.", log.TYPE.ERROR)
+            return false
+        end
+
+        curPos:add(deltaVec)
     end
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
