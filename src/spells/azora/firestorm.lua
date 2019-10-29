@@ -62,13 +62,12 @@ local cast = function(playerId)
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 19, 2)
 
-    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
-
     local success = casttime.cast(playerId, 1, true, false)
     if not success then
-        animations.resetAnimation(hero)
         return
     end
+
+    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     animations.queueAnimation(hero, 18, 1)
 
