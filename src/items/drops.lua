@@ -9,22 +9,22 @@ local DROP_TABLE = {
     -- UNITS
     -- -------------------------------------------------------------------------
     [FourCC('hmbs')] = { -- Small turtles
-        none = 50,
+        none = 150,
         [6] = 30,
         [5] = 10,
-        [45] = 10,
-        [29] = 20,
+        [45] = 2,
+        [29] = 4,
     },
     [FourCC('lold')] = { -- River turtles
         none = 50,
-        [6] = 20,
-        [5] = 10,
+        [6] = 5,
+        [5] = 2,
 		[9] = 275,
-        [18] = 5,
-        [37] = 5,
+        [18] = 1,
+        [37] = 1,
     },
     [FourCC('hwol')] = { -- Wolves
-        none = 50,
+        none = 250,
         [10] = 5,
         [22] = 5,
         [25] = 5,
@@ -34,13 +34,13 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('hwol')] = { -- Elite Wolves
-        none = 50,
+        none = 250,
         [38] = 5,
         [6] = 30,
         [5] = 10,
     },
     [FourCC('clea')] = { -- Cultist Commander
-        none = 50,
+        none = 250,
         [12] = 1,
         [35] = 1,
         [16] = 5,
@@ -52,7 +52,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('cled')] = { -- Cultist Commander
-        none = 50,
+        none = 250,
         [12] = 1,
         [35] = 1,
         [16] = 5,
@@ -64,7 +64,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('cspe')] = { -- Cultist Emissary
-        none = 50,
+        none = 250,
         [16] = 5,
         [19] = 5,
         [23] = 5,
@@ -76,7 +76,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('h000')] = { -- Cultist Raider
-        none = 50,
+        none = 250,
         [16] = 5,
         [20] = 5,
         [23] = 5,
@@ -93,7 +93,7 @@ local DROP_TABLE = {
     -- DUNGEON
     -- -------------------------------------------------------------------------
     [FourCC('culw')] = { -- Cultist Enforcer
-        none = 70,
+        none = 250,
         [14] = 5,
         [13] = 5,
         [31] = 5,
@@ -101,7 +101,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('cult')] = { -- Cultist Worker
-        none = 70,
+        none = 250,
         [14] = 5,
         [13] = 5,
         [31] = 5,
@@ -109,7 +109,7 @@ local DROP_TABLE = {
         [5] = 10,
     },
     [FourCC('ecul')] = { -- Cultist Bodyguard
-        none = 70,
+        none = 250,
         [14] = 5,
         [13] = 5,
         [31] = 5,
@@ -126,7 +126,6 @@ local DROP_TABLE = {
         [42] = 40,
     },
     [FourCC('hbos')] = { -- Giant Turtle
-        none = 20,
         [15] = 80,
     },
     [FourCC('mine')] = { -- Miner Joe
