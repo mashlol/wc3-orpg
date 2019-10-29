@@ -1,4 +1,5 @@
 local log = require('src/log.lua')
+local hero = require('src/hero.lua')
 local consts = require('src/ui/consts.lua')
 local utils = require('src/ui/utils.lua')
 local tooltip = require('src/ui/tooltip.lua')
@@ -122,7 +123,7 @@ function Equipment:init()
         0)
     BlzFrameSetSize(
         equipmentOrigin,
-        consts.EQUIPMENT_ITEM_SIZE * 7 + 0.015,
+        consts.EQUIPMENT_ITEM_SIZE * 9 + 0.015,
         consts.EQUIPMENT_ITEM_SIZE * 9 + 0.02)
     BlzFrameSetAbsPoint(
         equipmentOrigin,
@@ -148,6 +149,9 @@ function Equipment:init()
         -0.01)
     BlzFrameSetText(equipmentText, "Character (Lv. 2)")
 
+    -- local BUTTON_WIDTH_PX = 300 => 0.105
+    -- local BUTTON_HEIGHT_PX = 450 => 0.1575
+
     local portraitBackdropFrame = BlzCreateFrameByType(
         "BACKDROP",
         "portraitBackdropFrame",
@@ -155,7 +159,9 @@ function Equipment:init()
         "",
         0)
     BlzFrameSetSize(
-        portraitBackdropFrame, 0.105, consts.EQUIPMENT_ITEM_SIZE * 7)
+        portraitBackdropFrame,
+        consts.EQUIPMENT_ITEM_SIZE * 7 * 300 / 450,
+        consts.EQUIPMENT_ITEM_SIZE * 7)
     BlzFrameSetPoint(
         portraitBackdropFrame,
         FRAMEPOINT_TOP,
@@ -165,30 +171,9 @@ function Equipment:init()
         -0.025)
     BlzFrameSetTexture(
         portraitBackdropFrame,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        "war3mapImported\\stormfist_crop.blp",
         0,
         true)
-
-    local portraitFrame = BlzGetOriginFrame(ORIGIN_FRAME_PORTRAIT, 0)
-    local portraitParent = BlzFrameGetParent(portraitFrame)
-    BlzFrameSetVisible(portraitFrame, true)
-
-    if BlzGetLocalClientWidth() / BlzGetLocalClientHeight() > 1.7 then
-        BlzFrameClearAllPoints(portraitFrame)
-        BlzFrameSetSize(portraitFrame, 0.08, consts.EQUIPMENT_ITEM_SIZE * 7)
-        BlzFrameSetPoint(
-            portraitFrame,
-            FRAMEPOINT_TOP,
-            equipmentOrigin,
-            FRAMEPOINT_TOP,
-            0.072,
-            -0.025)
-    else
-        BlzFrameSetAllPoints(portraitFrame, portraitBackdropFrame)
-    end
-
-    BlzFrameSetLevel(portraitParent, 10)
-    BlzFrameSetParent(portraitParent, equipmentOrigin)
 
     local itemFrames = {}
 
@@ -196,7 +181,7 @@ function Equipment:init()
         local itemFrame = createItemFrame(
             equipmentOrigin,
             math.floor(i / 5) *
-                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 4) +
+                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 5) +
                 0.015,
             -(i % 5) *
                 (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE / 2) -
@@ -214,7 +199,7 @@ function Equipment:init()
     table.insert(itemFrames, weapon)
     local offHand = createItemFrame(
         equipmentOrigin,
-        0.12,
+        0.15,
         consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
         12)
     table.insert(itemFrames, offHand)
@@ -223,6 +208,7 @@ function Equipment:init()
         itemFrames = itemFrames,
         origin = equipmentOrigin,
         equipmentText = equipmentText,
+        portrait = portraitBackdropFrame,
     }
 
     return self
@@ -240,6 +226,11 @@ function Equipment:update(playerId)
 
     local level = GetHeroLevel(self.hero)
     BlzFrameSetText(frames.equipmentText, "Character (Lv. " .. level .. ")")
+
+    local pickedHero = hero.getPickedHero(playerId)
+    if pickedHero ~= nil then
+        BlzFrameSetTexture(frames.portrait, pickedHero.portrait, 0, true)
+    end
 
     local activeItem = equipment.getActiveItem(playerId)
     for i=1,12,1 do
