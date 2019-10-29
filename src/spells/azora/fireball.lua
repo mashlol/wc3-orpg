@@ -46,7 +46,6 @@ local cast = function(playerId)
         y = mouse.getMouseY(playerId)
     }
 
-    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 19, 1)
@@ -60,6 +59,8 @@ local cast = function(playerId)
     if not success then
         return
     end
+
+    cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     animations.queueAnimation(hero, 18, 1)
 
