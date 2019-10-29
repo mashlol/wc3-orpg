@@ -20,7 +20,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function()
-    return 'Slam the ground, dealing 50 damage to all nearby units.'
+    return 'Slam the ground, dealing 75 damage to all nearby units.'
 end
 
 local getSpellCooldown = function()

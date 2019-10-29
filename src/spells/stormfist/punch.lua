@@ -10,7 +10,7 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 3
+local COOLDOWN_S = 3.5
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -90,7 +90,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 350, damage.TYPE.PHYSICAL)
+                damage.dealDamage(hero, collidedUnit, 125, damage.TYPE.PHYSICAL)
                 effect.createEffect{
                     unit = collidedUnit,
                     model = "Abilities\\Spells\\Orc\\FeralSpirit\\feralspirittarget.mdl",
