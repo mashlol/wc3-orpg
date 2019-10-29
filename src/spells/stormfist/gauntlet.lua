@@ -16,7 +16,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Your next attack will deal 20 more damage and hit all nearby units.'
+    return 'Your next attack will deal 20 damage to all nearby units.'
 end
 
 local getSpellCooldown = function(playerId)
