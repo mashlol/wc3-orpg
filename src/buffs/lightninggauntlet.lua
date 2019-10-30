@@ -13,6 +13,7 @@ return {
     icon = "ReplaceableTextures\\CommandButtons\\BTNChainLightning.blp",
     onDamageDealt = function(source, target, amount)
         buff.removeBuff(source, 'lightninggauntlet')
+        UnitRemoveAbility(source, FourCC('rsaa'))
 
         local playerId = GetPlayerId(GetOwningPlayer(source))
 

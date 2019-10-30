@@ -40,6 +40,7 @@ local cast = function(playerId)
     animations.queueAnimation(hero, 17, 1)
 
     buff.addBuff(hero, hero, 'lightninggauntlet', 5)
+    UnitAddAbility(hero, FourCC('rsaa'))
 
     return true
 end
