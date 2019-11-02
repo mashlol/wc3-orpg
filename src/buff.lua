@@ -2,11 +2,24 @@ local hero = require('src/hero.lua')
 local stats = require('src/stats.lua')
 local damage = require('src/damage.lua')
 local buffloop = require('src/buffloop.lua')
-local equipment = require('src/items/equipment.lua')
 local casttime = require('src/casttime.lua')
-local itemmanager = require('src/items/itemmanager.lua')
 
 local BUFF_INFO = {
+    mount = {
+        effects = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 2,
+            },
+        },
+        vfx = {
+            model = "Liberty.mdl",
+            attach = "chest",
+        },
+        removeOnDamage = true,
+        removeOnCast = true,
+        icon = "ReplaceableTextures\\CommandButtons\\BTNWindWalkOn.blp",
+    },
     focus = {
         effects = {
             {
@@ -478,6 +491,16 @@ function maybeRemoveBuffsOnDamage(source, target, amount)
     end
 end
 
+function maybeRemoveBuffsOnCast(playerId)
+    local sourceUnit = hero.getHero(playerId)
+    local buffs = getBuffs(sourceUnit)
+    for buffName, _ in pairs(buffs) do
+        if BUFF_INFO[buffName].removeOnCast then
+            removeBuff(sourceUnit, buffName)
+        end
+    end
+end
+
 function hasBuff(unit, buffName)
     local unitId = GetHandleId(unit)
     return buffInstances[unitId] ~= nil and
@@ -603,6 +626,7 @@ return {
     getModifiedDamage = getModifiedDamage,
     getModifiedHealing = getModifiedHealing,
     maybeRemoveBuffsOnDamage = maybeRemoveBuffsOnDamage,
+    maybeRemoveBuffsOnCast = maybeRemoveBuffsOnCast,
     applyEffectList = applyEffectList,
     maybeAddEffectToList = maybeAddEffectToList,
     getBaseObjForUnit = getBaseObjForUnit,

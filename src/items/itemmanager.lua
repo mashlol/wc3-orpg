@@ -1031,6 +1031,19 @@ local ITEMS = {
         cost = -1,
         consume = false,
     },
+    [49] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Spirit Winds',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNWindWalkOn.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 1,
+        text = "Engage the spirit winds to travel faster.|nMust be out of combat.",
+        spell = 'mount',
+        cost = -1,
+        consume = false,
+    },
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
