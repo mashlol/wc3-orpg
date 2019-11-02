@@ -126,7 +126,7 @@ function init()
 
                     log.log(
                         playerId,
-                        "You entered |cffdb8b1a" .. zoneInfo.name .. "|r" .. levelRange,
+                        "Now entering |cffdb8b1a" .. zoneInfo.name .. "|r" .. levelRange,
                         log.TYPE.INFO)
 
                     local curSpawnPoint = getSpawnPoint(playerId)
