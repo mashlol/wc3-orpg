@@ -34,9 +34,7 @@ local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 local vendor = require('src/items/vendor.lua')
 local bossmanager = require('src/bosses/bossmanager.lua')
-
--- TODO add dungeon manager
-local mine = require('src/dungeons/mine.lua')
+local dungeonmanager = require('src/dungeons/dungeonmanager.lua')
 
 local debug = require('src/debug.lua')
 
@@ -75,7 +73,7 @@ local mainInit = function()
     itemmanager.init()
     vendor.init()
     bossmanager.init()
-    mine.init()
+    dungeonmanager.init()
 
     -- Intentionally after bossmanager to record boss locations
     spawnpoint.init()
