@@ -49,18 +49,25 @@ function maybeResetDungeon(dungeonKey)
         end
     end
 
-    if not bossmanager.isBossAlive(DUNGEONS[dungeonKey].finalBoss) then
-        for _, unitInfo in pairs(unitsToRespawn[dungeonKey]) do
-            local newUnit = CreateUnit(
-            Player(PLAYER_NEUTRAL_AGGRESSIVE),
-                unitInfo.unitType,
-                unitInfo.spawnV.x,
-                unitInfo.spawnV.y,
-                unitInfo.facing)
-            SetUnitUserData(newUnit, unitInfo.unitId)
+    if
+        DUNGEONS[dungeonKey].finalBoss == nil or
+        not bossmanager.isBossAlive(DUNGEONS[dungeonKey].finalBoss)
+    then
+        if unitsToRespawn[dungeonKey] ~= nil then
+            for _, unitInfo in pairs(unitsToRespawn[dungeonKey]) do
+                local newUnit = CreateUnit(
+                Player(PLAYER_NEUTRAL_AGGRESSIVE),
+                    unitInfo.unitType,
+                    unitInfo.spawnV.x,
+                    unitInfo.spawnV.y,
+                    unitInfo.facing)
+                SetUnitUserData(newUnit, unitInfo.unitId)
+            end
         end
 
-        bossmanager.maybeRespawnBoss(DUNGEONS[dungeonKey].finalBoss)
+        if DUNGEONS[dungeonKey].finalBoss ~= nil then
+            bossmanager.maybeRespawnBoss(DUNGEONS[dungeonKey].finalBoss)
+        end
         for _, boss in pairs(DUNGEONS[dungeonKey].otherBosses) do
             bossmanager.maybeRespawnBoss(boss)
         end
@@ -141,6 +148,25 @@ function init()
             otherBosses = {
                 bossmanager.ALL_BOSSES.MINER_JOE,
             },
+        },
+        WOLF_LAIR = {
+            name = "Wolf Lair",
+            tps = {
+                {
+                    from = gg_rct_wolfenter,
+                    to = gg_rct_wolfentrance,
+                },
+                {
+                    from = gg_rct_wolfleave,
+                    to = gg_rct_wolfexit,
+                },
+            },
+            rects = {
+                gg_rct_wolfdungeon1,
+                gg_rct_wolfdungeon2,
+            },
+            finalBoss = nil,
+            otherBosses = {},
         },
     }
 
