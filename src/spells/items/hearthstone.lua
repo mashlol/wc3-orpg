@@ -40,7 +40,7 @@ local cast = function(playerId)
         log.log(playerId, "You're in combat.", log.TYPE.ERROR)
         return false
     end
-
+    IssueImmediateOrder(hero, "stop")
     local castSuccess = casttime.cast(playerId, 5, true)
     if not castSuccess then
         return false

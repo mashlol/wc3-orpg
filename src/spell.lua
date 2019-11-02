@@ -2,6 +2,7 @@
 local healpot1 = require('src/spells/items/healpot1.lua')
 local food1 = require('src/spells/items/food1.lua')
 local hearthstone = require('src/spells/items/hearthstone.lua')
+local mount = require('src/spells/items/mount.lua')
 
 -- Generic
 local heal = require('src/spells/generic/heal.lua')
@@ -62,6 +63,7 @@ local dampenpot = require('src/spells/ivanov/dampenpot.lua')
 local pocketgoo = require('src/spells/ivanov/pocketgoo.lua')
 
 local hero = require('src/hero.lua')
+local buff = require('src/buff.lua')
 local log = require('src/log.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 local casttime = require('src/casttime.lua')
@@ -71,6 +73,7 @@ local SPELL_MAP = {
     healpot1 = healpot1,
     food1 = food1,
     hearthstone = hearthstone,
+    mount = mount,
 
     -- Generic
     heal = heal,
@@ -170,6 +173,7 @@ local castSpellByKey = function(playerId, spellKey)
 
     local spell = SPELL_MAP[spellKey]
     if spell ~= nil then
+        buff.maybeRemoveBuffsOnCast(playerId)
         return spell.cast(playerId)
     end
     return false
