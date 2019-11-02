@@ -47,6 +47,7 @@ gg_dest_DTg3_18339 = nil
 gg_dest_DTg3_18751 = nil
 gg_dest_YTcx_17816 = nil
 gg_dest_YTcx_17815 = nil
+gg_rct_minedungeon1 = nil
 function InitGlobals()
 end
 
@@ -558,6 +559,7 @@ function CreateRegions()
     gg_rct_wolfcaveenter1 = Rect(9056.0, 6784.0, 10912.0, 7584.0)
     gg_rct_cultistenter1 = Rect(16256.0, -6080.0, 17952.0, -2176.0)
     gg_rct_campenter1 = Rect(12544.0, -5536.0, 16032.0, -3072.0)
+    gg_rct_minedungeon1 = Rect(21632.0, 24800.0, 27840.0, 31584.0)
 end
 
 function CreateCameras()

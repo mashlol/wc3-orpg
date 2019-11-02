@@ -19,10 +19,6 @@ end
 function storeUnit()
     local unit = GetEnumUnit()
 
-    if not BlzGetUnitBooleanField(unit, UNIT_BF_RAISABLE) then
-        return
-    end
-
     if GetOwningPlayer(unit) ~= Player(PLAYER_NEUTRAL_AGGRESSIVE) then
         return
     end
