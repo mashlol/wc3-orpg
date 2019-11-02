@@ -21,6 +21,7 @@ local Equipment = require('src/ui/equipment.lua')
 local LootRoll = require('src/ui/lootroll.lua')
 local Map = require('src/ui/map.lua')
 local HeroSelect = require('src/ui/heroselect.lua')
+local DpsMeter = require('src/ui/dpsmeter.lua')
 
 local UI_MODULES = {
     ActionBar:new(),
@@ -44,6 +45,7 @@ local UI_MODULES = {
         buffSize = consts.BUFF_ICON_SIZE,
     },
     Backpack:new(),
+    DpsMeter:new(),
 }
 
 for i=0,9,1 do

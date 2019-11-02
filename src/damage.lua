@@ -2,6 +2,15 @@ local buff = require('src/buff.lua')
 local buffloop = require('src/buffloop.lua')
 local threat = require('src/threat.lua')
 
+-- dpsMeters = {
+--     [playerId] = {
+--         startTimer = timer1,
+--         expireTimer = timer2,
+--         amount = 1,
+--     }
+-- }
+local dpsMeters = {}
+
 local TYPE = {
     SPELL = {
         attackType = ATTACK_TYPE_HERO,
@@ -115,6 +124,43 @@ function onDamageTaken()
     createCombatText(amount, target, false, isCrit)
     threat.addThreat(source, target, amount)
     buff.maybeRemoveBuffsOnDamage(source, target, amount)
+
+    local playerId = GetPlayerId(GetOwningPlayer(source))
+
+    if GetPlayerController(Player(playerId)) ~= MAP_CONTROL_USER then
+        return
+    end
+
+    if dpsMeters[playerId] == nil then
+        dpsMeters[playerId] = {}
+    end
+    if
+        dpsMeters[playerId].expireTimer == nil or
+        TimerGetRemaining(dpsMeters[playerId].expireTimer) == 0
+    then
+        -- Start from beginning
+        DestroyTimer(dpsMeters[playerId].startTimer)
+
+        local startTimer = CreateTimer()
+        TimerStart(startTimer, 3600, false, nil)
+        dpsMeters[playerId].startTimer = startTimer
+
+        dpsMeters[playerId].amount = 0
+    end
+    -- Restart expire timer and add to total damage
+    DestroyTimer(dpsMeters[playerId].expireTimer)
+    local expireTimer = CreateTimer()
+    TimerStart(expireTimer, 5, false, nil)
+    dpsMeters[playerId].expireTimer = expireTimer
+    dpsMeters[playerId].lastTime = TimerGetElapsed(dpsMeters[playerId].startTimer)
+    dpsMeters[playerId].amount = dpsMeters[playerId].amount + amount
+end
+
+function getCurrentDps(playerId)
+    if dpsMeters[playerId] == nil then
+        return nil
+    end
+    return dpsMeters[playerId].amount / math.max(dpsMeters[playerId].lastTime, 1)
 end
 
 function init()
@@ -131,4 +177,5 @@ return {
     init = init,
     dealDamage = dealDamage,
     heal = heal,
+    getCurrentDps = getCurrentDps,
 }
