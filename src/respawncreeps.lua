@@ -7,6 +7,10 @@ local clearDeadUnits = function()
     local unitId = GetUnitUserData(unit)
     local unitType = GetUnitTypeId(unit)
 
+    if not BlzGetUnitBooleanField(unit, UNIT_BF_RAISABLE) then
+        return
+    end
+
     if spawnV and facing then
         TriggerSleepAction(30)
 
@@ -22,8 +26,11 @@ end
 
 local init = function()
     local trigger = CreateTrigger()
-
-    TriggerRegisterAnyUnitEventBJ(trigger, EVENT_PLAYER_UNIT_DEATH)
+    TriggerRegisterPlayerUnitEvent(
+        trigger,
+        Player(PLAYER_NEUTRAL_AGGRESSIVE),
+        EVENT_PLAYER_UNIT_DEATH,
+        nil)
     TriggerAddAction(trigger, clearDeadUnits)
 end
 

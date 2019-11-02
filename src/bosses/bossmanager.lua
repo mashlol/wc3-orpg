@@ -7,34 +7,34 @@ local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
 
 local ALL_BOSS_CLASSES = {
-    Turtle:new{
+    TURTLE = Turtle:new{
         bossUnitId = FourCC('hbos'),
         startX = -651,
         startY = -1480,
         facing = 134,
         respawnable = false,
     },
-    Wolf:new{
+    WOLF = Wolf:new{
         bossUnitId = FourCC('hbld'),
         startX = 15195,
         startY = 7531,
         facing = 223,
         respawnable = false,
     },
-    MinerJoe:new{
+    MINER_JOE = MinerJoe:new{
         bossUnitId = FourCC('mine'),
         startX = 24237,
         startY = 27062,
         facing = 37,
         respawnable = false,
     },
-    OverseerTom:new{
+    THE_OVERSEER = OverseerTom:new{
         bossUnitId = FourCC('over'),
         startX = 23428,
         startY = 30510,
         facing = 270,
         respawnable = false,
-    }
+    },
 }
 
 local Phase = {}
@@ -274,6 +274,10 @@ end
 
 function Context:startRespawn()
     TriggerSleepAction(60)
+    self:respawnBoss()
+end
+
+function Context:respawnBoss()
     self.cls.bossUnit =  CreateUnit(
         Player(PLAYER_NEUTRAL_AGGRESSIVE),
         self.cls.bossUnitId,
@@ -308,6 +312,25 @@ function Context:resetFight()
     SetUnitFacing(self.cls.bossUnit, self.cls.facing)
 end
 
+function isBossAlive(boss)
+    return GetUnitState(boss.bossUnit, UNIT_STATE_LIFE) > 0
+end
+
+function maybeRespawnBoss(boss)
+    if not isBossAlive(boss) then
+        boss.ctx:respawnBoss()
+    end
+end
+
+function isBoss(unit)
+    for _, cls in pairs(ALL_BOSS_CLASSES) do
+        if cls.bossUnit == unit then
+            return true
+        end
+    end
+    return false
+end
+
 function init()
     for idx, cls in pairs(ALL_BOSS_CLASSES) do
         cls.bossUnit = CreateUnit(
@@ -325,5 +348,9 @@ function init()
 end
 
 return {
+    ALL_BOSSES = ALL_BOSS_CLASSES,
     init = init,
+    isBossAlive = isBossAlive,
+    maybeRespawnBoss = maybeRespawnBoss,
+    isBoss = isBoss,
 }
