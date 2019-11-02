@@ -37,8 +37,6 @@ function onEnterRegion()
     local tpInfo = TP_MAPPINGS[GetHandleId(region)]
     if tpInfo ~= nil then
         moveUnitToRegion(GetEnteringUnit(), tpInfo.toRect)
-
-        maybeResetDungeon(tpInfo.dungeonKey)
     end
 end
 
