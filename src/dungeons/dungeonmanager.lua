@@ -4,10 +4,11 @@ local spawnpoint = require('src/spawnpoint.lua')
 
 local DUNGEONS
 local TP_MAPPINGS = {}
+local DUNGEON_REGION_MAPPINGS = {}
 
 -- List of units which we're going to respawn when we reset the dungeon
 -- unitsToRespawn = {
---     [dungeon_key] = {
+--     [dungeonKey] = {
 --         {
 --             unitId = 1,
 --             unitType = FourCC('hfoo'),
@@ -33,11 +34,20 @@ end
 function onEnterRegion()
     local region = GetTriggeringRegion()
 
-    local toInfo = TP_MAPPINGS[GetHandleId(region)]
-    if toInfo ~= nil then
-        moveUnitToRegion(GetEnteringUnit(), toInfo.toRect)
+    local tpInfo = TP_MAPPINGS[GetHandleId(region)]
+    if tpInfo ~= nil then
+        moveUnitToRegion(GetEnteringUnit(), tpInfo.toRect)
 
-        maybeResetDungeon(toInfo.dungeonKey)
+        maybeResetDungeon(tpInfo.dungeonKey)
+    end
+end
+
+function onExitDungeon()
+    local region = GetTriggeringRegion()
+
+    local dungeonKey = DUNGEON_REGION_MAPPINGS[GetHandleId(region)]
+    if dungeonKey ~= nil then
+        maybeResetDungeon(dungeonKey)
     end
 end
 
@@ -184,6 +194,17 @@ function init()
         end
     end
     TriggerAddAction(enterRegionTrig, onEnterRegion)
+
+    local exitDungeonTrig = CreateTrigger()
+    for dungeonKey, dungeonInfo in pairs(DUNGEONS) do
+        local dungeonRegion = CreateRegion()
+        for _, rect in pairs(dungeonInfo.rects) do
+            RegionAddRect(dungeonRegion, rect)
+        end
+        TriggerRegisterLeaveRegion(exitDungeonTrig, dungeonRegion, nil)
+        DUNGEON_REGION_MAPPINGS[GetHandleId(dungeonRegion)] = dungeonKey
+    end
+    TriggerAddAction(exitDungeonTrig, onExitDungeon)
 
     local deathTrigger = CreateTrigger()
     TriggerRegisterPlayerUnitEvent(
