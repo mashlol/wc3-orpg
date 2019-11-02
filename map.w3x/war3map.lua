@@ -48,6 +48,12 @@ gg_dest_DTg3_18751 = nil
 gg_dest_YTcx_17816 = nil
 gg_dest_YTcx_17815 = nil
 gg_rct_minedungeon1 = nil
+gg_rct_wolfdungeon1 = nil
+gg_rct_wolfdungeon2 = nil
+gg_rct_wolfleave = nil
+gg_rct_wolfentrance = nil
+gg_rct_wolfexit = nil
+gg_rct_wolfenter = nil
 function InitGlobals()
 end
 
@@ -560,6 +566,12 @@ function CreateRegions()
     gg_rct_cultistenter1 = Rect(16256.0, -6080.0, 17952.0, -2176.0)
     gg_rct_campenter1 = Rect(12544.0, -5536.0, 16032.0, -3072.0)
     gg_rct_minedungeon1 = Rect(21632.0, 24800.0, 27840.0, 31584.0)
+    gg_rct_wolfdungeon1 = Rect(15264.0, 23616.0, 21120.0, 27424.0)
+    gg_rct_wolfdungeon2 = Rect(16736.0, 27392.0, 21088.0, 32224.0)
+    gg_rct_wolfleave = Rect(20544.0, 26112.0, 20736.0, 26304.0)
+    gg_rct_wolfentrance = Rect(20480.0, 25760.0, 20864.0, 26016.0)
+    gg_rct_wolfexit = Rect(15008.0, 5600.0, 15264.0, 5888.0)
+    gg_rct_wolfenter = Rect(15392.0, 5568.0, 15552.0, 5824.0)
 end
 
 function CreateCameras()
