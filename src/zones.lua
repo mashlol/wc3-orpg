@@ -61,6 +61,7 @@ function init()
             levelRange = {10, 14},
             rects = {
                 gg_rct_wolfcaveenter1,
+                gg_rct_wolfexit,
             },
         },
         CULTIST_CAMP = {
@@ -78,6 +79,28 @@ function init()
             spawnPoint = {
                 x = 14527,
                 y = -5345,
+            },
+        },
+        THE_MINES = {
+            name = 'The Mines',
+            levelRange = {20, 25},
+            rects = {
+                gg_rct_minedungeon1,
+            },
+        },
+        WOLF_LAIR = {
+            name = 'Wolf Lair',
+            levelRange = {8, 13},
+            rects = {
+                gg_rct_wolfdungeon1,
+                gg_rct_wolfdungeon2,
+            },
+        },
+        BEATEN_ROAD = {
+            name = 'The Beaten Road',
+            rects = {
+                gg_rct_roadenter1,
+                gg_rct_roadenter2,
             },
         },
     }
@@ -103,7 +126,7 @@ function init()
 
                     log.log(
                         playerId,
-                        "You entered " .. zoneInfo.name .. levelRange,
+                        "You entered |cffdb8b1a" .. zoneInfo.name .. "|r" .. levelRange,
                         log.TYPE.INFO)
 
                     local curSpawnPoint = getSpawnPoint(playerId)

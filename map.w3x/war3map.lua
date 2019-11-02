@@ -54,6 +54,8 @@ gg_rct_wolfleave = nil
 gg_rct_wolfentrance = nil
 gg_rct_wolfexit = nil
 gg_rct_wolfenter = nil
+gg_rct_roadenter1 = nil
+gg_rct_roadenter2 = nil
 function InitGlobals()
 end
 
@@ -572,6 +574,8 @@ function CreateRegions()
     gg_rct_wolfentrance = Rect(20480.0, 25760.0, 20864.0, 26016.0)
     gg_rct_wolfexit = Rect(15008.0, 5600.0, 15264.0, 5888.0)
     gg_rct_wolfenter = Rect(15392.0, 5568.0, 15552.0, 5824.0)
+    gg_rct_roadenter1 = Rect(5664.0, 1152.0, 7200.0, 3840.0)
+    gg_rct_roadenter2 = Rect(10272.0, -3072.0, 15136.0, -640.0)
 end
 
 function CreateCameras()
