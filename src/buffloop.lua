@@ -84,17 +84,20 @@ function applyBuffs()
 
     for idx,unitInfo in pairs(effectsByUnitId) do
         local unit = unitInfo.unit
+        local unitType = GetUnitTypeId(unit)
 
         local obj = buff.getBaseObjForUnit(unit)
         local res = buff.applyEffectList(obj, unitInfo.effects)
         finalBuffList[idx] = res
 
-        if res.isRooted then
+        if res.isRooted and buff.isUnitTypeStunnable(unitType) then
             SetUnitMoveSpeed(unit, 0)
-        else
+        elseif buff.isUnitTypeSlowable(unitType) then
             SetUnitMoveSpeed(unit, res.baseSpeed)
         end
-        PauseUnit(unit, res.isStunned)
+        if buff.isUnitTypeStunnable(unitType) then
+            PauseUnit(unit, res.isStunned)
+        end
         SetUnitScale(unit, res.scale, res.scale, res.scale)
         if res.baseHP then
             BlzSetUnitMaxHP(unit, res.baseHP)
