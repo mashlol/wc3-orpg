@@ -41,7 +41,6 @@ function pruneThreatLevels()
 
     for targetUnitId,threatInfo in pairs(threatLevels) do
         local newThreats = {}
-        local hasAnyThreats = false
         if GetUnitState(threatInfo.unit, UNIT_STATE_LIFE) > 0 then
             local targetSpawnPos = spawnpoint.getSpawnPoint(threatInfo.unit)
             for sourceUnitId,sourceThreatInfo in pairs(threatInfo.threats) do
@@ -51,7 +50,7 @@ function pruneThreatLevels()
                     x = GetUnitX(sourceThreatInfo.unit),
                     y = GetUnitY(sourceThreatInfo.unit)}
                 local unitIsWithinRange = true
-                if targetSpawnPos then
+                if BlzGetUnitBooleanField(threatInfo.unit, UNIT_BF_RAISABLE) then
                     local dist = sourcePos
                         :subtract(targetSpawnPos)
                         :magnitude()
