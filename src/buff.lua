@@ -370,6 +370,17 @@ local BUFF_INFO = {
     },
 }
 
+local IMMUNE_UNIT_TYPES = {
+    [FourCC('mine')] = {
+        stunnable = false,
+        slowable = true,
+    },
+    [FourCC('over')] = {
+        stunnable = false,
+        slowable = false,
+    },
+}
+
 -- BuffInstances:
 -- {
 --   [unitHandleID] = {
@@ -610,6 +621,20 @@ function getBaseObjForUnit(unit)
     }
 end
 
+function isUnitTypeSlowable(unitType)
+    if IMMUNE_UNIT_TYPES[unitType] ~= nil then
+        return IMMUNE_UNIT_TYPES[unitType].slowable
+    end
+    return true
+end
+
+function isUnitTypeStunnable(unitType)
+    if IMMUNE_UNIT_TYPES[unitType] ~= nil then
+        return IMMUNE_UNIT_TYPES[unitType].stunnable
+    end
+    return true
+end
+
 function getBuffInstances()
     return buffInstances
 end
@@ -630,4 +655,6 @@ return {
     applyEffectList = applyEffectList,
     maybeAddEffectToList = maybeAddEffectToList,
     getBaseObjForUnit = getBaseObjForUnit,
+    isUnitTypeSlowable = isUnitTypeSlowable,
+    isUnitTypeStunnable = isUnitTypeStunnable,
 }
