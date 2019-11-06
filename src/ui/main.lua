@@ -80,11 +80,10 @@ function hideBlizzUI()
     local worldFrame = BlzGetOriginFrame(ORIGIN_FRAME_WORLD_FRAME, 0)
     BlzFrameSetAllPoints(worldFrame, originFrame)
 
-    for i=0,11,1 do
-        local commandFrame = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, i)
-        BlzFrameClearAllPoints(commandFrame)
-        BlzFrameSetAbsPoint(commandFrame, FRAMEPOINT_TOPLEFT, 0, 0)
-    end
+    local commandFrame = BlzGetOriginFrame(ORIGIN_FRAME_COMMAND_BUTTON, 1)
+    local parentCommandFrame = BlzFrameGetParent(commandFrame)
+    BlzFrameClearAllPoints(parentCommandFrame)
+    BlzFrameSetAbsPoint(parentCommandFrame, FRAMEPOINT_TOPLEFT, -1, -1)
 
     local miniMapFrame = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
 
