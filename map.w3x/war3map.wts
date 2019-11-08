@@ -34,12 +34,6 @@ STRING 7
 Testing
 }
 
-STRING 8
-// Doodads: tst3 (Testing 2), Name (Name)
-{
-Testing 2
-}
-
 STRING 9
 // Units: hbos (Giant Turtle), Tip (Tooltip - Basic)
 {
@@ -386,5 +380,23 @@ STRING 66
 // Units: cfir (Central Bonfire), Name (Name)
 {
 Central Bonfire
+}
+
+STRING 67
+// Doodads: tst3 (Fence Anywhere), Name (Name)
+{
+Fence Anywhere
+}
+
+STRING 68
+// Doodads: fira (Fire Pit Anywhere), Name (Name)
+{
+Fire Pit Anywhere
+}
+
+STRING 69
+// Doodads: benc (Bench Anywhere), Name (Name)
+{
+Bench Anywhere
 }
 
