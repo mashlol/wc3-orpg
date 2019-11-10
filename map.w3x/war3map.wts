@@ -543,3 +543,9 @@ STRING 95
  (Male Wander)
 }
 
+STRING 96
+// Doodads: farc (Frost arc anywhere), Name (Name)
+{
+Frost arc anywhere
+}
+

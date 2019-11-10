@@ -12,8 +12,8 @@ function CreateUnitsForPlayer0()
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), 12753.7, -9421.0, 256.556, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hyuj"), 12617.2, -9408.6, 266.743, FourCC("Hyuj"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hivn"), 12893.8, -9435.5, 244.840, FourCC("Hivn"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Htar"), 12475.5, -9421.0, -73.646, FourCC("Htar"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Hstm"), 12365.2, -9464.8, -69.180, FourCC("Hstm"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Htar"), 12475.5, -9421.0, 286.354, FourCC("Htar"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hstm"), 12365.2, -9464.8, 290.820, FourCC("Hstm"))
 end
 
 function CreateNeutralPassive()
