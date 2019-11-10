@@ -418,3 +418,27 @@ STRING 72
 Low Stone Anywhere
 }
 
+STRING 73
+// Destructibles: B000 (Bandit Tent 3), Name (Name)
+{
+Bandit Tent 3
+}
+
+STRING 74
+// Destructibles: B001 (Bandit Tent 1), Name (Name)
+{
+Bandit Tent 1
+}
+
+STRING 75
+// Destructibles: B002 (Bandit Tent 2), Name (Name)
+{
+Bandit Tent 2
+}
+
+STRING 76
+// Doodads: D000 (Tall Grass), Name (Name)
+{
+Tall Grass
+}
+

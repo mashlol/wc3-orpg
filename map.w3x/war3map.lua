@@ -3,6 +3,17 @@ function InitGlobals()
 end
 
 local REPLACE_ME
+function CreateUnitsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("Hyuj"), -1607.1, -2414.2, 264.053, FourCC("Hyuj"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -872.3, -3003.7, 225.205, FourCC("Hazr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hyuj"), 10625.8, -1712.4, 129.763, FourCC("Hyuj"))
+end
+
 function CreateNeutralPassive()
     local p = Player(PLAYER_NEUTRAL_PASSIVE)
     local u
@@ -20,7 +31,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1332.0, -2627.9, 208.850, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1173.7, -2574.4, 291.118, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 2877.6, -2768.2, 49.653, FourCC("nvk2"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 2862.8, -2630.5, -26.454, FourCC("nvlk"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 2862.8, -2630.5, 333.546, FourCC("nvlk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 3041.6, -2641.1, 205.458, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1391.9, -4093.0, 8.764, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2550.7, -4365.4, 109.620, FourCC("nbee"))
@@ -31,6 +42,7 @@ function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
+    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
