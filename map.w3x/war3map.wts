@@ -10,7 +10,7 @@ Force 1
 
 STRING 3
 {
-fk off
+PLACEHOLDER_NAME_REPLACED
 }
 
 STRING 4
@@ -20,12 +20,12 @@ Any
 
 STRING 5
 {
-Nondescript
+PLACEHOLDER_DESC_REPLACED
 }
 
 STRING 6
 {
-Unknown
+Mash, Spoon & Reckless
 }
 
 STRING 7
@@ -440,5 +440,70 @@ STRING 76
 // Doodads: D000 (Tall Grass), Name (Name)
 {
 Tall Grass
+}
+
+STRING 77
+{
+PLACEHOLDER_TITLE_REPLACED
+}
+
+STRING 78
+{
+Player 2
+}
+
+STRING 79
+{
+Player 3
+}
+
+STRING 80
+{
+Player 4
+}
+
+STRING 81
+{
+Player 5
+}
+
+STRING 82
+{
+Player 6
+}
+
+STRING 83
+{
+Player 7
+}
+
+STRING 84
+{
+Player 8
+}
+
+STRING 85
+{
+Player 9
+}
+
+STRING 86
+{
+Player 10
+}
+
+STRING 87
+{
+Player 11
+}
+
+STRING 88
+{
+Evil
+}
+
+STRING 89
+{
+https://discord.gg/AbBsrM9
 }
 
