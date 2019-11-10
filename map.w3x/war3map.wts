@@ -513,3 +513,33 @@ STRING 90
 WAterfall test
 }
 
+STRING 91
+// Doodads: D001 (Tower Anywhere), Name (Name)
+{
+Tower Anywhere
+}
+
+STRING 92
+// Doodads: D002 (House Anywhere Green), Name (Name)
+{
+House Anywhere Green
+}
+
+STRING 93
+// Units: vlww (Villager), EditorSuffix (Name - Editor Suffix)
+{
+ (Female Wander)
+}
+
+STRING 94
+// Units: vl2w (Villager), EditorSuffix (Name - Editor Suffix)
+{
+ (Male Wander 2)
+}
+
+STRING 95
+// Units: nviw (Villager), EditorSuffix (Name - Editor Suffix)
+{
+ (Male Wander)
+}
+
