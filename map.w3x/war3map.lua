@@ -1,5 +1,5 @@
-gg_cam_Camera_001 = nil
 gg_rct_Region_000 = nil
+gg_cam_Camera_001 = nil
 function InitGlobals()
 end
 
@@ -29,7 +29,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17113.8, -13518.8, 205.473, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 16239.8, -13837.2, 148.617, FourCC("vlww"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 16715.4, -13484.0, -82.291, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 16715.4, -13484.0, 277.709, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 16770.2, -13536.7, 183.205, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 15429.5, -15090.6, 158.867, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 16236.0, -14525.1, 284.115, FourCC("nalb"))
@@ -49,7 +49,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 13226.2, -12982.0, 238.433, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 14017.6, -12736.6, 351.101, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 14145.1, -13005.4, 73.819, FourCC("vlww"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hrdh"), 15845.5, -12374.0, -2.440, FourCC("hrdh"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hrdh"), 15845.5, -12374.0, 357.560, FourCC("hrdh"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17838.4, -11552.7, 168.584, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17841.5, -11381.6, 172.687, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17447.3, -10975.6, 266.894, FourCC("hfoo"))
