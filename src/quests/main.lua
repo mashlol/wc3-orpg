@@ -479,8 +479,8 @@ function initQuests()
     QUESTS = {
         [1] = {
             name = "Trouble in Turtle Town",
-            getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvl2_0005,
+            getQuestFrom = gg_unit_nvil_0069,
+            handQuestTo = gg_unit_nvil_0069,
             obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
             incompleteText = "Have you completed the task?",
             completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
@@ -502,8 +502,8 @@ function initQuests()
         },
         [2] = {
             name = "Fred's Quest",
-            getQuestFrom = gg_unit_nvil_0004,
-            handQuestTo = gg_unit_nvil_0085,
+            getQuestFrom = gg_unit_nvl2_0070,
+            handQuestTo = gg_unit_nvil_0071,
             obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
             incompleteText = "I don't think its possible to see this text.",
             completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
@@ -517,8 +517,8 @@ function initQuests()
         },
         [3] = {
             name = "Fred's Soup",
-            getQuestFrom = gg_unit_nvil_0085,
-            handQuestTo = gg_unit_nvil_0085,
+            getQuestFrom = gg_unit_nvil_0071,
+            handQuestTo = gg_unit_nvil_0071,
             obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect five River Turtle Meat and bring it back to me?",
             incompleteText = "Have you completed the task?",
             completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
@@ -538,8 +538,8 @@ function initQuests()
         },
         [4] = {
             name = "Return to Freydell Village",
-            getQuestFrom = gg_unit_nvil_0085,
-            handQuestTo = gg_unit_nvil_0004,
+            getQuestFrom = gg_unit_nvil_0071,
+            handQuestTo = gg_unit_nvl2_0070,
             obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
             incompleteText = "Impossible!",
             completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
@@ -553,8 +553,8 @@ function initQuests()
         },
         [5] = {
             name = "Wolves to the North",
-            getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvl2_0005,
+            getQuestFrom = gg_unit_nvil_0069,
+            handQuestTo = gg_unit_nvil_0069,
             obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least fifteen.",
             incompleteText = "Have you killed the wolves yet?",
             completedText = "Wow! You're skilled!",
@@ -575,8 +575,8 @@ function initQuests()
         },
 		[6] = {
             name = "Talk to Elder John",
-            getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvil_0087,
+            getQuestFrom = gg_unit_nvil_0069,
+            handQuestTo = gg_unit_nemi_0014,
             obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
             incompleteText = "Have you talked to Elder John?",
             completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
@@ -592,8 +592,8 @@ function initQuests()
         },
 		[7] = {
             name = "Giant Turtle",
-            getQuestFrom = gg_unit_nvl2_0005,
-            handQuestTo = gg_unit_nvl2_0005,
+            getQuestFrom = gg_unit_nvil_0069,
+            handQuestTo = gg_unit_nvil_0069,
             obtainText = "There's a giant turtle just west of Freydell Village, We believe it's the leader of the turtles invading the forest. Slay it and I will reward you fairly.",
             incompleteText = "Have you slain the giant turtle",
             completedText = "You did it? I'm amazed!",
@@ -614,8 +614,8 @@ function initQuests()
         },
 		[8] = {
             name = "Alpha Wolf",
-            getQuestFrom = gg_unit_nvil_0087,
-            handQuestTo = gg_unit_nvil_0087,
+            getQuestFrom = gg_unit_nemi_0014,
+            handQuestTo = gg_unit_nemi_0014,
             obtainText = "There is a cave just north of the village where the Alpha Wolf resides, though it is probably being controlled I need you to slay it. If you follow the road west you should be able to find him.",
             incompleteText = "Have you slain the alpha wolf?",
             completedText = "You did it? I'm amazed!",
@@ -636,7 +636,7 @@ function initQuests()
         },
         [9] = {
             name = "General Smith",
-            getQuestFrom = gg_unit_nvil_0087,
+            getQuestFrom = gg_unit_nemi_0014,
             handQuestTo = gg_unit_gens_0335,
             obtainText = "If you follow the path east and go left at the fork in the road you should be able to find General Smith at an army encampment just outside of Ironwell City.",
             incompleteText = "Did you find General Smith?",

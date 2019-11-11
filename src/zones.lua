@@ -4,8 +4,8 @@ local log = require('src/log.lua')
 local ZONES
 
 local DEFAULT_SPAWN_POINT = {
-    x = 4100,
-    y = 3000,
+    x = 1998,
+    y = -3141,
 }
 
 -- spawnPoints = {
@@ -37,8 +37,8 @@ function init()
                 gg_rct_freydellenter1,
             },
             spawnPoint = {
-                x = 4100,
-                y = 3000,
+                x = 1998,
+                y = -3141,
             },
         },
         FOREST = {
@@ -54,6 +54,13 @@ function init()
             rects = {
                 gg_rct_wolvesenter1,
                 gg_rct_wolvesenter2,
+            },
+        },
+        ICE_ZONE = {
+            name = "Ice Zone",
+            levelRange = {7, 12},
+            rects = {
+                gg_rct_iceenter1,
             },
         },
         WOLF_CAVE = {
