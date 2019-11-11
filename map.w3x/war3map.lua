@@ -1,21 +1,9 @@
 gg_cam_Camera_001 = nil
+gg_rct_Region_000 = nil
 function InitGlobals()
 end
 
 local REPLACE_ME
-function CreateUnitsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), 12753.7, -9421.0, 256.556, FourCC("Hazr"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Hyuj"), 12617.2, -9408.6, 266.743, FourCC("Hyuj"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Hivn"), 12893.8, -9435.5, 244.840, FourCC("Hivn"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Htar"), 12475.5, -9421.0, 286.354, FourCC("Htar"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Hstm"), 12365.2, -9464.8, 290.820, FourCC("Hstm"))
-end
-
 function CreateNeutralPassive()
     local p = Player(PLAYER_NEUTRAL_PASSIVE)
     local u
@@ -38,6 +26,11 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1391.9, -4093.0, 8.764, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2550.7, -4365.4, 109.620, FourCC("nbee"))
     u = BlzCreateUnitWithSkin(p, FourCC("hrdh"), 3101.3, -2818.5, 316.620, FourCC("hrdh"))
+    u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17113.8, -13518.8, 205.473, FourCC("nviw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 16239.8, -13837.2, 148.617, FourCC("vlww"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 16715.4, -13484.0, -82.291, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 16770.2, -13536.7, 183.205, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 15429.5, -15090.6, 158.867, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 16236.0, -14525.1, 284.115, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 18091.7, -13148.4, 335.632, FourCC("nalb"))
@@ -56,19 +49,38 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 13226.2, -12982.0, 238.433, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 14017.6, -12736.6, 351.101, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 14145.1, -13005.4, 73.819, FourCC("vlww"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hrdh"), 15845.5, -12374.0, -2.440, FourCC("hrdh"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17838.4, -11552.7, 168.584, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17841.5, -11381.6, 172.687, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17447.3, -10975.6, 266.894, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 17880.6, -10981.2, 268.134, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12391.1, -9523.3, 91.319, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12828.5, -9538.9, 93.046, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 16391.3, -13561.0, 67.604, FourCC("nvil"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 16403.4, -13458.5, 237.328, FourCC("nvk2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 16455.5, -13506.3, 188.627, FourCC("nvlk"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 15062.4, -12857.7, 213.600, FourCC("nhef"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17001.4, -13337.5, 239.470, FourCC("nhem"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17094.3, -13791.3, 155.630, FourCC("nhem"))
 end
 
 function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
     CreatePlayerBuildings()
     CreateNeutralPassive()
     CreatePlayerUnits()
+end
+
+function CreateRegions()
+    local we
+    gg_rct_Region_000 = Rect(12128.0, -16096.0, 18496.0, -9600.0)
+    we = AddWeatherEffect(gg_rct_Region_000, FourCC("LRma"))
+    EnableWeatherEffect(we, true)
 end
 
 function CreateCameras()
@@ -409,6 +421,7 @@ function main()
     SetAmbientDaySound("LordaeronSummerDay")
     SetAmbientNightSound("LordaeronSummerNight")
     SetMapMusic("Music", true, 0)
+    CreateRegions()
     CreateCameras()
     CreateAllUnits()
     InitBlizzard()

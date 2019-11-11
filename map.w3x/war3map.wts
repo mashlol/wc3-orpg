@@ -549,3 +549,33 @@ STRING 96
 Frost arc anywhere
 }
 
+STRING 97
+// Doodads: D003 (Trough Anywhere), Name (Name)
+{
+Trough Anywhere
+}
+
+STRING 98
+// Doodads: D004 (Junk Anywhere), Name (Name)
+{
+Junk Anywhere
+}
+
+STRING 99
+// Doodads: D005 (Tavern Anywhere), Name (Name)
+{
+Tavern Anywhere
+}
+
+STRING 100
+// Doodads: D006 (Stone Bench Anywhere), Name (Name)
+{
+Stone Bench Anywhere
+}
+
+STRING 101
+// Doodads: D007 (Potted Plant Anywhere), Name (Name)
+{
+Potted Plant Anywhere
+}
+
