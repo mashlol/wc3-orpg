@@ -579,3 +579,15 @@ STRING 101
 Potted Plant Anywhere
 }
 
+STRING 102
+// Destructibles: B003 (Igloo), Name (Name)
+{
+Igloo
+}
+
+STRING 103
+// Destructibles: IceW (Ice Walls), Name (Name)
+{
+Ice Walls
+}
+
