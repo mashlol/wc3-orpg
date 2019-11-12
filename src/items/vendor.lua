@@ -35,8 +35,8 @@ end
 
 function init()
     VENDORS = {
-        [GetHandleId(gg_unit_nvlw_0006)] = {
-            unit = gg_unit_nvlw_0006,
+        [GetHandleId(gg_unit_nvl2_0008)] = {
+            unit = gg_unit_nvl2_0008,
             items = {5, 6,}
         },
 		[GetHandleId(gg_unit_nvlw_0332)] = {

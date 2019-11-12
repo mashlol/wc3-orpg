@@ -8,16 +8,18 @@ gg_rct_wolvesenter1 = nil
 gg_rct_wolvesenter2 = nil
 gg_rct_forestenter1 = nil
 gg_rct_forestenter2 = nil
+gg_rct_house1enter1 = nil
+gg_rct_house1exit1 = nil
+gg_rct_house1entrance1 = nil
+gg_rct_house1leave1 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvil_0069 = nil
 gg_unit_nvl2_0070 = nil
 gg_unit_nvil_0071 = nil
 gg_unit_nemi_0014 = nil
-gg_rct_house1enter1 = nil
-gg_rct_house1exit1 = nil
-gg_rct_house1entrance1 = nil
-gg_rct_house1leave1 = nil
+gg_unit_nvlw_0004 = nil
+gg_unit_nvl2_0008 = nil
 function InitGlobals()
 end
 
@@ -98,15 +100,6 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("hwol"), 1072.9, -31.9, 69.234, FourCC("hwol"))
 end
 
-function CreateNeutralPassiveBuildings()
-    local p = Player(PLAYER_NEUTRAL_PASSIVE)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("ncp2"), 30432.0, 30752.0, 270.000, FourCC("ncp2"))
-end
-
 function CreateNeutralPassive()
     local p = Player(PLAYER_NEUTRAL_PASSIVE)
     local u
@@ -120,7 +113,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1506.5, -3833.3, 308.094, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1522.8, -3920.0, 39.473, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 2881.8, -3889.8, 208.095, FourCC("nvil"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2375.6, -4005.7, 193.693, FourCC("nvl2"))
+    gg_unit_nvl2_0008 = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2375.6, -4005.7, 193.693, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1332.0, -2627.9, 208.850, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1173.7, -2574.4, 291.118, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 2877.6, -2768.2, 49.653, FourCC("nvk2"))
@@ -171,7 +164,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1623.1, -4777.0, 274.996, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), -381.7, -3037.1, 197.904, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), -422.3, -3582.1, 161.730, FourCC("hfoo"))
-    gg_unit_nvil_0069 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1691.9, -3042.7, 286.063, FourCC("nvil"))
+    gg_unit_nvil_0069 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1605.4, -3046.9, 286.063, FourCC("nvil"))
     gg_unit_nvl2_0070 = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2109.6, -3057.2, 260.152, FourCC("nvl2"))
     gg_unit_nvil_0071 = BlzCreateUnitWithSkin(p, FourCC("nvil"), -4946.7, -4773.4, 277.180, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 30308.7, 31244.4, 287.308, FourCC("nvlw"))
@@ -188,7 +181,6 @@ function CreatePlayerUnits()
 end
 
 function CreateAllUnits()
-    CreateNeutralPassiveBuildings()
     CreatePlayerBuildings()
     CreateNeutralHostile()
     CreateNeutralPassive()
@@ -219,10 +211,10 @@ function CreateRegions()
     gg_rct_wolvesenter2 = Rect(1536.0, -2304.0, 5728.0, -1664.0)
     gg_rct_forestenter1 = Rect(-1120.0, -9184.0, -96.0, 3136.0)
     gg_rct_forestenter2 = Rect(-7744.0, -7584.0, -6720.0, -2528.0)
-    gg_rct_house1enter1 = Rect(1696.0, -3040.0, 1856.0, -2912.0)
-    gg_rct_house1exit1 = Rect(1696.0, -3232.0, 1856.0, -3072.0)
-    gg_rct_house1entrance1 = Rect(30336.0, 30912.0, 30496.0, 31072.0)
-    gg_rct_house1leave1 = Rect(30336.0, 30688.0, 30528.0, 30816.0)
+    gg_rct_house1enter1 = Rect(1696.0, -3072.0, 1856.0, -2944.0)
+    gg_rct_house1exit1 = Rect(1696.0, -3200.0, 1856.0, -3072.0)
+    gg_rct_house1entrance1 = Rect(30336.0, 30816.0, 30528.0, 30912.0)
+    gg_rct_house1leave1 = Rect(30336.0, 30656.0, 30528.0, 30784.0)
 end
 
 function CreateCameras()
@@ -249,6 +241,7 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0071, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0070, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0069, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0008, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nemi_0014, EVENT_UNIT_DEATH)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end
