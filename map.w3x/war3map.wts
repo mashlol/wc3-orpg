@@ -28,12 +28,6 @@ STRING 6
 Mash, Spoon & Reckless
 }
 
-STRING 7
-// Doodads: test (Testing), Name (Name)
-{
-Testing
-}
-
 STRING 9
 // Units: hbos (Giant Turtle), Tip (Tooltip - Basic)
 {
@@ -601,5 +595,11 @@ STRING 105
 // Doodads: D009 (Circle of Power Anywhere), Name (Name)
 {
 Circle of Power Anywhere
+}
+
+STRING 106
+// Doodads: test (Blue Aura Effect), Name (Name)
+{
+Blue Aura Effect
 }
 

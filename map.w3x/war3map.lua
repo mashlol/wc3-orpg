@@ -14,12 +14,11 @@ gg_rct_house1entrance1 = nil
 gg_rct_house1leave1 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
+gg_unit_nvl2_0008 = nil
 gg_unit_nvil_0069 = nil
 gg_unit_nvl2_0070 = nil
 gg_unit_nvil_0071 = nil
 gg_unit_nemi_0014 = nil
-gg_unit_nvlw_0004 = nil
-gg_unit_nvl2_0008 = nil
 function InitGlobals()
 end
 
@@ -211,10 +210,10 @@ function CreateRegions()
     gg_rct_wolvesenter2 = Rect(1536.0, -2304.0, 5728.0, -1664.0)
     gg_rct_forestenter1 = Rect(-1120.0, -9184.0, -96.0, 3136.0)
     gg_rct_forestenter2 = Rect(-7744.0, -7584.0, -6720.0, -2528.0)
-    gg_rct_house1enter1 = Rect(1696.0, -3072.0, 1856.0, -2944.0)
-    gg_rct_house1exit1 = Rect(1696.0, -3200.0, 1856.0, -3072.0)
-    gg_rct_house1entrance1 = Rect(30336.0, 30816.0, 30528.0, 30912.0)
-    gg_rct_house1leave1 = Rect(30336.0, 30656.0, 30528.0, 30784.0)
+    gg_rct_house1enter1 = Rect(1728.0, -3072.0, 1824.0, -2976.0)
+    gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
+    gg_rct_house1entrance1 = Rect(30400.0, 30784.0, 30464.0, 30848.0)
+    gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
 end
 
 function CreateCameras()
