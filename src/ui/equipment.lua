@@ -14,6 +14,7 @@ local equipmentToggles = {}
 
 local Equipment = {
     toggle = function(playerId)
+        equipment.activateItem(playerId, nil)
         equipmentToggles[playerId] = not equipmentToggles[playerId]
     end
 }

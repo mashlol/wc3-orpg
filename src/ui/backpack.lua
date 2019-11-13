@@ -18,6 +18,7 @@ local backpackToggles = {}
 
 local Backpack = {
     toggle = function(playerId)
+        backpack.activateItem(playerId, nil)
         backpackToggles[playerId] = not backpackToggles[playerId]
     end
 }
