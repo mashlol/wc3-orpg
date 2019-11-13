@@ -1,7 +1,16 @@
 local damage = require('src/damage.lua')
 local party = require('src/party.lua')
 
-local DpsMeter = {}
+-- dpsMeterToggles = {
+--     [playerId] = true or nil
+-- }
+local dpsMeterToggles = {}
+
+local DpsMeter = {
+    toggle = function(playerId)
+        dpsMeterToggles[playerId] = not dpsMeterToggles[playerId]
+    end
+}
 
 function DpsMeter:new(o)
     o = o or {}
@@ -137,7 +146,7 @@ end
 function DpsMeter:update(playerId)
     local frames = self.frames
 
-    local isVisible = self.hero ~= nil
+    local isVisible = self.hero ~= nil and dpsMeterToggles[playerId]
     BlzFrameSetVisible(frames.origin, isVisible)
 
     if not isVisible then

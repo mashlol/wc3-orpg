@@ -4,6 +4,7 @@ local Equipment = require('src/ui/equipment.lua')
 local Stats = require('src/ui/stats.lua')
 local QuestLog = require('src/ui/questlog.lua')
 local Map = require('src/ui/map.lua')
+local DpsMeter = require('src/ui/dpsmeter.lua')
 
 local MenuButtons = {}
 
@@ -45,6 +46,13 @@ local MENU_BUTTONS = {
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Map.toggle(playerId)
+        end
+    },
+    {
+        text = "DPS Meter (T)",
+        callback = function()
+            local playerId = GetPlayerId(GetTriggerPlayer())
+            DpsMeter.toggle(playerId)
         end
     },
 }

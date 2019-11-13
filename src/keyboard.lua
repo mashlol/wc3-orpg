@@ -4,6 +4,7 @@ local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
 local Stats = require("src/ui/stats.lua")
 local QuestLog = require("src/ui/questlog.lua")
+local DpsMeter = require("src/ui/dpsmeter.lua")
 local ItemBar = require("src/ui/itembar.lua")
 local Map = require("src/ui/map.lua")
 local itemmanager = require("src/items/itemmanager.lua")
@@ -49,6 +50,7 @@ local SUPPORTED_KEYS = {
     OSKEY_U,
     OSKEY_L,
     OSKEY_M,
+    OSKEY_T,
     OSKEY_1,
     OSKEY_2,
     OSKEY_3,
@@ -91,6 +93,8 @@ local keyPressed = function()
         Stats.toggle(playerId)
     elseif pressedKey == OSKEY_L then
         QuestLog.toggle(playerId)
+    elseif pressedKey == OSKEY_T then
+        DpsMeter.toggle(playerId)
     elseif pressedKey == OSKEY_M then
         -- Prevent move hotkey
         if GetPlayerId(GetLocalPlayer()) == playerId then
