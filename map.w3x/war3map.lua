@@ -19,6 +19,15 @@ gg_unit_nvil_0069 = nil
 gg_unit_nvl2_0070 = nil
 gg_unit_nvil_0071 = nil
 gg_unit_nemi_0014 = nil
+gg_rct_trollenter1 = nil
+gg_rct_trollexit1 = nil
+gg_rct_trollentrance1 = nil
+gg_rct_trollleave1 = nil
+gg_rct_trolldungeon = nil
+gg_rct_house2enter1 = nil
+gg_rct_house2exit1 = nil
+gg_rct_house2leave1 = nil
+gg_rct_house2entrance1 = nil
 function InitGlobals()
 end
 
@@ -214,6 +223,15 @@ function CreateRegions()
     gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
     gg_rct_house1entrance1 = Rect(30400.0, 30784.0, 30464.0, 30848.0)
     gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
+    gg_rct_trollenter1 = Rect(-8384.0, 1856.0, -8288.0, 1952.0)
+    gg_rct_trollexit1 = Rect(-8544.0, 1856.0, -8448.0, 1952.0)
+    gg_rct_trollentrance1 = Rect(30496.0, -29472.0, 30656.0, -29376.0)
+    gg_rct_trollleave1 = Rect(30496.0, -29632.0, 30656.0, -29472.0)
+    gg_rct_trolldungeon = Rect(26432.0, -29696.0, 31232.0, -21152.0)
+    gg_rct_house2enter1 = Rect(28128.0, -24768.0, 28224.0, -24672.0)
+    gg_rct_house2exit1 = Rect(28224.0, -24928.0, 28352.0, -24800.0)
+    gg_rct_house2leave1 = Rect(27488.0, -24064.0, 27584.0, -23968.0)
+    gg_rct_house2entrance1 = Rect(27328.0, -23936.0, 27456.0, -23808.0)
 end
 
 function CreateCameras()

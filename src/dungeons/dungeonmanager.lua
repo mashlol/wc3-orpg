@@ -133,45 +133,20 @@ end
 
 function init()
     DUNGEONS = {
-        MINES = {
-            name = "The mines",
+        TROLL_CAVE = {
+            name = "Troll Cave",
             tps = {
                 {
-                    from = gg_rct_mineenter,
-                    to = gg_rct_mineentrance,
+                    from = gg_rct_trollenter1,
+                    to = gg_rct_trollentrance1,
                 },
                 {
-                    from = gg_rct_minefinish,
-                    to = gg_rct_mineexit,
-                },
-                {
-                    from = gg_rct_mineleave,
-                    to = gg_rct_mineexit,
+                    from = gg_rct_trollleave1,
+                    to = gg_rct_trollexit1,
                 },
             },
             rects = {
-                gg_rct_minedungeon1,
-            },
-            finalBoss = bossmanager.ALL_BOSSES.THE_OVERSEER,
-            otherBosses = {
-                bossmanager.ALL_BOSSES.MINER_JOE,
-            },
-        },
-        WOLF_LAIR = {
-            name = "Wolf Lair",
-            tps = {
-                {
-                    from = gg_rct_wolfenter,
-                    to = gg_rct_wolfentrance,
-                },
-                {
-                    from = gg_rct_wolfleave,
-                    to = gg_rct_wolfexit,
-                },
-            },
-            rects = {
-                gg_rct_wolfdungeon1,
-                gg_rct_wolfdungeon2,
+                gg_rct_trolldungeon,
             },
             finalBoss = nil,
             otherBosses = {},
