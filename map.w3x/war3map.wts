@@ -603,3 +603,15 @@ STRING 106
 Blue Aura Effect
 }
 
+STRING 107
+// Destructibles: B004 (Icey Rock Anywhere), Name (Name)
+{
+Icey Rock Anywhere
+}
+
+STRING 108
+// Doodads: D00A (Ice Block with roll/pitch), Name (Name)
+{
+Ice Block with roll/pitch
+}
+
