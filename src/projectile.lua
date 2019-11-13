@@ -210,7 +210,7 @@ end
 
 local init = function()
     timer = CreateTimer()
-    TimerStart(timer, 0.03125, true, clearProjectiles)
+    TimerStart(timer, 0.0078125, true, clearProjectiles)
 end
 
 local createProjectile = function(options)
