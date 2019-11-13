@@ -615,3 +615,21 @@ STRING 108
 Ice Block with roll/pitch
 }
 
+STRING 109
+// Doodads: D00B (House Anywhere Purple Tall), Name (Name)
+{
+House Anywhere Purple Tall
+}
+
+STRING 110
+// Doodads: D00C (House Anywhere Red Smaller), Name (Name)
+{
+House Anywhere Red Smaller
+}
+
+STRING 111
+// Doodads: D00D (House Anywhere Green Smaller), Name (Name)
+{
+House Anywhere Green Smaller
+}
+
