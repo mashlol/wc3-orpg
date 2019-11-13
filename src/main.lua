@@ -87,8 +87,7 @@ local mainInit = function()
     end
 
     -- TODO maybe move to a door module
-    ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1457)
-    ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_LTe1_1422)
+    ModifyGateBJ(bj_GATEOPERATION_OPEN, gg_dest_YTcx_0977)
 end
 
 local realTimerStart = TimerStart

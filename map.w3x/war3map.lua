@@ -28,10 +28,18 @@ gg_rct_house2enter1 = nil
 gg_rct_house2exit1 = nil
 gg_rct_house2leave1 = nil
 gg_rct_house2entrance1 = nil
+gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
 
 local REPLACE_ME
+function CreateAllDestructables()
+    local d
+    local t
+    local life
+    gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
+end
+
 function CreateNeutralHostile()
     local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
     local u
@@ -131,7 +139,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 17077.9, -12865.0, 335.632, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 17645.9, -9597.7, 65.118, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 18826.4, -8565.1, 234.049, FourCC("nalb"))
-    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 17264.8, -8690.9, 5.735, FourCC("necr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 17585.0, -8739.1, 5.735, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 18897.9, -9692.5, 251.155, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 17187.8, -15815.3, 196.991, FourCC("nrat"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 18117.1, -15856.7, 115.371, FourCC("nrat"))
@@ -272,6 +280,7 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0069, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0008, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nemi_0014, EVENT_UNIT_DEATH)
+    TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end
 
@@ -603,6 +612,7 @@ function main()
     SetMapMusic("Music", true, 0)
     CreateRegions()
     CreateCameras()
+    CreateAllDestructables()
     CreateAllUnits()
     InitBlizzard()
     InitGlobals()
