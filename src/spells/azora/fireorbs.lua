@@ -106,6 +106,7 @@ local cast = function(playerId)
             speed = 1400,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
+                    buff.addBuff(hero, collidedUnit, 'ignite', 8)
                     damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.SPELL)
                     return true
                 end
@@ -129,8 +130,6 @@ local cast = function(playerId)
 
     animations.queueAnimation(hero, 3, 1)
 
-    buff.addBuff(hero, hero, 'frostball', 14400)
-
     local balls = {}
 
     for i=0,4,1 do
@@ -149,6 +148,7 @@ local cast = function(playerId)
             permanent = true,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
+                    buff.addBuff(hero, collidedUnit, 'ignite', 8)
                     damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
 
                     return true
