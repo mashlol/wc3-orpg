@@ -66,12 +66,12 @@ local cast = function(playerId)
 
     projectile.createProjectile{
         playerId = playerId,
-        model = "Abilities\\Weapons\\RedDragonBreath\\RedDragonMissile.mdl",
+        model = "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl",
         scale = 0.5,
         z = 50,
         fromV = heroV,
         toV = mouseV,
-        speed = 2000,
+        speed = 1800,
         length = 800,
         radius = 80,
         onCollide = function(collidedUnit)
