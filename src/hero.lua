@@ -103,7 +103,7 @@ local ALL_HERO_INFO = {
             [2] = 'frostnova',
             [3] = 'firelance',
             [4] = 'meteor',
-            [5] = 'firestorm',
+            [5] = 'fireorbs',
             [6] = 'blink',
         },
         model = "Magna Aegwynn.mdl",

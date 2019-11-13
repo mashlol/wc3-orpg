@@ -11,7 +11,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 30
+local COOLDOWN_S = 7
 
 -- storedData = {
 --     [playerId] = {
@@ -21,15 +21,15 @@ local COOLDOWN_S = 30
 local storedData = {}
 
 local getSpellId = function()
-    return 'frostball'
+    return 'fireorbs'
 end
 
 local getSpellName = function()
-    return 'Fingers of Frost'
+    return 'Fire Orbs'
 end
 
 local getSpellTooltip = function(playerId)
-    return 'TODO'
+    return 'Summon 5 orbs of fire that surround you. Re cast to throw the orbs toward the target direction.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -37,7 +37,7 @@ local getSpellCooldown = function(playerId)
 end
 
 local getSpellCasttime = function(playerId)
-    return 0.4
+    return 1.5
 end
 
 local getBall = function(playerId)
@@ -63,6 +63,7 @@ local cast = function(playerId)
     }
 
     local existingBall = getBall(playerId)
+    local hadBalls = false
     if existingBall ~= nil then
         SetUnitFacingTimed(
             hero,
@@ -70,12 +71,21 @@ local cast = function(playerId)
             0.05)
 
         IssueImmediateOrder(hero, "stop")
-        animations.queueAnimation(hero, 19, 1)
+        animations.queueAnimation(hero, 3, 1)
 
-        casttime.cast(playerId, 0.2, false)
+        casttime.cast(playerId, 0.3, false)
+    end
 
-        animations.queueAnimation(hero, 18, 1)
+    local finalV = Vector:new(mouseV)
+        :subtract(heroV)
 
+    if finalV:magnitude() > 800 then
+        finalV:normalize()
+            :multiply(800)
+    end
+
+    finalV:add(heroV)
+    while existingBall ~= nil do
         local oldLocation = Vector:new{
             x = existingBall.x,
             y = existingBall.y,
@@ -88,54 +98,48 @@ local cast = function(playerId)
         -- Project a new ball
         projectile.createProjectile{
             playerId = playerId,
-            model = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl",
-            scale = 0.8,
-            z = 20,
+            model = "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl",
+            scale = 0.4,
+            z = 50,
             fromV = oldLocation,
-            toV = mouseV,
-            speed = 900,
-            length = 800,
+            toV = finalV,
+            speed = 1400,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    if buff.hasBuff(collidedUnit, 'frostnova') then
-                        damage.dealDamage(hero, collidedUnit, 160, damage.TYPE.SPELL)
-                    else
-                        damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
-                    end
+                    damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.SPELL)
                     return true
                 end
                 return false
             end
         }
 
-        target.restoreOrder(playerId)
+        hadBalls = true
+        existingBall = getBall(playerId)
+    end
 
+    if hadBalls then
+        target.restoreOrder(playerId)
         return true
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 19, 1)
+    animations.queueAnimation(hero, 4, 2)
 
-    SetUnitFacingTimed(
-        hero,
-        bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
-        0.05)
+    casttime.cast(playerId, 1.5, false)
 
-    casttime.cast(playerId, 1, false)
-
-    animations.queueAnimation(hero, 18, 1)
+    animations.queueAnimation(hero, 3, 1)
 
     buff.addBuff(hero, hero, 'frostball', 14400)
 
     local balls = {}
 
-    for i=0,2,1 do
-        local startRad = i * ((2 * math.pi) / 3)
+    for i=0,4,1 do
+        local startRad = i * ((2 * math.pi) / 5)
         local ball = projectile.createProjectile{
             playerId = playerId,
-            model = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl",
-            scale = 0.8,
-            z = 20,
+            model = "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl",
+            scale = 0.4,
+            z = 50,
             fromUnit = hero,
             speed = 200,
             fromRadius = 80,
@@ -145,7 +149,6 @@ local cast = function(playerId)
             permanent = true,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    buff.addBuff(hero, collidedUnit, 'frostballslow', 8)
                     damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
 
                     return true
@@ -157,7 +160,6 @@ local cast = function(playerId)
 
                 if getBall(playerId) == nil then
                     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
-                    buff.removeBuff(hero, 'frostball')
                 end
             end
         }
@@ -175,7 +177,7 @@ local cast = function(playerId)
 end
 
 local getIcon = function()
-    return "ReplaceableTextures\\CommandButtons\\BTNFrostBolt.blp"
+    return "ReplaceableTextures\\CommandButtons\\BTNSoulBurn.blp"
 end
 
 return {

@@ -20,7 +20,7 @@ local phoenix = require('src/spells/azora/phoenix.lua')
 local fireshell = require('src/spells/azora/fireshell.lua')
 local icicle = require('src/spells/azora/icicle.lua')
 local firestorm = require('src/spells/azora/firestorm.lua')
-local frostballs = require('src/spells/azora/frostballs.lua')
+local fireorbs = require('src/spells/azora/fireorbs.lua')
 
 -- Yuji
 local slash = require('src/spells/yuji/slash.lua')
@@ -91,7 +91,7 @@ local SPELL_MAP = {
     fireshell = fireshell,
     icicle = icicle,
     firestorm = firestorm,
-    frostballs = frostballs,
+    fireorbs = fireorbs,
 
     -- Yuji
     slash = slash,
