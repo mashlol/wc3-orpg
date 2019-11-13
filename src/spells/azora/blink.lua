@@ -92,7 +92,7 @@ local cast = function(playerId)
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 14, 1)
+    animations.queueAnimation(hero, 4, 1)
 
     effect.createEffect{
         model = "Pillar of Flame Blue.mdl",

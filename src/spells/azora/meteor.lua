@@ -70,7 +70,7 @@ local cast = function(playerId)
     end
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 19, 2)
+    animations.queueAnimation(hero, 4, 2)
 
     local success = casttime.cast(playerId, 1, true, false)
     if not success then
@@ -79,7 +79,7 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    animations.queueAnimation(hero, 18, 1)
+    animations.queueAnimation(hero, 3, 1)
 
     createTargetEffect(mouseV)
 
