@@ -31,7 +31,7 @@ local clearDeadUnits = function()
     end
 
     if spawnV and facing then
-        TriggerSleepAction(5)
+        TriggerSleepAction(30)
 
         -- Check if any heroes are nearby, if so, don't respawn
         while isHeroNearby(spawnV) do
