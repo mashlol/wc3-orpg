@@ -633,3 +633,15 @@ STRING 111
 House Anywhere Green Smaller
 }
 
+STRING 112
+// Units: n000 (Child), EditorSuffix (Name - Editor Suffix)
+{
+ (Wander 2)
+}
+
+STRING 113
+// Units: n001 (Child), EditorSuffix (Name - Editor Suffix)
+{
+Wander
+}
+
