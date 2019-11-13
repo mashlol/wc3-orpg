@@ -98,6 +98,7 @@ function getAllCollisions(vec, radius)
 
     RemoveLocation(loc)
     RemoveRect(doodadRect)
+    DestroyGroup(grp)
 
     return collidedUnits, collidedDoodads
 end
