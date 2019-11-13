@@ -88,7 +88,9 @@ local cast = function(playerId)
         -- Project a new ball
         projectile.createProjectile{
             playerId = playerId,
-            model = "Abilities\\Spells\\Other\\FrostBolt\\FrostBoltMissile.mdl",
+            model = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl",
+            scale = 0.8,
+            z = 20,
             fromV = oldLocation,
             toV = mouseV,
             speed = 900,
@@ -131,7 +133,9 @@ local cast = function(playerId)
         local startRad = i * ((2 * math.pi) / 3)
         local ball = projectile.createProjectile{
             playerId = playerId,
-            model = "Abilities\\Spells\\Other\\FrostBolt\\FrostBoltMissile.mdl",
+            model = "Abilities\\Weapons\\LichMissile\\LichMissile.mdl",
+            scale = 0.8,
+            z = 20,
             fromUnit = hero,
             speed = 200,
             fromRadius = 80,

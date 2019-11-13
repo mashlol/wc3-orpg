@@ -242,10 +242,6 @@ local BUFF_INFO = {
                 amount = 0.9,
             },
         },
-        vfx = {
-            model = "Abilities\\Spells\\Undead\\FrostArmor\\FrostArmorTarget.mdl",
-            attach = "chest",
-        },
         icon = "ReplaceableTextures\\CommandButtons\\BTNFrostBolt.blp",
     },
     frostballslow = {
