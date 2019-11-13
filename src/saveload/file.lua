@@ -13,6 +13,7 @@ local ABILITY_LIST = {
 
 function writeFile(file, contents)
     local name = GetPlayerName(GetLocalPlayer())
+    name = string.gsub(name, "|", "")
     file = 'tvt/' .. name .. '/' .. file
 
     local c = 0
@@ -41,6 +42,7 @@ end
 
 function readFile(file)
     local name = GetPlayerName(GetLocalPlayer())
+    name = string.gsub(name, "|", "")
     file = 'tvt/' .. name .. '/' .. file
 
     local original = {}
