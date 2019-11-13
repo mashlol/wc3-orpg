@@ -1,4 +1,23 @@
 local spawnpoint = require('src/spawnpoint.lua')
+local hero = require('src/hero.lua')
+
+local isCloseTo = function(val, expected, range)
+    return val + range >= expected and val - range <= expected
+end
+
+function isHeroNearby(vec)
+    for i=0,bj_MAX_PLAYERS,1 do
+        local heroUnit = hero.getHero(i)
+        if
+            isCloseTo(GetUnitX(heroUnit), vec.x, 500) and
+            isCloseTo(GetUnitY(heroUnit), vec.y, 500)
+        then
+            return true
+        end
+    end
+
+    return false
+end
 
 local clearDeadUnits = function()
     local unit = GetTriggerUnit()
@@ -12,7 +31,12 @@ local clearDeadUnits = function()
     end
 
     if spawnV and facing then
-        TriggerSleepAction(30)
+        TriggerSleepAction(5)
+
+        -- Check if any heroes are nearby, if so, don't respawn
+        while isHeroNearby(spawnV) do
+            TriggerSleepAction(5)
+        end
 
         local newUnit = CreateUnit(
             Player(PLAYER_NEUTRAL_AGGRESSIVE),
