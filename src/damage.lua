@@ -1,6 +1,7 @@
 local buff = require('src/buff.lua')
 local buffloop = require('src/buffloop.lua')
 local threat = require('src/threat.lua')
+local combat = require('src/combat.lua')
 
 -- dpsMeters = {
 --     [playerId] = {
@@ -81,6 +82,10 @@ function heal(source, target, amount)
         newHealth)
 
     createCombatText(modifiedAmt, target, true)
+
+    if combat.isInCombat(target) then
+        combat.putUnitInCombat(source)
+    end
 
     -- TODO feed into threat system
 end

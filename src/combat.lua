@@ -55,4 +55,5 @@ end
 return {
     init = init,
     isInCombat = isInCombat,
+    putUnitInCombat = maybePutUnitInCombat,
 }
