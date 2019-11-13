@@ -12,13 +12,6 @@ gg_rct_house1enter1 = nil
 gg_rct_house1exit1 = nil
 gg_rct_house1entrance1 = nil
 gg_rct_house1leave1 = nil
-gg_cam_Camera_001 = nil
-gg_trg_Untitled_Trigger_001 = nil
-gg_unit_nvl2_0008 = nil
-gg_unit_nvil_0069 = nil
-gg_unit_nvl2_0070 = nil
-gg_unit_nvil_0071 = nil
-gg_unit_nemi_0014 = nil
 gg_rct_trollenter1 = nil
 gg_rct_trollexit1 = nil
 gg_rct_trollentrance1 = nil
@@ -28,6 +21,13 @@ gg_rct_house2enter1 = nil
 gg_rct_house2exit1 = nil
 gg_rct_house2leave1 = nil
 gg_rct_house2entrance1 = nil
+gg_cam_Camera_001 = nil
+gg_trg_Untitled_Trigger_001 = nil
+gg_unit_nvl2_0008 = nil
+gg_unit_nvil_0069 = nil
+gg_unit_nvl2_0070 = nil
+gg_unit_nvil_0071 = nil
+gg_unit_nemi_0014 = nil
 gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
@@ -175,7 +175,7 @@ function CreateNeutralPassive()
     gg_unit_nvl2_0070 = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2109.6, -3057.2, 260.152, FourCC("nvl2"))
     gg_unit_nvil_0071 = BlzCreateUnitWithSkin(p, FourCC("nvil"), -4946.7, -4773.4, 277.180, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 30308.7, 31244.4, 287.308, FourCC("nvlw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 18052.9, -12898.6, -74.007, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 18052.9, -12898.6, 285.993, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("n001"), 30193.5, 31112.8, 301.330, FourCC("n001"))
     u = BlzCreateUnitWithSkin(p, FourCC("n000"), 30651.7, 30959.7, 197.918, FourCC("n000"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 30642.4, 31140.1, 236.955, FourCC("nvl2"))
@@ -183,9 +183,9 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 14989.3, -11637.5, 148.617, FourCC("vlww"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 14876.4, -13809.8, 351.101, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 14882.8, -15258.6, 148.617, FourCC("vlww"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 13890.5, -15148.8, -35.378, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 13890.5, -15148.8, 324.622, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 14656.6, -14661.6, 22.359, FourCC("nvil"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 14656.0, -12359.1, -29.187, FourCC("nhem"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 14656.0, -12359.1, 330.813, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 14650.2, -12457.4, 51.890, FourCC("nhef"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 18314.0, -15556.9, 196.991, FourCC("nrat"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrat"), 18317.8, -15056.8, 196.991, FourCC("nrat"))
@@ -199,7 +199,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("n001"), 18086.0, -13233.8, 16.848, FourCC("n001"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 18179.2, -13093.6, 224.233, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 18274.2, -14906.9, 249.362, FourCC("nvlw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 18215.7, -14488.2, -85.423, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 18215.7, -14488.2, 274.577, FourCC("nvl2"))
 end
 
 function CreatePlayerBuildings()
