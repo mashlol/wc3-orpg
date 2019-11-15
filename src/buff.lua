@@ -406,11 +406,12 @@ function addBuff(source, target, buffName, duration)
         }
     end
 
-
     local curNumStacks = 0
     if buffInstances[unitId].buffs[buffName] ~= nil then
         curNumStacks = buffInstances[unitId].buffs[buffName].stacks
-        DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+        if buffInstances[unitId].buffs[buffName].timer then
+            DestroyTimer(buffInstances[unitId].buffs[buffName].timer)
+        end
         removeBuff(target, buffName)
     end
 
@@ -438,16 +439,18 @@ function addBuff(source, target, buffName, duration)
             BUFF_INFO[buffName].vfx.attach)
     end
 
-    local timer = CreateTimer()
-    buffInstances[unitId].buffs[buffName].timer = timer
-    TimerStart(
-        timer,
-        duration,
-        false,
-        function()
-            DestroyTimer(timer)
-            removeBuff(target, buffName)
-        end)
+    if duration ~= nil then
+        local timer = CreateTimer()
+        buffInstances[unitId].buffs[buffName].timer = timer
+        TimerStart(
+            timer,
+            duration,
+            false,
+            function()
+                DestroyTimer(timer)
+                removeBuff(target, buffName)
+            end)
+    end
 end
 
 function removeBuff(target, buffName, numStacks)
