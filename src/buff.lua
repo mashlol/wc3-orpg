@@ -368,6 +368,10 @@ local BUFF_INFO = {
         effects = {},
         maxStacks = 5,
     },
+    farblinking = {
+        effects = {},
+        maxStacks = 5,
+    },
 }
 
 local IMMUNE_UNIT_TYPES = {

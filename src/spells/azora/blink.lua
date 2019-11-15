@@ -3,6 +3,7 @@ local mouse = require('src/mouse.lua')
 local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
 local log = require('src/log.lua')
+local buff = require('src/buff.lua')
 local collision = require('src/collision.lua')
 local casttime = require('src/casttime.lua')
 local animations = require('src/animations.lua')
@@ -59,9 +60,10 @@ local cast = function(playerId)
     local finalV = Vector:new(mouseV)
         :subtract(heroV)
 
-    if finalV:magnitude() > 800 then
+    local maxBlinkDistance = 700 + buff.getBuffStacks(hero, 'farblinking') * 50
+    if finalV:magnitude() > maxBlinkDistance then
         finalV:normalize()
-            :multiply(800)
+            :multiply(maxBlinkDistance)
     end
 
     finalV:add(heroV)
