@@ -364,6 +364,10 @@ local BUFF_INFO = {
         removeStackOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
     },
+    impendingdoom = {
+        effects = {},
+        maxStacks = 5,
+    },
 }
 
 local IMMUNE_UNIT_TYPES = {

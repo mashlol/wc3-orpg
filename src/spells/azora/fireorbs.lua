@@ -132,8 +132,10 @@ local cast = function(playerId)
 
     local balls = {}
 
-    for i=0,4,1 do
-        local startRad = i * ((2 * math.pi) / 5)
+    local numOrbs = 3 + buff.getBuffStacks(hero, 'impendingdoom')
+
+    for i=0,numOrbs-1,1 do
+        local startRad = i * ((2 * math.pi) / numOrbs)
         local ball = projectile.createProjectile{
             playerId = playerId,
             model = "Abilities\\Weapons\\LordofFlameMissile\\LordofFlameMissile.mdl",
