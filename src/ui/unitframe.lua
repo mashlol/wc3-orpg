@@ -249,7 +249,9 @@ function UnitFrame:update(playerId)
     local buffArr = {}
 
     for buffName, buffInfo in pairs(buffs) do
-        table.insert(buffArr, {buffName = buffName, buffInfo = buffInfo})
+        if buff.BUFF_INFO[buffName].icon then
+            table.insert(buffArr, {buffName = buffName, buffInfo = buffInfo})
+        end
     end
 
     for i=1,10,1 do
