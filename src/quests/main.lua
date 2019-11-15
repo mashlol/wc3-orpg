@@ -551,29 +551,7 @@ function initQuests()
             prerequisites = {3},
             levelRequirement = 0,
         },
-        [5] = {
-            name = "Wolves to the North",
-            getQuestFrom = gg_unit_nvil_0069,
-            handQuestTo = gg_unit_nvil_0069,
-            obtainText = "So Fred thinks you can take them on? All right. You can find the wolves just north of Freydell, just follow the trail west. Come back when you've killed at least fifteen.",
-            incompleteText = "Have you killed the wolves yet?",
-            completedText = "Wow! You're skilled!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 15,
-                    toKill = FourCC('hwol'),
-                    name = 'Wolves',
-                }
-            },
-            rewards = {
-                exp = 125,
-                gold = 10,
-            },
-            prerequisites = {4},
-            levelRequirement = 0,
-        },
-		[6] = {
+		[5] = {
             name = "Talk to Elder John",
             getQuestFrom = gg_unit_nvil_0069,
             handQuestTo = gg_unit_nemi_0014,
@@ -590,7 +568,7 @@ function initQuests()
             prerequisites = {5},
             levelRequirement = 0,
         },
-		[7] = {
+		[6] = {
             name = "Giant Turtle",
             getQuestFrom = gg_unit_nvil_0069,
             handQuestTo = gg_unit_nvil_0069,
@@ -610,43 +588,6 @@ function initQuests()
                 gold = 25,
             },
             prerequisites = {6},
-            levelRequirement = 0,
-        },
-		[8] = {
-            name = "Alpha Wolf",
-            getQuestFrom = gg_unit_nemi_0014,
-            handQuestTo = gg_unit_nemi_0014,
-            obtainText = "There is a cave just north of the village where the Alpha Wolf resides, though it is probably being controlled I need you to slay it. If you follow the road west you should be able to find him.",
-            incompleteText = "Have you slain the alpha wolf?",
-            completedText = "You did it? I'm amazed!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('hbld'),
-                    name = 'Alpha Wolf',
-                }
-            },
-            rewards = {
-                exp = 225,
-                gold = 30,
-            },
-            prerequisites = {6},
-            levelRequirement = 0,
-        },
-        [9] = {
-            name = "General Smith",
-            getQuestFrom = gg_unit_nemi_0014,
-            handQuestTo = gg_unit_gens_0335,
-            obtainText = "If you follow the path east and go left at the fork in the road you should be able to find General Smith at an army encampment just outside of Ironwell City.",
-            incompleteText = "Did you find General Smith?",
-            completedText = "Fjord sent you? Good. I need some help around here.",
-            objectives = {},
-            rewards = {
-                exp = 30,
-                gold = 5,
-            },
-            prerequisites = {8},
             levelRequirement = 0,
         },
 		[10] = {
@@ -731,103 +672,6 @@ function initQuests()
                 gold = 30,
             },
             prerequisites = {9},
-            levelRequirement = 0,
-        },
-        -- DELETED QUEST, DO NOT REMOVE
-		-- [12] = {
-        --     name = "Scouting the Mines",
-        --     getQuestFrom = gg_unit_gens_0335,
-        --     handQuestTo = gg_unit_gens_0335,
-        --     obtainText = "With the Cultist camps in shambles to the east, it is time for us to focus to the north. There have been rumors of Cultist activity in the pass to the north of our camp. Go scout it out and come back to me if you find anything",
-        --     incompleteText = "Did you find anything in the pass?",
-        --     completedText = "I knew it. This is much worse than I thought.",
-        --     objectives = {
-        --         [1] = {
-        --             type = TYPE.DISCOVER,
-        --             rect = gg_rct_mineexit,
-        --             name = 'Mine Entrance',
-        --             amount = 1,
-        --         },
-        --     },
-        --     rewards = {
-        --         exp = 75,
-        --         gold = 10,
-        --     },
-        --     prerequisites = {11},
-        --     levelRequirement = 0,
-        -- },
-		[13] = {
-            name = "Attack Plans",
-            getQuestFrom = gg_unit_hcth_0104,
-            handQuestTo = gg_unit_hcth_0104,
-            obtainText = "Those Cultists are planning something. Enter the mines and find something that resembles attack plans and destroy them.",
-            incompleteText = "Have you destroyed those attack plans?",
-            completedText = "Nice work! You've saved the day",
-           objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('plan'),
-                    name = 'Attack Plans',
-					verb = 'Destroy',
-					verbPast = 'destroyed',
-                },
-            },
-            rewards = {
-                exp = 300,
-                gold = 25,
-            },
-            prerequisites = {10},
-            levelRequirement = 0,
-        },
-		[14] = {
-            name = "Kill Them All!",
-            getQuestFrom = gg_unit_gens_0335,
-            handQuestTo = gg_unit_gens_0335,
-            obtainText = "Enter the mines and kill the leaders in there. If we can do that then we will be able to slow down the progress of the Cultists.",
-            incompleteText = "Did you crush those Cultist bastards?",
-            completedText = "Thanks for playing TVT ORPG PRE-ALPHA. Please give any feedback here at our discord: https://discord.gg/7wqQ3Az",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('mine'),
-                    name = 'Miner Joe',
-                },
-				[2] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('over'),
-                    name = 'The Overseer',
-                }
-            },
-            rewards = {
-                exp = 350,
-                gold = 75,
-            },
-            prerequisites = {11},
-            levelRequirement = 0,
-        },
-		[15] = {
-            name = "A Friend In Need is a Friend Indeed",
-            getQuestFrom = gg_unit_nvil_0083,
-            handQuestTo = gg_unit_nvil_0084,
-            obtainText = "Help! My friend is being ambushed by some Cultists! He's just down this road behind me!",
-            incompleteText = "Is my friend still alive?",
-            completedText = "Thank you so much!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 4,
-                    toKill = FourCC('h001'),
-                    name = 'Cultist Ambushers',
-                }
-            },
-            rewards = {
-                exp = 150,
-                gold = 50,
-            },
-            prerequisites = {8},
             levelRequirement = 0,
         },
 }
