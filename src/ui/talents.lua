@@ -65,6 +65,24 @@ function Talents:init()
         -0.01)
     BlzFrameSetText(talentText, "Talents")
 
+    local unspentPointsText = BlzCreateFrameByType(
+        "TEXT",
+        "unspentPointsText",
+        talentsOrigin,
+        "",
+        0)
+    BlzFrameSetSize(unspentPointsText, consts.TALENTS_WIDTH, 0.012)
+    BlzFrameSetPoint(
+        unspentPointsText,
+        FRAMEPOINT_BOTTOM,
+        talentsOrigin,
+        FRAMEPOINT_BOTTOM,
+        -0.01,
+        0.01)
+    BlzFrameSetTextAlignment(
+        unspentPointsText, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
+    BlzFrameSetText(unspentPointsText, "0 Unspent Talent Points")
+
     local widthWithoutPadding = consts.TALENTS_WIDTH - EDGE_PADDING * 2
     local talentIconSize = consts.TALENT_ICON_SIZE * NUM_COLS
     local remainingSize = widthWithoutPadding - talentIconSize
@@ -149,6 +167,7 @@ function Talents:init()
     self.frames = {
         origin = talentsOrigin,
         talentIconFrames = talentIconFrames,
+        unspentPointsText = unspentPointsText,
     }
 
     return self
@@ -170,6 +189,10 @@ function Talents:update(playerId)
     if not showFrame then
         return
     end
+
+    local unspentPoints = talents.getUnspentTalentPoints(playerId)
+    BlzFrameSetText(
+        frames.unspentPointsText, unspentPoints .. " Unspent Talent Points")
 
     local filledEntries = {}
 

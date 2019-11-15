@@ -24,6 +24,15 @@ local TALENTS = {
     },
 }
 
+function getUnspentTalentPoints(playerId)
+    local spentPoints = getTotalPointsSpent(playerId)
+    local heroLevel = GetHeroLevel(hero.getHero(playerId))
+
+    local actualPoints = heroLevel - 10
+
+    return math.max(0, actualPoints - spentPoints)
+end
+
 function getInfoFromIndex(playerId, x, y)
     local heroUnit = hero.getHero(playerId)
     local heroType = GetUnitTypeId(heroUnit)
@@ -56,6 +65,9 @@ function canLearnTalent(playerId, x, y)
     if totalPointsSpent < talentInfo.numRequiredPoints then
         return false
     end
+    if getUnspentTalentPoints(playerId) <= 0 then
+        return false
+    end
     return true
 end
 
@@ -86,4 +98,5 @@ return {
     getNumPointsInTalent = getNumPointsInTalent,
     getTalentMaxLevel = getTalentMaxLevel,
     canLearnTalent = canLearnTalent,
+    getUnspentTalentPoints = getUnspentTalentPoints,
 }
