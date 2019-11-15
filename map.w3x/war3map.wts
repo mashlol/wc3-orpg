@@ -657,3 +657,21 @@ STRING 115
 Barrel Anywhere
 }
 
+STRING 116
+// Destructibles: B005 (Felwood Tree Wall 90*), Name (Name)
+{
+Felwood Tree Wall 90*
+}
+
+STRING 117
+// Destructibles: B006 (Felwood Tree Wall 180*), Name (Name)
+{
+Felwood Tree Wall 180*
+}
+
+STRING 118
+// Destructibles: B007 (Ice Spike), Name (Name)
+{
+Ice Spike
+}
+
