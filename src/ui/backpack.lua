@@ -230,8 +230,8 @@ function Backpack:init()
                                 playerId, spellKey)
                             if
                                 success and
-                                itemInfo.consume == true or
-                                itemInfo.consume == nil
+                                (itemInfo.consume == true or
+                                itemInfo.consume == nil)
                             then
                                 backpack.removeItemFromBackpack(
                                     playerId, clickedItemPos, 1)
