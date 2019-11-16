@@ -148,8 +148,10 @@ function init()
             rects = {
                 gg_rct_trolldungeon,
             },
-            finalBoss = nil,
-            otherBosses = {},
+            finalBoss = bossmanager.ALL_BOSSES.THE_OVERSEER,
+            otherBosses = {
+                bossmanager.ALL_BOSSES.MINER_JOE,
+            },
         },
     }
 

@@ -23,16 +23,16 @@ local ALL_BOSS_CLASSES = {
     },
     MINER_JOE = MinerJoe:new{
         bossUnitId = FourCC('mine'),
-        startX = 24237,
-        startY = 27062,
-        facing = 37,
+        startX = 30371,
+        startY = -24008,
+        facing = 270,
         respawnable = false,
     },
     THE_OVERSEER = OverseerTom:new{
         bossUnitId = FourCC('over'),
-        startX = 23428,
-        startY = 30510,
-        facing = 270,
+        startX = 28248,
+        startY = -29136,
+        facing = 128,
         respawnable = false,
     },
 }
