@@ -7,7 +7,7 @@ function queueAnimation(unit, animNum, duration)
     end
     local timer = CreateTimer()
     queues[unitId] = timer
-    TimerStart(timer, duration, false, function()
+    TimerStart(timer, duration + 0.01, false, function()
         -- Stop the anim
          DestroyTimer(timer)
          SetUnitAnimationByIndex(unit, 0)
