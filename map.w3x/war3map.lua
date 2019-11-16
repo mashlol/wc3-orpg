@@ -267,9 +267,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 27822.8, -27370.2, 127.757, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 27368.9, -27473.4, 77.743, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 27421.5, -26610.6, 114.265, FourCC("cult"))
-    u = BlzCreateUnitWithSkin(p, FourCC("mine"), 30375.5, -24023.3, 269.262, FourCC("mine"))
     u = BlzCreateUnitWithSkin(p, FourCC("h002"), 30666.0, -22225.9, 178.475, FourCC("h002"))
-    u = BlzCreateUnitWithSkin(p, FourCC("over"), 28265.0, -29144.0, 127.361, FourCC("over"))
 end
 
 function CreateNeutralPassive()
