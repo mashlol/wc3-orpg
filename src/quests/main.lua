@@ -540,9 +540,9 @@ function initQuests()
             name = "Return to Freydell Village",
             getQuestFrom = gg_unit_nvil_0071,
             handQuestTo = gg_unit_nvl2_0070,
-            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and ask him about the wolves north of the village.",
+            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and see what else he has for you.",
             incompleteText = "Impossible!",
-            completedText = "Fred sent you about the wolves? He thinks you can handle them? All right then. Talk to me when you're ready for the challenge.",
+            completedText = "Fred sent you back here? Well, good I have some more work for you.",
             objectives = {},
             rewards = {
                 exp = 30,
@@ -577,7 +577,7 @@ function initQuests()
             name = "Talk to Ice Guy",
             getQuestFrom = gg_unit_nvl2_0070,
             handQuestTo = gg_unit_nvil_0040,
-            obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
+            obtainText = "Find Ice Guy in the area",
             incompleteText = "Have you talked to Elder John?",
             completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
             objectives = {
