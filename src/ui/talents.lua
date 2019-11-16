@@ -97,31 +97,62 @@ function Talents:init()
     for x=0,NUM_COLS-1,1 do
         talentIconFrames[x] = {}
         for y=0,NUM_ROWS-1,1 do
-            local talentIcon = BlzCreateFrameByType(
-                "BACKDROP",
+            local talentIconOrigin = BlzCreateFrameByType(
+                "FRAME",
                 "talentIcon",
                 talentsOrigin,
                 "",
                 0)
             BlzFrameSetSize(
-                talentIcon,
+                talentIconOrigin,
                 consts.TALENT_ICON_SIZE,
                 consts.TALENT_ICON_SIZE)
             BlzFrameSetPoint(
-                talentIcon,
+                talentIconOrigin,
                 FRAMEPOINT_TOPLEFT,
                 talentsOrigin,
                 FRAMEPOINT_TOPLEFT,
                 EDGE_PADDING + (iconHorizontalPadding + consts.TALENT_ICON_SIZE) * x,
                 -EDGE_PADDING - (iconVerticalPadding + consts.TALENT_ICON_SIZE) * y)
 
+            local talentDependencyLine = BlzCreateFrameByType(
+                "BACKDROP",
+                "talentDependencyLine",
+                talentIconOrigin,
+                "",
+                0)
+            BlzFrameSetSize(
+                talentDependencyLine,
+                consts.TALENT_ICON_SIZE / 5,
+                consts.TALENT_ICON_SIZE + iconVerticalPadding)
+            BlzFrameSetPoint(
+                talentDependencyLine,
+                FRAMEPOINT_TOP,
+                talentIconOrigin,
+                FRAMEPOINT_TOP,
+                0,
+                0)
+            BlzFrameSetTexture(
+                talentDependencyLine,
+                "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+                0,
+                true)
+
+            local talentIcon = BlzCreateFrameByType(
+                "BACKDROP",
+                "talentIcon",
+                talentIconOrigin,
+                "",
+                0)
+            BlzFrameSetAllPoints(talentIcon, talentIconOrigin)
+
             local backdropTint = BlzCreateFrameByType(
                 "BACKDROP",
                 "backdropTint",
-                talentIcon,
+                talentIconOrigin,
                 "",
                 0)
-            BlzFrameSetAllPoints(backdropTint, talentIcon)
+            BlzFrameSetAllPoints(backdropTint, talentIconOrigin)
             BlzFrameSetTexture(
                 backdropTint,
                 "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -132,10 +163,10 @@ function Talents:init()
             local numLearnedText = BlzCreateFrameByType(
                 "TEXT",
                 "numLearnedText",
-                talentIcon,
+                talentIconOrigin,
                 "",
                 0)
-            BlzFrameSetAllPoints(numLearnedText, talentIcon)
+            BlzFrameSetAllPoints(numLearnedText, talentIconOrigin)
             BlzFrameSetTextAlignment(
                 numLearnedText, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
             BlzFrameSetText(numLearnedText, "0")
@@ -143,23 +174,25 @@ function Talents:init()
             local hoverFrame = BlzCreateFrameByType(
                 "GLUEBUTTON",
                 "hoverFrame",
-                talentIcon,
+                talentIconOrigin,
                 "IconButtonTemplate",
                 0)
 
             local tooltipFrame = tooltip.makeTooltipFrame(
-                talentIcon, 0.16, 0.08, hoverFrame, true)
+                talentIconOrigin, 0.16, 0.08, hoverFrame, true)
 
-            uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
+            uieventhandler.registerClickEvent(hoverFrame, function(playerId)
                 talents.learnTalent(playerId, x, y)
             end)
 
             talentIconFrames[x][y] = {
-                origin = talentIcon,
+                origin = talentIconOrigin,
                 icon = talentIcon,
                 tooltip = tooltipFrame,
                 numLearnedText = numLearnedText,
                 backdropTint = backdropTint,
+                talentDependencyLine = talentDependencyLine,
+                hoverFrame = hoverFrame,
             }
         end
     end
@@ -195,9 +228,11 @@ function Talents:update(playerId)
         frames.unspentPointsText, unspentPoints .. " Unspent Talent Points")
 
     local filledEntries = {}
+    local entriesForPrereq = {}
 
     for x=0,NUM_COLS-1,1 do
         filledEntries[x] = {}
+        entriesForPrereq[x] = {}
     end
 
     -- Loop through the talents available for the hero type that is selected
@@ -225,15 +260,42 @@ function Talents:update(playerId)
             local tooltipText = "|cff1c85e8" .. talentInfo.name .. "|r|n|n" .. talentInfo.description
             BlzFrameSetText(iconFrame.tooltip.text, tooltipText)
 
+            if talentInfo.prerequisite ~= nil then
+                local prereqRow = talentInfo.prerequisite.row
+                local prereqCol = talentInfo.prerequisite.col
+
+                for row = y-1, prereqRow, -1 do
+                    entriesForPrereq[prereqCol][row] = true
+                end
+            end
+
             filledEntries[x][y] = true
         end
     end
 
     for x=0,NUM_COLS-1,1 do
         for y=0,NUM_ROWS-1,1 do
-            if not filledEntries[x][y] then
+            if not filledEntries[x][y] and not entriesForPrereq[x][y] then
                 local iconFrame = frames.talentIconFrames[x][y]
                 BlzFrameSetVisible(iconFrame.origin, false)
+            elseif entriesForPrereq[x][y] then
+                local iconFrame = frames.talentIconFrames[x][y]
+                BlzFrameSetVisible(iconFrame.origin, true)
+                BlzFrameSetVisible(iconFrame.talentDependencyLine, true)
+                if availableTalents[y] ~= nil and availableTalents[y][x] ~= nil then
+                    BlzFrameSetVisible(iconFrame.backdropTint, true)
+                    BlzFrameSetVisible(iconFrame.numLearnedText, true)
+                    BlzFrameSetVisible(iconFrame.hoverFrame, true)
+                    BlzFrameSetVisible(iconFrame.icon, true)
+                else
+                    BlzFrameSetVisible(iconFrame.backdropTint, false)
+                    BlzFrameSetVisible(iconFrame.numLearnedText, false)
+                    BlzFrameSetVisible(iconFrame.hoverFrame, false)
+                    BlzFrameSetVisible(iconFrame.icon, false)
+                end
+            else
+                local iconFrame = frames.talentIconFrames[x][y]
+                BlzFrameSetVisible(iconFrame.talentDependencyLine, false)
             end
         end
     end

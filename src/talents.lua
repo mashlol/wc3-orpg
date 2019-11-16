@@ -18,8 +18,12 @@ local TALENTS = {
                 description = "Increases the distance you can blink by 50 each point.",
                 icon = "ReplaceableTextures\\CommandButtons\\BTNBlink.blp",
                 buffName = "farblinking",
-                numRequiredPoints = 5,
-            }
+                numRequiredPoints = 10,
+                prerequisite = {
+                    row = 0,
+                    col = 2
+                },
+            },
         },
     },
 }
@@ -67,6 +71,13 @@ function canLearnTalent(playerId, x, y)
     end
     if getUnspentTalentPoints(playerId) <= 0 then
         return false
+    end
+    if talentInfo.prerequisite ~= nil then
+        local prereqRow = talentInfo.prerequisite.row
+        local prereqCol = talentInfo.prerequisite.col
+
+        return getNumPointsInTalent(playerId, prereqCol, prereqRow) ==
+            getTalentMaxLevel(playerId, prereqCol, prereqRow)
     end
     return true
 end
