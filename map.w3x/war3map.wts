@@ -143,19 +143,13 @@ Test unit
 }
 
 STRING 28
-// Units: hwol (Wolf), Tip (Tooltip - Basic)
+// Units: lold (River Turtle), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 29
-// Units: hwol (Wolf), Name (Name)
-{
-Wolf
-}
-
 STRING 30
-// Units: lold (River Turtle), Tip (Tooltip - Basic)
+// Units: wol2 (Elite Mammoth), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -167,19 +161,13 @@ River Turtle
 }
 
 STRING 32
-// Units: wol2 (Elite Wolf), Tip (Tooltip - Basic)
+// Units: cult (Cultist Worker), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 33
-// Units: wol2 (Elite Wolf), Name (Name)
-{
-Elite Wolf
-}
-
 STRING 34
-// Units: cult (Cultist Worker), Tip (Tooltip - Basic)
+// Units: culw (Cultist Enforcer), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -191,7 +179,7 @@ Cultist Worker
 }
 
 STRING 36
-// Units: culw (Cultist Enforcer), Tip (Tooltip - Basic)
+// Units: ecul (Cultist Bodyguard), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -203,7 +191,7 @@ Cultist Enforcer
 }
 
 STRING 38
-// Units: ecul (Cultist Bodyguard), Tip (Tooltip - Basic)
+// Units: over (The Overseer), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -215,7 +203,7 @@ Cultist Bodyguard
 }
 
 STRING 40
-// Units: over (The Overseer), Tip (Tooltip - Basic)
+// Units: mine (Miner Joe), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -227,7 +215,7 @@ The Overseer
 }
 
 STRING 42
-// Units: mine (Miner Joe), Tip (Tooltip - Basic)
+// Units: h000 (Cultist Raider), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -239,7 +227,7 @@ Miner Joe
 }
 
 STRING 44
-// Units: h000 (Cultist Raider), Tip (Tooltip - Basic)
+// Units: cspe (Cultist Emissary), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -251,7 +239,7 @@ Cultist Raider
 }
 
 STRING 46
-// Units: cspe (Cultist Emissary), Tip (Tooltip - Basic)
+// Units: clea (Cultist Commander Siddel), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -263,7 +251,7 @@ Cultist Emissary
 }
 
 STRING 48
-// Units: clea (Cultist Commander Siddel), Tip (Tooltip - Basic)
+// Units: fire (Northwest Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -275,7 +263,7 @@ Cultist Commander Siddel
 }
 
 STRING 50
-// Units: fire (Northwest Bonfire), Tip (Tooltip - Basic)
+// Units: plan (Attack Plans), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -287,7 +275,7 @@ Northwest Bonfire
 }
 
 STRING 52
-// Units: plan (Attack Plans), Tip (Tooltip - Basic)
+// Units: cled (Cultist Commander Audric), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -305,7 +293,7 @@ General Smith
 }
 
 STRING 55
-// Units: cled (Cultist Commander Audric), Tip (Tooltip - Basic)
+// Units: h001 (Cultist Ambusher), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -317,7 +305,7 @@ Cultist Commander Audric
 }
 
 STRING 57
-// Units: h001 (Cultist Ambusher), Tip (Tooltip - Basic)
+// Units: sfir (Southwest Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -329,7 +317,7 @@ Cultist Ambusher
 }
 
 STRING 59
-// Units: sfir (Southwest Bonfire), Tip (Tooltip - Basic)
+// Units: sefi (Southeast Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -341,7 +329,7 @@ Southwest Bonfire
 }
 
 STRING 61
-// Units: sefi (Southeast Bonfire), Tip (Tooltip - Basic)
+// Units: nefi (Northeast Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -353,7 +341,7 @@ Southeast Bonfire
 }
 
 STRING 63
-// Units: nefi (Northeast Bonfire), Tip (Tooltip - Basic)
+// Units: cfir (Central Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -365,7 +353,7 @@ Northeast Bonfire
 }
 
 STRING 65
-// Units: cfir (Central Bonfire), Tip (Tooltip - Basic)
+// Units: mamo (Icy Mammoth), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -673,5 +661,53 @@ STRING 118
 // Destructibles: B007 (Ice Spike), Name (Name)
 {
 Ice Spike
+}
+
+STRING 119
+// Units: wol2 (Elite Mammoth), Name (Name)
+{
+Elite Mammoth
+}
+
+STRING 120
+// Units: trol (Troll Warrior), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 121
+// Units: mamo (Icy Mammoth), Name (Name)
+{
+Icy Mammoth
+}
+
+STRING 122
+// Units: trol (Troll Warrior), Name (Name)
+{
+Troll Warrior
+}
+
+STRING 123
+// Units: trop (Troll Priest), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 124
+// Units: trop (Troll Priest), Name (Name)
+{
+Troll Priest
+}
+
+STRING 125
+// Units: troc (Troll Chieftan), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 126
+// Units: troc (Troll Chieftan), Name (Name)
+{
+Troll Chieftan
 }
 

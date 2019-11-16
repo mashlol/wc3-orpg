@@ -552,23 +552,6 @@ function initQuests()
             levelRequirement = 0,
         },
 		[5] = {
-            name = "Talk to Elder John",
-            getQuestFrom = gg_unit_nvil_0069,
-            handQuestTo = gg_unit_nemi_0014,
-            obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
-            incompleteText = "Have you talked to Elder John?",
-            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
-            objectives = {
-
-            },
-            rewards = {
-                exp = 20,
-                gold = 5,
-            },
-            prerequisites = {5},
-            levelRequirement = 0,
-        },
-		[6] = {
             name = "Giant Turtle",
             getQuestFrom = gg_unit_nvil_0069,
             handQuestTo = gg_unit_nvil_0069,
@@ -587,9 +570,102 @@ function initQuests()
                 exp = 150,
                 gold = 25,
             },
+            prerequisites = {4},
+            levelRequirement = 0,
+        },
+		[6] = {
+            name = "Talk to Ice Guy",
+            getQuestFrom = gg_unit_nvl2_0070,
+            handQuestTo = gg_unit_nvil_0040,
+            obtainText = "Talk to Elder John, he should be in the southern part of Freydell Village",
+            incompleteText = "Have you talked to Elder John?",
+            completedText = "Ah, you're the heroes i've heard so much about. I have some important tasks for you. The animals in this area have been coordinating attacks on our village as of late. This is very unlike them, I think someone might be behind this.",
+            objectives = {
+
+            },
+            rewards = {
+                exp = 20,
+                gold = 5,
+            },
+            prerequisites = {4},
+            levelRequirement = 0,
+        },
+		[7] = {
+            name = "A Cold Winter",
+            getQuestFrom = gg_unit_nvil_0040,
+            handQuestTo = gg_unit_nvil_0040,
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
+            incompleteText = "Have you completed the task?",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
+            rewards = {
+                exp = 50,
+                gold = 5,
+            },
+			objectives = {
+                [1] = {
+                    type = TYPE.ITEM,
+                    amount = 10,
+                    itemId = 50,
+                },
+				[2] = {
+                    type = TYPE.ITEM,
+                    amount = 5,
+                    itemId = 51,
+                },
+            },
             prerequisites = {6},
             levelRequirement = 0,
         },
+		[8] = {
+            name = "Trolls to the West",
+            getQuestFrom = gg_unit_nvil_0040,
+            handQuestTo = gg_unit_nvil_0040,
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
+            incompleteText = "Have you completed the task?",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
+            rewards = {
+                exp = 50,
+                gold = 5,
+            },
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('trop'),
+                    name = 'Troll Priests',
+                },
+				[2] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('trol'),
+                    name = 'Troll Warriors',
+                },
+            },
+            prerequisites = {7},
+            levelRequirement = 0,
+        },
+		[9] = {
+            name = "Troll Chieftan",
+            getQuestFrom = gg_unit_nvlw_0178,
+            handQuestTo = gg_unit_nvlw_0178,
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
+            incompleteText = "Have you completed the task?",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
+            rewards = {
+                exp = 50,
+                gold = 5,
+            },
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('troc'),
+                    name = 'Troll Chieftan',
+                },
+            },
+            prerequisites = {7},
+            levelRequirement = 0,
+		},
 		[10] = {
             name = "Stamping out the Fires",
             getQuestFrom = gg_unit_hcth_0104,

@@ -1044,6 +1044,28 @@ local ITEMS = {
         cost = -1,
         consume = false,
     },
+		[50] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Mammoth Fur',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNRedDragon.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 10,
+        text = "The fur of a Mammoth...sure looks warm.",
+        cost = 20,
+    },
+		[51] = {
+        type = TYPE.CONSUMABLE,
+        name = 'Giant Mammoth Fur',
+        icon = "ReplaceableTextures\\CommandButtons\\BTNRobeOfTheMagi.blp",
+        itemLevel = 1,
+        requiredLevel = 1,
+        rarity = RARITY.COMMON,
+        stackSize = 10,
+        text = "This...looks warmer.",
+        cost = 20,
+    },
 }
 
 -- Precompute tooltips at initialization time or you get desyncs
