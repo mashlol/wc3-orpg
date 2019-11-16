@@ -613,7 +613,7 @@ function initQuests()
                     itemId = 51,
                 },
             },
-            prerequisites = {},
+            prerequisites = {6},
             levelRequirement = 0,
         },
 		[8] = {
