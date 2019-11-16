@@ -587,7 +587,7 @@ function initQuests()
                 exp = 20,
                 gold = 5,
             },
-            prerequisites = {4},
+            prerequisites = {5},
             levelRequirement = 0,
         },
 		[7] = {
@@ -613,7 +613,7 @@ function initQuests()
                     itemId = 51,
                 },
             },
-            prerequisites = {6},
+            prerequisites = {},
             levelRequirement = 0,
         },
 		[8] = {
@@ -658,7 +658,7 @@ function initQuests()
             objectives = {
                 [1] = {
                     type = TYPE.KILL,
-                    amount = 10,
+                    amount = 1,
                     toKill = FourCC('troc'),
                     name = 'Troll Chieftan',
                 },
@@ -667,6 +667,40 @@ function initQuests()
             levelRequirement = 0,
 		},
 		[10] = {
+            name = "Troll Dungeon Quest",
+            getQuestFrom = gg_unit_nvlw_0178,
+            handQuestTo = gg_unit_nvlw_0178,
+            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west. This is unlike them...",
+            incompleteText = "Have you completed the task?",
+            completedText = "Why were those turtles so aggressive? Usually they are very friendly.",
+            rewards = {
+                exp = 50,
+                gold = 5,
+            },
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('mine'),
+                    name = 'High Troll Priest',
+                },
+				 [2] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('h002'),
+                    name = 'Giant Yeti',
+                },
+				 [3] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('over'),
+                    name = 'Ice Troll Warlord',
+                },
+            },
+            prerequisites = {9},
+            levelRequirement = 0,
+		},
+		[11] = {
             name = "Stamping out the Fires",
             getQuestFrom = gg_unit_hcth_0104,
             handQuestTo = gg_unit_hcth_0104,
@@ -722,7 +756,7 @@ function initQuests()
             prerequisites = {9},
             levelRequirement = 0,
         },
-		[11] = {
+		[12] = {
             name = "Full Momentum",
             getQuestFrom = gg_unit_gens_0335,
             handQuestTo = gg_unit_gens_0335,

@@ -24,13 +24,13 @@ local DROP_TABLE = {
         [37] = 1,
     },
 	[FourCC('mamo')] = { -- Mammoth
-        none = 100,
-        [6] = 30,
+        none = 40,
+        [6] = 20,
         [5] = 10,
-		[50] = 275,
+		[50] = 175,
     },
 	[FourCC('wol2')] = { -- Elite Mammoth
-        none = 115,
+        none = 100,
         [6] = 30,
         [5] = 10,
 		[51] = 255,

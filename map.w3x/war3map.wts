@@ -729,3 +729,15 @@ STRING 134
 Giant Yeti
 }
 
+STRING 135
+// Doodads: D00H (iron gate anywhere), Name (Name)
+{
+iron gate anywhere
+}
+
+STRING 136
+// Destructibles: B008 (barricade anywhere), Name (Name)
+{
+barricade anywhere
+}
+
