@@ -23,7 +23,6 @@ local DROP_TABLE = {
         [18] = 1,
         [37] = 1,
     },
-	    },
 	[FourCC('mamo')] = { -- Mammoth
         none = 100,
         [6] = 30,
@@ -31,10 +30,10 @@ local DROP_TABLE = {
 		[50] = 250,
     },
 	[FourCC('Wol2')] = { -- Elite Mammoth
-        none = 125,
+        none = 115,
         [6] = 30,
         [5] = 10,
-		[51] = 200,
+		[51] = 225,
     },
     [FourCC('clea')] = { -- Cultist Commander
         none = 250,

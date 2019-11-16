@@ -1063,7 +1063,7 @@ local ITEMS = {
         requiredLevel = 1,
         rarity = RARITY.COMMON,
         stackSize = 10,
-        text = "This...looks warmer.",
+        text = "This looks...warmer.",
         cost = 20,
     },
 }
