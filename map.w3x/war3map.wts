@@ -161,69 +161,39 @@ River Turtle
 }
 
 STRING 32
-// Units: cult (Cultist Worker), Tip (Tooltip - Basic)
+// Units: cult (Ice Troll Grunt), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
 STRING 34
-// Units: culw (Cultist Enforcer), Tip (Tooltip - Basic)
+// Units: culw (Ice Troll Enforcer), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 35
-// Units: cult (Cultist Worker), Name (Name)
-{
-Cultist Worker
 }
 
 STRING 36
-// Units: ecul (Cultist Bodyguard), Tip (Tooltip - Basic)
+// Units: ecul (Ice Troll Bodyguard), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 37
-// Units: culw (Cultist Enforcer), Name (Name)
-{
-Cultist Enforcer
 }
 
 STRING 38
-// Units: over (The Overseer), Tip (Tooltip - Basic)
+// Units: over (Ice Troll Warlord), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 39
-// Units: ecul (Cultist Bodyguard), Name (Name)
-{
-Cultist Bodyguard
 }
 
 STRING 40
-// Units: mine (Miner Joe), Tip (Tooltip - Basic)
+// Units: mine (High Troll Priest), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 41
-// Units: over (The Overseer), Name (Name)
-{
-The Overseer
 }
 
 STRING 42
 // Units: h000 (Cultist Raider), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 43
-// Units: mine (Miner Joe), Name (Name)
-{
-Miner Joe
 }
 
 STRING 44
@@ -715,5 +685,47 @@ STRING 127
 // Doodads: D00F (Cave Illusion), Name (Name)
 {
 Cave Illusion
+}
+
+STRING 128
+// Units: cult (Ice Troll Grunt), Name (Name)
+{
+Ice Troll Grunt
+}
+
+STRING 129
+// Units: culw (Ice Troll Enforcer), Name (Name)
+{
+Ice Troll Enforcer
+}
+
+STRING 130
+// Units: ecul (Ice Troll Bodyguard), Name (Name)
+{
+Ice Troll Bodyguard
+}
+
+STRING 131
+// Units: over (Ice Troll Warlord), Name (Name)
+{
+Ice Troll Warlord
+}
+
+STRING 132
+// Units: mine (High Troll Priest), Name (Name)
+{
+High Troll Priest
+}
+
+STRING 133
+// Units: h002 (Giant Yeti), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 134
+// Units: h002 (Giant Yeti), Name (Name)
+{
+Giant Yeti
 }
 
