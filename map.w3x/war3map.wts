@@ -149,7 +149,7 @@ Turtle
 }
 
 STRING 30
-// Units: wol2 (Elite Mammoth), Tip (Tooltip - Basic)
+// Units: wol2 (Giant Mammoth), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -633,12 +633,6 @@ STRING 118
 Ice Spike
 }
 
-STRING 119
-// Units: wol2 (Elite Mammoth), Name (Name)
-{
-Elite Mammoth
-}
-
 STRING 120
 // Units: trol (Troll Warrior), Tip (Tooltip - Basic)
 {
@@ -787,5 +781,23 @@ STRING 145
 // Doodads: swae (Stone Wall End Anywhere), Name (Name)
 {
 Stone Wall End Anywhere
+}
+
+STRING 146
+// Units: wol2 (Giant Mammoth), Name (Name)
+{
+Giant Mammoth
+}
+
+STRING 147
+// Units: wolf (Arctic Wolf), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 148
+// Units: wolf (Arctic Wolf), Name (Name)
+{
+Arctic Wolf
 }
 
