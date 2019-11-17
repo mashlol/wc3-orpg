@@ -63,3 +63,29 @@ Frame "GLUETEXTBUTTON" "GrungeButton" INHERITS WITHCHILDREN "GrungeButtonTemplat
         Text "",
     }
 }
+
+Frame "GLUETEXTBUTTON" "RoundGrungeButtonTemplate" {
+    Width 0.228,
+    Height 0.035,
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ButtonPushedTextOffset 0.00f -0.001f,
+
+    ControlBackdrop "RoundGrungeButtonBackdropTemplate",
+    Frame "BACKDROP" "RoundGrungeButtonBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\round_button.blp",
+        BackdropBlendAll,
+    }
+
+    ControlPushedBackdrop "RoundGrungeButtonPushedBackdropTemplate",
+    Frame "BACKDROP" "RoundGrungeButtonPushedBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\round_button_press.blp",
+        BackdropBlendAll,
+    }
+
+    ControlMouseOverHighlight "RoundGrungeButtonMouseOverHighlightTemplate",
+    Frame "HIGHLIGHT" "RoundGrungeButtonMouseOverHighlightTemplate" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "war3mapImported\ui\round_button_hover_highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}

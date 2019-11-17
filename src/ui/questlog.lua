@@ -77,6 +77,10 @@ function QuestLog:init()
         table.insert(buttons, createQuestButton(origin, originFrame, -(i - 1) * 0.053 - 0.025, i))
     end
 
+    utils.createCloseButton(origin, function(playerId)
+        questLogToggles[playerId] = nil
+    end)
+
     self.frames = {
         origin = origin,
         buttons = buttons,

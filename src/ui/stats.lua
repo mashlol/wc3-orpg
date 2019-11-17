@@ -96,7 +96,10 @@ local statsToggles = {}
 local Stats = {
     toggle = function(playerId)
         statsToggles[playerId] = not statsToggles[playerId]
-    end
+    end,
+    hide = function(playerId)
+        statsToggles[playerId] = nil
+    end,
 }
 
 function Stats:new(o)

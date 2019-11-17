@@ -30,6 +30,48 @@ function createBorderFrame(origin, title)
     }
 end
 
+function createCloseButton(origin, callback)
+    local closeButton = BlzCreateFrame("RoundGrungeButtonTemplate", origin, 0, 0)
+    BlzFrameSetSize(closeButton, 0.022, 0.022)
+    BlzFrameSetPoint(
+        closeButton,
+        FRAMEPOINT_CENTER,
+        origin,
+        FRAMEPOINT_TOPRIGHT,
+        -0.005,
+        -0.005)
+
+    local buttonIcon = BlzCreateFrameByType(
+        "BACKDROP",
+        "buttonIcon",
+        closeButton,
+        "",
+        0)
+    BlzFrameSetSize(buttonIcon, 0.0143, 0.0143)
+    BlzFrameSetPoint(
+        buttonIcon,
+        FRAMEPOINT_CENTER,
+        closeButton,
+        FRAMEPOINT_CENTER,
+        0,
+        0)
+    BlzFrameSetTexture(
+        buttonIcon,
+        "war3mapImported\\ui\\close_icon.blp",
+        0,
+        true)
+
+    local trig = CreateTrigger()
+    BlzTriggerRegisterFrameEvent(trig, closeButton, FRAMEEVENT_CONTROL_CLICK)
+    TriggerAddAction(trig, function()
+        callback(GetPlayerId(GetTriggerPlayer()))
+
+        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
+        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+    end)
+end
+
 return {
     createBorderFrame = createBorderFrame,
+    createCloseButton = createCloseButton,
 }

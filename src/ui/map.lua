@@ -77,6 +77,10 @@ function Map:init()
         table.insert(markFrames, markFrame)
     end
 
+    utils.createCloseButton(mapOrigin, function(playerId)
+        mapToggles[playerId] = nil
+    end)
+
     self.frames = {
         origin = mapOrigin,
         mapFrame = mapFrame,

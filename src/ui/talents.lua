@@ -181,6 +181,10 @@ function Talents:init()
         end
     end
 
+    utils.createCloseButton(talentsOrigin, function(playerId)
+        talentToggles[playerId] = nil
+    end)
+
     self.frames = {
         origin = talentsOrigin,
         talentIconFrames = talentIconFrames,

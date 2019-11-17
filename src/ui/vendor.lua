@@ -208,28 +208,8 @@ function Vendor:init()
         })
     end
 
-    local closeButton = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
-    local closeButtonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
-    BlzFrameSetSize(closeButton, 0.06, 0.02)
-    BlzFrameSetPoint(
-        closeButton,
-        FRAMEPOINT_BOTTOMLEFT,
-        origin,
-        FRAMEPOINT_BOTTOMLEFT,
-        0.01,
-        0.01)
-    BlzFrameSetText(closeButtonText, "Cancel")
-    BlzFrameSetScale(closeButtonText, 0.4)
-
-    local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(trig, closeButton, FRAMEEVENT_CONTROL_CLICK)
-    TriggerAddAction(trig, function()
-        local playerId = GetPlayerId(GetTriggerPlayer())
-
+    utils.createCloseButton(origin, function(playerId)
         vendorToggles[playerId] = nil
-
-        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
     end)
 
     self.frames = {

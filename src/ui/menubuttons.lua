@@ -100,12 +100,8 @@ function MenuButtons:init()
         0.6)
 
     for i, buttonInfo in pairs(MENU_BUTTONS) do
-        local button = BlzCreateFrameByType(
-            "BACKDROP",
-            "button",
-            menuButtonsOrigin,
-            "",
-            0)
+        local button = BlzCreateFrame(
+            "RoundGrungeButtonTemplate", menuButtonsOrigin, 0, 0)
         BlzFrameSetSize(
             button, consts.MENU_BUTTON_SIZE, consts.MENU_BUTTON_SIZE)
         BlzFrameSetPoint(
@@ -115,8 +111,6 @@ function MenuButtons:init()
             FRAMEPOINT_LEFT,
             (i - 1) * (consts.MENU_BUTTON_SIZE - consts.MENU_BUTTON_SIZE * 0.1),
             0)
-        BlzFrameSetTexture(
-            button, "war3mapImported\\ui\\round_button.blp", 0, true)
 
         local buttonIcon = BlzCreateFrameByType(
             "BACKDROP",
@@ -141,22 +135,22 @@ function MenuButtons:init()
             0,
             true)
 
-        local hoverFrame = BlzCreateFrameByType(
-            "GLUEBUTTON",
-            "hoverFrame",
-            button,
-            "",
-            0)
+        -- local hoverFrame = BlzCreateFrameByType(
+        --     "GLUEBUTTON",
+        --     "hoverFrame",
+        --     button,
+        --     "",
+        --     0)
 
         local tooltipFrame = tooltip.makeTooltipFrame(
-            button, 0.08, 0.02, hoverFrame, true)
+            button, 0.08, 0.02, button, true, false, true)
 
         BlzFrameSetText(tooltipFrame.text, buttonInfo.text)
         BlzFrameSetTextAlignment(
             tooltipFrame.text, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_CENTER)
 
         local trig = CreateTrigger()
-        BlzTriggerRegisterFrameEvent(trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
+        BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
             buttonInfo.callback()
             BlzFrameSetEnable(BlzGetTriggerFrame(), false)

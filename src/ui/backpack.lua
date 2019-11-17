@@ -252,6 +252,10 @@ function Backpack:init()
         })
     end
 
+    utils.createCloseButton(backpackOrigin, function(playerId)
+        backpackToggles[playerId] = nil
+    end)
+
     self.frames = {
         itemFrames = itemFrames,
         origin = backpackOrigin,

@@ -6,6 +6,7 @@ local tooltip = require('src/ui/tooltip.lua')
 local backpack = require('src/items/backpack.lua')
 local equipment = require('src/items/equipment.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local Stats = require('src/ui/stats.lua')
 
 -- equipmentToggles = {
 --     [playerId] = true or nil
@@ -189,6 +190,12 @@ function Equipment:init()
         consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
         12)
     table.insert(itemFrames, offHand)
+
+
+    utils.createCloseButton(equipmentOrigin, function(playerId)
+        equipmentToggles[playerId] = nil
+        Stats.hide(playerId)
+    end)
 
     self.frames = {
         itemFrames = itemFrames,
