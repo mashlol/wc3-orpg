@@ -173,7 +173,7 @@ function UnitFrame:init()
     BlzFrameSetText(healthBarStatusText, "600 / 600")
 
     local buffIcons = {}
-    local buffSize = self.healthBarWidth / 11
+    local buffSize = self.healthBarWidth / 10
     for i=0,9,1 do
         local buffIcon = BlzCreateFrameByType(
             "BACKDROP",

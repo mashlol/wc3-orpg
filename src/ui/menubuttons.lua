@@ -6,12 +6,14 @@ local QuestLog = require('src/ui/questlog.lua')
 local Map = require('src/ui/map.lua')
 local DpsMeter = require('src/ui/dpsmeter.lua')
 local Talents = require('src/ui/talents.lua')
+local tooltip = require('src/ui/tooltip.lua')
 
 local MenuButtons = {}
 
 local MENU_BUTTONS = {
     {
         text = "Menu (F10)",
+        icon = "settings_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             local menuFrame = BlzGetOriginFrame(ORIGIN_FRAME_SYSTEM_BUTTON, 0)
@@ -22,6 +24,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "Inventory (B)",
+        icon = "chest_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Backpack.toggle(playerId)
@@ -29,6 +32,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "Character (C)",
+        icon = "hammer_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Equipment.toggle(playerId)
@@ -37,6 +41,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "Quest Log (L)",
+        icon = "book_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             QuestLog.toggle(playerId)
@@ -44,6 +49,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "Map (M)",
+        icon = "museum_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Map.toggle(playerId)
@@ -51,6 +57,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "Talents (N)",
+        icon = "star_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             Talents.toggle(playerId)
@@ -58,6 +65,7 @@ local MENU_BUTTONS = {
     },
     {
         text = "DPS Meter (T)",
+        icon = "swords_icon",
         callback = function()
             local playerId = GetPlayerId(GetTriggerPlayer())
             DpsMeter.toggle(playerId)
@@ -83,31 +91,72 @@ function MenuButtons:init()
         0)
     BlzFrameSetSize(
         menuButtonsOrigin,
-        #MENU_BUTTONS * consts.MENU_BUTTON_WIDTH,
-        consts.MENU_BUTTON_HEIGHT + 0.025)
+        #MENU_BUTTONS * consts.MENU_BUTTON_SIZE,
+        consts.MENU_BUTTON_SIZE)
     BlzFrameSetAbsPoint(
         menuButtonsOrigin,
-        FRAMEPOINT_CENTER,
+        FRAMEPOINT_TOP,
         0.4,
         0.6)
 
     for i, buttonInfo in pairs(MENU_BUTTONS) do
-        local button = BlzCreateFrame(
-            "ScriptDialogButton", menuButtonsOrigin, 0, 0)
-        local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+        local button = BlzCreateFrameByType(
+            "BACKDROP",
+            "button",
+            menuButtonsOrigin,
+            "",
+            0)
         BlzFrameSetSize(
-            button, consts.MENU_BUTTON_WIDTH, consts.MENU_BUTTON_HEIGHT)
+            button, consts.MENU_BUTTON_SIZE, consts.MENU_BUTTON_SIZE)
         BlzFrameSetPoint(
             button,
             FRAMEPOINT_LEFT,
             menuButtonsOrigin,
-            FRAMEPOINT_LEFT, (i - 1) * consts.MENU_BUTTON_WIDTH,
+            FRAMEPOINT_LEFT,
+            (i - 1) * (consts.MENU_BUTTON_SIZE - consts.MENU_BUTTON_SIZE * 0.1),
             0)
-        BlzFrameSetText(buttonText, buttonInfo.text)
-        BlzFrameSetScale(buttonText, 0.5)
+        BlzFrameSetTexture(
+            button, "war3mapImported\\ui\\square_button.blp", 0, true)
+
+        local buttonIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "buttonIcon",
+            button,
+            "",
+            0)
+        BlzFrameSetSize(
+            buttonIcon,
+            consts.MENU_BUTTON_SIZE * 0.65,
+            consts.MENU_BUTTON_SIZE * 0.65)
+        BlzFrameSetPoint(
+            buttonIcon,
+            FRAMEPOINT_CENTER,
+            button,
+            FRAMEPOINT_CENTER,
+            0,
+            0)
+        BlzFrameSetTexture(
+            buttonIcon,
+            "war3mapImported\\ui\\" .. buttonInfo.icon ..".blp",
+            0,
+            true)
+
+        local hoverFrame = BlzCreateFrameByType(
+            "GLUEBUTTON",
+            "hoverFrame",
+            button,
+            "",
+            0)
+
+        local tooltipFrame = tooltip.makeTooltipFrame(
+            button, 0.08, 0.02, hoverFrame, true)
+
+        BlzFrameSetText(tooltipFrame.text, buttonInfo.text)
+        BlzFrameSetTextAlignment(
+            tooltipFrame.text, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_CENTER)
 
         local trig = CreateTrigger()
-        BlzTriggerRegisterFrameEvent(trig, button, FRAMEEVENT_CONTROL_CLICK)
+        BlzTriggerRegisterFrameEvent(trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
         TriggerAddAction(trig, function()
             buttonInfo.callback()
             BlzFrameSetEnable(BlzGetTriggerFrame(), false)
