@@ -28,7 +28,7 @@ cp bin/war3map.lua bin/built.w3x/war3map.lua
 
 echo 'Deleting old versions'
 
-rm -rf /c/Users/Kevin/Documents/Warcraft\ III/Maps/Download/temp/built_*
+rm -rf /c/Users/Kevin/Documents/Warcraft\ III\ Beta/Maps/Download/temp/built_*
 
 echo 'Deleting build artifacts'
 
