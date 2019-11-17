@@ -741,3 +741,15 @@ STRING 136
 barricade anywhere
 }
 
+STRING 137
+// Destructibles: B009 (Icey Rock Anywhere), Name (Name)
+{
+Icey Rock Anywhere
+}
+
+STRING 138
+// Doodads: D00I (Black Back Drop), Name (Name)
+{
+Black Back Drop
+}
+
