@@ -28,7 +28,7 @@ function ActionBar:init()
     BlzFrameSetSize(
         actionBar, (consts.ACTION_ITEM_SIZE * 0.9) * 6, consts.ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(
-        actionBar, FRAMEPOINT_BOTTOM, 0.4, 0.01)
+        actionBar, FRAMEPOINT_BOTTOM, 0.4, 0.02)
 
     local actionItems = {}
     for i=0,5,1 do

@@ -95,15 +95,15 @@ function ExpBar:init()
         "",
         0)
     BlzFrameSetSize(
-        expBarFrameBackground, consts.EXP_BAR_WIDTH, consts.EXP_BAR_HEIGHT)
+        expBarFrameBackground, consts.EXP_BAR_WIDTH, consts.EXP_BAR_WIDTH * 75 / 1232)
     BlzFrameSetAbsPoint(
         expBarFrameBackground,
         FRAMEPOINT_BOTTOM,
-        0.4045,
+        0.401,
         0)
     BlzFrameSetTexture(
         expBarFrameBackground,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        "war3mapImported\\ui\\loading_bar_empty.blp",
         0,
         true)
 
@@ -114,7 +114,7 @@ function ExpBar:init()
         "",
         0)
     BlzFrameSetSize(
-        expBarFrameFilled, consts.EXP_BAR_WIDTH, consts.EXP_BAR_HEIGHT)
+        expBarFrameFilled, consts.EXP_BAR_WIDTH, consts.EXP_BAR_WIDTH * 46 / 1232)
     BlzFrameSetPoint(
         expBarFrameFilled,
         FRAMEPOINT_LEFT,
@@ -124,7 +124,7 @@ function ExpBar:init()
         0)
     BlzFrameSetTexture(
         expBarFrameFilled,
-        "Replaceabletextures\\Teamcolor\\Teamcolor03.blp",
+        "war3mapImported\\ui\\loading_bar_fill.blp",
         0,
         true)
 
