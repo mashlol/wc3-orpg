@@ -105,7 +105,7 @@ function hideBlizzUI()
 end
 
 function initCustomUI()
-    BlzLoadTOCFile("war3mapimported\\Tooltip.toc")
+    BlzLoadTOCFile("war3mapimported\\fdfs\\Tooltip.toc")
 
     for _, mod in pairs(UI_MODULES) do
         mod:init()
