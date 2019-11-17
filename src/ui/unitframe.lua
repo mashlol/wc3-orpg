@@ -98,7 +98,7 @@ function UnitFrame:init()
         0,
         0)
     BlzFrameSetTexture(
-        unitIconBackdrop, "war3mapImported\\ui\\ab_spelL_frame_clean.blp", 0, true)
+        unitIconBackdrop, "war3mapImported\\ui\\ab_spell_frame_clean.blp", 0, true)
 
     local iconWidth = iconBackdropWidth * 0.75
     local unitIconFrame = BlzCreateFrameByType(
@@ -115,6 +115,43 @@ function UnitFrame:init()
         FRAMEPOINT_CENTER,
         0,
         0)
+
+    local levelFrameWidth = iconBackdropWidth * 0.3
+    local levelFrameBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "levelFrameBackdrop",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(levelFrameBackdrop, levelFrameWidth, levelFrameWidth)
+    BlzFrameSetPoint(
+        levelFrameBackdrop,
+        FRAMEPOINT_TOPRIGHT,
+        unitIconBackdrop,
+        FRAMEPOINT_TOPRIGHT,
+        0,
+        0)
+    BlzFrameSetTexture(
+        levelFrameBackdrop, "war3mapImported\\ui\\level_frame.blp", 0, true)
+
+    local levelText = BlzCreateFrameByType(
+        "TEXT",
+        "levelText",
+        levelFrameBackdrop,
+        "",
+        0)
+    BlzFrameSetSize(
+        levelText, levelFrameWidth, levelFrameWidth)
+    BlzFrameSetPoint(
+        levelText,
+        FRAMEPOINT_CENTER,
+        levelFrameBackdrop,
+        FRAMEPOINT_CENTER,
+        0,
+        0)
+    BlzFrameSetTextAlignment(
+        levelText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+    BlzFrameSetText(levelText, "12")
 
     local healthBarStatusText = BlzCreateFrameByType(
         "TEXT",
@@ -199,6 +236,8 @@ function UnitFrame:init()
         origin = unitFrameOrigin,
         icon = unitIconFrame,
         buffIcons = buffIcons,
+        levelText = levelText,
+        levelFrameBackdrop = levelFrameBackdrop,
     }
 
     return self
@@ -237,9 +276,12 @@ function UnitFrame:update(playerId)
     end
 
     local unitIcon = BlzGetAbilityIcon(GetUnitTypeId(unit))
-    -- print()
-    -- local name = GetUnitName(unit)
     BlzFrameSetTexture(frames.icon, unitIcon, 0, true)
+
+    local unitLevel = GetHeroLevel(unit) or GetUnitLevel(unit)
+    BlzFrameSetText(frames.levelText, unitLevel)
+
+    BlzFrameSetVisible(frames.levelFrameBackdrop, self.forParty == nil)
 
     local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
     local maxHp = BlzGetUnitMaxHP(unit)

@@ -57,7 +57,7 @@ for i=0,9,1 do
         yLoc = 0.5 - (partyFrameHeight) * i,
         anchor = FRAMEPOINT_TOPLEFT,
         forTarget = false,
-        forParty = 0,
+        forParty = i,
         showCastBar = false,
         width = partyFrameWidth,
     })
