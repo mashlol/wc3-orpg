@@ -133,7 +133,7 @@ function Vendor:init()
             0.0025,
             0)
         BlzFrameSetTexture(
-            coinBackdrop, "ui\\feedback\\resources\\resourcegold.blp", 0, false)
+            coinBackdrop, "war3mapImported\\ui\\gold.blp", 0, true)
 
         local itemCostText = BlzCreateFrameByType(
             "TEXT",

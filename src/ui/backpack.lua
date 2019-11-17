@@ -44,10 +44,23 @@ function Backpack:init()
     BlzFrameSetAbsPoint(
         backpackOrigin,
         FRAMEPOINT_CENTER,
-        0.565,
+        0.6,
         0.32)
 
     local borderInfo = utils.createBorderFrame(backpackOrigin, "INVENTORY")
+
+    local coinBackdrop = BlzCreateFrameByType(
+        "BACKDROP", "coinBackdrop", backpackOrigin, "", 0)
+    BlzFrameSetSize(coinBackdrop, 0.012, 0.012)
+    BlzFrameSetPoint(
+        coinBackdrop,
+        FRAMEPOINT_BOTTOMLEFT,
+        backpackOrigin,
+        FRAMEPOINT_BOTTOMLEFT,
+        0.02,
+        0.01)
+    BlzFrameSetTexture(
+        coinBackdrop, "war3mapImported\\ui\\gold.blp", 0, true)
 
     local goldText = BlzCreateFrameByType(
         "TEXT",
@@ -62,9 +75,10 @@ function Backpack:init()
         FRAMEPOINT_BOTTOMLEFT,
         backpackOrigin,
         FRAMEPOINT_BOTTOMLEFT,
-        0.01,
+        0.035,
         0.01)
-    BlzFrameSetText(goldText, "Gold: 0")
+    BlzFrameSetText(goldText, "0")
+    BlzFrameSetTextAlignment(goldText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_LEFT)
 
     local itemFrames = {}
 
@@ -82,8 +96,31 @@ function Backpack:init()
             FRAMEPOINT_TOPLEFT,
             backpackOrigin,
             FRAMEPOINT_TOPLEFT,
-            (i % 6) * (consts.BACKPACK_ITEM_SIZE + 0.004) + 0.02,
-            -math.floor(i / 6) * (consts.BACKPACK_ITEM_SIZE + 0.004) - 0.03)
+            (i % 6) * (consts.BACKPACK_ITEM_SIZE + consts.BACKPACK_ITEM_PADDING) + 0.02,
+            -math.floor(i / 6) * (consts.BACKPACK_ITEM_SIZE +  consts.BACKPACK_ITEM_PADDING) - 0.03)
+
+        local itemBackground = BlzCreateFrameByType(
+            "BACKDROP",
+            "itemBackground",
+            itemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            itemBackground,
+            consts.BACKPACK_ITEM_SIZE * 4 / 3,
+            consts.BACKPACK_ITEM_SIZE * 4 / 3)
+        BlzFrameSetPoint(
+            itemBackground,
+            FRAMEPOINT_CENTER,
+            itemOrigin,
+            FRAMEPOINT_CENTER,
+            0,
+            0)
+        BlzFrameSetTexture(
+            itemBackground,
+            "war3mapImported\\ui\\ab_spell_frame_clean.blp",
+            0,
+            true)
 
         local itemFrame = BlzCreateFrameByType(
             "BACKDROP",
@@ -278,7 +315,7 @@ function Backpack:update(playerId)
 
     BlzFrameSetText(
         frames.goldText,
-        "Gold: ".. GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD))
+        "".. GetPlayerState(Player(playerId), PLAYER_STATE_RESOURCE_GOLD))
 
     BlzFrameSetText(
         frames.backpackText,
@@ -295,12 +332,9 @@ function Backpack:update(playerId)
                 itemmanager.getItemInfo(itemId).icon,
                 0,
                 true)
+            BlzFrameSetVisible(itemFrame.itemFrame, true)
         else
-            BlzFrameSetTexture(
-                itemFrame.itemFrame,
-                "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
-                0,
-                true)
+            BlzFrameSetVisible(itemFrame.itemFrame, false)
         end
 
         if itemCount ~= 1 and itemCount ~= nil then
