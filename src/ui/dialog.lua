@@ -41,18 +41,17 @@ function Dialog:new(o)
     return o
 end
 
-function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnIndex)
-    local button = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
-    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+function createButton(origin, xOffset, isNegative)
+    local button = BlzCreateFrame("GrungeButton", origin, 0, 0)
+    local buttonText = BlzGetFrameByName("GrungeButtonText", 0)
     BlzFrameSetSize(button, 0.12, 0.04)
     BlzFrameSetPoint(
         button,
-        btnIndex and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
+        FRAMEPOINT_CENTER,
         origin,
-        btnIndex and FRAMEPOINT_TOP or FRAMEPOINT_BOTTOM,
+        FRAMEPOINT_BOTTOM,
         xOffset,
-        yOffset)
-    BlzFrameSetScale(buttonText, 0.7)
+        0.005)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -73,14 +72,6 @@ function createButton(origin, originFrame, xOffset, yOffset, isNegative, btnInde
             dialogToggles[playerId].onNegativeButtonClicked
         then
             callback = dialogToggles[playerId].onNegativeButtonClicked
-        elseif
-            dialogToggles[playerId] ~= nil and
-            dialogToggles[playerId].buttons ~= nil and
-            btnIndex ~= nil and
-            dialogToggles[playerId].buttons[btnIndex] ~= nil and
-            dialogToggles[playerId].buttons[btnIndex].onClick
-        then
-            callback = dialogToggles[playerId].buttons[btnIndex].onClick
         end
 
         dialogToggles[playerId] = nil
@@ -133,49 +124,14 @@ function Dialog:init()
         0.01,
         -0.01)
 
-    local positiveButton = createButton(origin, originFrame, 0.07, 0.01, false)
-    local negativeButton = createButton(origin, originFrame, -0.07, 0.01, true)
-
-    local buttons = {}
-    for i=1,7,1 do
-        table.insert(
-            buttons,
-            createButton(origin, originFrame, 0, (i - 1) * -0.045 - 0.005, nil, i))
-    end
-
-    local spellIcons = {}
-    for i=0,8,1 do
-        local spellIcon = BlzCreateFrameByType(
-            "BACKDROP",
-            "spellIcon",
-            origin,
-            "",
-            0)
-        BlzFrameSetSize(
-            spellIcon, consts.ACTION_ITEM_SIZE, consts.ACTION_ITEM_SIZE)
-        BlzFrameSetPoint(
-            spellIcon,
-            FRAMEPOINT_LEFT,
-            origin,
-            FRAMEPOINT_LEFT,
-            (i % 3) * (consts.ACTION_ITEM_SIZE + 0.1) + 0.04,
-            -R2I(i / 3) * (consts.ACTION_ITEM_SIZE + 0.03) + 0.06)
-
-        local tooltipFrame = tooltip.makeTooltipFrame(spellIcon, 0.24, 0.095)
-
-        table.insert(spellIcons, {
-            icon = spellIcon,
-            tooltip = tooltipFrame,
-        })
-    end
+    local positiveButton = createButton(origin, 0.07, false)
+    local negativeButton = createButton(origin, -0.07, true)
 
     self.frames = {
         origin = origin,
         text = text,
         positiveButton = positiveButton,
         negativeButton = negativeButton,
-        buttons = buttons,
-        spellIcons = spellIcons,
     }
 
     return self
@@ -207,19 +163,19 @@ function Dialog:update(playerId)
     then
         BlzFrameSetPoint(
             frames.positiveButton.button,
-            FRAMEPOINT_BOTTOM,
+            FRAMEPOINT_CENTER,
             frames.origin,
             FRAMEPOINT_BOTTOM,
             0,
-            0.01)
+            0.005)
     else
         BlzFrameSetPoint(
             frames.positiveButton.button,
-            FRAMEPOINT_BOTTOM,
+            FRAMEPOINT_CENTER,
             frames.origin,
             FRAMEPOINT_BOTTOM,
             0.07,
-            0.01)
+            0.005)
     end
 
     BlzFrameSetVisible(
@@ -230,50 +186,16 @@ function Dialog:update(playerId)
         dialogToggles[playerId] ~= nil and dialogToggles[playerId].negativeButton)
     BlzFrameSetText(
         frames.positiveButton.text,
-        dialogToggles[playerId] ~= nil and dialogToggles[playerId].positiveButton or "")
+        string.upper(dialogToggles[playerId] ~= nil and dialogToggles[playerId].positiveButton or ""))
     BlzFrameSetText(
         frames.negativeButton.text,
-        dialogToggles[playerId] ~= nil and dialogToggles[playerId].negativeButton or "")
+        string.upper(dialogToggles[playerId] ~= nil and dialogToggles[playerId].negativeButton or ""))
     BlzFrameSetSize(
         frames.origin,
         consts.DIALOG_WIDTH,
         dialogToggles[playerId] ~= nil and
             dialogToggles[playerId].height or
             consts.DIALOG_HEIGHT)
-
-    for i=1,7,1 do
-        BlzFrameSetVisible(
-            frames.buttons[i].button,
-            dialogToggles[playerId] ~= nil and
-                dialogToggles[playerId].buttons ~= nil and
-                dialogToggles[playerId].buttons[i] ~= nil)
-        BlzFrameSetText(
-            frames.buttons[i].text,
-            dialogToggles[playerId] ~= nil and
-                dialogToggles[playerId].buttons ~= nil and
-                dialogToggles[playerId].buttons[i] ~= nil and
-                dialogToggles[playerId].buttons[i].text or "")
-    end
-
-    for i=1,9,1 do
-        local spellKey = dialogToggles[playerId] ~= nil and
-            dialogToggles[playerId].spells ~= nil and
-            dialogToggles[playerId].spells[i]
-        BlzFrameSetVisible(
-            frames.spellIcons[i].icon,
-            spellKey)
-
-        if spellKey then
-            BlzFrameSetTexture(
-                frames.spellIcons[i].icon,
-                spell.getIconBySpellKey(spellKey),
-                0,
-                true)
-            BlzFrameSetText(
-                frames.spellIcons[i].tooltip.text,
-                spell.getSpellTooltipBySpellKey(spellKey))
-        end
-    end
 end
 
 return Dialog

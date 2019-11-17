@@ -19,3 +19,47 @@ Frame "BACKDROP" "WindowBackgroundTemplate" {
     BackdropEdgeFile  "war3mapImported\ui\window_border.blp",
     BackdropBlendAll,
 }
+
+Frame "GLUETEXTBUTTON" "GrungeButtonTemplate" {
+    Width 0.228,
+    Height 0.035,
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ButtonPushedTextOffset 0.00f -0.001f,
+
+    ControlBackdrop "GrungeButtonBackdropTemplate",
+    Frame "BACKDROP" "GrungeButtonBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\button_regular.blp",
+        BackdropBlendAll,
+    }
+
+    ControlPushedBackdrop "GrungeButtonPushedBackdropTemplate",
+    Frame "BACKDROP" "GrungeButtonPushedBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\button_press.blp",
+        BackdropBlendAll,
+    }
+
+    ControlMouseOverHighlight "GrungeButtonMouseOverHighlightTemplate",
+    Frame "HIGHLIGHT" "GrungeButtonMouseOverHighlightTemplate" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "war3mapImported\ui\button_hover_highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}
+
+Frame "GLUETEXTBUTTON" "GrungeButton" INHERITS WITHCHILDREN "GrungeButtonTemplate" {
+    UseActiveContext,
+    ButtonText "GrungeButtonText",
+    Frame "TEXT" "GrungeButtonText" {
+        FrameFont "KhmerUIb.ttf", 0.013, "",
+        FontJustificationH JUSTIFYCENTER,
+        FontJustificationV JUSTIFYMIDDLE,
+        FontJustificationOffset 0.0 -0.002,
+        FontFlags "FIXEDSIZE",
+        FontColor 0.67 0.57 0.494 1.0,
+        FontHighlightColor 0.769 0.678 0.608 1.0,
+        FontDisabledColor 0.5 0.5 0.5 1.0,
+        FontShadowColor 0.0 0.0 0.0 0.9,
+        FontShadowOffset 0.001 -0.001,
+        Text "",
+    }
+}
