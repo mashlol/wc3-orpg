@@ -27,6 +27,8 @@ end
 function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
+    local isInverted = self.forParty == nil and not self.forTarget
+
     self.height = self.width / (692 / 199)
     local unitFrameOrigin = BlzCreateFrameByType(
         "FRAME",
@@ -51,13 +53,16 @@ function UnitFrame:init()
     BlzFrameSetSize(unitFrameBarsBackdrop, barsWidth, barsWidth / (516 / 114))
     BlzFrameSetPoint(
         unitFrameBarsBackdrop,
-        FRAMEPOINT_TOPRIGHT,
+        isInverted and FRAMEPOINT_TOPLEFT or FRAMEPOINT_TOPRIGHT,
         unitFrameOrigin,
-        FRAMEPOINT_TOPRIGHT,
+        isInverted and FRAMEPOINT_TOPLEFT or FRAMEPOINT_TOPRIGHT,
         0,
         -self.height * 0.1)
     BlzFrameSetTexture(
-        unitFrameBarsBackdrop, "war3mapImported\\ui\\main_bars.blp", 0, true)
+        unitFrameBarsBackdrop,
+        isInverted and "war3mapImported\\ui\\main_bars_flip.blp" or "war3mapImported\\ui\\main_bars.blp",
+        0,
+        true)
 
     self.healthBarWidth = self.width * 504 / 692
     self.healthBarHeight = self.healthBarWidth / (504 / 46)
@@ -71,14 +76,14 @@ function UnitFrame:init()
         healthBarFrameFilled, self.healthBarWidth, self.healthBarHeight)
     BlzFrameSetPoint(
         healthBarFrameFilled,
-        FRAMEPOINT_TOPLEFT,
+        isInverted and FRAMEPOINT_TOPRIGHT or FRAMEPOINT_TOPLEFT,
         unitFrameOrigin,
-        FRAMEPOINT_TOPLEFT,
-        self.width - self.width * 0.02 - self.healthBarWidth,
+        isInverted and FRAMEPOINT_TOPRIGHT or FRAMEPOINT_TOPLEFT,
+        (isInverted and -1 or 1) * (self.width - self.width * 0.02 - self.healthBarWidth),
         -self.height * 0.18)
     BlzFrameSetTexture(
         healthBarFrameFilled,
-        "war3mapImported\\ui\\fill_1.blp",
+        isInverted and "war3mapImported\\ui\\fill_1_flip.blp" or "war3mapImported\\ui\\fill_1.blp",
         0,
         true)
 
@@ -92,9 +97,9 @@ function UnitFrame:init()
     BlzFrameSetSize(unitIconBackdrop, iconBackdropWidth, iconBackdropWidth)
     BlzFrameSetPoint(
         unitIconBackdrop,
-        FRAMEPOINT_LEFT,
+        isInverted and FRAMEPOINT_RIGHT or FRAMEPOINT_LEFT,
         unitFrameOrigin,
-        FRAMEPOINT_LEFT,
+        isInverted and FRAMEPOINT_RIGHT or FRAMEPOINT_LEFT,
         0,
         0)
     BlzFrameSetTexture(
@@ -126,9 +131,9 @@ function UnitFrame:init()
     BlzFrameSetSize(levelFrameBackdrop, levelFrameWidth, levelFrameWidth)
     BlzFrameSetPoint(
         levelFrameBackdrop,
-        FRAMEPOINT_TOPRIGHT,
+        isInverted and FRAMEPOINT_TOPLEFT or FRAMEPOINT_TOPRIGHT,
         unitIconBackdrop,
-        FRAMEPOINT_TOPRIGHT,
+        isInverted and FRAMEPOINT_TOPLEFT or FRAMEPOINT_TOPRIGHT,
         0,
         0)
     BlzFrameSetTexture(
@@ -163,13 +168,13 @@ function UnitFrame:init()
         healthBarStatusText, self.healthBarWidth, self.healthBarHeight)
     BlzFrameSetPoint(
         healthBarStatusText,
-        FRAMEPOINT_TOPLEFT,
+        isInverted and FRAMEPOINT_TOPRIGHT or FRAMEPOINT_TOPLEFT,
         unitFrameOrigin,
-        FRAMEPOINT_TOPLEFT,
-        self.width - self.width * 0.08 - self.healthBarWidth,
+        isInverted and FRAMEPOINT_TOPRIGHT or FRAMEPOINT_TOPLEFT,
+        (isInverted and -1 or 1) * (self.width - self.width * 0.08 - self.healthBarWidth),
         -self.height * 0.18)
     BlzFrameSetTextAlignment(
-        healthBarStatusText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_RIGHT)
+        healthBarStatusText, TEXT_JUSTIFY_MIDDLE, isInverted and TEXT_JUSTIFY_LEFT or TEXT_JUSTIFY_RIGHT)
     BlzFrameSetText(healthBarStatusText, "600 / 600")
 
     local buffIcons = {}
@@ -184,10 +189,10 @@ function UnitFrame:init()
         BlzFrameSetSize(buffIcon, buffSize, buffSize)
         BlzFrameSetPoint(
             buffIcon,
-            FRAMEPOINT_BOTTOMLEFT,
+            isInverted and FRAMEPOINT_BOTTOMRIGHT or FRAMEPOINT_BOTTOMLEFT,
             unitFrameOrigin,
-            FRAMEPOINT_BOTTOMLEFT,
-            iconBackdropWidth + i * buffSize,
+            isInverted and FRAMEPOINT_BOTTOMRIGHT or FRAMEPOINT_BOTTOMLEFT,
+            (isInverted and -1 or 1) * (iconBackdropWidth + i * buffSize),
             self.height * 0.06)
 
         local buffStackCount = BlzCreateFrameByType(

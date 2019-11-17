@@ -78,7 +78,6 @@ function QuestLog:init()
 
     self.frames = {
         origin = origin,
-        text = text,
         buttons = buttons,
     }
 

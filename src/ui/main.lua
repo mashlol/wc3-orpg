@@ -32,7 +32,7 @@ local UI_MODULES = {
     MenuButtons:new(),
     SimpleButton:new(),
     UnitFrame:new{
-        xLoc = 0.625,
+        xLoc = 0.63,
         yLoc = 0.03,
         width = consts.BAR_WIDTH,
         forTarget = true,
