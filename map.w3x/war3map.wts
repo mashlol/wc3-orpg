@@ -777,3 +777,15 @@ STRING 143
 Table Anywhere
 }
 
+STRING 144
+// Doodads: swan (Stone Wall Middle Anywhere), Name (Name)
+{
+Stone Wall Middle Anywhere
+}
+
+STRING 145
+// Doodads: swae (Stone Wall End Anywhere), Name (Name)
+{
+Stone Wall End Anywhere
+}
+
