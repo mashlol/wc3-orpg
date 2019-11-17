@@ -13,7 +13,6 @@ local UnitFrame = {
     xLoc = 0,
     yLoc = 0,
     width = consts.BAR_WIDTH,
-    height = consts.BAR_HEIGHT * 4,
     anchor = FRAMEPOINT_CENTER,
     forTarget = false,
     farParty = nil,
@@ -28,61 +27,94 @@ end
 function UnitFrame:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
+    self.height = self.width / (692 / 199)
     local unitFrameOrigin = BlzCreateFrameByType(
         "FRAME",
         "unitFrameOrigin",
         originFrame,
         "",
         0)
-
-    BlzFrameSetSize(unitFrameOrigin, self.width + 0.01, self.height + 0.01)
+    BlzFrameSetSize(unitFrameOrigin, self.width, self.height)
     BlzFrameSetAbsPoint(
         unitFrameOrigin,
         self.anchor,
         self.xLoc,
         self.yLoc)
 
-    utils.createBorderFrame(unitFrameOrigin)
-
-    local healthBarFrameBackground = BlzCreateFrameByType(
+    local barsWidth = self.width * 516 / 692
+    local unitFrameBarsBackdrop = BlzCreateFrameByType(
         "BACKDROP",
-        "healthBarFrameBackground",
+        "unitFrameBarsBackdrop",
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(healthBarFrameBackground, self.width, consts.BAR_HEIGHT)
+    BlzFrameSetSize(unitFrameBarsBackdrop, barsWidth, barsWidth / (516 / 114))
     BlzFrameSetPoint(
-        healthBarFrameBackground,
-        FRAMEPOINT_BOTTOMLEFT,
+        unitFrameBarsBackdrop,
+        FRAMEPOINT_TOPRIGHT,
         unitFrameOrigin,
-        FRAMEPOINT_BOTTOMLEFT,
-        0.005,
-        0.005)
-    BlzFrameSetTexture(
-        healthBarFrameBackground,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        FRAMEPOINT_TOPRIGHT,
         0,
-        true)
+        -self.height * 0.1)
+    BlzFrameSetTexture(
+        unitFrameBarsBackdrop, "war3mapImported\\ui\\main_bars.blp", 0, true)
 
+    self.healthBarWidth = self.width * 504 / 692
+    self.healthBarHeight = self.healthBarWidth / (504 / 46)
     local healthBarFrameFilled = BlzCreateFrameByType(
         "BACKDROP",
         "healthBarFrameFilled",
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetSize(healthBarFrameFilled, self.width, consts.BAR_HEIGHT)
+    BlzFrameSetSize(
+        healthBarFrameFilled, self.healthBarWidth, self.healthBarHeight)
     BlzFrameSetPoint(
         healthBarFrameFilled,
-        FRAMEPOINT_BOTTOMLEFT,
-        healthBarFrameBackground,
-        FRAMEPOINT_BOTTOMLEFT,
+        FRAMEPOINT_TOPLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_TOPLEFT,
+        self.width - self.width * 0.02 - self.healthBarWidth,
+        -self.height * 0.18)
+    BlzFrameSetTexture(
+        healthBarFrameFilled,
+        "war3mapImported\\ui\\fill_1.blp",
+        0,
+        true)
+
+    local iconBackdropWidth = self.height * 1.1
+    local unitIconBackdrop = BlzCreateFrameByType(
+        "BACKDROP",
+        "unitIconBackdrop",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(unitIconBackdrop, iconBackdropWidth, iconBackdropWidth)
+    BlzFrameSetPoint(
+        unitIconBackdrop,
+        FRAMEPOINT_LEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_LEFT,
         0,
         0)
     BlzFrameSetTexture(
-        healthBarFrameFilled,
-        "Replaceabletextures\\Teamcolor\\Teamcolor06.blp",
+        unitIconBackdrop, "war3mapImported\\ui\\ab_spelL_frame_clean.blp", 0, true)
+
+    local iconWidth = iconBackdropWidth * 0.75
+    local unitIconFrame = BlzCreateFrameByType(
+        "BACKDROP",
+        "unitIconFrame",
+        unitFrameOrigin,
+        "",
+        0)
+    BlzFrameSetSize(unitIconFrame, iconWidth, iconWidth)
+    BlzFrameSetPoint(
+        unitIconFrame,
+        FRAMEPOINT_CENTER,
+        unitIconBackdrop,
+        FRAMEPOINT_CENTER,
         0,
-        true)
+        0)
 
     local healthBarStatusText = BlzCreateFrameByType(
         "TEXT",
@@ -90,26 +122,21 @@ function UnitFrame:init()
         unitFrameOrigin,
         "",
         0)
-    BlzFrameSetAllPoints(healthBarStatusText, healthBarFrameBackground)
+    BlzFrameSetSize(
+        healthBarStatusText, self.healthBarWidth, self.healthBarHeight)
+    BlzFrameSetPoint(
+        healthBarStatusText,
+        FRAMEPOINT_TOPLEFT,
+        unitFrameOrigin,
+        FRAMEPOINT_TOPLEFT,
+        self.width - self.width * 0.08 - self.healthBarWidth,
+        -self.height * 0.18)
     BlzFrameSetTextAlignment(
         healthBarStatusText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_RIGHT)
-
-    local unitNameFrame = BlzCreateFrameByType(
-        "TEXT",
-        "unitNameFrame",
-        unitFrameOrigin,
-        "",
-        0)
-    BlzFrameSetSize(unitNameFrame, self.width, consts.BAR_HEIGHT)
-    BlzFrameSetPoint(
-        unitNameFrame,
-        FRAMEPOINT_BOTTOMLEFT,
-        unitFrameOrigin,
-        FRAMEPOINT_BOTTOMLEFT,
-        0.005,
-        consts.BAR_HEIGHT + 0.005)
+    BlzFrameSetText(healthBarStatusText, "600 / 600")
 
     local buffIcons = {}
+    local buffSize = self.healthBarWidth / 11
     for i=0,9,1 do
         local buffIcon = BlzCreateFrameByType(
             "BACKDROP",
@@ -117,14 +144,14 @@ function UnitFrame:init()
             unitFrameOrigin,
             "",
             0)
-        BlzFrameSetSize(buffIcon, self.buffSize, self.buffSize)
+        BlzFrameSetSize(buffIcon, buffSize, buffSize)
         BlzFrameSetPoint(
             buffIcon,
             FRAMEPOINT_BOTTOMLEFT,
             unitFrameOrigin,
             FRAMEPOINT_BOTTOMLEFT,
-            i * self.buffSize + 0.005,
-            consts.BAR_HEIGHT * 2 + 0.005)
+            iconBackdropWidth + i * buffSize,
+            self.height * 0.06)
 
         local buffStackCount = BlzCreateFrameByType(
             "TEXT",
@@ -170,7 +197,7 @@ function UnitFrame:init()
         healthBar = healthBarFrameFilled,
         healthBarStatusText = healthBarStatusText,
         origin = unitFrameOrigin,
-        name = unitNameFrame,
+        icon = unitIconFrame,
         buffIcons = buffIcons,
     }
 
@@ -209,8 +236,10 @@ function UnitFrame:update(playerId)
         return
     end
 
-    local name = GetUnitName(unit)
-    BlzFrameSetText(frames.name, name)
+    local unitIcon = BlzGetAbilityIcon(GetUnitTypeId(unit))
+    -- print()
+    -- local name = GetUnitName(unit)
+    BlzFrameSetTexture(frames.icon, unitIcon, 0, true)
 
     local hp = BlzGetUnitRealField(unit, UNIT_RF_HP)
     local maxHp = BlzGetUnitMaxHP(unit)
@@ -218,29 +247,10 @@ function UnitFrame:update(playerId)
     BlzFrameSetText(frames.healthBarStatusText, R2I(hp) .. "/" .. maxHp)
 
     if maxHp ~= 0 then
-        if hp / maxHp < 0.2 then
-            BlzFrameSetTexture(
-                frames.healthBar,
-                "Replaceabletextures\\Teamcolor\\Teamcolor00.blp",
-                0,
-                true)
-        elseif hp / maxHp < .5 then
-            BlzFrameSetTexture(
-                frames.healthBar,
-                "Replaceabletextures\\Teamcolor\\Teamcolor04.blp",
-                0,
-                true)
-        else
-            BlzFrameSetTexture(
-                frames.healthBar,
-                "Replaceabletextures\\Teamcolor\\Teamcolor06.blp",
-                0,
-                true)
-        end
         BlzFrameSetSize(
             frames.healthBar,
-            self.width * hp / maxHp,
-            consts.BAR_HEIGHT)
+            self.healthBarWidth * 0.06 + self.healthBarWidth * 0.94 * hp / maxHp,
+            self.healthBarHeight)
     else
         BlzFrameSetSize(frames.healthBar, 0, consts.BAR_HEIGHT)
     end
