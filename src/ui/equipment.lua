@@ -35,7 +35,7 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         "IconButtonTemplate",
         0)
     BlzFrameSetSize(
-        itemOrigin, consts.EQUIPMENT_ITEM_SIZE, consts.EQUIPMENT_ITEM_SIZE)
+        itemOrigin, consts.EQUIPMENT_ITEM_SIZE * 0.75, consts.EQUIPMENT_ITEM_SIZE * 0.75)
     BlzFrameSetPoint(
         itemOrigin,
         FRAMEPOINT_TOPLEFT,
@@ -43,6 +43,24 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         FRAMEPOINT_TOPLEFT,
         xPos,
         yPos)
+
+    local background = BlzCreateFrameByType(
+        "BACKDROP",
+        "itemFrame",
+        itemOrigin,
+        "",
+        0)
+    BlzFrameSetSize(
+        background, consts.EQUIPMENT_ITEM_SIZE, consts.EQUIPMENT_ITEM_SIZE)
+    BlzFrameSetPoint(
+        background,
+        FRAMEPOINT_CENTER,
+        itemOrigin,
+        FRAMEPOINT_CENTER,
+        0,
+        0)
+    BlzFrameSetTexture(
+        background, "war3mapImported\\ui\\ab_spell_frame_clean.blp", 0, true)
 
     local itemFrame = BlzCreateFrameByType(
         "BACKDROP",
@@ -168,11 +186,11 @@ function Equipment:init()
         local itemFrame = createItemFrame(
             equipmentOrigin,
             math.floor(i / 5) *
-                (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE * 5) +
+                (consts.EQUIPMENT_ITEM_SIZE * 6.2) +
                 0.015,
             -(i % 5) *
                 (consts.EQUIPMENT_ITEM_SIZE + consts.EQUIPMENT_ITEM_SIZE / 2) -
-                0.025,
+                0.03,
             i+1)
 
         table.insert(itemFrames, itemFrame)
@@ -190,7 +208,6 @@ function Equipment:init()
         consts.EQUIPMENT_ITEM_SIZE * -8 - 0.005,
         12)
     table.insert(itemFrames, offHand)
-
 
     utils.createCloseButton(equipmentOrigin, function(playerId)
         equipmentToggles[playerId] = nil
@@ -218,7 +235,7 @@ function Equipment:update(playerId)
     end
 
     local level = GetHeroLevel(self.hero)
-    BlzFrameSetText(frames.equipmentText, "CHARACTER (Lv. " .. level .. ")")
+    BlzFrameSetText(frames.equipmentText, "CHARACTER (LV. " .. level .. ")")
 
     local pickedHero = hero.getPickedHero(playerId)
     if pickedHero ~= nil then
@@ -235,12 +252,9 @@ function Equipment:update(playerId)
                 itemmanager.getItemInfo(itemId).icon,
                 0,
                 true)
+            BlzFrameSetVisible(itemFrame.itemFrame, true)
         else
-            BlzFrameSetTexture(
-                itemFrame.itemFrame,
-                "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
-                0,
-                true)
+            BlzFrameSetVisible(itemFrame.itemFrame, false)
         end
 
         local tooltip = itemId ~= nil and

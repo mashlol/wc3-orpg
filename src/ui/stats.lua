@@ -134,18 +134,25 @@ function Stats:init()
     for i=0,17,1 do
         local infoText = BlzCreateFrameByType(
             "TEXT", "infoText", statsOrigin, "", 0)
-        BlzFrameSetSize(infoText, consts.STATS_WIDTH * 2, 0.02)
+        BlzFrameSetSize(infoText, consts.STATS_WIDTH * 4 / 3 - 0.03, 0.02)
         BlzFrameSetPoint(
             infoText,
-            FRAMEPOINT_TOP,
+            FRAMEPOINT_TOPLEFT,
             statsOrigin,
-            FRAMEPOINT_TOP,
-            consts.STATS_WIDTH / 2 - 0.01,
-            i * (-0.016) - 0.01)
-        BlzFrameSetScale(infoText, 0.75)
+            FRAMEPOINT_TOPLEFT,
+            0.015,
+            i * (-0.016) - 0.015)
+        BlzFrameSetScale(infoText, 3 / 4)
+
+        local amountText = BlzCreateFrameByType(
+            "TEXT", "amountText", statsOrigin, "", 0)
+        BlzFrameSetAllPoints(amountText, infoText)
+        BlzFrameSetScale(amountText, 0.75)
+        BlzFrameSetTextAlignment(amountText, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_RIGHT)
 
         table.insert(textFrames, {
             text = infoText,
+            amount = amountText,
         })
     end
 
@@ -175,7 +182,8 @@ function Stats:update(playerId)
         local amt = statToShow.getAmount(unitInfo, heroUnit, ownerHeroInfo)
         BlzFrameSetText(
             frames.textFrames[idx].text,
-            '|cffd6a511' .. statToShow.prefix .. '|r' .. amt)
+            '|cffd6a511' .. statToShow.prefix .. '|r')
+        BlzFrameSetText(frames.textFrames[idx].amount, amt)
     end
 end
 
