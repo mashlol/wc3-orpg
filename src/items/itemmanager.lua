@@ -185,7 +185,7 @@ local ITEMS = {
         requiredLevel = 1,
         rarity = RARITY.COMMON,
         stackSize = 10,
-        text = "The meat of a turtle...I think Fred wants this.",
+        text = "The meat of a turtle...|nI think Fred wants this.",
         cost = 20,
     },
     [10] = {
@@ -1052,7 +1052,7 @@ local ITEMS = {
         requiredLevel = 1,
         rarity = RARITY.COMMON,
         stackSize = 10,
-        text = "The fur of a Mammoth...sure looks warm.",
+        text = "The fur of a Mammoth...|nSure looks warm.",
         cost = 20,
     },
 		[51] = {
