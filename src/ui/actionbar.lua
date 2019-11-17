@@ -19,10 +19,6 @@ end
 function ActionBar:init()
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
-    -- local bottomBarBackground = BlzCreateFrame("Leaderboard", originFrame, 0, 0)
-    -- BlzFrameSetSize(bottomBarBackground, 0.26, 0.06)
-    -- BlzFrameSetAbsPoint(bottomBarBackground, FRAMEPOINT_BOTTOMLEFT, 0.3, 0)
-
     local actionBar = BlzCreateFrameByType(
         "FRAME",
         "actionBar",
@@ -32,40 +28,63 @@ function ActionBar:init()
     BlzFrameSetSize(
         actionBar, consts.ACTION_ITEM_SIZE * 6, consts.ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(
-        actionBar, FRAMEPOINT_CENTER, 0.4, consts.ACTION_ITEM_SIZE - 0.01)
+        actionBar, FRAMEPOINT_BOTTOM, 0.4, 0.01)
 
     local actionItems = {}
     for i=0,5,1 do
-        local actionItem = BlzCreateFrameByType(
+        local actionItemOrigin = BlzCreateFrameByType(
             "BACKDROP",
-            "actionItem",
+            "actionItemOrigin",
             actionBar,
             "",
             0)
         BlzFrameSetSize(
-            actionItem, consts.ACTION_ITEM_SIZE, consts.ACTION_ITEM_SIZE)
+            actionItemOrigin, consts.ACTION_ITEM_SIZE, consts.ACTION_ITEM_SIZE)
         BlzFrameSetPoint(
-            actionItem,
+            actionItemOrigin,
             FRAMEPOINT_LEFT,
             actionBar,
             FRAMEPOINT_LEFT,
-            i * (consts.ACTION_ITEM_SIZE + 0.0015),
+            i * (consts.ACTION_ITEM_SIZE - consts.ACTION_ITEM_SIZE * 0.1),
+            0)
+        BlzFrameSetTexture(
+            actionItemOrigin,
+            "war3mapImported\\ui\\ab_spell_frame.blp",
+            0,
+            true)
+
+        local actionItemIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionItemIcon",
+            actionItemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionItemIcon,
+            consts.ACTION_ITEM_SIZE * 0.75,
+            consts.ACTION_ITEM_SIZE * 0.75)
+        BlzFrameSetPoint(
+            actionItemIcon,
+            FRAMEPOINT_CENTER,
+            actionItemOrigin,
+            FRAMEPOINT_CENTER,
+            0,
             0)
 
         local actionCooldownBackdrop = BlzCreateFrameByType(
             "BACKDROP",
             "actionCooldownBackdrop",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
         BlzFrameSetSize(
             actionCooldownBackdrop,
-            consts.ACTION_ITEM_SIZE,
-            0)
+            consts.ACTION_ITEM_SIZE * 0.75,
+            consts.ACTION_ITEM_SIZE * 0.75)
         BlzFrameSetPoint(
             actionCooldownBackdrop,
             FRAMEPOINT_BOTTOM,
-            actionItem,
+            actionItemIcon,
             FRAMEPOINT_BOTTOM,
             0,
             0)
@@ -79,10 +98,10 @@ function ActionBar:init()
         local actionTintBackdrop = BlzCreateFrameByType(
             "BACKDROP",
             "actionTintBackdrop",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
-        BlzFrameSetAllPoints(actionTintBackdrop, actionItem)
+        BlzFrameSetAllPoints(actionTintBackdrop, actionItemIcon)
         BlzFrameSetTexture(
             actionTintBackdrop,
             "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
@@ -90,26 +109,47 @@ function ActionBar:init()
             true)
         BlzFrameSetAlpha(actionTintBackdrop, 80)
 
+        local actionItemShortcutBackdrop = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionItemShortcutBackdrop",
+            actionItemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionItemShortcutBackdrop,
+            consts.ACTION_ITEM_SIZE * 0.4,
+            consts.ACTION_ITEM_SIZE * 0.4)
+        BlzFrameSetPoint(
+            actionItemShortcutBackdrop,
+            FRAMEPOINT_BOTTOM,
+            actionItemOrigin,
+            FRAMEPOINT_BOTTOM,
+            0,
+            -0.004)
+        BlzFrameSetTexture(
+            actionItemShortcutBackdrop,
+            "war3mapImported\\ui\\shortcut_frame.blp",
+            0,
+            true)
+
         local actionHotkey = BlzCreateFrameByType(
             "TEXT",
             "actionItemHotkey",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
-        BlzFrameSetSize(actionHotkey, 0.01, 0.01)
-        BlzFrameSetText(actionHotkey, DEFAULT_HOTKEYS[i+1])
-        BlzFrameSetPoint(
+        BlzFrameSetAllPoints(actionHotkey, actionItemShortcutBackdrop)
+        BlzFrameSetTextAlignment(
             actionHotkey,
-            FRAMEPOINT_TOPLEFT,
-            actionItem,
-            FRAMEPOINT_TOPLEFT,
-            0.002,
-            -0.002)
+            TEXT_JUSTIFY_MIDDLE,
+            TEXT_JUSTIFY_CENTER)
+        BlzFrameSetScale(actionHotkey, 0.7)
+        BlzFrameSetText(actionHotkey, DEFAULT_HOTKEYS[i+1])
 
         local actionCooldownText = BlzCreateFrameByType(
             "TEXT",
             "actionCooldownText",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
         BlzFrameSetSize(
@@ -120,20 +160,22 @@ function ActionBar:init()
         BlzFrameSetPoint(
             actionCooldownText,
             FRAMEPOINT_CENTER,
-            actionItem,
+            actionItemOrigin,
             FRAMEPOINT_CENTER,
             0,
             0)
         BlzFrameSetTextAlignment(
             actionCooldownText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
 
-        local tooltipFrame = tooltip.makeTooltipFrame(actionItem, 0.24, 0.095)
+        local tooltipFrame = tooltip.makeTooltipFrame(
+            actionItemOrigin, 0.24, 0.095)
 
         table.insert(actionItems, {
-            actionItemBackground = actionItem,
+            icon = actionItemIcon,
             actionCooldownBackdrop = actionCooldownBackdrop,
             actionCooldownText = actionCooldownText,
             tooltipFrame = tooltipFrame,
+            actionTintBackdrop = actionTintBackdrop
         })
     end
 
@@ -193,16 +235,20 @@ function ActionBar:update(playerId)
             actionItem.actionCooldownBackdrop,
             cdPct ~= 0 and spellIcon ~= nil)
 
+        BlzFrameSetVisible(
+            actionItem.actionTintBackdrop,
+            cdPct ~= 0 and spellIcon ~= nil)
+
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
-            consts.ACTION_ITEM_SIZE,
-            consts.ACTION_ITEM_SIZE * cdPct)
+            consts.ACTION_ITEM_SIZE * 0.75,
+            consts.ACTION_ITEM_SIZE * 0.75 * cdPct)
 
-        BlzFrameSetTexture(
-            actionItem.actionItemBackground,
-            spellIcon or "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
-            0,
-            true)
+        BlzFrameSetVisible(actionItem.icon, spellIcon)
+
+        if spellIcon ~= nil then
+            BlzFrameSetTexture(actionItem.icon, spellIcon, 0, true)
+        end
 
         BlzFrameSetText(actionItem.tooltipFrame.text, spellTooltip)
     end
