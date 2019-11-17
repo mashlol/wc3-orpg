@@ -6,6 +6,7 @@ local spell = require('src/spell.lua')
 -- dialogToggles = {
 --     [playerId] = {
 --         text = "text",
+--         textalign = nil or TEXT_JUSTIFY_CENTER,
 --         height = 0.4,
 --         xPos = 0.4,
 --         spells = {
@@ -155,6 +156,13 @@ function Dialog:update(playerId)
     BlzFrameSetText(
         frames.text,
         dialogToggles[playerId] ~= nil and dialogToggles[playerId].text or "")
+
+    BlzFrameSetTextAlignment(
+        frames.text,
+        TEXT_JUSTIFY_TOP,
+        dialogToggles[playerId] ~= nil and
+            dialogToggles[playerId].textalign or
+            TEXT_JUSTIFY_CENTER)
 
     if
         dialogToggles[playerId] ~= nil and

@@ -47,9 +47,10 @@ function sendChallenge(challengerPlayerId, challengedPlayerId)
         challengedPlayerId, {
             text = GetPlayerName(Player(challengerPlayerId))..
                 " challenged you to a duel.",
+            textalign = TEXT_JUSTIFY_CENTER,
             positiveButton = "Accept",
             negativeButton = "Decline",
-            height = 0.1,
+            height = 0.075,
             onPositiveButtonClicked = function()
                 acceptDuel(challengedPlayerId, challengerPlayerId)
             end,

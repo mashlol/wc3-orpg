@@ -53,9 +53,10 @@ function sendInvite(inviterPlayerId, invitedPlayerId)
         invitedPlayerId, {
             text = GetPlayerName(Player(inviterPlayerId))..
                 " invited you to join their party.",
+            textalign = TEXT_JUSTIFY_CENTER,
             positiveButton = "Accept",
             negativeButton = "Decline",
-            height = 0.1,
+            height = 0.075,
             onPositiveButtonClicked = function()
                 acceptInvite(invitedPlayerId, inviterPlayerId)
             end,
