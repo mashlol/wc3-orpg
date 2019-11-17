@@ -32,7 +32,6 @@ function createQuestButton(origin, originFrame, yOffset, index)
         FRAMEPOINT_TOP,
         0,
         yOffset)
-    print(yOffset)
     BlzFrameSetText(buttonText, "This is a quest name")
     BlzFrameSetScale(buttonText, 0.75)
 
