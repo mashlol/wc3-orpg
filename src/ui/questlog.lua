@@ -21,10 +21,10 @@ function QuestLog:new(o)
 end
 
 function createQuestButton(origin, originFrame, yOffset, index)
-    local button = BlzCreateFrame("ScriptDialogButton", originFrame, 0, 0)
-    local buttonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+    local button = BlzCreateFrame("GrungeButton", originFrame, 0, 0)
+    local buttonText = BlzGetFrameByName("GrungeButtonText", 0)
     BlzFrameSetParent(button, origin)
-    BlzFrameSetSize(button, 0.16, 0.028)
+    BlzFrameSetSize(button, 0.16, 0.053)
     BlzFrameSetPoint(
         button,
         FRAMEPOINT_TOP,
@@ -32,8 +32,9 @@ function createQuestButton(origin, originFrame, yOffset, index)
         FRAMEPOINT_TOP,
         0,
         yOffset)
+    print(yOffset)
     BlzFrameSetText(buttonText, "This is a quest name")
-    BlzFrameSetScale(buttonText, 0.5)
+    BlzFrameSetScale(buttonText, 0.75)
 
     local trig = CreateTrigger()
     BlzTriggerRegisterFrameEvent(
@@ -73,7 +74,7 @@ function QuestLog:init()
 
     local buttons = {}
     for i=1,12,1 do
-        table.insert(buttons, createQuestButton(origin, originFrame, i * -0.03, i))
+        table.insert(buttons, createQuestButton(origin, originFrame, -(i - 1) * 0.053 - 0.025, i))
     end
 
     self.frames = {

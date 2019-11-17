@@ -50,7 +50,7 @@ Frame "GLUETEXTBUTTON" "GrungeButton" INHERITS WITHCHILDREN "GrungeButtonTemplat
     UseActiveContext,
     ButtonText "GrungeButtonText",
     Frame "TEXT" "GrungeButtonText" {
-        FrameFont "KhmerUIb.ttf", 0.013, "",
+        FrameFont "EscMenuTextFont", 0.013, "",
         FontJustificationH JUSTIFYCENTER,
         FontJustificationV JUSTIFYMIDDLE,
         FontJustificationOffset 0.0 -0.002,
