@@ -39,7 +39,7 @@ local UI_MODULES = {
         buffSize = consts.BUFF_ICON_SIZE,
     },
     UnitFrame:new{
-        xLoc = 0.15,
+        xLoc = 0.175,
         yLoc = 0.03,
         width = consts.BAR_WIDTH,
         forTarget = false,

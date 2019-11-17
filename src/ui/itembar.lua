@@ -43,47 +43,65 @@ function ItemBar:init()
         "",
         0)
     BlzFrameSetSize(
-        actionBar, consts.ITEM_ITEM_SIZE * 4, consts.ITEM_ITEM_SIZE)
+        actionBar, (consts.ITEM_ITEM_SIZE * 0.9) * 6, consts.ITEM_ITEM_SIZE)
     BlzFrameSetAbsPoint(
-        actionBar, FRAMEPOINT_BOTTOMLEFT, 0.305, consts.ACTION_ITEM_SIZE + 0.02)
+        actionBar, FRAMEPOINT_BOTTOM, 0.4, consts.ACTION_ITEM_SIZE + 0.01)
 
     local actionItems = {}
     for i=0,5,1 do
-        local actionItem = BlzCreateFrameByType(
+        local actionItemOrigin = BlzCreateFrameByType(
             "BACKDROP",
-            "actionItem",
+            "actionItemOrigin",
             actionBar,
             "",
             0)
         BlzFrameSetSize(
-            actionItem, consts.ITEM_ITEM_SIZE, consts.ITEM_ITEM_SIZE)
+            actionItemOrigin, consts.ITEM_ITEM_SIZE, consts.ITEM_ITEM_SIZE)
         BlzFrameSetPoint(
-            actionItem,
+            actionItemOrigin,
             FRAMEPOINT_LEFT,
             actionBar,
             FRAMEPOINT_LEFT,
-            i * (consts.ITEM_ITEM_SIZE + 0.0015),
+            i * (consts.ITEM_ITEM_SIZE * 0.9),
             0)
         BlzFrameSetTexture(
-            actionItem,
-            "UI/Widgets/Console/Human/human-inventory-slotfiller.blp",
+            actionItemOrigin,
+            "war3mapImported\\ui\\ab_spell_frame.blp",
             0,
             true)
+
+        local actionItemIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionItemIcon",
+            actionItemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionItemIcon,
+            consts.ITEM_ITEM_SIZE * 0.75,
+            consts.ITEM_ITEM_SIZE * 0.75)
+        BlzFrameSetPoint(
+            actionItemIcon,
+            FRAMEPOINT_CENTER,
+            actionItemOrigin,
+            FRAMEPOINT_CENTER,
+            0,
+            0)
 
         local actionCooldownBackdrop = BlzCreateFrameByType(
             "BACKDROP",
             "actionCooldownBackdrop",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
         BlzFrameSetSize(
             actionCooldownBackdrop,
-            consts.ITEM_ITEM_SIZE,
-            0)
+            consts.ITEM_ITEM_SIZE * 0.75,
+            consts.ITEM_ITEM_SIZE * 0.75)
         BlzFrameSetPoint(
             actionCooldownBackdrop,
             FRAMEPOINT_BOTTOM,
-            actionItem,
+            actionItemIcon,
             FRAMEPOINT_BOTTOM,
             0,
             0)
@@ -94,57 +112,59 @@ function ItemBar:init()
             true)
         BlzFrameSetAlpha(actionCooldownBackdrop, 200)
 
-        local actionTintBackdrop = BlzCreateFrameByType(
-            "BACKDROP",
-            "actionTintBackdrop",
-            actionItem,
+        local itemCountFrame = BlzCreateFrameByType(
+            "TEXT",
+            "actionItemHotkey",
+            actionItemOrigin,
             "",
             0)
-        BlzFrameSetAllPoints(actionTintBackdrop, actionItem)
+        BlzFrameSetAllPoints(itemCountFrame, actionItemIcon)
+        BlzFrameSetTextAlignment(
+            itemCountFrame,
+            TEXT_JUSTIFY_TOP,
+            TEXT_JUSTIFY_RIGHT)
+
+        local actionItemShortcutBackdrop = BlzCreateFrameByType(
+            "BACKDROP",
+            "actionItemShortcutBackdrop",
+            actionItemOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            actionItemShortcutBackdrop,
+            consts.ITEM_ITEM_SIZE * 0.4,
+            consts.ITEM_ITEM_SIZE * 0.4)
+        BlzFrameSetPoint(
+            actionItemShortcutBackdrop,
+            FRAMEPOINT_BOTTOM,
+            actionItemOrigin,
+            FRAMEPOINT_BOTTOM,
+            0,
+            -0.004)
         BlzFrameSetTexture(
-            actionTintBackdrop,
-            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            actionItemShortcutBackdrop,
+            "war3mapImported\\ui\\shortcut_frame.blp",
             0,
             true)
-        BlzFrameSetAlpha(actionTintBackdrop, 80)
 
         local actionHotkey = BlzCreateFrameByType(
             "TEXT",
             "actionItemHotkey",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
-        BlzFrameSetSize(actionHotkey, 0.01, 0.01)
-        BlzFrameSetText(actionHotkey, DEFAULT_HOTKEYS[i+1])
-        BlzFrameSetPoint(
-            actionHotkey,
-            FRAMEPOINT_TOPLEFT,
-            actionItem,
-            FRAMEPOINT_TOPLEFT,
-            0.002,
-            -0.002)
-
-        local itemCountFrame = BlzCreateFrameByType(
-            "TEXT",
-            "itemCountFrame",
-            actionItem,
-            "",
-            0)
-        BlzFrameSetSize(itemCountFrame, consts.ITEM_ITEM_SIZE, 0.012)
-        BlzFrameSetPoint(
-            itemCountFrame,
-            FRAMEPOINT_BOTTOMRIGHT,
-            actionItem,
-            FRAMEPOINT_BOTTOMRIGHT,
-            0,
-            0)
+        BlzFrameSetAllPoints(actionHotkey, actionItemShortcutBackdrop)
         BlzFrameSetTextAlignment(
-            itemCountFrame, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
+            actionHotkey,
+            TEXT_JUSTIFY_MIDDLE,
+            TEXT_JUSTIFY_CENTER)
+        BlzFrameSetScale(actionHotkey, 0.7)
+        BlzFrameSetText(actionHotkey, DEFAULT_HOTKEYS[i+1])
 
         local actionCooldownText = BlzCreateFrameByType(
             "TEXT",
             "actionCooldownText",
-            actionItem,
+            actionItemOrigin,
             "",
             0)
         BlzFrameSetSize(
@@ -155,7 +175,7 @@ function ItemBar:init()
         BlzFrameSetPoint(
             actionCooldownText,
             FRAMEPOINT_CENTER,
-            actionItem,
+            actionItemOrigin,
             FRAMEPOINT_CENTER,
             0,
             0)
@@ -165,7 +185,7 @@ function ItemBar:init()
         local hoverFrame = BlzCreateFrameByType(
             "GLUEBUTTON",
             "hoverFrame",
-            actionItem,
+            actionItemOrigin,
             "IconButtonTemplate",
             0)
 
@@ -189,10 +209,10 @@ function ItemBar:init()
         end)
 
         local tooltipFrame = tooltip.makeTooltipFrame(
-            actionItem, 0.16, 0.24, hoverFrame)
+            actionItemOrigin, 0.16, 0.24, hoverFrame)
 
         table.insert(actionItems, {
-            actionItemBackground = actionItem,
+            actionItemBackground = actionItemIcon,
             actionCooldownBackdrop = actionCooldownBackdrop,
             actionCooldownText = actionCooldownText,
             tooltipFrame = tooltipFrame,
@@ -222,11 +242,14 @@ function ItemBar:update(playerId)
         local itemId = playerHotbars[playerId][idx]
 
         local itemInfo = itemmanager.getItemInfo(itemId)
-        local itemIcon = "UI/Widgets/Console/Human/human-inventory-slotfiller.blp"
         local cdPct = 0.000001
         local itemCount = ""
         if itemInfo ~= nil then
-            itemIcon = itemInfo.icon
+            BlzFrameSetTexture(
+                actionItem.actionItemBackground,
+                itemInfo.icon,
+                0,
+                true)
             if itemInfo.spell ~= nil then
                 cdPct = spell.getCooldownPctBySpellKey(
                     playerId, itemInfo.spell)
@@ -234,16 +257,12 @@ function ItemBar:update(playerId)
             itemCount = backpack.getItemCount(playerId, itemId)
         end
 
+        BlzFrameSetVisible(actionItem.actionItemBackground, itemInfo)
+
         BlzFrameSetSize(
             actionItem.actionCooldownBackdrop,
-            consts.ITEM_ITEM_SIZE,
-            consts.ITEM_ITEM_SIZE * cdPct)
-
-        BlzFrameSetTexture(
-            actionItem.actionItemBackground,
-            itemIcon,
-            0,
-            true)
+            consts.ITEM_ITEM_SIZE * 0.75,
+            consts.ITEM_ITEM_SIZE * 0.75 * cdPct)
 
         local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
         BlzFrameSetSize(

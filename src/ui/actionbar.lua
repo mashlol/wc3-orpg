@@ -26,7 +26,7 @@ function ActionBar:init()
         "",
         0)
     BlzFrameSetSize(
-        actionBar, consts.ACTION_ITEM_SIZE * 6, consts.ACTION_ITEM_SIZE)
+        actionBar, (consts.ACTION_ITEM_SIZE * 0.9) * 6, consts.ACTION_ITEM_SIZE)
     BlzFrameSetAbsPoint(
         actionBar, FRAMEPOINT_BOTTOM, 0.4, 0.01)
 
@@ -45,7 +45,7 @@ function ActionBar:init()
             FRAMEPOINT_LEFT,
             actionBar,
             FRAMEPOINT_LEFT,
-            i * (consts.ACTION_ITEM_SIZE - consts.ACTION_ITEM_SIZE * 0.1),
+            i * (consts.ACTION_ITEM_SIZE * 0.9),
             0)
         BlzFrameSetTexture(
             actionItemOrigin,
