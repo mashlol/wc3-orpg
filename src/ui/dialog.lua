@@ -162,7 +162,7 @@ function Dialog:update(playerId)
         TEXT_JUSTIFY_TOP,
         dialogToggles[playerId] ~= nil and
             dialogToggles[playerId].textalign or
-            TEXT_JUSTIFY_CENTER)
+            TEXT_JUSTIFY_LEFT)
 
     if
         dialogToggles[playerId] ~= nil and
