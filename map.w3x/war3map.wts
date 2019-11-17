@@ -729,12 +729,6 @@ STRING 134
 Giant Yeti
 }
 
-STRING 135
-// Doodads: D00H (iron gate anywhere), Name (Name)
-{
-iron gate anywhere
-}
-
 STRING 136
 // Destructibles: B008 (barricade anywhere), Name (Name)
 {
@@ -751,5 +745,35 @@ STRING 138
 // Doodads: D00I (Black Back Drop), Name (Name)
 {
 Black Back Drop
+}
+
+STRING 139
+// Doodads: D00H (post hitching anywhere), Name (Name)
+{
+post hitching anywhere
+}
+
+STRING 140
+// Doodads: barn (Barn Anywhere), Name (Name)
+{
+Barn Anywhere
+}
+
+STRING 141
+// Doodads: crat (Crate Anywhere), Name (Name)
+{
+Crate Anywhere
+}
+
+STRING 142
+// Doodads: trog (Trough Empty Anywhere), Name (Name)
+{
+Trough Empty Anywhere
+}
+
+STRING 143
+// Doodads: tabl (Table Anywhere), Name (Name)
+{
+Table Anywhere
 }
 
