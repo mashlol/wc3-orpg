@@ -1,10 +1,21 @@
 Frame "BACKDROP" "BoxedTextBackgroundTemplate" {
-    DecorateFileNames, //Look-Up Names in some String table (for example gameinterface)
-    BackdropTileBackground, //Tile mode enabled
-    BackdropBackground  "ToolTipBackground", //BackgroundFile
+    DecorateFileNames,
+    BackdropTileBackground,
+    BackdropBackground  "ToolTipBackground",
     BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
-    BackdropCornerSize  0.008, //higher numbers make the corners bigger.
-    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022, //makes the background smaller, from the outside.
-    BackdropEdgeFile  "ToolTipBorder", //the border File
+    BackdropCornerSize  0.008,
+    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022,
+    BackdropEdgeFile  "ToolTipBorder",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "WindowBackgroundTemplate" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui\window_background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "war3mapImported\ui\window_border.blp",
     BackdropBlendAll,
 }

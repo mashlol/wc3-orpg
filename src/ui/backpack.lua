@@ -47,24 +47,7 @@ function Backpack:init()
         0.565,
         0.32)
 
-    utils.createBorderFrame(backpackOrigin)
-
-    local backpackText = BlzCreateFrameByType(
-        "TEXT",
-        "backpackText",
-        backpackOrigin,
-        "",
-        0)
-    BlzFrameSetSize(
-        backpackText, consts.BACKPACK_SIZE, 0.012)
-    BlzFrameSetPoint(
-        backpackText,
-        FRAMEPOINT_TOPLEFT,
-        backpackOrigin,
-        FRAMEPOINT_TOPLEFT,
-        0.01,
-        -0.01)
-    BlzFrameSetText(backpackText, "Inventory: 0/36")
+    local borderInfo = utils.createBorderFrame(backpackOrigin, "INVENTORY")
 
     local goldText = BlzCreateFrameByType(
         "TEXT",
@@ -273,7 +256,7 @@ function Backpack:init()
         itemFrames = itemFrames,
         origin = backpackOrigin,
         goldText = goldText,
-        backpackText = backpackText,
+        backpackText = borderInfo.text,
     }
 
     return self
@@ -295,7 +278,7 @@ function Backpack:update(playerId)
 
     BlzFrameSetText(
         frames.backpackText,
-        'Backpack: ' .. backpack.getFilledSlotCount(playerId) .. ' / 36')
+        'BACKPACK (' .. backpack.getFilledSlotCount(playerId) .. ' / 36)')
 
     local activeItem = backpack.getActiveItem(playerId)
     for i=1,36,1 do

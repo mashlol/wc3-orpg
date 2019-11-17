@@ -132,23 +132,8 @@ function Equipment:init()
         0.1,
         0.35)
 
-    utils.createBorderFrame(equipmentOrigin)
-
-    local equipmentText = BlzCreateFrameByType(
-        "TEXT",
-        "equipmentText",
-        equipmentOrigin,
-        "",
-        0)
-    BlzFrameSetSize(equipmentText, consts.EQUIPMENT_ITEM_SIZE * 4 + 0.03, 0.012)
-    BlzFrameSetPoint(
-        equipmentText,
-        FRAMEPOINT_TOPLEFT,
-        equipmentOrigin,
-        FRAMEPOINT_TOPLEFT,
-        0.01,
-        -0.01)
-    BlzFrameSetText(equipmentText, "Character (Lv. 2)")
+    local borderInfo = utils.createBorderFrame(
+        equipmentOrigin, "CHARACTER (Lv. 2)")
 
     -- local BUTTON_WIDTH_PX = 300 => 0.105
     -- local BUTTON_HEIGHT_PX = 450 => 0.1575
@@ -208,7 +193,7 @@ function Equipment:init()
     self.frames = {
         itemFrames = itemFrames,
         origin = equipmentOrigin,
-        equipmentText = equipmentText,
+        equipmentText = borderInfo.text,
         portrait = portraitBackdropFrame,
     }
 

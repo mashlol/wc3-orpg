@@ -47,23 +47,7 @@ function Talents:init()
         0.4,
         0.35)
 
-    utils.createBorderFrame(talentsOrigin)
-
-    local talentText = BlzCreateFrameByType(
-        "TEXT",
-        "talentText",
-        talentsOrigin,
-        "",
-        0)
-    BlzFrameSetSize(talentText, consts.TALENTS_WIDTH, 0.012)
-    BlzFrameSetPoint(
-        talentText,
-        FRAMEPOINT_TOPLEFT,
-        talentsOrigin,
-        FRAMEPOINT_TOPLEFT,
-        0.01,
-        -0.01)
-    BlzFrameSetText(talentText, "Talents")
+    utils.createBorderFrame(talentsOrigin, "TALENTS")
 
     local unspentPointsText = BlzCreateFrameByType(
         "TEXT",

@@ -69,23 +69,7 @@ function QuestLog:init()
         0,
         0.35)
 
-    utils.createBorderFrame(origin)
-
-    local text = BlzCreateFrameByType(
-        "TEXT",
-        "text",
-        origin,
-        "",
-        0)
-    BlzFrameSetSize(text, consts.QUEST_LOG_WIDTH - 0.02, consts.QUEST_LOG_HEIGHT)
-    BlzFrameSetPoint(
-        text,
-        FRAMEPOINT_TOPLEFT,
-        origin,
-        FRAMEPOINT_TOPLEFT,
-        0.01,
-        -0.01)
-    BlzFrameSetText(text, "Quest Log")
+    utils.createBorderFrame(origin, "QUEST LOG")
 
     local buttons = {}
     for i=1,12,1 do
