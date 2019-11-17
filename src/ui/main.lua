@@ -32,16 +32,16 @@ local UI_MODULES = {
     MenuButtons:new(),
     SimpleButton:new(),
     UnitFrame:new{
-        xLoc = 0.595,
+        xLoc = 0.625,
         yLoc = 0.03,
-        width = consts.BAR_WIDTH * 2 / 4 + 0.026,
+        width = consts.BAR_WIDTH,
         forTarget = true,
         buffSize = consts.BUFF_ICON_SIZE,
     },
     UnitFrame:new{
-        xLoc = 0.215,
+        xLoc = 0.15,
         yLoc = 0.03,
-        width = consts.BAR_WIDTH * 2 / 4 + 0.026,
+        width = consts.BAR_WIDTH,
         forTarget = false,
         buffSize = consts.BUFF_ICON_SIZE,
     },
@@ -49,19 +49,17 @@ local UI_MODULES = {
     DpsMeter:new(),
 }
 
+local partyFrameWidth = consts.BAR_WIDTH * 0.55
+local partyFrameHeight = partyFrameWidth / (692 / 199)
 for i=0,9,1 do
-    local xloC = math.floor(i / 5) * (consts.BAR_WIDTH / 3 + 0.005)
-
     table.insert(UI_MODULES, UnitFrame:new{
-        xLoc = xloC,
-        yLoc = 0.5 - (consts.BAR_HEIGHT * 4 - consts.BUFF_ICON_SIZE / 2 + 0.005) * (i % 5),
+        xLoc = 0,
+        yLoc = 0.5 - (partyFrameHeight) * i,
         anchor = FRAMEPOINT_TOPLEFT,
         forTarget = false,
-        forParty = i,
+        forParty = 0,
         showCastBar = false,
-        width = consts.BAR_WIDTH / 3,
-        height = consts.BAR_HEIGHT * 4 - consts.BUFF_ICON_SIZE / 2,
-        buffSize = consts.BUFF_ICON_SIZE / 2,
+        width = partyFrameWidth,
     })
 end
 
@@ -87,23 +85,23 @@ function hideBlizzUI()
     BlzFrameClearAllPoints(parentCommandFrame)
     BlzFrameSetAbsPoint(parentCommandFrame, FRAMEPOINT_TOPLEFT, -1, -1)
 
-    local miniMapFrame = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
+    -- local miniMapFrame = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
 
-    local miniMapBackdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "miniMapBackdrop",
-        originFrame,
-        "",
-        0)
-    BlzFrameSetAllPoints(miniMapBackdrop, miniMapFrame)
-    BlzFrameSetTexture(
-        miniMapBackdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
+    -- local miniMapBackdrop = BlzCreateFrameByType(
+    --     "BACKDROP",
+    --     "miniMapBackdrop",
+    --     originFrame,
+    --     "",
+    --     0)
+    -- BlzFrameSetAllPoints(miniMapBackdrop, miniMapFrame)
+    -- BlzFrameSetTexture(
+    --     miniMapBackdrop,
+    --     "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+    --     0,
+    --     true)
 
-    BlzFrameSetVisible(miniMapFrame, true)
-    BlzFrameSetParent(miniMapFrame, miniMapBackdrop)
+    -- BlzFrameSetVisible(miniMapFrame, true)
+    -- BlzFrameSetParent(miniMapFrame, miniMapBackdrop)
 end
 
 function initCustomUI()
