@@ -137,6 +137,7 @@ function ExpBar:init()
     BlzFrameSetAllPoints(expBarStatusText, expBarFrameBackground)
     BlzFrameSetTextAlignment(
         expBarStatusText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
+    BlzFrameSetScale(expBarStatusText, 0.65)
 
     self.frames = {
         expBar = expBarFrameFilled,
