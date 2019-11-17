@@ -52,7 +52,7 @@ function Vendor:init()
         0,
         0.35)
 
-    utils.createBorderFrame(origin)
+    utils.createBorderFrame(origin, "VENDOR")
 
     local ITEM_HEIGHT = 0.03
 
@@ -68,7 +68,7 @@ function Vendor:init()
             origin,
             FRAMEPOINT_TOPLEFT,
             (i % 2)* ((consts.VENDOR_WIDTH - 0.03) / 2 + 0.01) + 0.01,
-            -R2I(i / 2) * (ITEM_HEIGHT + 0.01) - 0.01)
+            -R2I(i / 2) * (ITEM_HEIGHT + 0.01) - 0.02)
 
         local itemBackdropFrame = BlzCreateFrameByType(
             "BACKDROP", "itemBackdropFrame", itemContainerFrame, "", 0)

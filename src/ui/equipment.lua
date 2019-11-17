@@ -211,7 +211,7 @@ function Equipment:update(playerId)
     end
 
     local level = GetHeroLevel(self.hero)
-    BlzFrameSetText(frames.equipmentText, "Character (Lv. " .. level .. ")")
+    BlzFrameSetText(frames.equipmentText, "CHARACTER (Lv. " .. level .. ")")
 
     local pickedHero = hero.getPickedHero(playerId)
     if pickedHero ~= nil then
