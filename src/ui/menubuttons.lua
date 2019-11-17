@@ -116,7 +116,7 @@ function MenuButtons:init()
             (i - 1) * (consts.MENU_BUTTON_SIZE - consts.MENU_BUTTON_SIZE * 0.1),
             0)
         BlzFrameSetTexture(
-            button, "war3mapImported\\ui\\square_button.blp", 0, true)
+            button, "war3mapImported\\ui\\round_button.blp", 0, true)
 
         local buttonIcon = BlzCreateFrameByType(
             "BACKDROP",
