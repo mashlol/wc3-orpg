@@ -74,10 +74,9 @@ function LootRoll:init()
         -0.01)
     BlzFrameSetTexture(
         itemBackdropFrame,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        "war3mapImported\\ui\\inner_container_2_full.blp",
         0,
         true)
-    BlzFrameSetAlpha(itemBackdropFrame, 100)
 
     local itemIconBackdropFrame = BlzCreateFrameByType(
         "BACKDROP", "itemIconBackdropFrame", origin, "", 0)
@@ -123,12 +122,14 @@ function LootRoll:init()
         0)
     BlzFrameSetText(itemTextFrame, "Some Item With A Huge Name Omg So Long")
 
+    local progressBarWidth = (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4
+
     local progressBarBackdropFrame = BlzCreateFrameByType(
         "BACKDROP", "progressBarBackdropFrame", origin, "", 0)
     BlzFrameSetSize(
         progressBarBackdropFrame,
-        (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4,
-        consts.LOOT_ROLL_HEIGHT * 1 / 6)
+        progressBarWidth,
+        progressBarWidth * 75 / 1232)
     BlzFrameSetPoint(
         progressBarBackdropFrame,
         FRAMEPOINT_BOTTOMLEFT,
@@ -138,7 +139,7 @@ function LootRoll:init()
         0.01)
     BlzFrameSetTexture(
         progressBarBackdropFrame,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+        "war3mapImported\\ui\\loading_bar_empty.blp",
         0,
         true)
 
@@ -146,8 +147,8 @@ function LootRoll:init()
         "BACKDROP", "progressBarFilledBackdropFrame", origin, "", 0)
     BlzFrameSetSize(
         progressBarFilledBackdropFrame,
-        (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4 * 0.5,
-        consts.LOOT_ROLL_HEIGHT * 1 / 6)
+        progressBarWidth,
+        progressBarWidth * 46 / 1232)
     BlzFrameSetPoint(
         progressBarFilledBackdropFrame,
         FRAMEPOINT_LEFT,
@@ -157,13 +158,13 @@ function LootRoll:init()
         0)
     BlzFrameSetTexture(
         progressBarFilledBackdropFrame,
-        "Replaceabletextures\\Teamcolor\\Teamcolor05.blp",
+        "war3mapImported\\ui\\loading_bar_fill.blp",
         0,
         true)
 
     for i=0,2,1 do
-        local rollButton = BlzCreateFrame("ScriptDialogButton", origin, 0, 0)
-        local rollButtonText = BlzGetFrameByName("ScriptDialogButtonText", 0)
+        local rollButton = BlzCreateFrame("GrungeButton", origin, 0, 0)
+        local rollButtonText = BlzGetFrameByName("GrungeButtonText", 0)
         BlzFrameSetSize(
             rollButton,
             (consts.LOOT_ROLL_WIDTH - 0.02) * 1 / 4,
@@ -219,7 +220,7 @@ function LootRoll:update(playerId)
     BlzFrameSetSize(
         frames.progressFilled,
         (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4 * duration,
-        consts.LOOT_ROLL_HEIGHT * 1 / 6)
+        (consts.LOOT_ROLL_WIDTH - 0.02) * 3 / 4 * 46 / 1232)
 
     local itemId = drops.getItemIdForRoll(playerRolls[playerId][1])
     local itemInfo = itemmanager.getItemInfo(itemId)
