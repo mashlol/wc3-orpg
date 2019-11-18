@@ -250,78 +250,174 @@ function isEligibleForQuest(playerId, questId)
     return true
 end
 
-function getQuestIncompletedText(questId)
-    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].handQuestTo) .. "|r|n|n"
-    res = res .. QUESTS[questId].incompleteText
-    return res
+function getSectionsForIncompletedDialog(questId)
+    local sections = {}
+    table.insert(sections, {
+        text = string.upper(GetUnitName(QUESTS[questId].handQuestTo)),
+        type = 'red',
+        textalign = TEXT_JUSTIFY_CENTER,
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.05,
+        width = 0.9,
+    })
+
+    table.insert(sections, {
+        text = "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n" .. QUESTS[questId].incompleteText,
+        type = 'normal',
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.075,
+        width = 0.8,
+    })
+
+    return sections
 end
 
-function getQuestCompletedText(questId)
-    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].handQuestTo) .. "|r|n|n"
-    res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
-    res = res .. QUESTS[questId].completedText
-    res = res .. "|n|n|cffe0b412Rewards:|r|n"
+function getSectionsForCompletedDialog(questId)
+    local rewards = {}
     if QUESTS[questId].rewards.gold then
-        res = res .. "- " .. QUESTS[questId].rewards.gold .. " gold|n"
+        table.insert(rewards, {
+            icon = "war3mapImported\\ui\\gold.blp",
+            text = QUESTS[questId].rewards.gold .. " Gold"
+        })
     end
     if QUESTS[questId].rewards.exp then
-        res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+        table.insert(rewards, {
+            icon = "ui\\feedback\\resources\\resourcemanastone.blp",
+            text = QUESTS[questId].rewards.exp .. " Experience"
+        })
     end
     if QUESTS[questId].rewards.items then
         for itemId,amount in pairs(QUESTS[questId].rewards.items) do
-            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+            table.insert(rewards, {
+                icon = itemmanager.getItemInfo(itemId).icon,
+                text = amount .. " " .. itemmanager.getItemInfo(itemId).name
+            })
         end
     end
-    return res
+
+    local sections = {}
+    table.insert(sections, {
+        text = string.upper(GetUnitName(QUESTS[questId].handQuestTo)),
+        type = 'red',
+        textalign = TEXT_JUSTIFY_CENTER,
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.05,
+        width = 0.9,
+    })
+
+    table.insert(sections, {
+        text = "|cff2cfc03" .. QUESTS[questId].name .. " Completed!|r|n|n" .. QUESTS[questId].completedText,
+        type = 'normal',
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.075,
+        width = 0.8,
+    })
+
+    table.insert(sections,  {
+        text = "|cffe0b412REWARDS|r",
+        type = 'normal',
+        height = 0.085,
+        width = 0.8,
+        bullets = rewards,
+    })
+
+    return sections
 end
 
-function getQuestAcceptText(questId, playerId)
-    local res = "|cffe0b412" .. GetUnitName(QUESTS[questId].getQuestFrom) .. "|r|n|n"
-
-    res = res .. "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n"
-
-    res = res .. QUESTS[questId].obtainText
-    local objectives = ""
+function getSectionsForAcceptDialog(questId, playerId)
+    local objectives = {}
     for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        local objective
+        local icon
         if objectiveInfo.type == TYPE.KILL then
             local verb = objectiveInfo.verb or 'Kill'
             local amount = objectiveInfo.amount > 1 and (objectiveInfo.amount .. ' ')  or ''
-            objectives = objectives.."- "..verb.." "..amount..objectiveInfo.name
+            objective = verb.." "..amount..objectiveInfo.name
+            icon = "war3mapImported\\ui\\swords_icon.blp"
         end
         if objectiveInfo.type == TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
-            objectives = objectives .. "- Collect "..objectiveInfo.amount.." "..itemInfo.name
+            objective = "Collect "..objectiveInfo.amount.." "..itemInfo.name
+            icon = "war3mapImported\\ui\\chest_icon.blp"
         end
         if objectiveInfo.type == TYPE.DISCOVER then
-            objectives = objectives .. "- Discover the "..objectiveInfo.name
+            objective = "Discover the "..objectiveInfo.name
+            icon = "war3mapImported\\ui\\search_icon.blp"
         end
-        if playerId ~= nil and progress[playerId][questId].objectives[objectiveIdx] ~= nil then
+        if playerId ~= nil and progress[playerId][questId] ~= nil and progress[playerId][questId].objectives[objectiveIdx] ~= nil then
             local amountDone = progress[playerId][questId].objectives[objectiveIdx]
-            objectives = objectives .. " ( ".. amountDone .." / ".. objectiveInfo.amount .." )"
+            objective = objective .. " ( ".. amountDone .." / ".. objectiveInfo.amount .." )"
         end
-        objectives = objectives .. "|n"
+        table.insert(objectives, {
+            text = objective,
+            icon = icon,
+        })
     end
-    if objectives ~= "" then
-        res = res .. "|n|n|cffe0b412Objectives:|r|n"..objectives
-    end
-    res = res .. "|n|n|cffe0b412Rewards:|r|n"
+
+    local rewards = {}
     if QUESTS[questId].rewards.gold then
-        res = res .. "- " .. QUESTS[questId].rewards.gold .. " gold|n"
+        table.insert(rewards, {
+            icon = "war3mapImported\\ui\\gold.blp",
+            text = QUESTS[questId].rewards.gold .. " Gold"
+        })
     end
     if QUESTS[questId].rewards.exp then
-        res = res .. "- " .. QUESTS[questId].rewards.exp .. " experience|n"
+        table.insert(rewards, {
+            icon = "ui\\feedback\\resources\\resourcemanastone.blp",
+            text = QUESTS[questId].rewards.exp .. " Experience"
+        })
     end
     if QUESTS[questId].rewards.items then
         for itemId,amount in pairs(QUESTS[questId].rewards.items) do
-            res = res .. "- " .. amount .. ' ' .. itemmanager.getItemInfo(itemId).name .. "|n"
+            table.insert(rewards, {
+                icon = itemmanager.getItemInfo(itemId).icon,
+                text = amount .. " " .. itemmanager.getItemInfo(itemId).name
+            })
         end
     end
-    return res
+
+    local sections = {}
+    table.insert(sections, {
+        text = string.upper(GetUnitName(QUESTS[questId].getQuestFrom)),
+        type = 'red',
+        textalign = TEXT_JUSTIFY_CENTER,
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.05,
+        width = 0.9,
+    })
+
+    table.insert(sections, {
+        text = "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n" .. QUESTS[questId].obtainText,
+        type = 'normal',
+        textalignvert = TEXT_JUSTIFY_MIDDLE,
+        height = 0.075,
+        width = 0.8,
+    })
+
+    if #objectives > 0 then
+        table.insert(sections, {
+            text = "|cffe0b412OBJECTIVES|r",
+            type = 'normal',
+            height = 0.085,
+            width = 0.8,
+            bullets = objectives,
+        })
+    end
+
+    table.insert(sections,  {
+        text = "|cffe0b412REWARDS|r",
+        type = 'normal',
+        height = 0.085,
+        width = 0.8,
+        bullets = rewards,
+    })
+
+    return sections
 end
 
 function beginQuest(playerId, questId)
     Dialog.show(playerId, {
-        text = getQuestAcceptText(questId),
+        sections = getSectionsForAcceptDialog(questId),
         positiveButton = "Accept",
         negativeButton = "Decline",
         onPositiveButtonClicked = function()
@@ -340,7 +436,7 @@ function finishQuest(playerId, questId)
     progress[playerId][questId].completed = true
 
     Dialog.show(playerId, {
-        text = getQuestCompletedText(questId),
+        sections = getSectionsForCompletedDialog(questId),
         positiveButton = "Okay",
     })
 
@@ -412,7 +508,7 @@ function onNpcClicked()
                 return
             else
                 Dialog.show(playerId, {
-                    text = getQuestIncompletedText(questId),
+                    sections = getSectionsForIncompletedDialog(questId),
                     positiveButton = 'Okay',
                 })
                 return
@@ -424,7 +520,7 @@ end
 function showDialogForActiveQuest(playerId, activeQuestId)
     local activeQuests = getActiveQuests(playerId)
     Dialog.show(playerId, {
-        text = getQuestAcceptText(activeQuests[activeQuestId], playerId),
+        sections = getSectionsForAcceptDialog(activeQuests[activeQuestId], playerId),
         positiveButton = "Okay",
         negativeButton = "Disband",
         onNegativeButtonClicked = function()
