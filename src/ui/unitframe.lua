@@ -157,6 +157,7 @@ function UnitFrame:init()
     BlzFrameSetTextAlignment(
         levelText, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
     BlzFrameSetText(levelText, "12")
+    BlzFrameSetScale(levelText, 0.8)
 
     local healthBarStatusText = BlzCreateFrameByType(
         "TEXT",
@@ -283,7 +284,7 @@ function UnitFrame:update(playerId)
     local unitIcon = BlzGetAbilityIcon(GetUnitTypeId(unit))
     BlzFrameSetTexture(frames.icon, unitIcon, 0, true)
 
-    local unitLevel = GetHeroLevel(unit) or GetUnitLevel(unit)
+    local unitLevel = GetHeroLevel(unit) ~= 0 and GetHeroLevel(unit) or GetUnitLevel(unit)
     BlzFrameSetText(frames.levelText, unitLevel)
 
     BlzFrameSetVisible(frames.levelFrameBackdrop, self.forParty == nil)
