@@ -41,6 +41,7 @@ local ALL_HERO_INFO = {
         portraitFullBlurred = "war3mapImported\\yuji_blur_crop.blp",
         baseHP = 600,
         attackSpeed = 1.5,
+        defense = 'Low',
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
@@ -64,6 +65,7 @@ local ALL_HERO_INFO = {
         portraitFullBlurred = "war3mapImported\\stormfist_blur_crop.blp",
         baseHP = 700,
         attackSpeed = 2,
+        defense = 'Medium',
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
@@ -87,6 +89,7 @@ local ALL_HERO_INFO = {
         portraitFullBlurred = "war3mapImported\\ivanov_blur_crop.blp",
         baseHP = 600,
         attackSpeed = 2.2,
+        defense = 'Medium',
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
@@ -111,6 +114,7 @@ local ALL_HERO_INFO = {
         portraitFullBlurred = "war3mapImported\\azora_blur_crop.blp",
         baseHP = 400,
         attackSpeed = 2.2,
+        defense = 'Low',
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
@@ -135,6 +139,7 @@ local ALL_HERO_INFO = {
         portraitFullBlurred = "war3mapImported\\tarcza_blur_crop.blp",
         baseHP = 1000,
         attackSpeed = 1.7,
+        defense = 'High',
     },
 }
 

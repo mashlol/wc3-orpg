@@ -37,6 +37,14 @@ local HERO_INFO_MARGIN_RELATIVE = HERO_INFO_MARGIN_PX / CONFIRM_HEIGHT_PX * CONF
 local SPELL_ICON_SIZE_PX = 128
 local SPELL_ICON_SIZE_RELATIVE = SPELL_ICON_SIZE_PX / CONFIRM_WIDTH_PX * CONFIRM_WIDTH_RELATIVE
 
+local HERO_INFO_TABLE_WIDTH_PX = 230
+local HERO_INFO_TABLE_HEIGHT_PX = 110
+local HERO_INFO_TABLE_WIDTH_RELATIVE = HERO_INFO_TABLE_WIDTH_PX / CONFIRM_WIDTH_PX * CONFIRM_WIDTH_RELATIVE
+local HERO_INFO_TABLE_HEIGHT_RELATIVE = HERO_INFO_TABLE_WIDTH_RELATIVE / (HERO_INFO_TABLE_WIDTH_PX / HERO_INFO_TABLE_HEIGHT_PX)
+local HERO_INFO_TABLE_BOTTOM_MARGIN_PX = 100
+local HERO_INFO_TABLE_BOTTOM_MARGIN_RELATIVE = HERO_INFO_TABLE_BOTTOM_MARGIN_PX / CONFIRM_WIDTH_PX * CONFIRM_WIDTH_RELATIVE
+
+
 -- heroSelectToggles = {
 --     [playerId] = [function or nil]
 -- }
@@ -403,6 +411,45 @@ function HeroSelect:init()
         heroConfirms[playerId] = nil
     end)
 
+    local heroInfoRows = {}
+    local rowHeight = HERO_INFO_TABLE_HEIGHT_RELATIVE / 5
+    for i=0,4,1 do
+        local heroInfoType = BlzCreateFrameByType(
+            "TEXT",
+            "heroInfoType",
+            heroInfoOrigin,
+            "",
+            0)
+        BlzFrameSetSize(
+            heroInfoType,
+            HERO_INFO_TABLE_WIDTH_RELATIVE,
+            rowHeight)
+        BlzFrameSetPoint(
+            heroInfoType,
+            FRAMEPOINT_BOTTOM,
+            confirmButton,
+            FRAMEPOINT_TOP,
+            0,
+            HERO_INFO_TABLE_BOTTOM_MARGIN_RELATIVE + i * rowHeight)
+        BlzFrameSetTextAlignment(
+            heroInfoType, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_LEFT)
+
+        local heroInfoAmount = BlzCreateFrameByType(
+            "TEXT",
+            "heroInfoAmount",
+            heroInfoOrigin,
+            "",
+            0)
+        BlzFrameSetAllPoints(heroInfoAmount, heroInfoType)
+        BlzFrameSetTextAlignment(
+            heroInfoAmount, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_RIGHT)
+
+        table.insert(heroInfoRows, {
+            type = heroInfoType,
+            amount = heroInfoAmount,
+        })
+    end
+
     local spellIcons = {}
     for i=0,5,1 do
         local spellIcon = BlzCreateFrameByType(
@@ -610,6 +657,7 @@ function HeroSelect:init()
         createButton = createButton,
         deleteButton = deleteButton,
         backButton = backButton,
+        heroInfoRows = heroInfoRows,
     }
 
     return self
@@ -748,6 +796,18 @@ function HeroSelect:update(playerId)
 
         BlzFrameSetText(frames.heroInfoDesc, heroInfo.desc)
         BlzFrameSetText(frames.heroInfoTitle, heroInfo.name)
+
+        BlzFrameSetText(frames.heroInfoRows[5].type, '|cfffbc531Type|r')
+        BlzFrameSetText(frames.heroInfoRows[5].amount, heroInfo.heroType)
+
+        BlzFrameSetText(frames.heroInfoRows[4].type, '|cfffbc531Base Health|r')
+        BlzFrameSetText(frames.heroInfoRows[4].amount, heroInfo.baseHP)
+
+        BlzFrameSetText(frames.heroInfoRows[3].type, '|cfffbc531Attack Speed|r')
+        BlzFrameSetText(frames.heroInfoRows[3].amount, heroInfo.attackSpeed)
+
+        BlzFrameSetText(frames.heroInfoRows[2].type, '|cfffbc531Defense|r')
+        BlzFrameSetText(frames.heroInfoRows[2].amount, heroInfo.defense)
 
         for i=1,6,1 do
             local spellKey = heroInfo.spells[i]
