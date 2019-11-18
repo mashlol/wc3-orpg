@@ -166,7 +166,7 @@ function maybeGetDrop(unit)
         totalWeights = totalWeights + weight
     end
 
-    local randNum = GetRandomReal(0, totalWeights-1)
+    local randNum = GetRandomReal(0, totalWeights)
     local curWeight = 0
     for itemId, weight in pairs(drops) do
         curWeight = curWeight + weight

@@ -4,10 +4,6 @@ gg_rct_rain1 = nil
 gg_rct_rain2 = nil
 gg_rct_rain3 = nil
 gg_rct_iceenter1 = nil
-gg_rct_wolvesenter1 = nil
-gg_rct_wolvesenter2 = nil
-gg_rct_forestenter1 = nil
-gg_rct_forestenter2 = nil
 gg_rct_house1enter1 = nil
 gg_rct_house1exit1 = nil
 gg_rct_house1entrance1 = nil
@@ -461,27 +457,11 @@ end
 function CreateRegions()
     local we
     gg_rct_ironwellenter1 = Rect(12128.0, -16096.0, 18496.0, -9600.0)
-    we = AddWeatherEffect(gg_rct_ironwellenter1, FourCC("LRma"))
-    EnableWeatherEffect(we, true)
     gg_rct_freydellenter1 = Rect(800.0, -4640.0, 3264.0, -2368.0)
-    we = AddWeatherEffect(gg_rct_freydellenter1, FourCC("LRaa"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain1 = Rect(-4896.0, -2304.0, 5696.0, 2688.0)
-    we = AddWeatherEffect(gg_rct_rain1, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain2 = Rect(-7712.0, -7584.0, -128.0, -2304.0)
-    we = AddWeatherEffect(gg_rct_rain2, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain3 = Rect(3296.0, -4704.0, 7104.0, -2304.0)
-    we = AddWeatherEffect(gg_rct_rain3, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_iceenter1 = Rect(-19744.0, -5760.0, -7904.0, 6048.0)
-    we = AddWeatherEffect(gg_rct_iceenter1, FourCC("SNhs"))
-    EnableWeatherEffect(we, true)
-    gg_rct_wolvesenter1 = Rect(480.0, -2272.0, 1536.0, 2688.0)
-    gg_rct_wolvesenter2 = Rect(1536.0, -2304.0, 5728.0, -1664.0)
-    gg_rct_forestenter1 = Rect(-1120.0, -9184.0, -96.0, 3136.0)
-    gg_rct_forestenter2 = Rect(-7744.0, -7584.0, -6720.0, -2528.0)
     gg_rct_house1enter1 = Rect(1728.0, -3072.0, 1824.0, -2976.0)
     gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
     gg_rct_house1entrance1 = Rect(30400.0, 30784.0, 30464.0, 30848.0)
