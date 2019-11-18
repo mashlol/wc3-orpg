@@ -14,7 +14,6 @@ local DROP_TABLE = {
         [5] = 10,
         [45] = 2,
         [29] = 4,
-        [4] = 999999,
     },
     [FourCC('lold')] = { -- River turtles
         none = 50,
