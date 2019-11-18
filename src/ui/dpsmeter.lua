@@ -1,5 +1,13 @@
 local damage = require('src/damage.lua')
 local party = require('src/party.lua')
+local utils = require('src/ui/utils.lua')
+
+local WIDTH = 0.13
+local HEIGHT = 0.15
+local PADDING = 0.008
+
+local ROW_WIDTH = WIDTH - PADDING * 2
+local ROW_HEIGHT =  (HEIGHT - PADDING * 2) / 10
 
 -- dpsMeterToggles = {
 --     [playerId] = true or nil
@@ -29,26 +37,14 @@ function DpsMeter:init()
         "",
         0)
     BlzFrameSetSize(
-        origin, 0.13, 0.15)
+        origin, WIDTH, HEIGHT)
     BlzFrameSetAbsPoint(
         origin,
         FRAMEPOINT_BOTTOMRIGHT,
-        0.8,
-        0.01)
+        0.75,
+        0.3)
 
-    local backdrop = BlzCreateFrameByType(
-        "BACKDROP",
-        "backdrop",
-        origin,
-        "",
-        0)
-    BlzFrameSetAllPoints(backdrop, origin)
-    BlzFrameSetTexture(
-        backdrop,
-        "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-        0,
-        true)
-    BlzFrameSetAlpha(backdrop, 150)
+    utils.createBorderFrame(origin)
 
     local rows = {}
     for i=0,9,1 do
@@ -58,14 +54,14 @@ function DpsMeter:init()
             origin,
             "",
             0)
-        BlzFrameSetSize(rowOrigin, 0.13, 0.015)
+        BlzFrameSetSize(rowOrigin, ROW_WIDTH, ROW_HEIGHT)
         BlzFrameSetPoint(
             rowOrigin,
             FRAMEPOINT_TOP,
             origin,
             FRAMEPOINT_TOP,
             0,
-            i * -0.015)
+            -i * ROW_HEIGHT - PADDING)
 
         local rowBackdropUnfilled = BlzCreateFrameByType(
             "BACKDROP",
@@ -87,7 +83,7 @@ function DpsMeter:init()
             rowOrigin,
             "",
             0)
-        BlzFrameSetSize(rowBackdrop, 0.07, 0.015)
+        BlzFrameSetSize(rowBackdrop, ROW_WIDTH, ROW_HEIGHT)
         BlzFrameSetPoint(
             rowBackdrop,
             FRAMEPOINT_LEFT,
@@ -129,6 +125,10 @@ function DpsMeter:init()
             nameText = rowNameTextFrame,
         })
     end
+
+    utils.createCloseButton(origin, function(playerId)
+        dpsMeterToggles[playerId] = nil
+    end)
 
     self.frames = {
         origin = origin,
@@ -191,7 +191,7 @@ function DpsMeter:update(playerId)
             BlzFrameSetVisible(rowFrames.origin, true)
             BlzFrameSetText(rowFrames.dpsText, round(dpsMeters[idx].dps, 2))
             BlzFrameSetText(rowFrames.nameText, GetPlayerName(Player(dpsMeters[idx].playerId)))
-            BlzFrameSetSize(rowFrames.backdrop, 0.13 * dpsMeters[idx].pctDps, 0.015)
+            BlzFrameSetSize(rowFrames.backdrop, ROW_WIDTH * dpsMeters[idx].pctDps, ROW_HEIGHT)
         else
             BlzFrameSetVisible(rowFrames.origin, false)
         end
