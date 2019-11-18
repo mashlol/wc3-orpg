@@ -1,6 +1,7 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
 local MinerJoe = require('src/bosses/minerjoe.lua')
+local Yeti = require('src/bosses/yeti.lua')
 local OverseerTom = require('src/bosses/overseertom.lua')
 local hero = require('src/hero.lua')
 local threat = require('src/threat.lua')
@@ -26,6 +27,13 @@ local ALL_BOSS_CLASSES = {
         startX = 30371,
         startY = -24008,
         facing = 270,
+        respawnable = false,
+    },
+    YETI = Yeti:new{
+        bossUnitId = FourCC('h002'),
+        startX = 30655,
+        startY = -22214,
+        facing = 180,
         respawnable = false,
     },
     THE_OVERSEER = OverseerTom:new{
