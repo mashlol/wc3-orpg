@@ -31,6 +31,7 @@ gg_unit_nemi_0014 = nil
 gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
 gg_dest_YTcx_0977 = nil
+gg_rct_iceenter2 = nil
 function InitGlobals()
 end
 
@@ -289,7 +290,6 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -16593.0, 618.6, 195.574, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -19416.7, 692.4, 218.920, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14436.5, -863.1, 298.057, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("htar"), 2788.7, -3301.5, -87.007, FourCC("htar"))
 end
 
 function CreateNeutralPassive()
@@ -486,8 +486,8 @@ function CreateRegions()
     gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
     gg_rct_house1entrance1 = Rect(30400.0, 30784.0, 30464.0, 30848.0)
     gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
-    gg_rct_trollenter1 = Rect(-8256.0, 1824.0, -8160.0, 1920.0)
-    gg_rct_trollexit1 = Rect(-8384.0, 1888.0, -8288.0, 1984.0)
+    gg_rct_trollenter1 = Rect(-20608.0, 3200.0, -20512.0, 3296.0)
+    gg_rct_trollexit1 = Rect(-20576.0, 2944.0, -20480.0, 3040.0)
     gg_rct_trollentrance1 = Rect(30496.0, -29472.0, 30656.0, -29376.0)
     gg_rct_trollleave1 = Rect(30496.0, -29632.0, 30656.0, -29472.0)
     gg_rct_trolldungeon = Rect(26432.0, -29696.0, 31232.0, -21152.0)
@@ -495,6 +495,9 @@ function CreateRegions()
     gg_rct_house2exit1 = Rect(28224.0, -24928.0, 28352.0, -24800.0)
     gg_rct_house2leave1 = Rect(27488.0, -24064.0, 27584.0, -23968.0)
     gg_rct_house2entrance1 = Rect(27328.0, -23936.0, 27456.0, -23808.0)
+    gg_rct_iceenter2 = Rect(-21056.0, 992.0, -19744.0, 3488.0)
+    we = AddWeatherEffect(gg_rct_iceenter2, FourCC("SNhs"))
+    EnableWeatherEffect(we, true)
 end
 
 function CreateCameras()

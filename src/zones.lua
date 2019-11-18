@@ -61,6 +61,7 @@ function init()
             levelRange = {7, 12},
             rects = {
                 gg_rct_iceenter1,
+                gg_rct_iceenter2,
             },
         },
         TROLL_CAVE = {
