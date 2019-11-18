@@ -57,6 +57,12 @@ local TYPE = {
         x = 1,
         y = 1,
     },
+    VENDOR_ERROR = {
+        duration = 1,
+        color = "|cffff0000",
+        x = 1,
+        y = 1,
+    },
     PICK_HERO_ERROR = {
         duration = 2,
         color = "|cffff0000",

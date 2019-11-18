@@ -75,10 +75,9 @@ function Vendor:init()
         BlzFrameSetAllPoints(itemBackdropFrame, itemContainerFrame)
         BlzFrameSetTexture(
             itemBackdropFrame,
-            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            "war3mapImported\\ui\\inner_container_2_full.blp",
             0,
             true)
-        BlzFrameSetAlpha(itemBackdropFrame, 100)
 
         local itemIcon = BlzCreateFrameByType(
             "BACKDROP",
@@ -183,7 +182,7 @@ function Vendor:init()
                     local curGold = GetPlayerState(
                         Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
                     if curGold < itemInfo.cost then
-                        log.log(playerId, 'Not enough gold.', log.TYPE.ERROR)
+                        log.log(playerId, 'Not enough gold.', log.TYPE.VENDOR_ERROR)
                         return
                     end
                     SetPlayerState(
