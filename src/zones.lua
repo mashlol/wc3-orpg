@@ -58,6 +58,7 @@ function init()
         },
         TROLL_CAVE = {
             name = 'Troll Cave',
+            levelRange = {13, 17},
             rects = {
                 gg_rct_trolldungeon,
             },
