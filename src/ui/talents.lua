@@ -122,6 +122,29 @@ function Talents:init()
                 0,
                 true)
 
+            local talentIconBackground = BlzCreateFrameByType(
+                "BACKDROP",
+                "talentIcon",
+                talentIconOrigin,
+                "",
+                0)
+            BlzFrameSetSize(
+                talentIconBackground,
+                consts.TALENT_ICON_SIZE * 4 / 3,
+                consts.TALENT_ICON_SIZE * 4 / 3)
+            BlzFrameSetPoint(
+                talentIconBackground,
+                FRAMEPOINT_CENTER,
+                talentIconOrigin,
+                FRAMEPOINT_CENTER,
+                0,
+                0)
+            BlzFrameSetTexture(
+                talentIconBackground,
+                "war3mapImported\\ui\\ab_spell_frame_clean.blp",
+                0,
+                true)
+
             local talentIcon = BlzCreateFrameByType(
                 "BACKDROP",
                 "talentIcon",
