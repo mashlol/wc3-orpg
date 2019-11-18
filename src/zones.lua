@@ -43,22 +43,14 @@ function init()
         },
         FOREST = {
             name = "Freydell Forest",
-            levelRange = {1, 6},
+            levelRange = {1, 7},
             rects = {
                 gg_rct_forestenter1,
             },
         },
-        WOLVES = {
-            name = "Wolf Plains",
-            levelRange = {7, 12},
-            rects = {
-                gg_rct_wolvesenter1,
-                gg_rct_wolvesenter2,
-            },
-        },
         ICE_ZONE = {
-            name = "Ice Zone",
-            levelRange = {7, 12},
+            name = "The Glacial Tundra",
+            levelRange = {7, 15},
             rects = {
                 gg_rct_iceenter1,
                 gg_rct_iceenter2,

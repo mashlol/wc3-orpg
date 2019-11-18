@@ -670,15 +670,13 @@ function initQuests()
             levelRequirement = 0,
         },
 		[6] = {
-            name = "The Glacial Heights",
+            name = "The Glacial Tundra",
             getQuestFrom = gg_unit_nvl2_0070,
             handQuestTo = gg_unit_nvil_0040,
-            obtainText = "Travel to the Glacial Heights, it's just west of here. You can find my friend Higram there, he might have some work for you.",
-            incompleteText = "Have you travele to the Glacial Heights yet?",
+            obtainText = "Travel to The Glacial Tundra, it's just west of here. You can find my friend Higram there, he might have some work for you.",
+            incompleteText = "Have you traveled to The Glacial Tundra yet?",
             completedText = "Ah, old man Fjorn sent you? Good. I have a lot of work that needs to get done.",
-            objectives = {
-
-            },
+            objectives = {},
             rewards = {
                 exp = 20,
                 gold = 5,
