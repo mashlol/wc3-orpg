@@ -670,15 +670,13 @@ function initQuests()
             levelRequirement = 0,
         },
 		[6] = {
-            name = "The Glacial Heights",
+            name = "The Glacial Tundra",
             getQuestFrom = gg_unit_nvl2_0070,
             handQuestTo = gg_unit_nvil_0040,
-            obtainText = "Travel to the Glacial Heights, it's just west of here. You can find my friend Higram there, he might have some work for you.",
-            incompleteText = "Have you travele to the Glacial Heights yet?",
+            obtainText = "Travel to The Glacial Tundra, it's just west of here. You can find my friend Higram there, he might have some work for you.",
+            incompleteText = "Have you traveled to The Glacial Tundra yet?",
             completedText = "Ah, old man Fjorn sent you? Good. I have a lot of work that needs to get done.",
-            objectives = {
-
-            },
+            objectives = {},
             rewards = {
                 exp = 20,
                 gold = 5,
@@ -879,6 +877,50 @@ function initQuests()
             },
             prerequisites = {9},
             levelRequirement = 0,
+        },
+        [13] = {
+            name = "Overrun with Wolves",
+            getQuestFrom = gg_unit_ntks_0365,
+            handQuestTo = gg_unit_ntks_0365,
+            obtainText = "These once peaceful lands have been overrun with wolves. My tribes can no longer survive here. Could you help us out?",
+            incompleteText = "Have you killed the wolves?",
+            completedText = "I am very impressed with your skills. Talk to me if you need more work.",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 10,
+                    toKill = FourCC('wolf'),
+                    name = 'Arctic Wolves',
+                }
+            },
+            rewards = {
+                exp = 50,
+                gold = 5,
+            },
+            prerequisites = {},
+            levelRequirement = 7,
+        },
+        [14] = {
+            name = "Alpha Wolf",
+            getQuestFrom = gg_unit_ntks_0365,
+            handQuestTo = gg_unit_ntks_0365,
+            obtainText = "There is a nook just north east of here where the Alpha Wolf resides, I need you to slay it. If you follow the road west you should be able to find him.",
+            incompleteText = "Have you slain the Alpha Wolf?",
+            completedText = "You did it? I'm amazed!",
+            objectives = {
+                [1] = {
+                    type = TYPE.KILL,
+                    amount = 1,
+                    toKill = FourCC('hbld'),
+                    name = 'The Alpha Wolf',
+                }
+            },
+            rewards = {
+                exp = 200,
+                gold = 30,
+            },
+            prerequisites = {13},
+            levelRequirement = 8,
         },
 }
 end

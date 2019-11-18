@@ -151,6 +151,7 @@ function init()
             finalBoss = bossmanager.ALL_BOSSES.THE_OVERSEER,
             otherBosses = {
                 bossmanager.ALL_BOSSES.MINER_JOE,
+                bossmanager.ALL_BOSSES.YETI,
             },
         },
     }

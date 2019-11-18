@@ -4,10 +4,6 @@ gg_rct_rain1 = nil
 gg_rct_rain2 = nil
 gg_rct_rain3 = nil
 gg_rct_iceenter1 = nil
-gg_rct_wolvesenter1 = nil
-gg_rct_wolvesenter2 = nil
-gg_rct_forestenter1 = nil
-gg_rct_forestenter2 = nil
 gg_rct_house1enter1 = nil
 gg_rct_house1exit1 = nil
 gg_rct_house1entrance1 = nil
@@ -21,6 +17,7 @@ gg_rct_house2enter1 = nil
 gg_rct_house2exit1 = nil
 gg_rct_house2leave1 = nil
 gg_rct_house2entrance1 = nil
+gg_rct_iceenter2 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -31,6 +28,7 @@ gg_unit_nemi_0014 = nil
 gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
 gg_dest_YTcx_0977 = nil
+gg_unit_ntks_0365 = nil
 function InitGlobals()
 end
 
@@ -267,7 +265,26 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 27822.8, -27370.2, 127.757, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 27368.9, -27473.4, 77.743, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 27421.5, -26610.6, 114.265, FourCC("cult"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h002"), 30666.0, -22225.9, 178.475, FourCC("h002"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14958.7, 1149.4, 64.700, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -17589.0, 1388.6, 127.061, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11629.0, 1813.7, 357.836, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10278.5, 3624.5, 34.278, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12920.2, 4590.4, 42.650, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12101.6, 6015.3, 138.377, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14809.4, 4570.7, 36.849, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -15580.3, 2680.6, 21.688, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12246.5, -1028.9, 221.052, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11781.7, -2737.3, 48.341, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10573.5, -2293.7, 92.716, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10287.8, -4106.3, 177.808, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10405.7, -144.9, 50.231, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10352.4, 1549.8, 333.368, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11665.1, 4949.3, 22.259, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14179.0, 3839.9, 259.011, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -16593.0, 618.6, 195.574, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -18281.4, 421.8, 346.780, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -19416.7, 692.4, 218.920, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14436.5, -863.1, 298.057, FourCC("wolf"))
 end
 
 function CreateNeutralPassive()
@@ -397,22 +414,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14538.2, -10121.2, 357.684, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14541.9, -10368.2, 357.684, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14544.1, -10486.0, 357.684, FourCC("hfoo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14958.7, 1149.4, 64.700, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -17589.0, 1388.6, 127.061, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11629.0, 1813.7, 357.836, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10278.5, 3624.5, 34.278, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12920.2, 4590.4, 42.650, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12101.6, 6015.3, 138.377, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14809.4, 4570.7, 36.849, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -15580.3, 2680.6, 21.688, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -12246.5, -1028.9, 221.052, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11781.7, -2737.3, 48.341, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10573.5, -2293.7, 92.716, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10287.8, -4106.3, 177.808, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10405.7, -144.9, 50.231, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -8377.5, 1428.5, 294.717, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -8460.8, 2471.3, 29.939, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10352.4, 1549.8, 333.368, FourCC("wolf"))
+    gg_unit_ntks_0365 = BlzCreateUnitWithSkin(p, FourCC("ntks"), -12867.2, 672.9, 1.766, FourCC("ntks"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12950.8, -8234.6, 181.644, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhea"), 15974.9, -8681.1, 2.862, FourCC("nhea"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12944.1, -8670.7, 170.518, FourCC("hfoo"))
@@ -436,12 +438,6 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16456.1, -8048.6, 357.304, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16442.5, -7920.8, 358.920, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16450.5, -7851.0, 357.304, FourCC("hhdl"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11665.1, 4949.3, 22.259, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14179.0, 3839.9, 259.011, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -16593.0, 618.6, 195.574, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -18281.4, 421.8, 346.783, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -19416.7, 692.4, 218.920, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14436.5, -863.1, 298.057, FourCC("wolf"))
 end
 
 function CreatePlayerBuildings()
@@ -460,33 +456,17 @@ end
 function CreateRegions()
     local we
     gg_rct_ironwellenter1 = Rect(12128.0, -16096.0, 18496.0, -9600.0)
-    we = AddWeatherEffect(gg_rct_ironwellenter1, FourCC("LRma"))
-    EnableWeatherEffect(we, true)
     gg_rct_freydellenter1 = Rect(800.0, -4640.0, 3264.0, -2368.0)
-    we = AddWeatherEffect(gg_rct_freydellenter1, FourCC("LRaa"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain1 = Rect(-4896.0, -2304.0, 5696.0, 2688.0)
-    we = AddWeatherEffect(gg_rct_rain1, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain2 = Rect(-7712.0, -7584.0, -128.0, -2304.0)
-    we = AddWeatherEffect(gg_rct_rain2, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_rain3 = Rect(3296.0, -4704.0, 7104.0, -2304.0)
-    we = AddWeatherEffect(gg_rct_rain3, FourCC("RAhr"))
-    EnableWeatherEffect(we, true)
     gg_rct_iceenter1 = Rect(-19744.0, -5760.0, -7904.0, 6048.0)
-    we = AddWeatherEffect(gg_rct_iceenter1, FourCC("SNhs"))
-    EnableWeatherEffect(we, true)
-    gg_rct_wolvesenter1 = Rect(480.0, -2272.0, 1536.0, 2688.0)
-    gg_rct_wolvesenter2 = Rect(1536.0, -2304.0, 5728.0, -1664.0)
-    gg_rct_forestenter1 = Rect(-1120.0, -9184.0, -96.0, 3136.0)
-    gg_rct_forestenter2 = Rect(-7744.0, -7584.0, -6720.0, -2528.0)
     gg_rct_house1enter1 = Rect(1728.0, -3072.0, 1824.0, -2976.0)
     gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
     gg_rct_house1entrance1 = Rect(30400.0, 30784.0, 30464.0, 30848.0)
     gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
-    gg_rct_trollenter1 = Rect(-8256.0, 1824.0, -8160.0, 1920.0)
-    gg_rct_trollexit1 = Rect(-8384.0, 1888.0, -8288.0, 1984.0)
+    gg_rct_trollenter1 = Rect(-20608.0, 3200.0, -20512.0, 3296.0)
+    gg_rct_trollexit1 = Rect(-20576.0, 2944.0, -20480.0, 3040.0)
     gg_rct_trollentrance1 = Rect(30496.0, -29472.0, 30656.0, -29376.0)
     gg_rct_trollleave1 = Rect(30496.0, -29632.0, 30656.0, -29472.0)
     gg_rct_trolldungeon = Rect(26432.0, -29696.0, 31232.0, -21152.0)
@@ -494,6 +474,9 @@ function CreateRegions()
     gg_rct_house2exit1 = Rect(28224.0, -24928.0, 28352.0, -24800.0)
     gg_rct_house2leave1 = Rect(27488.0, -24064.0, 27584.0, -23968.0)
     gg_rct_house2entrance1 = Rect(27328.0, -23936.0, 27456.0, -23808.0)
+    gg_rct_iceenter2 = Rect(-21056.0, 992.0, -19744.0, 3488.0)
+    we = AddWeatherEffect(gg_rct_iceenter2, FourCC("SNhs"))
+    EnableWeatherEffect(we, true)
 end
 
 function CreateCameras()
@@ -524,6 +507,7 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0040, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0008, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nemi_0014, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_ntks_0365, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

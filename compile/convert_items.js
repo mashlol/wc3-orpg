@@ -156,6 +156,8 @@ for (const x in parsed) {
                         return 'azoraId';
                     } else if (x == 'Iv') {
                         return 'ivanovId';
+                    } else if (x == 'St') {
+                        return 'stormfistId';
                     }
                 }).join(',');
                 itemResult += '    ' + column.name + ' = ' + '{' + allowedClasses + '},\n';

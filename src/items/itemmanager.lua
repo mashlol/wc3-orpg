@@ -44,6 +44,7 @@ local yujiId = FourCC('Hyuj')
 local azoraId = FourCC('Hazr')
 local tarczaId = FourCC('Htar')
 local ivanovId = FourCC('Hivn')
+local stormfistId = FourCC('Hstm')
 
 local ITEMS = {
     [1] = {
