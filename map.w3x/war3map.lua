@@ -17,6 +17,7 @@ gg_rct_house2enter1 = nil
 gg_rct_house2exit1 = nil
 gg_rct_house2leave1 = nil
 gg_rct_house2entrance1 = nil
+gg_rct_iceenter2 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -27,7 +28,7 @@ gg_unit_nemi_0014 = nil
 gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_iceenter2 = nil
+gg_unit_ntks_0365 = nil
 function InitGlobals()
 end
 
@@ -277,12 +278,11 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10573.5, -2293.7, 92.716, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10287.8, -4106.3, 177.808, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10405.7, -144.9, 50.231, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -8377.5, 1428.5, 294.717, FourCC("wolf"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -8460.8, 2471.3, 29.939, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -10352.4, 1549.8, 333.368, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -11665.1, 4949.3, 22.259, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14179.0, 3839.9, 259.011, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -16593.0, 618.6, 195.574, FourCC("wolf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -18281.4, 421.8, 346.780, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -19416.7, 692.4, 218.920, FourCC("wolf"))
     u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -14436.5, -863.1, 298.057, FourCC("wolf"))
 end
@@ -414,6 +414,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14538.2, -10121.2, 357.684, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14541.9, -10368.2, 357.684, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14544.1, -10486.0, 357.684, FourCC("hfoo"))
+    gg_unit_ntks_0365 = BlzCreateUnitWithSkin(p, FourCC("ntks"), -12867.2, 672.9, 1.766, FourCC("ntks"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12950.8, -8234.6, 181.644, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhea"), 15974.9, -8681.1, 2.862, FourCC("nhea"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 12944.1, -8670.7, 170.518, FourCC("hfoo"))
@@ -437,7 +438,6 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16456.1, -8048.6, 357.304, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16442.5, -7920.8, 358.920, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16450.5, -7851.0, 357.304, FourCC("hhdl"))
-    u = BlzCreateUnitWithSkin(p, FourCC("wolf"), -18281.4, 421.8, 346.783, FourCC("wolf"))
 end
 
 function CreatePlayerBuildings()
@@ -507,6 +507,7 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0040, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0008, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nemi_0014, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_ntks_0365, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

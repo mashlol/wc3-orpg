@@ -17,9 +17,9 @@ local ALL_BOSS_CLASSES = {
     },
     WOLF = Wolf:new{
         bossUnitId = FourCC('hbld'),
-        startX = 15195,
-        startY = 7531,
-        facing = 223,
+        startX = -8243,
+        startY = 2033,
+        facing = 165,
         respawnable = false,
     },
     MINER_JOE = MinerJoe:new{
