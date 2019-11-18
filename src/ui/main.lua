@@ -23,8 +23,10 @@ local LootRoll = require('src/ui/lootroll.lua')
 local Map = require('src/ui/map.lua')
 local HeroSelect = require('src/ui/heroselect.lua')
 local DpsMeter = require('src/ui/dpsmeter.lua')
+local MiniMap = require('src/ui/minimap.lua')
 
 local UI_MODULES = {
+    MiniMap:new(),
     ActionBar:new(),
     ItemBar:new(),
     CastBar:new(),
@@ -84,24 +86,6 @@ function hideBlizzUI()
     local parentCommandFrame = BlzFrameGetParent(commandFrame)
     BlzFrameClearAllPoints(parentCommandFrame)
     BlzFrameSetAbsPoint(parentCommandFrame, FRAMEPOINT_TOPLEFT, -1, -1)
-
-    -- local miniMapFrame = BlzGetOriginFrame(ORIGIN_FRAME_MINIMAP, 0)
-
-    -- local miniMapBackdrop = BlzCreateFrameByType(
-    --     "BACKDROP",
-    --     "miniMapBackdrop",
-    --     originFrame,
-    --     "",
-    --     0)
-    -- BlzFrameSetAllPoints(miniMapBackdrop, miniMapFrame)
-    -- BlzFrameSetTexture(
-    --     miniMapBackdrop,
-    --     "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
-    --     0,
-    --     true)
-
-    -- BlzFrameSetVisible(miniMapFrame, true)
-    -- BlzFrameSetParent(miniMapFrame, miniMapBackdrop)
 end
 
 function initCustomUI()
