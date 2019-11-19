@@ -20,114 +20,172 @@ const MAPPINGS = {
         'Off-hand': 'equipment.SLOT.OFFHAND',
     },
     'rarity': {
-        'Common': 'RARITY.COMMON',
-        'uncommon': 'RARITY.UNCOMMON',
-        'Rare': 'RARITY.RARE',
-        'Epic': 'RARITY.EPIC',
-        'Legendary': 'RARITY.LEGENDARY',
-        'Divine': 'RARITY.DIVINE',
+        'Common': 'itemmanager.RARITY.COMMON',
+        'Uncommon': 'itemmanager.RARITY.UNCOMMON',
+        'Rare': 'itemmanager.RARITY.RARE',
+        'Epic': 'itemmanager.RARITY.EPIC',
+        'Legendary': 'itemmanager.RARITY.LEGENDARY',
+        'Divine': 'itemmanager.RARITY.DIVINE',
+    },
+    'type': {
+        'Equipment': 'itemmanager.TYPE.EQUIPMENT',
+        'Consumable': 'itemmanager.TYPE.CONSUMABLE',
     },
 };
 
 const INITIAL_ID = 10;
 const COLUMNS = {
-    'Item Name': {
+    'name': {
         name: 'name',
         type: 'string',
     },
-    'Item Icon': {
+    'icon': {
         name: 'icon',
         type: 'string',
     },
-    'Item type': {
+    'type': {
         name: 'slot',
         type: 'mapping',
         mapping: 'slot',
     },
-    'Required Level': {
+    'requiredLevel': {
         name: 'requiredLevel',
         type: 'int',
     },
-    'Rarity': {
+    'rarity': {
         name: 'rarity',
         type: 'mapping',
         mapping: 'rarity',
     },
-    'iLVL': {
+    'itemLevel': {
         name: 'itemLevel',
         type: 'int',
     },
-    'Sell': {
+    'cost': {
         name: 'cost',
         type: 'int',
     },
-    'Can wear': {
+    'usable': {
         name: 'usableClasses',
         type: 'classList',
+    },
+    'stats': {
+        name: 'stats',
+        type: 'statList',
+    },
+    'classification': {
+        name: 'type',
+        type: 'mapping',
+        mapping: 'type',
+    },
+    'stackSize': {
+        name: 'stackSize',
+        type: 'int',
+    },
+    'tooltip': {
+        name: 'text',
+        type: 'string',
+    },
+    'spellKey': {
+        name: 'spell',
+        type: 'string',
     },
 };
 
 const STATS = {
-    'AD': {
-        lua: 'stats.RAW_DAMAGE',
-    },
-    '%AS': {
-        lua: 'stats.PERCENT_ATTACK_SPEED',
-        fn: (x) => 1 - (x / 100),
-    },
-    'SP': {
-        lua: 'stats.RAW_SPELL_DAMAGE',
-    },
-    'CastSp': {
-        lua: 'stats.PERCENT_CAST_SPEED',
-        fn: (x) => 1 - (x / 100),
-    },
-    'Stam': {
-        lua: 'stats.RAW_HIT_POINTS',
-    },
-    'DmgR': {
-        lua: 'stats.RAW_INCOMING_DAMAGE',
-        fn: (x) => -x,
-    },
-    'MS': {
+    '% Move Speed': {
         lua: 'stats.PERCENT_MOVE_SPEED',
+        fn: (x) => (x / 100) + 1,
+    },
+    '% Scale': {
+        lua: 'stats.SCALE',
         fn: (x) => (x / 100) + 1,
     },
     'Stam': {
         lua: 'stats.RAW_HIT_POINTS',
     },
-    'Hregen': {
+    'HP Regen': {
         lua: 'stats.HEALTH_REGEN',
     },
-    'CritChan': {
-        lua: 'stats.RAW_PERCENT_CRITICAL',
+    'Attack Damage': {
+        lua: 'stats.RAW_DAMAGE',
     },
-    'CritDam': {
-        lua: 'stats.RAW_CRITICAL_DAMAGE',
+    '% Attack Damage': {
+        lua: 'stats.PCT_DAMAGE',
+        fn: (x) => (x / 100) + 1,
     },
-    'HealRec': {
-        lua: 'stats.RAW_INCOMING_HEALING',
+    'Spell Damage': {
+        lua: 'stats.RAW_SPELL_DAMAGE',
+    },
+    '% Spell Damage': {
+        lua: 'stats.PCT_SPELL_DAMAGE',
+        fn: (x) => (x / 100) + 1,
     },
     'Healing': {
         lua: 'stats.RAW_HEALING',
     },
+    '% Healing': {
+        lua: 'stats.PCT_HEALING',
+        fn: (x) => (x / 100) + 1,
+    },
+    '% Physical Damage Taken': {
+        lua: 'stats.PCT_INCOMING_DAMAGE',
+        fn: (x) => (x / 100) + 1,
+    },
+    '% Spell Damage Taken': {
+        lua: 'stats.PCT_INCOMING_SPELL_DAMAGE',
+        fn: (x) => (x / 100) + 1,
+    },
+    '% Healing Received': {
+        lua: 'stats.PCT_ICOMING_HEALING',
+        fn: (x) => (x / 100) + 1,
+    },
+    'Physical Damage Taken': {
+        lua: 'stats.RAW_INCOMING_DAMAGE',
+    },
+    'Spell Damage Taken': {
+        lua: 'stats.RAW_INCOMING_SPELL_DAMAGE',
+    },
+    'INCOMING_HEALING_RAW': {
+        lua: 'stats.RAW_INCOMING_HEALING',
+    },
+    '% Cooldown Reduction': {
+        lua: 'stats.PERCENT_COOLDOWN_REDUCTION',
+        fn: (x) => 1 - (x / 100),
+    },
+    '% Cooldown Reduction': {
+        lua: 'stats.PERCENT_COOLDOWN_REDUCTION',
+        fn: (x) => 1 - (x / 100),
+    },
+    '% Cast Speed': {
+        lua: 'stats.PERCENT_CAST_SPEED',
+        fn: (x) => 1 - (x / 100),
+    },
+    '% Attack Speed': {
+        lua: 'stats.PERCENT_ATTACK_SPEED',
+        fn: (x) => 1 - (x / 100),
+    },
+    '% Crit Chance': {
+        lua: 'stats.RAW_PERCENT_CRITICAL',
+    },
+    'Critical Damage': {
+        lua: 'stats.RAW_CRITICAL_DAMAGE',
+    },
+    '% Critical Damage': {
+        lua: 'stats.PCT_CRITICAL_DAMAGE',
+        fn: (x) => (x / 100) + 1,
+    }
 }
 
-const csv = fs.readFileSync('items.csv', {encoding: 'utf8'});
+const input = fs.readFileSync('../json/items.json', {encoding: 'utf8'});
+const parsed = JSON.parse(input);
 
-const parsed = csvParse(csv, {
-    columns: true,
-});
+let finalResult = "";
 
-let currentId = INITIAL_ID;
 for (const x in parsed) {
     const row = parsed[x];
 
-    if (!row['Item Name']) {
-        continue;
-    }
-
-    let itemResult = "[" + currentId + "] = {\n    type = TYPE.EQUIPMENT,\n";
+    let itemResult = "[" + x + "] = {\n";
     let stats = "{\n";
     for (const y in row) {
         const column = COLUMNS[y];
@@ -144,36 +202,50 @@ for (const x in parsed) {
             }
             itemResult += '    ' + column.name + " = " + value + ",\n";
         } else if (column && column.type === 'classList') {
-            if (value.toLowerCase() == 'all') {
+            if (value.length == 0) {
                 // Ignored
             } else {
-                const allowedClasses = value.replace(/\s/g, "").split(',').map(x => {
-                    if (x == 'Ta') {
-                        return 'tarczaId';
-                    } else if (x == 'Yu') {
-                        return 'yujiId';
-                    } else if (x == 'Az') {
-                        return 'azoraId';
-                    } else if (x == 'Iv') {
-                        return 'ivanovId';
-                    } else if (x == 'St') {
-                        return 'stormfistId';
+                const allowedClasses = value.map(x => {
+                    if (x == 'Tarcza') {
+                        return 'FourCC(\'Htar\')';
+                    } else if (x == 'Yuji') {
+                        return 'FourCC(\'Hyuj\')';
+                    } else if (x == 'Azora') {
+                        return 'FourCC(\'Hazr\')';
+                    } else if (x == 'Ivanov') {
+                        return 'FourCC(\'Hivn\')';
+                    } else if (x == 'Stormfist') {
+                        return 'FourCC(\'Hstm\')';
                     }
                 }).join(',');
                 itemResult += '    ' + column.name + ' = ' + '{' + allowedClasses + '},\n';
             }
+        } else if (column && column.type === 'statList') {
+            const statList = value;
+            for (const statKey in value) {
+                const stat = STATS[statKey];
+                let statValue = value[statKey];
+                if (stat && statValue) {
+                    if (stat.fn) {
+                        statValue = stat.fn(statValue);
+                    }
+                    stats += '        {\n            type = ' + stat.lua + ',\n            amount = ' + statValue + ',\n            tickrate = 5,\n        },\n';
+                }
+            }
+
         }
 
-        const stat = STATS[y];
-        if (stat && value) {
-            if (stat.fn) {
-                value = stat.fn(value);
-            }
-            stats += '        {\n            type = ' + stat.lua + ',\n            amount = ' + value + ',\n            tickrate = 5,\n        },\n';
-        }
+
     }
 
-    console.log(itemResult + '    stats = ' + stats + '    },\n},');
-
-    currentId++;
+    finalResult += itemResult + '    stats = ' + stats + '    },\n},\n';
 }
+
+finalResult = "local equipment = require('src/items/equipment.lua')\n" +
+    "local stats = require('src/stats.lua')\n" +
+    "local itemmanager = require('src/stats.lua')\n" +
+    'local ITEMS = {\n' +
+    finalResult +
+    '}\n return {ITEMS=ITEMS}\n';
+
+fs.writeFileSync('../src/items/items.lua', finalResult);

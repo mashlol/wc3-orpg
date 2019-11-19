@@ -115,7 +115,7 @@ end
 
 TimerStart(CreateTimer(), 0.0, false, mainInit)
 
-collectgarbage("stop")
+-- collectgarbage("stop")
 
 return {
     mainInit = mainInit,

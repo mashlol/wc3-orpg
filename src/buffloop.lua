@@ -49,7 +49,7 @@ function applyBuffs()
         if heroUnit ~= nil then
             local equippedItems = equipment.getEquippedItems(playerId)
             for _, itemId in pairs(equippedItems) do
-                local stats = itemmanager.ITEMS[itemId].stats
+                local stats = itemmanager.getItemInfo(itemId).stats
                 for _, statInfo in pairs(stats) do
                     buff.maybeAddEffectToList(effectsByUnitId, heroUnit, statInfo)
                 end

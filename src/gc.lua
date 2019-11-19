@@ -169,8 +169,8 @@ GC.Group = GC.Type:new("group", "DestroyGroup", {"CreateGroup"})
 GC.Force = GC.Type:new("force", "DestroyForce", {"CreateForce"})
 
 local performGC = function()
-    collectgarbage("collect")
-    collectgarbage("stop")
+    -- collectgarbage("collect")
+    -- collectgarbage("stop")
 
     if __DEBUG__ then
         GC.Location:printstats()
