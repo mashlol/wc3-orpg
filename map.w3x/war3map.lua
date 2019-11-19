@@ -27,8 +27,8 @@ gg_unit_nvil_0071 = nil
 gg_unit_nemi_0014 = nil
 gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
-gg_dest_YTcx_0977 = nil
 gg_unit_ntks_0365 = nil
+gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
 
