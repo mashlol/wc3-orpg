@@ -69,7 +69,7 @@
     "rarity": "Common",
     "stackSize": 5,
     "tooltip": "Heal yourself for 200 HP.",
-    "spell": "healpot1",
+    "spellKey": "healpot1",
     "cost": 20
   },
   "6": {
@@ -81,7 +81,7 @@
     "rarity": "Common",
     "stackSize": 20,
     "tooltip": "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
-    "spell": "food1",
+    "spellKey": "food1",
     "cost": 5
   },
   "7": {
@@ -1197,7 +1197,7 @@
     "rarity": "Common",
     "stackSize": 1,
     "tooltip": "Return to town.|nMust be out of combat.",
-    "spell": "hearthstone",
+    "spellKey": "hearthstone",
     "cost": -1,
     "consume": false
   },
@@ -1210,7 +1210,7 @@
     "rarity": "Common",
     "stackSize": 1,
     "tooltip": "Engage the spirit winds to travel faster.|nMust be out of combat.",
-    "spell": "mount",
+    "spellKey": "mount",
     "cost": -1,
     "consume": false
   },

@@ -112,33 +112,33 @@ const STATS = {
         lua: 'stats.RAW_DAMAGE',
     },
     '% Attack Damage': {
-        lua: 'stats.PCT_DAMAGE',
+        lua: 'stats.PERCENT_DAMAGE',
         fn: (x) => (x / 100) + 1,
     },
     'Spell Damage': {
         lua: 'stats.RAW_SPELL_DAMAGE',
     },
     '% Spell Damage': {
-        lua: 'stats.PCT_SPELL_DAMAGE',
+        lua: 'stats.PERCENT_SPELL_DAMAGE',
         fn: (x) => (x / 100) + 1,
     },
     'Healing': {
         lua: 'stats.RAW_HEALING',
     },
     '% Healing': {
-        lua: 'stats.PCT_HEALING',
+        lua: 'stats.PERCENT_HEALING',
         fn: (x) => (x / 100) + 1,
     },
     '% Physical Damage Taken': {
-        lua: 'stats.PCT_INCOMING_DAMAGE',
+        lua: 'stats.PERCENT_INCOMING_DAMAGE',
         fn: (x) => (x / 100) + 1,
     },
     '% Spell Damage Taken': {
-        lua: 'stats.PCT_INCOMING_SPELL_DAMAGE',
+        lua: 'stats.PERCENT_INCOMING_SPELL_DAMAGE',
         fn: (x) => (x / 100) + 1,
     },
     '% Healing Received': {
-        lua: 'stats.PCT_ICOMING_HEALING',
+        lua: 'stats.PERCENT_ICOMING_HEALING',
         fn: (x) => (x / 100) + 1,
     },
     'Physical Damage Taken': {
@@ -169,7 +169,7 @@ const STATS = {
         lua: 'stats.RAW_CRITICAL_DAMAGE',
     },
     '% Critical Damage': {
-        lua: 'stats.PCT_CRITICAL_DAMAGE',
+        lua: 'stats.PERCENT_CRITICAL_DAMAGE',
         fn: (x) => (x / 100) + 1,
     }
 }

@@ -117,6 +117,7 @@ local TYPE = {
     rarity = RARITY.COMMON,
     stackSize = 5,
     text = "Heal yourself for 200 HP.",
+    spell = "healpot1",
     cost = 20,
     stats = {
     },
@@ -130,6 +131,7 @@ local TYPE = {
     rarity = RARITY.COMMON,
     stackSize = 20,
     text = "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
+    spell = "food1",
     cost = 5,
     stats = {
     },
@@ -1062,17 +1064,17 @@ local TYPE = {
     cost = 0,
     stats = {
         {
-            type = stats.PCT_DAMAGE,
+            type = stats.PERCENT_DAMAGE,
             amount = 1.02,
             tickrate = 5,
         },
         {
-            type = stats.PCT_SPELL_DAMAGE,
+            type = stats.PERCENT_SPELL_DAMAGE,
             amount = 1.02,
             tickrate = 5,
         },
         {
-            type = stats.PCT_HEALING,
+            type = stats.PERCENT_HEALING,
             amount = 1.02,
             tickrate = 5,
         },
@@ -1090,7 +1092,7 @@ local TYPE = {
     cost = 0,
     stats = {
         {
-            type = stats.PCT_DAMAGE,
+            type = stats.PERCENT_DAMAGE,
             amount = 1.04,
             tickrate = 5,
         },
@@ -1467,13 +1469,14 @@ local TYPE = {
 },
 [74] = {
     type = TYPE.CONSUMABLE,
-    name = "Return Stone",
+    name = "Return Stone Test",
     icon = "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
     itemLevel = 1,
     requiredLevel = 1,
     rarity = RARITY.COMMON,
     stackSize = 1,
     text = "Return to town.|nMust be out of combat.",
+    spell = "hearthstone",
     cost = -1,
     stats = {
     },
@@ -1487,6 +1490,7 @@ local TYPE = {
     rarity = RARITY.COMMON,
     stackSize = 1,
     text = "Engage the spirit winds to travel faster.|nMust be out of combat.",
+    spell = "mount",
     cost = -1,
     stats = {
     },
