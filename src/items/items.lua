@@ -39,7 +39,7 @@ local TYPE = {
     CONSUMABLE = 'consumable',
 }
 
-    local ITEMS = {
+local ITEMS = {
 [1] = {
     type = TYPE.EQUIPMENT,
     name = "Old boot",
@@ -47,10 +47,6 @@ local TYPE = {
     itemLevel = 1,
     requiredLevel = 1,
     rarity = RARITY.COMMON,
-    slot = equipment.SLOT.FEET,
-    stackSize = 1,
-    cost = 30,
-    usableClasses = {FourCC('Hyuj'),FourCC('Hazr')},
     stats = {
         {
             type = stats.RAW_HIT_POINTS,
@@ -58,6 +54,10 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.FEET,
+    stackSize = 1,
+    cost = 30,
+    usableClasses = {FourCC('Hyuj'),FourCC('Hazr')},
 },
 [2] = {
     type = TYPE.EQUIPMENT,
@@ -66,9 +66,6 @@ local TYPE = {
     itemLevel = 5,
     requiredLevel = 5,
     rarity = RARITY.UNCOMMON,
-    slot = equipment.SLOT.RING,
-    stackSize = 1,
-    cost = 150,
     stats = {
         {
             type = stats.RAW_HIT_POINTS,
@@ -81,6 +78,9 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.RING,
+    stackSize = 1,
+    cost = 150,
 },
 [3] = {
     type = TYPE.EQUIPMENT,
@@ -89,9 +89,6 @@ local TYPE = {
     itemLevel = 3,
     requiredLevel = 3,
     rarity = RARITY.UNCOMMON,
-    slot = equipment.SLOT.HELMET,
-    stackSize = 1,
-    cost = 80,
     stats = {
         {
             type = stats.RAW_HIT_POINTS,
@@ -99,6 +96,9 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.HELMET,
+    stackSize = 1,
+    cost = 80,
 },
 [4] = {
     type = TYPE.EQUIPMENT,
@@ -107,9 +107,6 @@ local TYPE = {
     itemLevel = 20,
     requiredLevel = 10,
     rarity = RARITY.RARE,
-    slot = equipment.SLOT.WEAPON,
-    stackSize = 1,
-    cost = 300,
     stats = {
         {
             type = stats.PERCENT_DAMAGE,
@@ -117,6 +114,9 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.WEAPON,
+    stackSize = 1,
+    cost = 300,
 },
 [5] = {
     type = TYPE.CONSUMABLE,
@@ -129,8 +129,6 @@ local TYPE = {
     text = "Heal yourself for 200 HP.",
     spell = "healpot1",
     cost = 20,
-    stats = {
-    },
 },
 [6] = {
     type = TYPE.CONSUMABLE,
@@ -143,8 +141,6 @@ local TYPE = {
     text = "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
     spell = "food1",
     cost = 5,
-    stats = {
-    },
 },
 [7] = {
     type = TYPE.EQUIPMENT,
@@ -153,9 +149,6 @@ local TYPE = {
     itemLevel = 1,
     requiredLevel = 1,
     rarity = RARITY.COMMON,
-    slot = equipment.SLOT.CHEST,
-    stackSize = 1,
-    cost = 35,
     stats = {
         {
             type = stats.PERCENT_INCOMING_DAMAGE,
@@ -163,6 +156,9 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.CHEST,
+    stackSize = 1,
+    cost = 35,
 },
 [8] = {
     type = TYPE.EQUIPMENT,
@@ -171,9 +167,6 @@ local TYPE = {
     itemLevel = 1,
     requiredLevel = 1,
     rarity = RARITY.COMMON,
-    slot = equipment.SLOT.BACK,
-    stackSize = 1,
-    cost = 35,
     stats = {
         {
             type = stats.PERCENT_MOVE_SPEED,
@@ -181,6 +174,9 @@ local TYPE = {
             tickrate = 5,
         },
     },
+    slot = equipment.SLOT.BACK,
+    stackSize = 1,
+    cost = 35,
 },
 [9] = {
     type = TYPE.CONSUMABLE,
@@ -192,8 +188,6 @@ local TYPE = {
     stackSize = 10,
     text = "The meat of a turtle...|nI think Fred wants this.",
     cost = 20,
-    stats = {
-    },
 },
 [10] = {
     type = TYPE.EQUIPMENT,
@@ -1548,8 +1542,6 @@ local TYPE = {
     text = "Return to town.|nMust be out of combat.",
     spell = "hearthstone",
     cost = -1,
-    stats = {
-    },
 },
 [75] = {
     type = TYPE.CONSUMABLE,
@@ -1562,8 +1554,6 @@ local TYPE = {
     text = "Engage the spirit winds to travel faster.|nMust be out of combat.",
     spell = "mount",
     cost = -1,
-    stats = {
-    },
 },
 [76] = {
     type = TYPE.CONSUMABLE,
@@ -1575,8 +1565,6 @@ local TYPE = {
     stackSize = 10,
     text = "The fur of a Mammoth...|nSure looks warm.",
     cost = 20,
-    stats = {
-    },
 },
 [77] = {
     type = TYPE.CONSUMABLE,
@@ -1588,8 +1576,6 @@ local TYPE = {
     stackSize = 10,
     text = "This looks...warmer.",
     cost = 20,
-    stats = {
-    },
 },
 }
  return {ITEMS=ITEMS, TYPE=TYPE}

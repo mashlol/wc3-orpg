@@ -1,0 +1,186 @@
+// Script to read the items csv and convert to lua code for items
+
+const fs = require('fs');
+const convertJson = require('./convert_json');
+
+const MAPPINGS = {
+    // 'slot': {
+    //     'Helmet': 'equipment.SLOT.HELMET',
+    //     'Necklace': 'equipment.SLOT.NECK',
+    //     'Shoulders': 'equipment.SLOT.SHOULDERS',
+    //     'Chest': 'equipment.SLOT.CHEST',
+    //     'Back': 'equipment.SLOT.BACK',
+    //     'Gloves': 'equipment.SLOT.HANDS',
+    //     'Pants': 'equipment.SLOT.LEGS',
+    //     'Feet': 'equipment.SLOT.FEET',
+    //     'Ring': 'equipment.SLOT.RING',
+    //     'Trinket': 'equipment.SLOT.TRINKET',
+    //     '1H Weapon': 'equipment.SLOT.WEAPON',
+    //     '2H Weapon': 'equipment.SLOT.WEAPON',
+    //     'Off-hand': 'equipment.SLOT.OFFHAND',
+    // },
+    // 'rarity': {
+    //     'Common': 'RARITY.COMMON',
+    //     'Uncommon': 'RARITY.UNCOMMON',
+    //     'Rare': 'RARITY.RARE',
+    //     'Epic': 'RARITY.EPIC',
+    //     'Legendary': 'RARITY.LEGENDARY',
+    //     'Divine': 'RARITY.DIVINE',
+    // },
+    // 'type': {
+    //     'Equipment': 'TYPE.EQUIPMENT',
+    //     'Consumable': 'TYPE.CONSUMABLE',
+    // },
+};
+
+const COLUMNS = {
+    'name': {
+        name: 'name',
+        type: 'string',
+    },
+    'getQuestFrom': {
+        name: 'getQuestFrom',
+        type: 'int',
+    },
+    'handQuestTo': {
+        name: 'handQuestTo',
+        type: 'int',
+    },
+    'obtainText': {
+        name: 'obtainText',
+        type: 'string',
+    },
+    'incompleteText': {
+        name: 'incompleteText',
+        type: 'string',
+    },
+    'completedText': {
+        name: 'completedText',
+        type: 'string',
+    },
+    'levelRequirement': {
+        name: 'levelRequirement',
+        type: 'int',
+    },
+    'objectives': {
+        name: 'objectives',
+        type: 'sublist',
+        columns: {
+            'type': {
+                name: 'type',
+                type: 'mapping',
+                mapping: 'objectiveType',
+            },
+            'amount': {
+                name: 'amount',
+                type: 'int',
+            },
+            'itemId': {
+                name: 'itemId',
+                type: 'int',
+            },
+            'toKill': {
+                name: 'toKill',
+                type: 'number',
+                fn: (x) => 'FourCC(\'' + x + '\')',
+            },
+            'name': {
+                name: 'name',
+                type: 'string',
+            },
+            'verb': {
+                name: 'verb',
+                type: 'string',
+            },
+            'verbPast': {
+                name: 'verbPast',
+                type: 'string',
+            },
+        },
+        mappings: {
+            'objectiveType': {
+                'kill': 'TYPE.KILL',
+                'item': 'TYPE.ITEM',
+                'discover': 'TYPE.DISCOVER',
+            }
+        },
+    },
+    'prerequisites': {
+        name: 'prerequisites',
+        type: 'intlist',
+    },
+
+
+    // 'icon': {
+    //     name: 'icon',
+    //     type: 'string',
+    //     fn: (x) => x.replace(/\\/g, '\\\\')
+    // },
+    // 'type': {
+    //     name: 'slot',
+    //     type: 'mapping',
+    //     mapping: 'slot',
+    // },
+    // 'requiredLevel': {
+    //     name: 'requiredLevel',
+    //     type: 'int',
+    // },
+    // 'rarity': {
+    //     name: 'rarity',
+    //     type: 'mapping',
+    //     mapping: 'rarity',
+    // },
+    // 'itemLevel': {
+    //     name: 'itemLevel',
+    //     type: 'int',
+    // },
+    // 'cost': {
+    //     name: 'cost',
+    //     type: 'int',
+    // },
+    // 'usable': {
+    //     name: 'usableClasses',
+    //     type: 'classList',
+    // },
+    // 'stats': {
+    //     name: 'stats',
+    //     type: 'statList',
+    // },
+    // 'classification': {
+    //     name: 'type',
+    //     type: 'mapping',
+    //     mapping: 'type',
+    // },
+    // 'stackSize': {
+    //     name: 'stackSize',
+    //     type: 'int',
+    // },
+    // 'tooltip': {
+    //     name: 'text',
+    //     type: 'string',
+    // },
+    // 'spellKey': {
+    //     name: 'spell',
+    //     type: 'string',
+    // },
+};
+
+const input = fs.readFileSync('../json/quests.json', {encoding: 'utf8'});
+const parsed = JSON.parse(input);
+
+let finalResult = convertJson(parsed, COLUMNS, MAPPINGS);
+
+finalResult = `
+
+local TYPE = {
+    KILL = {},
+    ITEM = {},
+    DISCOVER = {},
+}
+
+` +
+    'local QUESTS = {\n' +
+    finalResult +
+    '}\n return {QUESTS=QUESTS, TYPE=TYPE}\n';
+
+fs.writeFileSync('../src/quests/quests.lua', finalResult);

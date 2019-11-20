@@ -801,7 +801,7 @@ function initQuests()
             obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
             incompleteText = "Have you extinguished the Cultist Bonfires?",
             completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
-           objectives = {
+            objectives = {
                 [1] = {
                     type = TYPE.KILL,
                     amount = 1,

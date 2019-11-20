@@ -1,7 +1,7 @@
 // Script to read the items csv and convert to lua code for items
 
 const fs = require('fs');
-const csvParse = require('csv-parse/lib/sync');
+const convertJson = require('./convert_json');
 
 const MAPPINGS = {
     'slot': {
@@ -33,7 +33,6 @@ const MAPPINGS = {
     },
 };
 
-const INITIAL_ID = 10;
 const COLUMNS = {
     'name': {
         name: 'name',
@@ -93,154 +92,10 @@ const COLUMNS = {
     },
 };
 
-const STATS = {
-    '% Move Speed': {
-        lua: 'stats.PERCENT_MOVE_SPEED',
-        fn: (x) => (x / 100) + 1,
-    },
-    '% Scale': {
-        lua: 'stats.SCALE',
-        fn: (x) => (x / 100) + 1,
-    },
-    'Raw HP': {
-        lua: 'stats.RAW_HIT_POINTS',
-    },
-    'HP Regen': {
-        lua: 'stats.HEALTH_REGEN',
-    },
-    'Attack Damage': {
-        lua: 'stats.RAW_DAMAGE',
-    },
-    '% Attack Damage': {
-        lua: 'stats.PERCENT_DAMAGE',
-        fn: (x) => (x / 100) + 1,
-    },
-    'Spell Damage': {
-        lua: 'stats.RAW_SPELL_DAMAGE',
-    },
-    '% Spell Damage': {
-        lua: 'stats.PERCENT_SPELL_DAMAGE',
-        fn: (x) => (x / 100) + 1,
-    },
-    'Healing': {
-        lua: 'stats.RAW_HEALING',
-    },
-    '% Healing': {
-        lua: 'stats.PERCENT_HEALING',
-        fn: (x) => (x / 100) + 1,
-    },
-    '% Physical Damage Taken': {
-        lua: 'stats.PERCENT_INCOMING_DAMAGE',
-        fn: (x) => (x / 100) + 1,
-    },
-    '% Spell Damage Taken': {
-        lua: 'stats.PERCENT_INCOMING_SPELL_DAMAGE',
-        fn: (x) => (x / 100) + 1,
-    },
-    '% Healing Received': {
-        lua: 'stats.PERCENT_ICOMING_HEALING',
-        fn: (x) => (x / 100) + 1,
-    },
-    'Physical Damage Taken': {
-        lua: 'stats.RAW_INCOMING_DAMAGE',
-    },
-    'Spell Damage Taken': {
-        lua: 'stats.RAW_INCOMING_SPELL_DAMAGE',
-    },
-    'Healing Received': {
-        lua: 'stats.RAW_INCOMING_HEALING',
-    },
-    '% Cooldown Reduction': {
-        lua: 'stats.PERCENT_COOLDOWN_REDUCTION',
-        fn: (x) => 1 - (x / 100),
-    },
-    '% Cast Speed': {
-        lua: 'stats.PERCENT_CAST_SPEED',
-        fn: (x) => 1 - (x / 100),
-    },
-    '% Attack Speed': {
-        lua: 'stats.PERCENT_ATTACK_SPEED',
-        fn: (x) => 1 - (x / 100),
-    },
-    '% Crit Chance': {
-        lua: 'stats.RAW_PERCENT_CRITICAL',
-    },
-    'Critical Damage': {
-        lua: 'stats.RAW_CRITICAL_DAMAGE',
-    },
-    '% Critical Damage': {
-        lua: 'stats.PERCENT_CRITICAL_DAMAGE',
-        fn: (x) => (x / 100) + 1,
-    }
-}
-
 const input = fs.readFileSync('../json/items.json', {encoding: 'utf8'});
 const parsed = JSON.parse(input);
 
-let finalResult = "";
-
-for (const x in parsed) {
-    const row = parsed[x];
-
-    let itemResult = "[" + x + "] = {\n";
-    let stats = "{\n";
-    for (const y in row) {
-        const column = COLUMNS[y];
-        let value = row[y];
-
-        if (column && column.fn) {
-            value = column.fn(value);
-        }
-
-        if (column && column.type === 'string') {
-            itemResult += '    ' + column.name + " = \"" + value + "\",\n";
-        } else if (column && column.type === 'mapping') {
-            const result = MAPPINGS[column.mapping][value];
-            itemResult += '    ' + column.name + " = " + result + ",\n";
-        } else if (column && column.type === 'int') {
-            if (!value) {
-                value = '0';
-            }
-            itemResult += '    ' + column.name + " = " + value + ",\n";
-        } else if (column && column.type === 'classList') {
-            if (value.length == 0) {
-                // Ignored
-            } else {
-                const allowedClasses = value.map(x => {
-                    if (x == 'Tarcza') {
-                        return 'FourCC(\'Htar\')';
-                    } else if (x == 'Yuji') {
-                        return 'FourCC(\'Hyuj\')';
-                    } else if (x == 'Azora') {
-                        return 'FourCC(\'Hazr\')';
-                    } else if (x == 'Ivanov') {
-                        return 'FourCC(\'Hivn\')';
-                    } else if (x == 'Stormfist') {
-                        return 'FourCC(\'Hstm\')';
-                    }
-                }).join(',');
-                itemResult += '    ' + column.name + ' = ' + '{' + allowedClasses + '},\n';
-            }
-        } else if (column && column.type === 'statList') {
-            const statList = value;
-            for (const statKey in value) {
-                const stat = STATS[statKey];
-                let statValue = value[statKey];
-                if (stat && statValue) {
-                    if (stat.fn) {
-                        statValue = stat.fn(statValue);
-                    }
-                    stats += '        {\n            type = ' + stat.lua + ',\n            amount = ' + statValue + ',\n            tickrate = 5,\n        },\n';
-                }
-            }
-
-        }
-
-
-    }
-
-    finalResult += itemResult + '    stats = ' + stats + '    },\n},\n';
-}
+let finalResult = convertJson(parsed, COLUMNS, MAPPINGS);
 
 finalResult = "local equipment = require('src/items/equipment.lua')\n" +
     "local stats = require('src/stats.lua')\n" + `
@@ -282,7 +137,7 @@ local TYPE = {
     CONSUMABLE = 'consumable',
 }
 
-    ` +
+` +
     'local ITEMS = {\n' +
     finalResult +
     '}\n return {ITEMS=ITEMS, TYPE=TYPE}\n';
