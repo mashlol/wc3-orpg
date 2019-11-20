@@ -70,7 +70,11 @@ walk('./src', (err, res) => {
 
             requireMap += "\n\n";
 
-            requireMap += "require('src/main.lua')\n\n";
+            if (skipMin) {
+              requireMap += "TimerStart(CreateTimer(), 0.0, false, function() local status, err = pcall(function() require('src/main.lua') end) print(status, err) end)\n\n";
+            } else {
+              requireMap += "require('src/main.lua')\n\n";
+            }
 
             fs.appendFile('./bin/war3map_compiled.lua', requireMap, {encoding: 'utf-8'}, (err) => {
               if (err) throw err;
