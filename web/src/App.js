@@ -136,7 +136,7 @@ class App extends React.Component {
     if (this.state.editInfo) {
       editItemDialog = <EditDialog initialData={this.state.editInfo} id={this.state.editId} onSave={this._onSaveItem} onCancel={this._onCancel} />
     } else if (this.state.editQuestInfo) {
-      editQuestDialog = <EditQuestDialog initialData={this.state.editQuestInfo} id={this.state.editQuestId} onSave={this._onSaveQuest} onCancel={this._onCancel} existingItems={this.state.existingItems} />
+      editQuestDialog = <EditQuestDialog initialData={this.state.editQuestInfo} id={this.state.editQuestId} onSave={this._onSaveQuest} onCancel={this._onCancel} existingItems={this.state.existingItems} existingQuests={this.state.existingQuests} />
     }
 
     const existingItemList = Object.entries(this.state.existingItems).map(itemInfo => {

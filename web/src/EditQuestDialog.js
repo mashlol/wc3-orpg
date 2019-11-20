@@ -88,6 +88,18 @@ class EditQuestDialog extends React.Component {
     );
   }
 
+  _getSelectForPrerequisite(selectedOption, onChanged) {
+    const prerequisiteOptions = Object.entries(this.props.existingQuests).map(entry => {
+      return <option key={entry[0]} value={entry[0]}>{entry[1].name}</option>
+    });
+
+    return (
+      <select value={selectedOption} onChange={onChanged} >
+        {prerequisiteOptions}
+      </select>
+    );
+  }
+
   _onSave = () => {
     this.props.onSave(this.state.data, this.props.id);
   };
@@ -133,11 +145,40 @@ class EditQuestDialog extends React.Component {
   };
 
   _onRemoveObjective = (key) => {
-    console.log('removing obj', key);
     const oldData = Object.assign({}, this.state.data);
     const oldObjectives = oldData.objectives ? [...oldData.objectives] : [];
     oldObjectives.splice(key, 1);
     oldData.objectives = oldObjectives;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onAddPrerequisite = () => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldPrereqs = oldData.prerequisites ? [...oldData.prerequisites] : [];
+    oldPrereqs.push(1);
+    oldData.prerequisites = oldPrereqs;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onChangePrerequisite = (key, event) => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldPrereqs = oldData.prerequisites ? [...oldData.prerequisites] : [];
+    oldPrereqs[key] = event.target.value;
+    oldData.prerequisites = oldPrereqs;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onRemovePrerequisite = (key) => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldPrereqs = oldData.prerequisites ? [...oldData.prerequisites] : [];
+    oldPrereqs.splice(key, 1);
+    oldData.prerequisites = oldPrereqs;
     this.setState({
       data: oldData,
     });
@@ -196,6 +237,16 @@ class EditQuestDialog extends React.Component {
       );
     });
 
+    const preReqInfo = this.state.data.prerequisites || [];
+    const prerequisites = preReqInfo.map((entry, idx) => {
+      return (
+        <div key={idx}>
+          {this._getSelectForPrerequisite(entry, this._onChangePrerequisite.bind(this, idx))}
+          <button onClick={this._onRemovePrerequisite.bind(this, idx)}>Remove</button>
+        </div>
+      );
+    });
+
     return (
       <div className="editDialog">
         <div>
@@ -238,9 +289,15 @@ class EditQuestDialog extends React.Component {
           <input name="gold" type="number" placeholder="Gold Reward" value={this.state.data.rewards && this.state.data.rewards.gold} onChange={this._onChangeNestedValue.bind(this, 'rewards', 'gold')} />
         </div>
 
+        <hr />
+        <h3>Prerequisites</h3>
+        {prerequisites}
+        <button onClick={this._onAddPrerequisite}>Add a Prerequisite Quest</button>
+        <hr />
+        <h3>Objectives</h3>
         {objectives}
         <button onClick={this._onAddObjective}>Add an objective</button>
-
+        <hr />
         <button onClick={this._onSave}>Save</button>
         <button onClick={this.props.onCancel}>Cancel</button>
       </div>

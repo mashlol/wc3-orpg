@@ -250,7 +250,8 @@ class EditDialog extends React.Component {
             Usable by: {classRadios}
           </div>
           <div>
-            Stats:
+            <hr />
+            <h3>Stats</h3>
             {stats}
             <button onClick={this._onAddStat}>Add a stat</button>
           </div>
@@ -307,6 +308,9 @@ class EditDialog extends React.Component {
 
         {equipmentOnlyFields}
         {consumableOnlyFields}
+
+        <hr />
+
         <button onClick={this._onSave}>Save</button>
         <button onClick={this.props.onCancel}>Cancel</button>
       </div>
