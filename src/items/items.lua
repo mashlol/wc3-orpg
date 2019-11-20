@@ -75,6 +75,11 @@ local TYPE = {
             amount = 10,
             tickrate = 5,
         },
+        {
+            type = stats.PERCENT_DAMAGE,
+            amount = 1.01,
+            tickrate = 5,
+        },
     },
 },
 [3] = {
@@ -106,6 +111,11 @@ local TYPE = {
     stackSize = 1,
     cost = 300,
     stats = {
+        {
+            type = stats.PERCENT_DAMAGE,
+            amount = 1.1,
+            tickrate = 5,
+        },
     },
 },
 [5] = {
@@ -147,6 +157,11 @@ local TYPE = {
     stackSize = 1,
     cost = 35,
     stats = {
+        {
+            type = stats.PERCENT_INCOMING_DAMAGE,
+            amount = 0.98,
+            tickrate = 5,
+        },
     },
 },
 [8] = {
@@ -377,6 +392,16 @@ local TYPE = {
         {
             type = stats.RAW_INCOMING_HEALING,
             amount = 7,
+            tickrate = 5,
+        },
+        {
+            type = stats.PERCENT_CAST_SPEED,
+            amount = 0.95,
+            tickrate = 5,
+        },
+        {
+            type = stats.PERCENT_COOLDOWN_REDUCTION,
+            amount = 0.99,
             tickrate = 5,
         },
     },
@@ -670,6 +695,11 @@ local TYPE = {
             amount = 12,
             tickrate = 5,
         },
+        {
+            type = stats.PERCENT_CAST_SPEED,
+            amount = 0.98,
+            tickrate = 5,
+        },
     },
 },
 [36] = {
@@ -713,6 +743,11 @@ local TYPE = {
         {
             type = stats.RAW_HEALING,
             amount = 10,
+            tickrate = 5,
+        },
+        {
+            type = stats.PERCENT_CAST_SPEED,
+            amount = 0.99,
             tickrate = 5,
         },
     },
@@ -1005,6 +1040,11 @@ local TYPE = {
             amount = 4,
             tickrate = 5,
         },
+        {
+            type = stats.PERCENT_ATTACK_SPEED,
+            amount = 0.99,
+            tickrate = 5,
+        },
     },
 },
 [52] = {
@@ -1049,6 +1089,11 @@ local TYPE = {
         {
             type = stats.RAW_HEALING,
             amount = 8,
+            tickrate = 5,
+        },
+        {
+            type = stats.PERCENT_CAST_SPEED,
+            amount = 0.9901,
             tickrate = 5,
         },
     },
@@ -1191,6 +1236,11 @@ local TYPE = {
             amount = 17,
             tickrate = 5,
         },
+        {
+            type = stats.RAW_PERCENT_CRITICAL,
+            amount = 1,
+            tickrate = 5,
+        },
     },
 },
 [61] = {
@@ -1212,6 +1262,11 @@ local TYPE = {
         {
             type = stats.RAW_HEALING,
             amount = 20,
+            tickrate = 5,
+        },
+        {
+            type = stats.PERCENT_CAST_SPEED,
+            amount = 0.95,
             tickrate = 5,
         },
     },
@@ -1327,6 +1382,11 @@ local TYPE = {
             amount = 35,
             tickrate = 5,
         },
+        {
+            type = stats.RAW_PERCENT_CRITICAL,
+            amount = 1,
+            tickrate = 5,
+        },
     },
 },
 [68] = {
@@ -1343,6 +1403,16 @@ local TYPE = {
         {
             type = stats.RAW_DAMAGE,
             amount = 35,
+            tickrate = 5,
+        },
+        {
+            type = stats.RAW_CRITICAL_DAMAGE,
+            amount = 10,
+            tickrate = 5,
+        },
+        {
+            type = stats.RAW_PERCENT_CRITICAL,
+            amount = 1,
             tickrate = 5,
         },
     },
@@ -1469,7 +1539,7 @@ local TYPE = {
 },
 [74] = {
     type = TYPE.CONSUMABLE,
-    name = "Return Stone Test",
+    name = "Return Stone",
     icon = "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
     itemLevel = 1,
     requiredLevel = 1,

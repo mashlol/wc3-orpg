@@ -26,7 +26,7 @@
     "rarity": "Uncommon",
     "stats": {
       "Raw HP": 10,
-      "undefined": 1.01
+      "% Attack Damage": "1"
     },
     "type": "Ring",
     "stackSize": 1,
@@ -54,7 +54,7 @@
     "requiredLevel": 10,
     "rarity": "Rare",
     "stats": {
-      "undefined": 1.1
+      "% Attack Damage": "10"
     },
     "type": "2H Weapon",
     "stackSize": 1,
@@ -92,7 +92,7 @@
     "requiredLevel": 1,
     "rarity": "Common",
     "stats": {
-      "undefined": 0.98
+      "% Physical Damage Taken": "-2"
     },
     "type": "Chest",
     "stackSize": 1,
@@ -282,8 +282,9 @@
     "rarity": "Rare",
     "cost": 0,
     "stats": {
-      "undefined": 0.95,
-      "Healing Received": 7
+      "Healing Received": 7,
+      "% Cast Speed": "5",
+      "% Cooldown Reduction": "1"
     }
   },
   "20": {
@@ -532,8 +533,8 @@
     "cost": 0,
     "stats": {
       "Spell Damage": 12,
-      "undefined": 0.98,
-      "Healing": 12
+      "Healing": 12,
+      "% Cast Speed": "2"
     }
   },
   "36": {
@@ -564,9 +565,9 @@
     "cost": 0,
     "stats": {
       "Spell Damage": 10,
-      "undefined": 0.99,
       "Raw HP": 30,
-      "Healing": 10
+      "Healing": 10,
+      "% Cast Speed": "1"
     }
   },
   "38": {
@@ -788,11 +789,11 @@
     "rarity": "Uncommon",
     "cost": 0,
     "stats": {
-      "undefined": 0.99,
       "Spell Damage": 4,
       "Raw HP": 26,
       "Physical Damage Taken": -1,
-      "Healing": 4
+      "Healing": 4,
+      "% Attack Speed": "1"
     }
   },
   "52": {
@@ -827,9 +828,9 @@
     "cost": 0,
     "stats": {
       "Spell Damage": 8,
-      "undefined": 0.99,
       "Raw HP": 25,
-      "Healing": 8
+      "Healing": 8,
+      "% Cast Speed": 0.99
     }
   },
   "54": {
@@ -953,7 +954,7 @@
     "cost": 0,
     "stats": {
       "Attack Damage": 17,
-      "undefined": 1
+      "% Crit Chance": 1
     }
   },
   "61": {
@@ -971,8 +972,8 @@
     "cost": 0,
     "stats": {
       "Spell Damage": 20,
-      "undefined": 0.95,
-      "Healing": 20
+      "Healing": 20,
+      "% Cast Speed": "5"
     }
   },
   "62": {
@@ -1078,8 +1079,8 @@
     "cost": 0,
     "stats": {
       "Spell Damage": 35,
-      "undefined": 1,
-      "Healing": 35
+      "Healing": 35,
+      "% Crit Chance": 1
     }
   },
   "68": {
@@ -1098,7 +1099,8 @@
     "cost": 0,
     "stats": {
       "Attack Damage": 35,
-      "undefined": 10
+      "Critical Damage": 10,
+      "% Crit Chance": "1"
     }
   },
   "69": {
