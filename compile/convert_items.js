@@ -20,16 +20,16 @@ const MAPPINGS = {
         'Off-hand': 'equipment.SLOT.OFFHAND',
     },
     'rarity': {
-        'Common': 'itemmanager.RARITY.COMMON',
-        'Uncommon': 'itemmanager.RARITY.UNCOMMON',
-        'Rare': 'itemmanager.RARITY.RARE',
-        'Epic': 'itemmanager.RARITY.EPIC',
-        'Legendary': 'itemmanager.RARITY.LEGENDARY',
-        'Divine': 'itemmanager.RARITY.DIVINE',
+        'Common': 'RARITY.COMMON',
+        'Uncommon': 'RARITY.UNCOMMON',
+        'Rare': 'RARITY.RARE',
+        'Epic': 'RARITY.EPIC',
+        'Legendary': 'RARITY.LEGENDARY',
+        'Divine': 'RARITY.DIVINE',
     },
     'type': {
-        'Equipment': 'itemmanager.TYPE.EQUIPMENT',
-        'Consumable': 'itemmanager.TYPE.CONSUMABLE',
+        'Equipment': 'TYPE.EQUIPMENT',
+        'Consumable': 'TYPE.CONSUMABLE',
     },
 };
 
@@ -42,6 +42,7 @@ const COLUMNS = {
     'icon': {
         name: 'icon',
         type: 'string',
+        fn: (x) => x.replace(/\\/g, '\\\\')
     },
     'type': {
         name: 'slot',
@@ -191,6 +192,10 @@ for (const x in parsed) {
         const column = COLUMNS[y];
         let value = row[y];
 
+        if (column && column.fn) {
+            value = column.fn(value);
+        }
+
         if (column && column.type === 'string') {
             itemResult += '    ' + column.name + " = \"" + value + "\",\n";
         } else if (column && column.type === 'mapping') {
@@ -242,10 +247,48 @@ for (const x in parsed) {
 }
 
 finalResult = "local equipment = require('src/items/equipment.lua')\n" +
-    "local stats = require('src/stats.lua')\n" +
-    "local itemmanager = require('src/stats.lua')\n" +
+    "local stats = require('src/stats.lua')\n" + `
+local RARITY = {
+    COMMON = {
+        color = '|cffffffff',
+        text = 'Common',
+        priority = 0,
+    },
+    UNCOMMON = {
+        color = '|cff2cfc03',
+        text = 'Uncommon',
+        priority = 1,
+    },
+    RARE = {
+        color = '|cff036ffc',
+        text = 'Rare',
+        priority = 2,
+    },
+    EPIC = {
+        color = '|cff8403fc',
+        text = 'Epic',
+        priority = 3,
+    },
+    LEGENDARY = {
+        color = '|cffc4ab1a',
+        text = 'Legendary',
+        priority = 4,
+    },
+    DIVINE = {
+        color = '|cff16c48d',
+        text = 'Divine',
+        priority = 5,
+    },
+}
+
+local TYPE = {
+    EQUIPMENT = 'equipment',
+    CONSUMABLE = 'consumable',
+}
+
+    ` +
     'local ITEMS = {\n' +
     finalResult +
-    '}\n return {ITEMS=ITEMS}\n';
+    '}\n return {ITEMS=ITEMS, TYPE=TYPE}\n';
 
 fs.writeFileSync('../src/items/items.lua', finalResult);

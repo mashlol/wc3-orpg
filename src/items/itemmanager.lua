@@ -2,44 +2,6 @@ local hero = require('src/hero.lua')
 local equipment = require('src/items/equipment.lua')
 local items = require('src/items/items.lua')
 
-local RARITY = {
-    COMMON = {
-        color = "|cffffffff",
-        text = "Common",
-        priority = 0,
-    },
-    UNCOMMON = {
-        color = "|cff2cfc03",
-        text = "Uncommon",
-        priority = 1,
-    },
-    RARE = {
-        color = "|cff036ffc",
-        text = "Rare",
-        priority = 2,
-    },
-    EPIC = {
-        color = "|cff8403fc",
-        text = "Epic",
-        priority = 3,
-    },
-    LEGENDARY = {
-        color = "|cffc4ab1a",
-        text = "Legendary",
-        priority = 4,
-    },
-    DIVINE = {
-        color = "|cff16c48d",
-        text = "Divine",
-        priority = 5,
-    },
-}
-
-local TYPE = {
-    EQUIPMENT = 'equipment',
-    CONSUMABLE = 'consumable',
-}
-
 -- Precompute tooltips at initialization time or you get desyncs
 local TOOLTIPS = {}
 
@@ -81,7 +43,7 @@ function init()
 
         local type = equipment.getSlotName(itemInfo.slot)
 
-        if itemInfo.type == TYPE.CONSUMABLE then
+        if itemInfo.type == items.TYPE.CONSUMABLE then
             type = "Consumable"
         end
 
@@ -126,7 +88,6 @@ function init()
 end
 
 return {
-    RARITY = RARITY,
     init = init,
     getItemInfo = getItemInfo,
     getItemTooltip = getItemTooltip,

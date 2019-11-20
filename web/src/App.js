@@ -41,7 +41,7 @@ class App extends React.Component {
     });
 
     // Save to filesystem
-    fs.writeFileSync(ITEMS_JSON_LOCATION, JSON.stringify(oldExistingItems));
+    fs.writeFileSync(ITEMS_JSON_LOCATION, JSON.stringify(oldExistingItems, null, 2));
   };
 
   _onCancel = (info, id) => {

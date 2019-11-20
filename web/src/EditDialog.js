@@ -2,8 +2,8 @@ import React from 'react';
 
 const fs = require('fs');
 
-const IMPORT_LOCATION = './../../map.w3x/war3mapImported';
-const itemIcons = fs.readdirSync(IMPORT_LOCATION);
+// const IMPORT_LOCATION = './../../map.w3x/war3mapImported';
+// const itemIcons = fs.readdirSync(IMPORT_LOCATION);
 
 // {"1":{"name":"Item Name Perma","icon":"war3mapImported\\BTNWolf.blp","usable":[],"type":"Helmet","requiredLevel":"15","itemLevel":"27","rarity":"Rare","cost":12,"stats":{"Attack Damage":3}}}
 
@@ -219,9 +219,9 @@ class EditDialog extends React.Component {
       return <option key={rarity} value={rarity}>{rarity}</option>
     });
 
-    const itemIconOptions = Object.values(itemIcons).map(icon => {
-      return <option key={icon} value={icon}>{icon}</option>
-    });
+    // const itemIconOptions = Object.values(itemIcons).map(icon => {
+    //   return <option key={icon} value={icon}>{icon}</option>
+    // });
 
     const statInfo = this.state.data.stats || {};
     const stats = Object.entries(statInfo).map(entry => {
@@ -282,9 +282,9 @@ class EditDialog extends React.Component {
           </select>
         </div>
         <div>
-          <select name="icon" id="item-type" value={this.state.data.icon} onChange={this._onChangeSimpleValue.bind(this, 'icon')}>
-            {itemIconOptions}
-          </select>
+          <div>
+            <label htmlFor="icon">Icon: </label><input name="icon" type="text" placeholder="Icon" value={this.state.data.icon} onChange={this._onChangeSimpleValue.bind(this, 'icon')} />
+          </div>
         </div>
         <div>
           <label htmlFor="requiredLevel">Required Level: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />

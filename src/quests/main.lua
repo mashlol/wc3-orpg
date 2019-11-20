@@ -583,7 +583,7 @@ function initQuests()
             rewards = {
                 exp = 50,
                 gold = 5,
-                items = {[6] = 5},
+                items = {[4] = 5},
             },
             objectives = {
                 [1] = {
