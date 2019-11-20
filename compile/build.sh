@@ -6,6 +6,11 @@ mkdir -p bin
 
 rm -rf bin/built.w3x
 
+echo "Codegenning items.lua"
+cd compile
+node convert_items.js
+cd ..
+
 echo "Copying map.w3x to bin/built.w3x"
 cp -r map.w3x bin/built.w3x
 
