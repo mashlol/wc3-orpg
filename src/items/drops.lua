@@ -31,10 +31,7 @@ function maybeGetDrop(unit)
         totalWeights = totalWeights + weight
     end
 
-    print('total weight was: ', totalWeights)
-
     local randNum = GetRandomReal(0, totalWeights)
-    print('roll was: ', randNum)
     local curWeight = 0
     for itemId, weight in pairs(drops) do
         curWeight = curWeight + weight

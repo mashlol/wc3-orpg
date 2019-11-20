@@ -4,7 +4,7 @@ const STATS = {
         fn: (x) => (x / 100) + 1,
     },
     '% Scale': {
-        lua: 'stats.SCALE',
+        lua: 'stats.PERCENT_SCALE',
         fn: (x) => (x / 100) + 1,
     },
     'Raw HP': {
