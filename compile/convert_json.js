@@ -141,6 +141,29 @@ const convertJson = function(parsedJson, COLUMNS, MAPPINGS) {
                     }
                 }
                 rowResult += '    stats = ' + stats + '    },\n';
+            } else if (column && column.type === 'rewardList') {
+                const rewardList = value;
+                let rewards = "{\n";
+
+                const exp = rewardList.exp;
+                const gold = rewardList.gold;
+                const items = rewardList.items;
+
+                if (exp) {
+                    rewards += '        exp = ' + exp + ',\n';
+                }
+                if (gold) {
+                    rewards += '        gold = ' + gold + ',\n';
+                }
+                if (items) {
+                    rewards += '        items = {\n';
+                    for (const itemId in items) {
+                        rewards += '            [' + itemId + '] = ' + items[itemId] + ',\n';
+                    }
+                    rewards += '        },\n';
+                }
+
+                rowResult += '    rewards = ' + rewards + '    },\n';
             }
         }
 

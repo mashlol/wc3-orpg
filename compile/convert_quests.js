@@ -62,6 +62,10 @@ const COLUMNS = {
         name: 'levelRequirement',
         type: 'int',
     },
+    'rewards': {
+        name: 'rewards',
+        type: 'rewardList',
+    },
     'objectives': {
         name: 'objectives',
         type: 'sublist',
@@ -99,9 +103,9 @@ const COLUMNS = {
         },
         mappings: {
             'objectiveType': {
-                'kill': 'TYPE.KILL',
-                'item': 'TYPE.ITEM',
-                'discover': 'TYPE.DISCOVER',
+                'Kill': 'TYPE.KILL',
+                'Gather': 'TYPE.ITEM',
+                'Discover': 'TYPE.DISCOVER',
             }
         },
     },
@@ -109,60 +113,6 @@ const COLUMNS = {
         name: 'prerequisites',
         type: 'intlist',
     },
-
-
-    // 'icon': {
-    //     name: 'icon',
-    //     type: 'string',
-    //     fn: (x) => x.replace(/\\/g, '\\\\')
-    // },
-    // 'type': {
-    //     name: 'slot',
-    //     type: 'mapping',
-    //     mapping: 'slot',
-    // },
-    // 'requiredLevel': {
-    //     name: 'requiredLevel',
-    //     type: 'int',
-    // },
-    // 'rarity': {
-    //     name: 'rarity',
-    //     type: 'mapping',
-    //     mapping: 'rarity',
-    // },
-    // 'itemLevel': {
-    //     name: 'itemLevel',
-    //     type: 'int',
-    // },
-    // 'cost': {
-    //     name: 'cost',
-    //     type: 'int',
-    // },
-    // 'usable': {
-    //     name: 'usableClasses',
-    //     type: 'classList',
-    // },
-    // 'stats': {
-    //     name: 'stats',
-    //     type: 'statList',
-    // },
-    // 'classification': {
-    //     name: 'type',
-    //     type: 'mapping',
-    //     mapping: 'type',
-    // },
-    // 'stackSize': {
-    //     name: 'stackSize',
-    //     type: 'int',
-    // },
-    // 'tooltip': {
-    //     name: 'text',
-    //     type: 'string',
-    // },
-    // 'spellKey': {
-    //     name: 'spell',
-    //     type: 'string',
-    // },
 };
 
 const input = fs.readFileSync('../json/quests.json', {encoding: 'utf8'});

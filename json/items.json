@@ -1,21 +1,38 @@
 {
   "1": {
-    "classification": "Equipment",
-    "name": "Old boot",
-    "icon": "ReplaceableTextures\\CommandButtons\\BTNBoots.blp",
-    "itemLevel": 1,
-    "requiredLevel": 1,
-    "rarity": "Common",
-    "stats": {
-      "Raw HP": 10
+    "name": "Trouble in Turtle Town",
+    "getQuestFrom": "gg_unit_nvil_0069",
+    "handQuestTo": "gg_unit_nvil_0069",
+    "obtainText": "Yo yo I got a quest for you",
+    "incompleteText": "Yo yo the quest is incomplet yo",
+    "completedText": "Yo yo nice job yo",
+    "rewards": {
+      "exp": 50,
+      "gold": 5,
+      "items": {
+        "6": 5
+      }
     },
-    "type": "Feet",
-    "stackSize": 1,
-    "cost": 30,
-    "usable": [
-      "Yuji",
-      "Azora"
-    ]
+    "objectives": [
+      {
+        "type": "kill",
+        "amount": 10,
+        "toKill": "hmbs",
+        "name": "Snapping Turtles",
+        "verb": "Exterminate",
+        "verbPast": "exterminated"
+      },
+      {
+        "type": "item",
+        "amount": 10,
+        "itemId": 77
+      }
+    ],
+    "prerequisites": [
+      1,
+      2
+    ],
+    "levelRequirement": "12"
   },
   "2": {
     "classification": "Equipment",
@@ -1237,5 +1254,16 @@
     "stackSize": 10,
     "tooltip": "This looks...warmer.",
     "cost": 20
+  },
+  "78": {
+    "name": "New Quest Item",
+    "rarity": "Common",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "50",
+    "classification": "Consumable",
+    "stackSize": "15",
+    "tooltip": "I think fred needs this"
   }
 }

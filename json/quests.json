@@ -15,7 +15,7 @@
     },
     "objectives": [
       {
-        "type": "kill",
+        "type": "Kill",
         "amount": 10,
         "toKill": "hmbs",
         "name": "Snapping Turtles",
@@ -23,12 +23,56 @@
         "verbPast": "exterminated"
       },
       {
-        "type": "item",
+        "type": "Gather",
         "amount": 10,
-        "itemId": 77
+        "itemId": "76",
+        "toKill": "76"
+      },
+      {
+        "type": "Kill",
+        "amount": "15",
+        "toKill": "n000",
+        "verb": "Kill",
+        "verbPast": "killed"
       }
     ],
-    "prerequisites": [1, 2],
-    "levelRequirement": 1
+    "prerequisites": [
+      1,
+      2
+    ],
+    "levelRequirement": "5"
+  },
+  "2": {
+    "name": "New Quest",
+    "levelRequirement": "5",
+    "obtainText": "Some new obtain text",
+    "incompleteText": "Did you do it tho?",
+    "rewards": {
+      "gold": "50",
+      "exp": "15"
+    },
+    "getQuestFrom": "gg_unit_nvl2_0008",
+    "handQuestTo": "gg_unit_nvil_0069",
+    "completedText": "Nice job"
+  },
+  "3": {
+    "name": "Sweet New Quest yo",
+    "levelRequirement": "1",
+    "obtainText": "Yo do something",
+    "incompleteText": "U didnt do something",
+    "completedText": "Nice u did osmething!",
+    "rewards": {
+      "exp": "500",
+      "gold": "12"
+    },
+    "getQuestFrom": "gg_unit_ntks_0365",
+    "handQuestTo": "gg_unit_nvil_0040",
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "15",
+        "itemId": "78"
+      }
+    ]
   }
 }
