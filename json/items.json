@@ -1,69 +1,1239 @@
 {
   "1": {
-    "name": "Boots of Power",
-    "icon": "BTNINV_Boots_07.blp",
+    "classification": "Equipment",
+    "name": "Old boot",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNBoots.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stats": {
+      "Raw HP": 10
+    },
+    "type": "Feet",
+    "stackSize": 1,
+    "cost": 30,
     "usable": [
       "Yuji",
-      "Stormfist",
-      "Ivanov",
       "Azora"
-    ],
-    "type": "Helmet",
-    "requiredLevel": "50",
-    "itemLevel": "10",
-    "rarity": "Rare",
-    "cost": "5",
-    "stats": {
-      "Raw HP": "5",
-      "HP Regen": "25",
-      "Healing Received": "50"
-    },
-    "classification": "Equipment"
+    ]
   },
   "2": {
-    "name": "Sweet Item",
-    "type": "Shoulders",
-    "rarity": "Epic",
-    "icon": "BTNArmor.blp",
-    "requiredLevel": "123",
-    "itemLevel": "14",
-    "cost": "25",
-    "usable": [
-      "Stormfist"
-    ],
+    "classification": "Equipment",
+    "name": "Rusty Ring",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNGoldRing.blp",
+    "itemLevel": 5,
+    "requiredLevel": 5,
+    "rarity": "Uncommon",
     "stats": {
-      "% Move Speed": "5"
+      "Raw HP": 10,
+      "undefined": 1.01
     },
-    "classification": "Equipment"
+    "type": "Ring",
+    "stackSize": 1,
+    "cost": 150
   },
   "3": {
-    "name": "Saxons Item",
-    "type": "2H Weapon",
-    "rarity": "Rare",
-    "icon": "BTNDagger.blp",
-    "requiredLevel": "12",
-    "itemLevel": "12",
-    "cost": "50",
-    "usable": [
-      "Azora",
-      "Tarcza"
-    ],
+    "classification": "Equipment",
+    "name": "Iron Helmet",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNHelmutPurple.blp",
+    "itemLevel": 3,
+    "requiredLevel": 3,
+    "rarity": "Uncommon",
     "stats": {
-      "Raw HP": "5000000",
-      "Spell Damage": "50000000"
+      "Raw HP": 40
     },
-    "classification": "Equipment"
+    "type": "Helmet",
+    "stackSize": 1,
+    "cost": 80
   },
   "4": {
-    "name": "Cheese",
+    "classification": "Equipment",
+    "name": "Copper Dagger",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNDaggerOfEscape.blp",
+    "itemLevel": 20,
+    "requiredLevel": 10,
+    "rarity": "Rare",
+    "stats": {
+      "undefined": 1.1
+    },
+    "type": "2H Weapon",
+    "stackSize": 1,
+    "cost": 300
+  },
+  "5": {
     "classification": "Consumable",
-    "tooltip": "Heal yourself for 250",
+    "name": "Health Potion",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNPotionGreen.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 5,
+    "tooltip": "Heal yourself for 200 HP.",
+    "spell": "healpot1",
+    "cost": 20
+  },
+  "6": {
+    "classification": "Consumable",
+    "name": "Cheese",
     "icon": "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
-    "requiredLevel": "1",
-    "itemLevel": "1",
-    "cost": "5",
-    "stackSize": "5",
-    "spellKey": "food1",
-    "rarity": "Common"
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 20,
+    "tooltip": "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
+    "spell": "food1",
+    "cost": 5
+  },
+  "7": {
+    "classification": "Equipment",
+    "name": "Chain Vest",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNMantleOfIntelligence.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stats": {
+      "undefined": 0.98
+    },
+    "type": "Chest",
+    "stackSize": 1,
+    "cost": 35
+  },
+  "8": {
+    "classification": "Equipment",
+    "name": "Cloak",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNCloak.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stats": {
+      "% Move Speed": "1"
+    },
+    "type": "Back",
+    "stackSize": 1,
+    "cost": 35
+  },
+  "9": {
+    "classification": "Consumable",
+    "name": "River Turtle Meat",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNMonsterLure.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 10,
+    "tooltip": "The meat of a turtle...|nI think Fred wants this.",
+    "cost": 20
+  },
+  "10": {
+    "classification": "Equipment",
+    "name": "Wolf Helmet",
+    "icon": "war3mapImported\\BTNWolf.blp",
+    "type": "Helmet",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 15
+    }
+  },
+  "11": {
+    "classification": "Equipment",
+    "name": "Giant Wolf Helmet",
+    "icon": "war3mapImported\\BTNCompanionWolfDire.blp",
+    "type": "Helmet",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 25
+    }
+  },
+  "12": {
+    "classification": "Equipment",
+    "name": "Leather Helmet",
+    "icon": "war3mapImported\\BTNHelmet.blp",
+    "type": "Helmet",
+    "requiredLevel": 19,
+    "itemLevel": 32,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 60
+    }
+  },
+  "13": {
+    "classification": "Equipment",
+    "name": "Troll Helmet",
+    "icon": "war3mapImported\\BTNWater Battle Helmet.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Helmet",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 45
+    }
+  },
+  "14": {
+    "classification": "Equipment",
+    "name": "Troll Hood",
+    "icon": "war3mapImported\\BTNINV_Helmet_17.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Helmet",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 35
+    }
+  },
+  "15": {
+    "classification": "Equipment",
+    "name": "Iron Helmet",
+    "icon": "war3mapImported\\BTNAllianceHelmet.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Helmet",
+    "requiredLevel": 14,
+    "itemLevel": 24,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 6,
+      "Raw HP": 70
+    }
+  },
+  "16": {
+    "classification": "Equipment",
+    "name": "Troll Mask",
+    "icon": "war3mapImported\\BTNTiki Mask B.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Helmet",
+    "requiredLevel": 14,
+    "itemLevel": 24,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 8,
+      "Raw HP": 55,
+      "Healing": 8
+    }
+  },
+  "17": {
+    "classification": "Equipment",
+    "name": "Yeti Skull Helm",
+    "icon": "war3mapImported\\BTNNecroHelm.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Helmet",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 80,
+      "Physical Damage Taken": -5,
+      "HP Regen": 3
+    }
+  },
+  "18": {
+    "classification": "Equipment",
+    "name": "Troll Pendant",
+    "icon": "war3mapImported\\BTNEmpty Amulet.blp",
+    "type": "Necklace",
+    "requiredLevel": 15,
+    "itemLevel": 26,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Healing Received": 5
+    }
+  },
+  "19": {
+    "classification": "Equipment",
+    "name": "Warlord's Necklace",
+    "icon": "war3mapImported\\BTNNecklaceOfWarrior.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Necklace",
+    "requiredLevel": 17,
+    "itemLevel": 36,
+    "rarity": "Rare",
+    "cost": 0,
+    "stats": {
+      "undefined": 0.95,
+      "Healing Received": 7
+    }
+  },
+  "20": {
+    "classification": "Equipment",
+    "name": "Shell Pads",
+    "icon": "war3mapImported\\BTNDemonShoulderUPG1.blp",
+    "type": "Shoulders",
+    "requiredLevel": 6,
+    "itemLevel": 10,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 20
+    }
+  },
+  "21": {
+    "classification": "Equipment",
+    "name": "Cultist Epaulets",
+    "icon": "war3mapImported\\BTNShoulderplate.blp",
+    "type": "Shoulders",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 60
+    }
+  },
+  "22": {
+    "classification": "Equipment",
+    "name": "Troll Caster Pads",
+    "icon": "",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Shoulders",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 35
+    }
+  },
+  "23": {
+    "classification": "Equipment",
+    "name": "Troll Warrior Spaulders",
+    "icon": "",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Shoulders",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 45
+    }
+  },
+  "24": {
+    "classification": "Equipment",
+    "name": "Warlord's Shoulders",
+    "icon": "",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Shoulders",
+    "requiredLevel": 17,
+    "itemLevel": 29,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 8,
+      "Raw HP": 70
+    }
+  },
+  "25": {
+    "classification": "Equipment",
+    "name": "Turtle Leather Vest",
+    "icon": "war3mapImported\\BTNINV_Chest_Leather_02.blp",
+    "type": "Chest",
+    "requiredLevel": 2,
+    "itemLevel": 4,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 20
+    }
+  },
+  "26": {
+    "classification": "Equipment",
+    "name": "Cultist Robes",
+    "icon": "war3mapImported\\BTNINV_Robe_03.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Chest",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 80
+    }
+  },
+  "27": {
+    "classification": "Equipment",
+    "name": "Cultist Cuirass",
+    "icon": "war3mapImported\\BTNPlateArmor.blp",
+    "usable": [
+      "Tarcza",
+      "Yuji"
+    ],
+    "type": "Chest",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 115
+    }
+  },
+  "28": {
+    "classification": "Equipment",
+    "name": "Hardened Turtle Carapace",
+    "icon": "",
+    "type": "Chest",
+    "requiredLevel": 6,
+    "itemLevel": 10,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 45
+    }
+  },
+  "29": {
+    "classification": "Equipment",
+    "name": "Mammoth Fur Vest",
+    "icon": "",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Chest",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 70
+    }
+  },
+  "30": {
+    "classification": "Equipment",
+    "name": "Mammoth Fur Robe",
+    "icon": "",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Chest",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 65
+    }
+  },
+  "31": {
+    "classification": "Equipment",
+    "name": "Yeti Robe",
+    "icon": "",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Chest",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 85
+    }
+  },
+  "32": {
+    "classification": "Equipment",
+    "name": "Wolf Pelt",
+    "icon": "war3mapImported\\BTNINV_Misc_Cape_04.blp",
+    "type": "Back",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 10
+    }
+  },
+  "33": {
+    "classification": "Equipment",
+    "name": "Worn Cape",
+    "icon": "war3mapImported\\BTNINV_Misc_Cape_14.blp",
+    "type": "Back",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 45
+    }
+  },
+  "34": {
+    "classification": "Equipment",
+    "name": "Mammoth Fur-Lined Cape",
+    "icon": "war3mapImported\\BTNcloak1.blp",
+    "type": "Back",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 20
+    }
+  },
+  "35": {
+    "classification": "Equipment",
+    "name": "Priest's Cloak",
+    "icon": "",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Back",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 12,
+      "undefined": 0.98,
+      "Healing": 12
+    }
+  },
+  "36": {
+    "classification": "Equipment",
+    "name": "Fur-Lined Pants",
+    "icon": "war3mapImported\\BTNINV_Pants_Wolf.blp",
+    "type": "Pants",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 10
+    }
+  },
+  "37": {
+    "classification": "Equipment",
+    "name": "Spiritual Wolf Leggings",
+    "icon": "war3mapImported\\BTNINV_Pants_02.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Pants",
+    "requiredLevel": 12,
+    "itemLevel": 21,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 10,
+      "undefined": 0.99,
+      "Raw HP": 30,
+      "Healing": 10
+    }
+  },
+  "38": {
+    "classification": "Equipment",
+    "name": "Cultist Trousers",
+    "icon": "war3mapImported\\BTNpants01.blp",
+    "type": "Pants",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {}
+  },
+  "39": {
+    "classification": "Equipment",
+    "name": "Mammoth Hide Leggings",
+    "icon": "war3mapImported\\BTNLeatherPants4.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Pants",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 10
+    }
+  },
+  "40": {
+    "classification": "Equipment",
+    "name": "Troll Plate Leggings",
+    "icon": "",
+    "usable": [],
+    "type": "Pants",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 50
+    }
+  },
+  "41": {
+    "classification": "Equipment",
+    "name": "Troll Cloth Leggings",
+    "icon": "",
+    "usable": [],
+    "type": "Pants",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 50
+    }
+  },
+  "42": {
+    "classification": "Equipment",
+    "name": "Old Boots",
+    "icon": "war3mapImported\\BTNINV_Boots_09.blp",
+    "type": "Feet",
+    "requiredLevel": 1,
+    "itemLevel": 3,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "1",
+      "HP Regen": 2
+    }
+  },
+  "43": {
+    "classification": "Equipment",
+    "name": "Worn Running Boots",
+    "icon": "war3mapImported\\BTNINV_Boots_07.blp",
+    "type": "Feet",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "1",
+      "HP Regen": 4
+    }
+  },
+  "44": {
+    "classification": "Equipment",
+    "name": "Troll Sabatons",
+    "icon": "war3mapImported\\BTNINV_Boots_Plate_08.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Feet",
+    "requiredLevel": 15,
+    "itemLevel": 26,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "3",
+      "HP Regen": 5
+    }
+  },
+  "45": {
+    "classification": "Equipment",
+    "name": "Troll Kickers",
+    "icon": "war3mapImported\\BTNHeavyBoots.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Feet",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "2",
+      "HP Regen": 2
+    }
+  },
+  "46": {
+    "classification": "Equipment",
+    "name": "Mammoth Skin Boots",
+    "icon": "war3mapImported\\BTNINV_Boots_08.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Feet",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "2",
+      "HP Regen": 2
+    }
+  },
+  "47": {
+    "classification": "Equipment",
+    "name": "Troll Slippers",
+    "icon": "war3mapImported\\BTN.Boots3.BLP",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Feet",
+    "requiredLevel": 15,
+    "itemLevel": 26,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "3",
+      "HP Regen": 7
+    }
+  },
+  "48": {
+    "classification": "Equipment",
+    "name": "Warlord's Boots",
+    "icon": "war3mapImported\\BTNBlizzard_Boots.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Feet",
+    "requiredLevel": 17,
+    "itemLevel": 29,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "% Move Speed": "5",
+      "HP Regen": 10
+    }
+  },
+  "49": {
+    "classification": "Equipment",
+    "name": "Fur-lined Gloves",
+    "icon": "war3mapImported\\BTNFur Gauntlet.blp",
+    "type": "Gloves",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 8
+    }
+  },
+  "50": {
+    "classification": "Equipment",
+    "name": "Leather Gloves",
+    "icon": "war3mapImported\\BTNLeather Gauntlet.blp",
+    "type": "Gloves",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 16
+    }
+  },
+  "51": {
+    "classification": "Equipment",
+    "name": "Troll Handguards",
+    "icon": "",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Gloves",
+    "requiredLevel": 12,
+    "itemLevel": 21,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "undefined": 0.99,
+      "Spell Damage": 4,
+      "Raw HP": 26,
+      "Physical Damage Taken": -1,
+      "Healing": 4
+    }
+  },
+  "52": {
+    "classification": "Equipment",
+    "name": "Troll Handwraps",
+    "icon": "war3mapImported\\BTNTroll_VooDoo_Gloves.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Gloves",
+    "requiredLevel": 12,
+    "itemLevel": 19,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 20
+    }
+  },
+  "53": {
+    "classification": "Equipment",
+    "name": "High Priest's Gloves",
+    "icon": "war3mapImported\\BTNMana gloves.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Gloves",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 8,
+      "undefined": 0.99,
+      "Raw HP": 25,
+      "Healing": 8
+    }
+  },
+  "54": {
+    "classification": "Equipment",
+    "name": "Brass Ring",
+    "icon": "war3mapImported\\BTNINV_Jewelry_Ring_13.blp",
+    "type": "Ring",
+    "requiredLevel": 19,
+    "itemLevel": 32,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "% Attack Damage": "2",
+      "% Spell Damage": "2",
+      "% Healing": "2"
+    }
+  },
+  "55": {
+    "classification": "Equipment",
+    "name": "Warlord's Ring",
+    "icon": "war3mapImported\\BTNring1.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "Ring",
+    "requiredLevel": 17,
+    "itemLevel": 36,
+    "rarity": "Rare",
+    "cost": 0,
+    "stats": {
+      "% Attack Damage": "4"
+    }
+  },
+  "56": {
+    "classification": "Equipment",
+    "name": "Turtle Claw",
+    "icon": "war3mapImported\\BTNDagger.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 2,
+    "itemLevel": 4,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 3
+    }
+  },
+  "57": {
+    "classification": "Equipment",
+    "name": "Giant Wolf Fang",
+    "icon": "war3mapImported\\BTNBoneDagger.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 6
+    }
+  },
+  "58": {
+    "classification": "Equipment",
+    "name": "Cultist Wand",
+    "icon": "war3mapImported\\BTNMurgulStaff.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 12,
+      "Healing": 12
+    }
+  },
+  "59": {
+    "classification": "Equipment",
+    "name": "Chieftan's Sword",
+    "icon": "war3mapImported\\BTNCeremonial Sword.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 14,
+    "itemLevel": 24,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 13
+    }
+  },
+  "60": {
+    "classification": "Equipment",
+    "name": "Warlord's Bloody Axe",
+    "icon": "war3mapImported\\BTNBloodyAxe.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 17,
+    "itemLevel": 29,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 17,
+      "undefined": 1
+    }
+  },
+  "61": {
+    "classification": "Equipment",
+    "name": "Warlord's Mageblade",
+    "icon": "war3mapImported\\BTNWKnightBlade.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 17,
+    "itemLevel": 29,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 20,
+      "undefined": 0.95,
+      "Healing": 20
+    }
+  },
+  "62": {
+    "classification": "Equipment",
+    "name": "Spiked Bone Club",
+    "icon": "war3mapImported\\BTNSpikedClub.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 7,
+    "itemLevel": 12,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 8
+    }
+  },
+  "63": {
+    "classification": "Equipment",
+    "name": "Giant Bone Club",
+    "icon": "war3mapImported\\BTNPrehistoric Dino Club.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 12,
+    "itemLevel": 21,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 15
+    }
+  },
+  "64": {
+    "classification": "Equipment",
+    "name": "Broadsword",
+    "icon": "war3mapImported\\BTNAncientRelic.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {}
+  },
+  "65": {
+    "classification": "Equipment",
+    "name": "Troll Battle Axe",
+    "icon": "war3mapImported\\BTNMysticHatchet.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 14,
+    "itemLevel": 22,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 25
+    }
+  },
+  "66": {
+    "classification": "Equipment",
+    "name": "Troll Staff",
+    "icon": "war3mapImported\\BTNWandOfCosmicEnergy.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 14,
+    "itemLevel": 22,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 20,
+      "Healing": 20
+    }
+  },
+  "67": {
+    "classification": "Equipment",
+    "name": "High Priest's Staff",
+    "icon": "war3mapImported\\BTN_God_Scepter.blp",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 35,
+      "undefined": 1,
+      "Healing": 35
+    }
+  },
+  "68": {
+    "classification": "Equipment",
+    "name": "Yeti Horn",
+    "icon": "war3mapImported\\BTNHorn.blp",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist"
+    ],
+    "type": "2H Weapon",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Attack Damage": 35,
+      "undefined": 10
+    }
+  },
+  "69": {
+    "classification": "Equipment",
+    "name": "Shell Shield",
+    "icon": "war3mapImported\\BTNNerubianShield.blp",
+    "usable": [
+      "Tarcza"
+    ],
+    "type": "Off-hand",
+    "requiredLevel": 1,
+    "itemLevel": 3,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 5,
+      "Physical Damage Taken": -2
+    }
+  },
+  "70": {
+    "classification": "Equipment",
+    "name": "Cultist Blocker",
+    "icon": "war3mapImported\\BTNbuckler1.blp",
+    "usable": [
+      "Tarcza"
+    ],
+    "type": "Off-hand",
+    "requiredLevel": 16,
+    "itemLevel": 25,
+    "rarity": "Common",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 32,
+      "Physical Damage Taken": -6
+    }
+  },
+  "71": {
+    "classification": "Equipment",
+    "name": "Chieftan's Shield",
+    "icon": "war3mapImported\\BTNTowerShieldv.1.2.blp",
+    "usable": [
+      "Tarcza"
+    ],
+    "type": "Off-hand",
+    "requiredLevel": 14,
+    "itemLevel": 24,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 20,
+      "Physical Damage Taken": -5
+    }
+  },
+  "72": {
+    "classification": "Equipment",
+    "name": "High Priest's Tome",
+    "icon": "war3mapImported\\BTNSimpleBook1.BLP",
+    "usable": [
+      "Azora",
+      "Ivanov"
+    ],
+    "type": "Off-hand",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Spell Damage": 15,
+      "Raw HP": 20,
+      "Healing": 15
+    }
+  },
+  "73": {
+    "classification": "Equipment",
+    "name": "Yeti Bone Shield",
+    "icon": "",
+    "usable": [
+      "Tarcza"
+    ],
+    "type": "Off-hand",
+    "requiredLevel": 16,
+    "itemLevel": 27,
+    "rarity": "Uncommon",
+    "cost": 0,
+    "stats": {
+      "Raw HP": 45,
+      "Physical Damage Taken": -10
+    }
+  },
+  "74": {
+    "classification": "Consumable",
+    "name": "Return Stone",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNPhilosophersStone.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 1,
+    "tooltip": "Return to town.|nMust be out of combat.",
+    "spell": "hearthstone",
+    "cost": -1,
+    "consume": false
+  },
+  "75": {
+    "classification": "Consumable",
+    "name": "Spirit Winds",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNWindWalkOn.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 1,
+    "tooltip": "Engage the spirit winds to travel faster.|nMust be out of combat.",
+    "spell": "mount",
+    "cost": -1,
+    "consume": false
+  },
+  "76": {
+    "classification": "Consumable",
+    "name": "Mammoth Fur",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNRedDragon.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 10,
+    "tooltip": "The fur of a Mammoth...|nSure looks warm.",
+    "cost": 20
+  },
+  "77": {
+    "classification": "Consumable",
+    "name": "Giant Mammoth Fur",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNRobeOfTheMagi.blp",
+    "itemLevel": 1,
+    "requiredLevel": 1,
+    "rarity": "Common",
+    "stackSize": 10,
+    "tooltip": "This looks...warmer.",
+    "cost": 20
   }
 }

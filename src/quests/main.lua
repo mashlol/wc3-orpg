@@ -583,7 +583,7 @@ function initQuests()
             rewards = {
                 exp = 50,
                 gold = 5,
-                items = {[4] = 5},
+                items = {[6] = 5},
             },
             objectives = {
                 [1] = {
@@ -699,12 +699,12 @@ function initQuests()
                 [1] = {
                     type = TYPE.ITEM,
                     amount = 10,
-                    itemId = 50,
+                    itemId = 76,
                 },
 				[2] = {
                     type = TYPE.ITEM,
                     amount = 5,
-                    itemId = 51,
+                    itemId = 77,
                 },
             },
             prerequisites = {6},

@@ -102,7 +102,7 @@ const STATS = {
         lua: 'stats.SCALE',
         fn: (x) => (x / 100) + 1,
     },
-    'Stam': {
+    'Raw HP': {
         lua: 'stats.RAW_HIT_POINTS',
     },
     'HP Regen': {
@@ -147,12 +147,8 @@ const STATS = {
     'Spell Damage Taken': {
         lua: 'stats.RAW_INCOMING_SPELL_DAMAGE',
     },
-    'INCOMING_HEALING_RAW': {
+    'Healing Received': {
         lua: 'stats.RAW_INCOMING_HEALING',
-    },
-    '% Cooldown Reduction': {
-        lua: 'stats.PERCENT_COOLDOWN_REDUCTION',
-        fn: (x) => 1 - (x / 100),
     },
     '% Cooldown Reduction': {
         lua: 'stats.PERCENT_COOLDOWN_REDUCTION',

@@ -25,7 +25,8 @@
         "gg_rct_minefinish",
         "gg_rct_mineleave",
         "__DEBUG__",
-        "gg_dest_YTcx_0977"
+        "gg_dest_YTcx_0977",
+        "FourCC"
     ],
     "Lua.diagnostics.disable": [
         "lowercase-global"
