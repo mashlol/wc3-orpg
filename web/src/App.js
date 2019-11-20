@@ -4,7 +4,14 @@ import EditDialog from './EditDialog.js';
 
 const fs = require('fs');
 
-const ITEMS_JSON_LOCATION = './../../json/items.json';
+// Traverse down until we find map.w3x in the folder
+let path = '.';
+let depth = 0;
+while (depth < 20 && !fs.existsSync(path + 'map.w3x')) {
+  path = path + '../';
+}
+
+const ITEMS_JSON_LOCATION = path + 'json/items.json';
 
 // {"1":{"name":"Item Name Perma","icon":"war3mapImported\\BTNWolf.blp","usable":[],"type":"Helmet","requiredLevel":"15","itemLevel":"27","rarity":"Rare","cost":12,"stats":{"Attack Damage":3}}}
 
