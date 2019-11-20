@@ -74,21 +74,21 @@ class App extends React.Component {
 
   render() {
     let editDialog = null;
-    let existingItemList = null;
-    let addItemButton = null;
     if (this.state.editInfo) {
       editDialog = <EditDialog initialData={this.state.editInfo} id={this.state.editId} onSave={this._onSave} onCancel={this._onCancel} />
-    } else {
-      existingItemList = Object.entries(this.state.existingItems).map(itemInfo => {
-        return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}>{itemInfo[1].name}</div>;
-      });
-      addItemButton = <button onClick={this._onNewItem}>Add new item</button>;
     }
 
+    const existingItemList = Object.entries(this.state.existingItems).map(itemInfo => {
+      return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}>{itemInfo[1].name}</div>;
+    });
+    const addItemButton = <button onClick={this._onNewItem}>Add new item</button>;
+
     return (
-      <div className="app">
-        {existingItemList}
-        {addItemButton}
+      <div>
+        <div className="app">
+          {existingItemList}
+          {addItemButton}
+        </div>
         {editDialog}
       </div>
     );
