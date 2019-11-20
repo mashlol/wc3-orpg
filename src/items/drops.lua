@@ -3,142 +3,7 @@ local itemmanager = require('src/items/itemmanager.lua')
 local LootRoll = require('src/ui/lootroll.lua')
 local log = require('src/log.lua')
 local party = require('src/party.lua')
-
-local DROP_TABLE = {
-    -- -------------------------------------------------------------------------
-    -- UNITS
-    -- -------------------------------------------------------------------------
-    [FourCC('hmbs')] = { -- Small turtles
-        none = 150,
-        [6] = 30,
-        [5] = 10,
-        [45] = 2,
-        [29] = 4,
-    },
-    [FourCC('lold')] = { -- River turtles
-        none = 50,
-        [6] = 5,
-        [5] = 2,
-		[9] = 275,
-        [18] = 1,
-        [37] = 1,
-    },
-	[FourCC('mamo')] = { -- Mammoth
-        none = 40,
-        [6] = 20,
-        [5] = 10,
-		[50] = 175,
-    },
-	[FourCC('wol2')] = { -- Elite Mammoth
-        none = 100,
-        [6] = 30,
-        [5] = 10,
-		[51] = 255,
-    },
-    [FourCC('clea')] = { -- Cultist Commander
-        none = 250,
-        [12] = 1,
-        [35] = 1,
-        [16] = 5,
-        [23] = 5,
-        [27] = 5,
-        [30] = 5,
-        [33] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-    [FourCC('cled')] = { -- Cultist Commander
-        none = 250,
-        [12] = 1,
-        [35] = 1,
-        [16] = 5,
-        [23] = 5,
-        [27] = 5,
-        [30] = 5,
-        [33] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-    [FourCC('cspe')] = { -- Cultist Emissary
-        none = 250,
-        [16] = 5,
-        [19] = 5,
-        [23] = 5,
-        [27] = 5,
-        [30] = 5,
-        [33] = 5,
-        [39] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-    [FourCC('h000')] = { -- Cultist Raider
-        none = 250,
-        [16] = 5,
-        [20] = 5,
-        [23] = 5,
-        [27] = 5,
-        [30] = 5,
-        [33] = 5,
-        [43] = 5,
-        [46] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-
-    -- -------------------------------------------------------------------------
-    -- DUNGEON
-    -- -------------------------------------------------------------------------
-    [FourCC('culw')] = { -- Cultist Enforcer
-        none = 250,
-        [14] = 5,
-        [13] = 5,
-        [31] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-    [FourCC('cult')] = { -- Cultist Worker
-        none = 250,
-        [14] = 5,
-        [13] = 5,
-        [31] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-    [FourCC('ecul')] = { -- Cultist Bodyguard
-        none = 250,
-        [14] = 5,
-        [13] = 5,
-        [31] = 5,
-        [6] = 30,
-        [5] = 10,
-    },
-
-    -- -------------------------------------------------------------------------
-    -- BOSSES
-    -- -------------------------------------------------------------------------
-    [FourCC('hbld')] = { -- Alpha Wolf
-        [11] = 60,
-        [26] = 40,
-        [42] = 40,
-    },
-    [FourCC('hbos')] = { -- Giant Turtle
-        [15] = 80,
-    },
-    [FourCC('mine')] = { -- Miner Joe
-        [17] = 25,
-        [34] = 25,
-        [44] = 25,
-        [47] = 25,
-    },
-    [FourCC('over')] = { -- Overseer Tom
-        [21] = 22,
-        [24] = 22,
-        [28] = 22,
-        [40] = 22,
-        [36] = 12,
-    },
-
-}
+local droptable = require('src/items/droptable.lua')
 
 -- rolls = {
 --     [1] = {
@@ -156,7 +21,7 @@ local rollId = 1
 
 function maybeGetDrop(unit)
     local unitId = GetUnitTypeId(unit)
-    local drops = DROP_TABLE[unitId]
+    local drops = droptable.DROPS[unitId]
     if drops == nil then
         return nil
     end
@@ -166,7 +31,10 @@ function maybeGetDrop(unit)
         totalWeights = totalWeights + weight
     end
 
+    print('total weight was: ', totalWeights)
+
     local randNum = GetRandomReal(0, totalWeights)
+    print('roll was: ', randNum)
     local curWeight = 0
     for itemId, weight in pairs(drops) do
         curWeight = curWeight + weight
@@ -356,7 +224,6 @@ function init()
 end
 
 return {
-    DROP_TABLE = DROP_TABLE,
     init = init,
     getItemIdForRoll = getItemIdForRoll,
     getTimerForRoll = getTimerForRoll,
