@@ -1,38 +1,18 @@
 {
   "1": {
-    "name": "Trouble in Turtle Town",
-    "getQuestFrom": "gg_unit_nvil_0069",
-    "handQuestTo": "gg_unit_nvil_0069",
-    "obtainText": "Yo yo I got a quest for you",
-    "incompleteText": "Yo yo the quest is incomplet yo",
-    "completedText": "Yo yo nice job yo",
-    "rewards": {
-      "exp": 50,
-      "gold": 5,
-      "items": {
-        "6": 5
-      }
+    "classification": "Equipment",
+    "name": "Rusty Ring",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNGoldRing.blp",
+    "itemLevel": 5,
+    "requiredLevel": 5,
+    "rarity": "Uncommon",
+    "stats": {
+      "Raw HP": 10,
+      "% Attack Damage": "1"
     },
-    "objectives": [
-      {
-        "type": "kill",
-        "amount": 10,
-        "toKill": "hmbs",
-        "name": "Snapping Turtles",
-        "verb": "Exterminate",
-        "verbPast": "exterminated"
-      },
-      {
-        "type": "item",
-        "amount": 10,
-        "itemId": 77
-      }
-    ],
-    "prerequisites": [
-      1,
-      2
-    ],
-    "levelRequirement": "12"
+    "type": "Ring",
+    "stackSize": 1,
+    "cost": 150
   },
   "2": {
     "classification": "Equipment",

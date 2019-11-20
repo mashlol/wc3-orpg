@@ -51,6 +51,7 @@
       "gold": "50",
       "exp": "15"
     },
+    "objectives": [],
     "getQuestFrom": "gg_unit_nvl2_0008",
     "handQuestTo": "gg_unit_nvil_0069",
     "completedText": "Nice job"

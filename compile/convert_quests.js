@@ -129,8 +129,11 @@ local TYPE = {
 }
 
 ` +
-    'local QUESTS = {\n' +
+    'function getQuests() \n' +
+    'return {\n' +
     finalResult +
-    '}\n return {QUESTS=QUESTS, TYPE=TYPE}\n';
+    '}\n' +
+    'end\n' +
+    'return {getQuests = getQuests, TYPE=TYPE}';
 
 fs.writeFileSync('../src/quests/quests.lua', finalResult);

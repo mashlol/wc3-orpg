@@ -6,7 +6,8 @@ local TYPE = {
     DISCOVER = {},
 }
 
-local QUESTS = {
+function getQuests() 
+return {
 [1] = {
     name = "Trouble in Turtle Town",
     getQuestFrom = gg_unit_nvil_0069,
@@ -53,6 +54,8 @@ local QUESTS = {
         exp = 15,
         gold = 50,
     },
+    objectives = {
+},
     getQuestFrom = gg_unit_nvl2_0008,
     handQuestTo = gg_unit_nvil_0069,
     completedText = "Nice job",
@@ -73,9 +76,10 @@ local QUESTS = {
 [0] = {
     type = TYPE.ITEM,
     amount = 15,
-    itemId = 2,
+    itemId = 78,
 },
 },
 },
 }
- return {QUESTS=QUESTS, TYPE=TYPE}
+end
+return {getQuests = getQuests, TYPE=TYPE}

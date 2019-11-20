@@ -42,22 +42,26 @@ local TYPE = {
 local ITEMS = {
 [1] = {
     type = TYPE.EQUIPMENT,
-    name = "Old boot",
-    icon = "ReplaceableTextures\\CommandButtons\\BTNBoots.blp",
-    itemLevel = 1,
-    requiredLevel = 1,
-    rarity = RARITY.COMMON,
+    name = "Rusty Ring",
+    icon = "ReplaceableTextures\\CommandButtons\\BTNGoldRing.blp",
+    itemLevel = 5,
+    requiredLevel = 5,
+    rarity = RARITY.UNCOMMON,
     stats = {
         {
             type = stats.RAW_HIT_POINTS,
             amount = 10,
             tickrate = 5,
         },
+        {
+            type = stats.PERCENT_DAMAGE,
+            amount = 1.01,
+            tickrate = 5,
+        },
     },
-    slot = equipment.SLOT.FEET,
+    slot = equipment.SLOT.RING,
     stackSize = 1,
-    cost = 30,
-    usableClasses = {FourCC('Hyuj'),FourCC('Hazr')},
+    cost = 150,
 },
 [2] = {
     type = TYPE.EQUIPMENT,
@@ -1576,6 +1580,17 @@ local ITEMS = {
     stackSize = 10,
     text = "This looks...warmer.",
     cost = 20,
+},
+[78] = {
+    name = "New Quest Item",
+    rarity = RARITY.COMMON,
+    icon = "ReplaceableTextures\\CommandButtons\\BTNCheese.blp",
+    requiredLevel = 1,
+    itemLevel = 1,
+    cost = 50,
+    type = TYPE.CONSUMABLE,
+    stackSize = 15,
+    text = "I think fred needs this",
 },
 }
  return {ITEMS=ITEMS, TYPE=TYPE}

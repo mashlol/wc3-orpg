@@ -4,12 +4,7 @@ local party = require('src/party.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 local backpack = require('src/items/backpack.lua')
 local Dialog = require('src/ui/dialog.lua')
-
-local TYPE = {
-    KILL = {},
-    ITEM = {},
-    DISCOVER = {},
-}
+local quests = require('src/quests/quests.lua')
 
 local QUESTS
 
@@ -49,7 +44,7 @@ function onKill()
             if not progressInfo.completed then
                 for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
                     if
-                        objectiveInfo.type == TYPE.KILL and
+                        objectiveInfo.type == quests.TYPE.KILL and
                         objectiveInfo.toKill == GetUnitTypeId(dyingUnit) and
                         objectiveInfo.amount ~= progress[playerId][questId].objectives[objectiveIdx]
                     then
@@ -82,7 +77,7 @@ function maybeUpdateLootProgress(playerId)
     for questId, progressInfo in pairs(progress[playerId]) do
         if not progressInfo.completed then
             for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
-                if objectiveInfo.type == TYPE.ITEM then
+                if objectiveInfo.type == quests.TYPE.ITEM then
                     local count = math.min(
                         objectiveInfo.amount,
                         backpack.getItemCount(
@@ -117,7 +112,7 @@ function maybeUpdateDiscoverProgress()
         if not progressInfo.completed then
             for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
                 if
-                    objectiveInfo.type == TYPE.DISCOVER and
+                    objectiveInfo.type == quests.TYPE.DISCOVER and
                     progress[playerId][questId].objectives[objectiveIdx] ~= objectiveInfo.amount
                 then
                     if enteredRegion == objectiveInfo.region then
@@ -241,9 +236,11 @@ function isEligibleForQuest(playerId, questId)
         return false
     end
 
-    for _, prereqQuestId in pairs(QUESTS[questId].prerequisites) do
-        if not questCompleted(playerId, prereqQuestId) then
-            return false
+    if QUESTS[questId].prerequisites then
+        for _, prereqQuestId in pairs(QUESTS[questId].prerequisites) do
+            if not questCompleted(playerId, prereqQuestId) then
+                return false
+            end
         end
     end
 
@@ -329,18 +326,18 @@ function getSectionsForAcceptDialog(questId, playerId)
     for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
         local objective
         local icon
-        if objectiveInfo.type == TYPE.KILL then
+        if objectiveInfo.type == quests.TYPE.KILL then
             local verb = objectiveInfo.verb or 'Kill'
             local amount = objectiveInfo.amount > 1 and (objectiveInfo.amount .. ' ')  or ''
             objective = verb.." "..amount..objectiveInfo.name
             icon = "war3mapImported\\ui\\swords_icon.blp"
         end
-        if objectiveInfo.type == TYPE.ITEM then
+        if objectiveInfo.type == quests.TYPE.ITEM then
             local itemInfo = itemmanager.getItemInfo(objectiveInfo.itemId)
             objective = "Collect "..objectiveInfo.amount.." "..itemInfo.name
             icon = "war3mapImported\\ui\\chest_icon.blp"
         end
-        if objectiveInfo.type == TYPE.DISCOVER then
+        if objectiveInfo.type == quests.TYPE.DISCOVER then
             objective = "Discover the "..objectiveInfo.name
             icon = "war3mapImported\\ui\\search_icon.blp"
         end
@@ -469,7 +466,7 @@ function finishQuest(playerId, questId)
     end
 
     for _, objectiveInfo in pairs(QUESTS[questId].objectives) do
-        if objectiveInfo.type == TYPE.ITEM then
+        if objectiveInfo.type == quests.TYPE.ITEM then
             for i=1,objectiveInfo.amount,1 do
                 backpack.removeItemIdFromBackpack(playerId, objectiveInfo.itemId)
             end
@@ -572,357 +569,7 @@ function getNumQuests()
 end
 
 function initQuests()
-    QUESTS = {
-        [1] = {
-            name = "Trouble in Turtle Town",
-            getQuestFrom = gg_unit_nvil_0069,
-            handQuestTo = gg_unit_nvil_0069,
-            obtainText = "Hello traveller, my name is Fjorn. If you're looking to help out around here, we could really do with some help killing the snapping turtles invading the forest to the west.",
-            incompleteText = "Have you completed the task?",
-            completedText = "Thank you for defeating those turtles!",
-            rewards = {
-                exp = 50,
-                gold = 5,
-                items = {[6] = 5},
-            },
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('hmbs'),
-                    name = 'Snapping Turtles',
-                },
-            },
-            prerequisites = {},
-            levelRequirement = 0,
-        },
-        [2] = {
-            name = "Fred's Quest",
-            getQuestFrom = gg_unit_nvl2_0070,
-            handQuestTo = gg_unit_nvil_0071,
-            obtainText = "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
-            incompleteText = "I don't think its possible to see this text.",
-            completedText = "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
-            rewards = {
-                exp = 20,
-                gold = 5,
-            },
-            objectives = {},
-            prerequisites = {},
-            levelRequirement = 0,
-        },
-        [3] = {
-            name = "Fred's Soup",
-            getQuestFrom = gg_unit_nvil_0071,
-            handQuestTo = gg_unit_nvil_0071,
-            obtainText = "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect five River Turtle Meat and bring it back to me?",
-            incompleteText = "Have you completed the task?",
-            completedText = "Thanks so much! I need to get back to the village so I can make my soup!",
-            rewards = {
-                exp = 100,
-                gold = 5,
-            },
-            objectives = {
-                [1] = {
-                    type = TYPE.ITEM,
-                    amount = 5,
-                    itemId = 9,
-                }
-            },
-            prerequisites = {2},
-            levelRequirement = 0,
-        },
-        [4] = {
-            name = "Return to Freydell Village",
-            getQuestFrom = gg_unit_nvil_0071,
-            handQuestTo = gg_unit_nvl2_0070,
-            obtainText = "I appreciate all you've done for me, but I can take it from here. Return to Fjord and see what else he has for you.",
-            incompleteText = "Impossible!",
-            completedText = "Fred sent you back here? Well, good I have some more work for you.",
-            objectives = {},
-            rewards = {
-                exp = 30,
-                gold = 3,
-            },
-            prerequisites = {3},
-            levelRequirement = 0,
-        },
-		[5] = {
-            name = "Giant Turtle",
-            getQuestFrom = gg_unit_nvil_0069,
-            handQuestTo = gg_unit_nvil_0069,
-            obtainText = "There's a giant turtle just west of Freydell Village, We believe it's the leader of the turtles invading the forest. Slay it and I will reward you fairly.",
-            incompleteText = "Have you slain the giant turtle",
-            completedText = "You did it? I'm amazed!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('hbos'),
-                    name = 'Giant Turtle',
-                }
-            },
-            rewards = {
-                exp = 150,
-                gold = 25,
-            },
-            prerequisites = {4},
-            levelRequirement = 0,
-        },
-		[6] = {
-            name = "The Glacial Tundra",
-            getQuestFrom = gg_unit_nvl2_0070,
-            handQuestTo = gg_unit_nvil_0040,
-            obtainText = "Travel to The Glacial Tundra, it's just west of here. You can find my friend Higram there, he might have some work for you.",
-            incompleteText = "Have you traveled to The Glacial Tundra yet?",
-            completedText = "Ah, old man Fjorn sent you? Good. I have a lot of work that needs to get done.",
-            objectives = {},
-            rewards = {
-                exp = 20,
-                gold = 5,
-            },
-            prerequisites = {4},
-            levelRequirement = 0,
-        },
-		[7] = {
-            name = "A Cold Winter",
-            getQuestFrom = gg_unit_nvil_0040,
-            handQuestTo = gg_unit_nvil_0040,
-            obtainText = "This winter is a brutal one... the trolls to the west raided our house and stole our furs, could you go hunt some mammoth so that we could use their fur?",
-            incompleteText = "Have you completed the task?",
-            completedText = "Thank the lords! We will survive another winter.",
-            rewards = {
-                exp = 50,
-                gold = 5,
-            },
-			objectives = {
-                [1] = {
-                    type = TYPE.ITEM,
-                    amount = 10,
-                    itemId = 76,
-                },
-				[2] = {
-                    type = TYPE.ITEM,
-                    amount = 5,
-                    itemId = 77,
-                },
-            },
-            prerequisites = {6},
-            levelRequirement = 0,
-        },
-		[8] = {
-            name = "Trolls to the West",
-            getQuestFrom = gg_unit_nvil_0040,
-            handQuestTo = gg_unit_nvil_0040,
-            obtainText = "Those Trolls have been bothering us for too long! It's time we strike back! Go to their village, it's just west of here and slay them all!",
-            incompleteText = "Have you killed those Trolls?",
-            completedText = "Well done!",
-            rewards = {
-                exp = 50,
-                gold = 5,
-            },
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('trop'),
-                    name = 'Troll Priests',
-                },
-				[2] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('trol'),
-                    name = 'Troll Warriors',
-                },
-            },
-            prerequisites = {7},
-            levelRequirement = 0,
-        },
-		[9] = {
-            name = "Your Move, Chief",
-            getQuestFrom = gg_unit_nvlw_0178,
-            handQuestTo = gg_unit_nvlw_0178,
-            obtainText = "The leader of the Trolls in the village is a powerful man. Take him down and they will lose their morale!",
-            incompleteText = "Have you killed the Troll Chieftan yet?",
-            completedText = "Finally... we can live in peace.",
-            rewards = {
-                exp = 50,
-                gold = 5,
-            },
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('troc'),
-                    name = 'Troll Chieftan',
-                },
-            },
-            prerequisites = {7},
-            levelRequirement = 0,
-		},
-		[10] = {
-            name = "The Last of Them",
-            getQuestFrom = gg_unit_nvlw_0178,
-            handQuestTo = gg_unit_nvlw_0178,
-            obtainText = "I have reason to believe that there are more Trolls in a cave just north of the village. Find them and slay them. I will reward you handsomely.",
-            incompleteText = "Go find the cave and slay those Trolls!",
-            completedText = "Well done! Here is your reward.",
-            rewards = {
-                exp = 50,
-                gold = 5,
-            },
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('mine'),
-                    name = 'High Troll Priest',
-                },
-				 [2] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('h002'),
-                    name = 'Giant Yeti',
-                },
-				 [3] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('over'),
-                    name = 'Ice Troll Warlord',
-                },
-            },
-            prerequisites = {9},
-            levelRequirement = 0,
-		},
-		[11] = {
-            name = "Stamping out the Fires",
-            getQuestFrom = gg_unit_hcth_0104,
-            handQuestTo = gg_unit_hcth_0104,
-            obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
-            incompleteText = "Have you extinguished the Cultist Bonfires?",
-            completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('fire'),
-                    name = 'Northwest Bonfire',
-					verb = 'Extinguish',
-					verbPast = 'extinguished',
-                },
-				[2] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('sfir'),
-                    name = 'Southwest Bonfire',
-					verb = 'Extinguish',
-					verbPast = 'extinguished',
-                },
-				[3] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('cfir'),
-                    name = 'Central Bonfire',
-					verb = 'Extinguish',
-					verbPast = 'extinguished',
-                },
-				[4] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('nefi'),
-                    name = 'Northeast Bonfire',
-					verb = 'Extinguish',
-					verbPast = 'extinguished',
-                },
-				[5] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('sefi'),
-                    name = 'Southeast Bonfire',
-					verb = 'Extinguish',
-					verbPast = 'extinguished',
-                },
-            },
-            rewards = {
-                exp = 200,
-                gold = 25,
-            },
-            prerequisites = {9},
-            levelRequirement = 0,
-        },
-		[12] = {
-            name = "Full Momentum",
-            getQuestFrom = gg_unit_gens_0335,
-            handQuestTo = gg_unit_gens_0335,
-            obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with! You can find them in the encampments to the east.",
-            incompleteText = "Have you slain those Commanders yet?",
-            completedText = "Nicely done.",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('clea'),
-                    name = 'Cultist Commander Siddel',
-                },
-				[2] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('cled'),
-                    name = 'Cultist Commander Audric',
-                },
-            },
-            rewards = {
-                exp = 250,
-                gold = 30,
-            },
-            prerequisites = {9},
-            levelRequirement = 0,
-        },
-        [13] = {
-            name = "Overrun with Wolves",
-            getQuestFrom = gg_unit_ntks_0365,
-            handQuestTo = gg_unit_ntks_0365,
-            obtainText = "These once peaceful lands have been overrun with wolves. My tribes can no longer survive here. Could you help us out?",
-            incompleteText = "Have you killed the wolves?",
-            completedText = "I am very impressed with your skills. Talk to me if you need more work.",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 10,
-                    toKill = FourCC('wolf'),
-                    name = 'Arctic Wolves',
-                }
-            },
-            rewards = {
-                exp = 50,
-                gold = 5,
-            },
-            prerequisites = {},
-            levelRequirement = 7,
-        },
-        [14] = {
-            name = "Alpha Wolf",
-            getQuestFrom = gg_unit_ntks_0365,
-            handQuestTo = gg_unit_ntks_0365,
-            obtainText = "There is a nook just north east of here where the Alpha Wolf resides, I need you to slay it. If you follow the road west you should be able to find him.",
-            incompleteText = "Have you slain the Alpha Wolf?",
-            completedText = "You did it? I'm amazed!",
-            objectives = {
-                [1] = {
-                    type = TYPE.KILL,
-                    amount = 1,
-                    toKill = FourCC('hbld'),
-                    name = 'The Alpha Wolf',
-                }
-            },
-            rewards = {
-                exp = 200,
-                gold = 30,
-            },
-            prerequisites = {13},
-            levelRequirement = 8,
-        },
-}
+    QUESTS = quests.getQuests()
 end
 
 function onHeroLevel()
@@ -936,7 +583,7 @@ end
 function initRegionTriggers()
     for _, questInfo in pairs(QUESTS) do
         for _, objectiveInfo in pairs(questInfo.objectives) do
-            if objectiveInfo.type == TYPE.DISCOVER then
+            if objectiveInfo.type == quests.TYPE.DISCOVER then
                 local region = CreateRegion()
                 RegionAddRect(region, objectiveInfo.rect)
                 objectiveInfo.region = region

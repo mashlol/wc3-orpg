@@ -112,7 +112,7 @@ class App extends React.Component {
 
   _onNewQuest = () => {
     this.setState({
-      editQuestInfo: {},
+      editQuestInfo: {objectives: []},
       editQuestId: null,
     });
   };
