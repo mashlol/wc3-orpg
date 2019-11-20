@@ -242,6 +242,7 @@ class EditDialog extends React.Component {
         <div>
           <div>
             <select name="type" id="item-type" value={this.state.data.type} onChange={this._onChangeSimpleValue.bind(this, 'type')} >
+              <option value="unset">Choose a type</option>
               {itemTypeOptions}
             </select>
           </div>
@@ -278,6 +279,7 @@ class EditDialog extends React.Component {
         </div>
         <div>
           <select name="rarity" id="item-type" value={this.state.data.rarity} onChange={this._onChangeSimpleValue.bind(this, 'rarity')}>
+            <option value="unset">Choose a rarity</option>
             {itemRarityOptions}
           </select>
         </div>
