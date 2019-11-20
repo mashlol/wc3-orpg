@@ -85,7 +85,7 @@ const COLUMNS = {
             },
             'toKill': {
                 name: 'toKill',
-                type: 'number',
+                type: 'int',
                 fn: (x) => 'FourCC(\'' + x + '\')',
             },
             'name': {
