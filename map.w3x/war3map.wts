@@ -801,3 +801,15 @@ STRING 148
 Arctic Wolf
 }
 
+STRING 149
+// Doodads: gran (Granary Anywhere), Name (Name)
+{
+Granary Anywhere
+}
+
+STRING 151
+// Doodads: bara (Farm anywhere), Name (Name)
+{
+Farm anywhere
+}
+
