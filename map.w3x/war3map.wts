@@ -813,3 +813,15 @@ STRING 151
 Farm anywhere
 }
 
+STRING 152
+// Units: rats (Rat), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 153
+// Units: rats (Rat), Name (Name)
+{
+Rat
+}
+
