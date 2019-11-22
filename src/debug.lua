@@ -1,6 +1,8 @@
 local backpack = require('src/items/backpack.lua')
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
+local itemmanager = require('src/items/itemmanager.lua')
+local items = require('src/items/items.lua')
 
 local animNum = 1
 
@@ -63,6 +65,28 @@ local debug8 = function()
     SetUnitPosition(heroUnit, mouse.getMouseX(playerId), mouse.getMouseY(playerId))
 end
 
+local onGiveItem = function()
+    local sentString = GetEventPlayerChatString()
+    local itemNameOrId = SubString(
+        sentString, 3, StringLength(sentString))
+
+    local itemId = S2I(itemNameOrId)
+
+    if itemId == 0 then
+        for idx, info in pairs(items.ITEMS) do
+            if info.name == itemNameOrId then
+                print("Giving: ", itemNameOrId)
+                backpack.addItemIdToBackpack(0, idx)
+                return
+            end
+        end
+        print("No item with that name found")
+    else
+        print("Giving: ", itemmanager.getItemInfo(itemId).name)
+        backpack.addItemIdToBackpack(0, itemId)
+    end
+end
+
 local init = function()
     local trigger = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
@@ -75,6 +99,10 @@ local init = function()
     local trig3 = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trig3, Player(0), OSKEY_8, 0, true)
     TriggerAddAction(trig3, debug8)
+
+    local giveItemTrig = CreateTrigger()
+    TriggerRegisterPlayerChatEvent(giveItemTrig, Player(0), "-g", false)
+    TriggerAddAction(giveItemTrig, onGiveItem)
 end
 
 return {
