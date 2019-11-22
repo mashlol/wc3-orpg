@@ -849,3 +849,51 @@ STRING 157
 Abyss Rocks
 }
 
+STRING 158
+// Units: hbos (Giant Turtle), EditorSuffix (Name - Editor Suffix)
+{
+ (World Boss)
+}
+
+STRING 159
+// Units: hbld (Alpha Wolf), EditorSuffix (Name - Editor Suffix)
+{
+ (World Boss)
+}
+
+STRING 160
+// Units: cult (Ice Troll Grunt), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
+STRING 161
+// Units: culw (Ice Troll Enforcer), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
+STRING 162
+// Units: ecul (Ice Troll Bodyguard), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
+STRING 163
+// Units: over (Ice Troll Warlord), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+
+STRING 164
+// Units: mine (High Troll Priest), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+
+STRING 165
+// Units: h002 (Giant Yeti), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+
