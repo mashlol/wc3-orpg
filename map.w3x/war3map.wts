@@ -825,3 +825,27 @@ STRING 153
 Rat
 }
 
+STRING 154
+// Destructibles: B00D (Abyss4), Name (Name)
+{
+Abyss4
+}
+
+STRING 155
+// Doodads: D00K (Waterfall Rock1), Name (Name)
+{
+Waterfall Rock1
+}
+
+STRING 156
+// Doodads: D00L (Mountain Snowcap), Name (Name)
+{
+Mountain Snowcap
+}
+
+STRING 157
+// Doodads: D00M (Abyss Rocks), Name (Name)
+{
+Abyss Rocks
+}
+

@@ -40,6 +40,15 @@ function CreateAllDestructables()
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
 end
 
+function CreateUnitsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
+end
+
 function CreateNeutralHostile()
     local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
     local u
@@ -228,7 +237,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 30564.4, -27510.9, 272.464, FourCC("cult"))
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 30638.4, -28536.3, 272.756, FourCC("cult"))
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 29719.2, -27217.2, 317.507, FourCC("culw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("culw"), 30449.6, -27502.5, 254.149, FourCC("culw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("culw"), 30449.6, -27502.5, 254.150, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("culw"), 29532.8, -27356.9, 310.856, FourCC("culw"))
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 30361.0, -27384.3, 272.464, FourCC("cult"))
     u = BlzCreateUnitWithSkin(p, FourCC("cult"), 29764.4, -26337.4, 251.549, FourCC("cult"))
@@ -476,6 +485,7 @@ function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
+    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
