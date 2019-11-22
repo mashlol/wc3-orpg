@@ -69,7 +69,7 @@ local interruptCast = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
     stopCast(playerId, true)
     local heroUnit = hero.getHero(playerId)
-    animations.resetAnimation(heroUnit)
+    animations.maybeResetAnimation(heroUnit)
 end
 
 function stopCast(playerId, interruptable)
