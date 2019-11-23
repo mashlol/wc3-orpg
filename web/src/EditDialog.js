@@ -219,10 +219,6 @@ class EditDialog extends React.Component {
       return <option key={rarity} value={rarity}>{rarity}</option>
     });
 
-    // const itemIconOptions = Object.values(itemIcons).map(icon => {
-    //   return <option key={icon} value={icon}>{icon}</option>
-    // });
-
     const statInfo = this.state.data.stats || {};
     const stats = Object.entries(statInfo).map(entry => {
       const statKey = entry[0];
@@ -231,7 +227,7 @@ class EditDialog extends React.Component {
         <div key={entry[0]}>
           <input type="number" value={amount} onChange={this._onStatChanged.bind(this, statKey)} />
           {this._getSelectForStats(statKey, this._onStatKeyChanged.bind(this, statKey))}
-          <button onClick={this._onRemoveStat.bind(this, statKey)}>Remove</button>
+          <button className="destructive" onClick={this._onRemoveStat.bind(this, statKey)}>Remove</button>
         </div>);
     });
 
@@ -241,6 +237,7 @@ class EditDialog extends React.Component {
       equipmentOnlyFields = (
         <div>
           <div>
+            <label htmlFor="type">Type: </label>
             <select name="type" id="item-type" value={this.state.data.type} onChange={this._onChangeSimpleValue.bind(this, 'type')} >
               <option value="unset">Choose a type</option>
               {itemTypeOptions}
@@ -264,7 +261,7 @@ class EditDialog extends React.Component {
             <label htmlFor="stackSize">Stack Size: </label><input name="stackSize" type="number" placeholder="Stack Size" value={this.state.data.stackSize} onChange={this._onChangeSimpleValue.bind(this, 'stackSize')} />
           </div>
           <div>
-            <label htmlFor="tooltip">Tooltip: </label><input name="tooltip" type="textarea" placeholder="Tooltip" value={this.state.data.tooltip} onChange={this._onChangeSimpleValue.bind(this, 'tooltip')} />
+            <label htmlFor="tooltip">Tooltip: </label><input name="tooltip" type="text" placeholder="Tooltip" value={this.state.data.tooltip} onChange={this._onChangeSimpleValue.bind(this, 'tooltip')} />
           </div>
           <div>
             <label htmlFor="spellKey">Spell Key: </label><input name="spellKey" type="text" placeholder="Spell Key" value={this.state.data.spellKey} onChange={this._onChangeSimpleValue.bind(this, 'spellKey')} />
@@ -276,9 +273,11 @@ class EditDialog extends React.Component {
     return (
       <div className="editDialog">
         <div>
-          <input type="text" placeholder="Item Name" value={this.state.data.name} onChange={this._onChangeSimpleValue.bind(this, 'name')} />
+          <label htmlFor="name">Name: </label>
+          <input name="name" type="text" placeholder="Item Name" value={this.state.data.name} onChange={this._onChangeSimpleValue.bind(this, 'name')} />
         </div>
         <div>
+          <label htmlFor="rarity">Rarity: </label>
           <select name="rarity" id="item-type" value={this.state.data.rarity} onChange={this._onChangeSimpleValue.bind(this, 'rarity')}>
             <option value="unset">Choose a rarity</option>
             {itemRarityOptions}
@@ -300,6 +299,7 @@ class EditDialog extends React.Component {
         </div>
 
         <div>
+          <label htmlFor="classification">Type: </label>
           <select name="classification" id="item-type" value={this.state.data.classification} onChange={this._onChangeSimpleValue.bind(this, 'classification')}>
             <option value="unset">Choose a type of item</option>
             {itemClassOptions}
@@ -311,8 +311,8 @@ class EditDialog extends React.Component {
 
         <hr />
 
+        <button className="neutral" onClick={this.props.onCancel}>Cancel</button>
         <button onClick={this._onSave}>Save</button>
-        <button onClick={this.props.onCancel}>Cancel</button>
       </div>
     );
   }

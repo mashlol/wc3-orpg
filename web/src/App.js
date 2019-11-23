@@ -166,7 +166,6 @@ class App extends React.Component {
       editDropInfo: info,
       editDropId: id,
     });
-    console.log('edit drop', info, id);
   };
 
   _onNewDrop = () => {
@@ -189,7 +188,8 @@ class App extends React.Component {
     }
 
     const existingItemList = Object.entries(this.state.existingItems).map(itemInfo => {
-      return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}>{itemInfo[1].name}</div>;
+      const cls = itemInfo[1].classification === 'Equipment' ? itemInfo[1].type : itemInfo[1].classification;
+      return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}><strong>{itemInfo[1].name}</strong><span className={itemInfo[1].rarity}>{itemInfo[1].rarity}</span><span>{cls}</span></div>;
     });
     const addItemButton = <button onClick={this._onNewItem}>Add new item</button>;
 
@@ -240,7 +240,6 @@ class App extends React.Component {
         </div>
       );
     } else {
-
       contents = (
         <div>
           <div className="app">
@@ -252,6 +251,11 @@ class App extends React.Component {
       );
     }
 
+    let tint = null
+    if (editDropDialog || editQuestDialog || editItemDialog) {
+      tint = <div onClick={this._onCancel} className="tint" />;
+    }
+
     return (
       <div>
         <div className="tabs">
@@ -260,6 +264,7 @@ class App extends React.Component {
           <button onClick={this._switchTab.bind(this, 'drops')}>Drops</button>
         </div>
         {contents}
+        {tint}
       </div>
     );
   }

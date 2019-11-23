@@ -232,7 +232,7 @@ class EditQuestDialog extends React.Component {
 
           {objectiveSpecificFields}
 
-          <button onClick={this._onRemoveObjective.bind(this, idx)}>Remove</button>
+          <button className="destructive" onClick={this._onRemoveObjective.bind(this, idx)}>Remove</button>
         </div>
       );
     });
@@ -242,7 +242,7 @@ class EditQuestDialog extends React.Component {
       return (
         <div key={idx}>
           {this._getSelectForPrerequisite(entry, this._onChangePrerequisite.bind(this, idx))}
-          <button onClick={this._onRemovePrerequisite.bind(this, idx)}>Remove</button>
+          <button className="destructive" onClick={this._onRemovePrerequisite.bind(this, idx)}>Remove</button>
         </div>
       );
     });
@@ -250,15 +250,18 @@ class EditQuestDialog extends React.Component {
     return (
       <div className="editDialog">
         <div>
+          <label htmlFor="levelRequirement">Quest Name:</label>
           <input type="text" placeholder="Quest Name" value={this.state.data.name} onChange={this._onChangeSimpleValue.bind(this, 'name')} />
         </div>
         <div>
+          <label htmlFor="levelRequirement">Receive Quest From:</label>
           <select name="getQuestFrom" value={this.state.data.getQuestFrom} onChange={this._onChangeSimpleValue.bind(this, 'getQuestFrom')}>
             <option value="unset">Choose a quest giver</option>
             {validUnitOptions}
           </select>
         </div>
         <div>
+          <label htmlFor="levelRequirement">Hand Quest To:</label>
           <select name="handQuestTo" value={this.state.data.handQuestTo} onChange={this._onChangeSimpleValue.bind(this, 'handQuestTo')}>
             <option value="unset">Choose who to hand the quest to</option>
             {validUnitOptions}
@@ -298,8 +301,8 @@ class EditQuestDialog extends React.Component {
         {objectives}
         <button onClick={this._onAddObjective}>Add an objective</button>
         <hr />
+        <button className="neutral" onClick={this.props.onCancel}>Cancel</button>
         <button onClick={this._onSave}>Save</button>
-        <button onClick={this.props.onCancel}>Cancel</button>
       </div>
     );
   }

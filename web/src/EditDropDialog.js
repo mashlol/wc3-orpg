@@ -65,6 +65,14 @@ class EditDropDialog extends React.Component {
     });
   };
 
+  _onDropRemoved = (key) => {
+    const oldData = Object.assign({}, this.state.data);
+    delete oldData[key];
+    this.setState({
+      data: oldData,
+    });
+  };
+
   _onChangeUnitId = (event) => {
     this.setState({
       id: event.target.value,
@@ -82,6 +90,11 @@ class EditDropDialog extends React.Component {
       return <option key={itemId} value={itemId}>{itemName}</option>
     });
 
+    let totalWeight = 0;
+    Object.entries(this.state.data).forEach(entry => {
+      totalWeight += Number(entry[1]);
+    });
+
     const dropRows = Object.entries(this.state.data).map(entry => {
       return (
         <div className="dropTableRow">
@@ -90,6 +103,8 @@ class EditDropDialog extends React.Component {
             {validItemOptions}
           </select>
           <input type="number" value={entry[1]} onChange={this._onDropChange.bind(this, entry[0])} />
+          <span className="pct">{(Number(entry[1]) / totalWeight * 100).toFixed(2)} %</span>
+          <button className="destructive" onClick={this._onDropRemoved.bind(this, entry[0])}>Remove</button>
         </div>
       );
     });
@@ -108,8 +123,8 @@ class EditDropDialog extends React.Component {
 
         <hr />
 
+        <button className="neutral" onClick={this.props.onCancel}>Cancel</button>
         <button onClick={this._onSave}>Save</button>
-        <button onClick={this.props.onCancel}>Cancel</button>
       </div>
     );
   }
