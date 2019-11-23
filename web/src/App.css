@@ -37,6 +37,8 @@
     margin-left: -520px;
     padding: 20px;
     background: rgba(255,255,255,0.95);
+    max-height: calc(100% - 140px);
+    overflow-y: auto;
 }
 
 .app {
@@ -111,7 +113,7 @@ input[type=text], input[type=number], select, textarea {
 }
 
 .objective input[type=text], .objective input[type=number], .objective select, .objective textarea {
-    width: 260px;
+    width: 160px;
 }
 
 textarea {
