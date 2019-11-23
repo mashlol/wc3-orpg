@@ -47,6 +47,8 @@ function CreateUnitsForPlayer0()
     local t
     local life
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -29555.1, 31028.2, 186.136, FourCC("Hazr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -27441.0, 31288.9, 101.967, FourCC("Hazr"))
 end
 
 function CreateNeutralHostile()

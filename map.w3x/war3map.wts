@@ -897,3 +897,81 @@ STRING 165
  (Boss)
 }
 
+STRING 166
+// Destructibles: B00A (Sewer Corner Outer Corner), Name (Name)
+{
+Sewer Corner Outer Corner
+}
+
+STRING 167
+// Destructibles: B00B (Sewer Stone Doorway), Name (Name)
+{
+Sewer Stone Doorway
+}
+
+STRING 168
+// Destructibles: B00C (Sewer Inner Corner), Name (Name)
+{
+Sewer Inner Corner
+}
+
+STRING 169
+// Destructibles: B00E (Sewer Stone Doorway With Door), Name (Name)
+{
+Sewer Stone Doorway With Door
+}
+
+STRING 170
+// Destructibles: B00F (Destructable entrance), Name (Name)
+{
+Destructable entrance
+}
+
+STRING 171
+// Destructibles: B00M (Sewer Wall), Name (Name)
+{
+Sewer Wall
+}
+
+STRING 172
+// Destructibles: B00N (Sewer Wall Half), Name (Name)
+{
+Sewer Wall Half
+}
+
+STRING 173
+// Destructibles: B00I (Mine Entrance), Name (Name)
+{
+Mine Entrance
+}
+
+STRING 174
+// Destructibles: B00G (Sewer Wood Wall), Name (Name)
+{
+Sewer Wood Wall
+}
+
+STRING 175
+// Destructibles: B00H (Sewer Wall Half Wood), Name (Name)
+{
+Sewer Wall Half Wood
+}
+
+STRING 176
+// Destructibles: B00J (Grate), Name (Name)
+{
+Grate
+}
+
+STRING 177
+// Destructibles: B00K (Abyss4), Name (Name)
+{
+Abyss4
+}
+
+STRING 178
+// Destructibles: B00L (Sewer Inner Pillar), Name (Name)
+{
+Sewer Inner Pillar
+}
+
