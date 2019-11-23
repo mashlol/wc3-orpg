@@ -178,6 +178,29 @@ function Talents:init()
                 numLearnedText, TEXT_JUSTIFY_BOTTOM, TEXT_JUSTIFY_RIGHT)
             BlzFrameSetText(numLearnedText, "0")
 
+            local talentDependencyArrow = BlzCreateFrameByType(
+                "BACKDROP",
+                "talentDependencyArrow",
+                talentIconOrigin,
+                "",
+                0)
+            BlzFrameSetSize(
+                talentDependencyArrow,
+                consts.TALENT_ICON_SIZE,
+                consts.TALENT_ICON_SIZE)
+            BlzFrameSetPoint(
+                talentDependencyArrow,
+                FRAMEPOINT_CENTER,
+                talentIconOrigin,
+                FRAMEPOINT_TOP,
+                0,
+                -0.001)
+            BlzFrameSetTexture(
+                talentDependencyArrow,
+                "war3mapImported\\ui\\arrow_down_1_icon.blp",
+                0,
+                true)
+
             local hoverFrame = BlzCreateFrameByType(
                 "GLUEBUTTON",
                 "hoverFrame",
@@ -199,6 +222,7 @@ function Talents:init()
                 numLearnedText = numLearnedText,
                 backdropTint = backdropTint,
                 talentDependencyLine = talentDependencyLine,
+                talentDependencyArrow = talentDependencyArrow,
                 hoverFrame = hoverFrame,
             }
         end
@@ -272,12 +296,15 @@ function Talents:update(playerId)
             BlzFrameSetText(iconFrame.tooltip.text, tooltipText)
 
             if talentInfo.prerequisite ~= nil then
+                BlzFrameSetVisible(iconFrame.talentDependencyArrow, true)
                 local prereqRow = talentInfo.prerequisite.row
                 local prereqCol = talentInfo.prerequisite.col
 
                 for row = y-1, prereqRow, -1 do
                     entriesForPrereq[prereqCol][row] = true
                 end
+            else
+                BlzFrameSetVisible(iconFrame.talentDependencyArrow, false)
             end
 
             filledEntries[x][y] = true
