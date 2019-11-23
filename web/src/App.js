@@ -27,6 +27,70 @@ const existingDrops = JSON.parse(fs.readFileSync(DROPS_JSON_LOCATION, {
   encoding: 'utf8'
 }));
 
+
+const ItemClassification = {
+  EQUIPMENT: 'Equipment',
+  CONSUMABLE: 'Consumable',
+};
+
+const ItemType = {
+  HELMET: 'Helmet',
+  NECKLACE: 'Necklace',
+  SHOULDERS: 'Shoulders',
+  CHEST: 'Chest',
+  BACK: 'Back',
+  GLOVES: 'Gloves',
+  PANTS: 'Pants',
+  FEET: 'Feet',
+  RING: 'Ring',
+  TRINKET: 'Trinket',
+  ONE_HAND_WEAPON: '1H Weapon',
+  TWO_HAND_WEAPON: '2H Weapon',
+  OFF_HAND: 'Off-hand',
+};
+
+const Rarity = {
+  COMMON: 'Common',
+  UNCOMMON: 'Uncommon',
+  RARE: 'Rare',
+  EPIC: 'Epic',
+  LEGENDARY: 'Legendary',
+  DIVINE: 'Divine',
+};
+
+const Stat = {
+  PERCENT_MOVE_SPEED: '% Move Speed',
+  PERCENT_SCALE: '% Scale',
+  RAW_HIT_POINTS: 'Raw HP',
+  HEALTH_REGEN: 'HP Regen',
+  ATTACK_DAMAGE_RAW: 'Attack Damage',
+  ATTACK_DAMAGE_PCT: '% Attack Damage',
+  SPELL_DAMAGE_RAW: 'Spell Damage',
+  SPELL_DAMAGE_PCT: '% Spell Damage',
+  HEALING_RAW: 'Healing',
+  HEALING_PCT: '% Healing',
+  INCOMING_ATTACK_DAMAGE_PCT: '% Physical Damage Taken',
+  INCOMING_SPELL_DAMAGE_PCT: '% Spell Damage Taken',
+  INCOMING_HEALING_PCT: '% Healing Received',
+  INCOMING_ATTACK_DAMAGE_RAW: 'Physical Damage Taken',
+  INCOMING_SPELL_DAMAGE_RAW: 'Spell Damage Taken',
+  INCOMING_HEALING_RAW: 'Healing Received',
+  COOLDOWN_REDUCTION_PCT: '% Cooldown Reduction',
+  CAST_SPEED_PCT: '% Cast Speed',
+  ATTACK_SPEED_PCT: '% Attack Speed',
+  CRITICAL_CHANCE_RAW: '% Crit Chance',
+  CRITICAL_DAMAGE_RAW: 'Critical Damage',
+  CRITICAL_DAMAGE_PCT: '% Critical Damage',
+};
+
+const Class = {
+  AZORA: 'Azora',
+  YUJI: 'Yuji',
+  IVANOV: 'Ivanov',
+  TARCZA: 'Tarcza',
+  STORMFIST: 'Stormfist',
+};
+
 class App extends React.Component {
   state = {
     tab: "items",
@@ -42,6 +106,12 @@ class App extends React.Component {
     editDropInfo: null,
     editDropId: null,
     existingDrops: existingDrops,
+
+    itemTypeFilter: null,
+    itemSlotFilter: null,
+    itemRarityFilter: null,
+    itemLevelGTFilter: null,
+    itemLevelLTFilter: null,
   };
 
   _onSaveItem = (info, id) => {
@@ -175,6 +245,12 @@ class App extends React.Component {
     });
   };
 
+  _onChangeFilter = (filterStr, event) => {
+    this.setState({
+      [filterStr]: event.target.value,
+    });
+  };
+
   render() {
     let editItemDialog = null;
     let editQuestDialog = null;
@@ -187,11 +263,70 @@ class App extends React.Component {
       editDropDialog = <EditDropDialog initialData={this.state.editDropInfo} id={this.state.editDropId} onSave={this._onSaveDrop} onCancel={this._onCancel} existingItems={this.state.existingItems} existingQuests={this.state.existingQuests} />
     }
 
-    const existingItemList = Object.entries(this.state.existingItems).map(itemInfo => {
-      const cls = itemInfo[1].classification === 'Equipment' ? itemInfo[1].type : itemInfo[1].classification;
-      return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}><strong>{itemInfo[1].name}</strong><span className={itemInfo[1].rarity}>{itemInfo[1].rarity}</span><span>{cls}</span></div>;
-    });
+    const existingItemList = Object.entries(this.state.existingItems)
+      .filter(itemInfo => {
+        const typeFilter = this.state.itemTypeFilter;
+        const slotFilter = this.state.itemSlotFilter;
+        const rarityFilter = this.state.itemRarityFilter;
+        const itemLevelGTFilter = this.state.itemLevelGTFilter;
+        const itemLevelLTFilter = this.state.itemLevelLTFilter;
+
+        if (typeFilter != null && typeFilter !== "all" && itemInfo[1].classification !== typeFilter) {
+          return false;
+        }
+        if (slotFilter != null && slotFilter !== "all" && itemInfo[1].type !== slotFilter) {
+          return false;
+        }
+        if (rarityFilter != null && rarityFilter !== "all" && itemInfo[1].rarity !== rarityFilter) {
+          return false;
+        }
+
+        if (itemLevelGTFilter != null && itemLevelGTFilter !== "" && itemInfo[1].requiredLevel < itemLevelGTFilter) {
+          return false;
+        }
+
+        if (itemLevelLTFilter != null && itemLevelLTFilter !== "" && itemInfo[1].requiredLevel > itemLevelLTFilter) {
+          return false;
+        }
+
+        return true;
+      })
+      .map(itemInfo => {
+        const cls = itemInfo[1].classification === 'Equipment' ? itemInfo[1].type : itemInfo[1].classification;
+        return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}><strong>{itemInfo[1].name}</strong><span className={itemInfo[1].rarity}>{itemInfo[1].rarity}</span><span>{cls}</span></div>;
+      });
     const addItemButton = <button onClick={this._onNewItem}>Add new item</button>;
+
+    const itemClassOptions = Object.values(ItemClassification).map(type => {
+      return <option key={type} value={type}>{type}</option>
+    });
+
+    const itemTypeOptions = Object.values(ItemType).map(type => {
+      return <option key={type} value={type}>{type}</option>
+    });
+
+    const itemRarityOptions = Object.values(Rarity).map(rarity => {
+      return <option key={rarity} value={rarity}>{rarity}</option>
+    });
+
+    const filters = (
+      <div className="filters">
+        <select onChange={this._onChangeFilter.bind(this, 'itemTypeFilter')} value={this.state.itemTypeFilter}>
+          <option value="all">All Types</option>
+          {itemClassOptions}
+        </select>
+        <select onChange={this._onChangeFilter.bind(this, 'itemSlotFilter')} value={this.state.itemSlotFilter}>
+          <option value="all">All Slots</option>
+          {itemTypeOptions}
+        </select>
+        <select onChange={this._onChangeFilter.bind(this, 'itemRarityFilter')} value={this.state.itemRarityFilter}>
+          <option value="all">All Rarities</option>
+          {itemRarityOptions}
+        </select>
+        <input placeholder="Required Level >=" type="text" value={this.state.itemLevelGTFilter} onChange={this._onChangeFilter.bind(this, 'itemLevelGTFilter')} />
+        <input placeholder="Required Level <=" type="text" value={this.state.itemLevelLTFilter} onChange={this._onChangeFilter.bind(this, 'itemLevelLTFilter')} />
+      </div>
+    );
 
     const existingQuestList = Object.entries(this.state.existingQuests).map(questInfo => {
       return <div onClick={this._onEditQuest.bind(this, questInfo[1], questInfo[0])} key={questInfo[0]}>{questInfo[1].name}</div>;
@@ -223,6 +358,7 @@ class App extends React.Component {
       contents = (
         <div>
           <div className="app">
+            {filters}
             {existingItemList}
             {addItemButton}
           </div>

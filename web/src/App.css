@@ -24,6 +24,10 @@
     text-align: center;
 }
 
+.filters {
+    text-align: center;
+}
+
 .editDialog {
     position: absolute;
     background: white;
@@ -100,11 +104,14 @@ button.neutral:hover {
 
 input[type=text], input[type=number], select, textarea {
     width: 350px;
-    /* float: right; */
     height: 36px;
     padding: 0 5px;
     box-sizing: border-box;
     margin-bottom: 5px;
+}
+
+.objective input[type=text], .objective input[type=number], .objective select, .objective textarea {
+    width: 260px;
 }
 
 textarea {
@@ -115,6 +122,19 @@ label {
     width: 180px;
     display: inline-block;
     vertical-align: top;
+}
+
+.usableBy {
+    padding: 10px 0;
+}
+
+.usableBy label {
+    width: 100px;
+}
+
+.usableText {
+    width: 180px;
+    display: inline-block;
 }
 
 .tint {

@@ -243,8 +243,8 @@ class EditDialog extends React.Component {
               {itemTypeOptions}
             </select>
           </div>
-          <div>
-            Usable by: {classRadios}
+          <div className="usableBy">
+            <span className="usableText">Usable by: </span> {classRadios}
           </div>
           <div>
             <hr />

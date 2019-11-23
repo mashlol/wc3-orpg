@@ -227,7 +227,7 @@ class EditQuestDialog extends React.Component {
       }
 
       return (
-        <div key={idx}>
+        <div className="objective" key={idx}>
           {this._getSelectForObjective(entry.type, this._onObjectiveChanged.bind(this, idx, 'type'))}
 
           {objectiveSpecificFields}
