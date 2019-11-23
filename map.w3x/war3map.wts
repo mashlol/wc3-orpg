@@ -975,3 +975,21 @@ STRING 178
 Sewer Inner Pillar
 }
 
+STRING 179
+// Units: ihay (Infected Hay), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 180
+// Units: ihay (Infected Hay), Name (Name)
+{
+Infected Hay
+}
+
+STRING 181
+// Units: beet (Burrowed Beetle), Name (Name)
+{
+Burrowed Beetle
+}
+
