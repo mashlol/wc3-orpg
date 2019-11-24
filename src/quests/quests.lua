@@ -236,9 +236,9 @@ return {
 },
 [11] = {
     name = "Stamping out the Fires",
-    getQuestFrom = gg_unit_hcth_0104,
-    handQuestTo = gg_unit_hcth_0104,
-    obtainText = "The Cultists are rallying outside of our camp to the east. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
+    getQuestFrom = gg_unit_gens_0376,
+    handQuestTo = gg_unit_gens_0376,
+    obtainText = "The Cultists are rallying outside of our camp to the north west. They need to be slowed down. Find and destroy five Cultist Bonfires and return back to me.",
     incompleteText = "Have you extinguished the Cultist Bonfires?",
     completedText = "Nice work! I have another task for you. Talk to me again when you are ready.",
     objectives = {
@@ -287,14 +287,14 @@ return {
         exp = 200,
         gold = 25,
     },
-    prerequisites = {9},
+    prerequisites = {15},
     levelRequirement = 0,
 },
 [12] = {
     name = "Full Momentum",
-    getQuestFrom = gg_unit_gens_0335,
-    handQuestTo = gg_unit_gens_0335,
-    obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with! You can find them in the encampments to the east.",
+    getQuestFrom = gg_unit_hcth_0378,
+    handQuestTo = gg_unit_hcth_0378,
+    obtainText = "The Cultist Commanders are readying for their final assault. Take them out and let them know who they are messing with! You can find them in the encampments to the north west.",
     incompleteText = "Have you slain those Commanders yet?",
     completedText = "Nicely done.",
     objectives = {
@@ -315,7 +315,7 @@ return {
         exp = 250,
         gold = 30,
     },
-    prerequisites = {9},
+    prerequisites = {15},
     levelRequirement = 0,
 },
 [13] = {
@@ -361,6 +361,22 @@ return {
     },
     prerequisites = {13},
     levelRequirement = 8,
+},
+[15] = {
+    objectives = {
+},
+    name = "Ironwell Camp",
+    getQuestFrom = gg_unit_nvil_0040,
+    handQuestTo = gg_unit_gens_0376,
+    levelRequirement = 0,
+    obtainText = "Thank you for all of your help here. Without the trolls pestering us, we should be able to survive the winter. I think your help might be best used elsewhere. Last I heard, they have their hands full down in Ironwell City. Maybe if you go to the military camp just outside of the city they'll need some help. It's a bit of a trek south east of here.",
+    incompleteText = "Impossibru!",
+    completedText = "You'd like to help? Well, I suppose we need all the help we can get. Let me see if I can find something for you to do.",
+    rewards = {
+        exp = 25,
+        gold = 5,
+    },
+    prerequisites = {9,8},
 },
 }
 end

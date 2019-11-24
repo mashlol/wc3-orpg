@@ -18,5 +18,14 @@ local DROPS = {
     [11] = 25,
     [26] = 50,
 },
+[FourCC('lold')] = {
+    [9] = 1,
+},
+[FourCC('wol2')] = {
+    [77] = 1,
+},
+[FourCC('mamo')] = {
+    [76] = 1,
+},
 }
 return {DROPS = DROPS}
