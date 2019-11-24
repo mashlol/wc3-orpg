@@ -897,22 +897,10 @@ STRING 165
  (Boss)
 }
 
-STRING 166
-// Destructibles: B00A (Sewer Corner Outer Corner), Name (Name)
-{
-Sewer Corner Outer Corner
-}
-
 STRING 167
 // Destructibles: B00B (Sewer Stone Doorway), Name (Name)
 {
 Sewer Stone Doorway
-}
-
-STRING 168
-// Destructibles: B00C (Sewer Inner Corner), Name (Name)
-{
-Sewer Inner Corner
 }
 
 STRING 169
@@ -934,7 +922,7 @@ Sewer Wall
 }
 
 STRING 172
-// Destructibles: B00N (Sewer Wall Half), Name (Name)
+// Destructibles: B00A (Sewer Wall Half), Name (Name)
 {
 Sewer Wall Half
 }
@@ -949,12 +937,6 @@ STRING 174
 // Destructibles: B00G (Sewer Wood Wall), Name (Name)
 {
 Sewer Wood Wall
-}
-
-STRING 175
-// Destructibles: B00H (Sewer Wall Half Wood), Name (Name)
-{
-Sewer Wall Half Wood
 }
 
 STRING 176
@@ -991,5 +973,101 @@ STRING 181
 // Units: beet (Burrowed Beetle), Name (Name)
 {
 Burrowed Beetle
+}
+
+STRING 182
+// Destructibles: B00H (Sewer Wall Long), Name (Name)
+{
+Sewer Wall Long
+}
+
+STRING 183
+// Doodads: D00P (Sewer Wallpipes 90), Name (Name)
+{
+Sewer Wallpipes 90
+}
+
+STRING 185
+// Destructibles: B00N (Sewer Floor), Name (Name)
+{
+Sewer Floor
+}
+
+STRING 186
+// Destructibles: B00C (Sewer Wall Torch), Name (Name)
+{
+Sewer Wall Torch
+}
+
+STRING 187
+// Destructibles: B00O (Sewer Wood Wall Half), Name (Name)
+{
+Sewer Wood Wall Half
+}
+
+STRING 188
+// Destructibles: B00P (Sewer Wall Window Grate), Name (Name)
+{
+Sewer Wall Window Grate
+}
+
+STRING 189
+// Destructibles: B00Q (Abyss4), Name (Name)
+{
+Abyss4
+}
+
+STRING 190
+// Doodads: D00Q (Sewer Water falling), Name (Name)
+{
+Sewer Water falling
+}
+
+STRING 191
+// Doodads: D00R (Sewer Wallpipes 45), Name (Name)
+{
+Sewer Wallpipes 45
+}
+
+STRING 192
+// Doodads: D00S (Sewer Wallpipes 180), Name (Name)
+{
+Sewer Wallpipes 180
+}
+
+STRING 193
+// Doodads: D00T (Sewer Wallpipes 270), Name (Name)
+{
+Sewer Wallpipes 270
+}
+
+STRING 194
+// Doodads: D00U (Sewer Water Turning Right), Name (Name)
+{
+Sewer Water Turning Right
+}
+
+STRING 195
+// Doodads: D00V (Sewer Water Splash), Name (Name)
+{
+Sewer Water Splash
+}
+
+STRING 196
+// Doodads: D00W (Sewer Water Turning Left), Name (Name)
+{
+Sewer Water Turning Left
+}
+
+STRING 197
+// Doodads: D00X (Sewer Water Splash), Name (Name)
+{
+Sewer Water Splash
+}
+
+STRING 198
+// Doodads: D00Y (Ladder Anywhere), Name (Name)
+{
+Ladder Anywhere
 }
 
