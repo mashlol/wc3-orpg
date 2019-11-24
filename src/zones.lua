@@ -159,6 +159,62 @@ function init()
                 none = 1,
             },
         },
+        CULTIST_FOREST = {
+            name = "The Solemn Woods",
+            levelRange = {15, 20},
+            rects = {
+                gg_rct_cultists1,
+                gg_rct_cultists2,
+                gg_rct_cultists3,
+                gg_rct_cultists4,
+            },
+            weatherRects = {
+                gg_rct_cultists1,
+                gg_rct_cultists2,
+                gg_rct_cultists3,
+                gg_rct_cultists4,
+            },
+            weathers = {
+                [ASHENVALE_RAIN_LIGHT] = 4,
+                [OUTLAND_WIND_LIGHT] = 1,
+                [RAYS_OF_SUNLIGHT] = 2,
+            },
+        },
+        FARM = {
+            name = "Joe's Farm",
+            levelRange = {20, 25},
+            rects = {
+                gg_rct_farm1,
+                gg_rct_farm2,
+            },
+        },
+        IRONWELL_CAMP = {
+            name = "Ironwell Military Camp",
+            rects = {
+                gg_rct_ironwellcamp,
+            },
+        },
+        IRONWELL_CITY = {
+            name = "Ironwell City",
+            rects = {
+                gg_rct_ironwell1,
+                gg_rct_ironwell2,
+                gg_rct_ironwell3,
+            },
+            weatherRects = {
+                gg_rct_ironwell1,
+                gg_rct_ironwell2,
+                gg_rct_ironwell3,
+            },
+            weathers = {
+                [RAYS_OF_MOONLIGHT] = 19,
+                [ASHENVALE_RAIN_HEAVY] = 1,
+            },
+            spawnPoint = {
+                x = 16676,
+                y = -13636,
+            },
+        },
         TROLL_CAVE = {
             name = 'Troll Cave',
             levelRange = {13, 17},

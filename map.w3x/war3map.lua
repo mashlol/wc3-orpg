@@ -1,4 +1,4 @@
-gg_rct_ironwellenter1 = nil
+gg_rct_ironwell1 = nil
 gg_rct_freydellenter1 = nil
 gg_rct_rain1 = nil
 gg_rct_rain2 = nil
@@ -31,6 +31,17 @@ gg_unit_nvlw_0178 = nil
 gg_dest_YTcx_0977 = nil
 gg_unit_gens_0376 = nil
 gg_unit_hcth_0378 = nil
+gg_rct_rain4 = nil
+gg_rct_rain5 = nil
+gg_rct_cultists1 = nil
+gg_rct_cultists3 = nil
+gg_rct_cultists4 = nil
+gg_rct_cultists2 = nil
+gg_rct_farm1 = nil
+gg_rct_farm2 = nil
+gg_rct_ironwell2 = nil
+gg_rct_ironwell2_Copy = nil
+gg_rct_ironwellcamp = nil
 function InitGlobals()
 end
 
@@ -580,11 +591,11 @@ end
 
 function CreateRegions()
     local we
-    gg_rct_ironwellenter1 = Rect(12128.0, -16096.0, 18496.0, -9600.0)
+    gg_rct_ironwell1 = Rect(12128.0, -16096.0, 18496.0, -10816.0)
     gg_rct_freydellenter1 = Rect(800.0, -4640.0, 3264.0, -2368.0)
-    gg_rct_rain1 = Rect(-4896.0, -2304.0, 5696.0, 2688.0)
+    gg_rct_rain1 = Rect(-4896.0, -2304.0, 4768.0, 2688.0)
     gg_rct_rain2 = Rect(-7712.0, -7584.0, -128.0, -2304.0)
-    gg_rct_rain3 = Rect(3296.0, -4704.0, 7104.0, -2304.0)
+    gg_rct_rain3 = Rect(3296.0, -4704.0, 6784.0, -2304.0)
     gg_rct_iceenter1 = Rect(-19744.0, -5760.0, -7904.0, 6048.0)
     gg_rct_house1enter1 = Rect(1728.0, -3072.0, 1824.0, -2976.0)
     gg_rct_house1exit1 = Rect(1728.0, -3168.0, 1824.0, -3072.0)
@@ -602,6 +613,17 @@ function CreateRegions()
     gg_rct_iceenter2 = Rect(-21056.0, 992.0, -19744.0, 3488.0)
     we = AddWeatherEffect(gg_rct_iceenter2, FourCC("SNhs"))
     EnableWeatherEffect(we, true)
+    gg_rct_rain4 = Rect(-128.0, -9248.0, 5216.0, -4672.0)
+    gg_rct_rain5 = Rect(-5440.0, -9248.0, -96.0, -7584.0)
+    gg_rct_cultists1 = Rect(4768.0, -2304.0, 15456.0, 3008.0)
+    gg_rct_cultists3 = Rect(5216.0, -7520.0, 15104.0, -4704.0)
+    gg_rct_cultists4 = Rect(5184.0, -8576.0, 8480.0, -7520.0)
+    gg_rct_cultists2 = Rect(6784.0, -4704.0, 15136.0, -2304.0)
+    gg_rct_farm1 = Rect(8608.0, -12960.0, 11936.0, -7712.0)
+    gg_rct_farm2 = Rect(5248.0, -12960.0, 8608.0, -8640.0)
+    gg_rct_ironwell2 = Rect(12032.0, -10816.0, 13088.0, -9440.0)
+    gg_rct_ironwell2_Copy = Rect(16896.0, -10656.0, 19552.0, -7968.0)
+    gg_rct_ironwellcamp = Rect(13120.0, -10784.0, 16736.0, -7712.0)
 end
 
 function CreateCameras()
