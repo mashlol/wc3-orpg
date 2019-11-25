@@ -25,7 +25,7 @@ PLACEHOLDER_DESC_REPLACED
 
 STRING 6
 {
-Mash, Spoon & Reckless
+Mash, Spoon, Reckless & Magicon
 }
 
 STRING 9
@@ -1069,5 +1069,71 @@ STRING 198
 // Doodads: D00Y (Ladder Anywhere), Name (Name)
 {
 Ladder Anywhere
+}
+
+STRING 199
+// Units: h003 (Kelian Delaine), Name (Name)
+{
+Kelian Delaine
+}
+
+STRING 200
+// Doodads: D00Z (Ogre Building Everywhere), Name (Name)
+{
+Ogre Building Everywhere
+}
+
+STRING 201
+// Doodads: D010 (Ogre Building Everywhere 2), Name (Name)
+{
+Ogre Building Everywhere 2
+}
+
+STRING 202
+// Doodads: D011 (Tent), Name (Name)
+{
+Tent
+}
+
+STRING 203
+// Doodads: D012 (Tent 2), Name (Name)
+{
+Tent 2
+}
+
+STRING 204
+// Doodads: D013 (Tent 4), Name (Name)
+{
+Tent 4
+}
+
+STRING 205
+// Doodads: D014 (Tent 5), Name (Name)
+{
+Tent 5
+}
+
+STRING 206
+// Doodads: D015 (Tent 6), Name (Name)
+{
+Tent 6
+}
+
+STRING 207
+// Doodads: D016 (The Ironwell), Name (Name)
+{
+The Ironwell
+}
+
+STRING 208
+// Doodads: D017 (Dungeon Door), Name (Name)
+{
+Dungeon Door
+}
+
+STRING 209
+// Doodads: D018 (Dungeon Door 2), Name (Name)
+{
+Dungeon Door 2
 }
 

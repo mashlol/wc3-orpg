@@ -29,6 +29,34 @@ gg_rct_farm2 = nil
 gg_rct_ironwell2 = nil
 gg_rct_ironwell2_Copy = nil
 gg_rct_ironwellcamp = nil
+gg_rct_To_Hub_by_Magicon = nil
+gg_rct_Dragons_Rest_by_Magicon = nil
+gg_rct_Jungle_Troll_area_Questionmark = nil
+gg_rct_Animal_Mobs_area_Questionmark = nil
+gg_rct_Ogre_Area_Questionmark = nil
+gg_rct_Small_quest_Hub = nil
+gg_rct_Little_quest_Hub_for_Swamp = nil
+gg_rct_Wandering_Minotaur_Killing = nil
+gg_rct_Undead_Killing = nil
+gg_rct_Minotaurs_and_Undeads_working_togheter = nil
+gg_rct_Gallion_Rise = nil
+gg_rct_Assassination_Agency_Outlook = nil
+gg_rct_Quest_for_ogres = nil
+gg_rct_Owlkin_Killing = nil
+gg_rct_Thunder_Lizard_or_Wolves_Killing = nil
+gg_rct_Not_sure_yet_killing_area = nil
+gg_rct_Very_unfinished_Zone = nil
+gg_rct_Green_Fog_Dungeon_2 = nil
+gg_rct_Green_Fog_Dungeon = nil
+gg_rct_Swamp_monsters_Killing = nil
+gg_rct_Spooky_Corrupted_Forest_Deadzone = nil
+gg_rct_Corrupted_Farmlands_Deadzone = nil
+gg_rct_Corrupted_Steppes_Deadzone = nil
+gg_rct_Deathswamps_Deadzone = nil
+gg_rct_Completely_overrun_Deadzone = nil
+gg_rct_Corruped_Treants_Killing = nil
+gg_rct_Chapel_Holdout_with_Forgotten_People = nil
+gg_rct_Creepy_House_Creepy_Cellar_Entrance = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -61,6 +89,7 @@ function CreateUnitsForPlayer0()
     local life
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -27441.0, 31288.9, 101.967, FourCC("Hazr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 9703.0, 3409.4, 111.370, FourCC("nvk2"))
 end
 
 function CreateNeutralHostile()
@@ -372,18 +401,20 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13328.8, -644.7, 1.543, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 13913.9, -725.5, 83.966, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 14027.9, -719.9, 111.597, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 12935.9, 1113.8, 260.931, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 13226.0, 780.4, 182.821, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 13039.3, 1042.4, 240.281, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13134.8, 922.4, 211.967, FourCC("h000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 12465.8, 620.1, 7.473, FourCC("cspe"))
+    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 13389.1, 399.0, 187.989, FourCC("cspe"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 12772.1, 446.0, 102.149, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12933.4, 531.5, 104.353, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 12440.2, 1050.4, 296.410, FourCC("cspe"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12399.0, 944.6, 348.793, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 14581.0, -2496.2, 198.056, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("cfir"), 10154.1, -3265.2, 212.757, FourCC("cfir"))
     u = BlzCreateUnitWithSkin(p, FourCC("sefi"), 14362.7, -5321.1, 273.458, FourCC("sefi"))
     u = BlzCreateUnitWithSkin(p, FourCC("sfir"), 6802.0, -6107.4, 28.104, FourCC("sfir"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nefi"), 12969.3, 858.8, 145.496, FourCC("nefi"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nefi"), 12591.8, 662.0, 145.496, FourCC("nefi"))
     u = BlzCreateUnitWithSkin(p, FourCC("fire"), 7724.1, 1086.2, 333.456, FourCC("fire"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ngdk"), -3220.0, 10186.5, 39.754, FourCC("ngdk"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nepl"), 21429.5, -9373.4, 210.823, FourCC("nepl"))
 end
 
 function CreateNeutralPassive()
@@ -398,16 +429,16 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1512.6, -3050.4, 278.567, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1359.0, -4038.7, 308.094, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1375.3, -4125.4, 39.473, FourCC("nvil"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 2881.8, -3889.8, 208.095, FourCC("nvil"))
-    gg_unit_nvl2_0008 = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2375.6, -4005.7, 193.693, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 2863.9, -3843.5, 206.072, FourCC("nvil"))
+    gg_unit_nvl2_0008 = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2581.1, -4349.3, 90.631, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 15539.6, -9073.7, 357.684, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 15654.4, -9062.7, 159.395, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 2964.1, -2662.3, 246.899, FourCC("nvlk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 2951.9, -2709.1, 72.716, FourCC("nvk2"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 2710.0, -2654.8, -12.188, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 2710.0, -2654.8, 347.812, FourCC("nvlw"))
     gg_unit_nemi_0014 = BlzCreateUnitWithSkin(p, FourCC("nemi"), 1384.9, -3825.0, 353.960, FourCC("nemi"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2550.7, -4365.4, 109.620, FourCC("nbee"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1401.2, -4367.5, -3.527, FourCC("nvil"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2364.1, -4356.1, 102.312, FourCC("nbee"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1401.2, -4367.5, 356.473, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17113.8, -13518.8, 205.473, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 16239.8, -13837.2, 148.617, FourCC("vlww"))
@@ -571,7 +602,21 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nshe"), 9768.6, -9289.4, 343.322, FourCC("nshe"))
     u = BlzCreateUnitWithSkin(p, FourCC("nshe"), 9994.7, -9252.6, 242.597, FourCC("nshe"))
     u = BlzCreateUnitWithSkin(p, FourCC("hdhw"), 13388.8, -11238.8, 348.048, FourCC("hdhw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 13363.1, -11529.4, -5.549, FourCC("hgry"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 13363.1, -11529.4, 354.451, FourCC("hgry"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h003"), 8188.8, 4251.6, 270.080, FourCC("h003"))
+    SetUnitColor(u, ConvertPlayerColor(0))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 9201.0, 2530.1, 57.551, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 9799.5, 3054.9, 243.468, FourCC("nvl2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 9084.0, 2834.9, 315.351, FourCC("nvil"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9428.3, 2747.6, 228.415, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 9513.3, 3407.5, 82.697, FourCC("nvil"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9575.8, 3403.5, 87.005, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Nalc"), -3749.9, 8479.2, 279.730, FourCC("Nalc"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nass"), 16110.3, -1925.8, 203.589, FourCC("nass"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 13047.5, -18135.3, 65.118, FourCC("nalb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 14228.0, -17102.7, 234.049, FourCC("nalb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 12986.6, -17276.7, 5.735, FourCC("necr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 14299.5, -18230.2, 251.155, FourCC("necr"))
 end
 
 function CreatePlayerBuildings()
@@ -621,8 +666,40 @@ function CreateRegions()
     gg_rct_farm1 = Rect(8608.0, -12960.0, 11936.0, -7712.0)
     gg_rct_farm2 = Rect(5248.0, -12960.0, 8608.0, -8640.0)
     gg_rct_ironwell2 = Rect(12032.0, -10816.0, 13088.0, -9440.0)
-    gg_rct_ironwell2_Copy = Rect(16896.0, -10656.0, 19552.0, -7968.0)
+    gg_rct_ironwell2_Copy = Rect(12448.0, -18976.0, 15104.0, -16288.0)
     gg_rct_ironwellcamp = Rect(13120.0, -10784.0, 16736.0, -7712.0)
+    gg_rct_To_Hub_by_Magicon = Rect(9920.0, 7104.0, 10336.0, 7552.0)
+    gg_rct_Dragons_Rest_by_Magicon = Rect(-2720.0, 10592.0, -2176.0, 11040.0)
+    gg_rct_Jungle_Troll_area_Questionmark = Rect(-2464.0, 6112.0, -1824.0, 6656.0)
+    gg_rct_Animal_Mobs_area_Questionmark = Rect(6592.0, 5472.0, 7104.0, 6176.0)
+    gg_rct_Ogre_Area_Questionmark = Rect(-7776.0, 9888.0, -7136.0, 10464.0)
+    gg_rct_Small_quest_Hub = Rect(11104.0, 4096.0, 11296.0, 4352.0)
+    gg_rct_Little_quest_Hub_for_Swamp = Rect(1120.0, 2080.0, 1600.0, 2368.0)
+    gg_rct_Wandering_Minotaur_Killing = Rect(28160.0, -2976.0, 28576.0, -2464.0)
+    gg_rct_Undead_Killing = Rect(28800.0, -5440.0, 29280.0, -4896.0)
+    gg_rct_Minotaurs_and_Undeads_working_togheter = Rect(28448.0, -4224.0, 28896.0, -3616.0)
+    gg_rct_Gallion_Rise = Rect(24736.0, 2848.0, 25120.0, 3264.0)
+    gg_rct_Assassination_Agency_Outlook = Rect(16032.0, -1920.0, 16320.0, -1568.0)
+    gg_rct_Quest_for_ogres = Rect(-3872.0, 8288.0, -3584.0, 8416.0)
+    gg_rct_Owlkin_Killing = Rect(18624.0, -1280.0, 19072.0, -832.0)
+    gg_rct_Thunder_Lizard_or_Wolves_Killing = Rect(20896.0, -256.0, 21376.0, 96.0)
+    gg_rct_Not_sure_yet_killing_area = Rect(27360.0, 1152.0, 28000.0, 1728.0)
+    gg_rct_Very_unfinished_Zone = Rect(23104.0, -1184.0, 23936.0, -128.0)
+    gg_rct_Green_Fog_Dungeon_2 = Rect(-28992.0, 28480.0, -28704.0, 29472.0)
+    we = AddWeatherEffect(gg_rct_Green_Fog_Dungeon_2, FourCC("FDgh"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Green_Fog_Dungeon = Rect(-29280.0, 28096.0, -28928.0, 28416.0)
+    we = AddWeatherEffect(gg_rct_Green_Fog_Dungeon, FourCC("FDgh"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Swamp_monsters_Killing = Rect(1632.0, 12160.0, 3104.0, 12704.0)
+    gg_rct_Spooky_Corrupted_Forest_Deadzone = Rect(20992.0, -9760.0, 21280.0, -9472.0)
+    gg_rct_Corrupted_Farmlands_Deadzone = Rect(19296.0, -6336.0, 19776.0, -5792.0)
+    gg_rct_Corrupted_Steppes_Deadzone = Rect(25728.0, -11936.0, 26144.0, -11520.0)
+    gg_rct_Deathswamps_Deadzone = Rect(24192.0, -6656.0, 24672.0, -6112.0)
+    gg_rct_Completely_overrun_Deadzone = Rect(28320.0, -9760.0, 28928.0, -9056.0)
+    gg_rct_Corruped_Treants_Killing = Rect(21280.0, -9728.0, 21536.0, -9504.0)
+    gg_rct_Chapel_Holdout_with_Forgotten_People = Rect(24736.0, -13120.0, 25088.0, -12704.0)
+    gg_rct_Creepy_House_Creepy_Cellar_Entrance = Rect(23520.0, -8640.0, 23808.0, -8352.0)
 end
 
 function CreateCameras()
