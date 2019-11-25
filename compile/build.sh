@@ -85,8 +85,18 @@ else
 
     WC=/c/Program\ Files\ \(x86\)/Warcraft\ III\ Beta/x86_64/Warcraft\ III.exe
     if [ -f "$WC" ]; then
-        echo "Found wc3 in Program Files (x86), using $WC"
+        echo "Found wc3 in $WC"
         "$WC" -launch -loadfile ~/Documents/Warcraft\ III\ Beta/Maps/Download/temp/built_$BUILD_NUM.w3x
         exit 0
     fi
+
+    WC=/f/Warcraft\ III\ Beta/x86_64/Warcraft\ III.exe
+    if [ -f "$WC" ]; then
+        echo "Found wc3 in $WC"
+        "$WC" -launch -loadfile ~/Documents/Warcraft\ III\ Beta/Maps/Download/temp/built_$BUILD_NUM.w3x
+        exit 0
+    fi
+
+    echo "Unable to find wc3 executable. Exiting. Ask mash for help"
+    exit 1
 fi
