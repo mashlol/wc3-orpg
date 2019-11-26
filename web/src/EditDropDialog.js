@@ -10,13 +10,6 @@ while (depth < 20 && !fs.existsSync(path + 'map.w3x')) {
 
 const LUA_PATH_LOCATION = path + 'map.w3x/war3map.lua';
 
-const luaContents = fs.readFileSync(LUA_PATH_LOCATION, {encoding: 'utf8'});
-const unitFullMatch = luaContents.match(/BlzCreateUnitWithSkin\(p, FourCC\(\"([a-zA-Z0-9]{4})\"\)/g);
-const unitIds = unitFullMatch.map(x => {
-  return x.substring(33, 37);
-});
-const validUnitIds = Array.from(new Set(unitIds));
-
 class EditDropDialog extends React.Component {
   state = {
     data: this.props.initialData,
@@ -80,6 +73,13 @@ class EditDropDialog extends React.Component {
   };
 
   render() {
+    const luaContents = fs.readFileSync(LUA_PATH_LOCATION, {encoding: 'utf8'});
+    const unitFullMatch = luaContents.match(/BlzCreateUnitWithSkin\(p, FourCC\(\"([a-zA-Z0-9]{4})\"\)/g);
+    const unitIds = unitFullMatch.map(x => {
+      return x.substring(33, 37);
+    });
+    const validUnitIds = Array.from(new Set(unitIds));
+
     const validUnitOptions = validUnitIds.map(unitId => {
       return <option key={unitId} value={unitId}>{unitId}</option>;
     });

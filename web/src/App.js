@@ -27,7 +27,6 @@ const existingDrops = JSON.parse(fs.readFileSync(DROPS_JSON_LOCATION, {
   encoding: 'utf8'
 }));
 
-
 const ItemClassification = {
   EQUIPMENT: 'Equipment',
   CONSUMABLE: 'Consumable',
