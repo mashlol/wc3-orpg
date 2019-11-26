@@ -1137,3 +1137,45 @@ STRING 209
 Dungeon Door 2
 }
 
+STRING 210
+// Destructibles: B00R (Sewer Ground), Name (Name)
+{
+Sewer Ground
+}
+
+STRING 211
+// Destructibles: B00S (Sewer Ground2), Name (Name)
+{
+Sewer Ground2
+}
+
+STRING 212
+// Destructibles: B00T (Rope Bridge), Name (Name)
+{
+Rope Bridge
+}
+
+STRING 213
+// Doodads: D019 (Sewer Grate), Name (Name)
+{
+Sewer Grate
+}
+
+STRING 214
+// Destructibles: B00U (Rock), Name (Name)
+{
+Rock
+}
+
+STRING 215
+// Destructibles: B00V (Simple Wooden Stairs), Name (Name)
+{
+Simple Wooden Stairs
+}
+
+STRING 216
+// Destructibles: B00X (Stairs1), Name (Name)
+{
+Stairs1
+}
+
