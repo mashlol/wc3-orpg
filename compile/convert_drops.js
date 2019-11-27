@@ -30,4 +30,4 @@ finalResult =
     '}\n' +
     'return {DROPS = DROPS}';
 
-fs.writeFileSync('../src/items/droptable.lua', finalResult);
+fs.writeFileSync('../gen/items/droptable.lua', finalResult);

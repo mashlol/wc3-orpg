@@ -142,4 +142,4 @@ local TYPE = {
     finalResult +
     '}\n return {ITEMS=ITEMS, TYPE=TYPE}\n';
 
-fs.writeFileSync('../src/items/items.lua', finalResult);
+fs.writeFileSync('../gen/items/items.lua', finalResult);

@@ -136,4 +136,4 @@ local TYPE = {
     'end\n' +
     'return {getQuests = getQuests, TYPE=TYPE}';
 
-fs.writeFileSync('../src/quests/quests.lua', finalResult);
+fs.writeFileSync('../gen/quests/quests.lua', finalResult);

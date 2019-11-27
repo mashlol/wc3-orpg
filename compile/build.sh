@@ -2,9 +2,15 @@
 set -e
 shopt -s globstar
 
-mkdir -p bin
+echo "Cleaning old build"
 
-rm -rf bin/built.w3x
+rm -rf bin/*
+rm -rf gen/*
+
+mkdir -p bin
+mkdir -p gen
+mkdir -p gen/items/
+mkdir -p gen/quests/
 
 echo "Codegenning items, quests & drops"
 cd compile
