@@ -6,8 +6,10 @@
 local consts = require('src/ui/consts.lua')
 local buff = require('src/buff.lua')
 local party = require('src/party.lua')
+local arena = require('src/arena.lua')
 local hero = require('src/hero.lua')
-local utils = require('src/ui/utils.lua')
+local uieventhandler = require('src/ui/uieventhandler.lua')
+local ContextMenu = require('src/ui/contextmenu.lua')
 
 local UnitFrame = {
     xLoc = 0,
@@ -226,14 +228,8 @@ function UnitFrame:init()
         0)
     BlzFrameSetAllPoints(hoverFrame, unitFrameOrigin)
 
-    local trig = CreateTrigger()
-    BlzTriggerRegisterFrameEvent(
-        trig, hoverFrame, FRAMEEVENT_CONTROL_CLICK)
-
-    TriggerAddAction(trig, function()
-        self:onClick()
-        BlzFrameSetEnable(BlzGetTriggerFrame(), false)
-        BlzFrameSetEnable(BlzGetTriggerFrame(), true)
+    uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
+        self:onClick(playerId, button)
     end)
 
     self.frames = {
@@ -249,10 +245,37 @@ function UnitFrame:init()
     return self
 end
 
-function UnitFrame:onClick()
-    if GetPlayerId(GetTriggerPlayer()) == self.playerId then
+function UnitFrame:onClick(playerId, button)
+    if playerId == self.playerId and button == MOUSE_BUTTON_TYPE_LEFT then
         ClearSelection()
         SelectUnit(self:getUnit(), true)
+    elseif button == MOUSE_BUTTON_TYPE_RIGHT then
+        ContextMenu.show(playerId, {
+            attachFrame = self.frames.origin,
+            relative = FRAMEPOINT_TOPLEFT,
+            buttons = {
+                {
+                    text = "Invite to party",
+                    onClick = function()
+                        local invitedPlayerId = GetPlayerId(
+                            GetOwningPlayer(self:getUnit()))
+                        party.sendInvite(playerId, invitedPlayerId)
+                    end,
+                },
+                {
+                    text = "Challenge to duel",
+                    onClick = function()
+                        local challengedPlayerId = GetPlayerId(
+                            GetOwningPlayer(self:getUnit()))
+                        arena.sendChallenge(playerId, challengedPlayerId)
+                    end,
+                },
+                {},
+                {
+                    text = "Cancel",
+                },
+            },
+        })
     end
 end
 

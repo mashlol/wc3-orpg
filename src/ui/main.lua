@@ -24,6 +24,7 @@ local Map = require('src/ui/map.lua')
 local HeroSelect = require('src/ui/heroselect.lua')
 local DpsMeter = require('src/ui/dpsmeter.lua')
 local MiniMap = require('src/ui/minimap.lua')
+local ContextMenu = require('src/ui/contextmenu.lua')
 
 local UI_MODULES = {
     MiniMap:new(),
@@ -72,8 +73,9 @@ table.insert(UI_MODULES, Vendor:new())
 table.insert(UI_MODULES, Talents:new())
 table.insert(UI_MODULES, LootRoll:new())
 table.insert(UI_MODULES, Map:new())
-table.insert(UI_MODULES, HeroSelect:new())
+table.insert(UI_MODULES, ContextMenu:new())
 table.insert(UI_MODULES, Dialog:new())
+table.insert(UI_MODULES, HeroSelect:new())
 
 function hideBlizzUI()
     BlzHideOriginFrames(true)

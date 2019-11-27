@@ -150,4 +150,5 @@ return {
     getPlayersInParty = getPlayersInParty,
     getPlayerParty = getPlayerParty,
     removePlayerFromParty = removePlayerFromParty,
+    sendInvite = sendInvite,
 }

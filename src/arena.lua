@@ -207,6 +207,5 @@ end
 
 return {
     init = init,
-    getPlayersInParty = getPlayersInParty,
-    getPlayerParty = getPlayerParty,
+    sendChallenge = sendChallenge,
 }
