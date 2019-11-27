@@ -19,6 +19,10 @@ else
     echo "---"
     echo "$1"
     echo "---"
+    echo "And the changes that are included: "
+    echo "---"
+    git status -s
+    echo "---"
     echo "Does that look right? (y/N)"
     read result
 
