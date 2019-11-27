@@ -115,7 +115,7 @@ function maybeUpdateDiscoverProgress()
             for objectiveIdx, objectiveInfo in pairs(QUESTS[questId].objectives) do
                 if
                     objectiveInfo.type == quests.TYPE.DISCOVER and
-                    progress[playerId][questId].objectives[objectiveIdx] ~= objectiveInfo.amount
+                    progress[playerId][questId].objectives[objectiveIdx] ~= 1
                 then
                     if enteredRegion == objectiveInfo.region then
                         progress[playerId][questId].objectives[objectiveIdx] = 1
@@ -204,8 +204,12 @@ function questObjectivesCompleted(playerId, questId)
     end
 
     for idx, objectiveInfo in pairs(QUESTS[questId].objectives) do
+        local amt = objectiveInfo.amount
+        if amt == nil then
+            amt = 1
+        end
         if
-            objectiveInfo.amount ~= progress[playerId][questId].objectives[idx]
+            amt ~= progress[playerId][questId].objectives[idx]
         then
             return false
         end
@@ -358,8 +362,12 @@ function getSectionsForAcceptDialog(questId, playerId)
             icon = "war3mapImported\\ui\\search_icon.blp"
         end
         if playerId ~= nil and progress[playerId][questId] ~= nil and progress[playerId][questId].objectives[objectiveIdx] ~= nil then
+            local amt = objectiveInfo.amount
+            if amt == nil then
+                amt = 1
+            end
             local amountDone = progress[playerId][questId].objectives[objectiveIdx]
-            objective = objective .. " ( ".. amountDone .." / ".. objectiveInfo.amount .." )"
+            objective = objective .. " ( ".. amountDone .." / ".. amt .." )"
         end
         table.insert(objectives, {
             text = objective,

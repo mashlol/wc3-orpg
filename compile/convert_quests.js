@@ -75,6 +75,10 @@ const COLUMNS = {
                 type: 'mapping',
                 mapping: 'objectiveType',
             },
+            'region': {
+                name: 'rect',
+                type: 'int',
+            },
             'amount': {
                 name: 'amount',
                 type: 'int',

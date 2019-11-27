@@ -180,6 +180,7 @@ class EditQuestDialog extends React.Component {
     const luaContents = fs.readFileSync(LUA_PATH_LOCATION, {encoding: 'utf8'});
 
     const validUnits = Array.from(new Set(luaContents.match(/gg_unit_[a-zA-Z0-9]{4}_\d{4}/g)));
+    const validRegions = Array.from(new Set(luaContents.match(/gg_rct_[a-zA-Z0-9_]+/g)));
 
     const unitFullMatch = luaContents.match(/BlzCreateUnitWithSkin\(p, FourCC\(\"([a-zA-Z0-9]{4})\"\)/g);
     const unitIds = unitFullMatch.map(x => {
@@ -199,6 +200,10 @@ class EditQuestDialog extends React.Component {
       const itemId = entry[0];
       const itemName = entry[1].name;
       return <option key={itemId} value={itemId}>{itemName}</option>
+    });
+
+    const validRegionOptions = Object.values(validRegions).map(regionGlobal => {
+      return <option key={regionGlobal} value={regionGlobal}>{regionGlobal}</option>
     });
 
     const objectiveInfo = this.state.data.objectives || [];
@@ -223,6 +228,16 @@ class EditQuestDialog extends React.Component {
             <select name="itemId" type="text" placeholder="itemId" value={this.state.data.objectives[idx].itemId} onChange={this._onObjectiveChanged.bind(this, idx, 'itemId')}>
               <option value="unset">Choose an item</option>
               {validItemOptions}
+            </select>
+          </span>
+        );
+      } else if (entry.type === ObjectiveType.DISCOVER) {
+        objectiveSpecificFields = (
+          <span>
+            <input name="name" type="text" placeholder="MANDATORY REGION NAME" value={this.state.data.objectives[idx].name} onChange={this._onObjectiveChanged.bind(this, idx, 'name')} />
+            <select name="region" type="text" placeholder="region" value={this.state.data.objectives[idx].region} onChange={this._onObjectiveChanged.bind(this, idx, 'region')}>
+              <option value="unset">Choose a region</option>
+              {validRegionOptions}
             </select>
           </span>
         );
