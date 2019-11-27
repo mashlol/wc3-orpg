@@ -94,7 +94,7 @@ const convertJson = function(parsedJson, COLUMNS, MAPPINGS) {
             }
 
             if (column && column.type === 'string') {
-                rowResult += '    ' + column.name + " = \"" + value + "\",\n";
+                rowResult += '    ' + column.name + " = [[" + value + "]],\n";
             } else if (column && column.type === 'mapping') {
                 const result = MAPPINGS[column.mapping][value];
                 rowResult += '    ' + column.name + " = " + result + ",\n";
