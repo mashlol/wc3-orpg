@@ -11,7 +11,6 @@ let finalResult = '';
 for (const key in parsed) {
     const value = parsed[key];
 
-
     finalResult += '[FourCC(\'' + key + '\')] = {\n';
     for (const itemId in value) {
         if (itemId === 'none') {

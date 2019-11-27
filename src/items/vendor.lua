@@ -1,4 +1,5 @@
 local hero = require('src/hero.lua')
+local vendorlist = require('src/items/vendorlist.lua')
 local Vendor = require('src/ui/vendor.lua')
 
 local VENDORS
@@ -34,16 +35,7 @@ function onNpcVendorClicked()
 end
 
 function init()
-    VENDORS = {
-        [GetHandleId(gg_unit_nvl2_0008)] = {
-            unit = gg_unit_nvl2_0008,
-            items = {5, 6,}
-        },
-		[GetHandleId(gg_unit_nvlw_0332)] = {
-            unit = gg_unit_nvlw_0332,
-            items = {5, 6,}
-        },
-    }
+    VENDORS = vendorlist.getVendors()
 
     for _, vendorInfo in pairs(VENDORS) do
         AddSpecialEffectTarget(

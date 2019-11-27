@@ -12,11 +12,12 @@ mkdir -p gen
 mkdir -p gen/items/
 mkdir -p gen/quests/
 
-echo "Codegenning items, quests & drops"
+echo "Codegenning items, quests, drops & vendors"
 cd compile
 node convert_items.js
 node convert_quests.js
 node convert_drops.js
+node convert_vendors.js
 cd ..
 
 echo "Copying map.w3x to bin/built.w3x"
