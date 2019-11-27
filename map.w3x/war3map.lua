@@ -70,6 +70,7 @@ gg_rct_Flatter_Canyon = nil
 gg_rct_Third_Entrance_Desert = nil
 gg_rct_Second_Entrance_Desert = nil
 gg_rct_Hoping_for_Desert_City_or_something = nil
+gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -82,7 +83,10 @@ gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
 gg_unit_gens_0376 = nil
 gg_unit_hcth_0378 = nil
+gg_unit_n002_0531 = nil
+gg_unit_n003_0532 = nil
 gg_dest_YTcx_0977 = nil
+gg_unit_n005_0534 = nil
 function InitGlobals()
 end
 
@@ -633,12 +637,20 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9428.3, 2747.6, 228.415, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 9513.3, 3407.5, 82.697, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9575.8, 3403.5, 87.005, FourCC("nvlw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Nalc"), -3749.9, 8479.2, 279.730, FourCC("Nalc"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Nalc"), -3820.6, 8414.6, 279.730, FourCC("Nalc"))
     u = BlzCreateUnitWithSkin(p, FourCC("nass"), 16110.3, -1925.8, 203.589, FourCC("nass"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 13047.5, -18135.3, 65.118, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 14228.0, -17102.7, 234.049, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 12986.6, -17276.7, 5.735, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 14299.5, -18230.2, 251.155, FourCC("necr"))
+    gg_unit_n002_0531 = BlzCreateUnitWithSkin(p, FourCC("n002"), 20114.0, -900.7, 306.910, FourCC("n002"))
+    gg_unit_n003_0532 = BlzCreateUnitWithSkin(p, FourCC("n003"), 2219.8, -3850.1, 224.190, FourCC("n003"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n004"), 11287.6, 4329.1, 215.180, FourCC("n004"))
+    SetUnitColor(u, ConvertPlayerColor(10))
+    gg_unit_n005_0534 = BlzCreateUnitWithSkin(p, FourCC("n005"), 1198.5, 2413.1, 309.405, FourCC("n005"))
+    SetUnitColor(gg_unit_n005_0534, ConvertPlayerColor(2))
+    u = BlzCreateUnitWithSkin(p, FourCC("n006"), 4868.8, 10843.5, 159.820, FourCC("n006"))
+    SetUnitColor(u, ConvertPlayerColor(8))
 end
 
 function CreatePlayerBuildings()
@@ -737,6 +749,7 @@ function CreateRegions()
     gg_rct_Third_Entrance_Desert = Rect(27136.0, 15584.0, 27616.0, 16000.0)
     gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
     gg_rct_Hoping_for_Desert_City_or_something = Rect(8768.0, 10336.0, 9216.0, 10880.0)
+    gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = Rect(-6528.0, 5152.0, -6400.0, 5280.0)
 end
 
 function CreateCameras()
@@ -762,6 +775,9 @@ function InitTrig_Untitled_Trigger_001()
     gg_trg_Untitled_Trigger_001 = CreateTrigger()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0071, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvl2_0070, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n002_0531, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n003_0532, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n005_0534, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0069, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvlw_0178, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0040, EVENT_UNIT_DEATH)

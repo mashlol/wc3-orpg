@@ -389,5 +389,19 @@
       "9",
       "8"
     ]
+  },
+  "16": {
+    "objectives": [],
+    "getQuestFrom": "gg_unit_n003_0532",
+    "handQuestTo": "gg_unit_n005_0534",
+    "levelRequirement": "1",
+    "obtainText": "Hello there.. I see you have found yourself fighting in this world. We need capable adventurers like yourself. Up north you will find the Darrowswamps. This place is full of creatures the people of Valburn can not fight as we are mostly farmers and gatherers. Can you help and see what is going on in the swamps?",
+    "incompleteText": "Have you dared to adventure up north, to the Darrowswamps yet?",
+    "completedText": "Hello, Adventurer. You have been sent from the south? Any message? -no? -so strange... You want to help us here in these mystical swamps? That is great to hear! I believe you will have much work up here fore sure.",
+    "rewards": {
+      "exp": "200",
+      "gold": "2"
+    },
+    "name": "Something is Lurking in the North"
   }
 }

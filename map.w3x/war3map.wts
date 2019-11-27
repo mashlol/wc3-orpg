@@ -1275,3 +1275,33 @@ STRING 232
 Mountain Troll
 }
 
+STRING 233
+// Units: n002 (Dahota), Name (Name)
+{
+Dahota
+}
+
+STRING 234
+// Units: n003 (Marion Haven), Name (Name)
+{
+Marion Haven
+}
+
+STRING 235
+// Units: n004 (Delarion Delaine), Name (Name)
+{
+Delarion Delaine
+}
+
+STRING 236
+// Units: n005 (Adventurer), Name (Name)
+{
+Adventurer
+}
+
+STRING 237
+// Units: n006 (Havenguard), Name (Name)
+{
+Havenguard
+}
+
