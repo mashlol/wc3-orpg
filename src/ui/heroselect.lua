@@ -5,8 +5,8 @@ local file = require('src/saveload/file.lua')
 local tooltip = require('src/ui/tooltip.lua')
 
 local FULL_WIDTH_RELATIVE = 0.7
-local BUTTON_WIDTH_PX = 300
-local BUTTON_HEIGHT_PX = 450
+local BUTTON_WIDTH_PX = 225
+local BUTTON_HEIGHT_PX = 225
 local BUTTON_MARGIN_PX = 20
 local NUM_CHOICES = 5
 local FULL_WIDTH_PX = NUM_CHOICES * BUTTON_WIDTH_PX + (NUM_CHOICES - 1) * BUTTON_MARGIN_PX
@@ -743,7 +743,7 @@ function HeroSelect:update(playerId)
                 for _, heroInfo in pairs(HERO_INFO_AS_LIST) do
                     if string.match(condensedSlotMetadata[idx], heroInfo.name) then
                         BlzFrameSetTexture(
-                            button.origin, heroInfo.portrait, 0, true)
+                            button.origin, heroInfo.portraitSquare, 0, true)
                         break
                     end
                 end
@@ -773,7 +773,7 @@ function HeroSelect:update(playerId)
                 BlzFrameSetVisible(button.origin, true)
                 BlzFrameSetText(button.text, HERO_INFO_AS_LIST[idx].name)
                 BlzFrameSetTexture(
-                    button.origin, HERO_INFO_AS_LIST[idx].portrait, 0, true)
+                    button.origin, HERO_INFO_AS_LIST[idx].portraitSquare, 0, true)
             else
                 BlzFrameSetVisible(button.origin, false)
             end
