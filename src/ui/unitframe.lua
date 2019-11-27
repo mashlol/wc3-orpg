@@ -10,6 +10,8 @@ local arena = require('src/arena.lua')
 local hero = require('src/hero.lua')
 local uieventhandler = require('src/ui/uieventhandler.lua')
 local ContextMenu = require('src/ui/contextmenu.lua')
+local Equipment = require('src/ui/equipment.lua')
+local Stats = require('src/ui/stats.lua')
 
 local UnitFrame = {
     xLoc = 0,
@@ -268,6 +270,15 @@ function UnitFrame:onClick(playerId, button)
                         local challengedPlayerId = GetPlayerId(
                             GetOwningPlayer(self:getUnit()))
                         arena.sendChallenge(playerId, challengedPlayerId)
+                    end,
+                },
+                {
+                    text = "Inspect",
+                    onClick = function()
+                        local inspectedPlayer = GetPlayerId(
+                            GetOwningPlayer(self:getUnit()))
+                        Equipment.show(playerId, inspectedPlayer)
+                        Stats.show(playerId, inspectedPlayer)
                     end,
                 },
                 {},

@@ -95,7 +95,14 @@ local statsToggles = {}
 
 local Stats = {
     toggle = function(playerId)
-        statsToggles[playerId] = not statsToggles[playerId]
+        if statsToggles[playerId] ~= nil then
+            statsToggles[playerId] = nil
+        else
+            statsToggles[playerId] = playerId
+        end
+    end,
+    show = function(playerId, forPlayerId)
+        statsToggles[playerId] = forPlayerId
     end,
     hide = function(playerId)
         statsToggles[playerId] = nil
@@ -167,12 +174,14 @@ end
 function Stats:update(playerId)
     local frames = self.frames
 
+    local showFrame = statsToggles[playerId] ~= nil and self.hero ~= nil
+    BlzFrameSetVisible(frames.origin, showFrame)
+
+    playerId = statsToggles[playerId]
+
     local heroUnit = hero.getHero(playerId)
     local unitInfo = buffloop.getUnitInfo(heroUnit)
     local ownerHeroInfo = hero.getPickedHero(playerId)
-
-    local showFrame = statsToggles[playerId] == true and  heroUnit ~= nil
-    BlzFrameSetVisible(frames.origin, showFrame)
 
     if not showFrame then
         return

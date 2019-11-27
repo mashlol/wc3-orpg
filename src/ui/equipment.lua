@@ -9,15 +9,22 @@ local itemmanager = require('src/items/itemmanager.lua')
 local Stats = require('src/ui/stats.lua')
 
 -- equipmentToggles = {
---     [playerId] = true or nil
+--     [playerId] = [otherPlayerId] or nil
 -- }
 local equipmentToggles = {}
 
 local Equipment = {
     toggle = function(playerId)
         equipment.activateItem(playerId, nil)
-        equipmentToggles[playerId] = not equipmentToggles[playerId]
-    end
+        if equipmentToggles[playerId] ~= nil then
+            equipmentToggles[playerId] = nil
+        else
+            equipmentToggles[playerId] = playerId
+        end
+    end,
+    show = function(playerId, forPlayerId)
+        equipmentToggles[playerId] = forPlayerId
+    end,
 }
 
 function Equipment:new(o)
@@ -92,6 +99,13 @@ local createItemFrame = function(originFrame, xPos, yPos, slot)
         trig, itemOrigin, FRAMEEVENT_CONTROL_CLICK)
     TriggerAddAction(trig, function()
         local playerId = GetPlayerId(GetTriggerPlayer())
+
+        if equipmentToggles[playerId] ~= playerId then
+            -- Don't let them edit someone elses equipment, they're inspecting
+            -- someone
+            return
+        end
+
         local activeItem = backpack.getActiveItem(playerId)
         if activeItem ~= nil then
             local activeItemId = backpack.getItemIdAtPosition(
@@ -227,12 +241,14 @@ end
 function Equipment:update(playerId)
     local frames = self.frames
 
-    local isVisible = equipmentToggles[playerId] == true and self.hero ~= nil
+    local isVisible = equipmentToggles[playerId] ~= nil and self.hero ~= nil
     BlzFrameSetVisible(frames.origin, isVisible)
 
     if not isVisible then
         return
     end
+
+    playerId = equipmentToggles[playerId]
 
     local level = GetHeroLevel(self.hero)
     BlzFrameSetText(frames.equipmentText, "CHARACTER (LV. " .. level .. ")")
