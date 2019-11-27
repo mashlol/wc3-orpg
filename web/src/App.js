@@ -3,6 +3,7 @@ import './App.css';
 import EditDialog from './EditDialog.js';
 import EditQuestDialog from './EditQuestDialog.js';
 import EditDropDialog from './EditDropDialog.js';
+import EditVendorDialog from './EditVendorDialog.js';
 
 const fs = require('fs');
 
@@ -16,6 +17,7 @@ while (depth < 20 && !fs.existsSync(path + 'map.w3x')) {
 const ITEMS_JSON_LOCATION = path + 'json/items.json';
 const QUESTS_JSON_LOCATION = path + 'json/quests.json';
 const DROPS_JSON_LOCATION = path + 'json/drops.json';
+const VENDORS_JSON_LOCATION = path + 'json/vendors.json';
 
 const existingItems = JSON.parse(fs.readFileSync(ITEMS_JSON_LOCATION, {
   encoding: 'utf8'
@@ -24,6 +26,9 @@ const existingQuests = JSON.parse(fs.readFileSync(QUESTS_JSON_LOCATION, {
   encoding: 'utf8'
 }));
 const existingDrops = JSON.parse(fs.readFileSync(DROPS_JSON_LOCATION, {
+  encoding: 'utf8'
+}));
+const existingVendors = JSON.parse(fs.readFileSync(VENDORS_JSON_LOCATION, {
   encoding: 'utf8'
 }));
 
@@ -106,6 +111,10 @@ class App extends React.Component {
     editDropId: null,
     existingDrops: existingDrops,
 
+    editVendorInfo: null,
+    editVendorId: null,
+    existingVendors: existingVendors,
+
     itemTypeFilter: null,
     itemSlotFilter: null,
     itemRarityFilter: null,
@@ -183,6 +192,25 @@ class App extends React.Component {
     fs.writeFileSync(DROPS_JSON_LOCATION, JSON.stringify(oldExistingDrops, null, 2));
   };
 
+  _onSaveVendor = (info, id) => {
+    const oldExistingVendors = this.state.existingVendors;
+    if (info.length > 0) {
+      oldExistingVendors[id] = info;
+    }
+    if (id !== this.state.editDropId && this.state.editDropId !== null) {
+      // We changed the ID, delete the old one
+      delete oldExistingVendors[this.state.editDropId];
+    }
+    this.setState({
+      editVendorInfo: null,
+      editVendorId: null,
+      existingVendors: oldExistingVendors,
+    });
+
+    // Save to filesystem
+    fs.writeFileSync(VENDORS_JSON_LOCATION, JSON.stringify(oldExistingVendors, null, 2));
+  };
+
   _onCancel = (info, id) => {
     this.setState({
       editInfo: null,
@@ -193,6 +221,9 @@ class App extends React.Component {
 
       editDropInfo: null,
       editDropId: null,
+
+      editVendorInfo: null,
+      editVendorId: null,
     });
   };
 
@@ -244,6 +275,20 @@ class App extends React.Component {
     });
   };
 
+  _onEditVendor = (info, id) => {
+    this.setState({
+      editVendorInfo: info,
+      editVendorId: id,
+    });
+  };
+
+  _onNewVendor = () => {
+    this.setState({
+      editVendorInfo: [],
+      editVendorId: null,
+    });
+  };
+
   _onChangeFilter = (filterStr, event) => {
     this.setState({
       [filterStr]: event.target.value,
@@ -254,12 +299,15 @@ class App extends React.Component {
     let editItemDialog = null;
     let editQuestDialog = null;
     let editDropDialog = null;
+    let editVendorDialog = null;
     if (this.state.editInfo) {
       editItemDialog = <EditDialog initialData={this.state.editInfo} id={this.state.editId} onSave={this._onSaveItem} onCancel={this._onCancel} />
     } else if (this.state.editQuestInfo) {
       editQuestDialog = <EditQuestDialog initialData={this.state.editQuestInfo} id={this.state.editQuestId} onSave={this._onSaveQuest} onCancel={this._onCancel} existingItems={this.state.existingItems} existingQuests={this.state.existingQuests} />
     } else if (this.state.editDropInfo) {
       editDropDialog = <EditDropDialog initialData={this.state.editDropInfo} id={this.state.editDropId} onSave={this._onSaveDrop} onCancel={this._onCancel} existingItems={this.state.existingItems} existingQuests={this.state.existingQuests} />
+    } else if (this.state.editVendorInfo) {
+      editVendorDialog = <EditVendorDialog initialData={this.state.editVendorInfo} id={this.state.editVendorId} onSave={this._onSaveVendor} onCancel={this._onCancel} existingItems={this.state.existingItems} existingQuests={this.state.existingQuests} />
     }
 
     const existingItemList = Object.entries(this.state.existingItems)
@@ -351,6 +399,24 @@ class App extends React.Component {
     });
     const addDropTableButton = <button onClick={this._onNewDrop}>Add new droptable</button>;
 
+    const existingVendors = Object.entries(this.state.existingVendors).map(vendorInfo => {
+      const dropRows = vendorInfo[1].map(itemId => {
+        const existingItem = this.state.existingItems[itemId]
+        return (
+          <div className="dropTableRow">
+            <span>{existingItem ? existingItem.name : itemId}</span>
+          </div>
+        );
+      });
+      return (
+        <div onClick={this._onEditVendor.bind(this, vendorInfo[1], vendorInfo[0])} key={vendorInfo[0]}>
+          {vendorInfo[0]}
+          {dropRows}
+        </div>
+      );
+    });
+    const addVendorButton = <button onClick={this._onNewVendor}>Add new vendor</button>;
+
     let contents = null;
 
     if (this.state.tab === 'items') {
@@ -374,7 +440,7 @@ class App extends React.Component {
           {editQuestDialog}
         </div>
       );
-    } else {
+    } else if (this.state.tab === 'drops') {
       contents = (
         <div>
           <div className="app">
@@ -384,10 +450,20 @@ class App extends React.Component {
           {editDropDialog}
         </div>
       );
+    } else {
+      contents = (
+        <div>
+          <div className="app">
+            {existingVendors}
+            {addVendorButton}
+          </div>
+          {editVendorDialog}
+        </div>
+      );
     }
 
-    let tint = null
-    if (editDropDialog || editQuestDialog || editItemDialog) {
+    let tint = null;
+    if (editDropDialog || editQuestDialog || editItemDialog || editVendorDialog) {
       tint = <div onClick={this._onCancel} className="tint" />;
     }
 
@@ -397,6 +473,7 @@ class App extends React.Component {
           <button onClick={this._switchTab.bind(this, 'items')}>Items</button>
           <button onClick={this._switchTab.bind(this, 'quests')}>Quests</button>
           <button onClick={this._switchTab.bind(this, 'drops')}>Drops</button>
+          <button onClick={this._switchTab.bind(this, 'vendors')}>Vendors</button>
         </div>
         {contents}
         {tint}
