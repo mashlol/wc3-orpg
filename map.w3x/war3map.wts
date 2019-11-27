@@ -1179,3 +1179,99 @@ STRING 216
 Stairs1
 }
 
+STRING 217
+// Doodads: D01B (Pine Tree Everywhere), Name (Name)
+{
+Pine Tree Everywhere
+}
+
+STRING 218
+// Doodads: D01C (Ogre Building Everywhere), Name (Name)
+{
+Ogre Building Everywhere
+}
+
+STRING 219
+// Doodads: D01D (Chunk Wall), Name (Name)
+{
+Chunk Wall
+}
+
+STRING 220
+// Doodads: D01E (Chunk Wall 2), Name (Name)
+{
+Chunk Wall 2
+}
+
+STRING 221
+// Doodads: D01F (Chunk Wall 3), Name (Name)
+{
+Chunk Wall 3
+}
+
+STRING 222
+// Doodads: D01G (Chunk Wall 4), Name (Name)
+{
+Chunk Wall 4
+}
+
+STRING 223
+// Doodads: D01H (Gothic Tower), Name (Name)
+{
+Gothic Tower
+}
+
+STRING 224
+// Doodads: D01I (Gothic Archway), Name (Name)
+{
+Gothic Archway
+}
+
+STRING 225
+// Doodads: D01J (Human Building Green Everywhere), Name (Name)
+{
+Human Building Green Everywhere
+}
+
+STRING 226
+// Doodads: D01K (Human Building ¨Red Everywhere), Name (Name)
+{
+Human Building ¨Red Everywhere
+}
+
+STRING 227
+// Doodads: D01L (Human Building Blue Everywhere), Name (Name)
+{
+Human Building Blue Everywhere
+}
+
+STRING 228
+// Doodads: D01M (Big ruined arch), Name (Name)
+{
+Big ruined arch
+}
+
+STRING 229
+// Doodads: D01N (Ruined Wall 2), Name (Name)
+{
+Ruined Wall 2
+}
+
+STRING 230
+// Destructibles: B00Y (Barrens Tree Wall 2), Name (Name)
+{
+Barrens Tree Wall 2
+}
+
+STRING 231
+// Doodads: D01O (Mine Everywhere), Name (Name)
+{
+Mine Everywhere
+}
+
+STRING 232
+// Units: e000 (Mountain Troll), Name (Name)
+{
+Mountain Troll
+}
+

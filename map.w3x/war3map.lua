@@ -57,6 +57,19 @@ gg_rct_Completely_overrun_Deadzone = nil
 gg_rct_Corruped_Treants_Killing = nil
 gg_rct_Chapel_Holdout_with_Forgotten_People = nil
 gg_rct_Creepy_House_Creepy_Cellar_Entrance = nil
+gg_rct_Just_fog_at_Dark_Pass = nil
+gg_rct_Outrance_City = nil
+gg_rct_Outrance_from_City_2 = nil
+gg_rct_Entrance_City = nil
+gg_rct_Cavalamere_Town = nil
+gg_rct_Cavalamere_Lake = nil
+gg_rct_Darafftun_Monastery_Ruins = nil
+gg_rct_Mountain_Trolls = nil
+gg_rct_Canyon_Valley = nil
+gg_rct_Flatter_Canyon = nil
+gg_rct_Third_Entrance_Desert = nil
+gg_rct_Second_Entrance_Desert = nil
+gg_rct_Hoping_for_Desert_City_or_something = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -91,6 +104,14 @@ function CreateUnitsForPlayer0()
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -27441.0, 31288.9, 101.967, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 9703.0, 3409.4, 111.370, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -24624.5, 30805.8, 340.971, FourCC("Hazr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 20557.4, 5848.0, 131.543, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 13282.8, 13852.4, 280.050, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("emtg"), 22420.7, 4587.0, -43.471, FourCC("emtg"))
+    u = BlzCreateUnitWithSkin(p, FourCC("edoc"), 22332.9, 4464.1, -64.811, FourCC("edoc"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28356.4, 9091.0, 154.104, FourCC("e000"))
+    SetUnitColor(u, ConvertPlayerColor(21))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28288.4, 8847.0, 143.039, FourCC("e000"))
+    SetUnitColor(u, ConvertPlayerColor(21))
 end
 
 function CreateNeutralHostile()
@@ -701,6 +722,21 @@ function CreateRegions()
     gg_rct_Corruped_Treants_Killing = Rect(21280.0, -9728.0, 21536.0, -9504.0)
     gg_rct_Chapel_Holdout_with_Forgotten_People = Rect(24736.0, -13120.0, 25088.0, -12704.0)
     gg_rct_Creepy_House_Creepy_Cellar_Entrance = Rect(23520.0, -8640.0, 23808.0, -8352.0)
+    gg_rct_Just_fog_at_Dark_Pass = Rect(14208.0, 7392.0, 20320.0, 9568.0)
+    we = AddWeatherEffect(gg_rct_Just_fog_at_Dark_Pass, FourCC("FDwl"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Outrance_City = Rect(11104.0, 10432.0, 11424.0, 10688.0)
+    gg_rct_Outrance_from_City_2 = Rect(6848.0, 12288.0, 7232.0, 12672.0)
+    gg_rct_Entrance_City = Rect(9280.0, 8448.0, 9696.0, 8768.0)
+    gg_rct_Cavalamere_Town = Rect(13696.0, 13664.0, 14016.0, 13888.0)
+    gg_rct_Cavalamere_Lake = Rect(15584.0, 12896.0, 15776.0, 13152.0)
+    gg_rct_Darafftun_Monastery_Ruins = Rect(18272.0, 6176.0, 18528.0, 6400.0)
+    gg_rct_Mountain_Trolls = Rect(28352.0, 9632.0, 28736.0, 10048.0)
+    gg_rct_Canyon_Valley = Rect(24704.0, 12736.0, 25216.0, 13088.0)
+    gg_rct_Flatter_Canyon = Rect(25056.0, 7680.0, 25376.0, 7968.0)
+    gg_rct_Third_Entrance_Desert = Rect(27136.0, 15584.0, 27616.0, 16000.0)
+    gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
+    gg_rct_Hoping_for_Desert_City_or_something = Rect(8768.0, 10336.0, 9216.0, 10880.0)
 end
 
 function CreateCameras()
@@ -1089,7 +1125,7 @@ function config()
     DefineStartLocation(7, -1024.0, -5696.0)
     DefineStartLocation(8, -12480.0, 14528.0)
     DefineStartLocation(9, 14528.0, 28928.0)
-    DefineStartLocation(10, 28288.0, 12480.0)
+    DefineStartLocation(10, 30016.0, 20096.0)
     InitCustomPlayerSlots()
     InitCustomTeams()
     InitAllyPriorities()
