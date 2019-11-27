@@ -1305,3 +1305,33 @@ STRING 237
 Havenguard
 }
 
+STRING 238
+// Items: I000 (Antidote), Name (Name)
+{
+Antidote
+}
+
+STRING 239
+// Items: I001 (Ale), Name (Name)
+{
+Ale
+}
+
+STRING 240
+// Items: I001 (Ale), Description (Description)
+{
+Ale for the ones in need.
+}
+
+STRING 241
+// Items: I001 (Ale), Tip (Tooltip - Basic)
+{
+Purchase Ale.
+}
+
+STRING 242
+// Items: I001 (Ale), Ubertip (Tooltip - Extended)
+{
+A special ale.
+}
+

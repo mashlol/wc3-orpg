@@ -403,5 +403,31 @@
       "gold": "2"
     },
     "name": "Something is Lurking in the North"
+  },
+  "17": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "itemId": "79",
+        "amount": "1"
+      },
+      {
+        "type": "Gather",
+        "itemId": "80",
+        "amount": "1"
+      }
+    ],
+    "name": "Well Then... Here We Are",
+    "getQuestFrom": "gg_unit_n005_0534",
+    "levelRequirement": "1",
+    "obtainText": "For now, I just need a ale and this snakebite doesn't really help me move to the closest market. The closest market is to the east. The Sunspring Market. Can you go there and get me some antidote and ale?",
+    "incompleteText": "Have you brung me the ale? The antidote? No?Man, my life hangs in the balance!",
+    "completedText": "Thank you. You saved a weak adventurer's life. Now, where were we.",
+    "rewards": {
+      "exp": "350",
+      "gold": "3"
+    },
+    "handQuestTo": "gg_unit_n005_0534",
+    "prerequisites": []
   }
 }

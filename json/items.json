@@ -1245,5 +1245,27 @@
     "classification": "Consumable",
     "stackSize": "15",
     "tooltip": "I think fred needs this"
+  },
+  "79": {
+    "name": "Antidote",
+    "rarity": "Common",
+    "classification": "Consumable",
+    "stackSize": "1",
+    "tooltip": "This will heal poisonous wounds.",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "1",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNHolyWater.blp"
+  },
+  "80": {
+    "name": "Ale",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNINV_Misc_Ale_01.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "1",
+    "classification": "Consumable",
+    "stackSize": "1",
+    "tooltip": "Ale for the one in need."
   }
 }

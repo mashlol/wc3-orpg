@@ -85,8 +85,8 @@ gg_unit_gens_0376 = nil
 gg_unit_hcth_0378 = nil
 gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
-gg_dest_YTcx_0977 = nil
 gg_unit_n005_0534 = nil
+gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
 
