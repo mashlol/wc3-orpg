@@ -6,6 +6,8 @@ local backpack = require('src/items/backpack.lua')
 local Dialog = require('src/ui/dialog.lua')
 local quests = require('src/quests/quests.lua')
 
+local LINE_HEIGHT = 0.014
+
 local QUESTS
 
 -- progress = {
@@ -160,7 +162,6 @@ function updateQuestMarks()
 
     local playerId = GetPlayerId(GetLocalPlayer())
     for _, questMarkInfo in pairs(questMarks) do
-        -- print('check quest mark info for ', questMarkInfo.unit)
         local tag = questMarkInfo.tag
 
         local text, color = getMarkForQuestGiver(playerId, questMarkInfo.unit)
@@ -262,7 +263,7 @@ function getSectionsForIncompletedDialog(questId)
         text = "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n" .. QUESTS[questId].incompleteText,
         type = 'normal',
         textalignvert = TEXT_JUSTIFY_MIDDLE,
-        height = 0.075,
+        height = LINE_HEIGHT * 3 + getLineHeight(QUESTS[questId].incompleteText),
         width = 0.8,
     })
 
@@ -306,19 +307,34 @@ function getSectionsForCompletedDialog(questId)
         text = "|cff2cfc03" .. QUESTS[questId].name .. " Completed!|r|n|n" .. QUESTS[questId].completedText,
         type = 'normal',
         textalignvert = TEXT_JUSTIFY_MIDDLE,
-        height = 0.075,
+        height = LINE_HEIGHT * 3 + getLineHeight(QUESTS[questId].completedText),
         width = 0.8,
     })
 
     table.insert(sections,  {
         text = "|cffe0b412REWARDS|r",
         type = 'normal',
-        height = 0.085,
+        height = LINE_HEIGHT * (3 + #rewards),
         width = 0.8,
         bullets = rewards,
     })
 
     return sections
+end
+
+function getLineHeight(text)
+    local lines = string.split(text, "\n")
+    if #lines == 0 then
+        lines = {text}
+    end
+
+    local totalHeight = 0
+    for _, line in pairs(lines) do
+        local numChars = string.len(line)
+        totalHeight = totalHeight + math.ceil(numChars / 60) * LINE_HEIGHT
+    end
+
+    return totalHeight
 end
 
 function getSectionsForAcceptDialog(questId, playerId)
@@ -387,7 +403,7 @@ function getSectionsForAcceptDialog(questId, playerId)
         text = "|cff2cfc03" .. QUESTS[questId].name .. "|r|n|n" .. QUESTS[questId].obtainText,
         type = 'normal',
         textalignvert = TEXT_JUSTIFY_MIDDLE,
-        height = 0.075,
+        height = LINE_HEIGHT * 3 + getLineHeight(QUESTS[questId].obtainText),
         width = 0.8,
     })
 
@@ -395,7 +411,7 @@ function getSectionsForAcceptDialog(questId, playerId)
         table.insert(sections, {
             text = "|cffe0b412OBJECTIVES|r",
             type = 'normal',
-            height = 0.085,
+            height = LINE_HEIGHT * (3 + #objectives),
             width = 0.8,
             bullets = objectives,
         })
@@ -404,7 +420,7 @@ function getSectionsForAcceptDialog(questId, playerId)
     table.insert(sections,  {
         text = "|cffe0b412REWARDS|r",
         type = 'normal',
-        height = 0.085,
+        height = LINE_HEIGHT * (3 + #rewards),
         width = 0.8,
         bullets = rewards,
     })
