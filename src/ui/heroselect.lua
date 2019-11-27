@@ -4,16 +4,16 @@ local load = require('src/saveload/load.lua')
 local file = require('src/saveload/file.lua')
 local tooltip = require('src/ui/tooltip.lua')
 
-local FULL_WIDTH_RELATIVE = 0.7
+local FULL_WIDTH_RELATIVE = 0.4
 local BUTTON_WIDTH_PX = 225
-local BUTTON_HEIGHT_PX = 225
 local BUTTON_MARGIN_PX = 20
-local NUM_CHOICES = 5
-local FULL_WIDTH_PX = NUM_CHOICES * BUTTON_WIDTH_PX + (NUM_CHOICES - 1) * BUTTON_MARGIN_PX
-local RATIO = FULL_WIDTH_PX / BUTTON_HEIGHT_PX
-local FULL_HEIGHT_RELATIVE = FULL_WIDTH_RELATIVE / RATIO
+local NUM_CHOICES = 6
+local NUM_ROWS = 2
+local NUM_PER_ROW = NUM_CHOICES / NUM_ROWS
+local FULL_WIDTH_PX = NUM_PER_ROW * BUTTON_WIDTH_PX + (NUM_PER_ROW - 1) * BUTTON_MARGIN_PX
 local BUTTON_WIDTH_RELATIVE = BUTTON_WIDTH_PX / FULL_WIDTH_PX * FULL_WIDTH_RELATIVE
 local BUTTON_MARGIN_RELATIVE = BUTTON_MARGIN_PX / FULL_WIDTH_PX * FULL_WIDTH_RELATIVE
+local FULL_HEIGHT_RELATIVE = BUTTON_WIDTH_RELATIVE * NUM_ROWS
 
 local CONFIRM_WIDTH_PX = 1300
 local CONFIRM_HEIGHT_PX = 700
@@ -43,6 +43,9 @@ local HERO_INFO_TABLE_WIDTH_RELATIVE = HERO_INFO_TABLE_WIDTH_PX / CONFIRM_WIDTH_
 local HERO_INFO_TABLE_HEIGHT_RELATIVE = HERO_INFO_TABLE_WIDTH_RELATIVE / (HERO_INFO_TABLE_WIDTH_PX / HERO_INFO_TABLE_HEIGHT_PX)
 local HERO_INFO_TABLE_BOTTOM_MARGIN_PX = 100
 local HERO_INFO_TABLE_BOTTOM_MARGIN_RELATIVE = HERO_INFO_TABLE_BOTTOM_MARGIN_PX / CONFIRM_WIDTH_PX * CONFIRM_WIDTH_RELATIVE
+
+print('total width: ', FULL_WIDTH_RELATIVE)
+print('btn width: ', BUTTON_WIDTH_RELATIVE)
 
 
 -- heroSelectToggles = {
@@ -118,7 +121,7 @@ function HeroSelect:init()
     BlzFrameSetAbsPoint(
         origin,
         FRAMEPOINT_CENTER,
-        FULL_WIDTH_RELATIVE / 2 + 0.05,
+        0.4,
         0.3)
 
     local buttonContainer = BlzCreateFrameByType(
@@ -132,11 +135,14 @@ function HeroSelect:init()
     BlzFrameSetAbsPoint(
         buttonContainer,
         FRAMEPOINT_CENTER,
-        FULL_WIDTH_RELATIVE / 2 + 0.05,
+        0.4,
         0.3)
 
     local buttons = {}
     for idx=1,NUM_CHOICES,1 do
+        local x = (idx - 1) % NUM_PER_ROW
+        local y = math.floor((idx - 1) / NUM_PER_ROW)
+
         local heroButton = BlzCreateFrameByType(
             "BACKDROP",
             "heroButton",
@@ -144,14 +150,14 @@ function HeroSelect:init()
             "",
             0)
         BlzFrameSetSize(
-            heroButton, BUTTON_WIDTH_RELATIVE, FULL_HEIGHT_RELATIVE)
+            heroButton, BUTTON_WIDTH_RELATIVE, BUTTON_WIDTH_RELATIVE)
         BlzFrameSetPoint(
             heroButton,
             FRAMEPOINT_CENTER,
             buttonContainer,
             FRAMEPOINT_LEFT,
-            (idx - 1) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
-            0)
+            x * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
+            y * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) - BUTTON_WIDTH_RELATIVE / 2)
 
         local heroText = BlzCreateFrameByType(
             "TEXT",
@@ -686,7 +692,7 @@ function HeroSelect:update(playerId)
         then
             -- Reset to default size
             BlzFrameSetSize(
-                button.origin, BUTTON_WIDTH_RELATIVE, FULL_HEIGHT_RELATIVE)
+                button.origin, BUTTON_WIDTH_RELATIVE, BUTTON_WIDTH_RELATIVE)
         else
             -- Scale up accordingly
             local timer = heroHoverAnims[playerId][idx]
@@ -695,7 +701,7 @@ function HeroSelect:update(playerId)
             BlzFrameSetSize(
                 button.origin,
                 BUTTON_WIDTH_RELATIVE * scale,
-                FULL_HEIGHT_RELATIVE * scale)
+                BUTTON_WIDTH_RELATIVE * scale)
         end
     end
 
@@ -752,11 +758,11 @@ function HeroSelect:update(playerId)
             end
         end
 
-        BlzFrameSetAbsPoint(
-            frames.buttonContainer,
-            FRAMEPOINT_CENTER,
-            FULL_WIDTH_RELATIVE / 2 + 0.05 + (NUM_CHOICES - numButtons) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) / 2,
-            0.3)
+        -- BlzFrameSetAbsPoint(
+        --     frames.buttonContainer,
+        --     FRAMEPOINT_CENTER,
+        --     0.4,
+        --     0.3)
     elseif isCreating then
         BlzFrameSetPoint(
             frames.backButton,
@@ -779,11 +785,11 @@ function HeroSelect:update(playerId)
             end
         end
 
-        BlzFrameSetAbsPoint(
-            frames.buttonContainer,
-            FRAMEPOINT_CENTER,
-            FULL_WIDTH_RELATIVE / 2 + 0.05 + (NUM_CHOICES - numButtons) * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) / 2,
-            0.3)
+        -- BlzFrameSetAbsPoint(
+        --     frames.buttonContainer,
+        --     FRAMEPOINT_CENTER,
+        --     0.4,
+        --     0.3)
     end
 
     if isConfirming then
