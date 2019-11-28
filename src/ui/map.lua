@@ -1,11 +1,7 @@
 local utils = require('src/ui/utils.lua')
 local zones = require('src/zones.lua')
 local quests = require('src/quests/main.lua')
-
--- mapToggles = {
---     [playerId] = true or nil
--- }
-local mapToggles = {}
+local uieventhandler = require('src/ui/uieventhandler.lua')
 
 local PADDING = 0.015
 local WIDTH = 0.6
@@ -14,26 +10,38 @@ local HEIGHT = 0.4
 -- KEYS MUST MATCH ZONE NAMES IN `zones.lua`
 local MAPS = {
     FREYDELL = {
-        minX = -1364.1,
-        minY = -841.7,
-        maxX = 6866.4,
-        maxY = 4941.7,
-        mapFile = "mapfreydell.blp",
-        mapAspectRatio = 1.4939655,
-    },
-    FOREST = {
-        minX = -6638.4,
-        minY = -2192.9,
-        maxX = 3607.9,
-        maxY = 9704.1,
-        mapFile = "mapforest.blp",
-        mapAspectRatio = 0.916491649,
+        minX = -741.7,
+        minY = -4912.8,
+        maxX = 3474.6,
+        maxY = -2272.2,
+        mapFile = "war3mapImported\\freydell.blp",
+        mapAspectRatio = 1.66919191919,
     },
 }
 
+local ENTIRE_MAP_INFO = {
+    minX = -30208,
+    minY = -21235,
+    maxX = 31229,
+    maxY = 24101,
+    mapFile = "war3mapImported\\entire_map.blp",
+    mapAspectRatio = 1.4210019267,
+}
+
+-- mapToggles = {
+--     [playerId] = {
+--         zoomedOut = false,
+--     },
+-- }
+local mapToggles = {}
+
 local Map = {
     toggle = function(playerId)
-        mapToggles[playerId] = not mapToggles[playerId]
+        if mapToggles[playerId] ~= nil then
+            mapToggles[playerId] = nil
+        else
+            mapToggles[playerId] = {zoomedOut = false}
+        end
     end,
 }
 
@@ -77,6 +85,20 @@ function Map:init()
         table.insert(markFrames, markFrame)
     end
 
+    local hoverFrame = BlzCreateFrameByType(
+            "GLUEBUTTON",
+            "hoverFrame",
+            mapFrame,
+            "",
+            0)
+    BlzFrameSetAllPoints(hoverFrame, mapFrame)
+
+    uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
+        if button == MOUSE_BUTTON_TYPE_RIGHT then
+            mapToggles[playerId].zoomedOut = true
+        end
+    end)
+
     utils.createCloseButton(mapOrigin, function(playerId)
         mapToggles[playerId] = nil
     end)
@@ -113,7 +135,7 @@ end
 function Map:update(playerId)
     local frames = self.frames
 
-    local frameVisible = mapToggles[playerId] == true and self.hero ~= nil
+    local frameVisible = mapToggles[playerId] ~= nil and self.hero ~= nil
 
     BlzFrameSetVisible(frames.origin, frameVisible)
 
@@ -122,16 +144,17 @@ function Map:update(playerId)
     end
 
     local zone = zones.getCurrentZone(playerId)
-    if self.hero ~= nil and zone ~= nil then
-        local mapToUse = MAPS[zone]
+    if self.hero ~= nil and (zone ~= nil or mapToggles[playerId].zoomedOut) then
+        local mapToUse = mapToggles[playerId].zoomedOut and
+            ENTIRE_MAP_INFO or
+            MAPS[zone]
 
         if mapToUse ~= nil then
             local width
             local height
-            if mapToUse.mapAspectRatio > 1 then
+            if WIDTH / mapToUse.mapAspectRatio <= HEIGHT then
                 width = WIDTH
                 height = WIDTH / mapToUse.mapAspectRatio
-
             else
                 width = HEIGHT * mapToUse.mapAspectRatio
                 height = HEIGHT
@@ -177,8 +200,8 @@ function Map:update(playerId)
                 FRAMEPOINT_CENTER,
                 frames.mapFrame,
                 FRAMEPOINT_BOTTOMLEFT,
-                yourPosX,
-                yourPosY)
+                yourPosX + 0.005,
+                yourPosY + 0.005)
         else
             BlzFrameSetVisible(frames.yourPosFrame, false)
         end
