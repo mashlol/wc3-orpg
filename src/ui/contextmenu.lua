@@ -143,10 +143,6 @@ function ContextMenu:init()
         })
     end
 
-    -- utils.createCloseButton(origin, function(playerId)
-    --     contextMenuToggles[playerId] = nil
-    -- end)
-
     self.frames = {
         origin = origin,
         rows = rows,
