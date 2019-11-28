@@ -71,6 +71,9 @@ gg_rct_Third_Entrance_Desert = nil
 gg_rct_Second_Entrance_Desert = nil
 gg_rct_Hoping_for_Desert_City_or_something = nil
 gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = nil
+gg_rct_Polar_Furbolg_Killing = nil
+gg_rct_Walrusman = nil
+gg_rct_The_big_trees_wont_be_bad_for_camera_angle = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -87,6 +90,8 @@ gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_dest_YTcx_0977 = nil
+gg_rct_Region_076 = nil
+gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = nil
 function InitGlobals()
 end
 
@@ -106,16 +111,9 @@ function CreateUnitsForPlayer0()
     local life
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -27441.0, 31288.9, 101.967, FourCC("Hazr"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 9703.0, 3409.4, 111.370, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -24624.5, 30805.8, 340.971, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 20557.4, 5848.0, 131.543, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 13282.8, 13852.4, 280.050, FourCC("hfoo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("emtg"), 22420.7, 4587.0, 316.529, FourCC("emtg"))
-    u = BlzCreateUnitWithSkin(p, FourCC("edoc"), 22332.9, 4464.1, 295.189, FourCC("edoc"))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28356.4, 9091.0, 154.104, FourCC("e000"))
-    SetUnitColor(u, ConvertPlayerColor(21))
-    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28288.4, 8847.0, 143.039, FourCC("e000"))
-    SetUnitColor(u, ConvertPlayerColor(21))
 end
 
 function CreateNeutralHostile()
@@ -441,6 +439,12 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("fire"), 7724.1, 1086.2, 333.456, FourCC("fire"))
     u = BlzCreateUnitWithSkin(p, FourCC("ngdk"), -3220.0, 10186.5, 39.754, FourCC("ngdk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nepl"), 21429.5, -9373.4, 210.823, FourCC("nepl"))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28356.4, 9091.0, 154.104, FourCC("e000"))
+    SetUnitColor(u, ConvertPlayerColor(21))
+    u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28288.4, 8847.0, 143.039, FourCC("e000"))
+    SetUnitColor(u, ConvertPlayerColor(21))
+    u = BlzCreateUnitWithSkin(p, FourCC("nfpl"), -8478.7, -794.1, 335.753, FourCC("nfpl"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ntkf"), -21913.3, -550.5, 314.237, FourCC("ntkf"))
 end
 
 function CreateNeutralPassive()
@@ -637,6 +641,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9428.3, 2747.6, 228.415, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 9513.3, 3407.5, 82.697, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 9575.8, 3403.5, 87.005, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 9703.0, 3409.4, 111.370, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("Nalc"), -3820.6, 8414.6, 279.730, FourCC("Nalc"))
     u = BlzCreateUnitWithSkin(p, FourCC("nass"), 16110.3, -1925.8, 203.589, FourCC("nass"))
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 13047.5, -18135.3, 65.118, FourCC("nalb"))
@@ -750,6 +755,13 @@ function CreateRegions()
     gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
     gg_rct_Hoping_for_Desert_City_or_something = Rect(8768.0, 10336.0, 9216.0, 10880.0)
     gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = Rect(-6528.0, 5152.0, -6400.0, 5280.0)
+    gg_rct_Polar_Furbolg_Killing = Rect(-8608.0, -736.0, -8352.0, -544.0)
+    gg_rct_Walrusman = Rect(-21952.0, -544.0, -21728.0, -384.0)
+    gg_rct_The_big_trees_wont_be_bad_for_camera_angle = Rect(-8064.0, -1024.0, -7744.0, -736.0)
+    gg_rct_Region_076 = Rect(20128.0, -22272.0, 24800.0, -17376.0)
+    we = AddWeatherEffect(gg_rct_Region_076, FourCC("FDwl"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = Rect(27264.0, -17248.0, 28064.0, -16416.0)
 end
 
 function CreateCameras()

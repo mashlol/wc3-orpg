@@ -1413,3 +1413,57 @@ STRING 256
 Ruins Rocks Cluster Floating
 }
 
+STRING 257
+// Doodads: D01U (Chunk Wall 7), Name (Name)
+{
+Chunk Wall 7
+}
+
+STRING 258
+// Doodads: D01V (Furbolg Hut 1), Name (Name)
+{
+Furbolg Hut 1
+}
+
+STRING 259
+// Doodads: D01W (Furbolg Hut 2), Name (Name)
+{
+Furbolg Hut 2
+}
+
+STRING 260
+// Doodads: D01X (Huge Tree), Name (Name)
+{
+Huge Tree
+}
+
+STRING 261
+// Doodads: D01Y (Chunk Wall Canyon 1), Name (Name)
+{
+Chunk Wall Canyon 1
+}
+
+STRING 262
+// Doodads: D01Z (Chunk Wall Canyon 2), Name (Name)
+{
+Chunk Wall Canyon 2
+}
+
+STRING 263
+// Doodads: D020 (Chunk Wall Canyon 3), Name (Name)
+{
+Chunk Wall Canyon 3
+}
+
+STRING 264
+// Doodads: D021 (Town Hall Building Everywhere), Name (Name)
+{
+Town Hall Building Everywhere
+}
+
+STRING 265
+// Doodads: D022 (Undead Stone Walls), Name (Name)
+{
+Undead Stone Walls
+}
+
