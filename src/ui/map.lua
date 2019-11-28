@@ -9,6 +9,15 @@ local HEIGHT = 0.4
 
 -- KEYS MUST MATCH ZONE NAMES IN `zones.lua`
 local MAPS = {
+    FOREST = {
+        minX = -9565.7,
+        minY = -12496.5,
+        maxX = 4999,
+        maxY = 1860.9,
+        mapFile = "war3mapImported\\forest.blp",
+        mapAspectRatio = 1.0633579725,
+        zIndex = 1,
+    },
     FREYDELL = {
         minX = -741.7,
         minY = -4912.8,
@@ -16,6 +25,7 @@ local MAPS = {
         maxY = -2272.2,
         mapFile = "war3mapImported\\freydell.blp",
         mapAspectRatio = 1.66919191919,
+        zIndex = 2,
     },
 }
 
@@ -53,6 +63,12 @@ function Map:new(o)
 end
 
 function Map:init()
+    local mapsByZIndex = {}
+    for _, mapInfo in pairs(MAPS) do
+        table.insert(mapsByZIndex, mapInfo)
+    end
+    table.sort(mapsByZIndex, function(a, b) return a.zIndex < b.zIndex end)
+
     local originFrame = BlzGetOriginFrame(ORIGIN_FRAME_GAME_UI, 0)
 
     local mapOrigin = BlzCreateFrameByType(
@@ -85,19 +101,65 @@ function Map:init()
         table.insert(markFrames, markFrame)
     end
 
-    local hoverFrame = BlzCreateFrameByType(
-            "GLUEBUTTON",
-            "hoverFrame",
-            mapFrame,
-            "",
-            0)
-    BlzFrameSetAllPoints(hoverFrame, mapFrame)
+    local zoomOutButton = BlzCreateFrameByType(
+        "GLUEBUTTON",
+        "zoomOutButton",
+        mapFrame,
+        "",
+        0)
+    BlzFrameSetAllPoints(zoomOutButton, mapFrame)
 
-    uieventhandler.registerClickEvent(hoverFrame, function(playerId, button)
+    uieventhandler.registerClickEvent(zoomOutButton, function(playerId, button)
         if button == MOUSE_BUTTON_TYPE_RIGHT then
             mapToggles[playerId].zoomedOut = true
         end
     end)
+
+    local zoomInButtons = {}
+    local fullMapWidth, fullMapHeight = getMapRelativeSize(ENTIRE_MAP_INFO)
+    for _, mapInfo in pairs(mapsByZIndex) do
+        local zoomInButton = BlzCreateFrameByType(
+            "GLUEBUTTON",
+            "zoomInButton",
+            mapFrame,
+            "",
+            0)
+
+        local relativeMaxX, relativeMaxY = getRelativePoint(
+            mapInfo.maxX,
+            mapInfo.maxY,
+            ENTIRE_MAP_INFO,
+            fullMapWidth,
+            fullMapHeight)
+        local relativeMinX, relativeMinY = getRelativePoint(
+            mapInfo.minX,
+            mapInfo.minY,
+            ENTIRE_MAP_INFO,
+            fullMapWidth,
+            fullMapHeight)
+
+        BlzFrameSetSize(
+            zoomInButton,
+            relativeMaxX - relativeMinX,
+            relativeMaxY - relativeMinY)
+
+        BlzFrameSetPoint(
+            zoomInButton,
+            FRAMEPOINT_BOTTOMLEFT,
+            mapFrame,
+            FRAMEPOINT_BOTTOMLEFT,
+            relativeMinX,
+            relativeMinY)
+
+        uieventhandler.registerClickEvent(zoomInButton, function(playerId, button)
+            if button == MOUSE_BUTTON_TYPE_LEFT then
+                mapToggles[playerId].forceMap = mapInfo
+                mapToggles[playerId].zoomedOut = false
+            end
+        end)
+
+        table.insert(zoomInButtons, zoomInButton)
+    end
 
     utils.createCloseButton(mapOrigin, function(playerId)
         mapToggles[playerId] = nil
@@ -108,19 +170,39 @@ function Map:init()
         mapFrame = mapFrame,
         yourPosFrame = yourPosFrame,
         markFrames = markFrames,
+        zoomOutButton = zoomOutButton,
+        zoomInButtons = zoomInButtons,
     }
 
     return self
+end
+
+function getRelativePoint(x, y, mapToUse, width, height)
+    local rX = ((x - mapToUse.minX) / (mapToUse.maxX - mapToUse.minX)) * width
+    local rY = ((y - mapToUse.minY) / (mapToUse.maxY - mapToUse.minY)) * height
+
+    return rX, rY
 end
 
 function getRelativeUnitPoint(unit, mapToUse, width, height)
     local x = GetUnitX(unit)
     local y = GetUnitY(unit)
 
-    local rX = ((x - mapToUse.minX) / (mapToUse.maxX - mapToUse.minX)) * width
-    local rY = ((y - mapToUse.minY) / (mapToUse.maxY - mapToUse.minY)) * height
+    return getRelativePoint(x, y, mapToUse, width, height)
+end
 
-    return rX, rY
+function getMapRelativeSize(mapInfo)
+    local width
+    local height
+    if WIDTH / mapInfo.mapAspectRatio <= HEIGHT then
+        width = WIDTH
+        height = WIDTH / mapInfo.mapAspectRatio
+    else
+        width = HEIGHT * mapInfo.mapAspectRatio
+        height = HEIGHT
+    end
+
+    return width, height
 end
 
 function isUnitInMap(unit, mapToUse)
@@ -143,68 +225,67 @@ function Map:update(playerId)
         return
     end
 
+    for _, frame in pairs(frames.zoomInButtons) do
+        BlzFrameSetVisible(frame, mapToggles[playerId].zoomedOut)
+    end
+
     local zone = zones.getCurrentZone(playerId)
-    if self.hero ~= nil and (zone ~= nil or mapToggles[playerId].zoomedOut) then
-        local mapToUse = mapToggles[playerId].zoomedOut and
-            ENTIRE_MAP_INFO or
-            MAPS[zone]
+    local mapToUse = nil
+    if mapToggles[playerId].zoomedOut then
+        mapToUse = ENTIRE_MAP_INFO
+    elseif mapToggles[playerId].forceMap ~= nil then
+        mapToUse =  mapToggles[playerId].forceMap
+    elseif zone ~= nil then
+        mapToUse = MAPS[zone]
+    end
 
-        if mapToUse ~= nil then
-            local width
-            local height
-            if WIDTH / mapToUse.mapAspectRatio <= HEIGHT then
-                width = WIDTH
-                height = WIDTH / mapToUse.mapAspectRatio
-            else
-                width = HEIGHT * mapToUse.mapAspectRatio
-                height = HEIGHT
+    if mapToUse ~= nil then
+        local width, height = getMapRelativeSize(mapToUse)
+
+        local activeQuests = quests.getActiveQuests(playerId)
+        local i = 1
+        for _,activeQuestId in pairs(activeQuests) do
+            local questReceiver = quests.getQuestInfo(activeQuestId).handQuestTo
+            if
+                quests.questObjectivesCompleted(playerId, activeQuestId) and
+                isUnitInMap(questReceiver, mapToUse)
+            then
+                local questX, questY = getRelativeUnitPoint(
+                    questReceiver, mapToUse, width, height)
+
+                BlzFrameSetVisible(frames.markFrames[i], true)
+                BlzFrameSetPoint(
+                    frames.markFrames[i],
+                    FRAMEPOINT_CENTER,
+                    frames.mapFrame,
+                    FRAMEPOINT_BOTTOMLEFT,
+                    questX,
+                    questY)
+
+                i = i + 1
             end
-
-            local activeQuests = quests.getActiveQuests(playerId)
-            local i = 1
-            for _,activeQuestId in pairs(activeQuests) do
-                local questReceiver = quests.getQuestInfo(activeQuestId).handQuestTo
-                if
-                    quests.questObjectivesCompleted(playerId, activeQuestId) and
-                    isUnitInMap(questReceiver, mapToUse)
-                then
-                    local questX, questY = getRelativeUnitPoint(
-                        questReceiver, mapToUse, width, height)
-
-                    BlzFrameSetVisible(frames.markFrames[i], true)
-                    BlzFrameSetPoint(
-                        frames.markFrames[i],
-                        FRAMEPOINT_CENTER,
-                        frames.mapFrame,
-                        FRAMEPOINT_BOTTOMLEFT,
-                        questX,
-                        questY)
-
-                    i = i + 1
-                end
-            end
-
-            for j=i,20,1 do
-                BlzFrameSetVisible(frames.markFrames[j], false)
-            end
-
-            BlzFrameSetTexture(frames.mapFrame, mapToUse.mapFile, 0, true)
-
-            BlzFrameSetSize(frames.mapFrame, width, height)
-            BlzFrameSetVisible(frames.yourPosFrame, true)
-
-            local yourPosX, yourPosY = getRelativeUnitPoint(
-                self.hero, mapToUse, width, height)
-            BlzFrameSetPoint(
-                frames.yourPosFrame,
-                FRAMEPOINT_CENTER,
-                frames.mapFrame,
-                FRAMEPOINT_BOTTOMLEFT,
-                yourPosX + 0.005,
-                yourPosY + 0.005)
-        else
-            BlzFrameSetVisible(frames.yourPosFrame, false)
         end
+
+        for j=i,20,1 do
+            BlzFrameSetVisible(frames.markFrames[j], false)
+        end
+
+        BlzFrameSetTexture(frames.mapFrame, mapToUse.mapFile, 0, true)
+
+        BlzFrameSetSize(frames.mapFrame, width, height)
+        BlzFrameSetVisible(frames.yourPosFrame, true)
+
+        local yourPosX, yourPosY = getRelativeUnitPoint(
+            self.hero, mapToUse, width, height)
+        BlzFrameSetPoint(
+            frames.yourPosFrame,
+            FRAMEPOINT_CENTER,
+            frames.mapFrame,
+            FRAMEPOINT_BOTTOMLEFT,
+            yourPosX + 0.005,
+            yourPosY + 0.005)
+    else
+        BlzFrameSetVisible(frames.yourPosFrame, false)
     end
 end
 
