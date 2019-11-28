@@ -1335,3 +1335,81 @@ STRING 242
 A special ale.
 }
 
+STRING 244
+// Destructibles: B010 (Ruins Ashenvale Canopy Tree), Name (Name)
+{
+Ruins Ashenvale Canopy Tree
+}
+
+STRING 245
+// Destructibles: B011 (Ruins Silver Moon Tree), Name (Name)
+{
+Ruins Silver Moon Tree
+}
+
+STRING 246
+// Destructibles: B00Z (Ruins Felwood Canopy Tree), Name (Name)
+{
+Ruins Felwood Canopy Tree
+}
+
+STRING 247
+// Destructibles: B012 (Rope Bridge 90), Name (Name)
+{
+Rope Bridge 90
+}
+
+STRING 248
+// Destructibles: B013 (Ruins Summer Tree Wall), Name (Name)
+{
+Ruins Summer Tree Wall
+}
+
+STRING 249
+// Destructibles: B014 (Ruins Felwood Tree Wall), Name (Name)
+{
+Ruins Felwood Tree Wall
+}
+
+STRING 250
+// Destructibles: B015 (Chains), Name (Name)
+{
+Chains
+}
+
+STRING 251
+// Destructibles: B016 (Translucent Chains), Name (Name)
+{
+Translucent Chains
+}
+
+STRING 252
+// Destructibles: B017 (Translucent Chains), Name (Name)
+{
+Translucent Chains
+}
+
+STRING 253
+// Doodads: D01P (Ruins Waterfall), Name (Name)
+{
+Ruins Waterfall
+}
+
+STRING 254
+// Doodads: D01R (Dalaran Violet Citadel Ruined Fallen), Name (Name)
+{
+Dalaran Violet Citadel Ruined Fallen
+}
+
+STRING 255
+// Doodads: D01S (Ruins Column), Name (Name)
+{
+Ruins Column
+}
+
+STRING 256
+// Doodads: D01T (Ruins Rocks Cluster Floating), Name (Name)
+{
+Ruins Rocks Cluster Floating
+}
+
