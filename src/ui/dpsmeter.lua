@@ -41,8 +41,8 @@ function DpsMeter:init()
     BlzFrameSetAbsPoint(
         origin,
         FRAMEPOINT_BOTTOMRIGHT,
-        0.75,
-        0.3)
+        0.78,
+        0.25)
 
     utils.createBorderFrame(origin)
 
