@@ -1467,3 +1467,39 @@ STRING 265
 Undead Stone Walls
 }
 
+STRING 266
+// Destructibles: B018 (Black Rock Chunks Magicon), Name (Name)
+{
+Black Rock Chunks Magicon
+}
+
+STRING 267
+// Destructibles: B019 (Black Rock Chunks Magicon 2), Name (Name)
+{
+Black Rock Chunks Magicon 2
+}
+
+STRING 268
+// Doodads: D023 (Chunk Wall Light 1), Name (Name)
+{
+Chunk Wall Light 1
+}
+
+STRING 269
+// Doodads: D024 (Chunk Wall Light 2), Name (Name)
+{
+Chunk Wall Light 2
+}
+
+STRING 270
+// Doodads: D025 (Chunk Wall Light 2), Name (Name)
+{
+Chunk Wall Light 2
+}
+
+STRING 271
+// Doodads: D026 (Dungeon Door Dark), Name (Name)
+{
+Dungeon Door Dark
+}
+

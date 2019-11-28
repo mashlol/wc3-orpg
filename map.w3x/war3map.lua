@@ -74,6 +74,8 @@ gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = nil
 gg_rct_Polar_Furbolg_Killing = nil
 gg_rct_Walrusman = nil
 gg_rct_The_big_trees_wont_be_bad_for_camera_angle = nil
+gg_rct_Region_076 = nil
+gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -90,8 +92,6 @@ gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_Region_076 = nil
-gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = nil
 function InitGlobals()
 end
 
