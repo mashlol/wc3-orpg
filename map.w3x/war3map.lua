@@ -92,6 +92,8 @@ gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_dest_YTcx_0977 = nil
+gg_unit_nvil_0016 = nil
+gg_unit_nvil_0383 = nil
 function InitGlobals()
 end
 
@@ -468,7 +470,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 2710.0, -2654.8, 347.812, FourCC("nvlw"))
     gg_unit_nemi_0014 = BlzCreateUnitWithSkin(p, FourCC("nemi"), 1384.9, -3825.0, 353.960, FourCC("nemi"))
     u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2364.1, -4356.1, 102.312, FourCC("nbee"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1401.2, -4367.5, 356.473, FourCC("nvil"))
+    gg_unit_nvil_0016 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1400.7, -4331.1, 356.473, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
     u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17113.8, -13518.8, 205.473, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 16239.8, -13837.2, 148.617, FourCC("vlww"))
@@ -593,7 +595,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nhea"), 15968.1, -9423.8, 2.862, FourCC("nhea"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhea"), 15967.2, -9545.2, 1.946, FourCC("nhea"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16438.3, -8493.3, 358.920, FourCC("hhdl"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 13457.2, -11393.6, 4.888, FourCC("nvil"))
+    gg_unit_nvil_0383 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 13457.2, -11393.6, 4.888, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16446.3, -8423.4, 357.304, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16438.7, -8296.9, 358.920, FourCC("hhdl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hhdl"), 16446.7, -8227.0, 357.304, FourCC("hhdl"))
@@ -648,6 +650,8 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 14228.0, -17102.7, 234.049, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 12986.6, -17276.7, 5.735, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 14299.5, -18230.2, 251.155, FourCC("necr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hdhw"), 1323.0, -4217.2, 348.048, FourCC("hdhw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1305.9, -4483.5, 354.451, FourCC("hgry"))
     gg_unit_n002_0531 = BlzCreateUnitWithSkin(p, FourCC("n002"), 20114.0, -900.7, 306.910, FourCC("n002"))
     gg_unit_n003_0532 = BlzCreateUnitWithSkin(p, FourCC("n003"), 2219.8, -3850.1, 224.190, FourCC("n003"))
     u = BlzCreateUnitWithSkin(p, FourCC("n004"), 11287.6, 4329.1, 215.180, FourCC("n004"))
@@ -798,6 +802,8 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_ntks_0365, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_gens_0376, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_hcth_0378, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0016, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0383, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

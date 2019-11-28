@@ -3,16 +3,13 @@ local vendorlist = require('src/items/vendorlist.lua')
 local Vendor = require('src/ui/vendor.lua')
 
 local VENDORS
-local forceExitTimers = {}
 
-function startExitTimer(playerId, vendorUnit)
-    forceExitTimers[playerId] = CreateTimer()
-    TimerStart(forceExitTimers[playerId], 1, true, function()
-        local hero = hero.getHero(playerId)
-        if not IsUnitInRange(hero, vendorUnit, 300) then
-            DestroyTimer(forceExitTimers[playerId])
+function startVendorExitTimer(playerId, vendorUnit)
+    local timer = CreateTimer()
+    TimerStart(timer, 1, true, function()
+        if not IsUnitInRange(hero.getHero(playerId), vendorUnit, 300) then
+            DestroyTimer(timer)
             Vendor.hide(playerId)
-            forceExitTimers[playerId] = nil
         end
     end)
 end
@@ -30,7 +27,7 @@ function onNpcVendorClicked()
     then
         Vendor.show(playerId, {items = VENDORS[unitHandle].items})
 
-        startExitTimer(playerId, selectedUnit)
+        startVendorExitTimer(playerId, selectedUnit)
     end
 end
 

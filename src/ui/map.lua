@@ -2,6 +2,8 @@ local utils = require('src/ui/utils.lua')
 local zones = require('src/zones.lua')
 local quests = require('src/quests/main.lua')
 local uieventhandler = require('src/ui/uieventhandler.lua')
+local tooltip = require('src/ui/tooltip.lua')
+local flights = require('src/flights.lua')
 
 local PADDING = 0.015
 local WIDTH = 0.6
@@ -41,6 +43,8 @@ local ENTIRE_MAP_INFO = {
 -- mapToggles = {
 --     [playerId] = {
 --         zoomedOut = false,
+--         forceMap = [forcedMapInfo],
+--         flightInfo = [fn for when path chosen],
 --     },
 -- }
 local mapToggles = {}
@@ -52,6 +56,12 @@ local Map = {
         else
             mapToggles[playerId] = {zoomedOut = false}
         end
+    end,
+    showForChooseFlightPath = function(playerId, callback)
+        mapToggles[playerId] = {zoomedOut = true, flightInfo = callback}
+    end,
+    hide = function(playerId)
+        mapToggles[playerId] = nil
     end,
 }
 
@@ -152,13 +162,73 @@ function Map:init()
             relativeMinY)
 
         uieventhandler.registerClickEvent(zoomInButton, function(playerId, button)
-            if button == MOUSE_BUTTON_TYPE_LEFT then
+            if button == MOUSE_BUTTON_TYPE_LEFT and mapToggles[playerId].flightInfo == nil then
                 mapToggles[playerId].forceMap = mapInfo
                 mapToggles[playerId].zoomedOut = false
             end
         end)
 
         table.insert(zoomInButtons, zoomInButton)
+    end
+
+    local flightPathButtons = {}
+    for _, flightPathInfo in pairs(flights.getFlightPaths()) do
+        local relativeX, relativeY = getRelativePoint(
+            flightPathInfo.x,
+            flightPathInfo.y,
+            ENTIRE_MAP_INFO,
+            fullMapWidth,
+            fullMapHeight)
+
+        local flightPathButton = BlzCreateFrame(
+            "RoundGrungeButtonTemplate", mapFrame, 0, 0)
+        BlzFrameSetSize(
+            flightPathButton, 0.03, 0.03)
+        BlzFrameSetPoint(
+            flightPathButton,
+            FRAMEPOINT_CENTER,
+            mapFrame,
+            FRAMEPOINT_BOTTOMLEFT,
+            relativeX,
+            relativeY)
+
+        local buttonIcon = BlzCreateFrameByType(
+            "BACKDROP",
+            "buttonIcon",
+            flightPathButton,
+            "",
+            0)
+        BlzFrameSetSize(
+            buttonIcon,
+             0.03 * 0.65,
+             0.03 * 0.65)
+        BlzFrameSetPoint(
+            buttonIcon,
+            FRAMEPOINT_CENTER,
+            flightPathButton,
+            FRAMEPOINT_CENTER,
+            0,
+            0)
+        BlzFrameSetTexture(
+            buttonIcon,
+            "war3mapImported\\ui\\tag_icon.blp",
+            0,
+            true)
+
+        local tooltipFrame = tooltip.makeTooltipFrame(
+            flightPathButton, 0.16, 0.02, flightPathButton, true, false, true)
+
+        BlzFrameSetText(tooltipFrame.text, "Fly to " .. flightPathInfo.name)
+        BlzFrameSetTextAlignment(
+            tooltipFrame.text, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_CENTER)
+
+        uieventhandler.registerClickEvent(flightPathButton, function(playerId, button)
+            if button == MOUSE_BUTTON_TYPE_LEFT and mapToggles[playerId].flightInfo ~= nil then
+                mapToggles[playerId].flightInfo(flightPathInfo)
+            end
+        end)
+
+        table.insert(flightPathButtons, flightPathButton)
     end
 
     utils.createCloseButton(mapOrigin, function(playerId)
@@ -172,6 +242,7 @@ function Map:init()
         markFrames = markFrames,
         zoomOutButton = zoomOutButton,
         zoomInButtons = zoomInButtons,
+        flightPathButtons = flightPathButtons,
     }
 
     return self
@@ -227,6 +298,10 @@ function Map:update(playerId)
 
     for _, frame in pairs(frames.zoomInButtons) do
         BlzFrameSetVisible(frame, mapToggles[playerId].zoomedOut)
+    end
+
+    for _, frame in pairs(frames.flightPathButtons) do
+        BlzFrameSetVisible(frame, mapToggles[playerId].flightInfo)
     end
 
     local zone = zones.getCurrentZone(playerId)
