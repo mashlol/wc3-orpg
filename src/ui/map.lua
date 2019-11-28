@@ -106,7 +106,6 @@ function Map:init()
         BlzFrameSetSize(markFrame, 0.01, 0.01)
         BlzFrameSetPoint(
             markFrame, FRAMEPOINT_CENTER, mapFrame, FRAMEPOINT_BOTTOMLEFT, 0, 0)
-        BlzFrameSetText(markFrame, "|cffffff00?|r")
         BlzFrameSetTextAlignment(markFrame, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_CENTER)
         table.insert(markFrames, markFrame)
     end
@@ -317,16 +316,21 @@ function Map:update(playerId)
     if mapToUse ~= nil then
         local width, height = getMapRelativeSize(mapToUse)
 
-        local activeQuests = quests.getActiveQuests(playerId)
         local i = 1
-        for _,activeQuestId in pairs(activeQuests) do
-            local questReceiver = quests.getQuestInfo(activeQuestId).handQuestTo
+        for j=1,quests.getNumQuests()-1, 1 do
+            local questReceiver = quests.getQuestInfo(j).handQuestTo
+            local questGiver = quests.getQuestInfo(j).getQuestFrom
+            local questCompleted = quests.questObjectivesCompleted(playerId, j)
+            local questEligible = quests.isEligibleForQuest(playerId, j)
             if
-                quests.questObjectivesCompleted(playerId, activeQuestId) and
-                isUnitInMap(questReceiver, mapToUse)
+                (questCompleted and isUnitInMap(questReceiver, mapToUse)) or
+                (questEligible and isUnitInMap(questGiver, mapToUse))
             then
                 local questX, questY = getRelativeUnitPoint(
-                    questReceiver, mapToUse, width, height)
+                    questCompleted and questReceiver or questGiver,
+                    mapToUse,
+                    width,
+                    height)
 
                 BlzFrameSetVisible(frames.markFrames[i], true)
                 BlzFrameSetPoint(
@@ -336,6 +340,10 @@ function Map:update(playerId)
                     FRAMEPOINT_BOTTOMLEFT,
                     questX,
                     questY)
+
+                local text = questCompleted and "?" or "!"
+                BlzFrameSetText(
+                    frames.markFrames[i],  "|cffffff00" .. text .. "|r")
 
                 i = i + 1
             end

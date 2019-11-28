@@ -662,4 +662,5 @@ return {
     getActiveQuests = getActiveQuests,
     showDialogForActiveQuest = showDialogForActiveQuest,
     questObjectivesCompleted = questObjectivesCompleted,
+    isEligibleForQuest = isEligibleForQuest,
 }
