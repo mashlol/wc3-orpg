@@ -38,14 +38,14 @@ function saveHero(playerId)
     end
 
     for i=1,36,1 do
-        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 73)
+        code:addInt(backpack.getItemIdAtPosition(playerId, i) or 0, 5000)
         code:addInt(backpack.getItemCountAtPosition(playerId, i) or 0, 73)
     end
 
     code:addInt(string.byte(GetPlayerName(Player(playerId))) % 2500, 2500)
 
     for i=1,12,1 do
-        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 73)
+        code:addInt(equipment.getItemInSlot(playerId, i) or 0, 5000)
     end
 
     code = code:build()

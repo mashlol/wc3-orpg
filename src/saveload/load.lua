@@ -43,7 +43,7 @@ function loadChar(playerId, code)
 
     local backpackItems = {}
     for i=1,36,1 do
-        local itemId = decoded:getInt(73)
+        local itemId = decoded:getInt(5000)
         local count = decoded:getInt(73)
         if itemId ~= 0 then
             backpackItems[i] = {itemId = itemId, count = count}
@@ -61,7 +61,7 @@ function loadChar(playerId, code)
 
     local equips = {}
     for i=1,12,1 do
-        local itemId = decoded:getInt(73)
+        local itemId = decoded:getInt(5000)
         if itemId ~= 0 then
             equips[i] = itemId
         end

@@ -25,7 +25,7 @@ function writeFile(file, contents)
     for i=0,len-1,200 do
         chunk = SubString(contents, i, i + 200)
         Preload(
-            "\" )\ncall BlzSetAbilityIcon(" ..
+            "\" )\ncall BlzSetAbilityActivatedIcon(" ..
             I2S(ABILITY_LIST[c + 1]) ..
             ", \"" ..
             chunk ..
@@ -49,20 +49,20 @@ function readFile(file)
     local output = ""
 
     for i=0,#ABILITY_LIST-1,1 do
-        original[i + 1] = BlzGetAbilityIcon(ABILITY_LIST[i + 1])
+        original[i + 1] = BlzGetAbilityActivatedIcon(ABILITY_LIST[i + 1])
     end
 
     Preloader(file)
 
     for i=0,#ABILITY_LIST-1,1 do
-        chunk = BlzGetAbilityIcon(ABILITY_LIST[i + 1])
+        chunk = BlzGetAbilityActivatedIcon(ABILITY_LIST[i + 1])
         if chunk == original[i + 1] then
             return output ~= "" and output or nil
         end
 
         output = output .. chunk
 
-        BlzSetAbilityIcon(ABILITY_LIST[i + 1], original[i + 1])
+        BlzSetAbilityActivatedIcon(ABILITY_LIST[i + 1], original[i + 1])
     end
 
     return output ~= "" and output or nil
