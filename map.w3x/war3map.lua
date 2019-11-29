@@ -76,6 +76,8 @@ gg_rct_Walrusman = nil
 gg_rct_The_big_trees_wont_be_bad_for_camera_angle = nil
 gg_rct_Region_076 = nil
 gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = nil
+gg_rct_Just_an_idea = nil
+gg_rct_The_Forgotten_Kingdom = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -93,8 +95,8 @@ gg_unit_nvil_0016 = nil
 gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
-gg_dest_YTcx_0977 = nil
 gg_unit_nvil_0501 = nil
+gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
 
@@ -168,7 +170,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6657.5, -5206.2, 341.249, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6276.7, -4618.6, 342.905, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4359.5, -6926.6, 333.662, FourCC("lold"))
-    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4531.9, -8575.0, 164.675, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4893.8, 1545.5, 164.675, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -3079.7, -8990.8, 30.410, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2493.5, -8634.4, 219.054, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -3076.9, -8211.8, 288.780, FourCC("lold"))
@@ -182,7 +184,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6161.8, -2514.7, 328.059, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2322.2, -6923.9, 118.901, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4116.2, -6911.1, 219.054, FourCC("lold"))
-    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4882.0, -8623.9, 9.644, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5243.9, 1496.7, 9.644, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2807.7, -6378.0, 317.124, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -425.9, -5976.3, 178.543, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5083.6, -6354.4, 214.818, FourCC("lold"))
@@ -448,6 +450,10 @@ function CreateNeutralHostile()
     SetUnitColor(u, ConvertPlayerColor(21))
     u = BlzCreateUnitWithSkin(p, FourCC("nfpl"), -8478.7, -794.1, 335.753, FourCC("nfpl"))
     u = BlzCreateUnitWithSkin(p, FourCC("ntkf"), -21913.3, -550.5, 314.237, FourCC("ntkf"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2716.4, 2921.0, 164.675, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -3066.6, 2872.1, 9.644, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -1438.7, 2932.9, 164.675, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -1788.9, 2884.0, 9.644, FourCC("lold"))
 end
 
 function CreateNeutralPassive()
@@ -662,7 +668,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("n006"), 4868.8, 10843.5, 159.820, FourCC("n006"))
     SetUnitColor(u, ConvertPlayerColor(8))
     u = BlzCreateUnitWithSkin(p, FourCC("hphx"), 13384.0, -11262.2, 332.140, FourCC("hphx"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nrdr"), 9920.2, 10922.0, -53.099, FourCC("nrdr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nrdr"), 9920.2, 10922.0, 306.901, FourCC("nrdr"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrdk"), 10272.9, 10912.6, 241.569, FourCC("nrdk"))
 end
 
@@ -770,6 +776,8 @@ function CreateRegions()
     we = AddWeatherEffect(gg_rct_Region_076, FourCC("FDwl"))
     EnableWeatherEffect(we, true)
     gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = Rect(27264.0, -17248.0, 28064.0, -16416.0)
+    gg_rct_Just_an_idea = Rect(-12000.0, -11680.0, -11520.0, -11392.0)
+    gg_rct_The_Forgotten_Kingdom = Rect(-5856.0, 18144.0, -5504.0, 18496.0)
 end
 
 function CreateCameras()

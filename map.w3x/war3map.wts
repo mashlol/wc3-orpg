@@ -1515,3 +1515,33 @@ STRING 273
 Järga
 }
 
+STRING 274
+// Doodads: D027 (Fissure Big), Name (Name)
+{
+Fissure Big
+}
+
+STRING 275
+// Destructibles: B01A (Resurrection Stone 2), Name (Name)
+{
+Resurrection Stone 2
+}
+
+STRING 276
+// Doodads: D028 (White Rock Pillar), Name (Name)
+{
+White Rock Pillar
+}
+
+STRING 277
+// Doodads: D029 (Archway Angled Natural), Name (Name)
+{
+Archway Angled Natural
+}
+
+STRING 278
+// Doodads: D02A (White Stone Very Small), Name (Name)
+{
+White Stone Very Small
+}
+
