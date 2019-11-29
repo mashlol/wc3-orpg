@@ -1,5 +1,6 @@
 local spell = require("src/spell.lua")
 local hero = require("src/hero.lua")
+local camera = require("src/camera.lua")
 local Backpack = require("src/ui/backpack.lua")
 local Equipment = require("src/ui/equipment.lua")
 local Stats = require("src/ui/stats.lua")
@@ -120,7 +121,9 @@ end
 local spaceUp = function()
     if GetLocalPlayer() == GetTriggerPlayer() then
         ResetToGameCamera(0)
-        CameraSetupApplyForceDuration(gg_cam_Camera_001, false, 0)
+        if camera.isCustomCameraOn(GetPlayerId(GetTriggerPlayer())) then
+            CameraSetupApplyForceDuration(gg_cam_Camera_001, false, 0)
+        end
     end
 end
 
