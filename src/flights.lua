@@ -1,5 +1,6 @@
 local hero = require('src/hero.lua')
 local buff = require('src/buff.lua')
+local log = require('src/log.lua')
 local Map = require('src/ui/map.lua')
 local projectile = require('src/projectile.lua')
 local Vector = require('src/vector.lua')
@@ -29,6 +30,19 @@ function onFlightPathNpcClicked()
         IsUnitInRange(hero, selectedUnit, 300)
     then
         Map.showForChooseFlightPath(playerId, function(flightPathInfo)
+            local cost = 15
+            local curGold = GetPlayerState(
+                Player(playerId), PLAYER_STATE_RESOURCE_GOLD)
+            if curGold < cost then
+                log.log(playerId, 'Not enough gold.', log.TYPE.ERROR)
+                Map.hide(playerId)
+                return
+            end
+            SetPlayerState(
+                Player(playerId),
+                PLAYER_STATE_RESOURCE_GOLD,
+                curGold - cost)
+
             local fromV = Vector:new{
                 x = GetUnitX(hero),
                 y = GetUnitY(hero),

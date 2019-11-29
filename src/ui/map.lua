@@ -215,11 +215,36 @@ function Map:init()
             true)
 
         local tooltipFrame = tooltip.makeTooltipFrame(
-            flightPathButton, 0.16, 0.02, flightPathButton, true, false, true)
+            flightPathButton, 0.12, 0.03, flightPathButton, true, false, true)
+
+        local coinBackdrop = BlzCreateFrameByType(
+            "BACKDROP", "coinBackdrop", tooltipFrame.origin, "", 0)
+        BlzFrameSetSize(coinBackdrop, 0.01, 0.01)
+        BlzFrameSetPoint(
+            coinBackdrop,
+            FRAMEPOINT_BOTTOMLEFT,
+            tooltipFrame.origin,
+            FRAMEPOINT_BOTTOMLEFT,
+            0.003,
+            0.003)
+        BlzFrameSetTexture(
+            coinBackdrop, "war3mapImported\\ui\\gold.blp", 0, true)
+
+        local costTextFrame = BlzCreateFrameByType(
+            "TEXT", "costTextFrame", tooltipFrame.origin, "", 0)
+        BlzFrameSetSize(costTextFrame, 0.12, 0.01)
+        BlzFrameSetPoint(
+            costTextFrame,
+            FRAMEPOINT_LEFT,
+            coinBackdrop,
+            FRAMEPOINT_LEFT,
+            0.01,
+            0)
+        BlzFrameSetText(costTextFrame, "15")
+        BlzFrameSetTextAlignment(
+            costTextFrame, TEXT_JUSTIFY_MIDDLE, TEXT_JUSTIFY_LEFT)
 
         BlzFrameSetText(tooltipFrame.text, "Fly to " .. flightPathInfo.name)
-        BlzFrameSetTextAlignment(
-            tooltipFrame.text, TEXT_JUSTIFY_TOP, TEXT_JUSTIFY_CENTER)
 
         uieventhandler.registerClickEvent(flightPathButton, function(playerId, button)
             if button == MOUSE_BUTTON_TYPE_LEFT and mapToggles[playerId].flightInfo ~= nil then
