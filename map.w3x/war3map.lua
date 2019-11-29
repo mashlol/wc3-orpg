@@ -86,14 +86,15 @@ gg_unit_nvil_0071 = nil
 gg_unit_nemi_0014 = nil
 gg_unit_nvil_0040 = nil
 gg_unit_nvlw_0178 = nil
+gg_unit_nvil_0383 = nil
 gg_unit_gens_0376 = nil
 gg_unit_hcth_0378 = nil
+gg_unit_nvil_0016 = nil
 gg_unit_n002_0531 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_dest_YTcx_0977 = nil
-gg_unit_nvil_0016 = nil
-gg_unit_nvil_0383 = nil
+gg_unit_nvil_0501 = nil
 function InitGlobals()
 end
 
@@ -633,7 +634,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nshe"), 9793.2, -9456.2, 187.828, FourCC("nshe"))
     u = BlzCreateUnitWithSkin(p, FourCC("nshe"), 9768.6, -9289.4, 343.322, FourCC("nshe"))
     u = BlzCreateUnitWithSkin(p, FourCC("nshe"), 9994.7, -9252.6, 242.597, FourCC("nshe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hdhw"), 13388.8, -11238.8, 348.048, FourCC("hdhw"))
+    gg_unit_nvil_0501 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 10105.8, 10783.1, 264.480, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 13363.1, -11529.4, 354.451, FourCC("hgry"))
     u = BlzCreateUnitWithSkin(p, FourCC("h003"), 8188.8, 4251.6, 270.080, FourCC("h003"))
     SetUnitColor(u, ConvertPlayerColor(0))
@@ -660,6 +661,9 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n005_0534, ConvertPlayerColor(2))
     u = BlzCreateUnitWithSkin(p, FourCC("n006"), 4868.8, 10843.5, 159.820, FourCC("n006"))
     SetUnitColor(u, ConvertPlayerColor(8))
+    u = BlzCreateUnitWithSkin(p, FourCC("hphx"), 13384.0, -11262.2, 332.140, FourCC("hphx"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nrdr"), 9920.2, 10922.0, -53.099, FourCC("nrdr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nrdk"), 10272.9, 10912.6, 241.569, FourCC("nrdk"))
 end
 
 function CreatePlayerBuildings()
@@ -804,6 +808,7 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_hcth_0378, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0016, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0383, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nvil_0501, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

@@ -364,6 +364,13 @@ local BUFF_INFO = {
         removeStackOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
     },
+    stunnoicon = {
+        effects = {
+            {
+                type = stats.STUN,
+            },
+        },
+    },
     impendingdoom = {
         effects = {},
         maxStacks = 5,

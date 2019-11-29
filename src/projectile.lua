@@ -77,39 +77,41 @@ local clearProjectiles = function()
 
         local projectileV = Vector:new{x = curProjectileX, y = curProjectileY}
         local ownerHero = hero.getHero(projectile.options.playerId)
-        local collidedUnits, collidedDoodads = collision.getAllCollisions(
-            projectileV,
-            projectile.options.radius or 50)
-        for _, collidedUnit in pairs(collidedUnits) do
-            if
-                collidedUnit ~= ownerHero and
-                projectile.toRemove ~= true and
-                projectile.alreadyCollided[GetHandleId(collidedUnit)] ~= true
-            then
-                projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
-                local destroyOnCollide = false
-                if projectile.options.onCollide then
-                    destroyOnCollide = projectile.options.onCollide(
-                        collidedUnit)
-                end
-                if destroyOnCollide then
-                    destroyProjectile(projectile)
+        if projectile.options.radius ~= 0 then
+            local collidedUnits, collidedDoodads = collision.getAllCollisions(
+                projectileV,
+                projectile.options.radius or 50)
+            for _, collidedUnit in pairs(collidedUnits) do
+                if
+                    collidedUnit ~= ownerHero and
+                    projectile.toRemove ~= true and
+                    projectile.alreadyCollided[GetHandleId(collidedUnit)] ~= true
+                then
+                    projectile.alreadyCollided[GetHandleId(collidedUnit)] = true
+                    local destroyOnCollide = false
+                    if projectile.options.onCollide then
+                        destroyOnCollide = projectile.options.onCollide(
+                            collidedUnit)
+                    end
+                    if destroyOnCollide then
+                        destroyProjectile(projectile)
+                    end
                 end
             end
-        end
-        for _, doodad in pairs(collidedDoodads) do
-            if
-                projectile.toRemove ~= true and
-                projectile.alreadyCollided[GetHandleId(doodad)] ~= true
-            then
-                projectile.alreadyCollided[GetHandleId(doodad)] = true
-                local destroyOnCollide = false
-                if projectile.options.onDoodadCollide then
-                    destroyOnCollide = projectile.options.onDoodadCollide(
-                        doodad)
-                end
-                if destroyOnCollide then
-                    destroyProjectile(projectile)
+            for _, doodad in pairs(collidedDoodads) do
+                if
+                    projectile.toRemove ~= true and
+                    projectile.alreadyCollided[GetHandleId(doodad)] ~= true
+                then
+                    projectile.alreadyCollided[GetHandleId(doodad)] = true
+                    local destroyOnCollide = false
+                    if projectile.options.onDoodadCollide then
+                        destroyOnCollide = projectile.options.onDoodadCollide(
+                            doodad)
+                    end
+                    if destroyOnCollide then
+                        destroyProjectile(projectile)
+                    end
                 end
             end
         end
@@ -196,6 +198,22 @@ local clearProjectiles = function()
                 projectile.options.speed = projectile.options.speed +
                     projectile.options.acceleration *
                     elapsedTime
+            end
+            if projectile.options.visionRadius then
+                SetFogStateRadius(
+                    Player(projectile.options.playerId),
+                    FOG_OF_WAR_VISIBLE,
+                    newPos.x,
+                    newPos.y,
+                    projectile.options.visionRadius,
+                    false)
+            end
+            if
+                projectile.options.cameraFollow and
+                projectile.options.playerId == GetPlayerId(GetLocalPlayer())
+            then
+                PanCameraToTimed(
+                    newPos.x, newPos.y + (projectile.options.z or 0) / 2, 0)
             end
         end
     end
