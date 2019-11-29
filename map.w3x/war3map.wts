@@ -1545,3 +1545,27 @@ STRING 278
 White Stone Very Small
 }
 
+STRING 279
+// Units: Hkan (Kanna), Propernames (Proper Names)
+{
+Kanna
+}
+
+STRING 280
+// Units: Hkan (Kanna), Name (Name)
+{
+Kanna
+}
+
+STRING 281
+// Units: Hrav (Ravanna), Propernames (Proper Names)
+{
+Ravanna
+}
+
+STRING 282
+// Units: Hrav (Ravanna), Name (Name)
+{
+Ravanna
+}
+
