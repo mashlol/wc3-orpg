@@ -4,10 +4,10 @@ local load = require('src/saveload/load.lua')
 local file = require('src/saveload/file.lua')
 local tooltip = require('src/ui/tooltip.lua')
 
-local FULL_WIDTH_RELATIVE = 0.4
+local FULL_WIDTH_RELATIVE = 0.6
 local BUTTON_WIDTH_PX = 225
 local BUTTON_MARGIN_PX = 20
-local NUM_CHOICES = 6
+local NUM_CHOICES = 8
 local NUM_ROWS = 2
 local NUM_PER_ROW = NUM_CHOICES / NUM_ROWS
 local FULL_WIDTH_PX = NUM_PER_ROW * BUTTON_WIDTH_PX + (NUM_PER_ROW - 1) * BUTTON_MARGIN_PX
