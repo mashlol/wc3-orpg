@@ -71,16 +71,27 @@ local TYPE = {
     },
 }
 
-local log = function(playerId, text, type, duration)
-    text = type.color..text.."|r"
-    duration = duration or type.duration
+-- local curMsgTimer = {
+--     [playerId] = timer
+-- }
+local curMsgTimer = {}
 
-    DisplayTimedTextToPlayer(
-        Player(playerId), type.x, type.y, duration, text)
-
+function logFloatingText(playerId, text, type, duration)
     local heroUnit = hero.getHero(playerId)
 
     if heroUnit == nil or not type.floatingText then
+        return
+    end
+
+    if curMsgTimer[playerId] ~= nil then
+        -- Some msg already playing, wait for that one to be done
+        TimerStart(
+            CreateTimer(),
+            TimerGetRemaining(curMsgTimer[playerId]),
+            false,
+            function()
+                logFloatingText(playerId, text, type, duration)
+            end)
         return
     end
 
@@ -102,12 +113,27 @@ local log = function(playerId, text, type, duration)
     SetTextTagLifespan(tag, duration)
     SetTextTagFadepoint(tag, 0.01)
 
+    curMsgTimer[playerId] = CreateTimer()
+    TimerStart(curMsgTimer[playerId], 1.2, false, function()
+        DestroyTimer(curMsgTimer[playerId])
+        curMsgTimer[playerId] = nil
+    end)
+
     TimerStart(CreateTimer(), duration, false, function()
         DestroyTextTag(tag)
         DestroyTimer(GetExpiredTimer())
     end)
 end
 
+local log = function(playerId, text, type, duration)
+    text = type.color..text.."|r"
+    duration = duration or type.duration
+
+    DisplayTimedTextToPlayer(
+        Player(playerId), type.x, type.y, duration, text)
+
+    logFloatingText(playerId, text, type, duration)
+end
 
 return {
     TYPE = TYPE,
