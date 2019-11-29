@@ -364,6 +364,19 @@ local BUFF_INFO = {
         removeStackOnDamage = true,
         icon = "ReplaceableTextures\\CommandButtons\\BTNLightningShield.blp",
     },
+    tornado = {
+        effects = {
+            {
+                type = stats.PERCENT_MOVE_SPEED,
+                amount = 0.6,
+            },
+        },
+        vfx = {
+            model = "Abilities\\Spells\\Orc\\LightningShield\\LightningShieldBuff.mdl",
+            attach = "origin",
+        },
+        icon = "ReplaceableTextures\\CommandButtons\\BTNTornado.blp",
+    },
     stunnoicon = {
         effects = {
             {

@@ -24,6 +24,9 @@ local createEffect = function(options)
     if options.facing then
         BlzSetSpecialEffectYaw(effect, options.facing)
     end
+    if options.pitchRad then
+        BlzSetSpecialEffectPitch(effect, options.pitchRad)
+    end
 
     local effectTimer = CreateTimer()
     TimerStart(effectTimer, options.duration, false, function()
@@ -33,6 +36,8 @@ local createEffect = function(options)
         DestroyEffect(effect)
         DestroyTimer(effectTimer)
     end)
+
+    return effect
 end
 
 return {

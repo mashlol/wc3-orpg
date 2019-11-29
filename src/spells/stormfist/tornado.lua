@@ -1,8 +1,8 @@
 local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
+local collision = require('src/collision.lua')
 local Vector = require('src/vector.lua')
 local effect = require('src/effect.lua')
-local projectile = require('src/projectile.lua')
 local log = require('src/log.lua')
 local buff = require('src/buff.lua')
 local animations = require('src/animations.lua')
@@ -12,7 +12,7 @@ local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 10
+local COOLDOWN_S = 15
 
 local getSpellId = function()
     return 'tornado'
@@ -23,7 +23,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Summon a tornado moving in a line, dealing massive damage to anyone in its way.'
+    return 'Summon a tornado from your hands as a beam of power, dealing massive damage and slowing any targets in its way'
 end
 
 local getSpellCooldown = function(playerId)
@@ -32,6 +32,16 @@ end
 
 local getSpellCasttime = function(playerId)
     return 0.5
+end
+
+local getCollisionPoint = function(heroV, facingDeg, i, j)
+    local perpendicularAngle = (facingDeg + 90) * bj_DEGTORAD
+    local perpendicularVec = Vector:fromAngle(perpendicularAngle)
+        :multiply(i * 50)
+        :add(heroV)
+    return Vector:fromAngle(facingDeg * bj_DEGTORAD)
+        :multiply(j * 550)
+        :add(perpendicularVec)
 end
 
 local cast = function(playerId)
@@ -62,24 +72,60 @@ local cast = function(playerId)
 
     cooldowns.startCooldown(playerId, getSpellId(), COOLDOWN_S)
 
-    animations.queueAnimation(hero, 8, 1)
+    animations.queueAnimation(hero, 7, 3)
 
-    projectile.createProjectile{
-        playerId = playerId,
+    local sfx = effect.createEffect{
+        x = GetUnitX(hero),
+        y = GetUnitY(hero),
         model = "Abilities\\Spells\\Other\\Tornado\\TornadoElementalSmall.mdl",
-        fromV = heroV,
-        toV = mouseV,
-        speed = 500,
-        length = 1000,
-        radius = 150,
-        scale = 3,
-        onCollide = function(collidedUnit)
-            if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 175, damage.TYPE.SPELL)
-            end
-            return false
-        end
+        duration = 3,
+        timeScale = 1.5,
+        z = 50,
+        pitchRad = math.pi / 2,
+        facing = Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
     }
+
+    local DPS = 100
+    local timerSpeed = 0.01
+    local dmgFrequency = 0.1
+
+    local numTicks = 0
+
+    local timer = CreateTimer()
+    TimerStart(timer, timerSpeed, true, function()
+        numTicks = numTicks + 1
+
+        local newMouseV = Vector:new{
+            x = mouse.getMouseX(playerId),
+            y = mouse.getMouseY(playerId)
+        }
+
+        local facingRad = Atan2(newMouseV.y - heroV.y, newMouseV.x - heroV.x)
+        local facingDeg = bj_RADTODEG * facingRad
+        BlzSetSpecialEffectYaw(sfx, facingRad)
+        SetUnitFacingTimed(hero, facingDeg, 0.05)
+
+        if numTicks % (dmgFrequency / timerSpeed) == 0 then
+            local shape = {
+                getCollisionPoint(heroV, facingDeg, 1, 0),
+                getCollisionPoint(heroV, facingDeg, -1, 0),
+                getCollisionPoint(heroV, facingDeg, -1, 1),
+                getCollisionPoint(heroV, facingDeg, 1, 1),
+            }
+
+            local collidedUnits = collision.getAllCollisions(shape)
+            for _, unit in pairs(collidedUnits) do
+                if IsUnitEnemy(unit, Player(playerId)) then
+                    damage.dealDamage(hero, unit, DPS * dmgFrequency, damage.TYPE.SPELL)
+                    buff.addBuff(hero, unit, 'tornado', dmgFrequency * 2)
+                end
+            end
+        end
+    end)
+
+    casttime.cast(playerId, 3, false, false)
+
+    DestroyTimer(timer)
 
     target.restoreOrder(playerId)
 
