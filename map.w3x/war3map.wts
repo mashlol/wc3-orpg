@@ -1503,3 +1503,15 @@ STRING 271
 Dungeon Door Dark
 }
 
+STRING 272
+// Units: Hjar (Järga), Propernames (Proper Names)
+{
+Järga
+}
+
+STRING 273
+// Units: Hjar (Järga), Name (Name)
+{
+Järga
+}
+

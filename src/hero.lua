@@ -141,12 +141,12 @@ local ALL_HERO_INFO = {
         attackSpeed = 1.7,
         defense = 'High',
     },
-    [FourCC("Nbrn")] = {
+    [FourCC("Hjar")] = {
         name = 'Järga',
         desc = 'TODO',
         heroType = 'Ranged',
         storedId = 6,
-        id = FourCC("Nbrn"),
+        id = FourCC("Hjar"),
         spells = {
             [1] = 'whirlwind',
             [2] = 'boomerang',
