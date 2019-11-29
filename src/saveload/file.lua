@@ -11,6 +11,8 @@ local ABILITY_LIST = {
     FourCC('Afbk'),
 }
 
+local _FILE_CACHE = {}
+
 function writeFile(file, contents)
     local name = GetPlayerName(GetLocalPlayer())
     name = string.gsub(name, "|", "")
@@ -34,6 +36,8 @@ function writeFile(file, contents)
     end
     Preload("\" )\nendfunction\nfunction a takes nothing returns nothing\n //")
     PreloadGenEnd(file)
+
+    _FILE_CACHE[file] = contents
 end
 
 function exists(file)
@@ -44,6 +48,14 @@ function readFile(file)
     local name = GetPlayerName(GetLocalPlayer())
     name = string.gsub(name, "|", "")
     file = 'tvt/' .. name .. '/' .. file
+
+    if _FILE_CACHE[file] ~= nil then
+        local contents = _FILE_CACHE[file]
+        if contents == "" then
+            return nil
+        end
+        return contents
+    end
 
     local original = {}
     local output = ""
