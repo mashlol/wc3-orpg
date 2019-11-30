@@ -21,7 +21,7 @@ function maybeResetAnimation(unit)
     local animTimer = animTimers[unitId]
     if animTimer ~= nil then
         DestroyTimer(animTimer)
-        SetUnitAnimationByIndex(unit, 0)
+        SetUnitAnimation(unit, 'idle')
         animTimers[unitId] = nil
     end
 end

@@ -5,21 +5,21 @@ local damage = require('src/damage.lua')
 local buff = require('src/buff.lua')
 local animations = require('src/animations.lua')
 
-local OverseerTom = {}
+local TrollWarlord = {}
 
-function OverseerTom:new(o)
+function TrollWarlord:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function OverseerTom:getName()
-    return "The Overseer"
+function TrollWarlord:getName()
+    return "Ice Troll Warlord"
 end
 
 -- Counter-clockwise coords
-function OverseerTom:getBounds()
+function TrollWarlord:getBounds()
     return {
         {x = 26803, y = -27995},
         {x = 26814, y = -29570},
@@ -29,10 +29,9 @@ function OverseerTom:getBounds()
     }
 end
 
-function OverseerTom:pullCenter()
-    buff.addBuff(self.bossUnit, self.bossUnit, 'stunnoeffect', 5)
+function TrollWarlord:pullCenter()
     PauseUnit(self.bossUnit, true)
-    animations.queueAnimation(self.bossUnit, 15, 5)
+    animations.queueAnimation(self.bossUnit, 1, 5)
 
     local bombV = Vector:new{
         x = GetUnitX(self.bossUnit),
@@ -64,16 +63,17 @@ function OverseerTom:pullCenter()
         remove = true,
     }
 
-    animations.queueAnimation(self.bossUnit, 15, 5)
+    animations.queueAnimation(self.bossUnit, 1, 5)
     local timer = CreateTimer()
     TimerStart(timer, 5, false, function()
         DestroyTimer(timer)
+        PauseUnit(self.bossUnit, false)
         effect.createEffect{
-            model = 'Pillar of Flame Orange.mdl',
+            model = 'Abilities\\Spells\\Undead\\FreezingBreath\\FreezingBreathMissile.mdl',
             x = bombV.x,
             y = bombV.y,
-            duration = 0.5,
-            scale = 2,
+            duration = 0.1,
+            scale = 4,
         }
 
         local collidedUnits = collision.getAllCollisions(bombV, 200)
@@ -85,7 +85,7 @@ function OverseerTom:pullCenter()
     end)
 end
 
-function OverseerTom:init()
+function TrollWarlord:init()
     local phase1 = self.ctx:registerPhase{
         hp = 100,
     }
@@ -99,4 +99,4 @@ function OverseerTom:init()
     self.ctx:registerDoor(gg_dest_YTcx_17816, true)
 end
 
-return OverseerTom
+return TrollWarlord

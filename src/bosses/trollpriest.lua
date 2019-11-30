@@ -3,21 +3,21 @@ local effect = require('src/effect.lua')
 local collision = require('src/collision.lua')
 local damage = require('src/damage.lua')
 
-local MinerJoe = {}
+local TrollPriest = {}
 
-function MinerJoe:new(o)
+function TrollPriest:new(o)
     o = o or {}
     setmetatable(o, self)
     self.__index = self
     return o
 end
 
-function MinerJoe:getName()
-    return "Miner Joe"
+function TrollPriest:getName()
+    return "High Troll Priest"
 end
 
 -- Counter-clockwise coords
-function MinerJoe:getBounds()
+function TrollPriest:getBounds()
     return {
         {x = 29273, y = -23300},
         {x = 29466, y = -25392},
@@ -26,7 +26,7 @@ function MinerJoe:getBounds()
     }
 end
 
-function MinerJoe:throwBomb()
+function TrollPriest:throwBomb()
     local target = self.ctx:getRandomInvolvedHero()
 
     local bombV = Vector:new{
@@ -40,31 +40,35 @@ function MinerJoe:throwBomb()
         y = bombV.y,
         z = 0,
         duration = 3,
-        scale = 3,
+        scale = 2.5,
         remove = true,
     }
 
-    local timer = CreateTimer()
-    TimerStart(timer, 3, false, function()
-        DestroyTimer(timer)
+    TimerStart(CreateTimer(), 2.4, false, function()
+        DestroyTimer(GetExpiredTimer())
         effect.createEffect{
-            model = 'Pillar of Flame Orange.mdl',
+            model = 'Abilities\\Spells\\Human\\Blizzard\\BlizzardTarget.mdl',
             x = bombV.x,
             y = bombV.y,
-            duration = 0.5,
-            scale = 1,
+            duration = 2,
+            scale = 2,
+            timeScale = 2,
         }
 
-        local collidedUnits = collision.getAllCollisions(bombV, 150)
-        for _, unit in pairs(collidedUnits) do
-            if IsUnitEnemy(unit, Player(PLAYER_NEUTRAL_AGGRESSIVE)) then
-                damage.dealDamage(self.bossUnit, unit, 400, damage.TYPE.SPELL)
+        TimerStart(CreateTimer(), 0.6, false, function()
+            print('doing damage now')
+            DestroyTimer(GetExpiredTimer())
+            local collidedUnits = collision.getAllCollisions(bombV, 150)
+            for _, unit in pairs(collidedUnits) do
+                if IsUnitEnemy(unit, Player(PLAYER_NEUTRAL_AGGRESSIVE)) then
+                    damage.dealDamage(self.bossUnit, unit, 400, damage.TYPE.SPELL)
+                end
             end
-        end
+        end)
     end)
 end
 
-function MinerJoe:init()
+function TrollPriest:init()
     local phase1 = self.ctx:registerPhase{
         hp = 100,
     }
@@ -76,4 +80,4 @@ function MinerJoe:init()
     self.ctx:registerDoor(gg_dest_DTg3_18751, false)
 end
 
-return MinerJoe
+return TrollPriest

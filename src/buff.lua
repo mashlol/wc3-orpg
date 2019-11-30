@@ -399,6 +399,10 @@ local IMMUNE_UNIT_TYPES = {
         stunnable = false,
         slowable = true,
     },
+    [FourCC('h002')] = {
+        stunnable = false,
+        slowable = true,
+    },
     [FourCC('over')] = {
         stunnable = false,
         slowable = false,

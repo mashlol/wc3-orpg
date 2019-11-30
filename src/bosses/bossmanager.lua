@@ -1,8 +1,8 @@
 local Turtle = require('src/bosses/turtle.lua')
 local Wolf = require('src/bosses/wolf.lua')
-local MinerJoe = require('src/bosses/minerjoe.lua')
+local TrollPriest = require('src/bosses/trollpriest.lua')
 local Yeti = require('src/bosses/yeti.lua')
-local OverseerTom = require('src/bosses/overseertom.lua')
+local TrollWarlord = require('src/bosses/trollwarlord.lua')
 local hero = require('src/hero.lua')
 local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
@@ -22,7 +22,7 @@ local ALL_BOSS_CLASSES = {
         facing = 165,
         respawnable = false,
     },
-    MINER_JOE = MinerJoe:new{
+    TROLL_PRIEST = TrollPriest:new{
         bossUnitId = FourCC('mine'),
         startX = 30371,
         startY = -24008,
@@ -36,7 +36,7 @@ local ALL_BOSS_CLASSES = {
         facing = 180,
         respawnable = false,
     },
-    THE_OVERSEER = OverseerTom:new{
+    TROLL_WARLORD = TrollWarlord:new{
         bossUnitId = FourCC('over'),
         startX = 28248,
         startY = -29136,
