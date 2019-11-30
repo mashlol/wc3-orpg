@@ -257,7 +257,7 @@
   "18": {
     "classification": "Equipment",
     "name": "Troll Pendant",
-    "icon": "war3mapImported\\BTNEmpty Amulet.blp",
+    "icon": "war3mapImported\\BTNCastersBeads.blp",
     "type": "Necklace",
     "requiredLevel": 15,
     "itemLevel": 26,
@@ -385,7 +385,8 @@
     "icon": "war3mapImported\\BTNINV_Robe_03.blp",
     "usable": [
       "Azora",
-      "Ivanov"
+      "Ivanov",
+      "Kanna"
     ],
     "type": "Chest",
     "requiredLevel": 16,
@@ -393,7 +394,7 @@
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 80
+      "Raw HP": "65"
     }
   },
   "27": {
@@ -467,7 +468,8 @@
     "icon": "",
     "usable": [
       "Azora",
-      "Ivanov"
+      "Ivanov",
+      "Kanna"
     ],
     "type": "Chest",
     "requiredLevel": 16,
@@ -1269,5 +1271,66 @@
     "classification": "Consumable",
     "stackSize": "1",
     "tooltip": "Ale for the one in need."
+  },
+  "81": {
+    "name": "Regenerative Slime",
+    "rarity": "Uncommon",
+    "icon": "war3mapImported\\BTNA10 Slime.blp",
+    "requiredLevel": "22",
+    "itemLevel": "35",
+    "cost": "0",
+    "classification": "Equipment",
+    "usable": [
+      "Yuji",
+      "Stormfist",
+      "Kanna"
+    ],
+    "stats": {
+      "HP Regen": "8",
+      "Raw HP": "100",
+      "Spell Damage Taken": "-5"
+    },
+    "type": "Helmet"
+  },
+  "82": {
+    "name": "Discarded Amulet",
+    "icon": "war3mapImported/BTNEmpty Amulet.blp",
+    "rarity": "Common",
+    "requiredLevel": "2",
+    "itemLevel": "2",
+    "classification": "Equipment",
+    "type": "Necklace",
+    "usable": [
+      "Azora",
+      "Yuji",
+      "Ivanov",
+      "Tarcza",
+      "Stormfist",
+      "Kanna",
+      "Jarga",
+      "Ravanna"
+    ],
+    "stats": {
+      "Raw HP": "10"
+    }
+  },
+  "83": {
+    "requiredLevel": "25",
+    "itemLevel": "40",
+    "classification": "Equipment",
+    "rarity": "Rare",
+    "name": "Plague Doctors Robes",
+    "type": "Chest",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna"
+    ],
+    "icon": "war3mapImported\\BTNPlagueDoctor.blp",
+    "stats": {
+      "Spell Damage": "25",
+      "Healing": "40",
+      "Raw HP": "100"
+    }
   }
 }
