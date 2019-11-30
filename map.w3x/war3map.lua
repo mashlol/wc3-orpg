@@ -97,6 +97,10 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
+gg_rct_Just_a_zone_to_make_map_look_better = nil
+gg_rct_Maybe_future_patch_zone = nil
+gg_rct_Salt_Desert = nil
+gg_rct_Salty_Lake = nil
 function InitGlobals()
 end
 
@@ -117,7 +121,7 @@ function CreateUnitsForPlayer0()
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -27441.0, 31288.9, 101.967, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -24624.5, 30805.8, 340.971, FourCC("Hazr"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 20557.4, 5848.0, 131.543, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.544, FourCC("hmpr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 13282.8, 13852.4, 280.050, FourCC("hfoo"))
 end
 
@@ -166,7 +170,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5127.6, -5365.2, 43.486, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5882.2, -6170.1, 18.305, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4549.7, -5499.3, 48.944, FourCC("lold"))
-    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5262.1, -7154.2, 16.266, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -3145.8, -4359.2, 16.266, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6657.5, -5206.2, 341.249, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6276.7, -4618.6, 342.905, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -4359.5, -6926.6, 333.662, FourCC("lold"))
@@ -778,6 +782,10 @@ function CreateRegions()
     gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = Rect(27264.0, -17248.0, 28064.0, -16416.0)
     gg_rct_Just_an_idea = Rect(-12000.0, -11680.0, -11520.0, -11392.0)
     gg_rct_The_Forgotten_Kingdom = Rect(-5856.0, 18144.0, -5504.0, 18496.0)
+    gg_rct_Just_a_zone_to_make_map_look_better = Rect(-11296.0, 12832.0, -10880.0, 13312.0)
+    gg_rct_Maybe_future_patch_zone = Rect(-10720.0, 12864.0, -10336.0, 13248.0)
+    gg_rct_Salt_Desert = Rect(3648.0, 19008.0, 4032.0, 19360.0)
+    gg_rct_Salty_Lake = Rect(-1856.0, 20640.0, -1472.0, 20992.0)
 end
 
 function CreateCameras()
