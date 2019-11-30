@@ -67,7 +67,8 @@
     "stackSize": 5,
     "tooltip": "Heal yourself for 200 HP.",
     "spellKey": "healpot1",
-    "cost": 20
+    "cost": 20,
+    "consume": "on"
   },
   "6": {
     "classification": "Consumable",
@@ -79,7 +80,8 @@
     "stackSize": 20,
     "tooltip": "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
     "spellKey": "food1",
-    "cost": 5
+    "cost": 5,
+    "consume": "on"
   },
   "7": {
     "classification": "Equipment",

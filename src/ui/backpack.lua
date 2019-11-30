@@ -248,11 +248,7 @@ function Backpack:init()
                             -- Consume the item
                             local success = spell.castSpellByKey(
                                 playerId, spellKey)
-                            if
-                                success and
-                                (itemInfo.consume == true or
-                                itemInfo.consume == nil)
-                            then
+                            if success and itemInfo.consume == true then
                                 backpack.removeItemFromBackpack(
                                     playerId, clickedItemPos, 1)
                             end

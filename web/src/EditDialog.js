@@ -119,7 +119,7 @@ class EditDialog extends React.Component {
 
   _onChangeSimpleValue = (key, event) => {
     const oldData = Object.assign({}, this.state.data);
-    oldData[key] = event.target.value;
+    oldData[key] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
     this.setState({
       data: oldData,
     });
@@ -266,6 +266,8 @@ class EditDialog extends React.Component {
           <div>
             <label htmlFor="spellKey">Spell Key: </label><input name="spellKey" type="text" placeholder="Spell Key" value={this.state.data.spellKey} onChange={this._onChangeSimpleValue.bind(this, 'spellKey')} />
           </div>
+          <label htmlFor="shouldConsume">Consume on use</label>
+          <input type="checkbox" id="shouldConsume" name="shouldConsume" checked={this.state.data.consume} onChange={this._onChangeSimpleValue.bind(this, 'consume')} />
         </div>
       );
     }

@@ -90,6 +90,11 @@ const COLUMNS = {
         name: 'spell',
         type: 'string',
     },
+    'consume': {
+        name: 'consume',
+        type: 'int',
+        fn: x => x === 'on' ? 'true' : 'false',
+    },
 };
 
 const input = fs.readFileSync('../json/items.json', {encoding: 'utf8'});
