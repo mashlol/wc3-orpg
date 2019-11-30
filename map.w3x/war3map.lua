@@ -91,6 +91,7 @@ gg_rct_Owl_Forest = nil
 gg_rct_Owling_Moon_City = nil
 gg_rct_Weather_Owling_Moon_City = nil
 gg_rct_Owlkin_Slaying = nil
+gg_rct_Dwarven_Tunnels = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -110,7 +111,6 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_Dwarven_Tunnels = nil
 function InitGlobals()
 end
 
@@ -719,8 +719,8 @@ function CreateRegions()
     gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
     gg_rct_trollenter1 = Rect(-20608.0, 3200.0, -20512.0, 3296.0)
     gg_rct_trollexit1 = Rect(-20576.0, 2944.0, -20480.0, 3040.0)
-    gg_rct_trollentrance1 = Rect(30496.0, -29472.0, 30656.0, -29376.0)
-    gg_rct_trollleave1 = Rect(30496.0, -29632.0, 30656.0, -29472.0)
+    gg_rct_trollentrance1 = Rect(30496.0, -29280.0, 30656.0, -29184.0)
+    gg_rct_trollleave1 = Rect(30496.0, -29440.0, 30656.0, -29280.0)
     gg_rct_trolldungeon = Rect(26432.0, -29696.0, 31232.0, -21152.0)
     gg_rct_house2enter1 = Rect(28128.0, -24768.0, 28224.0, -24672.0)
     gg_rct_house2exit1 = Rect(28224.0, -24928.0, 28352.0, -24800.0)
@@ -1155,7 +1155,7 @@ function InitAllyPriorities()
     SetStartLocPrio(8, 1, 3, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(9, 9)
     SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_LOW)
@@ -1206,7 +1206,7 @@ function config()
     SetTeams(11)
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
     DefineStartLocation(0, -5824.0, -704.0)
-    DefineStartLocation(1, 29248.0, -13568.0)
+    DefineStartLocation(1, 29760.0, -11264.0)
     DefineStartLocation(2, -19264.0, 11392.0)
     DefineStartLocation(3, -20032.0, 11008.0)
     DefineStartLocation(4, 3712.0, -15232.0)
