@@ -123,6 +123,12 @@ const convertJson = function(parsedJson, COLUMNS, MAPPINGS) {
                             return 'FourCC(\'Hivn\')';
                         } else if (x == 'Stormfist') {
                             return 'FourCC(\'Hstm\')';
+                        } else if (x == 'Kanna') {
+                            return 'FourCC(\'Hkan\')';
+                        } else if (x == 'Ravanna') {
+                            return 'FourCC(\'Hrav\')';
+                        } else if (x == 'Jarga') {
+                            return 'FourCC(\'Hjar\')';
                         }
                     }).join(',');
                     rowResult += '    ' + column.name + ' = ' + '{' + allowedClasses + '},\n';

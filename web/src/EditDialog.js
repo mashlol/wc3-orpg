@@ -73,6 +73,9 @@ const Class = {
   IVANOV: 'Ivanov',
   TARCZA: 'Tarcza',
   STORMFIST: 'Stormfist',
+  KANNA: 'Kanna',
+  RAVANNA: 'Ravanna',
+  JARGA: 'Jarga',
 };
 
 // const data: {
