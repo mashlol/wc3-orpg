@@ -1641,3 +1641,9 @@ STRING 294
 Dwarven Wall Endcap Tower House Building
 }
 
+STRING 295
+// Doodads: D02N (Sewer Vents Down), Name (Name)
+{
+Sewer Vents Down
+}
+

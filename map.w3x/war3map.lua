@@ -111,6 +111,16 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
+gg_rct_house3enter1 = nil
+gg_rct_house3leave1 = nil
+gg_rct_house3entrance1 = nil
+gg_rct_house3exit1 = nil
+gg_rct_house3enter2 = nil
+gg_rct_house3entrance2 = nil
+gg_rct_sewerentrance1 = nil
+gg_rct_sewerexit1 = nil
+gg_rct_sewerenter1 = nil
+gg_rct_sewerleave1 = nil
 function InitGlobals()
 end
 
@@ -813,6 +823,16 @@ function CreateRegions()
     EnableWeatherEffect(we, true)
     gg_rct_Owlkin_Slaying = Rect(4256.0, -12064.0, 4416.0, -11904.0)
     gg_rct_Dwarven_Tunnels = Rect(23136.0, -14304.0, 23328.0, -14016.0)
+    gg_rct_house3enter1 = Rect(-27168.0, 31328.0, -27040.0, 31456.0)
+    gg_rct_house3leave1 = Rect(-25888.0, 31200.0, -25760.0, 31328.0)
+    gg_rct_house3entrance1 = Rect(-25824.0, 30976.0, -25696.0, 31104.0)
+    gg_rct_house3exit1 = Rect(-27424.0, 31328.0, -27296.0, 31456.0)
+    gg_rct_house3enter2 = Rect(-26848.0, 28160.0, -26720.0, 28288.0)
+    gg_rct_house3entrance2 = Rect(-26848.0, 27616.0, -26720.0, 27744.0)
+    gg_rct_sewerentrance1 = Rect(-29888.0, 31072.0, -29728.0, 31232.0)
+    gg_rct_sewerexit1 = Rect(-29888.0, 31296.0, -29728.0, 31456.0)
+    gg_rct_sewerenter1 = Rect(18144.0, -15584.0, 18240.0, -15488.0)
+    gg_rct_sewerleave1 = Rect(18016.0, -15456.0, 18112.0, -15360.0)
 end
 
 function CreateCameras()
