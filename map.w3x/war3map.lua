@@ -85,6 +85,12 @@ gg_rct_Salty_Lake = nil
 gg_rct_Jungle_Troll_Killing = nil
 gg_rct_Fort_Cragscorth = nil
 gg_rct_Steppes_of_Infinity = nil
+gg_rct_Dead_Ice_Hills = nil
+gg_rct_Abandoned_Human_Settlement = nil
+gg_rct_Owl_Forest = nil
+gg_rct_Owling_Moon_City = nil
+gg_rct_Weather_Owling_Moon_City = nil
+gg_rct_Owlkin_Slaying = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -104,9 +110,7 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_Dead_Ice_Hills = nil
-gg_rct_Abandoned_Human_Settlement = nil
-gg_rct_Owl_Forest = nil
+gg_rct_Dwarven_Tunnels = nil
 function InitGlobals()
 end
 
@@ -129,6 +133,8 @@ function CreateUnitsForPlayer0()
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -24624.5, 30805.8, 340.971, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.544, FourCC("hmpr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 13282.8, 13852.4, 280.050, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nzep"), 6239.2, -11672.9, 146.584, FourCC("nzep"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ngir"), 19444.9, 1233.9, 59.855, FourCC("ngir"))
 end
 
 function CreateNeutralHostile()
@@ -671,7 +677,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1305.9, -4483.5, 354.451, FourCC("hgry"))
     gg_unit_n002_0531 = BlzCreateUnitWithSkin(p, FourCC("n002"), 20114.0, -900.7, 306.910, FourCC("n002"))
     gg_unit_n003_0532 = BlzCreateUnitWithSkin(p, FourCC("n003"), 2219.8, -3850.1, 224.190, FourCC("n003"))
-    u = BlzCreateUnitWithSkin(p, FourCC("n004"), 12976.3, 5593.3, 211.848, FourCC("n004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n004"), 12877.5, 5590.6, 252.088, FourCC("n004"))
     SetUnitColor(u, ConvertPlayerColor(10))
     gg_unit_n005_0534 = BlzCreateUnitWithSkin(p, FourCC("n005"), 1198.5, 2413.1, 309.405, FourCC("n005"))
     SetUnitColor(gg_unit_n005_0534, ConvertPlayerColor(2))
@@ -680,6 +686,9 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hphx"), 13384.0, -11262.2, 332.140, FourCC("hphx"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrdr"), 9920.2, 10922.0, 306.901, FourCC("nrdr"))
     u = BlzCreateUnitWithSkin(p, FourCC("nrdk"), 10272.9, 10912.6, 241.569, FourCC("nrdk"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Nbst"), 28144.2, 8663.4, 126.590, FourCC("Nbst"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nowb"), 3800.4, -12234.9, 302.576, FourCC("nowb"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nowk"), 3808.5, -12084.1, 309.498, FourCC("nowk"))
 end
 
 function CreatePlayerBuildings()
@@ -727,7 +736,7 @@ function CreateRegions()
     gg_rct_cultists4 = Rect(5184.0, -8576.0, 8480.0, -7520.0)
     gg_rct_cultists2 = Rect(6784.0, -4704.0, 15136.0, -2304.0)
     gg_rct_farm1 = Rect(8608.0, -12960.0, 11936.0, -7712.0)
-    gg_rct_farm2 = Rect(5248.0, -12960.0, 8608.0, -8640.0)
+    gg_rct_farm2 = Rect(6144.0, -12960.0, 8608.0, -8640.0)
     gg_rct_ironwell2 = Rect(12032.0, -10816.0, 13088.0, -9440.0)
     gg_rct_ironwell2_Copy = Rect(12448.0, -18976.0, 15104.0, -16288.0)
     gg_rct_ironwellcamp = Rect(13120.0, -10784.0, 16736.0, -7712.0)
@@ -798,6 +807,12 @@ function CreateRegions()
     gg_rct_Dead_Ice_Hills = Rect(29120.0, -19424.0, 29504.0, -19008.0)
     gg_rct_Abandoned_Human_Settlement = Rect(25728.0, -20480.0, 26080.0, -20000.0)
     gg_rct_Owl_Forest = Rect(-6304.0, -8864.0, -5792.0, -8288.0)
+    gg_rct_Owling_Moon_City = Rect(4800.0, -11776.0, 4992.0, -11616.0)
+    gg_rct_Weather_Owling_Moon_City = Rect(3296.0, -12960.0, 6048.0, -9504.0)
+    we = AddWeatherEffect(gg_rct_Weather_Owling_Moon_City, FourCC("LRma"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Owlkin_Slaying = Rect(4256.0, -12064.0, 4416.0, -11904.0)
+    gg_rct_Dwarven_Tunnels = Rect(23136.0, -14304.0, 23328.0, -14016.0)
 end
 
 function CreateCameras()

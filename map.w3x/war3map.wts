@@ -1605,3 +1605,39 @@ STRING 288
 Chunk Wall Black 5
 }
 
+STRING 289
+// Doodads: D02H (Exterior Wall 2), Name (Name)
+{
+Exterior Wall 2
+}
+
+STRING 290
+// Doodads: D02I (Owling Moon City Archway), Name (Name)
+{
+Owling Moon City Archway
+}
+
+STRING 291
+// Doodads: D02J (Statue Keeper Owling Moon City), Name (Name)
+{
+Statue Keeper Owling Moon City
+}
+
+STRING 292
+// Doodads: D02K (Owling Moon City Fountain), Name (Name)
+{
+Owling Moon City Fountain
+}
+
+STRING 293
+// Doodads: D02L (Dwarven Kingdom Gate), Name (Name)
+{
+Dwarven Kingdom Gate
+}
+
+STRING 294
+// Doodads: D02M (Dwarven Wall Endcap Tower House Building), Name (Name)
+{
+Dwarven Wall Endcap Tower House Building
+}
+
