@@ -1575,3 +1575,33 @@ STRING 283
 Owling Moon City Wall
 }
 
+STRING 284
+// Doodads: D02C (Chunk Wall Black 3), Name (Name)
+{
+Chunk Wall Black 3
+}
+
+STRING 285
+// Doodads: D02D (Chunk Wall Black 2), Name (Name)
+{
+Chunk Wall Black 2
+}
+
+STRING 286
+// Doodads: D02E (Chunk Wall Black 1), Name (Name)
+{
+Chunk Wall Black 1
+}
+
+STRING 287
+// Doodads: D02F (Chunk Wall Black 4), Name (Name)
+{
+Chunk Wall Black 4
+}
+
+STRING 288
+// Doodads: D02G (Chunk Wall Black 5), Name (Name)
+{
+Chunk Wall Black 5
+}
+

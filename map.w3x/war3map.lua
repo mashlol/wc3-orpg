@@ -31,8 +31,8 @@ gg_rct_ironwell2_Copy = nil
 gg_rct_ironwellcamp = nil
 gg_rct_To_Hub_by_Magicon = nil
 gg_rct_Dragons_Rest_by_Magicon = nil
-gg_rct_Jungle_Troll_area_Questionmark = nil
-gg_rct_Animal_Mobs_area_Questionmark = nil
+gg_rct_Tzchon_Ruins = nil
+gg_rct_Animal_Mobs_Killing = nil
 gg_rct_Ogre_Area_Questionmark = nil
 gg_rct_Small_quest_Hub = nil
 gg_rct_Little_quest_Hub_for_Swamp = nil
@@ -69,7 +69,7 @@ gg_rct_Canyon_Valley = nil
 gg_rct_Flatter_Canyon = nil
 gg_rct_Third_Entrance_Desert = nil
 gg_rct_Second_Entrance_Desert = nil
-gg_rct_Hoping_for_Desert_City_or_something = nil
+gg_rct_Unfinished_City = nil
 gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = nil
 gg_rct_Polar_Furbolg_Killing = nil
 gg_rct_Walrusman = nil
@@ -78,6 +78,13 @@ gg_rct_Region_076 = nil
 gg_rct_Big_dead_area_cant_use_the_black_ground_before_making_mountains = nil
 gg_rct_Just_an_idea = nil
 gg_rct_The_Forgotten_Kingdom = nil
+gg_rct_Just_a_zone_to_make_map_look_better = nil
+gg_rct_Maybe_future_patch_zone = nil
+gg_rct_Salt_Desert = nil
+gg_rct_Salty_Lake = nil
+gg_rct_Jungle_Troll_Killing = nil
+gg_rct_Fort_Cragscorth = nil
+gg_rct_Steppes_of_Infinity = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -97,10 +104,9 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_Just_a_zone_to_make_map_look_better = nil
-gg_rct_Maybe_future_patch_zone = nil
-gg_rct_Salt_Desert = nil
-gg_rct_Salty_Lake = nil
+gg_rct_Dead_Ice_Hills = nil
+gg_rct_Abandoned_Human_Settlement = nil
+gg_rct_Owl_Forest = nil
 function InitGlobals()
 end
 
@@ -665,7 +671,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1305.9, -4483.5, 354.451, FourCC("hgry"))
     gg_unit_n002_0531 = BlzCreateUnitWithSkin(p, FourCC("n002"), 20114.0, -900.7, 306.910, FourCC("n002"))
     gg_unit_n003_0532 = BlzCreateUnitWithSkin(p, FourCC("n003"), 2219.8, -3850.1, 224.190, FourCC("n003"))
-    u = BlzCreateUnitWithSkin(p, FourCC("n004"), 11287.6, 4329.1, 215.180, FourCC("n004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("n004"), 12976.3, 5593.3, 211.848, FourCC("n004"))
     SetUnitColor(u, ConvertPlayerColor(10))
     gg_unit_n005_0534 = BlzCreateUnitWithSkin(p, FourCC("n005"), 1198.5, 2413.1, 309.405, FourCC("n005"))
     SetUnitColor(gg_unit_n005_0534, ConvertPlayerColor(2))
@@ -727,10 +733,10 @@ function CreateRegions()
     gg_rct_ironwellcamp = Rect(13120.0, -10784.0, 16736.0, -7712.0)
     gg_rct_To_Hub_by_Magicon = Rect(9920.0, 7104.0, 10336.0, 7552.0)
     gg_rct_Dragons_Rest_by_Magicon = Rect(-2720.0, 10592.0, -2176.0, 11040.0)
-    gg_rct_Jungle_Troll_area_Questionmark = Rect(-2464.0, 6112.0, -1824.0, 6656.0)
-    gg_rct_Animal_Mobs_area_Questionmark = Rect(6592.0, 5472.0, 7104.0, 6176.0)
+    gg_rct_Tzchon_Ruins = Rect(-2464.0, 6112.0, -1824.0, 6656.0)
+    gg_rct_Animal_Mobs_Killing = Rect(6592.0, 5472.0, 7104.0, 6176.0)
     gg_rct_Ogre_Area_Questionmark = Rect(-7776.0, 9888.0, -7136.0, 10464.0)
-    gg_rct_Small_quest_Hub = Rect(11104.0, 4096.0, 11296.0, 4352.0)
+    gg_rct_Small_quest_Hub = Rect(12768.0, 5376.0, 12960.0, 5632.0)
     gg_rct_Little_quest_Hub_for_Swamp = Rect(1120.0, 2080.0, 1600.0, 2368.0)
     gg_rct_Wandering_Minotaur_Killing = Rect(28160.0, -2976.0, 28576.0, -2464.0)
     gg_rct_Undead_Killing = Rect(28800.0, -5440.0, 29280.0, -4896.0)
@@ -760,8 +766,8 @@ function CreateRegions()
     gg_rct_Just_fog_at_Dark_Pass = Rect(14208.0, 7392.0, 20320.0, 9568.0)
     we = AddWeatherEffect(gg_rct_Just_fog_at_Dark_Pass, FourCC("FDwl"))
     EnableWeatherEffect(we, true)
-    gg_rct_Outrance_City = Rect(11104.0, 10432.0, 11424.0, 10688.0)
-    gg_rct_Outrance_from_City_2 = Rect(6848.0, 12288.0, 7232.0, 12672.0)
+    gg_rct_Outrance_City = Rect(11456.0, 10432.0, 11776.0, 10720.0)
+    gg_rct_Outrance_from_City_2 = Rect(7232.0, 15200.0, 7616.0, 15584.0)
     gg_rct_Entrance_City = Rect(9280.0, 8448.0, 9696.0, 8768.0)
     gg_rct_Cavalamere_Town = Rect(13696.0, 13664.0, 14016.0, 13888.0)
     gg_rct_Cavalamere_Lake = Rect(15584.0, 12896.0, 15776.0, 13152.0)
@@ -771,7 +777,7 @@ function CreateRegions()
     gg_rct_Flatter_Canyon = Rect(25056.0, 7680.0, 25376.0, 7968.0)
     gg_rct_Third_Entrance_Desert = Rect(27136.0, 15584.0, 27616.0, 16000.0)
     gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
-    gg_rct_Hoping_for_Desert_City_or_something = Rect(8768.0, 10336.0, 9216.0, 10880.0)
+    gg_rct_Unfinished_City = Rect(9056.0, 10848.0, 9504.0, 11392.0)
     gg_rct_Entrance_Swamp_Troll_Ruin_Dungeon = Rect(-6528.0, 5152.0, -6400.0, 5280.0)
     gg_rct_Polar_Furbolg_Killing = Rect(-8608.0, -736.0, -8352.0, -544.0)
     gg_rct_Walrusman = Rect(-21952.0, -544.0, -21728.0, -384.0)
@@ -786,6 +792,12 @@ function CreateRegions()
     gg_rct_Maybe_future_patch_zone = Rect(-10720.0, 12864.0, -10336.0, 13248.0)
     gg_rct_Salt_Desert = Rect(3648.0, 19008.0, 4032.0, 19360.0)
     gg_rct_Salty_Lake = Rect(-1856.0, 20640.0, -1472.0, 20992.0)
+    gg_rct_Jungle_Troll_Killing = Rect(-2112.0, 5600.0, -1632.0, 5952.0)
+    gg_rct_Fort_Cragscorth = Rect(20448.0, -19520.0, 20608.0, -19264.0)
+    gg_rct_Steppes_of_Infinity = Rect(20832.0, -14624.0, 21088.0, -14336.0)
+    gg_rct_Dead_Ice_Hills = Rect(29120.0, -19424.0, 29504.0, -19008.0)
+    gg_rct_Abandoned_Human_Settlement = Rect(25728.0, -20480.0, 26080.0, -20000.0)
+    gg_rct_Owl_Forest = Rect(-6304.0, -8864.0, -5792.0, -8288.0)
 end
 
 function CreateCameras()
@@ -1103,31 +1115,39 @@ function InitAllyPriorities()
     SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(1, 1, 4, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(1, 2, 7, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(2, 1)
-    SetStartLocPrio(2, 0, 8, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(3, 3)
-    SetStartLocPrio(3, 0, 2, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(3, 1, 5, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(3, 2, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(2, 2)
+    SetStartLocPrio(2, 0, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(2, 1, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(3, 2)
+    SetStartLocPrio(3, 0, 2, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(3, 1, 8, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(4, 1)
     SetStartLocPrio(4, 0, 7, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(5, 1)
-    SetStartLocPrio(5, 0, 3, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(6, 3)
+    SetStartLocPrioCount(5, 3)
+    SetStartLocPrio(5, 0, 2, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 1, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(5, 2, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(6, 5)
     SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(6, 1, 3, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(6, 2, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(6, 3, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 4, 8, MAP_LOC_PRIO_LOW)
     SetStartLocPrioCount(7, 1)
     SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(8, 1)
-    SetStartLocPrio(8, 0, 2, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(9, 6)
+    SetStartLocPrioCount(8, 2)
+    SetStartLocPrio(8, 0, 2, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(8, 1, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(9, 9)
     SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(9, 4, 7, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(9, 5, 8, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(10, 8)
     SetStartLocPrio(10, 0, 0, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(10, 1, 1, MAP_LOC_PRIO_LOW)
@@ -1172,13 +1192,13 @@ function config()
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
     DefineStartLocation(0, -5824.0, -704.0)
     DefineStartLocation(1, 29248.0, -13568.0)
-    DefineStartLocation(2, -11648.0, 14272.0)
+    DefineStartLocation(2, -19264.0, 11392.0)
     DefineStartLocation(3, -20032.0, 11008.0)
     DefineStartLocation(4, 3712.0, -15232.0)
     DefineStartLocation(5, -26368.0, 7360.0)
     DefineStartLocation(6, -23936.0, -6912.0)
     DefineStartLocation(7, -1024.0, -5696.0)
-    DefineStartLocation(8, -12480.0, 14528.0)
+    DefineStartLocation(8, -20096.0, 11648.0)
     DefineStartLocation(9, 14528.0, 28928.0)
     DefineStartLocation(10, 30016.0, 20096.0)
     InitCustomPlayerSlots()
