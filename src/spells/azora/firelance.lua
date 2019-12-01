@@ -11,7 +11,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 4
+local COOLDOWN_S = 10
 
 local getSpellId = function()
     return 'firelance'
@@ -76,7 +76,7 @@ local cast = function(playerId)
         radius = 80,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 120, damage.TYPE.SPELL)
+                damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.SPELL)
                 buff.addBuff(hero, collidedUnit, 'firelance', 1)
                 buff.addBuff(hero, collidedUnit, 'ignite', 8)
             end

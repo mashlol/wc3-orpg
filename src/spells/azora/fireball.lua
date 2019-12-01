@@ -22,7 +22,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Azora conjures a ball of flame, dealing 60 damage to the first target hit.'
+    return 'Azora conjures a ball of flame, dealing 40 damage to the first target hit.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -30,7 +30,7 @@ local getSpellCooldown = function(playerId)
 end
 
 local getSpellCasttime = function(playerId)
-    return 0.7
+    return 1.5
 end
 
 local cast = function(playerId)
@@ -48,14 +48,14 @@ local cast = function(playerId)
 
 
     IssueImmediateOrder(hero, "stop")
-    animations.queueAnimation(hero, 4, 1)
+    animations.queueAnimation(hero, 4, 1.5)
 
     SetUnitFacingTimed(
         hero,
         bj_RADTODEG * Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
         0.05)
 
-    local success = casttime.cast(playerId, 0.7, true, false)
+    local success = casttime.cast(playerId, 1.5, true, false)
     if not success then
         return
     end
@@ -75,7 +75,7 @@ local cast = function(playerId)
         radius = 100,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 60, damage.TYPE.SPELL)
+                damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
                 buff.addBuff(hero, collidedUnit, 'ignite', 8)
                 return true
             end

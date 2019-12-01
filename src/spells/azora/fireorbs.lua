@@ -107,7 +107,7 @@ local cast = function(playerId)
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     buff.addBuff(hero, collidedUnit, 'ignite', 8)
-                    damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.SPELL)
+                    damage.dealDamage(hero, collidedUnit, 20, damage.TYPE.SPELL)
                     return true
                 end
                 return false
@@ -151,7 +151,7 @@ local cast = function(playerId)
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
                     buff.addBuff(hero, collidedUnit, 'ignite', 8)
-                    damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
+                    damage.dealDamage(hero, collidedUnit, 10, damage.TYPE.SPELL)
 
                     return true
                 end

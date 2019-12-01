@@ -10,7 +10,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 10
+local COOLDOWN_S = 18
 
 local getSpellId = function()
     return 'frostnova'
@@ -75,7 +75,7 @@ local cast = function(playerId)
                         unit = collidedUnit,
                         duration = 0.5,
                     }
-                    buff.addBuff(hero, collidedUnit, 'frostnova', 2)
+                    buff.addBuff(hero, collidedUnit, 'frostnova', 5)
                 end
                 return false
             end,
@@ -85,14 +85,6 @@ local cast = function(playerId)
     target.restoreOrder(playerId)
 
     return true
-end
-
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()

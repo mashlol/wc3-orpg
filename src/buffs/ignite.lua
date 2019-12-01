@@ -9,7 +9,7 @@ return {
     effects = {
         {
             type = stats.DAMAGE_OVER_TIME,
-            amount = 5,
+            amount = 1,
             tickrate = 1,
         }
     },
@@ -37,7 +37,7 @@ return {
         local collidedUnits = collision.getAllCollisions(posV, 100)
         for _, unit in pairs(collidedUnits) do
             if IsUnitEnemy(unit, Player(playerId)) then
-                damage.dealDamage(sourceUnit, unit, 75, damage.TYPE.SPELL)
+                damage.dealDamage(sourceUnit, unit, 20, damage.TYPE.SPELL)
             end
         end
         return true
