@@ -9,7 +9,7 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 3.5
+local COOLDOWN_S = 12
 
 local getSpellId = function()
     return 'throwingstar'
@@ -69,7 +69,7 @@ local cast = function(playerId)
             radius = 30,
             onCollide = function(collidedUnit)
                 if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                    damage.dealDamage(hero, collidedUnit, 30, damage.TYPE.PHYSICAL)
+                    damage.dealDamage(hero, collidedUnit, 15, damage.TYPE.PHYSICAL)
                     return true
                 end
                 return false

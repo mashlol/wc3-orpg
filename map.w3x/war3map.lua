@@ -92,6 +92,16 @@ gg_rct_Owling_Moon_City = nil
 gg_rct_Weather_Owling_Moon_City = nil
 gg_rct_Owlkin_Slaying = nil
 gg_rct_Dwarven_Tunnels = nil
+gg_rct_house3enter1 = nil
+gg_rct_house3leave1 = nil
+gg_rct_house3entrance1 = nil
+gg_rct_house3exit1 = nil
+gg_rct_house3enter2 = nil
+gg_rct_house3entrance2 = nil
+gg_rct_sewerentrance1 = nil
+gg_rct_sewerexit1 = nil
+gg_rct_sewerenter1 = nil
+gg_rct_sewerleave1 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -111,16 +121,6 @@ gg_unit_n003_0532 = nil
 gg_unit_n005_0534 = nil
 gg_unit_nvil_0501 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_house3enter1 = nil
-gg_rct_house3leave1 = nil
-gg_rct_house3entrance1 = nil
-gg_rct_house3exit1 = nil
-gg_rct_house3enter2 = nil
-gg_rct_house3entrance2 = nil
-gg_rct_sewerentrance1 = nil
-gg_rct_sewerexit1 = nil
-gg_rct_sewerenter1 = nil
-gg_rct_sewerleave1 = nil
 function InitGlobals()
 end
 

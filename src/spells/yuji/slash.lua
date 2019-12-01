@@ -12,8 +12,8 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.2
-local COOLDOWN_S_LONG = 1
+local COOLDOWN_S = 0.5
+local COOLDOWN_S_LONG = 10
 
 local storedData = {}
 
@@ -116,7 +116,7 @@ local cast = function(playerId)
         end,
         onDestroy = function()
             -- Finish up the stuff
-            local dmgAmount = storedData[playerId].attackCount == 2 and 100 or 25
+            local dmgAmount = storedData[playerId].attackCount == 2 and 25 or 10
 
             -- Update heroV now that we've moved
             local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}

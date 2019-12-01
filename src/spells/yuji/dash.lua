@@ -10,8 +10,8 @@ local damage = require('src/damage.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 0.5
-local COOLDOWN_S_LONG = 3
+local COOLDOWN_S = 1
+local COOLDOWN_S_LONG = 15
 
 local storedData = {}
 
@@ -31,7 +31,7 @@ local getSpellName = function()
 end
 
 local getSpellTooltip = function(playerId)
-    return 'Dash forward, dealing 35 damage to all units struck. Can be recast quickly after the first activation.'
+    return 'Dash forward, dealing 10 damage to all units struck. Can be recast quickly after the first activation.'
 end
 
 local getSpellCooldown = function(playerId)
@@ -93,7 +93,7 @@ local cast = function(playerId)
         length = 500,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 50, damage.TYPE.PHYSICAL)
+                damage.dealDamage(hero, collidedUnit, 10, damage.TYPE.PHYSICAL)
             end
             return false
         end,

@@ -11,7 +11,7 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 3
+local COOLDOWN_S = 7
 
 local getSpellId = function()
     return 'jab'
@@ -93,7 +93,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(shape)
     for idx, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 100, damage.TYPE.PHYSICAL)
+            damage.dealDamage(hero, unit, 40, damage.TYPE.PHYSICAL)
 
             effect.createEffect{
                 model = "Objects\\Spawnmodels\\Human\\HumanBlood\\HumanBloodPeasant.mdl",
