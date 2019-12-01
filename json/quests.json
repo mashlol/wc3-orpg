@@ -436,8 +436,9 @@
         "type": "Kill",
         "amount": "25",
         "toKill": "wood",
-        "verb": "pick up",
-        "verbPast": "picked up"
+        "verb": "Pick up",
+        "verbPast": "picked up",
+        "name": "Wood"
       }
     ],
     "name": "Chopping Their Supplies",
