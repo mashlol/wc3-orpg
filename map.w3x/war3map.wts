@@ -1647,3 +1647,39 @@ STRING 295
 Sewer Vents Down
 }
 
+STRING 296
+// Doodads: D02O (Jungle Tree), Name (Name)
+{
+Jungle Tree
+}
+
+STRING 297
+// Doodads: D02P (Jungle Tree 0), Name (Name)
+{
+Jungle Tree 0
+}
+
+STRING 298
+// Doodads: D02Q (Jungle Tree 1), Name (Name)
+{
+Jungle Tree 1
+}
+
+STRING 299
+// Doodads: D02R (Willow Tree), Name (Name)
+{
+Willow Tree
+}
+
+STRING 300
+// Doodads: D02S (Willow Tree 2), Name (Name)
+{
+Willow Tree 2
+}
+
+STRING 301
+// Units: h004 (Ranged Target Dummy), Name (Name)
+{
+Ranged Target Dummy
+}
+
