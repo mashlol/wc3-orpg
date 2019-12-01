@@ -81,7 +81,7 @@ local castCorrosiveBlast = function(playerId)
         speed = 500,
         destroyOnCollide = false,
         onDestroy = function()
-            damage.dealDamage(hero, target, 50, damage.TYPE.SPELL)
+            damage.dealDamage(hero, target, 20, damage.TYPE.SPELL)
             buff.addBuff(hero, target, 'corrosiveblast', 10)
 
             effect.createEffect{

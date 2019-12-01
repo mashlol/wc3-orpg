@@ -171,7 +171,7 @@ local BUFF_INFO = {
         effects = {
             {
                 type = stats.DAMAGE_OVER_TIME,
-                amount = 30,
+                amount = 10,
                 tickrate = 1,
             },
         },
