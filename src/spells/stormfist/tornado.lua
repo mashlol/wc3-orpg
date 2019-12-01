@@ -85,7 +85,7 @@ local cast = function(playerId)
         facing = Atan2(mouseV.y - heroV.y, mouseV.x - heroV.x),
     }
 
-    local DPS = 100
+    local DPS = 60
     local timerSpeed = 0.01
     local dmgFrequency = 0.1
 

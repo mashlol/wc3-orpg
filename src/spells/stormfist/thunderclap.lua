@@ -60,7 +60,7 @@ local cast = function(playerId)
     local collidedUnits = collision.getAllCollisions(heroV, 300)
     for _, unit in pairs(collidedUnits) do
         if IsUnitEnemy(unit, Player(playerId)) then
-            damage.dealDamage(hero, unit, 75, damage.TYPE.SPELL)
+            damage.dealDamage(hero, unit, 25, damage.TYPE.SPELL)
         end
     end
 

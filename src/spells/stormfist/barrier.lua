@@ -6,7 +6,7 @@ local casttime = require('src/casttime.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 8
+local COOLDOWN_S = 14
 
 local getSpellId = function()
     return 'barrier'

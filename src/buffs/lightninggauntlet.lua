@@ -34,7 +34,7 @@ return {
         local collidedUnits = collision.getAllCollisions(posV, 100)
         for _, unit in pairs(collidedUnits) do
             if IsUnitEnemy(unit, Player(playerId)) then
-                damage.dealDamage(source, unit, 20, damage.TYPE.SPELL)
+                damage.dealDamage(source, unit, 10, damage.TYPE.SPELL)
             end
         end
     end
