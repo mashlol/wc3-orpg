@@ -217,8 +217,9 @@ class EditQuestDialog extends React.Component {
               <option value="unset">Choose a unit</option>
               {validUnitIdOptions}
             </select>
-            <input name="verb" type="text" placeholder="Verb" value={this.state.data.objectives[idx].verb} onChange={this._onObjectiveChanged.bind(this, idx, 'verb')} />
-            <input name="verbPast" type="text" placeholder="Verb Past" value={this.state.data.objectives[idx].verbPast} onChange={this._onObjectiveChanged.bind(this, idx, 'verbPast')} />
+            <input name="name" type="text" placeholder="Name (plural if multiple amount)" value={this.state.data.objectives[idx].name} onChange={this._onObjectiveChanged.bind(this, idx, 'name')} />
+            <input name="verb" type="text" placeholder="Verb (Optional)" value={this.state.data.objectives[idx].verb} onChange={this._onObjectiveChanged.bind(this, idx, 'verb')} />
+            <input name="verbPast" type="text" placeholder="Verb Past (Optional)" value={this.state.data.objectives[idx].verbPast} onChange={this._onObjectiveChanged.bind(this, idx, 'verbPast')} />
           </span>
         );
       } else if (entry.type === ObjectiveType.GATHER) {
