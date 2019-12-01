@@ -1683,3 +1683,15 @@ STRING 301
 Ranged Target Dummy
 }
 
+STRING 302
+// Units: wood (Wood Pile), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 303
+// Units: wood (Wood Pile), Name (Name)
+{
+Wood Pile
+}
+
