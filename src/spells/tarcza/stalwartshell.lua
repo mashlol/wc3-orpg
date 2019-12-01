@@ -9,7 +9,7 @@ local target = require('src/target.lua')
 local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 4
+local COOLDOWN_S = 10
 
 local getSpellId = function()
     return 'stalwartshell'
@@ -39,12 +39,6 @@ local cast = function(playerId)
 
     local hero = hero.getHero(playerId)
 
-    local heroV = Vector:new{x = GetUnitX(hero), y = GetUnitY(hero)}
-    local mouseV = Vector:new{
-        x = mouse.getMouseX(playerId),
-        y = mouse.getMouseY(playerId)
-    }
-
     IssueImmediateOrder(hero, "stop")
     animations.queueAnimation(hero, 10, 1.5)
 
@@ -57,14 +51,6 @@ local cast = function(playerId)
     target.restoreOrder(playerId)
 
     return true
-end
-
-local getCooldown = function(playerId)
-    return cooldowns.getRemainingCooldown(playerId, getSpellId())
-end
-
-local getTotalCooldown = function(playerId)
-    return cooldowns.getTotalCooldown(playerId, getSpellId())
 end
 
 local getIcon = function()

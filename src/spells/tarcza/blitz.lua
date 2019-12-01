@@ -12,7 +12,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
 local COOLDOWN_S = 1
-local COOLDOWN_S_LONG = 3
+local COOLDOWN_S_LONG = 18
 
 local storedData = {}
 
@@ -111,7 +111,7 @@ local cast = function(playerId)
             if IsUnitAlly(target, Player(playerId)) then
                 buff.addBuff(hero, target, 'assist', 2)
             else
-                damage.dealDamage(hero, target, 50, damage.TYPE.PHYSICAL)
+                damage.dealDamage(hero, target, 10, damage.TYPE.PHYSICAL)
                 buff.addBuff(hero, target, 'stun', 1)
             end
             return false

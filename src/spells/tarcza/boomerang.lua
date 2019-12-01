@@ -10,7 +10,7 @@ local cooldowns = require('src/spells/cooldowns.lua')
 local target = require('src/target.lua')
 
 -- TODO create some sort of helper or "DB" for getting cooldowns
-local COOLDOWN_S = 2
+local COOLDOWN_S = 8
 
 local isStuck = function(unit)
     return IsUnitType(unit, UNIT_TYPE_STUNNED) or
@@ -79,7 +79,7 @@ local cast = function(playerId)
         removeInsteadOfKill = true,
         onCollide = function(collidedUnit)
             if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                damage.dealDamage(hero, collidedUnit, 40, damage.TYPE.SPELL)
+                damage.dealDamage(hero, collidedUnit, 15, damage.TYPE.SPELL)
             end
             return false
         end,
@@ -100,7 +100,7 @@ local cast = function(playerId)
                 removeInsteadOfKill = true,
                 onCollide = function(collidedUnit)
                     if IsUnitEnemy(collidedUnit, Player(playerId)) then
-                        damage.dealDamage(hero, collidedUnit, 80, damage.TYPE.SPELL)
+                        damage.dealDamage(hero, collidedUnit, 30, damage.TYPE.SPELL)
                     end
                     return false
                 end
