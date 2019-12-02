@@ -1695,3 +1695,135 @@ STRING 303
 Wood Pile
 }
 
+STRING 304
+// Units: htar (Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+60
+}
+
+STRING 305
+// Units: h004 (Ranged Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+60
+}
+
+STRING 306
+// Units: h005 (Target Dummy), Name (Name)
+{
+Target Dummy
+}
+
+STRING 307
+// Units: h005 (Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+45
+}
+
+STRING 308
+// Units: h006 (Ranged Target Dummy), Name (Name)
+{
+Ranged Target Dummy
+}
+
+STRING 309
+// Units: h006 (Ranged Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+45
+}
+
+STRING 310
+// Units: h007 (Ranged Target Dummy), Name (Name)
+{
+Ranged Target Dummy
+}
+
+STRING 311
+// Units: h007 (Ranged Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+30
+}
+
+STRING 312
+// Units: h008 (Target Dummy), Name (Name)
+{
+Target Dummy
+}
+
+STRING 313
+// Units: h008 (Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+30
+}
+
+STRING 314
+// Units: h009 (Target Dummy), Name (Name)
+{
+Target Dummy
+}
+
+STRING 315
+// Units: h009 (Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+15
+}
+
+STRING 316
+// Units: h00A (Target Dummy), Name (Name)
+{
+Target Dummy
+}
+
+STRING 317
+// Units: h00A (Target Dummy), EditorSuffix (Name - Editor Suffix)
+{
+8
+}
+
+STRING 318
+// Doodads: D02T (Remove all these stones Later), Name (Name)
+{
+Remove all these stones Later
+}
+
+STRING 319
+// Units: h00B (Copper Ore), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 320
+// Units: h00B (Copper Ore), Name (Name)
+{
+Copper Ore
+}
+
+STRING 321
+// Units: n007 (Town Forge), Name (Name)
+{
+Town Forge
+}
+
+STRING 322
+// Units: n008 (Town Anvil), Name (Name)
+{
+Town Anvil
+}
+
+STRING 323
+// Units: n009 (Town Forge), Name (Name)
+{
+Town Forge
+}
+
+STRING 324
+// Units: n00A (Saka the Blacksmith), Name (Name)
+{
+Saka the Blacksmith
+}
+
+STRING 325
+// Units: n00B (Tina the Blacksmith Supply Vendor), Name (Name)
+{
+Tina the Blacksmith Supply Vendor
+}
+
