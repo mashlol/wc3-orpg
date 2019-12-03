@@ -1416,7 +1416,8 @@
     "stats": {
       "Raw HP": "1",
       "Attack Damage": "1"
-    }
+    },
+    "type": "Feet"
   },
   "89": {
     "name": "Sewer Pendant",
@@ -1533,32 +1534,38 @@
   "94": {
     "name": "Rat Fur Gloves",
     "classification": "Equipment",
-    "type": "Gloves"
+    "type": "Gloves",
+    "rarity": "Uncommon"
   },
   "95": {
     "name": "Cult Leaders Grasps",
     "classification": "Equipment",
-    "type": "Gloves"
+    "type": "Gloves",
+    "rarity": "Rare"
   },
   "96": {
     "name": "Cult Leader's Pants",
     "classification": "Equipment",
-    "type": "Pants"
+    "type": "Pants",
+    "rarity": "Rare"
   },
   "97": {
     "name": "Sewer Waders",
     "classification": "Equipment",
-    "type": "Pants"
+    "type": "Pants",
+    "rarity": "Rare"
   },
   "98": {
     "name": "Sewer Runners",
     "classification": "Equipment",
-    "type": "Feet"
+    "type": "Feet",
+    "rarity": "Rare"
   },
   "99": {
     "name": "Cult Leaders Steel Toes",
     "classification": "Equipment",
-    "type": "Feet"
+    "type": "Feet",
+    "rarity": "Rare"
   },
   "100": {
     "name": "Rat Cultist Totem",
