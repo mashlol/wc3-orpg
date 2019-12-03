@@ -22,7 +22,7 @@
       }
     ],
     "prerequisites": [],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "2": {
     "name": "Fred's Quest",
@@ -37,7 +37,7 @@
     },
     "objectives": [],
     "prerequisites": [],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "3": {
     "name": "Fred's Soup",
@@ -60,7 +60,7 @@
     "prerequisites": [
       2
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "4": {
     "name": "Return to Freydell Village",
@@ -77,7 +77,7 @@
     "prerequisites": [
       3
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "5": {
     "name": "Giant Turtle",
@@ -101,7 +101,7 @@
     "prerequisites": [
       4
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "6": {
     "name": "The Glacial Tundra",
@@ -118,7 +118,7 @@
     "prerequisites": [
       4
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "7": {
     "name": "A Cold Winter",
@@ -146,7 +146,7 @@
     "prerequisites": [
       6
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "8": {
     "name": "Trolls to the West",
@@ -176,7 +176,7 @@
     "prerequisites": [
       7
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "9": {
     "name": "Your Move, Chief",
@@ -200,7 +200,7 @@
     "prerequisites": [
       7
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "10": {
     "name": "The Last of Them",
@@ -236,7 +236,7 @@
     "prerequisites": [
       9
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "11": {
     "name": "Stamping out the Fires",
@@ -294,7 +294,7 @@
     "prerequisites": [
       "15"
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "12": {
     "name": "Full Momentum",
@@ -324,7 +324,7 @@
     "prerequisites": [
       "15"
     ],
-    "levelRequirement": 0
+    "levelRequirement": "1"
   },
   "13": {
     "name": "Overrun with Wolves",
@@ -364,7 +364,7 @@
       }
     ],
     "rewards": {
-      "exp": 200,
+      "exp": "75",
       "gold": 30
     },
     "prerequisites": [
@@ -377,7 +377,7 @@
     "name": "Ironwell Camp",
     "getQuestFrom": "gg_unit_nvil_0040",
     "handQuestTo": "gg_unit_gens_0376",
-    "levelRequirement": "0",
+    "levelRequirement": "1",
     "obtainText": "Thank you for all of your help here. Without the trolls pestering us, we should be able to survive the winter. I think your help might be best used elsewhere. Last I heard, they have their hands full down in Ironwell City. Maybe if you go to the military camp just outside of the city they'll need some help. It's a bit of a trek south east of here.",
     "incompleteText": "Impossibru!",
     "completedText": "You'd like to help? Well, I suppose we need all the help we can get. Let me see if I can find something for you to do.",
@@ -399,7 +399,7 @@
     "incompleteText": "Have you dared to adventure up north, to the Darrowswamps yet?",
     "completedText": "Hello, Adventurer. You have been sent from the south? Any message? -no? -so strange... You want to help us here in these mystical swamps? That is great to hear! I believe you will have much work up here fore sure.",
     "rewards": {
-      "exp": "200",
+      "exp": "12",
       "gold": "2"
     },
     "name": "Something is Lurking in the North"
@@ -452,5 +452,154 @@
       "gold": "2"
     },
     "levelRequirement": "1"
+  },
+  "19": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "6",
+        "itemId": "86"
+      }
+    ],
+    "name": "Copper Ore...",
+    "getQuestFrom": "gg_unit_n00A_0631",
+    "handQuestTo": "gg_unit_n007_0627",
+    "levelRequirement": "1",
+    "obtainText": "Hello, so you wish to craft your own armor? I bet you wish! Well, first you would have to find some Copper ore out in the world. Good luck finding any. Then, when you are ready you can smelt them at that forge over there.",
+    "incompleteText": "Have you found any ore yet?",
+    "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
+    "rewards": {
+      "exp": "7",
+      "gold": "0"
+    }
+  },
+  "20": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "2",
+        "itemId": "84"
+      },
+      {
+        "type": "Gather",
+        "amount": "2",
+        "itemId": "87"
+      }
+    ],
+    "name": "It's Craftingtime!",
+    "getQuestFrom": "gg_unit_n007_0627",
+    "handQuestTo": "gg_unit_n008_0628",
+    "levelRequirement": "1",
+    "obtainText": "Now it is time to craft some armor on the anvil to the right of the forge..",
+    "incompleteText": ".. You are missing Weak Flux. Flux is normally sold by merchants and vendors.",
+    "completedText": "You crafted your first item! Check your bags to equip it.",
+    "rewards": {
+      "exp": "4",
+      "gold": "1"
+    },
+    "prerequisites": [
+      "19"
+    ]
+  },
+  "21": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "10",
+        "itemId": "86"
+      }
+    ],
+    "name": "More Ore?",
+    "getQuestFrom": "gg_unit_n00A_0631",
+    "handQuestTo": "gg_unit_n00A_0631",
+    "levelRequirement": "5",
+    "obtainText": "I couldn't unnotice that you were over that anvil over there and forged yourself a armor piece? Is that right? That anvil is mine though, you would have to search for a Blacksmithing Approval to use my blacksmith area.\n\nHead out there and gather some more ores and you may get my permission.",
+    "incompleteText": "SO.. No ore?!",
+    "completedText": "See there. I take these. You were sent by me, remember.\n\nCome back when I need you.\n\nThanks, now begone.",
+    "rewards": {
+      "exp": "10",
+      "gold": "2"
+    },
+    "prerequisites": [
+      "20"
+    ]
+  },
+  "22": {
+    "objectives": [],
+    "name": "Adventure awaits in the swamp! ...when you are ready.",
+    "getQuestFrom": "gg_unit_n005_0534",
+    "handQuestTo": "gg_unit_n005_0534",
+    "levelRequirement": "1",
+    "obtainText": "Well, here lies the swamp. And I really want to fight alongside you in there. But... there is a big But... You are far too inexperienced yet. Come back when you are more experienced. (34)",
+    "incompleteText": "Shouldn't you be out there gaining glory for your cause? You seem a little lost, we can go into the swamps when you are capable of doing so.",
+    "completedText": "Ah! You finally have a reason to return! I knew you would become atleast a little more powerful one day!",
+    "rewards": {
+      "exp": "45",
+      "gold": "5"
+    },
+    "prerequisites": [
+      "17",
+      "23"
+    ]
+  },
+  "23": {
+    "objectives": [],
+    "name": "Been waiting to lurk the swamps for too long...",
+    "getQuestFrom": "gg_unit_n005_0638",
+    "levelRequirement": "34",
+    "obtainText": "Yeah, well. my leader... ehm, to my left. He only accepts those he think is worthful to have with him into the swamps. And I am sure I have seen you before. Well, atleast, he is ready to have you with him in there! See it as a good opportunity and gain glory for the King and the Country!",
+    "incompleteText": "So, you are not sure you want to join yet?",
+    "completedText": "SO glad you would join us, -erhm, him! He should want to talk to you now. If you don't mind.",
+    "rewards": {
+      "exp": "50",
+      "gold": "10"
+    },
+    "prerequisites": [],
+    "handQuestTo": "gg_unit_n005_0638"
+  },
+  "24": {
+    "objectives": [],
+    "name": "Mugglet.. My Dog!",
+    "getQuestFrom": "gg_unit_n006_0640",
+    "handQuestTo": "gg_unit_n00E_0639",
+    "levelRequirement": "34",
+    "obtainText": "Well, some weeks ago, I sent my nephew to guard and scout the swamps northwest of here. I also sent with him my dog! I miss my dear dog, Mugglet. I Wish that someone like you could by any chance check out on him? And my nephew at the same go.\n\nSadly I am stuck here for duty until next month and cannot go myself.\n\nI hope you take my task.",
+    "incompleteText": "Have you checked in on my Dog, Mugglet? I wish I could see him. I love him dearly.",
+    "completedText": "The dog looks at you with a scared face. Like it has seen nightmares in the shadows of the swamp.",
+    "rewards": {
+      "exp": "35",
+      "gold": "1"
+    }
+  },
+  "25": {
+    "objectives": [],
+    "name": "Mugglet's Current Lord",
+    "handQuestTo": "gg_unit_n005_0638",
+    "levelRequirement": "34",
+    "obtainText": "Mugglet hints to you that his current Lord is near. He also hints you towards him.",
+    "incompleteText": "Woof!",
+    "completedText": "Oh, you found Mugglet! He is not mine, but I took him with me from Ironwell City! -Oh, you have met my nephew already? I am glad you show you cared for my family members! You can have this for your time.\n\nOh, you also wonder why the dog stands in the swamp entrance?\n\nIsn't that what dogs are for? -To stay guard? Atleast for the night! That is what I use him for!",
+    "rewards": {
+      "exp": "15",
+      "gold": "6"
+    },
+    "prerequisites": [
+      "24"
+    ],
+    "getQuestFrom": "gg_unit_n00E_0639"
+  },
+  "26": {
+    "objectives": [],
+    "name": "Your Place in this World",
+    "getQuestFrom": "gg_unit_n006_0641",
+    "handQuestTo": "gg_unit_n00F_0642",
+    "levelRequirement": "1",
+    "obtainText": "So you are awake? I was wonder who had camped in this illegal area. You should meet with the Mayor in the town north of here and hear what he has to say about illegal crimes.",
+    "incompleteText": "Why haven't you packed down your tent yet? This area belongs to the King and his realm.",
+    "completedText": "You say you had camped by the waterfall, south of here? Why would I care, it's in the wilderness!\n\nWell now, you look like a person that could take a fight! We could need people like yourself. Why won't you look around and see if you somehow can help us around here? -Dismissed!",
+    "rewards": {
+      "exp": "3",
+      "gold": "1"
+    }
   }
 }

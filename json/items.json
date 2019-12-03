@@ -1258,7 +1258,7 @@
     "tooltip": "This will heal poisonous wounds.",
     "requiredLevel": "1",
     "itemLevel": "1",
-    "cost": "1",
+    "cost": "2",
     "icon": "ReplaceableTextures\\CommandButtons\\BTNHolyWater.blp"
   },
   "80": {
@@ -1331,6 +1331,71 @@
       "Spell Damage": "25",
       "Healing": "40",
       "Raw HP": "100"
+    }
+  },
+  "84": {
+    "name": "Weak Flux",
+    "rarity": "Common",
+    "icon": "war3mapImported\\DISBTNINV_Misc_Dust_02.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "2",
+    "classification": "Consumable",
+    "stackSize": "5",
+    "tooltip": "Flux is used to forge the most fashionable armor."
+  },
+  "85": {
+    "name": "Common Flux",
+    "rarity": "Common",
+    "icon": "war3mapImported\\DISBTNINV_Misc_Dust_01.blp",
+    "requiredLevel": "3",
+    "itemLevel": "3",
+    "cost": "4",
+    "classification": "Consumable",
+    "stackSize": "5",
+    "tooltip": "Flux is used to create the most fashionable armor."
+  },
+  "86": {
+    "name": "Copper Ore",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNMetal-CopperV1.1.blp",
+    "requiredLevel": "1",
+    "itemLevel": "3",
+    "cost": "5",
+    "classification": "Consumable",
+    "stackSize": "100",
+    "tooltip": "Copper ore is used for different situations."
+  },
+  "87": {
+    "name": "Copper Bar",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNCopperBar.blp",
+    "requiredLevel": "1",
+    "itemLevel": "5",
+    "cost": "8",
+    "classification": "Consumable",
+    "stackSize": "100",
+    "tooltip": "Copper bars can be used to craft armor and weapons or you can simply sell them to a vendor."
+  },
+  "88": {
+    "name": "Uninspired Crafted Copper Boots",
+    "rarity": "Common",
+    "icon": "war3mapImported/BTNINV_Boots_Plate_08.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "2",
+    "classification": "Equipment",
+    "usable": [
+      "Yuji",
+      "Ivanov",
+      "Stormfist",
+      "Tarcza",
+      "Kanna",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "1",
+      "Attack Damage": "1"
     }
   }
 }

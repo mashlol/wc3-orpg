@@ -1827,3 +1827,45 @@ STRING 325
 Tina the Blacksmith Supply Vendor
 }
 
+STRING 326
+// Units: h00C (Huge Copper Chunk), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 327
+// Units: h00C (Huge Copper Chunk), Name (Name)
+{
+Huge Copper Chunk
+}
+
+STRING 328
+// Units: n00C (Vendor), Name (Name)
+{
+Vendor
+}
+
+STRING 329
+// Units: n00D (Merchant), Name (Name)
+{
+Merchant
+}
+
+STRING 330
+// Units: n00E (Mugglet), Name (Name)
+{
+Mugglet
+}
+
+STRING 331
+// Units: n00E (Mugglet), EditorSuffix (Name - Editor Suffix)
+{
+ (Male Wander)
+}
+
+STRING 332
+// Units: n00F (Landlord), Name (Name)
+{
+Landlord
+}
+
