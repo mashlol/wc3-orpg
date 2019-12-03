@@ -130,13 +130,13 @@ gg_unit_n007_0627 = nil
 gg_unit_n008_0628 = nil
 gg_unit_n00B_0637 = nil
 gg_unit_n009_0629 = nil
-gg_unit_n00A_0631 = nil
 gg_unit_n00C_0510 = nil
 gg_unit_n005_0638 = nil
 gg_unit_n006_0640 = nil
 gg_unit_n00E_0639 = nil
 gg_unit_n006_0641 = nil
 gg_dest_YTcx_0977 = nil
+gg_unit_n00A_0631 = nil
 function InitGlobals()
 end
 
@@ -895,7 +895,7 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n009_0629, ConvertPlayerColor(24))
     gg_unit_n00D_0630 = BlzCreateUnitWithSkin(p, FourCC("n00D"), 9794.2, 3030.5, 247.140, FourCC("n00D"))
     SetUnitColor(gg_unit_n00D_0630, ConvertPlayerColor(24))
-    gg_unit_n00A_0631 = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3023.5, -5249.7, 196.184, FourCC("n00A"))
+    gg_unit_n00A_0631 = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3039.2, -5240.9, 179.080, FourCC("n00A"))
     SetUnitColor(gg_unit_n00A_0631, ConvertPlayerColor(24))
     gg_unit_n00B_0637 = BlzCreateUnitWithSkin(p, FourCC("n00B"), 2788.9, -4858.4, 283.190, FourCC("n00B"))
     SetUnitColor(gg_unit_n00B_0637, ConvertPlayerColor(24))

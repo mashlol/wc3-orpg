@@ -439,7 +439,7 @@
         "verb": "Pick up",
         "verbPast": "picked up",
         "name": "Wood",
-        "itemId": "102"
+        "itemId": "89"
       }
     ],
     "name": "Chopping Their Supplies",
@@ -459,7 +459,7 @@
       {
         "type": "Gather",
         "amount": "6",
-        "itemId": "86"
+        "itemId": "84"
       }
     ],
     "name": "Copper Ore...",
@@ -479,7 +479,7 @@
       {
         "type": "Gather",
         "amount": "2",
-        "itemId": "84"
+        "itemId": "85"
       },
       {
         "type": "Gather",
@@ -507,7 +507,7 @@
       {
         "type": "Gather",
         "amount": "10",
-        "itemId": "86"
+        "itemId": "84"
       }
     ],
     "name": "More Ore?",

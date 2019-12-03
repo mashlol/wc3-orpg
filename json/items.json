@@ -67,7 +67,7 @@
     "stackSize": 5,
     "tooltip": "Heal yourself for 200 HP.",
     "spellKey": "healpot1",
-    "cost": 20,
+    "cost": "11",
     "consume": "on"
   },
   "6": {
@@ -80,7 +80,7 @@
     "stackSize": 20,
     "tooltip": "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
     "spellKey": "food1",
-    "cost": 5,
+    "cost": "5",
     "consume": "on"
   },
   "7": {
@@ -1332,5 +1332,81 @@
       "Healing": "40",
       "Raw HP": "100"
     }
+  },
+  "84": {
+    "name": "Copper Ore",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNMetal-CopperV1.1.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "5",
+    "classification": "Consumable",
+    "stackSize": "100",
+    "tooltip": "A metal."
+  },
+  "85": {
+    "name": "Copper Bar",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNCopperBar.blp",
+    "requiredLevel": "1",
+    "itemLevel": "3",
+    "cost": "7",
+    "classification": "Consumable",
+    "stackSize": "100",
+    "tooltip": "A type of metal bar."
+  },
+  "86": {
+    "name": "Uninspired Crafted Boots",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNHeavyBoots.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "4",
+    "classification": "Equipment",
+    "type": "Feet",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist",
+      "Kanna",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "1",
+      "Attack Damage": "1"
+    }
+  },
+  "87": {
+    "name": "Weak Flux",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNINV_Misc_Dust_02.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "2",
+    "classification": "Consumable",
+    "stackSize": "200",
+    "tooltip": "Flux is needed for crafting items."
+  },
+  "88": {
+    "name": "Common Flux",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNINV_Misc_Dust_01.blp",
+    "requiredLevel": "1",
+    "itemLevel": "3",
+    "cost": "4",
+    "classification": "Consumable",
+    "stackSize": "200",
+    "tooltip": "Flux is needed to craft items."
+  },
+  "89": {
+    "name": "Cultist Wood",
+    "rarity": "Common",
+    "icon": "war3mapImported\\DISBTNWoodBig.blp",
+    "requiredLevel": "1",
+    "itemLevel": "3",
+    "cost": "1",
+    "classification": "Consumable",
+    "stackSize": "100",
+    "tooltip": "Wood cut down by Forest Cultists."
   }
 }
