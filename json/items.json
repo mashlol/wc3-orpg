@@ -1601,5 +1601,26 @@
       "Attack Damage": "10"
     },
     "type": "1H Weapon"
+  },
+  "102": {
+    "name": "Bundle of Wood",
+    "rarity": "Common",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "classification": "Consumable",
+    "stackSize": "25",
+    "tooltip": "A bundle of wood.",
+    "spellKey": "O",
+    "cost": "1"
+  },
+  "103": {
+    "name": "Cultist Insignia",
+    "rarity": "Common",
+    "requiredLevel": "1",
+    "classification": "Consumable",
+    "stackSize": "1",
+    "tooltip": "A Cultist's Insignia",
+    "cost": "1",
+    "itemLevel": "1"
   }
 }

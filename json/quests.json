@@ -433,18 +433,19 @@
   "18": {
     "objectives": [
       {
-        "type": "Kill",
+        "type": "Gather",
         "amount": "25",
         "toKill": "wood",
         "verb": "Pick up",
         "verbPast": "picked up",
-        "name": "Wood"
+        "name": "Wood",
+        "itemId": "102"
       }
     ],
     "name": "Chopping Their Supplies",
     "getQuestFrom": "gg_unit_nvl2_0199",
     "handQuestTo": "gg_unit_nvl2_0199",
-    "obtainText": "The Cultists in the woods have been chopping down trees to collect wood for the winter to come. If we can take that wood then we will be able to drive them out of the woods. Go collect all of the wood that they have chopped.",
+    "obtainText": "The Cultists in the woods just north of here have been chopping down trees to collect wood for the winter to come. If we can take that wood then we will be able to drive them out of the woods. Go collect all of the wood that they have chopped.",
     "incompleteText": "Do you have the wood?",
     "completedText": "Nice! They won't last the winter without their wood.",
     "rewards": {
