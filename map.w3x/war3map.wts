@@ -1869,3 +1869,75 @@ STRING 332
 Landlord
 }
 
+STRING 333
+// Units: erat (Giant Rat), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 334
+// Units: erat (Giant Rat), Name (Name)
+{
+Giant Rat
+}
+
+STRING 335
+// Units: erat (Giant Rat), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
+STRING 336
+// Units: hrat (Hulking Rat), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 337
+// Units: hrat (Hulking Rat), Name (Name)
+{
+Hulking Rat
+}
+
+STRING 338
+// Units: hrat (Hulking Rat), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+
+STRING 339
+// Units: ebru (Cultist Bruiser), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 340
+// Units: ebru (Cultist Bruiser), Name (Name)
+{
+Cultist Bruiser
+}
+
+STRING 341
+// Units: ebru (Cultist Bruiser), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
+STRING 342
+// Units: culn (Cultist Necromancer), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 343
+// Units: culn (Cultist Necromancer), Name (Name)
+{
+Cultist Necromancer
+}
+
+STRING 344
+// Units: culn (Cultist Necromancer), EditorSuffix (Name - Editor Suffix)
+{
+ (Elite)
+}
+
