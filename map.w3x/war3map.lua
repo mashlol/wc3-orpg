@@ -135,8 +135,8 @@ gg_unit_n005_0638 = nil
 gg_unit_n006_0640 = nil
 gg_unit_n00E_0639 = nil
 gg_unit_n006_0641 = nil
-gg_dest_YTcx_0977 = nil
 gg_unit_n00A_0631 = nil
+gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
 
