@@ -259,12 +259,14 @@
     "name": "Troll Pendant",
     "icon": "war3mapImported\\BTNCastersBeads.blp",
     "type": "Necklace",
-    "requiredLevel": 15,
+    "requiredLevel": "12",
     "itemLevel": 26,
     "rarity": "Uncommon",
     "cost": 0,
     "stats": {
-      "Healing Received": 5
+      "Raw HP": "35",
+      "Spell Damage": "10",
+      "Attack Damage": "10"
     }
   },
   "19": {
@@ -276,14 +278,15 @@
       "Ivanov"
     ],
     "type": "Necklace",
-    "requiredLevel": 17,
+    "requiredLevel": "18",
     "itemLevel": 36,
-    "rarity": "Rare",
+    "rarity": "Uncommon",
     "cost": 0,
     "stats": {
-      "Healing Received": 7,
-      "% Cast Speed": "5",
-      "% Cooldown Reduction": "1"
+      "% Cooldown Reduction": "1",
+      "Raw HP": "50",
+      "Attack Damage": "15",
+      "Spell Damage": "25"
     }
   },
   "20": {
@@ -291,7 +294,7 @@
     "name": "Shell Pads",
     "icon": "war3mapImported\\BTNDemonShoulderUPG1.blp",
     "type": "Shoulders",
-    "requiredLevel": 6,
+    "requiredLevel": "4",
     "itemLevel": 10,
     "rarity": "Common",
     "cost": 0,
@@ -326,7 +329,8 @@
     "rarity": "Common",
     "cost": "0",
     "stats": {
-      "Raw HP": 35
+      "Raw HP": 35,
+      "Spell Damage": "10"
     }
   },
   "23": {
@@ -344,7 +348,8 @@
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 45
+      "Raw HP": 45,
+      "Physical Damage Taken": "-10"
     }
   },
   "24": {
@@ -357,13 +362,14 @@
       "Stormfist"
     ],
     "type": "Shoulders",
-    "requiredLevel": 17,
+    "requiredLevel": "15",
     "itemLevel": 29,
     "rarity": "Uncommon",
     "cost": 0,
     "stats": {
       "Attack Damage": 8,
-      "Raw HP": 70
+      "Raw HP": 70,
+      "Physical Damage Taken": "-15"
     }
   },
   "25": {
@@ -389,12 +395,14 @@
       "Kanna"
     ],
     "type": "Chest",
-    "requiredLevel": 16,
+    "requiredLevel": "18",
     "itemLevel": 25,
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": "65"
+      "Raw HP": "80",
+      "Spell Damage": "20",
+      "Healing": "20"
     }
   },
   "27": {
@@ -406,12 +414,13 @@
       "Yuji"
     ],
     "type": "Chest",
-    "requiredLevel": 16,
+    "requiredLevel": "18",
     "itemLevel": 25,
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 115
+      "Raw HP": 115,
+      "Physical Damage Taken": "-25"
     }
   },
   "28": {
@@ -424,7 +433,8 @@
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 45
+      "Raw HP": 45,
+      "Physical Damage Taken": "-8"
     }
   },
   "29": {
@@ -437,12 +447,13 @@
       "Stormfist"
     ],
     "type": "Chest",
-    "requiredLevel": 7,
+    "requiredLevel": "9",
     "itemLevel": 12,
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 70
+      "Raw HP": 70,
+      "Physical Damage Taken": "-15"
     }
   },
   "30": {
@@ -465,19 +476,21 @@
   "31": {
     "classification": "Equipment",
     "name": "Yeti Robe",
-    "icon": "war3mapImported\\BTNcloak1",
+    "icon": "war3imported\\BTNcloak1.blp",
     "usable": [
       "Azora",
       "Ivanov",
       "Kanna"
     ],
     "type": "Chest",
-    "requiredLevel": 16,
+    "requiredLevel": "15",
     "itemLevel": 27,
     "rarity": "Uncommon",
     "cost": 0,
     "stats": {
-      "Raw HP": 85
+      "Raw HP": "65",
+      "Spell Damage": "15",
+      "Healing": "10"
     }
   },
   "32": {
@@ -485,12 +498,13 @@
     "name": "Wolf Pelt",
     "icon": "war3mapImported\\BTNINV_Misc_Cape_04.blp",
     "type": "Back",
-    "requiredLevel": 7,
+    "requiredLevel": "4",
     "itemLevel": 12,
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 10
+      "Raw HP": 10,
+      "HP Regen": "2"
     }
   },
   "33": {
@@ -503,7 +517,8 @@
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 45
+      "Raw HP": 45,
+      "Attack Damage": "10"
     }
   },
   "34": {
@@ -511,12 +526,13 @@
     "name": "Mammoth Fur-Lined Cape",
     "icon": "war3mapImported\\BTNcloak1.blp",
     "type": "Back",
-    "requiredLevel": 7,
+    "requiredLevel": "10",
     "itemLevel": 12,
     "rarity": "Common",
     "cost": 0,
     "stats": {
-      "Raw HP": 20
+      "Raw HP": "35",
+      "% Attack Speed": "2"
     }
   },
   "35": {
@@ -525,7 +541,8 @@
     "icon": "",
     "usable": [
       "Azora",
-      "Ivanov"
+      "Ivanov",
+      "Kanna"
     ],
     "type": "Back",
     "requiredLevel": 16,
@@ -1260,7 +1277,7 @@
     "tooltip": "This will heal poisonous wounds.",
     "requiredLevel": "1",
     "itemLevel": "1",
-    "cost": "1",
+    "cost": "2",
     "icon": "ReplaceableTextures\\CommandButtons\\BTNHolyWater.blp"
   },
   "80": {
@@ -1313,7 +1330,8 @@
       "Ravanna"
     ],
     "stats": {
-      "Raw HP": "10"
+      "Raw HP": "15",
+      "HP Regen": "3"
     }
   },
   "83": {
@@ -1739,5 +1757,206 @@
     "classification": "Consumable",
     "stackSize": "1",
     "tooltip": "The Insignia of the Cultists"
+  },
+  "107": {  
+    "name": "Sewer Pendant",  
+    "rarity": "Rare", 
+    "requiredLevel": "24",  
+    "itemLevel": "46",  
+    "classification": "Equipment",  
+    "type": "Necklace", 
+    "usable": [ 
+      "Azora",  
+      "Yuji", 
+      "Ivanov", 
+      "Tarcza", 
+      "Stormfist",  
+      "Kanna",  
+      "Jarga",  
+      "Ravanna" 
+    ],  
+    "stats": {  
+      "Raw HP": "100",  
+      "Spell Damage": "25", 
+      "Attack Damage": "30",  
+      "% Crit Chance": "2"  
+    },  
+    "icon": "war3imported\\BTNEmerald Amulet.blp" 
+  },  
+  "108": { 
+    "name": "Sewer Shoulders",  
+    "rarity": "Uncommon", 
+    "requiredLevel": "22",  
+    "itemLevel": "30",  
+    "classification": "Equipment",  
+    "usable": [ 
+      "Yuji", 
+      "Tarcza", 
+      "Stormfist",  
+      "Ravanna",  
+      "Jarga" 
+    ],  
+    "stats": {  
+      "Attack Damage": "15",  
+      "Raw HP": "90", 
+      "Physical Damage Taken": "-25"  
+    },  
+    "type": "Shoulders",  
+    "icon": "war3imported\\ BTNShoulder.blp"  
+  },  
+  "109": { 
+    "name": "Stiff Sewer Rags", 
+    "rarity": "Uncommon", 
+    "requiredLevel": "22",  
+    "itemLevel": "35",  
+    "classification": "Equipment",  
+    "type": "Shoulders",  
+    "usable": [ 
+      "Jarga",  
+      "Stormfist",  
+      "Ivanov", 
+      "Azora",  
+      "Kanna" 
+    ],  
+    "stats": {  
+      "Raw HP": "70", 
+      "Healing": "30",  
+      "Spell Damage": "30"  
+    } 
+  },  
+  "110": { 
+    "name": "Rat Fur Shoulders",  
+    "icon": "war3imported\\BTNBerserkersShoulder.blp",  
+    "rarity": "Uncommon", 
+    "requiredLevel": "22",  
+    "itemLevel": "40",  
+    "classification": "Equipment",  
+    "type": "Shoulders",  
+    "usable": [ 
+      "Azora",  
+      "Ivanov", 
+      "Kanna",  
+      "Jarga",  
+      "Yuji"  
+    ],  
+    "stats": {  
+      "% Move Speed": "5",  
+      "Raw HP": "60", 
+      "Spell Damage": "15"  
+    } 
+  },  
+  "111": { 
+    "requiredLevel": "24",  
+    "itemLevel": "40",  
+    "rarity": "Rare", 
+    "name": "Sewage Drenched Cape", 
+    "classification": "Equipment",  
+    "type": "Back", 
+    "usable": [ 
+      "Azora",  
+      "Yuji", 
+      "Ivanov", 
+      "Tarcza", 
+      "Stormfist",  
+      "Kanna",  
+      "Ravanna",  
+      "Jarga" 
+    ],  
+    "stats": {  
+      "Raw HP": "85", 
+      "Attack Damage": "20",  
+      "Spell Damage": "20", 
+      "Healing": "20" 
+    },  
+    "icon": "war3imported\\BTNINV_Misc_Cape_01.blp" 
+  },  
+  "112": { 
+    "name": "Rat Fur Gloves", 
+    "classification": "Equipment",  
+    "type": "Gloves", 
+    "rarity": "Uncommon"  
+  },  
+  "113": { 
+    "name": "Cult Leaders Grasps",  
+    "classification": "Equipment",  
+    "type": "Gloves", 
+    "rarity": "Rare"  
+  },  
+  "114": { 
+    "name": "Cult Leader's Pants",  
+    "classification": "Equipment",  
+    "type": "Pants",  
+    "rarity": "Rare"  
+  },  
+  "115": { 
+    "name": "Sewer Waders", 
+    "classification": "Equipment",  
+    "type": "Pants",  
+    "rarity": "Rare"  
+  },  
+  "116": { 
+    "name": "Sewer Runners",  
+    "classification": "Equipment",  
+    "type": "Feet", 
+    "rarity": "Rare"  
+  },  
+  "117": { 
+    "name": "Cult Leaders Steel Toes",  
+    "classification": "Equipment",  
+    "type": "Feet", 
+    "rarity": "Rare"  
+  },  
+  "118": {  
+    "name": "Rat Cultist Totem",  
+    "rarity": "Rare", 
+    "icon": "war3imported\\BTNTuskarrattack2.blp",  
+    "requiredLevel": "21",  
+    "itemLevel": "41",  
+    "classification": "Equipment",  
+    "type": "Trinket",  
+    "usable": [ 
+      "Azora",  
+      "Yuji", 
+      "Ivanov", 
+      "Tarcza", 
+      "Stormfist",  
+      "Ravanna",  
+      "Jarga",  
+      "Kanna" 
+    ],  
+    "stats": {  
+      "HP Regen": "20", 
+      "Raw HP": "115",  
+      "% Crit Chance": "5"  
+    } 
+  },  
+  "119": {  
+    "name": "Lost Sword", 
+    "rarity": "Common", 
+    "icon": "war3imported\\BTNDruidicSword2.blp", 
+    "requiredLevel": "4", 
+    "itemLevel": "10",  
+    "classification": "Equipment",  
+    "usable": [ 
+      "Yuji", 
+      "Ravanna",  
+      "Stormfist",  
+      "Tarcza"  
+    ],  
+    "stats": {  
+      "Attack Damage": "10" 
+    },  
+    "type": "1H Weapon" 
+  },  
+  "120": {  
+    "name": "Bundle of Wood", 
+    "rarity": "Common", 
+    "requiredLevel": "1", 
+    "itemLevel": "1", 
+    "classification": "Consumable", 
+    "stackSize": "25",  
+    "tooltip": "A bundle of wood.", 
+    "spellKey": "O",  
+    "cost": "1" 
   }
 }
