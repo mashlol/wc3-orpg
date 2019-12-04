@@ -53,7 +53,7 @@
     "stats": {
       "% Attack Damage": "10"
     },
-    "type": "2H Weapon",
+    "type": "1H Weapon",
     "stackSize": 1,
     "cost": 300
   },
@@ -315,7 +315,7 @@
   "22": {
     "classification": "Equipment",
     "name": "Troll Caster Pads",
-    "icon": "",
+    "icon": "war3mapimported\\BTNNight Elf Shoulder.blp",
     "usable": [
       "Azora",
       "Ivanov"
@@ -324,7 +324,7 @@
     "requiredLevel": 12,
     "itemLevel": 19,
     "rarity": "Common",
-    "cost": 0,
+    "cost": "0",
     "stats": {
       "Raw HP": 35
     }
@@ -332,7 +332,7 @@
   "23": {
     "classification": "Equipment",
     "name": "Troll Warrior Spaulders",
-    "icon": "",
+    "icon": "war3mapImported\\BTNShoulder.blp",
     "usable": [
       "Yuji",
       "Tarcza",
@@ -350,7 +350,7 @@
   "24": {
     "classification": "Equipment",
     "name": "Warlord's Shoulders",
-    "icon": "",
+    "icon": "war3mapimported\\BTNShoulderUPG3.blp",
     "usable": [
       "Yuji",
       "Tarcza",
@@ -417,7 +417,7 @@
   "28": {
     "classification": "Equipment",
     "name": "Hardened Turtle Carapace",
-    "icon": "",
+    "icon": "war3mapImported\\BTNcuirass1.blp",
     "type": "Chest",
     "requiredLevel": 6,
     "itemLevel": 10,
@@ -430,7 +430,7 @@
   "29": {
     "classification": "Equipment",
     "name": "Mammoth Fur Vest",
-    "icon": "",
+    "icon": "war3mapImported\\Fur Armor04.blp ",
     "usable": [
       "Yuji",
       "Tarcza",
@@ -448,7 +448,7 @@
   "30": {
     "classification": "Equipment",
     "name": "Mammoth Fur Robe",
-    "icon": "",
+    "icon": "war3mapimported\\BTNFurArmor02.blp",
     "usable": [
       "Azora",
       "Ivanov"
@@ -465,7 +465,7 @@
   "31": {
     "classification": "Equipment",
     "name": "Yeti Robe",
-    "icon": "",
+    "icon": "war3mapImported\\BTNcloak1",
     "usable": [
       "Azora",
       "Ivanov",
@@ -603,7 +603,7 @@
   "40": {
     "classification": "Equipment",
     "name": "Troll Plate Leggings",
-    "icon": "",
+    "icon": "war3mapImported\\BTNSteelPants2.blp",
     "usable": [],
     "type": "Pants",
     "requiredLevel": 12,
@@ -617,7 +617,7 @@
   "41": {
     "classification": "Equipment",
     "name": "Troll Cloth Leggings",
-    "icon": "",
+    "icon": "war3mapImported\\BTNINV_Pants_01.blp",
     "usable": [],
     "type": "Pants",
     "requiredLevel": 12,
@@ -778,7 +778,7 @@
   "51": {
     "classification": "Equipment",
     "name": "Troll Handguards",
-    "icon": "",
+    "icon": "war3mapImported\\BTNDuelists Gauntlets.blp",
     "usable": [
       "Yuji",
       "Tarcza",
@@ -894,7 +894,7 @@
       "Tarcza",
       "Stormfist"
     ],
-    "type": "2H Weapon",
+    "type": "1H Weapon",
     "requiredLevel": 7,
     "itemLevel": 12,
     "rarity": "Common",
@@ -966,7 +966,7 @@
       "Azora",
       "Ivanov"
     ],
-    "type": "2H Weapon",
+    "type": "1H Weapon",
     "requiredLevel": 17,
     "itemLevel": 29,
     "rarity": "Uncommon",
@@ -1027,7 +1027,9 @@
     "itemLevel": 25,
     "rarity": "Common",
     "cost": 0,
-    "stats": {}
+    "stats": {
+      "Attack Damage": "20"
+    }
   },
   "65": {
     "classification": "Equipment",
@@ -1177,7 +1179,7 @@
   "73": {
     "classification": "Equipment",
     "name": "Yeti Bone Shield",
-    "icon": "",
+    "icon": "war3mapImported\\BTNBoneStopA.blp",
     "usable": [
       "Tarcza"
     ],
@@ -1288,7 +1290,7 @@
     "stats": {
       "HP Regen": "8",
       "Raw HP": "100",
-      "Spell Damage Taken": "-5"
+      "Physical Damage Taken": "-20"
     },
     "type": "Helmet"
   },
@@ -1408,5 +1410,334 @@
     "classification": "Consumable",
     "stackSize": "100",
     "tooltip": "Wood cut down by Forest Cultists."
+  },
+  "90": {
+    "name": "Sewer Hood",
+    "rarity": "Rare",
+    "icon": "war3mapImported\\btnleatherhood",
+    "requiredLevel": "24",
+    "itemLevel": "40",
+    "cost": "1",
+    "classification": "Equipment",
+    "type": "Helmet",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "85",
+      "Spell Damage Taken": "-20"
+    }
+  },
+  "91": {
+    "name": "Rat Fur Spaulders",
+    "icon": "war3mapImported\\BTNBerserkersShoulder.blp",
+    "requiredLevel": "25",
+    "rarity": "Uncommon",
+    "itemLevel": "36",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Shoulders",
+    "usable": [
+      "Azora",
+      "Kanna",
+      "Ivanov",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "60",
+      "Physical Damage Taken": "-10",
+      "% Move Speed": 0
+    }
+  },
+  "92": {
+    "name": "Sewer Rat Hide Pants",
+    "icon": "war3mapImported\\BTNLeatherPants7.blp",
+    "rarity": "Uncommon",
+    "requiredLevel": "23",
+    "itemLevel": "38",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Pants",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist",
+      "Ravanna"
+    ],
+    "stats": {
+      "Raw HP": "80",
+      "Attack Damage": "15",
+      "Physical Damage Taken": "-20"
+    }
+  },
+  "93": {
+    "name": "Sewer Leggings",
+    "icon": "war3mapImported\\BTNINV_Pants_05.blp",
+    "requiredLevel": "23",
+    "itemLevel": "38",
+    "rarity": "Uncommon",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Pants",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "65",
+      "Physical Damage Taken": "-10",
+      "Healing": "15",
+      "Spell Damage": "10"
+    }
+  },
+  "94": {
+    "name": "Cultist Leader's Shined Boots",
+    "icon": "war3mapImported\\BTNbt.blp ",
+    "requiredLevel": "24",
+    "rarity": "Rare",
+    "itemLevel": "40",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Feet",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist",
+      "Ravanna",
+      "Jarga"
+    ],
+    "stats": {
+      "% Move Speed": "5",
+      "Attack Damage": "20",
+      "% Attack Speed": "10"
+    }
+  },
+  "95": {
+    "icon": "war3mapImported\\BTNWalkers of Darkness.blp",
+    "name": "Cultist Magus' Spell Boots",
+    "requiredLevel": "24",
+    "itemLevel": "40",
+    "rarity": "Rare",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Feet",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna"
+    ],
+    "stats": {
+      "% Move Speed": "10",
+      "% Cast Speed": "10",
+      "Healing": "20",
+      "Spell Damage": "15"
+    }
+  },
+  "96": {
+    "name": "Thick Sewer Guards",
+    "rarity": "Uncommon",
+    "icon": "war3mapImported\\BTNNatureGlove.blp",
+    "requiredLevel": "22",
+    "itemLevel": "34",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Gloves",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna"
+    ],
+    "stats": {
+      "Spell Damage": "12",
+      "Healing": "15",
+      "% Crit Chance": "5"
+    }
+  },
+  "97": {
+    "name": "Cultist Leader Gauntlets",
+    "rarity": "Uncommon",
+    "requiredLevel": "22",
+    "itemLevel": "34",
+    "cost": "0",
+    "icon": "war3mapImported\\BTNPlated Gauntlet2.blp",
+    "classification": "Equipment",
+    "type": "Gloves",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist",
+      "Ravanna",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "30",
+      "% Attack Speed": "5",
+      "Attack Damage": "25"
+    }
+  },
+  "98": {
+    "name": "Wooden Band",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNWoodenRingUPG1.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Ring",
+    "stats": {
+      "Raw HP": "3"
+    }
+  },
+  "99": {
+    "name": "Broken Copper Ring",
+    "icon": "war3mapImported\\BTNCopperring01.blp",
+    "rarity": "Common",
+    "classification": "Equipment",
+    "type": "Ring",
+    "cost": "0",
+    "itemLevel": "15",
+    "requiredLevel": "10",
+    "stats": {
+      "Raw HP": "15",
+      "HP Regen": "3"
+    }
+  },
+  "100": {
+    "name": "Enchanted Wedding Band",
+    "icon": "war3mapImported\\BTNring2.blp",
+    "rarity": "Rare",
+    "requiredLevel": "26",
+    "itemLevel": "42",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Ring",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna"
+    ],
+    "stats": {
+      "% Spell Damage": "6",
+      "% Healing": "10",
+      "% Cooldown Reduction": "5"
+    }
+  },
+  "101": {
+    "name": "Cultist Leader Sigil",
+    "icon": "war3mapImported\\BTNWildredRing.blp",
+    "requiredLevel": "26",
+    "itemLevel": "42",
+    "rarity": "Rare",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Ring",
+    "usable": [
+      "Yuji",
+      "Tarcza",
+      "Stormfist",
+      "Ravanna",
+      "Jarga"
+    ],
+    "stats": {
+      "% Attack Damage": "10",
+      "% Attack Speed": "8",
+      "HP Regen": "5"
+    }
+  },
+  "102": {
+    "icon": "war3mapImported\\BTNDemonology.blp",
+    "name": "Cultist Bible",
+    "rarity": "Rare",
+    "requiredLevel": "24",
+    "itemLevel": "40",
+    "cost": "0",
+    "classification": "Equipment",
+    "usable": [
+      "Azora",
+      "Ivanov",
+      "Kanna"
+    ],
+    "stats": {
+      "% Spell Damage": "10",
+      "% Healing": "10",
+      "Healing": "20",
+      "Spell Damage": "20"
+    },
+    "type": "Off-hand"
+  },
+  "103": {
+    "name": "Sewer Soaked Shield",
+    "icon": "war3mapImported\\BTNNature Shield.blp",
+    "requiredLevel": "24",
+    "rarity": "Uncommon",
+    "itemLevel": "36",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Off-hand",
+    "usable": [
+      "Tarcza",
+      "Stormfist",
+      "Ravanna"
+    ],
+    "stats": {
+      "% Physical Damage Taken": "-5",
+      "Raw HP": "90",
+      "Physical Damage Taken": "-25"
+    }
+  },
+  "104": {
+    "icon": "war3mapImported\\BTNDarkArmor.blp",
+    "name": "Cultist Leader's Plate",
+    "requiredLevel": "25",
+    "itemLevel": "42",
+    "rarity": "Rare",
+    "cost": "0",
+    "classification": "Equipment",
+    "type": "Chest",
+    "usable": [
+      "Tarcza",
+      "Stormfist",
+      "Ravanna"
+    ],
+    "stats": {
+      "Raw HP": "115",
+      "Physical Damage Taken": "-30",
+      "HP Regen": "10"
+    }
+  },
+  "105": {
+    "rarity": "Rare",
+    "classification": "Equipment",
+    "type": "Chest",
+    "icon": "war3mapImported\\BTNINV_Chest_Leather_03.blp",
+    "name": "Sacrifical Leather Cuirass",
+    "requiredLevel": "25",
+    "itemLevel": "42",
+    "cost": "0",
+    "usable": [
+      "Yuji",
+      "Jarga"
+    ],
+    "stats": {
+      "Raw HP": "85",
+      "Attack Damage": "30",
+      "% Attack Speed": "5"
+    }
+  },
+  "106": {
+    "name": "Cultist Insignia",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNRunewordRed.blp",
+    "requiredLevel": "1",
+    "itemLevel": "1",
+    "cost": "1",
+    "classification": "Consumable",
+    "stackSize": "1",
+    "tooltip": "The Insignia of the Cultists"
   }
 }
