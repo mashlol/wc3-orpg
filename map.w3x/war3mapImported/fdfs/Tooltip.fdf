@@ -1,0 +1,91 @@
+Frame "BACKDROP" "BoxedTextBackgroundTemplate" {
+    DecorateFileNames,
+    BackdropTileBackground,
+    BackdropBackground  "ToolTipBackground",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.008,
+    BackdropBackgroundInsets 0.0022 0.0022 0.0022 0.0022,
+    BackdropEdgeFile  "ToolTipBorder",
+    BackdropBlendAll,
+}
+
+Frame "BACKDROP" "WindowBackgroundTemplate" {
+    BackdropTileBackground,
+    BackdropBackground  "war3mapImported\ui\window_background.blp",
+    BackdropCornerFlags "UL|UR|BL|BR|T|L|B|R",
+    BackdropCornerSize  0.016,
+    BackdropBackgroundSize  0.032,
+    BackdropBackgroundInsets 0.004 0.004 0.004 0.004,
+    BackdropEdgeFile  "war3mapImported\ui\window_border.blp",
+    BackdropBlendAll,
+}
+
+Frame "GLUETEXTBUTTON" "GrungeButtonTemplate" {
+    Width 0.228,
+    Height 0.035,
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ButtonPushedTextOffset 0.00f -0.001f,
+
+    ControlBackdrop "GrungeButtonBackdropTemplate",
+    Frame "BACKDROP" "GrungeButtonBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\button_regular.blp",
+        BackdropBlendAll,
+    }
+
+    ControlPushedBackdrop "GrungeButtonPushedBackdropTemplate",
+    Frame "BACKDROP" "GrungeButtonPushedBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\button_press.blp",
+        BackdropBlendAll,
+    }
+
+    ControlMouseOverHighlight "GrungeButtonMouseOverHighlightTemplate",
+    Frame "HIGHLIGHT" "GrungeButtonMouseOverHighlightTemplate" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "war3mapImported\ui\button_hover_highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}
+
+Frame "GLUETEXTBUTTON" "GrungeButton" INHERITS WITHCHILDREN "GrungeButtonTemplate" {
+    UseActiveContext,
+    ButtonText "GrungeButtonText",
+    Frame "TEXT" "GrungeButtonText" {
+        FrameFont "EscMenuTextFont", 0.013, "",
+        FontJustificationH JUSTIFYCENTER,
+        FontJustificationV JUSTIFYMIDDLE,
+        FontJustificationOffset 0.0 -0.002,
+        FontFlags "FIXEDSIZE",
+        FontColor 0.67 0.57 0.494 1.0,
+        FontHighlightColor 0.769 0.678 0.608 1.0,
+        FontDisabledColor 0.5 0.5 0.5 1.0,
+        FontShadowColor 0.0 0.0 0.0 0.9,
+        FontShadowOffset 0.001 -0.001,
+        Text "",
+    }
+}
+
+Frame "GLUETEXTBUTTON" "RoundGrungeButtonTemplate" {
+    Width 0.228,
+    Height 0.035,
+    ControlStyle "AUTOTRACK|HIGHLIGHTONMOUSEOVER",
+    ButtonPushedTextOffset 0.00f -0.001f,
+
+    ControlBackdrop "RoundGrungeButtonBackdropTemplate",
+    Frame "BACKDROP" "RoundGrungeButtonBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\round_button.blp",
+        BackdropBlendAll,
+    }
+
+    ControlPushedBackdrop "RoundGrungeButtonPushedBackdropTemplate",
+    Frame "BACKDROP" "RoundGrungeButtonPushedBackdropTemplate" {
+        BackdropBackground "war3mapImported\ui\round_button_press.blp",
+        BackdropBlendAll,
+    }
+
+    ControlMouseOverHighlight "RoundGrungeButtonMouseOverHighlightTemplate",
+    Frame "HIGHLIGHT" "RoundGrungeButtonMouseOverHighlightTemplate" {
+        HighlightType "FILETEXTURE",
+        HighlightAlphaFile "war3mapImported\ui\round_button_hover_highlight.blp",
+        HighlightAlphaMode "ADD",
+    }
+}
