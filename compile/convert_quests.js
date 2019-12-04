@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const convertJson = require('./convert_json');
+const validator = require('./validation.js').validateQuest;
 
 const MAPPINGS = {
     // 'slot': {
@@ -122,7 +123,7 @@ const COLUMNS = {
 const input = fs.readFileSync('../json/quests.json', {encoding: 'utf8'});
 const parsed = JSON.parse(input);
 
-let finalResult = convertJson(parsed, COLUMNS, MAPPINGS);
+let finalResult = convertJson(parsed, COLUMNS, MAPPINGS, validator);
 
 finalResult = `
 

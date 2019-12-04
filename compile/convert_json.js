@@ -79,10 +79,18 @@ const STATS = {
     }
 };
 
-const convertJson = function(parsedJson, COLUMNS, MAPPINGS) {
+const convertJson = function(parsedJson, COLUMNS, MAPPINGS, validatorFn) {
     let finalResult = "";
     for (const x in parsedJson) {
         const row = parsedJson[x];
+
+        if (validatorFn) {
+            const validity = validatorFn(row);
+            if (validity !== true) {
+                console.log("WARNING: Ignoring id ", x, "because it is invalid: ", validity);
+                continue;
+            }
+        }
 
         let rowResult = "[" + x + "] = {\n";
         for (const y in row) {

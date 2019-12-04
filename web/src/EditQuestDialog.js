@@ -235,7 +235,7 @@ class EditQuestDialog extends React.Component {
       } else if (entry.type === ObjectiveType.DISCOVER) {
         objectiveSpecificFields = (
           <span>
-            <input name="name" type="text" placeholder="MANDATORY REGION NAME" value={this.state.data.objectives[idx].name} onChange={this._onObjectiveChanged.bind(this, idx, 'name')} />
+            <input name="name" type="text" placeholder="Name" value={this.state.data.objectives[idx].name} onChange={this._onObjectiveChanged.bind(this, idx, 'name')} />
             <select name="region" type="text" placeholder="region" value={this.state.data.objectives[idx].region} onChange={this._onObjectiveChanged.bind(this, idx, 'region')}>
               <option value="unset">Choose a region</option>
               {validRegionOptions}

@@ -2,6 +2,7 @@
 
 const fs = require('fs');
 const convertJson = require('./convert_json');
+const itemValidator = require('./validation.js').validateItem;
 
 const MAPPINGS = {
     'slot': {
@@ -100,7 +101,7 @@ const COLUMNS = {
 const input = fs.readFileSync('../json/items.json', {encoding: 'utf8'});
 const parsed = JSON.parse(input);
 
-let finalResult = convertJson(parsed, COLUMNS, MAPPINGS);
+let finalResult = convertJson(parsed, COLUMNS, MAPPINGS, itemValidator);
 
 finalResult = "local equipment = require('src/items/equipment.lua')\n" +
     "local stats = require('src/stats.lua')\n" + `

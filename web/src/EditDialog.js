@@ -2,16 +2,6 @@ import React from 'react';
 
 const fs = require('fs');
 
-// const IMPORT_LOCATION = './../../map.w3x/war3mapImported';
-// const itemIcons = fs.readdirSync(IMPORT_LOCATION);
-
-// {"1":{"name":"Item Name Perma","icon":"war3mapImported\\BTNWolf.blp","usable":[],"type":"Helmet","requiredLevel":"15","itemLevel":"27","rarity":"Rare","cost":12,"stats":{"Attack Damage":3}}}
-
-// const existingItems = JSON.parse(fs.readFileSync(ITEMS_JSON_LOCATION, {
-//   encoding: 'utf8'
-// }));
-
-
 const ItemClassification = {
   EQUIPMENT: 'Equipment',
   CONSUMABLE: 'Consumable',

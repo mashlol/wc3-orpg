@@ -61,12 +61,20 @@
     border-radius: 4px;
 }
 
+.app > div.invalid {
+    background: #ad342e;
+}
+
+.app > div.invalid:hover {
+    background: #cd544e;
+}
+
 .app > div:hover, button:hover {
     background: #3498db;
 }
 
 .app > div > *:not(.dropTableRow) {
-    width: 300px;
+    width: 20%;
     display: inline-block;
 }
 

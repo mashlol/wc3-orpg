@@ -5,6 +5,9 @@ import EditQuestDialog from './EditQuestDialog.js';
 import EditDropDialog from './EditDropDialog.js';
 import EditVendorDialog from './EditVendorDialog.js';
 
+const itemValidator = require('../../compile/validation.js').validateItem;
+const questValidator = require('../../compile/validation.js').validateQuest;
+
 const fs = require('fs');
 
 // Traverse down until we find map.w3x in the folder
@@ -123,6 +126,12 @@ class App extends React.Component {
   };
 
   _onSaveItem = (info, id) => {
+    const validity = itemValidator(info);
+    if (validity !== true) {
+      // Show warning dialog but still save and stuff
+      alert('WARNING: ' + validity + ', this item will be ignored when building!');
+    }
+
     const oldExistingItems = this.state.existingItems;
     if (Object.entries(info).length > 0) {
       if (id != null) {
@@ -148,7 +157,11 @@ class App extends React.Component {
   };
 
   _onSaveQuest = (info, id) => {
-    console.log('Quest saved', info, id);
+    const validity = questValidator(info);
+    if (validity !== true) {
+      // Show warning dialog but still save and stuff
+      alert('WARNING: ' + validity + ', this quest will be ignored when building!');
+    }
     const oldExistingQuests = this.state.existingQuests;
     if (Object.entries(info).length > 0) {
       if (id != null) {
@@ -339,8 +352,16 @@ class App extends React.Component {
         return true;
       })
       .map(itemInfo => {
+        const validity = itemValidator(itemInfo[1]);
         const cls = itemInfo[1].classification === 'Equipment' ? itemInfo[1].type : itemInfo[1].classification;
-        return <div onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}><strong>{itemInfo[1].name}</strong><span className={itemInfo[1].rarity}>{itemInfo[1].rarity}</span><span>{cls}</span></div>;
+        return (
+          <div className={validity !== true ? 'invalid' : 'valid'} onClick={this._onEditItem.bind(this, itemInfo[1], itemInfo[0])} key={itemInfo[0]}>
+            <strong>{itemInfo[1].name}</strong>
+            <span className={itemInfo[1].rarity}>{itemInfo[1].rarity}</span>
+            <span>{cls}</span>
+            <span>{validity !== true ? ('(' + validity + '!)') : null}</span>
+          </div>
+        );
       });
     const addItemButton = <button onClick={this._onNewItem}>Add new item</button>;
 
@@ -376,7 +397,13 @@ class App extends React.Component {
     );
 
     const existingQuestList = Object.entries(this.state.existingQuests).map(questInfo => {
-      return <div onClick={this._onEditQuest.bind(this, questInfo[1], questInfo[0])} key={questInfo[0]}>{questInfo[1].name}</div>;
+      const validity = questValidator(questInfo[1]);
+      return (
+        <div className={validity !== true ? 'invalid': 'valid'} onClick={this._onEditQuest.bind(this, questInfo[1], questInfo[0])} key={questInfo[0]}>
+          <strong>{questInfo[1].name}</strong>
+          <span>{validity !== true ? ('(' + validity + '!)') : null}</span>
+        </div>
+      );
     });
     const addQuestButton = <button onClick={this._onNewQuest}>Add new quest</button>;
 
