@@ -1786,15 +1786,9 @@ Remove all these stones Later
 }
 
 STRING 319
-// Units: h00B (Copper Ore), Tip (Tooltip - Basic)
+// Units: h00B (Copper Vein), Tip (Tooltip - Basic)
 {
 Turtle
-}
-
-STRING 320
-// Units: h00B (Copper Ore), Name (Name)
-{
-Copper Ore
 }
 
 STRING 321
@@ -1939,5 +1933,65 @@ STRING 344
 // Units: culn (Cultist Necromancer), EditorSuffix (Name - Editor Suffix)
 {
  (Elite)
+}
+
+STRING 345
+// Units: h00D (Mystique Forest Owl), Tip (Tooltip - Basic)
+{
+Owl
+}
+
+STRING 346
+// Units: h00D (Mystique Forest Owl), Name (Name)
+{
+Mystique Forest Owl
+}
+
+STRING 347
+// Units: h00E (Dreamlinked Forest Owl), Tip (Tooltip - Basic)
+{
+Owl
+}
+
+STRING 348
+// Units: h00E (Dreamlinked Forest Owl), Name (Name)
+{
+Dreamlinked Forest Owl
+}
+
+STRING 350
+// Units: h00F (Gedrul the Unlinked), Name (Name)
+{
+Gedrul the Unlinked
+}
+
+STRING 351
+// Units: h00F (Gedrul the Unlinked), EditorSuffix (Name - Editor Suffix)
+{
+ (World Boss)
+}
+
+STRING 352
+// Units: h00F (Gedrul the Unlinked), Tip (Tooltip - Basic)
+{
+Dreamkin Leftout
+}
+
+STRING 353
+// Units: h00G (Violent Hawk), Tip (Tooltip - Basic)
+{
+Hawk
+}
+
+STRING 354
+// Units: h00G (Violent Hawk), Name (Name)
+{
+Violent Hawk
+}
+
+STRING 355
+// Units: h00B (Copper Vein), Name (Name)
+{
+Copper Vein
 }
 
