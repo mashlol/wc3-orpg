@@ -14,6 +14,7 @@ GuardDistance=0.0
 GuardReturnTime=10000.0
 MaxGuardDistance=100000.0
 MaxHeroLevel=60
+MaxUnitLevel=63
 MaxUnitSpeed=1000000000.0
 MinUnitSpeed=0.0
 NeedHeroXP=20

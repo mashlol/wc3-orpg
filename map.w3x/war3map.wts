@@ -1995,3 +1995,15 @@ STRING 355
 Copper Vein
 }
 
+STRING 356
+// Units: n00G (Larynelle), Name (Name)
+{
+Larynelle
+}
+
+STRING 357
+// Units: n00H (Murphy Nactaron), Name (Name)
+{
+Murphy Nactaron
+}
+

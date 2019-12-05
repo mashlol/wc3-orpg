@@ -104,6 +104,8 @@ gg_rct_sewerenter1 = nil
 gg_rct_sewerleave1 = nil
 gg_rct_New_Starting_Area_Point_aka_Your_Camp = nil
 gg_rct_New_Starting_Area_before_you_enter_town = nil
+gg_rct_Vespen_Heights = nil
+gg_rct_Verdant_Grove = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -137,8 +139,8 @@ gg_unit_n00E_0639 = nil
 gg_unit_n006_0641 = nil
 gg_unit_n00A_0631 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_Vespen_Heights = nil
-gg_rct_Verdant_Grove = nil
+gg_unit_n00G_0801 = nil
+gg_unit_n00H_0802 = nil
 function InitGlobals()
 end
 
@@ -156,8 +158,6 @@ function CreateUnitsForPlayer0()
     local unitID
     local t
     local life
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 16546.2, -8674.2, 178.356, FourCC("h004"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 16547.5, -8925.7, 180.324, FourCC("h004"))
     u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.544, FourCC("hmpr"))
     u = BlzCreateUnitWithSkin(p, FourCC("nzep"), 6239.2, -11672.9, 146.584, FourCC("nzep"))
@@ -250,6 +250,8 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 14668.3, -8046.9, 218.719, FourCC("htar"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 15151.0, -8025.3, 290.733, FourCC("htar"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 15419.5, -8018.7, 246.827, FourCC("htar"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h007"), 16560.5, -8678.3, 186.201, FourCC("h007"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h007"), 16564.9, -8795.2, 184.514, FourCC("h007"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 12228.0, -6788.9, 148.335, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 11855.0, -6901.8, 82.537, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 11787.0, -4230.6, 230.838, FourCC("h001"))
@@ -692,6 +694,12 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h00G"), -2361.9, -839.7, 203.099, FourCC("h00G"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00G"), -3595.4, 184.1, 347.618, FourCC("h00G"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00G"), -352.7, -2093.9, 279.446, FourCC("h00G"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h006"), 16559.4, -8919.3, 185.032, FourCC("h006"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h006"), 16560.1, -9050.2, 179.212, FourCC("h006"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h006"), 16553.6, -9170.9, 183.267, FourCC("h006"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 16559.8, -9287.2, 181.245, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 16558.6, -9406.6, 182.255, FourCC("h004"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h004"), 16552.8, -9521.8, 183.769, FourCC("h004"))
 end
 
 function CreateNeutralPassiveBuildings()
@@ -980,6 +988,9 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2462.8, -1766.6, 200.100, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2381.4, -1743.8, 6.405, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2288.7, -343.5, 52.824, FourCC("necr"))
+    gg_unit_n00G_0801 = BlzCreateUnitWithSkin(p, FourCC("n00G"), 3133.3, -1685.0, -88.766, FourCC("n00G"))
+    gg_unit_n00H_0802 = BlzCreateUnitWithSkin(p, FourCC("n00H"), 2788.0, -2588.2, -85.547, FourCC("n00H"))
+    SetUnitColor(gg_unit_n00H_0802, ConvertPlayerColor(24))
 end
 
 function CreatePlayerBuildings()
@@ -1174,6 +1185,8 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00E_0639, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n006_0641, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00F_0642, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00G_0801, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00H_0802, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

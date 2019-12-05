@@ -602,5 +602,66 @@
       "exp": "3",
       "gold": "1"
     }
+  },
+  "27": {
+    "objectives": [
+      {
+        "type": "Kill",
+        "amount": "25",
+        "toKill": "h00G",
+        "name": "Vespen Hawks"
+      },
+      {
+        "type": "Gather",
+        "amount": "3",
+        "itemId": "125"
+      }
+    ],
+    "getQuestFrom": "gg_unit_n00G_0801",
+    "name": "Preservation",
+    "handQuestTo": "gg_unit_n00G_0801",
+    "levelRequirement": "1",
+    "obtainText": "We have to preserve the nature. Lately a flock of Hawks have came here to feed, leaving bloodsheds behind. I need someone strong and not as animal-caring as me, to do a important task. I need you to exterminate the Hawks and bring me three Poor Elegant Feathers. Go through Freydell Village, then over the bridge. There you will find their hideout - the Vespen Heights. Take care!",
+    "incompleteText": "Have you done the nature's call? Are the hawks slain?",
+    "completedText": "Ohh! I never thought I'd find someone like you. Maybe one day we can have a flirt or something? Rolling on the grass? What you mean by no? Oh.. well, that's alright then.",
+    "rewards": {
+      "exp": "10",
+      "gold": "3"
+    }
+  },
+  "28": {
+    "objectives": [
+      {
+        "type": "Kill",
+        "amount": "20",
+        "toKill": "h00D",
+        "name": "Mystique Forest Owls"
+      },
+      {
+        "type": "Kill",
+        "amount": "5",
+        "toKill": "h00E",
+        "name": "Dreamlinked Forest Owls"
+      },
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "129"
+      }
+    ],
+    "name": "Weird Stuff is Happening",
+    "getQuestFrom": "gg_unit_n00H_0802",
+    "handQuestTo": "gg_unit_n00H_0802",
+    "levelRequirement": "3",
+    "obtainText": "Well, well, hello there.\n\nI want to tell you something weird.\nDown southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE.\n\nThere are creatures there, terrible beings, I saw them, monstreous beasts I tell you!\n\nLegend says that these creatures living down there are creatures that have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while you are at it and bring me a proof you have been there! \nI get creeped out by all of this.",
+    "incompleteText": "You aren't afraid of dreams, are you?",
+    "completedText": "So, it is true then? What? Did you mostly see glowing Owls? Hmm, that is not what my eyes met. I saw huge giant beasts with horns! I am sure you saw atleast one of these terrifying beings. Or is everything just a dream?",
+    "rewards": {
+      "exp": "14",
+      "gold": "12"
+    },
+    "prerequisites": [
+      1
+    ]
   }
 }
