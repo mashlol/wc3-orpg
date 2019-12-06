@@ -345,14 +345,20 @@ function Map:update(playerId)
         for j=1,quests.getNumQuests()-1, 1 do
             local questReceiver = quests.getQuestInfo(j).handQuestTo
             local questGiver = quests.getQuestInfo(j).getQuestFrom
-            local questCompleted = quests.questObjectivesCompleted(playerId, j)
+            local objectivesCompleted = quests.questObjectivesCompleted(playerId, j)
+            local questCompleted = quests.questCompleted(playerId, j)
+            local hasQuest = quests.hasQuest(playerId, j)
             local questEligible = quests.isEligibleForQuest(playerId, j)
+
             if
-                (questCompleted and isUnitInMap(questReceiver, mapToUse)) or
-                (questEligible and isUnitInMap(questGiver, mapToUse))
+                not questCompleted and (
+                    (objectivesCompleted and isUnitInMap(questReceiver, mapToUse)) or
+                    (questEligible and isUnitInMap(questGiver, mapToUse)) or
+                    (hasQuest and isUnitInMap(questReceiver, mapToUse))
+                )
             then
                 local questX, questY = getRelativeUnitPoint(
-                    questCompleted and questReceiver or questGiver,
+                    (objectivesCompleted or hasQuest) and questReceiver or questGiver,
                     mapToUse,
                     width,
                     height)
@@ -366,9 +372,12 @@ function Map:update(playerId)
                     questX,
                     questY)
 
-                local text = questCompleted and "?" or "!"
+                local text = (objectivesCompleted or hasQuest) and "?" or "!"
+                local textColor = (objectivesCompleted or questEligible) and
+                    "|cffe3ca09" or
+                    "|cff000000"
                 BlzFrameSetText(
-                    frames.markFrames[i],  "|cffffff00" .. text .. "|r")
+                    frames.markFrames[i],  textColor .. text .. "|r")
 
                 i = i + 1
             end

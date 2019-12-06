@@ -663,4 +663,6 @@ return {
     showDialogForActiveQuest = showDialogForActiveQuest,
     questObjectivesCompleted = questObjectivesCompleted,
     isEligibleForQuest = isEligibleForQuest,
+    questCompleted = questCompleted,
+    hasQuest = hasQuest,
 }
