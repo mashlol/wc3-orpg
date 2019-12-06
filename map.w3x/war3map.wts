@@ -131,25 +131,19 @@ Alpha Wolf
 }
 
 STRING 26
-// Units: htst (Test unit), Tip (Tooltip - Basic)
-{
-Turtle
-}
-
-STRING 27
-// Units: htst (Test unit), Name (Name)
-{
-Test unit
-}
-
-STRING 28
 // Units: lold (River Turtle), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 30
+STRING 28
 // Units: wol2 (Giant Mammoth), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 30
+// Units: cult (Ice Troll Grunt), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -161,43 +155,43 @@ River Turtle
 }
 
 STRING 32
-// Units: cult (Ice Troll Grunt), Tip (Tooltip - Basic)
-{
-Turtle
-}
-
-STRING 34
 // Units: culw (Ice Troll Enforcer), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 36
+STRING 34
 // Units: ecul (Ice Troll Bodyguard), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 38
+STRING 36
 // Units: over (Ice Troll Warlord), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 40
+STRING 38
 // Units: mine (High Troll Priest), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 42
+STRING 40
 // Units: h000 (Cultist Raider), Tip (Tooltip - Basic)
 {
 Turtle
 }
 
-STRING 44
+STRING 42
 // Units: cspe (Cultist Emissary), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 44
+// Units: clea (Cultist Commander Siddel), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -209,7 +203,7 @@ Cultist Raider
 }
 
 STRING 46
-// Units: clea (Cultist Commander Siddel), Tip (Tooltip - Basic)
+// Units: fire (Northwest Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -221,7 +215,7 @@ Cultist Emissary
 }
 
 STRING 48
-// Units: fire (Northwest Bonfire), Tip (Tooltip - Basic)
+// Units: plan (Attack Plans), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -233,7 +227,7 @@ Cultist Commander Siddel
 }
 
 STRING 50
-// Units: plan (Attack Plans), Tip (Tooltip - Basic)
+// Units: cled (Cultist Commander Audric), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -245,7 +239,7 @@ Northwest Bonfire
 }
 
 STRING 52
-// Units: cled (Cultist Commander Audric), Tip (Tooltip - Basic)
+// Units: h001 (Cultist Ambusher), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -263,7 +257,7 @@ General Smith
 }
 
 STRING 55
-// Units: h001 (Cultist Ambusher), Tip (Tooltip - Basic)
+// Units: sfir (Southwest Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -275,7 +269,7 @@ Cultist Commander Audric
 }
 
 STRING 57
-// Units: sfir (Southwest Bonfire), Tip (Tooltip - Basic)
+// Units: sefi (Southeast Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -287,7 +281,7 @@ Cultist Ambusher
 }
 
 STRING 59
-// Units: sefi (Southeast Bonfire), Tip (Tooltip - Basic)
+// Units: nefi (Northeast Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -299,7 +293,7 @@ Southwest Bonfire
 }
 
 STRING 61
-// Units: nefi (Northeast Bonfire), Tip (Tooltip - Basic)
+// Units: cfir (Central Bonfire), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -311,7 +305,7 @@ Southeast Bonfire
 }
 
 STRING 63
-// Units: cfir (Central Bonfire), Tip (Tooltip - Basic)
+// Units: mamo (Icy Mammoth), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -323,7 +317,7 @@ Northeast Bonfire
 }
 
 STRING 65
-// Units: mamo (Icy Mammoth), Tip (Tooltip - Basic)
+// Units: trol (Troll Warrior), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -634,7 +628,7 @@ Ice Spike
 }
 
 STRING 120
-// Units: trol (Troll Warrior), Tip (Tooltip - Basic)
+// Units: trop (Troll Priest), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -652,7 +646,7 @@ Troll Warrior
 }
 
 STRING 123
-// Units: trop (Troll Priest), Tip (Tooltip - Basic)
+// Units: troc (Troll Chieftan), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -664,7 +658,7 @@ Troll Priest
 }
 
 STRING 125
-// Units: troc (Troll Chieftan), Tip (Tooltip - Basic)
+// Units: h002 (Giant Yeti), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -712,7 +706,7 @@ High Troll Priest
 }
 
 STRING 133
-// Units: h002 (Giant Yeti), Tip (Tooltip - Basic)
+// Units: wolf (Arctic Wolf), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -790,7 +784,7 @@ Giant Mammoth
 }
 
 STRING 147
-// Units: wolf (Arctic Wolf), Tip (Tooltip - Basic)
+// Units: rats (Rat), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -814,7 +808,7 @@ Farm anywhere
 }
 
 STRING 152
-// Units: rats (Rat), Tip (Tooltip - Basic)
+// Units: ihay (Infected Hay), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -958,7 +952,7 @@ Sewer Inner Pillar
 }
 
 STRING 179
-// Units: ihay (Infected Hay), Tip (Tooltip - Basic)
+// Units: wood (Wood Pile), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1684,7 +1678,7 @@ Ranged Target Dummy
 }
 
 STRING 302
-// Units: wood (Wood Pile), Tip (Tooltip - Basic)
+// Units: h00B (Copper Vein), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1786,7 +1780,7 @@ Remove all these stones Later
 }
 
 STRING 319
-// Units: h00B (Copper Vein), Tip (Tooltip - Basic)
+// Units: h00C (Huge Copper Chunk), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1822,7 +1816,7 @@ Tina the Blacksmith Supply Vendor
 }
 
 STRING 326
-// Units: h00C (Huge Copper Chunk), Tip (Tooltip - Basic)
+// Units: erat (Giant Rat), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1864,7 +1858,7 @@ Landlord
 }
 
 STRING 333
-// Units: erat (Giant Rat), Tip (Tooltip - Basic)
+// Units: hrat (Hulking Rat), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1882,7 +1876,7 @@ STRING 335
 }
 
 STRING 336
-// Units: hrat (Hulking Rat), Tip (Tooltip - Basic)
+// Units: ebru (Cultist Bruiser), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1900,7 +1894,7 @@ STRING 338
 }
 
 STRING 339
-// Units: ebru (Cultist Bruiser), Tip (Tooltip - Basic)
+// Units: culn (Cultist Necromancer), Tip (Tooltip - Basic)
 {
 Turtle
 }
@@ -1915,12 +1909,6 @@ STRING 341
 // Units: ebru (Cultist Bruiser), EditorSuffix (Name - Editor Suffix)
 {
  (Elite)
-}
-
-STRING 342
-// Units: culn (Cultist Necromancer), Tip (Tooltip - Basic)
-{
-Turtle
 }
 
 STRING 343
