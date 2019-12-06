@@ -106,6 +106,7 @@ gg_rct_New_Starting_Area_Point_aka_Your_Camp = nil
 gg_rct_New_Starting_Area_before_you_enter_town = nil
 gg_rct_Vespen_Heights = nil
 gg_rct_Verdant_Grove = nil
+gg_rct_sewerdungeon = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -140,8 +141,11 @@ gg_unit_n006_0641 = nil
 gg_unit_n00A_0631 = nil
 gg_unit_n00G_0801 = nil
 gg_unit_n00H_0802 = nil
+gg_unit_n00I_0803 = nil
 gg_dest_YTcx_0977 = nil
-gg_rct_sewerdungeon = nil
+gg_unit_n00J_0804 = nil
+gg_unit_nfoh_0160 = nil
+gg_unit_nmoo_0805 = nil
 function InitGlobals()
 end
 
@@ -222,7 +226,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h009"), 3928.9, -2569.5, 217.069, FourCC("h009"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00A"), 3716.1, -2882.8, 128.432, FourCC("h00A"))
     u = BlzCreateUnitWithSkin(p, FourCC("h008"), 12958.3, -7844.0, 196.392, FourCC("h008"))
-    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6556.7, -3164.9, 17.116, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6455.9, -3442.8, 17.116, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5312.8, -2055.4, 273.359, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6161.8, -2514.7, 328.059, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2322.2, -6923.9, 118.901, FourCC("lold"))
@@ -231,7 +235,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2807.7, -6378.0, 317.124, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -425.9, -5976.3, 178.543, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5083.6, -6354.4, 214.818, FourCC("lold"))
-    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -5570.6, -3249.0, 71.040, FourCC("lold"))
+    u = BlzCreateUnitWithSkin(p, FourCC("lold"), -6231.9, -2645.2, 1.253, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -7149.3, -5963.1, 214.818, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("trol"), -16616.0, -2051.3, 277.723, FourCC("trol"))
     u = BlzCreateUnitWithSkin(p, FourCC("trop"), -16582.2, -2256.3, 101.056, FourCC("trop"))
@@ -627,9 +631,9 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 10592.0, 1501.2, 39.655, FourCC("cspe"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 10741.9, 1483.9, 165.104, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 10682.4, 1628.3, 248.977, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6453.8, 1278.2, 213.610, FourCC("h000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6480.6, 976.0, 213.610, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6849.8, -340.8, 143.665, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6305.5, 1207.6, 23.228, FourCC("h000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6332.3, 905.4, 23.228, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 6721.1, -228.2, 310.923, FourCC("cspe"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 4786.0, -1010.5, 309.995, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 4963.9, -1085.0, 203.886, FourCC("h001"))
@@ -709,7 +713,8 @@ function CreateNeutralPassiveBuildings()
     local unitID
     local t
     local life
-    u = BlzCreateUnitWithSkin(p, FourCC("nfoh"), 2880.0, -768.0, 270.000, FourCC("nfoh"))
+    gg_unit_nfoh_0160 = BlzCreateUnitWithSkin(p, FourCC("nfoh"), 2880.0, -768.0, 270.000, FourCC("nfoh"))
+    gg_unit_nmoo_0805 = BlzCreateUnitWithSkin(p, FourCC("nmoo"), 4480.0, -8064.0, 270.000, FourCC("nmoo"))
 end
 
 function CreateNeutralPassive()
@@ -992,6 +997,13 @@ function CreateNeutralPassive()
     gg_unit_n00G_0801 = BlzCreateUnitWithSkin(p, FourCC("n00G"), 3133.3, -1685.0, 271.234, FourCC("n00G"))
     gg_unit_n00H_0802 = BlzCreateUnitWithSkin(p, FourCC("n00H"), 2788.0, -2588.2, 274.453, FourCC("n00H"))
     SetUnitColor(gg_unit_n00H_0802, ConvertPlayerColor(24))
+    gg_unit_n00I_0803 = BlzCreateUnitWithSkin(p, FourCC("n00I"), 1507.0, -8181.4, 270.310, FourCC("n00I"))
+    gg_unit_n00J_0804 = BlzCreateUnitWithSkin(p, FourCC("n00J"), 1961.9, -196.6, -57.180, FourCC("n00J"))
+    SetUnitColor(gg_unit_n00J_0804, ConvertPlayerColor(2))
+    u = BlzCreateUnitWithSkin(p, FourCC("nrac"), 3848.0, -8484.2, 243.168, FourCC("nrac"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nder"), 3845.0, -7696.2, 223.623, FourCC("nder"))
+    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 4062.9, -7618.1, 123.292, FourCC("necr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("necr"), 4632.4, -7979.1, 189.168, FourCC("necr"))
 end
 
 function CreatePlayerBuildings()
@@ -1189,6 +1201,10 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00F_0642, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00G_0801, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00H_0802, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00I_0803, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00J_0804, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nfoh_0160, EVENT_UNIT_DEATH)
+    TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_nmoo_0805, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end

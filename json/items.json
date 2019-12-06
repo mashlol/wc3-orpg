@@ -1272,7 +1272,7 @@
     "stackSize": "1",
     "tooltip": "This will heal poisonous wounds.",
     "itemLevel": "1",
-    "cost": "2",
+    "cost": "3",
     "icon": "ReplaceableTextures\\CommandButtons\\BTNHolyWater.blp"
   },
   "80": {
@@ -1280,7 +1280,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNINV_Misc_Ale_01.blp",
     "itemLevel": "1",
-    "cost": "1",
+    "cost": "2",
     "classification": "Quest Item",
     "stackSize": "1",
     "tooltip": "Ale for the one in need."
@@ -1362,7 +1362,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNCopperBar.blp",
     "itemLevel": "3",
-    "cost": "7",
+    "cost": "10",
     "classification": "Crafting Material",
     "stackSize": "100",
     "tooltip": "A type of metal bar."
@@ -1373,7 +1373,7 @@
     "icon": "war3mapImported\\BTNHeavyBoots.blp",
     "requiredLevel": "1",
     "itemLevel": "1",
-    "cost": "4",
+    "cost": "20",
     "classification": "Equipment",
     "type": "Feet",
     "usable": [
@@ -1951,7 +1951,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNCR_Metal_ClawS.blp",
     "itemLevel": "7",
-    "cost": "5",
+    "cost": "25",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "These claws may fit well for a souvenir."
@@ -1961,7 +1961,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNClaws Attack.blp",
     "itemLevel": "5",
-    "cost": "5",
+    "cost": "23",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "You may aswell just sell them to a inspired buyer."
@@ -1972,7 +1972,7 @@
     "icon": "war3mapImported\\BTNTurtlescale.blp",
     "requiredLevel": "4",
     "itemLevel": "7",
-    "cost": "14",
+    "cost": "70",
     "classification": "Equipment",
     "type": "Off-hand",
     "usable": [
@@ -1994,7 +1994,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNSpikedSpineCarapace.blp",
     "itemLevel": "3",
-    "cost": "2",
+    "cost": "8",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "Well, that was unfortunate."
@@ -2014,7 +2014,7 @@
     "rarity": "Uncommon",
     "icon": "war3mapImported\\BTNOtter.blp",
     "itemLevel": "9",
-    "cost": "13",
+    "cost": "40",
     "classification": "Trash",
     "stackSize": "100",
     "tooltip": "Why would anyone carry around dead otters..."
@@ -2034,7 +2034,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNHealing Leaf.blp",
     "itemLevel": "3",
-    "cost": "1",
+    "cost": "8",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "It's... grass."
@@ -2044,9 +2044,29 @@
     "rarity": "Uncommon",
     "icon": "war3mapImported\\BTNFeather.blp",
     "itemLevel": "1",
-    "cost": "4",
+    "cost": "48",
     "classification": "Quest Item",
     "stackSize": "20",
     "tooltip": "Are these feathers even real?"
+  },
+  "130": {
+    "name": "Turtle Shell",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNTurtlescale.blp",
+    "itemLevel": "1",
+    "cost": "23",
+    "classification": "Quest Item",
+    "stackSize": "10",
+    "tooltip": "There ain't any use for this. Or is it?"
+  },
+  "131": {
+    "name": "Cinderburry Herb",
+    "icon": "war3mapImported\\BTNHealing Leaf.blp",
+    "rarity": "Uncommon",
+    "itemLevel": "1",
+    "cost": "15",
+    "classification": "Quest Item",
+    "stackSize": "200",
+    "tooltip": "Shamans have used these herbs for age to get clarity of what's to come."
   }
 }

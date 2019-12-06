@@ -633,7 +633,7 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": "20",
+        "amount": "15",
         "toKill": "h00D",
         "name": "Mystique Forest Owls"
       },
@@ -653,15 +653,147 @@
     "getQuestFrom": "gg_unit_n00H_0802",
     "handQuestTo": "gg_unit_n00H_0802",
     "levelRequirement": "3",
-    "obtainText": "Well, well, hello there.\n\nI want to tell you something weird.\nDown southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE.\n\nThere are creatures there, terrible beings, I saw them, monstreous beasts I tell you!\n\nLegend says that these creatures living down there are creatures that have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while you are at it and bring me a proof you have been there! \nI get creeped out by all of this.",
-    "incompleteText": "You aren't afraid of dreams, are you?",
-    "completedText": "So, it is true then? What? Did you mostly see glowing Owls? Hmm, that is not what my eyes met. I saw huge giant beasts with horns! I am sure you saw atleast one of these terrifying beings. Or is everything just a dream?",
+    "obtainText": "Hello there, person.\nI want to tell you something weird.\nDown southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE.\nThere are creatures there, terrible beings, I saw them, monstreous beasts I tell you!\n\nLegend says that these creatures living down there have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while at it and bring me a proof you have been there! \nI get creeped out by all of this.",
+    "incompleteText": "You aren't afraid of dreams, are you?\n",
+    "completedText": "So, it is true then? Huh, you saw glowing owls? That is not what my eyes met. I saw huge giant beasts with horns! I am sure you saw atleast glimpses of these terrifying beings. \n\nOr is everything just a dream?",
     "rewards": {
       "exp": "14",
       "gold": "12"
     },
     "prerequisites": [
       1
+    ]
+  },
+  "29": {
+    "objectives": [],
+    "name": "Finally Awake",
+    "getQuestFrom": "gg_unit_n00I_0803",
+    "handQuestTo": "gg_unit_n00I_0803",
+    "levelRequirement": "1",
+    "obtainText": "Hello, finally awake from your slumber?\nDo you remember me? We met before you went to sleep 4 months ago.\nHow come you are able to sleep for that long?\n\nLast time someone slept for that long, they had been protected by the unknown and the reason he was protected was to sacrifice himself in a later state. The unknown Gods walk among us and are not our friends.\n\nHave they granted you their protection?",
+    "incompleteText": "hmm.",
+    "completedText": "If they have granted you their protection, I wonder why.For your sake I hope it is not because they have seen the future and knew that you would sacrifice yourself for someone important.",
+    "rewards": {
+      "exp": "5",
+      "gold": "0"
+    }
+  },
+  "30": {
+    "objectives": [],
+    "name": "Finally Awake (Part 2)",
+    "getQuestFrom": "gg_unit_n00I_0803",
+    "handQuestTo": "gg_unit_n00I_0803",
+    "levelRequirement": "1",
+    "obtainText": "While you have slept, our lands are at peril. The undead have marched into our very Kingdom,  Alliances of Wild Clans have gathered togheter to make our Kingdom crumble. They want to hit us while we are down. Our troops are blocking the undead coming from the east. We have farmers figting trolls, we have fishers figthing mammoths, it's a mess. Also... A dark, unknown aura has been sensed by villagers and I believe them.",
+    "incompleteText": "Yes?",
+    "completedText": "I have seen you fight before, and I know you can do better than farmers. I believe you have been sleeping for a reason, I don't know why, but I have faith in you. \n\nHere is a bit of money that i don't need myself - take care!",
+    "rewards": {
+      "exp": "6",
+      "gold": "3"
+    },
+    "prerequisites": [
+      "29"
+    ]
+  },
+  "31": {
+    "objectives": [],
+    "name": "He Who Stands Between Life and Death",
+    "getQuestFrom": "gg_unit_n00I_0803",
+    "handQuestTo": "gg_unit_n00J_0804",
+    "levelRequirement": "1",
+    "obtainText": "You have clearly lost your memory, don't worry though, it will come back in time.\nNow... Please meet with Arawel in the Verdant Grove, he may know what is happening.",
+    "incompleteText": "Met with Arawel yet? He is in a grove just north of Freydell Village.",
+    "completedText": "Yes, hello? May I help you? \nAh, so you say Veralynne sent you?\n\nAs a person that can see glimpses into the future and through life and death, this can mean only two things; either you are the person that will meet with the Deathlord from within their circles, or you are the Deathlord's pawn - which means... No, I cannot say. It is prohibited in my circumstances. I am just a faceless creature walking these lands...",
+    "rewards": {
+      "exp": "7"
+    },
+    "prerequisites": [
+      "29",
+      "30"
+    ]
+  },
+  "32": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "3",
+        "itemId": "131"
+      },
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "130"
+      },
+      {
+        "type": "Gather",
+        "itemId": "125",
+        "amount": "1"
+      }
+    ],
+    "name": "Insight from the Past and the Future",
+    "getQuestFrom": "gg_unit_n00J_0804",
+    "handQuestTo": "gg_unit_n00J_0804",
+    "levelRequirement": "2",
+    "obtainText": "Let me be serious for a second.\nIf you want to know some glimpses from your past and future, I need you to gather some ingredients for me. But know this, these ingrediants are not something to meddle with.\n\nBring me three Cinderburry Herbs from southwest of Freydell. Bring me one Poor Elegant Feather and one Turtle Shell. -Yes, I need a bowl.",
+    "incompleteText": "Found anything yet? Any feather or herbs?",
+    "completedText": "Yes, there we go! In perfect shape also!\nI sense a great gatherer in you.",
+    "rewards": {
+      "exp": "15",
+      "gold": "2"
+    },
+    "prerequisites": [
+      "31"
+    ]
+  },
+  "33": {
+    "objectives": [],
+    "name": "Insight from the Past",
+    "getQuestFrom": "gg_unit_n00J_0804",
+    "handQuestTo": "gg_unit_nfoh_0160",
+    "levelRequirement": "1",
+    "prerequisites": [
+      "32"
+    ],
+    "obtainText": "I just need to crunch these feathers a bit more before you can use the spellpowder.\n\nHere it is!\nThe spellpowder that will reveal your past.",
+    "incompleteText": "So, you not eager to hear about your past? Your loss of memory is strong. You should use this opportunity.",
+    "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"You look down on eagle flying over burning forests\"\n\n\"A smile of a friend, a memory of joy\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers the dark, are you....?\"\n\nThe dream fades.",
+    "rewards": {
+      "exp": "25",
+      "gold": "0"
+    }
+  },
+  "34": {
+    "objectives": [],
+    "name": "Insight into the Future",
+    "getQuestFrom": "gg_unit_nfoh_0160",
+    "handQuestTo": "gg_unit_nmoo_0805",
+    "levelRequirement": "1",
+    "obtainText": "as the dream fades you get a glimpse of a fountain south of Freydell Village.",
+    "incompleteText": "The waters shows a Twin Fountain to the south of Freydell Village, you have had a vision of it before.",
+    "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your desintation even more.\"",
+    "rewards": {
+      "exp": "25",
+      "gold": "0"
+    },
+    "prerequisites": [
+      "33"
+    ]
+  },
+  "35": {
+    "objectives": [],
+    "name": "He who.. Still Stands..",
+    "getQuestFrom": "gg_unit_nmoo_0805",
+    "handQuestTo": "gg_unit_n00J_0804",
+    "levelRequirement": "1",
+    "obtainText": "You should probably meet with Arawel again.",
+    "incompleteText": "",
+    "completedText": "So... These were your visions. I can't say you have any great visions, they only showed you small details and you didn't get to learn so much. Anyway, I hope I have helped and I hope you take wisdom from what you have seen and use it for the good of our Kingdom.  \n\nOh, and take these coins, a creature like me won't have need for such.\n\nI will head back to Evaste...\n-Ehrm, ..bye. I am sure we will meet again. Maybe soon.",
+    "rewards": {
+      "exp": "40",
+      "gold": "19"
+    },
+    "prerequisites": [
+      "34"
     ]
   }
 }
