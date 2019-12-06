@@ -278,6 +278,13 @@ class EditDialog extends React.Component {
       );
     }
 
+    let sellText = <span>{' '}(Use -1 for unsellable)</span>;
+    if (this.state.data.cost != null) {
+      sellText = this.state.data.cost >= 0 ?
+        <span>{' '}(Sells for {Math.floor(this.state.data.cost / 5)})</span>
+        : <span>{' '}(Unsellable)</span>
+    }
+
     return (
       <div className="editDialog">
         <div>
@@ -304,6 +311,7 @@ class EditDialog extends React.Component {
         </div>
         <div>
           <label htmlFor="cost">Cost: </label><input name="cost" type="number" placeholder="Cost" value={this.state.data.cost} onChange={this._onChangeSimpleValue.bind(this, 'cost')} />
+          {sellText}
         </div>
 
         <div>
