@@ -11,7 +11,6 @@ const validateItem = function(item) {
   const mandatoryItemFields = {
     name: "name",
     icon: "icon",
-    requiredLevel: 'required level',
     rarity: 'rarity',
     itemLevel: 'item level',
     cost: 'cost',
@@ -21,11 +20,13 @@ const validateItem = function(item) {
   const mandatoryEquipmentFields = {
     type: 'type',
     stats: 'stats',
+    requiredLevel: 'required level',
   };
 
   const mandatoryConsumableFields = {
     stackSize: 'stack size',
     tooltip: 'tooltip',
+    requiredLevel: 'required level',
   };
 
   const res = validateObj(item, mandatoryItemFields);

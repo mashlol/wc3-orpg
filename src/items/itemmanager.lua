@@ -49,6 +49,8 @@ function init()
             type = "Trash"
         elseif itemInfo.type == items.TYPE.QUEST then
             type = "Quest Item"
+        elseif itemInfo.type == items.TYPE.CRAFTING then
+            type = "Crafting Material"
         end
 
         local itemText = ""
@@ -72,6 +74,12 @@ function init()
             numLines = numLines + 1
         end
 
+        local requiredLevel = ""
+        if itemInfo.requiredLevel ~= nil then
+            requiredLevel = "|nRequires level " .. itemInfo.requiredLevel
+            numLines = numLines + 1
+        end
+
         TOOLTIPS[itemId] = {
             text =
                 itemInfo.rarity.color ..
@@ -81,9 +89,8 @@ function init()
                 "|n"..
                 "|cffe3e312Item level " ..
                 itemInfo.itemLevel ..
-                "|r|n"..
-                "Requires level " ..
-                itemInfo.requiredLevel ..
+                "|r"..
+                requiredLevel..
                 itemStats..
                 itemText,
             numLines = numLines + 5,

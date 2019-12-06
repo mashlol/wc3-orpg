@@ -33,6 +33,7 @@ const MAPPINGS = {
         'Consumable': 'TYPE.CONSUMABLE',
         'Trash': 'TYPE.TRASH',
         'Quest Item': 'TYPE.QUEST',
+        'Crafting Material': 'TYPE.CRAFTING',
     },
 };
 
@@ -145,6 +146,7 @@ local TYPE = {
     CONSUMABLE = 'consumable',
     TRASH = 'trash',
     QUEST = 'quest',
+    CRAFTING = 'crafting',
 }
 
 ` +

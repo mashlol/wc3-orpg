@@ -7,6 +7,7 @@ const ItemClassification = {
   CONSUMABLE: 'Consumable',
   QUEST_ITEM: 'Quest Item',
   TRASH: 'Trash',
+  CRAFTING: 'Crafting Material',
 };
 
 const ItemType = {
@@ -226,10 +227,9 @@ class EditDialog extends React.Component {
         </div>);
     });
 
-    let equipmentOnlyFields = null;
-    let consumableOnlyFields = null;
+    let classSpecificFields = null;
     if (this.state.data.classification === ItemClassification.EQUIPMENT) {
-      equipmentOnlyFields = (
+      classSpecificFields = (
         <div>
           <div>
             <label htmlFor="type">Type: </label>
@@ -237,6 +237,9 @@ class EditDialog extends React.Component {
               <option value="unset">Choose a type</option>
               {itemTypeOptions}
             </select>
+          </div>
+          <div>
+            <label htmlFor="requiredLevel">Required Level to Equip: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />
           </div>
           <div className="usableBy">
             <span className="usableText">Usable by: </span> {classRadios}
@@ -250,10 +253,13 @@ class EditDialog extends React.Component {
         </div>
       );
     } else if (this.state.data.classification === ItemClassification.CONSUMABLE) {
-      consumableOnlyFields = (
+      classSpecificFields = (
         <div>
           <div>
             <label htmlFor="stackSize">Stack Size: </label><input name="stackSize" type="number" placeholder="Stack Size" value={this.state.data.stackSize} onChange={this._onChangeSimpleValue.bind(this, 'stackSize')} />
+          </div>
+          <div>
+            <label htmlFor="requiredLevel">Required Level to Use: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />
           </div>
           <div>
             <label htmlFor="tooltip">Tooltip: </label><input name="tooltip" type="text" placeholder="Tooltip" value={this.state.data.tooltip} onChange={this._onChangeSimpleValue.bind(this, 'tooltip')} />
@@ -265,8 +271,8 @@ class EditDialog extends React.Component {
           <input type="checkbox" id="shouldConsume" name="shouldConsume" checked={this.state.data.consume} onChange={this._onChangeSimpleValue.bind(this, 'consume')} />
         </div>
       );
-    } else if (this.state.data.classification === ItemClassification.QUEST_ITEM || this.state.data.classification === ItemClassification.TRASH) {
-      consumableOnlyFields = (
+    } else {
+      classSpecificFields = (
         <div>
           <div>
             <label htmlFor="stackSize">Stack Size: </label><input name="stackSize" type="number" placeholder="Stack Size" value={this.state.data.stackSize} onChange={this._onChangeSimpleValue.bind(this, 'stackSize')} />
@@ -304,9 +310,6 @@ class EditDialog extends React.Component {
           </div>
         </div>
         <div>
-          <label htmlFor="requiredLevel">Required Level: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />
-        </div>
-        <div>
           <label htmlFor="itemLevel">Item Level: </label><input name="itemLevel" type="number" placeholder="Item Level" value={this.state.data.itemLevel} onChange={this._onChangeSimpleValue.bind(this, 'itemLevel')} />
         </div>
         <div>
@@ -322,8 +325,7 @@ class EditDialog extends React.Component {
           </select>
         </div>
 
-        {equipmentOnlyFields}
-        {consumableOnlyFields}
+        {classSpecificFields}
 
         <hr />
 
