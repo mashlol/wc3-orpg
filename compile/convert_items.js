@@ -31,6 +31,8 @@ const MAPPINGS = {
     'type': {
         'Equipment': 'TYPE.EQUIPMENT',
         'Consumable': 'TYPE.CONSUMABLE',
+        'Trash': 'TYPE.TRASH',
+        'Quest Item': 'TYPE.QUEST',
     },
 };
 
@@ -141,6 +143,8 @@ local RARITY = {
 local TYPE = {
     EQUIPMENT = 'equipment',
     CONSUMABLE = 'consumable',
+    TRASH = 'trash',
+    QUEST = 'quest',
 }
 
 ` +

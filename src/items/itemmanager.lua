@@ -45,6 +45,10 @@ function init()
 
         if itemInfo.type == items.TYPE.CONSUMABLE then
             type = "Consumable"
+        elseif itemInfo.type == items.TYPE.TRASH then
+            type = "Trash"
+        elseif itemInfo.type == items.TYPE.QUEST then
+            type = "Quest Item"
         end
 
         local itemText = ""
