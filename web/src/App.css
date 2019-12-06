@@ -1,5 +1,5 @@
 .tabs {
-    background: #2980b9;
+    background: #22454c;
     text-align: center;
     padding: 10px 0;
 }
@@ -15,7 +15,7 @@
 }
 
 .tabs button:hover {
-    background: #3498db;
+    background: #42656c;
 }
 
 .dropTableRow > span.pct {
@@ -55,22 +55,26 @@
 .app > div {
     margin-bottom: 8px;
     padding: 20px;
-    background: #2e96ad;
+    background: #22454c;
     color: white;
     cursor: pointer;
     border-radius: 4px;
 }
 
 .app > div.invalid {
-    background: #ad342e;
+    background: #5f1815;
 }
 
 .app > div.invalid:hover {
-    background: #cd544e;
+    background: #7f3835;
 }
 
-.app > div:hover, button:hover {
-    background: #3498db;
+.app > div:hover {
+    background: #42656c;
+}
+
+button:hover {
+    background: #42656c;
 }
 
 .app > div > *:not(.dropTableRow) {
@@ -83,7 +87,7 @@
 }
 
 button {
-    background: #2e96ad;
+    background: #22454c;
     border: none;
     padding: 10px 40px;
     color: white;
@@ -95,12 +99,12 @@ button {
 }
 
 button.destructive {
-    background: #ac2424;
+    background: #5f1815;
     margin-left: 10px;
 }
 
 button.destructive:hover {
-    background: #cf1313;
+    background: #7f3835;
 }
 
 button.neutral {
@@ -156,4 +160,24 @@ label {
     right: 0;
     bottom: 0;
     background: rgba(0,0,0,0.8);
+}
+
+.Uncommon {
+    color: #2cfc03;
+}
+
+.Rare {
+    color: #036ffc;
+}
+
+.Epic {
+    color: #ae4dfd;
+}
+
+.Legendary {
+    color: #c4ab1a;
+}
+
+.Divine {
+    color: #16c48d;
 }
