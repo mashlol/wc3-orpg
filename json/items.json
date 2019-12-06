@@ -1238,7 +1238,7 @@
   },
   "76": {
     "classification": "Consumable",
-    "name": "Destroyed Mammoth Fur",
+    "name": "Mammoth Fur",
     "icon": "war3mapImported\\BTNClaws Attack.blp",
     "itemLevel": "9",
     "requiredLevel": "7",
@@ -1249,7 +1249,7 @@
   },
   "77": {
     "classification": "Consumable",
-    "name": "Destroyed Giant Mammoth Fur",
+    "name": "Giant Mammoth Fur",
     "icon": "war3mapImported\\BTNClaws Attack.blp",
     "itemLevel": 1,
     "requiredLevel": 1,
