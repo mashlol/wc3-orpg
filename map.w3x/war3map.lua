@@ -99,9 +99,9 @@ gg_rct_house3exit1 = nil
 gg_rct_house3enter2 = nil
 gg_rct_house3entrance2 = nil
 gg_rct_sewerentrance1 = nil
-gg_rct_sewerexit1 = nil
-gg_rct_sewerenter1 = nil
 gg_rct_sewerleave1 = nil
+gg_rct_sewerenter1 = nil
+gg_rct_sewerexit1 = nil
 gg_rct_New_Starting_Area_Point_aka_Your_Camp = nil
 gg_rct_New_Starting_Area_before_you_enter_town = nil
 gg_rct_Vespen_Heights = nil
@@ -138,9 +138,10 @@ gg_unit_n006_0640 = nil
 gg_unit_n00E_0639 = nil
 gg_unit_n006_0641 = nil
 gg_unit_n00A_0631 = nil
-gg_dest_YTcx_0977 = nil
 gg_unit_n00G_0801 = nil
 gg_unit_n00H_0802 = nil
+gg_dest_YTcx_0977 = nil
+gg_rct_sewerdungeon = nil
 function InitGlobals()
 end
 
@@ -988,8 +989,8 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2462.8, -1766.6, 200.100, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2381.4, -1743.8, 6.405, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 2288.7, -343.5, 52.824, FourCC("necr"))
-    gg_unit_n00G_0801 = BlzCreateUnitWithSkin(p, FourCC("n00G"), 3133.3, -1685.0, -88.766, FourCC("n00G"))
-    gg_unit_n00H_0802 = BlzCreateUnitWithSkin(p, FourCC("n00H"), 2788.0, -2588.2, -85.547, FourCC("n00H"))
+    gg_unit_n00G_0801 = BlzCreateUnitWithSkin(p, FourCC("n00G"), 3133.3, -1685.0, 271.234, FourCC("n00G"))
+    gg_unit_n00H_0802 = BlzCreateUnitWithSkin(p, FourCC("n00H"), 2788.0, -2588.2, 274.453, FourCC("n00H"))
     SetUnitColor(gg_unit_n00H_0802, ConvertPlayerColor(24))
 end
 
@@ -1022,7 +1023,7 @@ function CreateRegions()
     gg_rct_house1leave1 = Rect(30400.0, 30688.0, 30464.0, 30752.0)
     gg_rct_trollenter1 = Rect(-20608.0, 3200.0, -20512.0, 3296.0)
     gg_rct_trollexit1 = Rect(-20576.0, 2944.0, -20480.0, 3040.0)
-    gg_rct_trollentrance1 = Rect(30496.0, -29280.0, 30656.0, -29184.0)
+    gg_rct_trollentrance1 = Rect(30528.0, -29184.0, 30656.0, -29056.0)
     gg_rct_trollleave1 = Rect(30496.0, -29440.0, 30656.0, -29280.0)
     gg_rct_trolldungeon = Rect(26432.0, -29696.0, 31232.0, -21152.0)
     gg_rct_house2enter1 = Rect(28128.0, -24768.0, 28224.0, -24672.0)
@@ -1116,22 +1117,23 @@ function CreateRegions()
     EnableWeatherEffect(we, true)
     gg_rct_Owlkin_Slaying = Rect(4256.0, -12064.0, 4416.0, -11904.0)
     gg_rct_Dwarven_Tunnels = Rect(23136.0, -14304.0, 23328.0, -14016.0)
-    gg_rct_house3enter1 = Rect(-27168.0, 31328.0, -27040.0, 31456.0)
-    gg_rct_house3leave1 = Rect(-25888.0, 31200.0, -25760.0, 31328.0)
-    gg_rct_house3entrance1 = Rect(-25824.0, 30976.0, -25696.0, 31104.0)
-    gg_rct_house3exit1 = Rect(-27424.0, 31328.0, -27296.0, 31456.0)
+    gg_rct_house3enter1 = Rect(-27200.0, 31328.0, -27072.0, 31456.0)
+    gg_rct_house3leave1 = Rect(-25856.0, 31168.0, -25696.0, 31328.0)
+    gg_rct_house3entrance1 = Rect(-25664.0, 30976.0, -25536.0, 31104.0)
+    gg_rct_house3exit1 = Rect(-27488.0, 31328.0, -27360.0, 31456.0)
     gg_rct_house3enter2 = Rect(-26848.0, 28160.0, -26720.0, 28288.0)
     gg_rct_house3entrance2 = Rect(-26848.0, 27616.0, -26720.0, 27744.0)
     gg_rct_sewerentrance1 = Rect(-29888.0, 31072.0, -29728.0, 31232.0)
-    gg_rct_sewerexit1 = Rect(-29888.0, 31296.0, -29728.0, 31456.0)
+    gg_rct_sewerleave1 = Rect(-29888.0, 31296.0, -29728.0, 31456.0)
     gg_rct_sewerenter1 = Rect(18144.0, -15584.0, 18240.0, -15488.0)
-    gg_rct_sewerleave1 = Rect(18016.0, -15456.0, 18112.0, -15360.0)
+    gg_rct_sewerexit1 = Rect(18016.0, -15456.0, 18112.0, -15360.0)
     gg_rct_New_Starting_Area_Point_aka_Your_Camp = Rect(2144.0, -11296.0, 2272.0, -11136.0)
     gg_rct_New_Starting_Area_before_you_enter_town = Rect(2112.0, -7008.0, 2688.0, -6304.0)
     gg_rct_Vespen_Heights = Rect(-1664.0, -1568.0, -1216.0, -1408.0)
     gg_rct_Verdant_Grove = Rect(1952.0, -1664.0, 4000.0, -64.0)
     we = AddWeatherEffect(gg_rct_Verdant_Grove, FourCC("LRma"))
     EnableWeatherEffect(we, true)
+    gg_rct_sewerdungeon = Rect(-30208.0, 25888.0, -22336.0, 31712.0)
 end
 
 function CreateCameras()

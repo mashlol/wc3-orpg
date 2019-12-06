@@ -216,10 +216,17 @@ function init()
             },
         },
         TROLL_CAVE = {
-            name = 'Troll Cave',
+            name = 'Dungeon: Icy Caverns',
             levelRange = {13, 17},
             rects = {
                 gg_rct_trolldungeon,
+            },
+        },
+        SEWERS = {
+            name = 'Dungeon: The Sewers of Ironwell',
+            levelRange = {20, 25},
+            rects = {
+                gg_rct_sewerdungeon,
             },
         },
     }

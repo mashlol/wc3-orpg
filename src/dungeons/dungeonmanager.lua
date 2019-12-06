@@ -134,7 +134,7 @@ end
 function init()
     DUNGEONS = {
         TROLL_CAVE = {
-            name = "Troll Cave",
+            name = "Icy Cavern",
             tps = {
                 {
                     from = gg_rct_trollenter1,
@@ -148,11 +148,29 @@ function init()
             rects = {
                 gg_rct_trolldungeon,
             },
-            finalBoss = bossmanager.ALL_BOSSES.THE_OVERSEER,
+            finalBoss = bossmanager.ALL_BOSSES.TROLL_WARLORD,
             otherBosses = {
-                bossmanager.ALL_BOSSES.MINER_JOE,
+                bossmanager.ALL_BOSSES.TROLL_PRIEST,
                 bossmanager.ALL_BOSSES.YETI,
             },
+        },
+        SEWERS = {
+            name = "Ironwell Sewers",
+            tps = {
+                {
+                    from = gg_rct_sewerenter1,
+                    to = gg_rct_sewerentrance1,
+                },
+                {
+                    from = gg_rct_sewerleave1,
+                    to = gg_rct_sewerexit1,
+                },
+            },
+            rects = {
+                gg_rct_sewerdungeon,
+            },
+            finalBoss = bossmanager.ALL_BOSSES.TURTLE,
+            otherBosses = {},
         },
     }
 
