@@ -227,7 +227,7 @@ function Backpack:init()
                         local itemInfo = itemmanager.getItemInfo(itemId)
                         local spellKey = itemInfo.spell
                         local itemSlot = itemInfo.slot
-                        if isInVendor and itemInfo.cost > 0 then
+                        if isInVendor and itemInfo.cost >= 0 then
                             -- Sell 1 of the item
                             backpack.removeItemFromBackpack(
                                 playerId, clickedItemPos, 1)
@@ -361,7 +361,7 @@ function Backpack:update(playerId)
             local numTooltipLines = itemmanager.getItemTooltipNumLines(itemId)
             local tooltip = itemmanager.getItemTooltip(itemId)
 
-            if Vendor.isVendorActive(playerId) and itemInfo.cost > 0 then
+            if Vendor.isVendorActive(playerId) and itemInfo.cost >= 0 then
                 numTooltipLines = numTooltipLines + 2
                 tooltip = tooltip ..
                     "|n|n(Right click to sell for "..
