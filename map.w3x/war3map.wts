@@ -2019,3 +2019,39 @@ STRING 361
 Cinderburry Herb
 }
 
+STRING 362
+// Units: culb (Zarimus Dreadsorrow), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 363
+// Units: culb (Zarimus Dreadsorrow), Name (Name)
+{
+Zarimus Dreadsorrow
+}
+
+STRING 364
+// Units: culb (Zarimus Dreadsorrow), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+
+STRING 365
+// Units: cubm (The Ratmaster), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 366
+// Units: cubm (The Ratmaster), Name (Name)
+{
+The Ratmaster
+}
+
+STRING 367
+// Units: cubm (The Ratmaster), EditorSuffix (Name - Editor Suffix)
+{
+ (Boss)
+}
+

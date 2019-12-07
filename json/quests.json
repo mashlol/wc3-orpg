@@ -795,5 +795,26 @@
     "prerequisites": [
       "34"
     ]
+  },
+  "36": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "toKill": "h000",
+        "amount": "1",
+        "itemId": "106"
+      }
+    ],
+    "getQuestFrom": "gg_unit_nvil_0366",
+    "handQuestTo": "gg_unit_nvil_0366",
+    "levelRequirement": "1",
+    "obtainText": "I have reason to believe that the cultists have converted some of my farmhands. Go into the woods and find a Cultist Insignia so that we can figure out who the traitor is.",
+    "incompleteText": "Have you found a Cultist Insignia?",
+    "completedText": "Great, we can use this to find the traitors!",
+    "rewards": {
+      "exp": "5",
+      "gold": "20"
+    },
+    "name": "Insignia Quest"
   }
 }
