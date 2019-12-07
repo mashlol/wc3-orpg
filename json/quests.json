@@ -7,8 +7,8 @@
     "incompleteText": "Have you completed the task?",
     "completedText": "Thank you for defeating those turtles!",
     "rewards": {
-      "exp": 50,
-      "gold": 5,
+      "exp": "11",
+      "gold": "3",
       "items": {
         "6": 5
       }
@@ -16,7 +16,7 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": 10,
+        "amount": "15",
         "toKill": "hmbs",
         "name": "Snapping Turtles"
       }
@@ -32,8 +32,8 @@
     "incompleteText": "I don't think its possible to see this text.",
     "completedText": "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
     "rewards": {
-      "exp": 20,
-      "gold": 5
+      "exp": "8",
+      "gold": "2"
     },
     "objectives": [],
     "prerequisites": [],
@@ -47,8 +47,8 @@
     "incompleteText": "Have you completed the task?",
     "completedText": "Thanks so much! I need to get back to the village so I can make my soup!",
     "rewards": {
-      "exp": 100,
-      "gold": 5
+      "exp": "11",
+      "gold": "3"
     },
     "objectives": [
       {
@@ -95,8 +95,8 @@
       }
     ],
     "rewards": {
-      "exp": 150,
-      "gold": 25
+      "exp": "25",
+      "gold": "12"
     },
     "prerequisites": [
       4
@@ -112,7 +112,7 @@
     "completedText": "Ah, old man Fjorn sent you? Good. I have a lot of work that needs to get done.",
     "objectives": [],
     "rewards": {
-      "exp": 20,
+      "exp": "15",
       "gold": 5
     },
     "prerequisites": [
@@ -128,7 +128,7 @@
     "incompleteText": "Have you completed the task?",
     "completedText": "Thank the lords! We will survive another winter.",
     "rewards": {
-      "exp": 50,
+      "exp": "20",
       "gold": 5
     },
     "objectives": [
@@ -156,8 +156,8 @@
     "incompleteText": "Have you killed those Trolls?",
     "completedText": "Well done!",
     "rewards": {
-      "exp": 50,
-      "gold": 5
+      "exp": "25",
+      "gold": "6"
     },
     "objectives": [
       {
@@ -186,8 +186,8 @@
     "incompleteText": "Have you killed the Troll Chieftan yet?",
     "completedText": "Finally... we can live in peace.",
     "rewards": {
-      "exp": 50,
-      "gold": 5
+      "exp": "27",
+      "gold": "7"
     },
     "objectives": [
       {
@@ -203,15 +203,15 @@
     "levelRequirement": "1"
   },
   "10": {
-    "name": "The Last of Them",
+    "name": "The Last of Them (Dungeon)",
     "getQuestFrom": "gg_unit_nvlw_0178",
     "handQuestTo": "gg_unit_nvlw_0178",
     "obtainText": "I have reason to believe that there are more Trolls in a cave just north of the village. Find them and slay them. I will reward you handsomely.",
     "incompleteText": "Go find the cave and slay those Trolls!",
     "completedText": "Well done! Here is your reward.",
     "rewards": {
-      "exp": 50,
-      "gold": 5
+      "exp": "45",
+      "gold": "12"
     },
     "objectives": [
       {
@@ -288,8 +288,8 @@
       }
     ],
     "rewards": {
-      "exp": 200,
-      "gold": 25
+      "exp": "40",
+      "gold": "14"
     },
     "prerequisites": [
       "15"
@@ -318,8 +318,8 @@
       }
     ],
     "rewards": {
-      "exp": 250,
-      "gold": 30
+      "exp": "40",
+      "gold": "16"
     },
     "prerequisites": [
       "15"
@@ -336,14 +336,14 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": 10,
+        "amount": "15",
         "toKill": "wolf",
         "name": "Arctic Wolves"
       }
     ],
     "rewards": {
-      "exp": 50,
-      "gold": 5
+      "exp": "22",
+      "gold": "6"
     },
     "prerequisites": [],
     "levelRequirement": 7
@@ -394,13 +394,13 @@
     "objectives": [],
     "getQuestFrom": "gg_unit_n003_0532",
     "handQuestTo": "gg_unit_n005_0534",
-    "levelRequirement": "1",
+    "levelRequirement": "34",
     "obtainText": "Hello there.. I see you have found yourself fighting in this world. We need capable adventurers like yourself. Up north you will find the Darrowswamps. This place is full of creatures the people of Valburn can not fight as we are mostly farmers and gatherers. Can you help and see what is going on in the swamps?",
     "incompleteText": "Have you dared to adventure up north, to the Darrowswamps yet?",
     "completedText": "Hello, Adventurer. You have been sent from the south? Any message? -no? -so strange... You want to help us here in these mystical swamps? That is great to hear! I believe you will have much work up here fore sure.",
     "rewards": {
-      "exp": "12",
-      "gold": "2"
+      "exp": "15",
+      "gold": "4"
     },
     "name": "Something is Lurking in the North"
   },
@@ -424,7 +424,7 @@
     "incompleteText": "Have you brung me the ale? The antidote? No?Man, my life hangs in the balance!",
     "completedText": "Thank you. You saved a weak adventurer's life. Now, where were we.",
     "rewards": {
-      "exp": "350",
+      "exp": "10",
       "gold": "3"
     },
     "handQuestTo": "gg_unit_n005_0534",
@@ -470,7 +470,7 @@
     "incompleteText": "Missing Regents or Crafting Materials.",
     "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
     "rewards": {
-      "exp": "7",
+      "exp": "5",
       "gold": "0"
     }
   },
@@ -492,11 +492,11 @@
     "handQuestTo": "gg_unit_n008_0628",
     "levelRequirement": "1",
     "obtainText": "Now it is time to craft some armor on the anvil to the right of the forge..",
-    "incompleteText": ".. You are missing Weak Flux. Flux is normally sold by merchants and vendors.",
+    "incompleteText": "Weak Flux or Copper Ores missing.",
     "completedText": "You crafted your first item! Check your bags to equip it.",
     "rewards": {
-      "exp": "4",
-      "gold": "1"
+      "exp": "3",
+      "gold": "0"
     },
     "prerequisites": [
       "19"
@@ -518,7 +518,7 @@
     "incompleteText": "SO.. No ore?!",
     "completedText": "See there. I take these. You were sent by me, remember.\n\nCome back when I need you.\n\nThanks, now begone.",
     "rewards": {
-      "exp": "10",
+      "exp": "6",
       "gold": "2"
     },
     "prerequisites": [
@@ -531,9 +531,9 @@
     "getQuestFrom": "gg_unit_n005_0534",
     "handQuestTo": "gg_unit_n005_0534",
     "levelRequirement": "1",
-    "obtainText": "Well, here lies the swamp. And I really want to fight alongside you in there. But... there is a big But... You are far too inexperienced yet. Come back when you are more experienced. (34)",
+    "obtainText": "Well, here lies the swamp. And I really want to fight alongside you in there, but I need to have a lookout from this post.",
     "incompleteText": "Shouldn't you be out there gaining glory for your cause? You seem a little lost, we can go into the swamps when you are capable of doing so.",
-    "completedText": "Ah! You finally have a reason to return! I knew you would become atleast a little more powerful one day!",
+    "completedText": "You should get in there.",
     "rewards": {
       "exp": "45",
       "gold": "5"
@@ -552,7 +552,7 @@
     "incompleteText": "So, you are not sure you want to join yet?",
     "completedText": "SO glad you would join us, -erhm, him! He should want to talk to you now. If you don't mind.",
     "rewards": {
-      "exp": "50",
+      "exp": "25",
       "gold": "10"
     },
     "prerequisites": [],
@@ -568,8 +568,8 @@
     "incompleteText": "Have you checked in on my Dog, Mugglet? I wish I could see him. I love him dearly.",
     "completedText": "The dog looks at you with a scared face. Like it has seen nightmares in the shadows of the swamp.",
     "rewards": {
-      "exp": "35",
-      "gold": "1"
+      "exp": "27",
+      "gold": "0"
     }
   },
   "25": {
@@ -581,7 +581,7 @@
     "incompleteText": "Woof!",
     "completedText": "Oh, you found Mugglet! He is not mine, but I took him with me from Ironwell City! -Oh, you have met my nephew already? I am glad you show you cared for my family members! You can have this for your time.\n\nOh, you also wonder why the dog stands in the swamp entrance?\n\nIsn't that what dogs are for? -To stay guard? Atleast for the night! That is what I use him for!",
     "rewards": {
-      "exp": "15",
+      "exp": "18",
       "gold": "6"
     },
     "prerequisites": [
@@ -599,15 +599,15 @@
     "incompleteText": "Why haven't you packed down your tent yet? This area belongs to the King and his realm.",
     "completedText": "You say you had camped by the waterfall, south of here? Why would I care, it's in the wilderness!\n\nWell now, you look like a person that could take a fight! We could need people like yourself. Why won't you look around and see if you somehow can help us around here? -Dismissed!",
     "rewards": {
-      "exp": "3",
-      "gold": "1"
+      "exp": "1",
+      "gold": "0"
     }
   },
   "27": {
     "objectives": [
       {
         "type": "Kill",
-        "amount": "25",
+        "amount": "20",
         "toKill": "h00G",
         "name": "Vespen Hawks"
       },
@@ -625,7 +625,7 @@
     "incompleteText": "Have you done the nature's call? Are the hawks slain?",
     "completedText": "Ohh! I never thought I'd find someone like you. Maybe one day we can have a flirt or something? Rolling on the grass? What you mean by no? Oh.. well, that's alright then.",
     "rewards": {
-      "exp": "10",
+      "exp": "8",
       "gold": "3"
     }
   },
@@ -653,7 +653,7 @@
     "getQuestFrom": "gg_unit_n00H_0802",
     "handQuestTo": "gg_unit_n00H_0802",
     "levelRequirement": "3",
-    "obtainText": "Hello there, person.\nI want to tell you something weird.\nDown southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE.\nThere are creatures there, terrible beings, I saw them, monstreous beasts I tell you!\n\nLegend says that these creatures living down there have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while at it and bring me a proof you have been there! \nI get creeped out by all of this.",
+    "obtainText": "Hello, stranger. I want to tell you something weird. Down southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE. There are creatures there, terrible beings, I saw them, monstreous beasts! Legend says that these creatures living down there have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while at it and bring me a proof you have been there! I get creeped out by all of this.",
     "incompleteText": "You aren't afraid of dreams, are you?\n",
     "completedText": "So, it is true then? Huh, you saw glowing owls? That is not what my eyes met. I saw huge giant beasts with horns! I am sure you saw atleast glimpses of these terrifying beings. \n\nOr is everything just a dream?",
     "rewards": {
@@ -674,7 +674,7 @@
     "incompleteText": "hmm.",
     "completedText": "If they have granted you their protection, I wonder why. For your sake I hope it is not because they have seen the future and knew that you would sacrifice yourself for someone important.",
     "rewards": {
-      "exp": "5",
+      "exp": "1",
       "gold": "0"
     }
   },
@@ -688,8 +688,8 @@
     "incompleteText": "Yes?",
     "completedText": "I have seen you fight before, and I know you can do better than farmers. I believe you have been sleeping for a reason, I don't know why, but I have faith in you. \n\nHere is a bit of money that i don't need myself - take care!",
     "rewards": {
-      "exp": "6",
-      "gold": "3"
+      "exp": "2",
+      "gold": "2"
     },
     "prerequisites": [
       "29"
@@ -705,7 +705,7 @@
     "incompleteText": "Met with Arawel yet? He is in a grove just north of Freydell Village.",
     "completedText": "Yes, hello? May I help you? \nAh, so you say Veralynne sent you?\n\nAs a person that can see glimpses into the future and through life and death, this can mean only two things; either you are the person that will meet with the Deathlord from within their circles, or you are the Deathlord's pawn - which means... No, I cannot say. It is prohibited in my circumstances. I am just a faceless creature walking these lands...",
     "rewards": {
-      "exp": "7"
+      "exp": "3"
     },
     "prerequisites": [
       "29",
@@ -733,13 +733,13 @@
     "name": "Insight from the Past and the Future",
     "getQuestFrom": "gg_unit_n00J_0804",
     "handQuestTo": "gg_unit_n00J_0804",
-    "levelRequirement": "2",
+    "levelRequirement": "1",
     "obtainText": "Let me be serious for a second.\nIf you want to know some glimpses from your past and future, I need you to gather some ingredients for me. But know this, these ingrediants are not something to meddle with.\n\nBring me three Cinderburry Herbs from southwest of Freydell. Bring me one Poor Elegant Feather and one Turtle Shell. -Yes, I need a bowl.",
     "incompleteText": "Found anything yet? Any feather or herbs?",
     "completedText": "Yes, there we go! In perfect shape also!\nI sense a great gatherer in you.",
     "rewards": {
-      "exp": "15",
-      "gold": "2"
+      "exp": "9",
+      "gold": "3"
     },
     "prerequisites": [
       "31"
@@ -758,7 +758,7 @@
     "incompleteText": "So, you not eager to hear about your past? Your loss of memory is strong. You should use this opportunity.",
     "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"Trolls working\"\n\n\"A smile of a friend, a memory of joy. The person is standing by a cliff...\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers from the dark, are you....?\"\n\nThe dream fades.",
     "rewards": {
-      "exp": "25",
+      "exp": "9",
       "gold": "0"
     }
   },
@@ -772,7 +772,7 @@
     "incompleteText": "The waters shows a Twin Fountain to the south of Freydell Village, you have had a vision of it before.",
     "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your destination even more.\"",
     "rewards": {
-      "exp": "25",
+      "exp": "9",
       "gold": "0"
     },
     "prerequisites": [
@@ -789,8 +789,8 @@
     "incompleteText": "",
     "completedText": "So... These were your visions. I can't say you have any great visions, they only showed you small details and you didn't get to learn so much. Anyway, I hope I have helped and I hope you take wisdom from what you have seen and use it for the good of our Kingdom.  \n\nOh, and take these coins, a creature like me won't have need for such.\n\nI will head back to Evaste...\n-Ehrm, ..bye. I am sure we will meet again. Maybe soon.",
     "rewards": {
-      "exp": "40",
-      "gold": "19"
+      "exp": "10",
+      "gold": "4"
     },
     "prerequisites": [
       "34"
@@ -812,9 +812,23 @@
     "incompleteText": "Have you found a Cultist Insignia?",
     "completedText": "Great, we can use this to find the traitors!",
     "rewards": {
-      "exp": "5",
-      "gold": "20"
+      "exp": "10",
+      "gold": "15"
     },
     "name": "Insignia Quest"
+  },
+  "37": {
+    "objectives": [],
+    "name": "Where is he?",
+    "getQuestFrom": "gg_unit_n003_0532",
+    "handQuestTo": "gg_unit_n005_0534",
+    "levelRequirement": "4",
+    "obtainText": "We have been looking for our Scout for some time, I guess he has drowned in the Swamps like the rest of his men?\nAnyway, I need you to check on him.",
+    "incompleteText": "Have you found our Scout up north yet? He like to call himself a Adventurer.",
+    "completedText": "So, the mistress sent you here? What a awful place to send someone. I am glad you are here though.",
+    "rewards": {
+      "exp": "6",
+      "gold": "1"
+    }
   }
 }

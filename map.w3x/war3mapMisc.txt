@@ -12,6 +12,7 @@ GrantNormalXPFormulaB=0.0
 GrantNormalXPFormulaC=0.0
 GuardDistance=0.0
 GuardReturnTime=10000.0
+HeroFactorXP=65,55,45,35,20,5,0
 MaxGuardDistance=100000.0
 MaxHeroLevel=60
 MaxUnitLevel=63

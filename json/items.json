@@ -1238,7 +1238,7 @@
   "76": {
     "classification": "Quest Item",
     "name": "Mammoth Fur",
-    "icon": "war3mapImported\\BTNClaws Attack.blp",
+    "icon": "war3mapImported\\BTNINV_Misc_Pelt_Boar_01.blp",
     "itemLevel": "9",
     "rarity": "Common",
     "stackSize": "20",
@@ -1248,7 +1248,7 @@
   "77": {
     "classification": "Quest Item",
     "name": "Giant Mammoth Fur",
-    "icon": "war3mapImported\\BTNClaws Attack.blp",
+    "icon": "war3mapImported\\BTNINV_Misc_Pelt_Boar_01.blp",
     "itemLevel": 1,
     "rarity": "Common",
     "stackSize": 10,
@@ -2067,6 +2067,6 @@
     "cost": "15",
     "classification": "Quest Item",
     "stackSize": "200",
-    "tooltip": "Shamans have used these herbs for age to get clarity of what's to come."
+    "tooltip": "Shamans have used these herbs for age to get clarity of what's to come.           "
   }
 }
