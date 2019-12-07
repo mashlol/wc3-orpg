@@ -26,8 +26,8 @@ local RAYS_OF_MOONLIGHT = FourCC('LRma')
 local HEAVY_WIND = FourCC('WNcw')
 
 local DEFAULT_SPAWN_POINT = {
-    x = 1998,
-    y = -3141,
+    x = 2149,
+    y = -11130,
 }
 
 -- spawnPoints = {
