@@ -2007,3 +2007,15 @@ STRING 359
 Arawel
 }
 
+STRING 360
+// Units: fLOW (Cinderburry Herb), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 361
+// Units: fLOW (Cinderburry Herb), Name (Name)
+{
+Cinderburry Herb
+}
+

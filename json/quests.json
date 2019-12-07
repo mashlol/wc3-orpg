@@ -467,7 +467,7 @@
     "handQuestTo": "gg_unit_n007_0627",
     "levelRequirement": "1",
     "obtainText": "Hello, so you wish to craft your own armor? I bet you wish! Well, first you would have to find some Copper ore out in the world. Good luck finding any. Then, when you are ready you can smelt them at that forge over there.",
-    "incompleteText": "Have you found any ore yet?",
+    "incompleteText": "Missing Regents or Crafting Materials.",
     "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
     "rewards": {
       "exp": "7",
@@ -591,7 +591,7 @@
   },
   "26": {
     "objectives": [],
-    "name": "Your Place in this World",
+    "name": "Is this Your Home?",
     "getQuestFrom": "gg_unit_n006_0641",
     "handQuestTo": "gg_unit_n00F_0642",
     "levelRequirement": "1",
@@ -670,9 +670,9 @@
     "getQuestFrom": "gg_unit_n00I_0803",
     "handQuestTo": "gg_unit_n00I_0803",
     "levelRequirement": "1",
-    "obtainText": "Hello, finally awake from your slumber?\nDo you remember me? We met before you went to sleep 4 months ago.\nHow come you are able to sleep for that long?\n\nLast time someone slept for that long, they had been protected by the unknown and the reason he was protected was to sacrifice himself in a later state. The unknown Gods walk among us and are not our friends.\n\nHave they granted you their protection?",
+    "obtainText": "Hello, finally awake from your slumber?\nDo you remember me? We met before you went to sleep four months ago.\nHow come you are able to sleep for that long?\n\nLast time someone slept for that long, they had been protected by the unknown and the reason they were protected was to sacrifice themself in a later state. The unknown Gods walk among us and are not our friends.\n\nBut.. Have they granted you their protection?",
     "incompleteText": "hmm.",
-    "completedText": "If they have granted you their protection, I wonder why.For your sake I hope it is not because they have seen the future and knew that you would sacrifice yourself for someone important.",
+    "completedText": "If they have granted you their protection, I wonder why. For your sake I hope it is not because they have seen the future and knew that you would sacrifice yourself for someone important.",
     "rewards": {
       "exp": "5",
       "gold": "0"
@@ -684,7 +684,7 @@
     "getQuestFrom": "gg_unit_n00I_0803",
     "handQuestTo": "gg_unit_n00I_0803",
     "levelRequirement": "1",
-    "obtainText": "While you have slept, our lands are at peril. The undead have marched into our very Kingdom,  Alliances of Wild Clans have gathered togheter to make our Kingdom crumble. They want to hit us while we are down. Our troops are blocking the undead coming from the east. We have farmers figting trolls, we have fishers figthing mammoths, it's a mess. Also... A dark, unknown aura has been sensed by villagers and I believe them.",
+    "obtainText": "While you have slept, our lands are at peril. The undead have marched into our very Kingdom, Alliances of Wild Clans have gathered togheter to make our Kingdom crumble. They want to hit us while we are down. Our troops are doing their best blocking the undead swarming from the east. We have farmers figthing trolls, we have fishers figthing mammoths, it's a mess. \n\nAlso... A dark, unknown aura has been sensed by villagers and I believe of what they speak.",
     "incompleteText": "Yes?",
     "completedText": "I have seen you fight before, and I know you can do better than farmers. I believe you have been sleeping for a reason, I don't know why, but I have faith in you. \n\nHere is a bit of money that i don't need myself - take care!",
     "rewards": {
@@ -754,9 +754,9 @@
     "prerequisites": [
       "32"
     ],
-    "obtainText": "I just need to crunch these feathers a bit more before you can use the spellpowder.\n\nHere it is!\nThe spellpowder that will reveal your past.",
+    "obtainText": "I just need to crunch these feathers a bit more before you can use the spellpowder.\n\nHere it is!\nThe spellpowder that will reveal your past.\n\nGo over to the fountain over there (In the \"Verdant Grove\") and start the ritual by using the spellpowder.",
     "incompleteText": "So, you not eager to hear about your past? Your loss of memory is strong. You should use this opportunity.",
-    "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"You look down on eagle flying over burning forests\"\n\n\"A smile of a friend, a memory of joy\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers the dark, are you....?\"\n\nThe dream fades.",
+    "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"Trolls working\"\n\n\"A smile of a friend, a memory of joy. The person is standing by a cliff...\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers from the dark, are you....?\"\n\nThe dream fades.",
     "rewards": {
       "exp": "25",
       "gold": "0"
@@ -770,7 +770,7 @@
     "levelRequirement": "1",
     "obtainText": "as the dream fades you get a glimpse of a fountain south of Freydell Village.",
     "incompleteText": "The waters shows a Twin Fountain to the south of Freydell Village, you have had a vision of it before.",
-    "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your desintation even more.\"",
+    "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your destination even more.\"",
     "rewards": {
       "exp": "25",
       "gold": "0"
