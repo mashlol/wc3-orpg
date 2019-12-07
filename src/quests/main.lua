@@ -67,6 +67,7 @@ function onKill()
                                 ' '..
                                 objectiveInfo.name,
                             log.TYPE.QUEST)
+                        maybeLogQuestCompleted(playerId, questId)
                         updateQuestMarks()
                     end
                 end
@@ -87,6 +88,7 @@ function maybeUpdateLootProgress(playerId)
 
                     local existing =
                         progress[playerId][questId].objectives[objectiveIdx]
+                    progress[playerId][questId].objectives[objectiveIdx] = count
                     if existing ~= count and count ~= 0 then
                         log.log(
                             playerId,
@@ -97,8 +99,8 @@ function maybeUpdateLootProgress(playerId)
                                 ' '..
                                 itemmanager.getItemInfo(objectiveInfo.itemId).name,
                             log.TYPE.QUEST)
+                        maybeLogQuestCompleted(playerId, questId)
                     end
-                    progress[playerId][questId].objectives[objectiveIdx] = count
                     updateQuestMarks()
                 end
             end
@@ -123,11 +125,22 @@ function maybeUpdateDiscoverProgress()
                             playerId,
                             'You discovered the ' .. objectiveInfo.name,
                             log.TYPE.QUEST)
+                        maybeLogQuestCompleted(playerId, questId)
                         updateQuestMarks()
                     end
                 end
             end
         end
+    end
+end
+
+function maybeLogQuestCompleted(playerId, questId)
+    if questObjectivesCompleted(playerId, questId) then
+        local questName = QUESTS[questId].name
+        log.log(
+            playerId,
+            '|cff2cfc03' .. questName .. '|r now completed!',
+            log.TYPE.QUEST)
     end
 end
 
