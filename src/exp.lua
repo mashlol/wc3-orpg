@@ -1,8 +1,8 @@
 local party = require('src/party.lua')
 local hero = require('src/hero.lua')
 
-local BASE_EXP = 10
-local ELITE_BASE_EXP = 30
+local BASE_EXP = 4
+local ELITE_BASE_EXP = 12
 
 local PARTY_MULTIPLIER = {1, 0.9, 0.8, 0.7, 0.6}
 
@@ -29,6 +29,11 @@ function distributeExp()
 
     local dyingUnitLevel = GetUnitLevel(dyingUnit)
     local isElite = not BlzGetUnitBooleanField(dyingUnit, UNIT_BF_DECAYABLE)
+    local givesExp = not BlzGetUnitBooleanField(dyingUnit, UNIT_BF_USE_EXTENDED_LINE_OF_SIGHT)
+
+    if not givesExp then
+        return
+    end
 
     local playerPartyId = party.getPlayerParty(killingPlayerId)
 
