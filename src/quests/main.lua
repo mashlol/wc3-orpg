@@ -308,7 +308,7 @@ function getSectionsForCompletedDialog(questId)
     })
 
     table.insert(sections, {
-        text = "|cff2cfc03" .. QUESTS[questId].name .. " Completed!|r|n|n" .. QUESTS[questId].completedText,
+        text = "|cff2cfc03" .. QUESTS[questId].name .. "|r (Completed!)|n|n" .. QUESTS[questId].completedText,
         type = 'normal',
         textalignvert = TEXT_JUSTIFY_MIDDLE,
         height = LINE_HEIGHT * 3 + getLineHeight(QUESTS[questId].completedText),

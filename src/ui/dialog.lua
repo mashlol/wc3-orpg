@@ -4,7 +4,7 @@ local tooltip = require('src/ui/tooltip.lua')
 local spell = require('src/spell.lua')
 
 local MAX_NUM_SECTIONS = 5
-local SECTION_PADDING = 0.008
+local SECTION_PADDING = 0.005
 local MAX_NUM_BULLETS = 8
 
 -- dialogToggles = {
