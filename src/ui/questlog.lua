@@ -73,7 +73,9 @@ function QuestLog:init()
 
     local buttons = {}
     for i=1,12,1 do
-        table.insert(buttons, createQuestButton(origin, originFrame, -(i - 1) * 0.053 - 0.025, i))
+        table.insert(
+            buttons,
+            createQuestButton(origin, originFrame, -(i - 1) * 0.045 - 0.025, i))
     end
 
     utils.createCloseButton(origin, function(playerId)

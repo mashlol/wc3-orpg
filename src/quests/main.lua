@@ -7,6 +7,7 @@ local Dialog = require('src/ui/dialog.lua')
 local quests = require('src/quests/quests.lua')
 
 local LINE_HEIGHT = 0.014
+local MAX_ACTIVE_QUESTS = 9
 
 local QUESTS
 
@@ -455,6 +456,17 @@ function beginQuest(playerId, questId)
         positiveButton = "Accept",
         negativeButton = "Decline",
         onPositiveButtonClicked = function()
+            local numActiveQuests = 0
+            for activeQuestId, _ in pairs(progress[playerId]) do
+                if not questCompleted(playerId, activeQuestId) then
+                    numActiveQuests = numActiveQuests + 1
+                end
+            end
+            if numActiveQuests >= MAX_ACTIVE_QUESTS then
+                log.log(playerId, "Your quest log is full!", log.TYPE.ERROR)
+                return
+            end
+
             progress[playerId][questId] = {
                 completed = false,
                 objectives = {},

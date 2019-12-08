@@ -4,7 +4,7 @@ local tooltip = require('src/ui/tooltip.lua')
 local spell = require('src/spell.lua')
 
 local MAX_NUM_SECTIONS = 5
-local SECTION_PADDING = 0.005
+local SECTION_PADDING = 0.002
 local MAX_NUM_BULLETS = 8
 
 -- dialogToggles = {
@@ -121,7 +121,7 @@ function Dialog:init()
         origin,
         FRAMEPOINT_CENTER,
         0.4,
-        0.35)
+        0.375)
 
     utils.createBorderFrame(origin)
 
