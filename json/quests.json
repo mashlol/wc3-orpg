@@ -472,8 +472,7 @@
     "incompleteText": "Missing Regents or Crafting Materials.",
     "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
     "rewards": {
-      "exp": "6",
-      "gold": "0"
+      "exp": "6"
     }
   },
   "20": {
@@ -497,8 +496,7 @@
     "incompleteText": "Weak Flux or Copper Ores missing.",
     "completedText": "You crafted your first item! Check your bags to equip it.",
     "rewards": {
-      "exp": "3",
-      "gold": "0"
+      "exp": "3"
     },
     "prerequisites": [
       "19"
@@ -570,8 +568,7 @@
     "incompleteText": "Have you checked in on my Dog, Mugglet? I wish I could see him. I love him dearly.",
     "completedText": "The dog looks at you with a scared face. Like it has seen nightmares in the shadows of the swamp.",
     "rewards": {
-      "exp": "28",
-      "gold": "0"
+      "exp": "28"
     }
   },
   "25": {
@@ -601,8 +598,7 @@
     "incompleteText": "Why haven't you packed down your tent yet? This area belongs to the King and his realm.",
     "completedText": "You say you had camped by the waterfall, south of here? Why would I care, it's in the wilderness!\n\nWell now, you look like a person that could take a fight! We could need people like yourself. Why won't you look around and see if you somehow can help us around here? -Dismissed!",
     "rewards": {
-      "exp": "1",
-      "gold": "0"
+      "exp": "1"
     }
   },
   "27": {
@@ -676,8 +672,7 @@
     "incompleteText": "hmm.",
     "completedText": "If they have granted you their protection, I wonder why. For your sake I hope it is not because they have seen the future and knew that you would sacrifice yourself for someone important.",
     "rewards": {
-      "exp": "1",
-      "gold": "0"
+      "exp": "1"
     }
   },
   "30": {
@@ -760,8 +755,7 @@
     "incompleteText": "So, you not eager to hear about your past? Your loss of memory is strong. You should use this opportunity.",
     "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"Trolls working\"\n\n\"A smile of a friend, a memory of joy. The person is standing by a cliff...\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers from the dark, are you....?\"\n\nThe dream fades.",
     "rewards": {
-      "exp": "8",
-      "gold": "0"
+      "exp": "8"
     }
   },
   "34": {
@@ -774,8 +768,7 @@
     "incompleteText": "The waters shows a Twin Fountain to the south of Freydell Village, you have had a vision of it before.",
     "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your destination even more.\"",
     "rewards": {
-      "exp": "8",
-      "gold": "0"
+      "exp": "8"
     },
     "prerequisites": [
       "33"
@@ -857,8 +850,7 @@
     "incompleteText": "An empty barrel.",
     "completedText": "Oh, no, please! Not that figure! I tried to send it away with the last caravan! Please don't return it to me! You should meet with a priest and ask if he can cleanse it for you. That thing is filled by evil!",
     "rewards": {
-      "exp": "11",
-      "gold": "0"
+      "exp": "11"
     },
     "prerequisites": [
       "37"
@@ -915,8 +907,7 @@
     "incompleteText": "There is only trash lying here.",
     "completedText": "Oh, so you found my letter. My father is a strong individual and he has been keeping the western regions safe for years. The Icy Tundra has kind of been his second home. I don't understand why he feel home there though. You would have to ask him.",
     "rewards": {
-      "exp": "6",
-      "gold": "0"
+      "exp": "6"
     },
     "prerequisites": []
   },
