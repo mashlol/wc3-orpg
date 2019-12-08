@@ -176,6 +176,60 @@ class EditQuestDialog extends React.Component {
     });
   };
 
+  _onAddItemReward = () => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldItemRewards = oldData.rewards && oldData.rewards.items ?
+      Object.assign({}, oldData.rewards.items) :
+      {};
+    oldItemRewards["1"] = 1;
+    if (!oldData.rewards) {
+      oldData.rewards = {};
+    }
+    oldData.rewards.items = oldItemRewards;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onChangeItemRewardAmount = (key, event) => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldItemRewards = oldData.rewards && oldData.rewards.items ?
+      Object.assign({}, oldData.rewards.items) :
+      {};
+    oldItemRewards[key] = event.target.value;
+    oldData.rewards.items = oldItemRewards;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onChangeItemKey = (oldKey, event) => {
+    const oldData = Object.assign({}, this.state.data);
+    const oldItemRewards = oldData.rewards && oldData.rewards.items ?
+      Object.assign({}, oldData.rewards.items) :
+      {};
+    const oldValue = oldItemRewards[oldKey];
+    delete oldItemRewards[oldKey];
+    oldItemRewards[event.target.value] = oldValue;
+    oldData.rewards.items = oldItemRewards;
+    this.setState({
+      data: oldData,
+    });
+  };
+
+  _onDeleteItemReward = (key) => {
+    console.log('delete key');
+    const oldData = Object.assign({}, this.state.data);
+    const oldItemRewards = oldData.rewards && oldData.rewards.items ?
+      Object.assign({}, oldData.rewards.items) :
+      {};
+    delete oldItemRewards[key];
+    oldData.rewards.items = oldItemRewards;
+    this.setState({
+      data: oldData,
+    });
+  };
+
   render() {
     const luaContents = fs.readFileSync(LUA_PATH_LOCATION, {encoding: 'utf8'});
 
@@ -265,6 +319,17 @@ class EditQuestDialog extends React.Component {
       );
     });
 
+    const itemRewards = this.state.data.rewards && this.state.data.rewards.items && Object.entries(this.state.data.rewards.items).map((rewardInfo) => {
+      return (
+        <div className="objective">
+          <label>Item Reward:</label>
+          <input type="text" placeholder="Amount" value={rewardInfo[1]} onChange={this._onChangeItemRewardAmount.bind(this, rewardInfo[0])} />
+          <select value={rewardInfo[0]} onChange={this._onChangeItemKey.bind(this, rewardInfo[0])}>{validItemOptions}</select>
+          <button className="destructive" onClick={this._onDeleteItemReward.bind(this, rewardInfo[0])}>Remove</button>
+        </div>
+      );
+    });
+
     return (
       <div className="editDialog">
         <div>
@@ -301,6 +366,8 @@ class EditQuestDialog extends React.Component {
           <label htmlFor="completedText">Complete Text: </label>
           <textarea name="completedText" placeholder="Complete Text" value={this.state.data.completedText} onChange={this._onChangeSimpleValue.bind(this, 'completedText')} />
         </div>
+        <hr />
+        <h3> Rewards</h3>
         <div>
           <label htmlFor="exp">Exp Reward: </label>
           <input name="exp" type="number" placeholder="Exp Reward" value={this.state.data.rewards && this.state.data.rewards.exp} onChange={this._onChangeNestedValue.bind(this, 'rewards', 'exp')} />
@@ -308,6 +375,10 @@ class EditQuestDialog extends React.Component {
          <div>
           <label htmlFor="gold">Gold Reward: </label>
           <input name="gold" type="number" placeholder="Gold Reward" value={this.state.data.rewards && this.state.data.rewards.gold} onChange={this._onChangeNestedValue.bind(this, 'rewards', 'gold')} />
+        </div>
+        {itemRewards}
+        <div>
+          <button onClick={this._onAddItemReward}>Add an item reward</button>
         </div>
 
         <hr />
