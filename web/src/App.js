@@ -38,6 +38,9 @@ const existingVendors = JSON.parse(fs.readFileSync(VENDORS_JSON_LOCATION, {
 const ItemClassification = {
   EQUIPMENT: 'Equipment',
   CONSUMABLE: 'Consumable',
+  QUEST_ITEM: 'Quest Item',
+  TRASH: 'Trash',
+  CRAFTING: 'Crafting Material',
 };
 
 const ItemType = {
@@ -99,6 +102,8 @@ const Class = {
 };
 
 class App extends React.Component {
+  _searchRef = React.createRef();
+
   state = {
     tab: "items",
 
@@ -118,6 +123,7 @@ class App extends React.Component {
     editVendorId: null,
     existingVendors: existingVendors,
 
+    itemNameFilter: null,
     itemTypeFilter: null,
     itemSlotFilter: null,
     itemRarityFilter: null,
@@ -308,6 +314,19 @@ class App extends React.Component {
     });
   };
 
+  componentDidMount = () => {
+    window.onkeydown = (e) => {
+      if(e.keyCode == 70 && e.ctrlKey){
+        console.log('ctrl f', this);
+        this._searchRef.current.focus();
+      }
+    };
+  };
+
+  componentWillUnmount = () => {
+    window.onkeydown = null;
+  };
+
   render() {
     let editItemDialog = null;
     let editQuestDialog = null;
@@ -325,11 +344,16 @@ class App extends React.Component {
 
     const existingItemList = Object.entries(this.state.existingItems)
       .filter(itemInfo => {
+        const nameFilter = this.state.itemNameFilter;
         const typeFilter = this.state.itemTypeFilter;
         const slotFilter = this.state.itemSlotFilter;
         const rarityFilter = this.state.itemRarityFilter;
         const itemLevelGTFilter = this.state.itemLevelGTFilter;
         const itemLevelLTFilter = this.state.itemLevelLTFilter;
+
+        if (nameFilter != null && nameFilter != "" && itemInfo[1].name != null && !itemInfo[1].name.toLowerCase().includes(nameFilter.toLowerCase())) {
+          return false;
+        }
 
         if (typeFilter != null && typeFilter !== "all" && itemInfo[1].classification !== typeFilter) {
           return false;
@@ -379,6 +403,7 @@ class App extends React.Component {
 
     const filters = (
       <div className="filters">
+        <input ref={this._searchRef} placeholder="Filter by name" type="text" value={this.state.itemNameFilter} onChange={this._onChangeFilter.bind(this, 'itemNameFilter')} />
         <select onChange={this._onChangeFilter.bind(this, 'itemTypeFilter')} value={this.state.itemTypeFilter}>
           <option value="all">All Types</option>
           {itemClassOptions}
@@ -449,7 +474,7 @@ class App extends React.Component {
     if (this.state.tab === 'items') {
       contents = (
         <div>
-          <div className="app">
+          <div className="app items">
             {filters}
             {existingItemList}
             {addItemButton}
