@@ -92,9 +92,19 @@ button:hover {
 }
 
 .app > div > *:not(.dropTableRow) {
-    width: 16%;
+    width: 23%;
     display: inline-block;
     margin-right: 10px;
+}
+
+.app > div.filters > *:not(.dropTableRow) {
+    width: 15%;
+    display: inline-block;
+    margin-right: 6px;
+}
+
+.app > div > *:not(.dropTableRow):last-child {
+    margin-right: 0;
 }
 
 .dropTableRow {
