@@ -2133,3 +2133,15 @@ STRING 381
 Way Gate
 }
 
+STRING 382
+// Units: irat (Infected Rat), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 383
+// Units: irat (Infected Rat), Name (Name)
+{
+Infected Rat
+}
+

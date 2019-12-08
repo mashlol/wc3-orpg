@@ -128,6 +128,7 @@ gg_unit_nvil_0040 = nil
 gg_unit_n005_0534 = nil
 gg_unit_n003_0532 = nil
 gg_unit_n002_0531 = nil
+gg_unit_n00Q_0841 = nil
 gg_unit_nvil_0501 = nil
 gg_unit_nvlw_0178 = nil
 gg_unit_nvil_0383 = nil
@@ -161,7 +162,6 @@ gg_unit_n00M_0835 = nil
 gg_unit_n00N_0836 = nil
 gg_unit_n00O_0838 = nil
 gg_unit_n00P_0839 = nil
-gg_unit_n00Q_0841 = nil
 gg_dest_YTcx_0977 = nil
 function InitGlobals()
 end
