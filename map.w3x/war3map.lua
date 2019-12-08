@@ -116,6 +116,8 @@ gg_rct_house5enter1 = nil
 gg_rct_house5entrance1 = nil
 gg_rct_house5leave1 = nil
 gg_rct_house5exit1 = nil
+gg_rct_Tiara_Netheril = nil
+gg_rct_Coveted_Hills_Village = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_nvl2_0008 = nil
@@ -1201,6 +1203,8 @@ function CreateRegions()
     gg_rct_house5entrance1 = Rect(28896.0, 30784.0, 29024.0, 30912.0)
     gg_rct_house5leave1 = Rect(28896.0, 30656.0, 29024.0, 30752.0)
     gg_rct_house5exit1 = Rect(4352.0, 832.0, 4480.0, 960.0)
+    gg_rct_Tiara_Netheril = Rect(26400.0, 23392.0, 26752.0, 23808.0)
+    gg_rct_Coveted_Hills_Village = Rect(9120.0, -16608.0, 9440.0, -16224.0)
 end
 
 function CreateCameras()

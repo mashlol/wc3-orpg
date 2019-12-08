@@ -16,7 +16,7 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": "15",
+        "amount": "10",
         "toKill": "hmbs",
         "name": "Snapping Turtles"
       }
@@ -113,10 +113,11 @@
     "objectives": [],
     "rewards": {
       "exp": "21",
-      "gold": 5
+      "gold": "7"
     },
     "prerequisites": [
-      4
+      4,
+      "35"
     ],
     "levelRequirement": "5"
   },
@@ -472,7 +473,10 @@
     "incompleteText": "Missing Regents or Crafting Materials.",
     "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
     "rewards": {
-      "exp": "6"
+      "exp": "6",
+      "items": {
+        "85": "3"
+      }
     }
   },
   "20": {
@@ -496,7 +500,10 @@
     "incompleteText": "Weak Flux or Copper Ores missing.",
     "completedText": "You crafted your first item! Check your bags to equip it.",
     "rewards": {
-      "exp": "3"
+      "exp": "3",
+      "items": {
+        "86": 1
+      }
     },
     "prerequisites": [
       "19"
@@ -605,13 +612,13 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": "20",
+        "amount": "15",
         "toKill": "h00G",
         "name": "Vespen Hawks"
       },
       {
         "type": "Gather",
-        "amount": "3",
+        "amount": "2",
         "itemId": "125"
       }
     ],
@@ -631,7 +638,7 @@
     "objectives": [
       {
         "type": "Kill",
-        "amount": "15",
+        "amount": "10",
         "toKill": "h00D",
         "name": "Mystique Forest Owls"
       },
@@ -731,7 +738,7 @@
     "getQuestFrom": "gg_unit_n00J_0804",
     "handQuestTo": "gg_unit_n00J_0804",
     "levelRequirement": "1",
-    "obtainText": "Let me be serious for a second.\nIf you want to know some glimpses from your past and future, I need you to gather some ingredients for me. But know this, these ingrediants are not something to meddle with.\n\nBring me three Cinderburry Herbs from southwest of Freydell. Bring me one Poor Elegant Feather and one Turtle Shell. -Yes, I need a bowl.",
+    "obtainText": "Let me be serious for a second.\nIf you want to know some glimpses from your past and future, I need you to gather some ingredients for me. But know this, these ingredients are not something to meddle with.\n\nBring me three Cinderburry Herbs from southwest of Freydell. Bring me one Poor Elegant Feather and one Turtle Shell. -Yes, I need a bowl.",
     "incompleteText": "Found anything yet? Any feather or herbs?",
     "completedText": "Yes, there we go! In perfect shape also!\nI sense a great gatherer in you.",
     "rewards": {
@@ -830,34 +837,44 @@
     "objectives": [],
     "name": "99-Year Old Wine",
     "getQuestFrom": "gg_unit_n00K_0833",
-    "handQuestTo": "gg_unit_n00L_0834",
+    "handQuestTo": "gg_unit_n00K_0833",
     "levelRequirement": "5",
-    "obtainText": "Inside the Barrel you find a 99-year old wine marked with two letters: R.J.\nMaybe someone would be glad you returned this to them.",
+    "obtainText": "Inside the Barrel you find two coins and a 99-year old wine marked with two letters: R.J.\n",
     "incompleteText": "An empty barrel.",
-    "completedText": "Oh, look at that. Where did you find this? I lost my cargo some days ago and I am glad you returned me this treasure. You can enter my Inn whenever you like!",
+    "completedText": "Maybe someone would be glad you returned this to them.",
     "rewards": {
-      "exp": "13",
-      "gold": "4"
+      "exp": "4",
+      "gold": "2",
+      "items": {
+        "132": 1
+      }
     }
   },
   "39": {
     "objectives": [],
     "name": "Unknown Figure",
     "getQuestFrom": "gg_unit_n00K_0842",
-    "handQuestTo": "gg_unit_n003_0532",
+    "handQuestTo": "gg_unit_n00K_0842",
     "levelRequirement": "4",
-    "obtainText": "An unknown weird figure made of clay is inside the barrel. Maybe someone in the Town knows about this figure.",
+    "obtainText": "An unknown weird figure made of clay is inside the barrel.",
     "incompleteText": "An empty barrel.",
-    "completedText": "Oh, no, please! Not that figure! I tried to send it away with the last caravan! Please don't return it to me! You should meet with a priest and ask if he can cleanse it for you. That thing is filled by evil!",
+    "completedText": "You pick the Figure. Feeling a sickening feeling in your body.",
     "rewards": {
-      "exp": "11"
+      "exp": "5",
+      "items": {
+        "134": "1"
+      }
     },
-    "prerequisites": [
-      "37"
-    ]
+    "prerequisites": []
   },
   "40": {
-    "objectives": [],
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "134"
+      }
+    ],
     "name": "The Unknown Figure",
     "getQuestFrom": "gg_unit_n003_0532",
     "handQuestTo": "gg_unit_n00M_0835",
@@ -870,7 +887,7 @@
       "gold": "8"
     },
     "prerequisites": [
-      "39"
+      "47"
     ]
   },
   "41": {
@@ -900,20 +917,29 @@
   "42": {
     "objectives": [],
     "name": "A Letter for a Father",
-    "getQuestFrom": "gg_unit_n00A_0631",
-    "handQuestTo": "gg_unit_n00L_0834",
-    "levelRequirement": "5",
+    "getQuestFrom": "gg_unit_n00N_0836",
+    "handQuestTo": "gg_unit_n00N_0836",
+    "levelRequirement": "7",
     "obtainText": "Something catches your eye... A letter lies in the trash on the floor. It has a known symbol on it, which you can not remember, but you sure feel it is something you held dear.. before you lost your memory.",
     "incompleteText": "There is only trash lying here.",
-    "completedText": "Oh, so you found my letter. My father is a strong individual and he has been keeping the western regions safe for years. The Icy Tundra has kind of been his second home. I don't understand why he feel home there though. You would have to ask him.",
+    "completedText": "You pick the letter up.",
     "rewards": {
-      "exp": "6"
+      "exp": "6",
+      "items": {
+        "135": 1
+      }
     },
     "prerequisites": []
   },
   "43": {
-    "objectives": [],
-    "name": "A Letter for a Father (Part 2)",
+    "objectives": [
+      {
+        "type": "Gather",
+        "itemId": "135",
+        "amount": "1"
+      }
+    ],
+    "name": "A Letter for a Father (Part 3)",
     "getQuestFrom": "gg_unit_n00L_0834",
     "handQuestTo": "gg_unit_n00O_0838",
     "levelRequirement": "1",
@@ -922,10 +948,13 @@
     "completedText": "..You find Ral's father, but only in pieces.\nWhat has happened here?",
     "rewards": {
       "exp": "26",
-      "gold": "4"
+      "gold": "4",
+      "items": {
+        "135": 1
+      }
     },
     "prerequisites": [
-      "42"
+      "48"
     ]
   },
   "44": {
@@ -961,7 +990,8 @@
       "gold": "4"
     },
     "prerequisites": [
-      "4"
+      "4",
+      "35"
     ],
     "handQuestTo": "gg_unit_n00P_0839"
   },
@@ -980,6 +1010,82 @@
     },
     "prerequisites": [
       "45"
+    ]
+  },
+  "47": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "134"
+      }
+    ],
+    "name": "Unknown Figure (Part 2)",
+    "getQuestFrom": "gg_unit_n00K_0842",
+    "handQuestTo": "gg_unit_n003_0532",
+    "levelRequirement": "4",
+    "obtainText": "Maybe someone in the Town knows about this figure.",
+    "incompleteText": "An empty barrel.",
+    "completedText": "Oh, no, please! Not that figure! I tried to send it away with the last caravan! Please don't return it to me! You should meet with a priest and ask if he can cleanse it for you. That thing is filled by evil!",
+    "rewards": {
+      "exp": "14",
+      "gold": "0",
+      "items": {
+        "134": 1
+      }
+    },
+    "prerequisites": [
+      "39"
+    ]
+  },
+  "48": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "135"
+      }
+    ],
+    "name": "A Letter to a Father (Part 2)",
+    "getQuestFrom": "gg_unit_n00N_0836",
+    "handQuestTo": "gg_unit_n00L_0834",
+    "levelRequirement": "5",
+    "obtainText": "Maybe you can ask Ral about the letter.",
+    "incompleteText": "Empty Trash.",
+    "completedText": "Oh, so you found my letter. My father is a strong individual and he has been keeping the western regions safe for years. The Icy Tundra has kind of been his second home. I don't understand why he feel home there though. You would have to ask him.",
+    "rewards": {
+      "exp": "11",
+      "gold": "2",
+      "items": {
+        "135": 1
+      }
+    },
+    "prerequisites": [
+      "42"
+    ]
+  },
+  "49": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "132"
+      }
+    ],
+    "name": "99-Year Old Wine (Part 2)",
+    "getQuestFrom": "gg_unit_n00K_0833",
+    "handQuestTo": "gg_unit_n00L_0834",
+    "levelRequirement": "1",
+    "obtainText": "Maybe someone would be glad you returned this to them.",
+    "completedText": "Oh, look at that. Where did you find this? I lost my cargo some days ago and I am glad you returned me this treasure. You can enter my Inn whenever you like!",
+    "incompleteText": "An empty barrel.",
+    "rewards": {
+      "exp": "11",
+      "gold": "4",
+      "items": {}
+    },
+    "prerequisites": [
+      "38"
     ]
   }
 }

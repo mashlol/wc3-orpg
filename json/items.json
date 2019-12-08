@@ -1362,7 +1362,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNCopperBar.blp",
     "itemLevel": "3",
-    "cost": "10",
+    "cost": "16",
     "classification": "Crafting Material",
     "stackSize": "100",
     "tooltip": "A type of metal bar."
@@ -2089,5 +2089,25 @@
     "classification": "Quest Item",
     "stackSize": "1",
     "tooltip": "It should rest in Jary's family."
+  },
+  "134": {
+    "name": "Unknown Figure",
+    "rarity": "Rare",
+    "icon": "war3mapImported\\BTNTiki Mask B.blp",
+    "itemLevel": "10",
+    "cost": "4",
+    "classification": "Quest Item",
+    "stackSize": "1",
+    "tooltip": "This figure gives a bad feeling."
+  },
+  "135": {
+    "name": "Letter to a Father",
+    "rarity": "Common",
+    "icon": "Anvil.blp",
+    "itemLevel": "1",
+    "cost": "1",
+    "classification": "Quest Item",
+    "stackSize": "1",
+    "tooltip": "When did it become mature to take someone else's letter?"
   }
 }
