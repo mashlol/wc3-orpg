@@ -154,6 +154,7 @@ gg_unit_n00H_0802 = nil
 gg_unit_n00I_0803 = nil
 gg_unit_n00J_0804 = nil
 gg_unit_nmoo_0805 = nil
+gg_unit_n00K_0842 = nil
 gg_unit_n00K_0833 = nil
 gg_unit_n00L_0834 = nil
 gg_unit_n00M_0835 = nil
@@ -162,7 +163,6 @@ gg_unit_n00O_0838 = nil
 gg_unit_n00P_0839 = nil
 gg_unit_n00Q_0841 = nil
 gg_dest_YTcx_0977 = nil
-gg_unit_n00K_0842 = nil
 function InitGlobals()
 end
 
@@ -172,17 +172,6 @@ function CreateAllDestructables()
     local t
     local life
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
-end
-
-function CreateUnitsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("Hazr"), -8781.7, -8141.3, 71.062, FourCC("Hazr"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.544, FourCC("hmpr"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nzep"), 6239.2, -11672.9, 146.584, FourCC("nzep"))
 end
 
 function CreateNeutralHostile()
@@ -972,6 +961,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nalb"), 14228.0, -17102.7, 234.049, FourCC("nalb"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 12986.6, -17276.7, 5.735, FourCC("necr"))
     u = BlzCreateUnitWithSkin(p, FourCC("necr"), 14299.5, -18230.2, 251.155, FourCC("necr"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.540, FourCC("hmpr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14318.7, 14179.3, 257.801, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hdhw"), 1323.0, -4217.2, 348.048, FourCC("hdhw"))
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1305.9, -4483.5, 354.451, FourCC("hgry"))
@@ -1065,7 +1055,6 @@ function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
