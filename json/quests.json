@@ -32,7 +32,7 @@
     "incompleteText": "I don't think its possible to see this text.",
     "completedText": "Fjorn sent you? Thank goodness you've arrived! I was hunting turtles for soup, when all of a sudden I was knocked out and thrown in a cage!",
     "rewards": {
-      "exp": "8",
+      "exp": "9",
       "gold": "2"
     },
     "objectives": [],
@@ -47,7 +47,7 @@
     "incompleteText": "Have you completed the task?",
     "completedText": "Thanks so much! I need to get back to the village so I can make my soup!",
     "rewards": {
-      "exp": "11",
+      "exp": "13",
       "gold": "3"
     },
     "objectives": [
@@ -68,10 +68,10 @@
     "handQuestTo": "gg_unit_nvl2_0070",
     "obtainText": "I appreciate all you've done for me, but I can take it from here. Return to Fjord and see what else he has for you.",
     "incompleteText": "Impossible!",
-    "completedText": "Fred sent you back here? Well, good I have some more work for you.",
+    "completedText": "Fred sent you back here? Well, good I have some future work for you.",
     "objectives": [],
     "rewards": {
-      "exp": 30,
+      "exp": "16",
       "gold": 3
     },
     "prerequisites": [
@@ -112,13 +112,13 @@
     "completedText": "Ah, old man Fjorn sent you? Good. I have a lot of work that needs to get done.",
     "objectives": [],
     "rewards": {
-      "exp": "15",
+      "exp": "21",
       "gold": 5
     },
     "prerequisites": [
       4
     ],
-    "levelRequirement": "1"
+    "levelRequirement": "5"
   },
   "7": {
     "name": "A Cold Winter",
@@ -128,7 +128,7 @@
     "incompleteText": "Have you completed the task?",
     "completedText": "Thank the lords! We will survive another winter.",
     "rewards": {
-      "exp": "20",
+      "exp": "24",
       "gold": 5
     },
     "objectives": [
@@ -210,7 +210,7 @@
     "incompleteText": "Go find the cave and slay those Trolls!",
     "completedText": "Well done! Here is your reward.",
     "rewards": {
-      "exp": "45",
+      "exp": "55",
       "gold": "12"
     },
     "objectives": [
@@ -342,7 +342,7 @@
       }
     ],
     "rewards": {
-      "exp": "22",
+      "exp": "24",
       "gold": "6"
     },
     "prerequisites": [],
@@ -364,8 +364,8 @@
       }
     ],
     "rewards": {
-      "exp": "75",
-      "gold": 30
+      "exp": "50",
+      "gold": "19"
     },
     "prerequisites": [
       13
@@ -428,7 +428,9 @@
       "gold": "3"
     },
     "handQuestTo": "gg_unit_n005_0534",
-    "prerequisites": []
+    "prerequisites": [
+      "37"
+    ]
   },
   "18": {
     "objectives": [
@@ -449,7 +451,7 @@
     "incompleteText": "Do you have the wood?",
     "completedText": "Nice! They won't last the winter without their wood.",
     "rewards": {
-      "exp": "50",
+      "exp": "48",
       "gold": "2"
     },
     "levelRequirement": "1"
@@ -470,7 +472,7 @@
     "incompleteText": "Missing Regents or Crafting Materials.",
     "completedText": "You smelted some ore. The Copper bars are now visible in your bags.",
     "rewards": {
-      "exp": "5",
+      "exp": "6",
       "gold": "0"
     }
   },
@@ -518,7 +520,7 @@
     "incompleteText": "SO.. No ore?!",
     "completedText": "See there. I take these. You were sent by me, remember.\n\nCome back when I need you.\n\nThanks, now begone.",
     "rewards": {
-      "exp": "6",
+      "exp": "13",
       "gold": "2"
     },
     "prerequisites": [
@@ -535,7 +537,7 @@
     "incompleteText": "Shouldn't you be out there gaining glory for your cause? You seem a little lost, we can go into the swamps when you are capable of doing so.",
     "completedText": "You should get in there.",
     "rewards": {
-      "exp": "45",
+      "exp": "47",
       "gold": "5"
     },
     "prerequisites": [
@@ -552,7 +554,7 @@
     "incompleteText": "So, you are not sure you want to join yet?",
     "completedText": "SO glad you would join us, -erhm, him! He should want to talk to you now. If you don't mind.",
     "rewards": {
-      "exp": "25",
+      "exp": "29",
       "gold": "10"
     },
     "prerequisites": [],
@@ -568,7 +570,7 @@
     "incompleteText": "Have you checked in on my Dog, Mugglet? I wish I could see him. I love him dearly.",
     "completedText": "The dog looks at you with a scared face. Like it has seen nightmares in the shadows of the swamp.",
     "rewards": {
-      "exp": "27",
+      "exp": "28",
       "gold": "0"
     }
   },
@@ -581,7 +583,7 @@
     "incompleteText": "Woof!",
     "completedText": "Oh, you found Mugglet! He is not mine, but I took him with me from Ironwell City! -Oh, you have met my nephew already? I am glad you show you cared for my family members! You can have this for your time.\n\nOh, you also wonder why the dog stands in the swamp entrance?\n\nIsn't that what dogs are for? -To stay guard? Atleast for the night! That is what I use him for!",
     "rewards": {
-      "exp": "18",
+      "exp": "22",
       "gold": "6"
     },
     "prerequisites": [
@@ -625,7 +627,7 @@
     "incompleteText": "Have you done the nature's call? Are the hawks slain?",
     "completedText": "Ohh! I never thought I'd find someone like you. Maybe one day we can have a flirt or something? Rolling on the grass? What you mean by no? Oh.. well, that's alright then.",
     "rewards": {
-      "exp": "8",
+      "exp": "12",
       "gold": "3"
     }
   },
@@ -653,11 +655,11 @@
     "getQuestFrom": "gg_unit_n00H_0802",
     "handQuestTo": "gg_unit_n00H_0802",
     "levelRequirement": "3",
-    "obtainText": "Hello, stranger. I want to tell you something weird. Down southwest of here, over the bridge to the west, there is a very weird place. I have been there once and I mean; ONCE. There are creatures there, terrible beings, I saw them, monstreous beasts! Legend says that these creatures living down there have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo down and see for yourself if you don't believe me! Kill some while at it and bring me a proof you have been there! I get creeped out by all of this.",
+    "obtainText": "Hello, stranger. Something is wrong. Down southwest of here, over the bridge to the west, there is a very weird place. I have been there once. There are creatures there, terrible beings, I saw them, monstreous beasts! Legend says that these have broken free from dreams?! -Or as I like to say it; Nightmares!\n\nGo and see for yourself if you don't believe me! Kill some while at it and bring me a proof you have been there! I get creeped out by all of this.",
     "incompleteText": "You aren't afraid of dreams, are you?\n",
     "completedText": "So, it is true then? Huh, you saw glowing owls? That is not what my eyes met. I saw huge giant beasts with horns! I am sure you saw atleast glimpses of these terrifying beings. \n\nOr is everything just a dream?",
     "rewards": {
-      "exp": "14",
+      "exp": "16",
       "gold": "12"
     },
     "prerequisites": [
@@ -758,7 +760,7 @@
     "incompleteText": "So, you not eager to hear about your past? Your loss of memory is strong. You should use this opportunity.",
     "completedText": "You fade into a past dream and you rediscover some pictures from the past:\n\n\"A hole so deep it takes you to the inner core\"\n\n\"Trolls working\"\n\n\"A smile of a friend, a memory of joy. The person is standing by a cliff...\"\n\n\"A family in deep danger, is it yours or someone else's?\"\n \nand at last you see:\n\n\"A forgotten cave, -by a waterfall. Silent, but unresting sounds whispers from the dark, are you....?\"\n\nThe dream fades.",
     "rewards": {
-      "exp": "9",
+      "exp": "8",
       "gold": "0"
     }
   },
@@ -772,7 +774,7 @@
     "incompleteText": "The waters shows a Twin Fountain to the south of Freydell Village, you have had a vision of it before.",
     "completedText": "Another dream appears, this dream seem to belong from the future:\n\n\"You see dead marching into the Kingdom, forming hardened creatures to spread their plague into the City of Ironwell.\"\n\n\"You see dead swamps and Hidden Secret chambers in a deserted land\".\n\n\"You see only darkness around you, trying to suffocate you until your last breath, but the last breath may not be your last\".\n\n\"You see a life in chains, but that isn't your hand, is it?\".\n\n\"You see a crown and a crowd, you see blood, you see hope and anger\".\n\n\"You see your past home, but it is...\".\n\nThe dreams fades and you are only left with echoes in your head and pictures that make you question your destination even more.\"",
     "rewards": {
-      "exp": "9",
+      "exp": "8",
       "gold": "0"
     },
     "prerequisites": [
@@ -812,7 +814,7 @@
     "incompleteText": "Have you found a Cultist Insignia?",
     "completedText": "Great, we can use this to find the traitors!",
     "rewards": {
-      "exp": "10",
+      "exp": "18",
       "gold": "15"
     },
     "name": "Insignia Quest"
@@ -822,13 +824,171 @@
     "name": "Where is he?",
     "getQuestFrom": "gg_unit_n003_0532",
     "handQuestTo": "gg_unit_n005_0534",
-    "levelRequirement": "4",
+    "levelRequirement": "3",
     "obtainText": "We have been looking for our Scout for some time, I guess he has drowned in the Swamps like the rest of his men?\nAnyway, I need you to check on him.",
     "incompleteText": "Have you found our Scout up north yet? He like to call himself a Adventurer.",
     "completedText": "So, the mistress sent you here? What a awful place to send someone. I am glad you are here though.",
     "rewards": {
-      "exp": "6",
+      "exp": "9",
       "gold": "1"
     }
+  },
+  "38": {
+    "objectives": [],
+    "name": "99-Year Old Wine",
+    "getQuestFrom": "gg_unit_n00K_0833",
+    "handQuestTo": "gg_unit_n00L_0834",
+    "levelRequirement": "5",
+    "obtainText": "Inside the Barrel you find a 99-year old wine marked with two letters: R.J.\nMaybe someone would be glad you returned this to them.",
+    "incompleteText": "An empty barrel.",
+    "completedText": "Oh, look at that. Where did you find this? I lost my cargo some days ago and I am glad you returned me this treasure. You can enter my Inn whenever you like!",
+    "rewards": {
+      "exp": "13",
+      "gold": "4"
+    }
+  },
+  "39": {
+    "objectives": [],
+    "name": "Unknown Figure",
+    "getQuestFrom": "gg_unit_n00K_0842",
+    "handQuestTo": "gg_unit_n003_0532",
+    "levelRequirement": "4",
+    "obtainText": "An unknown weird figure made of clay is inside the barrel. Maybe someone in the Town knows about this figure.",
+    "incompleteText": "An empty barrel.",
+    "completedText": "Oh, no, please! Not that figure! I tried to send it away with the last caravan! Please don't return it to me! You should meet with a priest and ask if he can cleanse it for you. That thing is filled by evil!",
+    "rewards": {
+      "exp": "11",
+      "gold": "0"
+    },
+    "prerequisites": [
+      "37"
+    ]
+  },
+  "40": {
+    "objectives": [],
+    "name": "The Unknown Figure",
+    "getQuestFrom": "gg_unit_n003_0532",
+    "handQuestTo": "gg_unit_n00M_0835",
+    "levelRequirement": "4",
+    "obtainText": "You should deliver the Figure to the Ironwell Priest. He should be able to tell you what curse the figure is bearing. Also, do not try to let go of the statue before he has investigated it.",
+    "incompleteText": "Are you going to Ironwell anytime soon? You need to deliver that statue to the Ironwell Priest. Get going!",
+    "completedText": "Oh, hello stranger. I sense a evil aura around you. Aha, so you are bearing on such darkness... A Darkcovered Figure.",
+    "rewards": {
+      "exp": "20",
+      "gold": "8"
+    },
+    "prerequisites": [
+      "39"
+    ]
+  },
+  "41": {
+    "objectives": [
+      {
+        "type": "Kill",
+        "amount": "1",
+        "toKill": "h00F",
+        "name": "Gebrul the Unlinked"
+      }
+    ],
+    "name": "Unlinked from a Dream",
+    "getQuestFrom": "gg_unit_n00H_0802",
+    "handQuestTo": "gg_unit_n00H_0802",
+    "levelRequirement": "1",
+    "obtainText": "I am sure there are monsters down there and we need to put a stop to this madness. Head down to the Owl Forest alone or with some friends and kill the Unlinked Creature.",
+    "incompleteText": "Have you stopped this nightmare yet?",
+    "completedText": "Oh, Holy Moly!\nYou did it, I can again head back to that forest! Here is your reward for saving my mind before it went whole crazy!",
+    "rewards": {
+      "exp": "18",
+      "gold": "9"
+    },
+    "prerequisites": [
+      "28"
+    ]
+  },
+  "42": {
+    "objectives": [],
+    "name": "A Letter for a Father",
+    "getQuestFrom": "gg_unit_n00A_0631",
+    "handQuestTo": "gg_unit_n00L_0834",
+    "levelRequirement": "5",
+    "obtainText": "Something catches your eye... A letter lies in the trash on the floor. It has a known symbol on it, which you can not remember, but you sure feel it is something you held dear.. before you lost your memory.",
+    "incompleteText": "There is only trash lying here.",
+    "completedText": "Oh, so you found my letter. My father is a strong individual and he has been keeping the western regions safe for years. The Icy Tundra has kind of been his second home. I don't understand why he feel home there though. You would have to ask him.",
+    "rewards": {
+      "exp": "6",
+      "gold": "0"
+    },
+    "prerequisites": []
+  },
+  "43": {
+    "objectives": [],
+    "name": "A Letter for a Father (Part 2)",
+    "getQuestFrom": "gg_unit_n00L_0834",
+    "handQuestTo": "gg_unit_n00O_0838",
+    "levelRequirement": "1",
+    "obtainText": "Anyway, he has been silent for long now and he should have been here two days ago for his monthly visit.\n\nHey, maybe you can deliver him the letter for me? I would be grateful!",
+    "incompleteText": "Still any chance you can deliver the letter for me? My father is in the Icy Tundras to the west of here.",
+    "completedText": "..You find Ral's father, but only in pieces.\nWhat has happened here?",
+    "rewards": {
+      "exp": "26",
+      "gold": "4"
+    },
+    "prerequisites": [
+      "42"
+    ]
+  },
+  "44": {
+    "objectives": [
+      {
+        "type": "Gather",
+        "amount": "1",
+        "itemId": "133"
+      }
+    ],
+    "name": "A Father's Medallion",
+    "getQuestFrom": "gg_unit_n00O_0838",
+    "handQuestTo": "gg_unit_n00L_0834",
+    "levelRequirement": "1",
+    "obtainText": "In his hands you see a medallion with the same symbol on it. Maybe Ral wants it as a memory..\n\nYou may have to break it out of his frozen hands with force.",
+    "incompleteText": "May he rest in eternal serenity.",
+    "completedText": "What?\n\nNo... this can't be true!\n\nNoooooooo! Father! You were the only one I had left!\n\nFather.... Noo... *sobs*\n\n...Thank you for returning his medallion to me...\n\nIf I could be a bit alone now. I need time...",
+    "rewards": {
+      "exp": "30",
+      "gold": "10"
+    }
+  },
+  "45": {
+    "objectives": [],
+    "name": "He Who Stands in the Grove",
+    "getQuestFrom": "gg_unit_n00Q_0841",
+    "levelRequirement": "5",
+    "obtainText": "Hey! Before you head out on other adventures!\nI just wanted to tell you that he who stands in the forest wanted to talk to you urgently.\nHe was talking about a icy region.",
+    "incompleteText": "You got to talk to the elf in the Verdant Grove. He says it is urgent.",
+    "completedText": "You came. I had my doubt. You know most people think I am unique. Not always in a good way. But one can never lose hope.",
+    "rewards": {
+      "exp": "22",
+      "gold": "4"
+    },
+    "prerequisites": [
+      "4"
+    ],
+    "handQuestTo": "gg_unit_n00P_0839"
+  },
+  "46": {
+    "objectives": [],
+    "name": "He Who Stands in Snow",
+    "getQuestFrom": "gg_unit_n00J_0804",
+    "handQuestTo": "gg_unit_n00P_0839",
+    "levelRequirement": "1",
+    "obtainText": "I heard your time here soon is over and wanted to contact you. My brother is in the Icy Region to the west. I think he knows how you can get your memory back. \n\nIf you follow the road to the west from Freydell Village, you will have the chance to find him to the North of the Icy Tundra. There you can seek his Wisdom.",
+    "incompleteText": "So you are also just enjoying this beautiful grove. Have you met my brother to the icy west yet?",
+    "completedText": "Hello, stranger. I have seen you coming.\nMy brother sent you, didn't he?",
+    "rewards": {
+      "exp": "23",
+      "gold": "4"
+    },
+    "prerequisites": [
+      "45"
+    ]
   }
 }

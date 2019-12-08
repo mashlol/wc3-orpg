@@ -2055,3 +2055,81 @@ STRING 367
  (Boss)
 }
 
+STRING 368
+// Units: n00K (Washed Barrel), Name (Name)
+{
+Washed Barrel
+}
+
+STRING 369
+// Units: n00L (Ral Jary), EditorSuffix (Name - Editor Suffix)
+{
+ (Male Wander)
+}
+
+STRING 370
+// Units: n00L (Ral Jary), Name (Name)
+{
+Ral Jary
+}
+
+STRING 371
+// Units: n00M (Ironwell Priest Narphel), EditorSuffix (Name - Editor Suffix)
+{
+ (Male Wander)
+}
+
+STRING 372
+// Units: n00M (Ironwell Priest Narphel), Name (Name)
+{
+Ironwell Priest Narphel
+}
+
+STRING 373
+// Units: n00N (Trash), Name (Name)
+{
+Trash
+}
+
+STRING 374
+// Units: n00O (Ewan Jary), Name (Name)
+{
+Ewan Jary
+}
+
+STRING 375
+// Units: n00P (Arawon), Name (Name)
+{
+Arawon
+}
+
+STRING 376
+// Units: h00H (Father's Medallion), Tip (Tooltip - Basic)
+{
+Turtle
+}
+
+STRING 378
+// Units: n00Q (Shalbion Barion), EditorSuffix (Name - Editor Suffix)
+{
+Wander
+}
+
+STRING 379
+// Units: n00Q (Shalbion Barion), Name (Name)
+{
+Shalbion Barion
+}
+
+STRING 380
+// Units: h00H (Father's Medallion), Name (Name)
+{
+Father's Medallion
+}
+
+STRING 381
+// Doodads: D02U (Way Gate), Name (Name)
+{
+Way Gate
+}
+

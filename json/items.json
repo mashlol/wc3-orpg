@@ -2001,7 +2001,7 @@
   },
   "125": {
     "name": "Poor Elegant Feather",
-    "rarity": "Uncommon",
+    "rarity": "Common",
     "icon": "war3mapImported\\BTNFeather.blp",
     "itemLevel": "6",
     "cost": "12",
@@ -2068,5 +2068,26 @@
     "classification": "Quest Item",
     "stackSize": "200",
     "tooltip": "Shamans have used these herbs for age to get clarity of what's to come.           "
+  },
+  "132": {
+    "name": "99-Year Old Wine",
+    "rarity": "Uncommon",
+    "icon": "war3mapImported\\BTNredJApotionGS.blp",
+    "itemLevel": "1",
+    "cost": "5",
+    "classification": "Consumable",
+    "stackSize": "5",
+    "requiredLevel": "60",
+    "tooltip": "Someone must have loved this Wine since it still is unopened."
+  },
+  "133": {
+    "name": "Father's Medallion",
+    "rarity": "Rare",
+    "icon": "war3mapImported\\BTNEmpty Amulet.blp",
+    "itemLevel": "10",
+    "cost": "4",
+    "classification": "Quest Item",
+    "stackSize": "1",
+    "tooltip": "It should rest in Jary's family."
   }
 }
