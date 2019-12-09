@@ -1,74 +1,74 @@
-import React from 'react';
+import React from "react";
 
-const fs = require('fs');
+const fs = require("fs");
 
 const ItemClassification = {
-  EQUIPMENT: 'Equipment',
-  CONSUMABLE: 'Consumable',
-  QUEST_ITEM: 'Quest Item',
-  TRASH: 'Trash',
-  CRAFTING: 'Crafting Material',
+  EQUIPMENT: "Equipment",
+  CONSUMABLE: "Consumable",
+  QUEST_ITEM: "Quest Item",
+  TRASH: "Trash",
+  CRAFTING: "Crafting Material"
 };
 
 const ItemType = {
-  HELMET: 'Helmet',
-  NECKLACE: 'Necklace',
-  SHOULDERS: 'Shoulders',
-  CHEST: 'Chest',
-  BACK: 'Back',
-  GLOVES: 'Gloves',
-  PANTS: 'Pants',
-  FEET: 'Feet',
-  RING: 'Ring',
-  TRINKET: 'Trinket',
-  ONE_HAND_WEAPON: '1H Weapon',
-  TWO_HAND_WEAPON: '2H Weapon',
-  OFF_HAND: 'Off-hand',
+  HELMET: "Helmet",
+  NECKLACE: "Necklace",
+  SHOULDERS: "Shoulders",
+  CHEST: "Chest",
+  BACK: "Back",
+  GLOVES: "Gloves",
+  PANTS: "Pants",
+  FEET: "Feet",
+  RING: "Ring",
+  TRINKET: "Trinket",
+  ONE_HAND_WEAPON: "1H Weapon",
+  TWO_HAND_WEAPON: "2H Weapon",
+  OFF_HAND: "Off-hand"
 };
 
 const Rarity = {
-  COMMON: 'Common',
-  UNCOMMON: 'Uncommon',
-  RARE: 'Rare',
-  EPIC: 'Epic',
-  LEGENDARY: 'Legendary',
-  DIVINE: 'Divine',
+  COMMON: "Common",
+  UNCOMMON: "Uncommon",
+  RARE: "Rare",
+  EPIC: "Epic",
+  LEGENDARY: "Legendary",
+  DIVINE: "Divine"
 };
 
 const Stat = {
-  PERCENT_MOVE_SPEED: '% Move Speed',
-  PERCENT_SCALE: '% Scale',
-  RAW_HIT_POINTS: 'Raw HP',
-  HEALTH_REGEN: 'HP Regen',
-  ATTACK_DAMAGE_RAW: 'Attack Damage',
-  ATTACK_DAMAGE_PCT: '% Attack Damage',
-  SPELL_DAMAGE_RAW: 'Spell Damage',
-  SPELL_DAMAGE_PCT: '% Spell Damage',
-  HEALING_RAW: 'Healing',
-  HEALING_PCT: '% Healing',
-  INCOMING_ATTACK_DAMAGE_PCT: '% Physical Damage Taken',
-  INCOMING_SPELL_DAMAGE_PCT: '% Spell Damage Taken',
-  INCOMING_HEALING_PCT: '% Healing Received',
-  INCOMING_ATTACK_DAMAGE_RAW: 'Physical Damage Taken',
-  INCOMING_SPELL_DAMAGE_RAW: 'Spell Damage Taken',
-  INCOMING_HEALING_RAW: 'Healing Received',
-  COOLDOWN_REDUCTION_PCT: '% Cooldown Reduction',
-  CAST_SPEED_PCT: '% Cast Speed',
-  ATTACK_SPEED_PCT: '% Attack Speed',
-  CRITICAL_CHANCE_RAW: '% Crit Chance',
-  CRITICAL_DAMAGE_RAW: 'Critical Damage',
-  CRITICAL_DAMAGE_PCT: '% Critical Damage',
+  PERCENT_MOVE_SPEED: "% Move Speed",
+  PERCENT_SCALE: "% Scale",
+  RAW_HIT_POINTS: "Raw HP",
+  HEALTH_REGEN: "HP Regen",
+  ATTACK_DAMAGE_RAW: "Attack Damage",
+  ATTACK_DAMAGE_PCT: "% Attack Damage",
+  SPELL_DAMAGE_RAW: "Spell Damage",
+  SPELL_DAMAGE_PCT: "% Spell Damage",
+  HEALING_RAW: "Healing",
+  HEALING_PCT: "% Healing",
+  INCOMING_ATTACK_DAMAGE_PCT: "% Physical Damage Taken",
+  INCOMING_SPELL_DAMAGE_PCT: "% Spell Damage Taken",
+  INCOMING_HEALING_PCT: "% Healing Received",
+  INCOMING_ATTACK_DAMAGE_RAW: "Physical Damage Taken",
+  INCOMING_SPELL_DAMAGE_RAW: "Spell Damage Taken",
+  INCOMING_HEALING_RAW: "Healing Received",
+  COOLDOWN_REDUCTION_PCT: "% Cooldown Reduction",
+  CAST_SPEED_PCT: "% Cast Speed",
+  ATTACK_SPEED_PCT: "% Attack Speed",
+  CRITICAL_CHANCE_RAW: "% Crit Chance",
+  CRITICAL_DAMAGE_RAW: "Critical Damage",
+  CRITICAL_DAMAGE_PCT: "% Critical Damage"
 };
 
 const Class = {
-  AZORA: 'Azora',
-  YUJI: 'Yuji',
-  IVANOV: 'Ivanov',
-  TARCZA: 'Tarcza',
-  STORMFIST: 'Stormfist',
-  KANNA: 'Kanna',
-  RAVANNA: 'Ravanna',
-  JARGA: 'Jarga',
+  AZORA: "Azora",
+  YUJI: "Yuji",
+  IVANOV: "Ivanov",
+  TARCZA: "Tarcza",
+  STORMFIST: "Stormfist",
+  KANNA: "Kanna",
+  RAVANNA: "Ravanna",
+  JARGA: "Jarga"
 };
 
 // const data: {
@@ -86,27 +86,38 @@ const Class = {
 // };
 
 function removeA(arr) {
-    var what, a = arguments, L = a.length, ax;
-    while (L > 1 && arr.length) {
-        what = a[--L];
-        while ((ax= arr.indexOf(what)) !== -1) {
-            arr.splice(ax, 1);
-        }
+  var what,
+    a = arguments,
+    L = a.length,
+    ax;
+  while (L > 1 && arr.length) {
+    what = a[--L];
+    while ((ax = arr.indexOf(what)) !== -1) {
+      arr.splice(ax, 1);
     }
-    return arr;
+  }
+  return arr;
 }
 
 class EditDialog extends React.Component {
   state = {
-    data: this.props.initialData,
+    data: this.props.initialData
   };
 
   _getSelectForStats(selectedOption, onChanged) {
     const itemStatOptions = Object.values(Stat).map(stat => {
-      return <option key={stat} value={stat}>{stat}</option>
+      return (
+        <option key={stat} value={stat}>
+          {stat}
+        </option>
+      );
     });
 
-    return <select value={selectedOption} onChange={onChanged} >{itemStatOptions}</select>;
+    return (
+      <select value={selectedOption} onChange={onChanged}>
+        {itemStatOptions}
+      </select>
+    );
   }
 
   _onSave = () => {
@@ -115,9 +126,12 @@ class EditDialog extends React.Component {
 
   _onChangeSimpleValue = (key, event) => {
     const oldData = Object.assign({}, this.state.data);
-    oldData[key] = event.target.type === 'checkbox' ? event.target.checked : event.target.value;
+    oldData[key] =
+      event.target.type === "checkbox"
+        ? event.target.checked
+        : event.target.value;
     this.setState({
-      data: oldData,
+      data: oldData
     });
   };
 
@@ -137,7 +151,7 @@ class EditDialog extends React.Component {
       oldStats[nextUnusedKey] = 0;
       oldData.stats = oldStats;
       this.setState({
-        data: oldData,
+        data: oldData
       });
     }
   };
@@ -148,7 +162,7 @@ class EditDialog extends React.Component {
     oldStats[key] = event.target.value;
     oldData.stats = oldStats;
     this.setState({
-      data: oldData,
+      data: oldData
     });
   };
 
@@ -160,17 +174,17 @@ class EditDialog extends React.Component {
     delete oldStats[oldKey];
     oldData.stats = oldStats;
     this.setState({
-      data: oldData,
+      data: oldData
     });
   };
 
-  _onRemoveStat = (key) => {
+  _onRemoveStat = key => {
     const oldData = Object.assign({}, this.state.data);
     const oldStats = oldData.stats ? Object.assign({}, oldData.stats) : {};
-    delete oldStats[key]
+    delete oldStats[key];
     oldData.stats = oldStats;
     this.setState({
-      data: oldData,
+      data: oldData
     });
   };
 
@@ -188,31 +202,51 @@ class EditDialog extends React.Component {
 
     oldData.usable = oldUsable;
     this.setState({
-      data: oldData,
+      data: oldData
     });
   };
 
   render() {
     const classRadios = Object.values(Class).map(cls => {
-      const checked = this.state.data.usable && this.state.data.usable.includes(cls);
+      const checked =
+        this.state.data.usable && this.state.data.usable.includes(cls);
       return (
         <span key={cls}>
-          <input type="checkbox" id={cls} name="classes" value={cls} checked={checked} onChange={this._onChangeHeroUsable.bind(this, cls)} />
+          <input
+            type="checkbox"
+            id={cls}
+            name="classes"
+            value={cls}
+            checked={checked}
+            onChange={this._onChangeHeroUsable.bind(this, cls)}
+          />
           <label htmlFor={cls}>{cls}</label>
         </span>
       );
     });
 
     const itemClassOptions = Object.values(ItemClassification).map(type => {
-      return <option key={type} value={type}>{type}</option>
+      return (
+        <option key={type} value={type}>
+          {type}
+        </option>
+      );
     });
 
     const itemTypeOptions = Object.values(ItemType).map(type => {
-      return <option key={type} value={type}>{type}</option>
+      return (
+        <option key={type} value={type}>
+          {type}
+        </option>
+      );
     });
 
     const itemRarityOptions = Object.values(Rarity).map(rarity => {
-      return <option key={rarity} value={rarity}>{rarity}</option>
+      return (
+        <option key={rarity} value={rarity}>
+          {rarity}
+        </option>
+      );
     });
 
     const statInfo = this.state.data.stats || {};
@@ -221,10 +255,23 @@ class EditDialog extends React.Component {
       const amount = entry[1];
       return (
         <div key={entry[0]}>
-          <input type="number" value={amount} onChange={this._onStatChanged.bind(this, statKey)} />
-          {this._getSelectForStats(statKey, this._onStatKeyChanged.bind(this, statKey))}
-          <button className="destructive" onClick={this._onRemoveStat.bind(this, statKey)}>Remove</button>
-        </div>);
+          <input
+            type="number"
+            value={amount}
+            onChange={this._onStatChanged.bind(this, statKey)}
+          />
+          {this._getSelectForStats(
+            statKey,
+            this._onStatKeyChanged.bind(this, statKey)
+          )}
+          <button
+            className="destructive"
+            onClick={this._onRemoveStat.bind(this, statKey)}
+          >
+            Remove
+          </button>
+        </div>
+      );
     });
 
     let classSpecificFields = null;
@@ -233,13 +280,25 @@ class EditDialog extends React.Component {
         <div>
           <div>
             <label htmlFor="type">Type: </label>
-            <select name="type" id="item-type" value={this.state.data.type} onChange={this._onChangeSimpleValue.bind(this, 'type')} >
+            <select
+              name="type"
+              id="item-type"
+              value={this.state.data.type}
+              onChange={this._onChangeSimpleValue.bind(this, "type")}
+            >
               <option value="unset">Choose a type</option>
               {itemTypeOptions}
             </select>
           </div>
           <div>
-            <label htmlFor="requiredLevel">Required Level to Equip: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />
+            <label htmlFor="requiredLevel">Required Level to Equip: </label>
+            <input
+              name="requiredLevel"
+              type="number"
+              placeholder="Required Level"
+              value={this.state.data.requiredLevel}
+              onChange={this._onChangeSimpleValue.bind(this, "requiredLevel")}
+            />
           </div>
           <div className="usableBy">
             <span className="usableText">Usable by: </span> {classRadios}
@@ -252,74 +311,164 @@ class EditDialog extends React.Component {
           </div>
         </div>
       );
-    } else if (this.state.data.classification === ItemClassification.CONSUMABLE) {
+    } else if (
+      this.state.data.classification === ItemClassification.CONSUMABLE
+    ) {
       classSpecificFields = (
         <div>
           <div>
-            <label htmlFor="stackSize">Stack Size: </label><input name="stackSize" type="number" placeholder="Stack Size" value={this.state.data.stackSize} onChange={this._onChangeSimpleValue.bind(this, 'stackSize')} />
+            <label htmlFor="stackSize">Stack Size: </label>
+            <input
+              name="stackSize"
+              type="number"
+              placeholder="Stack Size"
+              value={this.state.data.stackSize}
+              onChange={this._onChangeSimpleValue.bind(this, "stackSize")}
+            />
           </div>
           <div>
-            <label htmlFor="requiredLevel">Required Level to Use: </label><input name="requiredLevel" type="number" placeholder="Required Level" value={this.state.data.requiredLevel} onChange={this._onChangeSimpleValue.bind(this, 'requiredLevel')} />
+            <label htmlFor="requiredLevel">Required Level to Use: </label>
+            <input
+              name="requiredLevel"
+              type="number"
+              placeholder="Required Level"
+              value={this.state.data.requiredLevel}
+              onChange={this._onChangeSimpleValue.bind(this, "requiredLevel")}
+            />
           </div>
           <div>
-            <label htmlFor="tooltip">Tooltip: </label><input name="tooltip" type="text" placeholder="Tooltip" value={this.state.data.tooltip} onChange={this._onChangeSimpleValue.bind(this, 'tooltip')} />
+            <label htmlFor="tooltip">Tooltip: </label>
+            <input
+              name="tooltip"
+              type="text"
+              placeholder="Tooltip"
+              value={this.state.data.tooltip}
+              onChange={this._onChangeSimpleValue.bind(this, "tooltip")}
+            />
           </div>
           <div>
-            <label htmlFor="spellKey">Spell Key: </label><input name="spellKey" type="text" placeholder="Spell Key" value={this.state.data.spellKey} onChange={this._onChangeSimpleValue.bind(this, 'spellKey')} />
+            <label htmlFor="spellKey">Spell Key: </label>
+            <input
+              name="spellKey"
+              type="text"
+              placeholder="Spell Key"
+              value={this.state.data.spellKey}
+              onChange={this._onChangeSimpleValue.bind(this, "spellKey")}
+            />
           </div>
           <label htmlFor="shouldConsume">Consume on use</label>
-          <input type="checkbox" id="shouldConsume" name="shouldConsume" checked={this.state.data.consume} onChange={this._onChangeSimpleValue.bind(this, 'consume')} />
+          <input
+            type="checkbox"
+            id="shouldConsume"
+            name="shouldConsume"
+            checked={this.state.data.consume}
+            onChange={this._onChangeSimpleValue.bind(this, "consume")}
+          />
         </div>
       );
     } else {
       classSpecificFields = (
         <div>
           <div>
-            <label htmlFor="stackSize">Stack Size: </label><input name="stackSize" type="number" placeholder="Stack Size" value={this.state.data.stackSize} onChange={this._onChangeSimpleValue.bind(this, 'stackSize')} />
+            <label htmlFor="stackSize">Stack Size: </label>
+            <input
+              name="stackSize"
+              type="number"
+              placeholder="Stack Size"
+              value={this.state.data.stackSize}
+              onChange={this._onChangeSimpleValue.bind(this, "stackSize")}
+            />
           </div>
           <div>
-            <label htmlFor="tooltip">Tooltip: </label><input name="tooltip" type="text" placeholder="Tooltip" value={this.state.data.tooltip} onChange={this._onChangeSimpleValue.bind(this, 'tooltip')} />
+            <label htmlFor="tooltip">Tooltip: </label>
+            <input
+              name="tooltip"
+              type="text"
+              placeholder="Tooltip"
+              value={this.state.data.tooltip}
+              onChange={this._onChangeSimpleValue.bind(this, "tooltip")}
+            />
           </div>
         </div>
       );
     }
 
-    let sellText = <span>{' '}(Use -1 for unsellable)</span>;
+    let sellText = <span> (Use -1 for unsellable)</span>;
     if (this.state.data.cost != null) {
-      sellText = this.state.data.cost >= 0 ?
-        <span>{' '}(Sells for {Math.floor(this.state.data.cost / 5)})</span>
-        : <span>{' '}(Unsellable)</span>
+      sellText =
+        this.state.data.cost >= 0 ? (
+          <span> (Sells for {Math.floor(this.state.data.cost / 5)})</span>
+        ) : (
+          <span> (Unsellable)</span>
+        );
     }
 
     return (
       <div className="editDialog">
         <div>
           <label htmlFor="name">Name: </label>
-          <input name="name" type="text" placeholder="Item Name" value={this.state.data.name} onChange={this._onChangeSimpleValue.bind(this, 'name')} />
+          <input
+            name="name"
+            type="text"
+            placeholder="Item Name"
+            value={this.state.data.name}
+            onChange={this._onChangeSimpleValue.bind(this, "name")}
+          />
         </div>
         <div>
           <label htmlFor="rarity">Rarity: </label>
-          <select name="rarity" id="item-type" value={this.state.data.rarity} onChange={this._onChangeSimpleValue.bind(this, 'rarity')}>
+          <select
+            name="rarity"
+            id="item-type"
+            value={this.state.data.rarity}
+            onChange={this._onChangeSimpleValue.bind(this, "rarity")}
+          >
             <option value="unset">Choose a rarity</option>
             {itemRarityOptions}
           </select>
         </div>
         <div>
           <div>
-            <label htmlFor="icon">Icon: </label><input name="icon" type="text" placeholder="Icon" value={this.state.data.icon} onChange={this._onChangeSimpleValue.bind(this, 'icon')} />
+            <label htmlFor="icon">Icon: </label>
+            <input
+              name="icon"
+              type="text"
+              placeholder="Icon"
+              value={this.state.data.icon}
+              onChange={this._onChangeSimpleValue.bind(this, "icon")}
+            />
           </div>
         </div>
         <div>
-          <label htmlFor="itemLevel">Item Level: </label><input name="itemLevel" type="number" placeholder="Item Level" value={this.state.data.itemLevel} onChange={this._onChangeSimpleValue.bind(this, 'itemLevel')} />
+          <label htmlFor="itemLevel">Item Level: </label>
+          <input
+            name="itemLevel"
+            type="number"
+            placeholder="Item Level"
+            value={this.state.data.itemLevel}
+            onChange={this._onChangeSimpleValue.bind(this, "itemLevel")}
+          />
         </div>
         <div>
-          <label htmlFor="cost">Cost: </label><input name="cost" type="number" placeholder="Cost" value={this.state.data.cost} onChange={this._onChangeSimpleValue.bind(this, 'cost')} />
+          <label htmlFor="cost">Cost: </label>
+          <input
+            name="cost"
+            type="number"
+            placeholder="Cost"
+            value={this.state.data.cost}
+            onChange={this._onChangeSimpleValue.bind(this, "cost")}
+          />
           {sellText}
         </div>
 
         <div>
           <label htmlFor="classification">Type: </label>
-          <select name="classification" id="item-type" value={this.state.data.classification} onChange={this._onChangeSimpleValue.bind(this, 'classification')}>
+          <select
+            name="classification"
+            id="item-type"
+            value={this.state.data.classification}
+            onChange={this._onChangeSimpleValue.bind(this, "classification")}
+          >
             <option value="unset">Choose a type of item</option>
             {itemClassOptions}
           </select>
@@ -329,7 +478,9 @@ class EditDialog extends React.Component {
 
         <hr />
 
-        <button className="neutral" onClick={this.props.onCancel}>Cancel</button>
+        <button className="neutral" onClick={this.props.onCancel}>
+          Cancel
+        </button>
         <button onClick={this._onSave}>Save</button>
       </div>
     );

@@ -1,8 +1,8 @@
 // Script to read the items csv and convert to lua code for items
 
-const fs = require('fs');
-const convertJson = require('./convert_json');
-const validator = require('./validation.js').validateQuest;
+const fs = require("fs");
+const convertJson = require("./convert_json");
+const validator = require("./validation.js").validateQuest;
 
 const MAPPINGS = {
     // 'slot': {
@@ -35,97 +35,98 @@ const MAPPINGS = {
 };
 
 const COLUMNS = {
-    'name': {
-        name: 'name',
-        type: 'string',
+    name: {
+        name: "name",
+        type: "string"
     },
-    'getQuestFrom': {
-        name: 'getQuestFrom',
-        type: 'int',
+    getQuestFrom: {
+        name: "getQuestFrom",
+        type: "int"
     },
-    'handQuestTo': {
-        name: 'handQuestTo',
-        type: 'int',
+    handQuestTo: {
+        name: "handQuestTo",
+        type: "int"
     },
-    'obtainText': {
-        name: 'obtainText',
-        type: 'string',
+    obtainText: {
+        name: "obtainText",
+        type: "string"
     },
-    'incompleteText': {
-        name: 'incompleteText',
-        type: 'string',
+    incompleteText: {
+        name: "incompleteText",
+        type: "string"
     },
-    'completedText': {
-        name: 'completedText',
-        type: 'string',
+    completedText: {
+        name: "completedText",
+        type: "string"
     },
-    'levelRequirement': {
-        name: 'levelRequirement',
-        type: 'int',
+    levelRequirement: {
+        name: "levelRequirement",
+        type: "int"
     },
-    'rewards': {
-        name: 'rewards',
-        type: 'rewardList',
+    rewards: {
+        name: "rewards",
+        type: "rewardList"
     },
-    'objectives': {
-        name: 'objectives',
-        type: 'sublist',
+    objectives: {
+        name: "objectives",
+        type: "sublist",
         columns: {
-            'type': {
-                name: 'type',
-                type: 'mapping',
-                mapping: 'objectiveType',
+            type: {
+                name: "type",
+                type: "mapping",
+                mapping: "objectiveType"
             },
-            'region': {
-                name: 'rect',
-                type: 'int',
+            region: {
+                name: "rect",
+                type: "int"
             },
-            'amount': {
-                name: 'amount',
-                type: 'int',
+            amount: {
+                name: "amount",
+                type: "int"
             },
-            'itemId': {
-                name: 'itemId',
-                type: 'int',
+            itemId: {
+                name: "itemId",
+                type: "int"
             },
-            'toKill': {
-                name: 'toKill',
-                type: 'int',
-                fn: (x) => 'FourCC(\'' + x + '\')',
+            toKill: {
+                name: "toKill",
+                type: "int",
+                fn: x => "FourCC('" + x + "')"
             },
-            'name': {
-                name: 'name',
-                type: 'string',
+            name: {
+                name: "name",
+                type: "string"
             },
-            'verb': {
-                name: 'verb',
-                type: 'string',
+            verb: {
+                name: "verb",
+                type: "string"
             },
-            'verbPast': {
-                name: 'verbPast',
-                type: 'string',
-            },
-        },
-        mappings: {
-            'objectiveType': {
-                'Kill': 'TYPE.KILL',
-                'Gather': 'TYPE.ITEM',
-                'Discover': 'TYPE.DISCOVER',
+            verbPast: {
+                name: "verbPast",
+                type: "string"
             }
         },
+        mappings: {
+            objectiveType: {
+                Kill: "TYPE.KILL",
+                Gather: "TYPE.ITEM",
+                Discover: "TYPE.DISCOVER"
+            }
+        }
     },
-    'prerequisites': {
-        name: 'prerequisites',
-        type: 'intlist',
-    },
+    prerequisites: {
+        name: "prerequisites",
+        type: "intlist"
+    }
 };
 
-const input = fs.readFileSync('../json/quests.json', {encoding: 'utf8'});
+const input = fs.readFileSync("../json/quests.json", { encoding: "utf8" });
 const parsed = JSON.parse(input);
 
 let finalResult = convertJson(parsed, COLUMNS, MAPPINGS, validator);
 
-finalResult = `
+finalResult =
+    `
 
 local TYPE = {
     KILL = {},
@@ -134,11 +135,11 @@ local TYPE = {
 }
 
 ` +
-    'function getQuests() \n' +
-    'return {\n' +
+    "function getQuests() \n" +
+    "return {\n" +
     finalResult +
-    '}\n' +
-    'end\n' +
-    'return {getQuests = getQuests, TYPE=TYPE}';
+    "}\n" +
+    "end\n" +
+    "return {getQuests = getQuests, TYPE=TYPE}";
 
-fs.writeFileSync('../gen/quests/quests.lua', finalResult);
+fs.writeFileSync("../gen/quests/quests.lua", finalResult);

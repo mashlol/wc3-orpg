@@ -1,113 +1,115 @@
 // Script to read the items csv and convert to lua code for items
 
-const fs = require('fs');
-const convertJson = require('./convert_json');
-const itemValidator = require('./validation.js').validateItem;
+const fs = require("fs");
+const convertJson = require("./convert_json");
+const itemValidator = require("./validation.js").validateItem;
 
 const MAPPINGS = {
-    'slot': {
-        'Helmet': 'equipment.SLOT.HELMET',
-        'Necklace': 'equipment.SLOT.NECK',
-        'Shoulders': 'equipment.SLOT.SHOULDERS',
-        'Chest': 'equipment.SLOT.CHEST',
-        'Back': 'equipment.SLOT.BACK',
-        'Gloves': 'equipment.SLOT.HANDS',
-        'Pants': 'equipment.SLOT.LEGS',
-        'Feet': 'equipment.SLOT.FEET',
-        'Ring': 'equipment.SLOT.RING',
-        'Trinket': 'equipment.SLOT.TRINKET',
-        '1H Weapon': 'equipment.SLOT.WEAPON',
-        '2H Weapon': 'equipment.SLOT.WEAPON',
-        'Off-hand': 'equipment.SLOT.OFFHAND',
+    slot: {
+        Helmet: "equipment.SLOT.HELMET",
+        Necklace: "equipment.SLOT.NECK",
+        Shoulders: "equipment.SLOT.SHOULDERS",
+        Chest: "equipment.SLOT.CHEST",
+        Back: "equipment.SLOT.BACK",
+        Gloves: "equipment.SLOT.HANDS",
+        Pants: "equipment.SLOT.LEGS",
+        Feet: "equipment.SLOT.FEET",
+        Ring: "equipment.SLOT.RING",
+        Trinket: "equipment.SLOT.TRINKET",
+        "1H Weapon": "equipment.SLOT.WEAPON",
+        "2H Weapon": "equipment.SLOT.WEAPON",
+        "Off-hand": "equipment.SLOT.OFFHAND"
     },
-    'rarity': {
-        'Common': 'RARITY.COMMON',
-        'Uncommon': 'RARITY.UNCOMMON',
-        'Rare': 'RARITY.RARE',
-        'Epic': 'RARITY.EPIC',
-        'Legendary': 'RARITY.LEGENDARY',
-        'Divine': 'RARITY.DIVINE',
+    rarity: {
+        Common: "RARITY.COMMON",
+        Uncommon: "RARITY.UNCOMMON",
+        Rare: "RARITY.RARE",
+        Epic: "RARITY.EPIC",
+        Legendary: "RARITY.LEGENDARY",
+        Divine: "RARITY.DIVINE"
     },
-    'type': {
-        'Equipment': 'TYPE.EQUIPMENT',
-        'Consumable': 'TYPE.CONSUMABLE',
-        'Trash': 'TYPE.TRASH',
-        'Quest Item': 'TYPE.QUEST',
-        'Crafting Material': 'TYPE.CRAFTING',
-    },
+    type: {
+        Equipment: "TYPE.EQUIPMENT",
+        Consumable: "TYPE.CONSUMABLE",
+        Trash: "TYPE.TRASH",
+        "Quest Item": "TYPE.QUEST",
+        "Crafting Material": "TYPE.CRAFTING"
+    }
 };
 
 const COLUMNS = {
-    'name': {
-        name: 'name',
-        type: 'string',
+    name: {
+        name: "name",
+        type: "string"
     },
-    'icon': {
-        name: 'icon',
-        type: 'string',
-        fn: (x) => x.replace(/\\/g, '\\\\')
+    icon: {
+        name: "icon",
+        type: "string",
+        fn: x => x.replace(/\\/g, "\\\\")
     },
-    'type': {
-        name: 'slot',
-        type: 'mapping',
-        mapping: 'slot',
+    type: {
+        name: "slot",
+        type: "mapping",
+        mapping: "slot"
     },
-    'requiredLevel': {
-        name: 'requiredLevel',
-        type: 'int',
+    requiredLevel: {
+        name: "requiredLevel",
+        type: "int"
     },
-    'rarity': {
-        name: 'rarity',
-        type: 'mapping',
-        mapping: 'rarity',
+    rarity: {
+        name: "rarity",
+        type: "mapping",
+        mapping: "rarity"
     },
-    'itemLevel': {
-        name: 'itemLevel',
-        type: 'int',
+    itemLevel: {
+        name: "itemLevel",
+        type: "int"
     },
-    'cost': {
-        name: 'cost',
-        type: 'int',
+    cost: {
+        name: "cost",
+        type: "int"
     },
-    'usable': {
-        name: 'usableClasses',
-        type: 'classList',
+    usable: {
+        name: "usableClasses",
+        type: "classList"
     },
-    'stats': {
-        name: 'stats',
-        type: 'statList',
+    stats: {
+        name: "stats",
+        type: "statList"
     },
-    'classification': {
-        name: 'type',
-        type: 'mapping',
-        mapping: 'type',
+    classification: {
+        name: "type",
+        type: "mapping",
+        mapping: "type"
     },
-    'stackSize': {
-        name: 'stackSize',
-        type: 'int',
+    stackSize: {
+        name: "stackSize",
+        type: "int"
     },
-    'tooltip': {
-        name: 'text',
-        type: 'string',
+    tooltip: {
+        name: "text",
+        type: "string"
     },
-    'spellKey': {
-        name: 'spell',
-        type: 'string',
+    spellKey: {
+        name: "spell",
+        type: "string"
     },
-    'consume': {
-        name: 'consume',
-        type: 'int',
-        fn: x => x === 'on' ? 'true' : 'false',
-    },
+    consume: {
+        name: "consume",
+        type: "int",
+        fn: x => (x === "on" ? "true" : "false")
+    }
 };
 
-const input = fs.readFileSync('../json/items.json', {encoding: 'utf8'});
+const input = fs.readFileSync("../json/items.json", { encoding: "utf8" });
 const parsed = JSON.parse(input);
 
 let finalResult = convertJson(parsed, COLUMNS, MAPPINGS, itemValidator);
 
-finalResult = "local equipment = require('src/items/equipment.lua')\n" +
-    "local stats = require('src/stats.lua')\n" + `
+finalResult =
+    "local equipment = require('src/items/equipment.lua')\n" +
+    "local stats = require('src/stats.lua')\n" +
+    `
 local RARITY = {
     COMMON = {
         color = '|cffffffff',
@@ -150,8 +152,8 @@ local TYPE = {
 }
 
 ` +
-    'local ITEMS = {\n' +
+    "local ITEMS = {\n" +
     finalResult +
-    '}\n return {ITEMS=ITEMS, TYPE=TYPE}\n';
+    "}\n return {ITEMS=ITEMS, TYPE=TYPE}\n";
 
-fs.writeFileSync('../gen/items/items.lua', finalResult);
+fs.writeFileSync("../gen/items/items.lua", finalResult);

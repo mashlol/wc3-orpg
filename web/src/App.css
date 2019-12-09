@@ -46,7 +46,7 @@
     left: 50%;
     margin-left: -520px;
     padding: 20px;
-    background: rgba(255,255,255,0.95);
+    background: rgba(255, 255, 255, 0.95);
     max-height: calc(100% - 140px);
     overflow-y: auto;
 }
@@ -141,7 +141,10 @@ button.neutral:hover {
     background: #709cb6;
 }
 
-input[type=text], input[type=number], select, textarea {
+input[type="text"],
+input[type="number"],
+select,
+textarea {
     width: 350px;
     height: 36px;
     padding: 0 5px;
@@ -149,7 +152,10 @@ input[type=text], input[type=number], select, textarea {
     margin-bottom: 5px;
 }
 
-.objective input[type=text], .objective input[type=number], .objective select, .objective textarea {
+.objective input[type="text"],
+.objective input[type="number"],
+.objective select,
+.objective textarea {
     width: 130px;
     margin-right: 4px;
 }
@@ -184,7 +190,7 @@ label {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0,0,0,0.8);
+    background: rgba(0, 0, 0, 0.8);
 }
 
 .Uncommon {
