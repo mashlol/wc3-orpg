@@ -119,7 +119,7 @@
     "rarity": "Common",
     "stackSize": 10,
     "tooltip": "The meat of a turtle...|nI think Fred wants this.",
-    "cost": 20
+    "cost": "5"
   },
   "10": {
     "classification": "Equipment",
@@ -896,7 +896,7 @@
     "requiredLevel": 2,
     "itemLevel": 4,
     "rarity": "Common",
-    "cost": 0,
+    "cost": "16",
     "stats": {
       "Attack Damage": 3
     }
@@ -1960,7 +1960,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNCR_Metal_ClawS.blp",
     "itemLevel": "7",
-    "cost": "25",
+    "cost": "11",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "These claws may fit well for a souvenir."
@@ -2118,5 +2118,43 @@
     "classification": "Quest Item",
     "stackSize": "1",
     "tooltip": "When did it become mature to take someone else's letter?"
+  },
+  "136": {
+    "name": "Useful Wolf Fur",
+    "rarity": "Common",
+    "icon": "war3mapImported\\BTNINV_Misc_Pelt_Boar_01.blp",
+    "itemLevel": "1",
+    "cost": "5",
+    "classification": "Quest Item",
+    "stackSize": "6",
+    "tooltip": "Could help you through a cold winter."
+  },
+  "137": {
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNCloak.blp",
+    "name": "Freydell Fur Cloak",
+    "rarity": "Common",
+    "itemLevel": "3",
+    "cost": "14",
+    "classification": "Equipment",
+    "type": "Back",
+    "requiredLevel": "2",
+    "usable": [],
+    "stats": {
+      "Healing Received": "1",
+      "HP Regen": "1",
+      "Raw HP": "2",
+      "Attack Damage": "1",
+      "Healing": "1",
+      "Critical Damage": "1"
+    }
+  },
+  "138": {
+    "name": "Harrion's Fur Cloak",
+    "rarity": "Common",
+    "icon": "ReplaceableTextures\\CommandButtons\\BTNCloak.blp",
+    "itemLevel": "1",
+    "cost": "4",
+    "classification": "Quest Item",
+    "stackSize": "1"
   }
 }
