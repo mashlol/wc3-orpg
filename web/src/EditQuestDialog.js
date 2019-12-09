@@ -242,15 +242,15 @@ class EditQuestDialog extends React.Component {
     });
     const validUnitIds = Array.from(new Set(unitIds));
 
-    const validUnitOptions = Object.values(validUnits).map(unitGlobal => {
+    const validUnitOptions = Object.values(validUnits).sort().map(unitGlobal => {
       return <option key={unitGlobal} value={unitGlobal}>{unitGlobal}</option>
     });
 
-    const validUnitIdOptions = Object.values(validUnitIds).map(unitId => {
+    const validUnitIdOptions = Object.values(validUnitIds).sort().map(unitId => {
       return <option key={unitId} value={unitId}>{unitId}</option>
     });
 
-    const validItemOptions = Object.entries(this.props.existingItems).map(entry => {
+    const validItemOptions = Object.entries(this.props.existingItems).sort((a, b) => a[1].name.localeCompare(b[1].name)).map(entry => {
       const itemId = entry[0];
       const itemName = entry[1].name;
       return <option key={itemId} value={itemId}>{itemName}</option>
