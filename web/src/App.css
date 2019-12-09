@@ -72,7 +72,7 @@ ul {
     padding: 8px;
 }
 
-.app.items {
+.app.items, .app.quests {
     margin-top: 96px;
 }
 

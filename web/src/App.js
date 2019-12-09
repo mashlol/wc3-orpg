@@ -550,7 +550,32 @@ class App extends React.Component {
       </div>
     );
 
-    const existingQuestList = Object.entries(this.state.existingQuests).map(
+    const questFilters = (
+      <div className="filters">
+        <input
+          ref={this._searchRef}
+          placeholder="Filter by name"
+          type="text"
+          value={this.state.questNameFilter}
+          onChange={this._onChangeFilter.bind(this, "questNameFilter")}
+        />
+      </div>
+    );
+
+    const existingQuestList = Object.entries(this.state.existingQuests).filter(questInfo => {
+      const nameFilter = this.state.questNameFilter;
+
+      if (
+        nameFilter != null &&
+        nameFilter != "" &&
+        questInfo[1].name != null &&
+        !questInfo[1].name.toLowerCase().includes(nameFilter.toLowerCase())
+      ) {
+        return false;
+      }
+
+      return true;
+    }).map(
       questInfo => {
         const validity = questValidator(questInfo[1]);
         return (
@@ -640,7 +665,8 @@ class App extends React.Component {
     } else if (this.state.tab === "quests") {
       contents = (
         <div>
-          <div className="app">
+          <div className="app quests">
+            {questFilters}
             {existingQuestList}
             {addQuestButton}
           </div>
