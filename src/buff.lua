@@ -395,15 +395,29 @@ local BUFF_INFO = {
 }
 
 local IMMUNE_UNIT_TYPES = {
+    -- Troll High Priest
     [FourCC('mine')] = {
         stunnable = false,
         slowable = true,
     },
+    -- Yeti
     [FourCC('h002')] = {
         stunnable = false,
         slowable = true,
     },
+    -- Troll final boss
     [FourCC('over')] = {
+        stunnable = false,
+        slowable = false,
+    },
+
+    -- Ratmaster
+    [FourCC('cubm')] = {
+        stunnable = false,
+        slowable = true,
+    },
+    -- Dreadsorrow
+    [FourCC('culb')] = {
         stunnable = false,
         slowable = false,
     },

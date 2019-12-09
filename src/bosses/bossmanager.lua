@@ -1,13 +1,19 @@
-local Turtle = require('src/bosses/turtle.lua')
-local Wolf = require('src/bosses/wolf.lua')
-local TrollPriest = require('src/bosses/trollpriest.lua')
-local Yeti = require('src/bosses/yeti.lua')
-local TrollWarlord = require('src/bosses/trollwarlord.lua')
 local hero = require('src/hero.lua')
 local threat = require('src/threat.lua')
 local collision = require('src/collision.lua')
 
+local Turtle = require('src/bosses/turtle.lua')
+local Wolf = require('src/bosses/wolf.lua')
+
+local TrollPriest = require('src/bosses/trollpriest.lua')
+local Yeti = require('src/bosses/yeti.lua')
+local TrollWarlord = require('src/bosses/trollwarlord.lua')
+
+local Ratmaster = require('src/bosses/ratmaster.lua')
+local Dreadsorrow = require('src/bosses/dreadsorrow.lua')
+
 local ALL_BOSS_CLASSES = {
+    -- WORLD BOSSES
     TURTLE = Turtle:new{
         bossUnitId = FourCC('hbos'),
         startX = -1135,
@@ -22,6 +28,8 @@ local ALL_BOSS_CLASSES = {
         facing = 165,
         respawnable = false,
     },
+
+    -- ICY CAVERNS
     TROLL_PRIEST = TrollPriest:new{
         bossUnitId = FourCC('mine'),
         startX = 30371,
@@ -41,6 +49,22 @@ local ALL_BOSS_CLASSES = {
         startX = 28248,
         startY = -29136,
         facing = 128,
+        respawnable = false,
+    },
+
+    -- IRONWELL SEWERS
+    RATMASTER = Ratmaster:new{
+        bossUnitId = FourCC('cubm'),
+        startX = -26681,
+        startY = 29305,
+        facing = 6,
+        respawnable = false,
+    },
+    DREADSORROW = Dreadsorrow:new{
+        bossUnitId = FourCC('culb'),
+        startX = -22875,
+        startY = 27815,
+        facing = 185,
         respawnable = false,
     },
 }
@@ -64,7 +88,19 @@ function Phase:addTimedEvent(interval, func)
     })
 end
 
+function Phase:onStart(func)
+    self.onStartCallback = func
+end
+
+function Phase:onFinish(func)
+    self.onFinishCallback = func
+end
+
 function Phase:startPhase()
+    print('starting a phase')
+    if self.onStartCallback then
+        self.onStartCallback()
+    end
     for _, event in pairs(self.timedEvents) do
         local timer = CreateTimer()
         TimerStart(timer, event.interval, true, event.func)
@@ -73,6 +109,9 @@ function Phase:startPhase()
 end
 
 function Phase:endPhase()
+    if self.onFinishCallback then
+        self.onFinishCallback()
+    end
     for _, timer in pairs(self.timers) do
         DestroyTimer(timer)
     end
@@ -239,6 +278,7 @@ function Context:onBossEngaged()
 
     print(self.cls:getName() .. " engaged...")
     DestroyTrigger(self.startFightTrigger)
+    print('destroed engage trigger')
 
     self.endFightTrigger = CreateTrigger()
 
@@ -296,6 +336,7 @@ function Context:respawnBoss()
 end
 
 function Context:resetFight()
+    print('resetfight called')
     self:cleanupFight()
 
     self.startFightTrigger = CreateTrigger()

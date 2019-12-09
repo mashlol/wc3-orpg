@@ -44,9 +44,9 @@ local debug0 = function()
 
     -- animNum = animNum - 0.01
 
-    backpack.addItemIdToBackpack(playerId, 49)
+    -- backpack.addItemIdToBackpack(playerId, 49)
 
-    -- SetUnitAnimationByIndex(hero, itemId)
+    SetUnitAnimationByIndex(hero, itemId)
 
     print(itemId)
 

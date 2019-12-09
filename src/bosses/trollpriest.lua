@@ -56,7 +56,6 @@ function TrollPriest:throwBomb()
         }
 
         TimerStart(CreateTimer(), 0.6, false, function()
-            print('doing damage now')
             DestroyTimer(GetExpiredTimer())
             local collidedUnits = collision.getAllCollisions(bombV, 150)
             for _, unit in pairs(collidedUnits) do

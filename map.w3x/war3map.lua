@@ -165,6 +165,10 @@ gg_unit_n00N_0836 = nil
 gg_unit_n00O_0838 = nil
 gg_unit_n00P_0839 = nil
 gg_dest_YTcx_0977 = nil
+gg_dest_DTg7_14262 = nil
+gg_dest_DTg7_14263 = nil
+gg_dest_DTg7_14264 = nil
+gg_dest_DTg7_14265 = nil
 function InitGlobals()
 end
 
@@ -173,6 +177,10 @@ function CreateAllDestructables()
     local d
     local t
     local life
+    gg_dest_DTg7_14262 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -25792.0, 29568.0, 0.000, 0.900, 0, FourCC("DTg7"))
+    gg_dest_DTg7_14263 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -25792.0, 29056.0, 0.000, 0.900, 0, FourCC("DTg7"))
+    gg_dest_DTg7_14264 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 28032.0, 0.000, 0.900, 0, FourCC("DTg7"))
+    gg_dest_DTg7_14265 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 27520.0, 0.000, 0.900, 0, FourCC("DTg7"))
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
 end
 
@@ -615,13 +623,13 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24366.3, 30945.4, 256.424, FourCC("culn"))
     u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -25877.1, 28070.0, 211.488, FourCC("ebru"))
     u = BlzCreateUnitWithSkin(p, FourCC("culn"), -25735.8, 28040.4, 203.903, FourCC("culn"))
-    u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -24517.7, 27533.3, 185.870, FourCC("ebru"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -24572.9, 27583.5, 185.870, FourCC("ebru"))
     u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -26460.3, 26743.5, 48.486, FourCC("ebru"))
-    u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -24534.9, 27705.9, 201.616, FourCC("ebru"))
+    u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -24590.2, 27756.1, 201.616, FourCC("ebru"))
     u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -26327.6, 26861.1, 216.032, FourCC("ebru"))
-    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24376.7, 27450.1, 178.450, FourCC("culn"))
-    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24386.2, 27647.1, 193.374, FourCC("culn"))
-    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24413.6, 27796.0, 204.465, FourCC("culn"))
+    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24432.0, 27500.3, 178.450, FourCC("culn"))
+    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24441.5, 27697.3, 193.374, FourCC("culn"))
+    u = BlzCreateUnitWithSkin(p, FourCC("culn"), -24468.9, 27846.2, 204.465, FourCC("culn"))
     u = BlzCreateUnitWithSkin(p, FourCC("ebru"), -25947.4, 27936.1, 202.840, FourCC("ebru"))
     u = BlzCreateUnitWithSkin(p, FourCC("erat"), -26373.5, 29584.8, 349.454, FourCC("erat"))
     u = BlzCreateUnitWithSkin(p, FourCC("erat"), -26355.2, 29309.5, 6.901, FourCC("erat"))
@@ -726,8 +734,6 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("fLOW"), -9004.5, -7980.5, 211.548, FourCC("fLOW"))
     u = BlzCreateUnitWithSkin(p, FourCC("fLOW"), -6470.8, -9807.9, 80.697, FourCC("fLOW"))
     u = BlzCreateUnitWithSkin(p, FourCC("fLOW"), -6452.1, -9847.2, 80.697, FourCC("fLOW"))
-    u = BlzCreateUnitWithSkin(p, FourCC("culb"), -22866.8, 27801.9, 185.004, FourCC("culb"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cubm"), -26667.4, 29298.9, 6.205, FourCC("cubm"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), -236.5, -5595.4, 76.439, FourCC("hmbs"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), -813.1, -5930.4, 76.439, FourCC("hmbs"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), -244.2, -6492.0, 76.439, FourCC("hmbs"))
@@ -1273,6 +1279,10 @@ function InitTrig_Untitled_Trigger_001()
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00P_0839, EVENT_UNIT_DEATH)
     TriggerRegisterUnitEvent(gg_trg_Untitled_Trigger_001, gg_unit_n00Q_0841, EVENT_UNIT_DEATH)
     TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_YTcx_0977)
+    TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_DTg7_14262)
+    TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_DTg7_14263)
+    TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_DTg7_14264)
+    TriggerRegisterDeathEvent(gg_trg_Untitled_Trigger_001, gg_dest_DTg7_14265)
     TriggerAddAction(gg_trg_Untitled_Trigger_001, Trig_Untitled_Trigger_001_Actions)
 end
 
