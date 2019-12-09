@@ -768,7 +768,7 @@
   "34": {
     "objectives": [],
     "name": "Insight into the Future",
-    "getQuestFrom": "gg_unit_nfoh_0160",
+    "getQuestFrom": "gg_unit_life_0858",
     "handQuestTo": "gg_unit_n00T_0859",
     "levelRequirement": "1",
     "obtainText": "as the dream fades you get a glimpse of a fountain south of Freydell Village.",
@@ -865,7 +865,9 @@
         "134": "1"
       }
     },
-    "prerequisites": []
+    "prerequisites": [
+      "37"
+    ]
   },
   "40": {
     "objectives": [
@@ -1109,7 +1111,9 @@
     "rewards": {
       "exp": "8",
       "gold": "0",
-      "items": {}
+      "items": {
+        "136": "6"
+      }
     }
   },
   "51": {
@@ -1125,12 +1129,13 @@
     "handQuestTo": "gg_unit_n00S_0857",
     "levelRequirement": "1",
     "obtainText": "Can you head to Grydna in Freydell Village and ask if she could make the Fur Cloak for me?",
-    "incompleteText": "You should bring six Fur Cloaks to the village.",
+    "incompleteText": "So you say Harrion wanted you to tell me to make him a Fur Cloak? I don't know what you think, but shouldn't you be carrying some Fur, for me to be able to make you a Fur Cloak?",
     "completedText": "Of course he wants me to make it for him, that lazy husband... Alright, seems you have enough for two, I can make one for you too for free.",
     "rewards": {
       "exp": "6",
       "gold": "0",
       "items": {
+        "136": 1,
         "137": 1
       }
     },
@@ -1150,8 +1155,8 @@
     "getQuestFrom": "gg_unit_n00S_0857",
     "handQuestTo": "gg_unit_n00R_0108",
     "levelRequirement": "1",
-    "obtainText": "Right... Head back to my lazy husband with this masterpiece. I am sure he will reward you more than me.",
-    "incompleteText": "Did my husband like his new cloak? Have you given it yet?",
+    "obtainText": "Right... Head back to my lazy husband with this masterpiece. I am sure he will pay you some coins for your troubles.",
+    "incompleteText": "Where is my cloak?",
     "completedText": "Oh, that is a masterpiece! Thank you, stranger! I will thank my lovely wife later!\n\nHere is the money I promised you!",
     "rewards": {
       "exp": "9",
@@ -1175,9 +1180,9 @@
     "getQuestFrom": "gg_unit_n00U_0863",
     "handQuestTo": "gg_unit_n00U_0863",
     "levelRequirement": "7",
-    "obtainText": "I have come from the Elven Lands to the North. I have come here to make sure these trolls won't have supplies during this cold period.\nSadly... Trolls can recognize the smell of us Elves from the North, even in the coldest temperature.\n\nWhat I mean is, If I go in, they would all know I am there. Something which is too dangerous for a lone elf to let happen. They can't smell you, can you destroy their Supply Huts for me?",
+    "obtainText": "I have come from the Elven Lands to the North. I have come here to make sure these trolls won't have supplies during this cold period.\nSadly... Trolls can recognize the smell of us Northern Elves, even in the coldest temperature.\n\nWhat I mean is, If I go in, they would all know I am there. Something which is too dangerous for a lone elf to let happen. They can't smell you, so can you destroy their Supply Huts for me?",
     "incompleteText": "I must be sure the job here is done. Have you destoyed their Supply Huts?",
-    "completedText": "Me and the Elves of the north are thankful. Let them Ice Trolls starve.",
+    "completedText": "Me and the Elves of the North are thankful. Let them Ice Trolls starve.",
     "rewards": {
       "exp": "23",
       "gold": "6",

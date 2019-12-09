@@ -2163,18 +2163,6 @@ STRING 387
 Harrion Hipster
 }
 
-STRING 388
-// Units: h00I (Freydell Wolf), Tip (Tooltip - Basic)
-{
-Owl
-}
-
-STRING 389
-// Units: h00I (Freydell Wolf), Name (Name)
-{
-Freydell Wolf
-}
-
 STRING 391
 // Units: n00S (Grydna Hipster), Ubertip (Tooltip - Extended)
 {
@@ -2215,5 +2203,23 @@ STRING 397
 // Units: n00U (Laniah the Spy), Name (Name)
 {
 Laniah the Spy
+}
+
+STRING 398
+// Units: h00J (Freydell Timber Wolf), Tip (Tooltip - Basic)
+{
+Wolf
+}
+
+STRING 399
+// Units: h00J (Freydell Timber Wolf), Name (Name)
+{
+Freydell Timber Wolf
+}
+
+STRING 400
+// Doodads: D02W (Lion Statue), Name (Name)
+{
+Lion Statue
 }
 

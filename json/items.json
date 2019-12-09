@@ -139,7 +139,7 @@
     "name": "Giant Wolf Helmet",
     "icon": "war3mapImported\\BTNCompanionWolfDire.blp",
     "type": "Helmet",
-    "requiredLevel": 12,
+    "requiredLevel": "14",
     "itemLevel": 19,
     "rarity": "Common",
     "cost": 0,
@@ -170,7 +170,7 @@
       "Stormfist"
     ],
     "type": "Helmet",
-    "requiredLevel": 12,
+    "requiredLevel": "14",
     "itemLevel": 19,
     "rarity": "Common",
     "cost": 0,
@@ -187,7 +187,7 @@
       "Ivanov"
     ],
     "type": "Helmet",
-    "requiredLevel": 12,
+    "requiredLevel": "13",
     "itemLevel": 19,
     "rarity": "Common",
     "cost": 0,
@@ -323,7 +323,7 @@
       "Ivanov"
     ],
     "type": "Shoulders",
-    "requiredLevel": 12,
+    "requiredLevel": "13",
     "itemLevel": 19,
     "rarity": "Common",
     "cost": "0",
@@ -342,7 +342,7 @@
       "Stormfist"
     ],
     "type": "Shoulders",
-    "requiredLevel": 12,
+    "requiredLevel": "13",
     "itemLevel": 19,
     "rarity": "Common",
     "cost": 0,
@@ -361,7 +361,7 @@
       "Stormfist"
     ],
     "type": "Shoulders",
-    "requiredLevel": "15",
+    "requiredLevel": "17",
     "itemLevel": 29,
     "rarity": "Uncommon",
     "cost": 0,
@@ -756,7 +756,7 @@
       "Stormfist"
     ],
     "type": "Feet",
-    "requiredLevel": 17,
+    "requiredLevel": "15",
     "itemLevel": 29,
     "rarity": "Uncommon",
     "cost": 0,
@@ -1776,7 +1776,7 @@
   "108": {
     "name": "Sewer Shoulders",
     "rarity": "Uncommon",
-    "requiredLevel": "22",
+    "requiredLevel": "23",
     "itemLevel": "30",
     "classification": "Equipment",
     "usable": [
@@ -1798,7 +1798,7 @@
   "109": {
     "name": "Stiff Sewer Rags",
     "rarity": "Uncommon",
-    "requiredLevel": "22",
+    "requiredLevel": "23",
     "itemLevel": "35",
     "classification": "Equipment",
     "type": "Shoulders",
@@ -1821,7 +1821,7 @@
     "name": "Rat Fur Shoulders",
     "icon": "war3imported\\BTNBerserkersShoulder.blp",
     "rarity": "Uncommon",
-    "requiredLevel": "22",
+    "requiredLevel": "23",
     "itemLevel": "40",
     "classification": "Equipment",
     "type": "Shoulders",
