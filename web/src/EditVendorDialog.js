@@ -1,4 +1,5 @@
 import React from "react";
+import SelectSearch from "react-select-search";
 
 const fs = require("fs");
 
@@ -44,18 +45,15 @@ class EditVendorDialog extends React.Component {
 
   _onItemChanged = (oldKey, event) => {
     const oldData = [...this.state.data];
-    oldData[oldKey] = event.target.value;
+    oldData[oldKey] = event.value;
     this.setState({
       data: oldData
     });
   };
 
   _onItemRemoved = key => {
-    console.log("removing elemnt", key, this.state.data);
     const oldData = [...this.state.data];
-    console.log(oldData);
     oldData.splice(key, 1);
-    console.log(oldData);
     this.setState({
       data: oldData
     });
@@ -63,7 +61,7 @@ class EditVendorDialog extends React.Component {
 
   _onChangeUnit = event => {
     this.setState({
-      id: event.target.value
+      id: event.value
     });
   };
 
@@ -75,12 +73,8 @@ class EditVendorDialog extends React.Component {
       new Set(luaContents.match(/gg_unit_[a-zA-Z0-9]{4}_\d{4}/g))
     );
 
-    const validUnitOptions = validUnits.map(unitId => {
-      return (
-        <option key={unitId} value={unitId}>
-          {unitId}
-        </option>
-      );
+   const validUnitOptions = validUnits.sort().map(unit => {
+      return { value: unit, name: unit };
     });
 
     const validItemOptions = Object.entries(this.props.existingItems)
@@ -88,20 +82,18 @@ class EditVendorDialog extends React.Component {
       .map(entry => {
         const itemId = entry[0];
         const itemName = entry[1].name;
-        return (
-          <option key={itemId} value={itemId}>
-            {itemName}
-          </option>
-        );
+        return { value: itemId, name: itemName };
       });
 
     const itemRows = this.state.data.map((val, idx) => {
       return (
         <div className="dropTableRow">
-          <select value={val} onChange={this._onItemChanged.bind(this, idx)}>
-            <option value="none">None</option>
-            {validItemOptions}
-          </select>
+          <SelectSearch
+            options={validItemOptions}
+            value={val}
+            onChange={this._onItemChanged.bind(this, idx)}
+            placeholder="Choose an item..."
+          />
           <button
             className="destructive"
             onClick={this._onItemRemoved.bind(this, idx)}
@@ -115,10 +107,12 @@ class EditVendorDialog extends React.Component {
     return (
       <div className="editDialog">
         <div>
-          <select value={this.state.id} onChange={this._onChangeUnit}>
-            <option value="unset">Choose a unit to be the vendor</option>
-            {validUnitOptions}
-          </select>
+          <SelectSearch
+            options={validUnitOptions}
+            value={this.state.id}
+            onChange={this._onChangeUnit}
+            placeholder="Choose a unit to be the vendor"
+          />
         </div>
         {itemRows}
 

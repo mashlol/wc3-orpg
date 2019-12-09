@@ -1,4 +1,5 @@
 import React from "react";
+import SelectSearch from "react-select-search";
 
 const fs = require("fs");
 
@@ -88,18 +89,17 @@ class EditQuestDialog extends React.Component {
   _getSelectForPrerequisite(selectedOption, onChanged) {
     const prerequisiteOptions = Object.entries(this.props.existingQuests).map(
       entry => {
-        return (
-          <option key={entry[0]} value={entry[0]}>
-            {entry[1].name}
-          </option>
-        );
+        return {value: entry[0], name: entry[1].name};
       }
     );
 
     return (
-      <select value={selectedOption} onChange={onChanged}>
-        {prerequisiteOptions}
-      </select>
+      <SelectSearch
+        options={prerequisiteOptions}
+        value={selectedOption}
+        onChange={onChanged}
+        placeholder="Choose a quest..."
+      />
     );
   }
 
@@ -109,7 +109,7 @@ class EditQuestDialog extends React.Component {
 
   _onChangeSimpleValue = (key, event) => {
     const oldData = Object.assign({}, this.state.data);
-    oldData[key] = event.target.value;
+    oldData[key] = event.value || event.target.value;
     this.setState({
       data: oldData
     });
@@ -140,7 +140,7 @@ class EditQuestDialog extends React.Component {
   _onObjectiveChanged = (key, field, event) => {
     const oldData = Object.assign({}, this.state.data);
     const oldObjectives = oldData.objectives ? [...oldData.objectives] : [];
-    oldObjectives[key][field] = event.target.value;
+    oldObjectives[key][field] = event.value || event.target.value;
     oldData.objectives = oldObjectives;
     this.setState({
       data: oldData
@@ -160,7 +160,7 @@ class EditQuestDialog extends React.Component {
   _onAddPrerequisite = () => {
     const oldData = Object.assign({}, this.state.data);
     const oldPrereqs = oldData.prerequisites ? [...oldData.prerequisites] : [];
-    oldPrereqs.push(1);
+    oldPrereqs.push("1");
     oldData.prerequisites = oldPrereqs;
     this.setState({
       data: oldData
@@ -170,7 +170,7 @@ class EditQuestDialog extends React.Component {
   _onChangePrerequisite = (key, event) => {
     const oldData = Object.assign({}, this.state.data);
     const oldPrereqs = oldData.prerequisites ? [...oldData.prerequisites] : [];
-    oldPrereqs[key] = event.target.value;
+    oldPrereqs[key] = event.value;
     oldData.prerequisites = oldPrereqs;
     this.setState({
       data: oldData
@@ -224,7 +224,7 @@ class EditQuestDialog extends React.Component {
         : {};
     const oldValue = oldItemRewards[oldKey];
     delete oldItemRewards[oldKey];
-    oldItemRewards[event.target.value] = oldValue;
+    oldItemRewards[event.value] = oldValue;
     oldData.rewards.items = oldItemRewards;
     this.setState({
       data: oldData
@@ -268,21 +268,13 @@ class EditQuestDialog extends React.Component {
     const validUnitOptions = Object.values(validUnits)
       .sort()
       .map(unitGlobal => {
-        return (
-          <option key={unitGlobal} value={unitGlobal}>
-            {unitGlobal}
-          </option>
-        );
+        return {value: unitGlobal, name: unitGlobal};
       });
 
     const validUnitIdOptions = Object.values(validUnitIds)
       .sort()
       .map(unitId => {
-        return (
-          <option key={unitId} value={unitId}>
-            {unitId}
-          </option>
-        );
+        return {value: unitId, name: unitId};
       });
 
     const validItemOptions = Object.entries(this.props.existingItems)
@@ -290,11 +282,7 @@ class EditQuestDialog extends React.Component {
       .map(entry => {
         const itemId = entry[0];
         const itemName = entry[1].name;
-        return (
-          <option key={itemId} value={itemId}>
-            {itemName}
-          </option>
-        );
+        return { value: itemId, name: itemName };
       });
 
     const validRegionOptions = Object.values(validRegions).map(regionGlobal => {
@@ -318,16 +306,12 @@ class EditQuestDialog extends React.Component {
               value={this.state.data.objectives[idx].amount}
               onChange={this._onObjectiveChanged.bind(this, idx, "amount")}
             />
-            <select
-              name="toKill"
-              type="text"
-              placeholder="toKill"
+            <SelectSearch
+              options={validUnitIdOptions}
+              placeholder="Select a unit..."
               value={this.state.data.objectives[idx].toKill}
               onChange={this._onObjectiveChanged.bind(this, idx, "toKill")}
-            >
-              <option value="unset">Choose a unit</option>
-              {validUnitIdOptions}
-            </select>
+            />
             <input
               name="name"
               type="text"
@@ -361,16 +345,12 @@ class EditQuestDialog extends React.Component {
               value={this.state.data.objectives[idx].amount}
               onChange={this._onObjectiveChanged.bind(this, idx, "amount")}
             />
-            <select
-              name="itemId"
-              type="text"
-              placeholder="itemId"
+            <SelectSearch
+              options={validItemOptions}
               value={this.state.data.objectives[idx].itemId}
               onChange={this._onObjectiveChanged.bind(this, idx, "itemId")}
-            >
-              <option value="unset">Choose an item</option>
-              {validItemOptions}
-            </select>
+              placeholder="Choose an item..."
+            />
           </span>
         );
       } else if (entry.type === ObjectiveType.DISCOVER) {
@@ -450,12 +430,12 @@ class EditQuestDialog extends React.Component {
                 rewardInfo[0]
               )}
             />
-            <select
+            <SelectSearch
+              options={validItemOptions}
               value={rewardInfo[0]}
               onChange={this._onChangeItemKey.bind(this, rewardInfo[0])}
-            >
-              {validItemOptions}
-            </select>
+              placeholder="Choose an item..."
+            />
             <button
               className="destructive"
               onClick={this._onDeleteItemReward.bind(this, rewardInfo[0])}
@@ -469,8 +449,9 @@ class EditQuestDialog extends React.Component {
     return (
       <div className="editDialog">
         <div>
-          <label htmlFor="levelRequirement">Quest Name:</label>
+          <label htmlFor="questName">Quest Name:</label>
           <input
+            name="questName"
             type="text"
             placeholder="Quest Name"
             value={this.state.data.name}
@@ -478,26 +459,22 @@ class EditQuestDialog extends React.Component {
           />
         </div>
         <div>
-          <label htmlFor="levelRequirement">Receive Quest From:</label>
-          <select
+          <label htmlFor="getQuestFrom">Receive Quest From:</label>
+          <SelectSearch
+            options={validUnitOptions}
             name="getQuestFrom"
             value={this.state.data.getQuestFrom}
             onChange={this._onChangeSimpleValue.bind(this, "getQuestFrom")}
-          >
-            <option value="unset">Choose a quest giver</option>
-            {validUnitOptions}
-          </select>
+          />
         </div>
         <div>
-          <label htmlFor="levelRequirement">Hand Quest To:</label>
-          <select
+          <label htmlFor="handQuestTo">Hand Quest To:</label>
+          <SelectSearch
+            options={validUnitOptions}
             name="handQuestTo"
             value={this.state.data.handQuestTo}
             onChange={this._onChangeSimpleValue.bind(this, "handQuestTo")}
-          >
-            <option value="unset">Choose who to hand the quest to</option>
-            {validUnitOptions}
-          </select>
+          />
         </div>
         <div>
           <label htmlFor="levelRequirement">Required Level: </label>

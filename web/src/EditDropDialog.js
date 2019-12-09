@@ -1,4 +1,5 @@
 import React from "react";
+import SelectSearch from "react-select-search";
 
 const fs = require("fs");
 
@@ -49,7 +50,7 @@ class EditDropDialog extends React.Component {
   };
 
   _onDropKeyChanged = (oldKey, event) => {
-    const newKey = event.target.value;
+    const newKey = event.value;
     const oldData = Object.assign({}, this.state.data);
     oldData[newKey] = oldData[oldKey];
     delete oldData[oldKey];
@@ -68,7 +69,7 @@ class EditDropDialog extends React.Component {
 
   _onChangeUnitId = event => {
     this.setState({
-      id: event.target.value
+      id: event.value
     });
   };
 
@@ -85,11 +86,7 @@ class EditDropDialog extends React.Component {
     const validUnitIds = Array.from(new Set(unitIds));
 
     const validUnitOptions = validUnitIds.sort().map(unitId => {
-      return (
-        <option key={unitId} value={unitId}>
-          {unitId}
-        </option>
-      );
+      return { value: unitId, name: unitId };
     });
 
     const validItemOptions = Object.entries(this.props.existingItems)
@@ -97,11 +94,7 @@ class EditDropDialog extends React.Component {
       .map(entry => {
         const itemId = entry[0];
         const itemName = entry[1].name;
-        return (
-          <option key={itemId} value={itemId}>
-            {itemName}
-          </option>
-        );
+        return { value: itemId, name: itemName };
       });
 
     let totalWeight = 0;
@@ -112,13 +105,12 @@ class EditDropDialog extends React.Component {
     const dropRows = Object.entries(this.state.data).map(entry => {
       return (
         <div className="dropTableRow">
-          <select
+          <SelectSearch
+            options={[...validItemOptions, { value: "none", name: "None" }]}
             value={entry[0]}
             onChange={this._onDropKeyChanged.bind(this, entry[0])}
-          >
-            <option value="none">None</option>
-            {validItemOptions}
-          </select>
+            placeholder="Choose an item..."
+          />
           <input
             type="number"
             value={entry[1]}
@@ -140,21 +132,25 @@ class EditDropDialog extends React.Component {
     return (
       <div className="editDialog">
         <div>
-          <select value={this.state.id} onChange={this._onChangeUnitId}>
-            <option value="unset">Choose a unit id</option>
-            {validUnitOptions}
-          </select>
+          <SelectSearch
+            options={validUnitOptions}
+            value={this.state.id}
+            onChange={this._onChangeUnitId}
+            placeholder="Choose a unit id"
+          />
         </div>
         {dropRows}
 
         <button onClick={this._addNewDrop}>Add new drop</button>
 
-        <hr />
+        <div class="dialog-btm">
+          <hr />
 
-        <button className="neutral" onClick={this.props.onCancel}>
-          Cancel
-        </button>
-        <button onClick={this._onSave}>Save</button>
+          <button className="neutral" onClick={this.props.onCancel}>
+            Cancel
+          </button>
+          <button onClick={this._onSave}>Save</button>
+        </div>
       </div>
     );
   }

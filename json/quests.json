@@ -54,11 +54,11 @@
       {
         "type": "Gather",
         "amount": 5,
-        "itemId": 9
+        "itemId": "9"
       }
     ],
     "prerequisites": [
-      2
+      "2"
     ],
     "levelRequirement": "1"
   },
@@ -75,7 +75,7 @@
       "gold": 3
     },
     "prerequisites": [
-      3
+      "3"
     ],
     "levelRequirement": "1"
   },
@@ -99,7 +99,7 @@
       "gold": "12"
     },
     "prerequisites": [
-      4
+      "4"
     ],
     "levelRequirement": "1"
   },
@@ -116,7 +116,7 @@
       "gold": "7"
     },
     "prerequisites": [
-      4,
+      "4",
       "35"
     ],
     "levelRequirement": "5"
@@ -136,16 +136,16 @@
       {
         "type": "Gather",
         "amount": 10,
-        "itemId": 76
+        "itemId": "76"
       },
       {
         "type": "Gather",
         "amount": 5,
-        "itemId": 77
+        "itemId": "77"
       }
     ],
     "prerequisites": [
-      6
+      "6"
     ],
     "levelRequirement": "1"
   },
@@ -175,7 +175,7 @@
       }
     ],
     "prerequisites": [
-      7
+      "7"
     ],
     "levelRequirement": "1"
   },
@@ -199,7 +199,7 @@
       }
     ],
     "prerequisites": [
-      7
+      "7"
     ],
     "levelRequirement": "1"
   },
@@ -235,7 +235,7 @@
       }
     ],
     "prerequisites": [
-      9
+      "9"
     ],
     "levelRequirement": "1"
   },
@@ -369,7 +369,7 @@
       "gold": "19"
     },
     "prerequisites": [
-      13
+      "13"
     ],
     "levelRequirement": 8
   },
