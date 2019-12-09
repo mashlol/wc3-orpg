@@ -6,6 +6,8 @@ local backpack = require('src/items/backpack.lua')
 local Dialog = require('src/ui/dialog.lua')
 local quests = require('src/quests/quests.lua')
 
+local hay = require('src/quests/hay.lua')
+
 local LINE_HEIGHT = 0.014
 local MAX_ACTIVE_QUESTS = 9
 
@@ -645,6 +647,10 @@ function initRegionTriggers()
     end
 end
 
+function initQuestSpecificModules()
+    hay.init()
+end
+
 function init()
     local selectTrig = CreateTrigger()
     for i=0,bj_MAX_PLAYERS-1,1 do
@@ -670,6 +676,8 @@ function init()
     initObjectiveTriggers()
     initQuestMarks()
     initRegionTriggers()
+
+    initQuestSpecificModules()
 
     hero.addRepickedListener(resetQuestProgress)
     hero.addHeroPickedListener(updateQuestMarks)
