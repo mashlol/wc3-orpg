@@ -1345,7 +1345,8 @@
       "Spell Damage": "25",
       "Healing": "40",
       "Raw HP": "100"
-    }
+    },
+    "cost": "50"
   },
   "84": {
     "name": "Copper Ore",
@@ -1769,7 +1770,8 @@
       "Attack Damage": "30",
       "% Crit Chance": "2"
     },
-    "icon": "war3imported\\BTNEmerald Amulet.blp"
+    "icon": "war3imported\\BTNEmerald Amulet.blp",
+    "cost": "50"
   },
   "108": {
     "name": "Sewer Shoulders",
@@ -1790,7 +1792,8 @@
       "Physical Damage Taken": "-25"
     },
     "type": "Shoulders",
-    "icon": "war3imported\\ BTNShoulder.blp"
+    "icon": "war3imported\\ BTNShoulder.blp",
+    "cost": "50"
   },
   "109": {
     "name": "Stiff Sewer Rags",
@@ -1810,7 +1813,9 @@
       "Raw HP": "70",
       "Healing": "30",
       "Spell Damage": "30"
-    }
+    },
+    "cost": "50",
+    "icon": "idk"
   },
   "110": {
     "name": "Rat Fur Shoulders",
@@ -1831,7 +1836,8 @@
       "% Move Speed": "5",
       "Raw HP": "60",
       "Spell Damage": "15"
-    }
+    },
+    "cost": "50"
   },
   "111": {
     "requiredLevel": "24",
@@ -1856,7 +1862,8 @@
       "Spell Damage": "20",
       "Healing": "20"
     },
-    "icon": "war3imported\\BTNINV_Misc_Cape_01.blp"
+    "icon": "war3imported\\BTNINV_Misc_Cape_01.blp",
+    "cost": "100"
   },
   "112": {
     "name": "Rat Fur Gloves",
@@ -1916,7 +1923,8 @@
       "HP Regen": "20",
       "Raw HP": "115",
       "% Crit Chance": "5"
-    }
+    },
+    "cost": "100"
   },
   "119": {
     "name": "Lost Sword",
@@ -1934,7 +1942,8 @@
     "stats": {
       "Attack Damage": "10"
     },
-    "type": "1H Weapon"
+    "type": "1H Weapon",
+    "cost": "150"
   },
   "120": {
     "name": "Bundle of Wood",

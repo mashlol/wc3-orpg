@@ -1924,15 +1924,9 @@ STRING 344
 }
 
 STRING 345
-// Units: h00D (Mystique Forest Owl), Tip (Tooltip - Basic)
+// Units: h00D (Mystic Forest Owl), Tip (Tooltip - Basic)
 {
 Owl
-}
-
-STRING 346
-// Units: h00D (Mystique Forest Owl), Name (Name)
-{
-Mystique Forest Owl
 }
 
 STRING 347
@@ -2149,5 +2143,11 @@ STRING 384
 // Doodads: D02V (Tiran'Netheril Walls), Name (Name)
 {
 Tiran'Netheril Walls
+}
+
+STRING 385
+// Units: h00D (Mystic Forest Owl), Name (Name)
+{
+Mystic Forest Owl
 }
 
