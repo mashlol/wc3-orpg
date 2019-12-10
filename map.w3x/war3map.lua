@@ -173,6 +173,8 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
+gg_rct_Region_122 = nil
+gg_rct_Region_121 = nil
 function InitGlobals()
 end
 
@@ -1263,8 +1265,16 @@ function CreateRegions()
     gg_rct_house5leave1 = Rect(28896.0, 30656.0, 29024.0, 30752.0)
     gg_rct_house5exit1 = Rect(4352.0, 832.0, 4480.0, 960.0)
     gg_rct_Tiara_Netheril = Rect(26400.0, 23392.0, 26752.0, 23808.0)
-    gg_rct_Coveted_Hills_Village = Rect(9120.0, -16608.0, 9440.0, -16224.0)
+    gg_rct_Coveted_Hills_Village = Rect(8800.0, -16992.0, 9536.0, -15904.0)
+    we = AddWeatherEffect(gg_rct_Coveted_Hills_Village, FourCC("LRaa"))
+    EnableWeatherEffect(we, true)
     gg_rct_there_is_a_bridge_to_the_right = Rect(-4192.0, 18112.0, -3936.0, 18368.0)
+    gg_rct_Region_122 = Rect(20992.0, -8672.0, 27552.0, -4608.0)
+    we = AddWeatherEffect(gg_rct_Region_122, FourCC("FDwl"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Region_121 = Rect(24160.0, -4320.0, 25184.0, -3488.0)
+    we = AddWeatherEffect(gg_rct_Region_121, FourCC("FDwl"))
+    EnableWeatherEffect(we, true)
 end
 
 function CreateCameras()

@@ -79,7 +79,7 @@
     "stackSize": 20,
     "tooltip": "Eat to heal 60 HP per 3 seconds.|nMust be out of combat.",
     "spellKey": "food1",
-    "cost": "5",
+    "cost": "1",
     "consume": "on",
     "requiredLevel": "1"
   },
@@ -1970,7 +1970,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNClaws Attack.blp",
     "itemLevel": "5",
-    "cost": "23",
+    "cost": "19",
     "classification": "Trash",
     "stackSize": "200",
     "tooltip": "You may aswell just sell them to a inspired buyer."
@@ -2060,7 +2060,7 @@
     "rarity": "Common",
     "icon": "war3mapImported\\BTNTurtlescale.blp",
     "itemLevel": "1",
-    "cost": "23",
+    "cost": "13",
     "classification": "Quest Item",
     "stackSize": "10",
     "tooltip": "There ain't any use for this. Or is it?"
