@@ -42,6 +42,7 @@ local ALL_HERO_INFO = {
         baseHP = 600,
         attackSpeed = 1.5,
         defense = 'Low',
+        enabled = true,
     },
     [FourCC("Hstm")] = {
         name = 'Stormfist',
@@ -66,6 +67,7 @@ local ALL_HERO_INFO = {
         baseHP = 700,
         attackSpeed = 2,
         defense = 'Medium',
+        enabled = true,
     },
     [FourCC("Hivn")] = {
         name = 'Ivanov',
@@ -90,6 +92,7 @@ local ALL_HERO_INFO = {
         baseHP = 600,
         attackSpeed = 2.2,
         defense = 'Medium',
+        enabled = true,
     },
     [FourCC("Hazr")] = {
         name = 'Azora',
@@ -115,6 +118,7 @@ local ALL_HERO_INFO = {
         baseHP = 400,
         attackSpeed = 2.2,
         defense = 'Low',
+        enabled = true,
     },
     [FourCC("Htar")] = {
         name = 'Tarcza',
@@ -140,6 +144,7 @@ local ALL_HERO_INFO = {
         baseHP = 1000,
         attackSpeed = 1.7,
         defense = 'High',
+        enabled = true,
     },
     [FourCC("Hjar")] = {
         name = 'Järga',
@@ -161,6 +166,7 @@ local ALL_HERO_INFO = {
         baseHP = 450,
         attackSpeed = 1.2,
         defense = 'Low',
+        enabled = false,
     },
     [FourCC("Hkan")] = {
         name = 'Kanna',
@@ -182,6 +188,7 @@ local ALL_HERO_INFO = {
         baseHP = 350,
         attackSpeed = 1.2,
         defense = 'Low',
+        enabled = false,
     },
     [FourCC("Hrav")] = {
         name = 'Ravanna',
@@ -203,6 +210,7 @@ local ALL_HERO_INFO = {
         baseHP = 800,
         attackSpeed = 2.5,
         defense = 'High',
+        enabled = false,
     },
 }
 

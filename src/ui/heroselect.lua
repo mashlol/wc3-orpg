@@ -155,6 +155,20 @@ function HeroSelect:init()
             x * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) + BUTTON_WIDTH_RELATIVE / 2,
             y * (BUTTON_WIDTH_RELATIVE + BUTTON_MARGIN_RELATIVE) - BUTTON_WIDTH_RELATIVE / 2)
 
+        local tintFrame = BlzCreateFrameByType(
+            "BACKDROP",
+            "tintFrame",
+            heroButton,
+            "",
+            0)
+        BlzFrameSetAllPoints(tintFrame, heroButton)
+        BlzFrameSetTexture(
+            tintFrame,
+            "Replaceabletextures\\Teamcolor\\Teamcolor20.blp",
+            0,
+            true)
+        BlzFrameSetAlpha(tintFrame, 150)
+
         local heroText = BlzCreateFrameByType(
             "TEXT",
             "heroText",
@@ -234,6 +248,10 @@ function HeroSelect:init()
                 end
                 HeroSelect.hide(playerId)
             else
+                if not HERO_INFO_AS_LIST[idx].enabled then
+                    return
+                end
+
                 heroConfirms[playerId] = idx
             end
         end)
@@ -241,6 +259,7 @@ function HeroSelect:init()
         buttons[idx] = {
             origin = heroButton,
             text = heroText,
+            tint = tintFrame,
         }
     end
 
@@ -736,6 +755,8 @@ function HeroSelect:update(playerId)
             if condensedSlotMetadata[idx] ~= nil then
                 numButtons = numButtons + 1
                 BlzFrameSetVisible(button.origin, true)
+                BlzFrameSetVisible(button.tint, false)
+
                 if isDeleting then
                     BlzFrameSetText(
                         button.text, "|cffff0000Delete " .. condensedSlotMetadata[idx])
@@ -773,19 +794,20 @@ function HeroSelect:update(playerId)
             if HERO_INFO_AS_LIST[idx] ~= nil then
                 numButtons = numButtons + 1
                 BlzFrameSetVisible(button.origin, true)
-                BlzFrameSetText(button.text, HERO_INFO_AS_LIST[idx].name)
+                if HERO_INFO_AS_LIST[idx].enabled then
+                    BlzFrameSetText(button.text, HERO_INFO_AS_LIST[idx].name)
+                else
+                    BlzFrameSetText(
+                        button.text,
+                        HERO_INFO_AS_LIST[idx].name .. "(Coming soon...)")
+                end
                 BlzFrameSetTexture(
                     button.origin, HERO_INFO_AS_LIST[idx].portraitSquare, 0, true)
+                BlzFrameSetVisible(button.tint, not HERO_INFO_AS_LIST[idx].enabled)
             else
                 BlzFrameSetVisible(button.origin, false)
             end
         end
-
-        -- BlzFrameSetAbsPoint(
-        --     frames.buttonContainer,
-        --     FRAMEPOINT_CENTER,
-        --     0.4,
-        --     0.3)
     end
 
     if isConfirming then
