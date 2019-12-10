@@ -88,6 +88,8 @@ function hideBlizzUI()
     local parentCommandFrame = BlzFrameGetParent(commandFrame)
     BlzFrameClearAllPoints(parentCommandFrame)
     BlzFrameSetAbsPoint(parentCommandFrame, FRAMEPOINT_TOPLEFT, -1, -1)
+
+    BlzFrameSetVisible(BlzGetFrameByName("ConsoleUIBackdrop", 0), false)
 end
 
 function initCustomUI()
