@@ -75,11 +75,11 @@ if [ "$1" == "--bump" ]; then
     rm -f ../tvt-releases/*.w3x
     cp bin/compiled_map.w3x "../tvt-releases/tvt-orpg-$2.w3x"
 
-    echo 'Committing and pushing'
-    cd ../tvt-releases
-    git add .
-    git commit -m "Version bump: $2"
-    git push
+    # echo 'Committing and pushing'
+    # cd ../tvt-releases
+    # git add .
+    # git commit -m "Version bump: $2"
+    # git push
 
     cd ../map
 else

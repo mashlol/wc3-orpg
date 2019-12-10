@@ -117,7 +117,7 @@ function init()
     hideBlizzUI()
     initCustomUI()
 
-    TimerStart(CreateTimer(), 0.0078125, true, updateCustomUI)
+    TimerStart(CreateTimer(), 0.03125, true, updateCustomUI)
 end
 
 return {

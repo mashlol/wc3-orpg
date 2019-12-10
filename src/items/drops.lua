@@ -1,5 +1,6 @@
 local backpack = require('src/items/backpack.lua')
 local itemmanager = require('src/items/itemmanager.lua')
+local items = require('src/items/items.lua')
 local LootRoll = require('src/ui/lootroll.lua')
 local log = require('src/log.lua')
 local party = require('src/party.lua')
@@ -55,7 +56,7 @@ function maybeDistributeDrop()
 
         if
             playerPartyId ~= nil and
-            itemInfo.rarity.priority >= itemmanager.RARITY.UNCOMMON.priority
+            itemInfo.rarity.priority >= items.RARITY.UNCOMMON.priority
         then
             local playersInParty = party.getPlayersInParty(playerPartyId)
             local localRollId = rollId

@@ -154,6 +154,6 @@ local TYPE = {
 ` +
     "local ITEMS = {\n" +
     finalResult +
-    "}\n return {ITEMS=ITEMS, TYPE=TYPE}\n";
+    "}\n return {ITEMS=ITEMS, TYPE=TYPE, RARITY=RARITY}\n";
 
 fs.writeFileSync("../gen/items/items.lua", finalResult);
