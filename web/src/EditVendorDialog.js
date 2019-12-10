@@ -73,9 +73,11 @@ class EditVendorDialog extends React.Component {
       new Set(luaContents.match(/gg_unit_[a-zA-Z0-9]{4}_\d{4}/g))
     );
 
-   const validUnitOptions = validUnits.sort().map(unit => {
+    const validUnitOptions = [...validUnits.sort().filter(unit => {
+      return !this.props.existingVendors[unit];
+    }).map(unit => {
       return { value: unit, name: unit };
-    });
+    }), {value: this.state.id, name: this.state.id}];
 
     const validItemOptions = Object.entries(this.props.existingItems)
       .sort((a, b) => a[1].name.localeCompare(b[1].name))
@@ -109,7 +111,7 @@ class EditVendorDialog extends React.Component {
         <div>
           <SelectSearch
             options={validUnitOptions}
-            value={this.state.id}
+            value={this.state.id === null ? undefined : this.state.id}
             onChange={this._onChangeUnit}
             placeholder="Choose a unit to be the vendor"
           />

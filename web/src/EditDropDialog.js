@@ -85,9 +85,11 @@ class EditDropDialog extends React.Component {
     });
     const validUnitIds = Array.from(new Set(unitIds));
 
-    const validUnitOptions = validUnitIds.sort().map(unitId => {
+    const validUnitOptions = [...validUnitIds.sort().filter(unitId => {
+      return !this.props.existingDrops[unitId];
+    }).map(unitId => {
       return { value: unitId, name: unitId };
-    });
+    }), {value: this.state.id, name: this.state.id}];
 
     const validItemOptions = Object.entries(this.props.existingItems)
       .sort((a, b) => a[1].name.localeCompare(b[1].name))
@@ -134,7 +136,7 @@ class EditDropDialog extends React.Component {
         <div>
           <SelectSearch
             options={validUnitOptions}
-            value={this.state.id}
+            value={this.state.id === null ? undefined : this.state.id}
             onChange={this._onChangeUnitId}
             placeholder="Choose a unit id"
           />

@@ -374,6 +374,8 @@ class App extends React.Component {
           onCancel={this._onCancel}
           existingItems={this.state.existingItems}
           existingQuests={this.state.existingQuests}
+          existingDrops={this.state.existingDrops}
+          existingVendors={this.state.existingVendors}
         />
       );
     } else if (this.state.editDropInfo) {
@@ -385,6 +387,8 @@ class App extends React.Component {
           onCancel={this._onCancel}
           existingItems={this.state.existingItems}
           existingQuests={this.state.existingQuests}
+          existingDrops={this.state.existingDrops}
+          existingVendors={this.state.existingVendors}
         />
       );
     } else if (this.state.editVendorInfo) {
@@ -396,6 +400,8 @@ class App extends React.Component {
           onCancel={this._onCancel}
           existingItems={this.state.existingItems}
           existingQuests={this.state.existingQuests}
+          existingDrops={this.state.existingDrops}
+          existingVendors={this.state.existingVendors}
         />
       );
     }
