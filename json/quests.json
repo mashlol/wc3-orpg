@@ -1130,7 +1130,7 @@
     "levelRequirement": "1",
     "obtainText": "Can you head to Grydna in Freydell Village and ask if she could make the Fur Cloak for me?",
     "incompleteText": "So you say Harrion wanted you to tell me to make him a Fur Cloak? I don't know what you think, but shouldn't you be carrying some Fur, for me to be able to make you a Fur Cloak?",
-    "completedText": "Of course he wants me to make it for him, that lazy husband... Alright, seems you have enough for two, I can make one for you too for free.",
+    "completedText": "Of course he wants me to make it for him, that lazy husband... Alright, seems you have enough for two, I can make one free for you aswell.",
     "rewards": {
       "exp": "6",
       "gold": "0",

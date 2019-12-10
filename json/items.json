@@ -1985,15 +1985,12 @@
     "classification": "Equipment",
     "type": "Off-hand",
     "usable": [
-      "Ivanov",
-      "Stormfist",
-      "Tarcza",
-      "Jarga"
+      "Tarcza"
     ],
     "stats": {
       "HP Regen": "1",
-      "Raw HP": "1",
-      "Healing Received": "1",
+      "Raw HP": "2",
+      "Healing Received": "2",
       "Attack Damage": "1",
       "% Move Speed": "-1"
     }

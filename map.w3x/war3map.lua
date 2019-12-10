@@ -188,6 +188,16 @@ function CreateAllDestructables()
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
 end
 
+function CreateBuildingsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("hcas"), 16384.0, -17344.0, 270.000, FourCC("hcas"))
+    SetUnitColor(u, ConvertPlayerColor(11))
+end
+
 function CreateNeutralHostileBuildings()
     local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
     local u
@@ -786,6 +796,8 @@ function CreateNeutralPassiveBuildings()
     local life
     gg_unit_n00F_0642 = BlzCreateUnitWithSkin(p, FourCC("n00F"), 1924.8, -3573.7, 271.000, FourCC("n00F"))
     SetUnitColor(gg_unit_n00F_0642, ConvertPlayerColor(8))
+    u = BlzCreateUnitWithSkin(p, FourCC("hcas"), 13632.0, -13696.0, 270.000, FourCC("hcas"))
+    SetUnitColor(u, ConvertPlayerColor(11))
 end
 
 function CreateNeutralPassive()
@@ -1099,6 +1111,7 @@ function CreateNeutralPassive()
 end
 
 function CreatePlayerBuildings()
+    CreateBuildingsForPlayer0()
 end
 
 function CreatePlayerUnits()
