@@ -998,7 +998,7 @@
       "4",
       "35"
     ],
-    "handQuestTo": "gg_unit_n00P_0839"
+    "handQuestTo": "gg_unit_n00J_0804"
   },
   "46": {
     "objectives": [],
@@ -1130,13 +1130,13 @@
     "levelRequirement": "1",
     "obtainText": "Can you head to Grydna in Freydell Village and ask if she could make the Fur Cloak for me?",
     "incompleteText": "So you say Harrion wanted you to tell me to make him a Fur Cloak? I don't know what you think, but shouldn't you be carrying some Fur, for me to be able to make you a Fur Cloak?",
-    "completedText": "Of course he wants me to make it for him, that lazy husband... Alright, seems you have enough for two, I can make one free for you aswell.",
+    "completedText": "Of course he wants me to make it for him, that lazy husband... Alright, seems you have enough for two, then I make two. One for him, one for you.",
     "rewards": {
       "exp": "6",
       "gold": "0",
       "items": {
-        "136": 1,
-        "137": 1
+        "137": 1,
+        "138": "1"
       }
     },
     "prerequisites": [

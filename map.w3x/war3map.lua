@@ -119,6 +119,8 @@ gg_rct_house5exit1 = nil
 gg_rct_Tiara_Netheril = nil
 gg_rct_Coveted_Hills_Village = nil
 gg_rct_there_is_a_bridge_to_the_right = nil
+gg_rct_Region_122 = nil
+gg_rct_Region_121 = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_n00M_0835 = nil
@@ -173,8 +175,7 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Region_122 = nil
-gg_rct_Region_121 = nil
+gg_rct_Harabent_Hills = nil
 function InitGlobals()
 end
 
@@ -188,16 +189,6 @@ function CreateAllDestructables()
     gg_dest_DTg7_14264 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 28032.0, 0.000, 0.900, 0, FourCC("DTg7"))
     gg_dest_DTg7_14265 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 27520.0, 0.000, 0.900, 0, FourCC("DTg7"))
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
-end
-
-function CreateBuildingsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("hcas"), 16384.0, -17344.0, 270.000, FourCC("hcas"))
-    SetUnitColor(u, ConvertPlayerColor(11))
 end
 
 function CreateNeutralHostileBuildings()
@@ -1113,7 +1104,6 @@ function CreateNeutralPassive()
 end
 
 function CreatePlayerBuildings()
-    CreateBuildingsForPlayer0()
 end
 
 function CreatePlayerUnits()
@@ -1275,6 +1265,7 @@ function CreateRegions()
     gg_rct_Region_121 = Rect(24160.0, -4320.0, 25184.0, -3488.0)
     we = AddWeatherEffect(gg_rct_Region_121, FourCC("FDwl"))
     EnableWeatherEffect(we, true)
+    gg_rct_Harabent_Hills = Rect(29824.0, 22304.0, 30240.0, 22784.0)
 end
 
 function CreateCameras()
