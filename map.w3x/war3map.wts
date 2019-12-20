@@ -1773,12 +1773,6 @@ STRING 317
 8
 }
 
-STRING 318
-// Doodads: D02T (Remove all these stones Later), Name (Name)
-{
-Remove all these stones Later
-}
-
 STRING 319
 // Units: h00C (Huge Copper Chunk), Tip (Tooltip - Basic)
 {
@@ -2233,5 +2227,29 @@ STRING 402
 // Doodads: D02Y (Post Lantern Everywhere), Name (Name)
 {
 Post Lantern Everywhere
+}
+
+STRING 403
+// Units: h00I (Rocky Tile), Name (Name)
+{
+Rocky Tile
+}
+
+STRING 404
+// Units: h00K (Rocky Tile 2), Name (Name)
+{
+Rocky Tile 2
+}
+
+STRING 405
+// Units: h00L (Rocky Tile 3), Name (Name)
+{
+Rocky Tile 3
+}
+
+STRING 406
+// Doodads: D02T (Hindlecliffs Stones), Name (Name)
+{
+Hindlecliffs Stones
 }
 

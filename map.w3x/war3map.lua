@@ -121,6 +121,7 @@ gg_rct_Coveted_Hills_Village = nil
 gg_rct_there_is_a_bridge_to_the_right = nil
 gg_rct_Region_122 = nil
 gg_rct_Region_121 = nil
+gg_rct_Harabent_Hills = nil
 gg_cam_Camera_001 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_n00M_0835 = nil
@@ -175,7 +176,9 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Harabent_Hills = nil
+gg_rct_Hindlecliffs_Zone = nil
+gg_rct_Walk_of_Kings = nil
+gg_rct_Fort_Hope = nil
 function InitGlobals()
 end
 
@@ -189,6 +192,108 @@ function CreateAllDestructables()
     gg_dest_DTg7_14264 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 28032.0, 0.000, 0.900, 0, FourCC("DTg7"))
     gg_dest_DTg7_14265 = BlzCreateDestructableWithSkin(FourCC("DTg7"), -24256.0, 27520.0, 0.000, 0.900, 0, FourCC("DTg7"))
     gg_dest_YTcx_0977 = BlzCreateDestructableWithSkin(FourCC("YTcx"), 17664.0, -10816.0, 270.000, 1.000, 0, FourCC("YTcx"))
+end
+
+function CreateBuildingsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8438.6, -19186.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5979.8, -17518.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 6139.5, -17688.1, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5851.8, -17262.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5723.8, -17006.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5723.8, -16750.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5723.8, -16494.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5659.8, -16238.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5531.8, -15982.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5467.8, -15726.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5595.8, -15470.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5787.8, -15278.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5467.8, -15854.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5595.8, -16110.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5659.8, -16430.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5659.8, -16622.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5723.8, -16878.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5787.8, -17134.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 5915.8, -17390.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 6043.8, -17582.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 6811.8, -18414.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7003.8, -18542.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7195.8, -18606.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7387.8, -18670.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7579.8, -18734.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7771.8, -18798.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7899.8, -18926.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8027.8, -19054.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8155.8, -19118.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8283.8, -19182.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4821.3, -19559.9, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4683.8, -19702.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4530.4, -19797.3, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4380.5, -19948.6, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4113.0, -20037.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 3952.3, -20131.7, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 3742.3, -20177.0, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 3538.3, -20143.2, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4078.8, -20290.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4119.4, -20474.2, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4154.8, -20616.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4220.8, -20747.9, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4278.7, -20851.8, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4368.6, -20973.8, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4438.9, -21095.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4549.8, -21245.3, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4667.2, -21340.3, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4825.7, -21406.3, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5005.3, -21397.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5138.3, -21370.8, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5320.4, -21340.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5475.1, -21351.1, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5642.8, -21399.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5784.6, -21459.0, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5906.9, -21549.2, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5971.5, -21687.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 6034.5, -21803.0, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 6132.3, -21943.2, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 6205.3, -22188.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 6242.3, -22390.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 4977.4, -19459.0, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5075.8, -19399.6, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5227.9, -19346.7, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5366.7, -19315.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5494.6, -19378.4, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00K"), 5670.9, -19516.5, 270.000, FourCC("h00K"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8580.7, -19195.2, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8738.5, -19204.6, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 8893.5, -19198.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9039.8, -19210.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9206.6, -19250.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9348.7, -19259.2, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9506.5, -19268.6, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9661.5, -19262.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9807.8, -19274.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 9974.6, -19250.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10116.7, -19259.2, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10274.5, -19268.6, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10429.5, -19262.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10575.8, -19274.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10742.6, -19314.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 10884.7, -19323.2, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11042.5, -19332.6, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11197.5, -19326.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11343.8, -19338.0, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11487.0, -19396.8, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11651.9, -19488.9, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11829.5, -19581.3, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 11965.8, -19647.3, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12104.6, -19707.7, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12261.4, -19714.7, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12479.2, -19748.4, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12604.2, -19718.9, 270.000, FourCC("h00L"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 12764.4, -19608.0, 270.000, FourCC("h00L"))
 end
 
 function CreateNeutralHostileBuildings()
@@ -1104,6 +1209,7 @@ function CreateNeutralPassive()
 end
 
 function CreatePlayerBuildings()
+    CreateBuildingsForPlayer0()
 end
 
 function CreatePlayerUnits()
@@ -1266,6 +1372,9 @@ function CreateRegions()
     we = AddWeatherEffect(gg_rct_Region_121, FourCC("FDwl"))
     EnableWeatherEffect(we, true)
     gg_rct_Harabent_Hills = Rect(29824.0, 22304.0, 30240.0, 22784.0)
+    gg_rct_Hindlecliffs_Zone = Rect(5024.0, -16192.0, 5376.0, -15744.0)
+    gg_rct_Walk_of_Kings = Rect(8672.0, -19360.0, 9056.0, -18976.0)
+    gg_rct_Fort_Hope = Rect(4832.0, -20000.0, 5056.0, -19776.0)
 end
 
 function CreateCameras()
