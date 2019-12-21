@@ -2253,3 +2253,69 @@ STRING 406
 Hindlecliffs Stones
 }
 
+STRING 407
+// Doodads: D02Z (House Interior Wall 3 with Windows), Name (Name)
+{
+House Interior Wall 3 with Windows
+}
+
+STRING 408
+// Doodads: D030 (House Interior Wall 1), Name (Name)
+{
+House Interior Wall 1
+}
+
+STRING 409
+// Doodads: D031 (House Interior Wall 2), Name (Name)
+{
+House Interior Wall 2
+}
+
+STRING 410
+// Doodads: D032 (House Interior Door), Name (Name)
+{
+House Interior Door
+}
+
+STRING 411
+// Doodads: D033 (House Interior Floor), Name (Name)
+{
+House Interior Floor
+}
+
+STRING 412
+// Doodads: D034 (House Interior Fireplace), Name (Name)
+{
+House Interior Fireplace
+}
+
+STRING 413
+// Doodads: D035 (House Interior Carpet 2), Name (Name)
+{
+House Interior Carpet 2
+}
+
+STRING 414
+// Doodads: D036 (House Interior Carpet 1), Name (Name)
+{
+House Interior Carpet 1
+}
+
+STRING 415
+// Doodads: D037 (House Interior Door 2), Name (Name)
+{
+House Interior Door 2
+}
+
+STRING 416
+// Doodads: D038 (Rounded Floor), Name (Name)
+{
+Rounded Floor
+}
+
+STRING 417
+// Doodads: D039 (Wagon), Name (Name)
+{
+Wagon
+}
+
