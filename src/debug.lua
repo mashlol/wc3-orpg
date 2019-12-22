@@ -4,6 +4,31 @@ local mouse = require('src/mouse.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 local items = require('src/items/items.lua')
 
+local SKYBOXES = {
+    "Environment\\Sky\\AshenvaleSky\\AshenvaleSky.mdl",
+    "Environment\\Sky\\BarrensSky\\BarrensSky.mdl",
+    "Environment\\Sky\\BlizzardSky\\BlizzardSky.mdl",
+    "Environment\\Sky\\DalaranSky\\DalaranSky.mdl",
+    "Environment\\Sky\\DalaranRuinsSky\\DalaranRuinsSky.mdl",
+    "Environment\\Sky\\FelwoodSky\\FelwoodSky.mdl",
+    "Environment\\Sky\\FoggedSky\\FoggedSky.mdl",
+    "Environment\\Sky\\Sky\\SkyLight.mdl",
+    "Environment\\Sky\\IcecrownGlacierSky\\IcecrownGlacierSky.mdl",
+    "Environment\\Sky\\LordaeronFallSky\\LordaeronFallSky.mdl",
+    "Environment\\Sky\\LordaeronSummerSky\\LordaeronSummerSky.mdl",
+    "Environment\\Sky\\LordaeronWinterSky\\LordaeronWinterSky.mdl",
+    "Environment\\Sky\\LordaeronWinterSkyBrightGreen\\LordaeronWinterSkyBrightGreen.mdl",
+    "Environment\\Sky\\LordaeronWinterSkyPink\\LordaeronWinterSkyPink.mdl",
+    "Environment\\Sky\\LordaeronWinterSkyPurple\\LordaeronWinterSkyPurple.mdl",
+    "Environment\\Sky\\LordaeronWinterSkyRed\\LordaeronWinterSkyRed.mdl",
+    "Environment\\Sky\\LordaeronWinterSkyYellow\\LordaeronWinterSkyYellow.mdl",
+    "Environment\\Sky\\NorthrendSky\\NorthrendSky.mdl",
+    "Environment\\Sky\\Outland_Sky\\Outland_Sky.mdl",
+    "Environment\\Sky\\PrologueSky\\PrologueSky.mdl",
+    "Environment\\Sky\\VillageSky\\VillageSky.mdl",
+    "Environment\\Sky\\VillageFallSky\\VillageFallSky.mdl",
+}
+
 local animNum = 1
 
 -- Blademaster anims
@@ -11,6 +36,9 @@ local animNum = 1
 -- 13 bladestorm
 
 local itemId = 1
+
+local screenshotId = 1
+local skyboxId = 0
 
 local debug9 = function()
     local playerId = GetPlayerId(GetTriggerPlayer())
@@ -87,6 +115,32 @@ local onGiveItem = function()
     end
 end
 
+local debugMinus = function()
+    print("Disabling print statements, you will no longer see debug messages")
+    print = function() end
+
+    if GetLocalPlayer() == GetTriggerPlayer() then
+        hero.removeHero(GetPlayerId(GetTriggerPlayer()))
+        print("Applying camera: \"Camera Screenshot " .. screenshotId .. "\"")
+        local camName = "gg_cam_Camera_Screenshot_"..screenshotId
+        CameraSetupApplyForceDuration(_G[camName], true, 0)
+        screenshotId = screenshotId + 1
+
+        local newCamName = "gg_cam_Camera_Screenshot_"..screenshotId
+        if _G[newCamName] == nil then
+            screenshotId = 1
+        end
+    end
+end
+
+local debugAdd = function()
+    local skyboxModel = SKYBOXES[skyboxId + 1]
+    print("Set skybox to " .. skyboxModel)
+    SetSkyModel(skyboxModel)
+    skyboxId = skyboxId + 1
+    skyboxId = skyboxId % #SKYBOXES
+end
+
 local init = function()
     local trigger = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trigger, Player(0), OSKEY_9, 0, true)
@@ -99,6 +153,14 @@ local init = function()
     local trig3 = CreateTrigger()
     BlzTriggerRegisterPlayerKeyEvent(trig3, Player(0), OSKEY_8, 0, true)
     TriggerAddAction(trig3, debug8)
+
+    local trig4 = CreateTrigger()
+    BlzTriggerRegisterPlayerKeyEvent(trig4, Player(0), OSKEY_SUBTRACT, 0, true)
+    TriggerAddAction(trig4, debugMinus)
+
+    local trig5 = CreateTrigger()
+    BlzTriggerRegisterPlayerKeyEvent(trig5, Player(0), OSKEY_ADD, 0, true)
+    TriggerAddAction(trig5, debugAdd)
 
     local giveItemTrig = CreateTrigger()
     TriggerRegisterPlayerChatEvent(giveItemTrig, Player(0), "-g", false)
