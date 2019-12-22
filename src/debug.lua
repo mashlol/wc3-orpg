@@ -3,6 +3,7 @@ local hero = require('src/hero.lua')
 local mouse = require('src/mouse.lua')
 local itemmanager = require('src/items/itemmanager.lua')
 local items = require('src/items/items.lua')
+local log = require('src/log.lua')
 
 local SKYBOXES = {
     "Environment\\Sky\\AshenvaleSky\\AshenvaleSky.mdl",
@@ -118,6 +119,10 @@ end
 local debugMinus = function()
     print("Disabling print statements, you will no longer see debug messages")
     print = function() end
+    log.log = function() end
+
+    BlzEnableCursor(false)
+    BlzFrameSetVisible(BlzGetFrameByName("menuButtonsOrigin", 0), false)
 
     if GetLocalPlayer() == GetTriggerPlayer() then
         hero.removeHero(GetPlayerId(GetTriggerPlayer()))
