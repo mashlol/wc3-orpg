@@ -50,7 +50,7 @@ gg_rct_Green_Fog_Dungeon_2 = nil
 gg_rct_Green_Fog_Dungeon = nil
 gg_rct_Swamp_monsters_Killing = nil
 gg_rct_Spooky_Corrupted_Forest_Deadzone = nil
-gg_rct_Corrupted_Farmlands_Deadzone = nil
+gg_rct_Gonna_be_a_Epic_Corrupted_Farmlands_Deadzone = nil
 gg_rct_Corrupted_Steppes_Deadzone = nil
 gg_rct_Deathswamps_Deadzone = nil
 gg_rct_Completely_overrun_Deadzone = nil
@@ -65,7 +65,7 @@ gg_rct_Cavalamere_Town = nil
 gg_rct_Cavalamere_Lake = nil
 gg_rct_Darafftun_Monastery_Ruins = nil
 gg_rct_Mountain_Trolls = nil
-gg_rct_Canyon_Valley = nil
+gg_rct_Canyon_Valley_THIS_AREA_is_gonna_be_REALLY_COOL = nil
 gg_rct_Flatter_Canyon = nil
 gg_rct_Third_Entrance_Desert = nil
 gg_rct_Second_Entrance_Desert = nil
@@ -80,12 +80,12 @@ gg_rct_Just_an_idea = nil
 gg_rct_The_Forgotten_Kingdom = nil
 gg_rct_Just_a_zone_to_make_map_look_better = nil
 gg_rct_Maybe_future_patch_zone = nil
-gg_rct_Salt_Desert = nil
+gg_rct_Salt_Desert_Cant_have_many_details = nil
 gg_rct_Salty_Lake = nil
 gg_rct_Jungle_Troll_Killing = nil
 gg_rct_Fort_Cragscorth = nil
 gg_rct_Steppes_of_Infinity = nil
-gg_rct_Dead_Ice_Hills = nil
+gg_rct_Dead_Ice_Hills_Gonna_be_Epic = nil
 gg_rct_Abandoned_Human_Settlement = nil
 gg_rct_Owl_Forest = nil
 gg_rct_Owling_Moon_City = nil
@@ -179,6 +179,10 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
+gg_rct_This_place_is_gonna_look_cool_just_wait = nil
+gg_rct_I_have_no_idea_what_I_am_gonna_do_with_the_Desert_Area_guess_I_will_wait_and_see = nil
+gg_rct_Think_I_am_gonna_rewamp_this_zone = nil
+gg_rct_Dungeon_to_underseas_Ruins = nil
 function InitGlobals()
 end
 
@@ -762,7 +766,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h00J"), -5617.3, -2937.2, 288.183, FourCC("h00J"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00J"), -7515.5, -5487.4, 349.318, FourCC("h00J"))
     u = BlzCreateUnitWithSkin(p, FourCC("nogm"), -7387.8, 9960.0, 275.570, FourCC("nogm"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nogl"), -5583.2, 12131.6, -69.287, FourCC("nogl"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nogl"), -5583.2, 12131.6, 290.713, FourCC("nogl"))
 end
 
 function CreateNeutralPassiveBuildings()
@@ -1270,7 +1274,7 @@ function CreateRegions()
     EnableWeatherEffect(we, true)
     gg_rct_Swamp_monsters_Killing = Rect(1632.0, 12160.0, 3104.0, 12704.0)
     gg_rct_Spooky_Corrupted_Forest_Deadzone = Rect(20992.0, -9760.0, 21280.0, -9472.0)
-    gg_rct_Corrupted_Farmlands_Deadzone = Rect(19296.0, -6336.0, 19776.0, -5792.0)
+    gg_rct_Gonna_be_a_Epic_Corrupted_Farmlands_Deadzone = Rect(19296.0, -6336.0, 19776.0, -5792.0)
     gg_rct_Corrupted_Steppes_Deadzone = Rect(25728.0, -11936.0, 26144.0, -11520.0)
     gg_rct_Deathswamps_Deadzone = Rect(24192.0, -6656.0, 24672.0, -6112.0)
     gg_rct_Completely_overrun_Deadzone = Rect(28320.0, -9760.0, 28928.0, -9056.0)
@@ -1287,7 +1291,7 @@ function CreateRegions()
     gg_rct_Cavalamere_Lake = Rect(15584.0, 12896.0, 15776.0, 13152.0)
     gg_rct_Darafftun_Monastery_Ruins = Rect(18272.0, 6176.0, 18528.0, 6400.0)
     gg_rct_Mountain_Trolls = Rect(28352.0, 9632.0, 28736.0, 10048.0)
-    gg_rct_Canyon_Valley = Rect(24704.0, 12736.0, 25216.0, 13088.0)
+    gg_rct_Canyon_Valley_THIS_AREA_is_gonna_be_REALLY_COOL = Rect(24704.0, 12736.0, 25216.0, 13088.0)
     gg_rct_Flatter_Canyon = Rect(25056.0, 7680.0, 25376.0, 7968.0)
     gg_rct_Third_Entrance_Desert = Rect(27136.0, 15584.0, 27616.0, 16000.0)
     gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
@@ -1304,12 +1308,12 @@ function CreateRegions()
     gg_rct_The_Forgotten_Kingdom = Rect(-5856.0, 18144.0, -5504.0, 18496.0)
     gg_rct_Just_a_zone_to_make_map_look_better = Rect(-11296.0, 12832.0, -10880.0, 13312.0)
     gg_rct_Maybe_future_patch_zone = Rect(-10720.0, 12864.0, -10336.0, 13248.0)
-    gg_rct_Salt_Desert = Rect(3648.0, 19008.0, 4032.0, 19360.0)
+    gg_rct_Salt_Desert_Cant_have_many_details = Rect(3648.0, 19008.0, 4032.0, 19360.0)
     gg_rct_Salty_Lake = Rect(-1856.0, 20640.0, -1472.0, 20992.0)
     gg_rct_Jungle_Troll_Killing = Rect(-2112.0, 5600.0, -1632.0, 5952.0)
     gg_rct_Fort_Cragscorth = Rect(20448.0, -19520.0, 20608.0, -19264.0)
     gg_rct_Steppes_of_Infinity = Rect(20832.0, -14624.0, 21088.0, -14336.0)
-    gg_rct_Dead_Ice_Hills = Rect(29120.0, -19424.0, 29504.0, -19008.0)
+    gg_rct_Dead_Ice_Hills_Gonna_be_Epic = Rect(29120.0, -19424.0, 29504.0, -19008.0)
     gg_rct_Abandoned_Human_Settlement = Rect(25728.0, -20480.0, 26080.0, -20000.0)
     gg_rct_Owl_Forest = Rect(-6304.0, -8864.0, -5792.0, -8288.0)
     gg_rct_Owling_Moon_City = Rect(4800.0, -11776.0, 4992.0, -11616.0)
@@ -1361,6 +1365,10 @@ function CreateRegions()
     gg_rct_Hindlecliffs_Zone = Rect(5024.0, -16192.0, 5376.0, -15744.0)
     gg_rct_Walk_of_Kings = Rect(8672.0, -19360.0, 9056.0, -18976.0)
     gg_rct_Fort_Hope = Rect(4832.0, -20000.0, 5056.0, -19776.0)
+    gg_rct_This_place_is_gonna_look_cool_just_wait = Rect(30048.0, -15648.0, 30432.0, -15296.0)
+    gg_rct_I_have_no_idea_what_I_am_gonna_do_with_the_Desert_Area_guess_I_will_wait_and_see = Rect(13536.0, 19552.0, 14048.0, 19904.0)
+    gg_rct_Think_I_am_gonna_rewamp_this_zone = Rect(-10240.0, 12896.0, -9856.0, 13248.0)
+    gg_rct_Dungeon_to_underseas_Ruins = Rect(-6368.0, 19296.0, -6208.0, 19424.0)
 end
 
 function CreateCameras()
