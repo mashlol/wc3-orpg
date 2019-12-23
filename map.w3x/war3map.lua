@@ -130,6 +130,32 @@ gg_rct_I_have_no_idea_what_I_am_gonna_do_with_the_Desert_Area_guess_I_will_wait_
 gg_rct_Think_I_am_gonna_rewamp_this_zone = nil
 gg_rct_Dungeon_to_underseas_Ruins = nil
 gg_cam_Camera_001 = nil
+gg_cam_Camera_Screenshot_1 = nil
+gg_cam_Camera_Screenshot_2 = nil
+gg_cam_Camera_Screenshot_3 = nil
+gg_cam_Camera_Screenshot_4 = nil
+gg_cam_Camera_Screenshot_5 = nil
+gg_cam_Camera_Screenshot_6 = nil
+gg_cam_Camera_Screenshot_7 = nil
+gg_cam_Camera_Screenshot_8 = nil
+gg_cam_Camera_Screenshot_9 = nil
+gg_cam_Camera_Screenshot_10 = nil
+gg_cam_Camera_Screenshot_11 = nil
+gg_cam_Camera_Screenshot_12 = nil
+gg_cam_Camera_Screenshot_13 = nil
+gg_cam_Camera_Screenshot_14 = nil
+gg_cam_Camera_Screenshot_15 = nil
+gg_cam_Camera_Screenshot_16 = nil
+gg_cam_Camera_Screenshot_17 = nil
+gg_cam_Camera_Screenshot_18 = nil
+gg_cam_Camera_Screenshot_19 = nil
+gg_cam_Camera_Screenshot_20 = nil
+gg_cam_Camera_Screenshot_21 = nil
+gg_cam_Camera_Screenshot_22 = nil
+gg_cam_Camera_Screenshot_23 = nil
+gg_cam_Camera_Screenshot_24 = nil
+gg_cam_Camera_Screenshot_25 = nil
+gg_cam_Camera_Screenshot_26 = nil
 gg_trg_Untitled_Trigger_001 = nil
 gg_unit_n00M_0835 = nil
 gg_unit_nvl2_0008 = nil
@@ -183,32 +209,8 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_cam_Camera_Screenshot_1 = nil
-gg_cam_Camera_Screenshot_2 = nil
-gg_cam_Camera_Screenshot_3 = nil
-gg_cam_Camera_Screenshot_4 = nil
-gg_cam_Camera_Screenshot_5 = nil
-gg_cam_Camera_Screenshot_6 = nil
-gg_cam_Camera_Screenshot_7 = nil
-gg_cam_Camera_Screenshot_8 = nil
-gg_cam_Camera_Screenshot_9 = nil
-gg_cam_Camera_Screenshot_10 = nil
-gg_cam_Camera_Screenshot_11 = nil
-gg_cam_Camera_Screenshot_12 = nil
-gg_cam_Camera_Screenshot_13 = nil
-gg_cam_Camera_Screenshot_14 = nil
-gg_cam_Camera_Screenshot_15 = nil
-gg_cam_Camera_Screenshot_16 = nil
-gg_cam_Camera_Screenshot_17 = nil
-gg_cam_Camera_Screenshot_18 = nil
-gg_cam_Camera_Screenshot_19 = nil
-gg_cam_Camera_Screenshot_20 = nil
-gg_cam_Camera_Screenshot_21 = nil
-gg_cam_Camera_Screenshot_22 = nil
-gg_cam_Camera_Screenshot_23 = nil
-gg_cam_Camera_Screenshot_24 = nil
-gg_cam_Camera_Screenshot_25 = nil
-gg_cam_Camera_Screenshot_26 = nil
+gg_rct_Kill_area = nil
+gg_rct_Kill_area_2 = nil
 function InitGlobals()
 end
 
@@ -545,7 +547,6 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("cfir"), 10154.1, -3265.2, 212.757, FourCC("cfir"))
     u = BlzCreateUnitWithSkin(p, FourCC("sefi"), 14362.7, -5321.1, 273.458, FourCC("sefi"))
     u = BlzCreateUnitWithSkin(p, FourCC("nefi"), 12591.8, 662.0, 145.496, FourCC("nefi"))
-    u = BlzCreateUnitWithSkin(p, FourCC("fire"), 7724.1, 1086.2, 333.456, FourCC("fire"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 9975.0, -6989.0, 51.239, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("nepl"), 21429.5, -9373.4, 210.823, FourCC("nepl"))
     u = BlzCreateUnitWithSkin(p, FourCC("hrat"), -28636.0, 31429.1, 266.189, FourCC("hrat"))
@@ -568,9 +569,9 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13201.1, -6015.0, 269.687, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13298.9, -6208.9, 143.196, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 13119.9, -6172.7, 24.967, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 10015.7, -5251.2, 213.026, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 9825.2, -5240.4, 313.452, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 9899.1, -5405.6, 86.462, FourCC("h000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 10240.4, -5565.7, 213.026, FourCC("h000"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 10049.9, -5554.9, 313.452, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 10123.8, -5720.1, 86.462, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 13808.4, -4646.6, 130.714, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 13660.9, -4730.2, 106.638, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 13657.6, -4529.3, 297.277, FourCC("h000"))
@@ -685,26 +686,9 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("erat"), -26361.8, 29008.7, 24.579, FourCC("erat"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00J"), -6459.1, -5690.3, 136.169, FourCC("h00J"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00J"), -6507.9, -4818.7, 152.164, FourCC("h00J"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 7726.4, 914.8, 95.719, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 7842.6, 987.9, 133.806, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 7664.9, 1214.2, 299.388, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 6372.5, -1649.3, 39.655, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 7566.9, -1001.0, 35.321, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 7683.1, -927.9, 213.610, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6522.4, -1666.6, 165.104, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 6462.9, -1522.2, 248.977, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 10592.0, 1501.2, 39.655, FourCC("cspe"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 10741.9, 1483.9, 165.104, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 10682.4, 1628.3, 248.977, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6480.6, 976.0, 213.610, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6849.8, -340.8, 143.665, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 6332.3, 905.4, 23.228, FourCC("h000"))
-    u = BlzCreateUnitWithSkin(p, FourCC("cspe"), 6721.1, -228.2, 310.923, FourCC("cspe"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 4786.0, -1010.5, 309.995, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 4963.9, -1085.0, 203.886, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 4793.9, -1197.6, 41.269, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h001"), 5314.0, 300.9, 299.388, FourCC("h001"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h000"), 5398.0, 153.7, 143.665, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -3270.2, -11509.1, 323.920, FourCC("h00C"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00B"), -856.0, -1876.3, 266.844, FourCC("h00B"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00D"), -7962.8, -7939.8, 277.512, FourCC("h00D"))
@@ -933,7 +917,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2364.1, -4356.1, 102.312, FourCC("nbee"))
     gg_unit_nvil_0016 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1400.7, -4331.1, 356.473, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17113.8, -13518.8, 205.473, FourCC("nviw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 17239.7, -13473.3, 205.473, FourCC("nviw"))
     u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 16239.8, -13837.2, 148.617, FourCC("vlww"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 16715.4, -13484.0, 277.709, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 16770.2, -13536.7, 183.205, FourCC("nvl2"))
@@ -966,7 +950,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 16403.4, -13458.5, 237.328, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 16455.5, -13506.3, 188.627, FourCC("nvlk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 15062.4, -12857.7, 213.600, FourCC("nhef"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17001.4, -13337.5, 239.470, FourCC("nhem"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17050.0, -13385.8, -72.056, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17094.3, -13791.3, 155.630, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3383.0, -3043.8, 359.463, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3379.6, -3626.1, 354.915, FourCC("hfoo"))
@@ -1117,6 +1101,7 @@ function CreateNeutralPassive()
     gg_unit_nvil_0501 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 10105.8, 10783.1, 264.480, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 13363.1, -11529.4, 354.451, FourCC("hgry"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4367.0, -3128.2, 34.037, FourCC("nsha"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hpal"), 6032.0, -100.3, -78.172, FourCC("Hpal"))
     u = BlzCreateUnitWithSkin(p, FourCC("h003"), 8188.8, 4251.6, 270.080, FourCC("h003"))
     SetUnitColor(u, ConvertPlayerColor(0))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 9201.0, 2530.1, 57.551, FourCC("nvl2"))
@@ -1395,6 +1380,8 @@ function CreateRegions()
     gg_rct_I_have_no_idea_what_I_am_gonna_do_with_the_Desert_Area_guess_I_will_wait_and_see = Rect(13536.0, 19552.0, 14048.0, 19904.0)
     gg_rct_Think_I_am_gonna_rewamp_this_zone = Rect(-10240.0, 12896.0, -9856.0, 13248.0)
     gg_rct_Dungeon_to_underseas_Ruins = Rect(-6368.0, 19296.0, -6208.0, 19424.0)
+    gg_rct_Kill_area = Rect(6368.0, 2432.0, 6528.0, 2624.0)
+    gg_rct_Kill_area_2 = Rect(8000.0, -672.0, 8224.0, -416.0)
 end
 
 function CreateCameras()

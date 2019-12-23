@@ -2331,3 +2331,33 @@ STRING 419
 Rising Water 2
 }
 
+STRING 420
+// Doodads: D03B (Pine Tree from Game 1), Name (Name)
+{
+Pine Tree from Game 1
+}
+
+STRING 421
+// Doodads: D03C (Jungle Tree Variation 2), Name (Name)
+{
+Jungle Tree Variation 2
+}
+
+STRING 422
+// Doodads: D03D (Jungle Tree Variation 3), Name (Name)
+{
+Jungle Tree Variation 3
+}
+
+STRING 423
+// Doodads: D03E (Jungle Tree Variation 4), Name (Name)
+{
+Jungle Tree Variation 4
+}
+
+STRING 424
+// Doodads: D03F (Wall Barred Large Help), Name (Name)
+{
+Wall Barred Large Help
+}
+
