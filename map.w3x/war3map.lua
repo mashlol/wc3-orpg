@@ -129,6 +129,8 @@ gg_rct_This_place_is_gonna_look_cool_just_wait = nil
 gg_rct_I_have_no_idea_what_I_am_gonna_do_with_the_Desert_Area_guess_I_will_wait_and_see = nil
 gg_rct_Think_I_am_gonna_rewamp_this_zone = nil
 gg_rct_Dungeon_to_underseas_Ruins = nil
+gg_rct_Kill_area = nil
+gg_rct_Kill_area_2 = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -209,8 +211,13 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Kill_area = nil
-gg_rct_Kill_area_2 = nil
+gg_rct_Three_Kings_Creek = nil
+gg_rct_Shredder_Killing = nil
+gg_rct_Wilderness_Killing = nil
+gg_rct_Moonshine_in_jungle = nil
+gg_rct_Rain_Jungle = nil
+gg_rct_Ray_of_light_in_jungle_Copy = nil
+gg_rct_Ray_of_light_in_jungle_Copy_Copy = nil
 function InitGlobals()
 end
 
@@ -950,7 +957,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 16403.4, -13458.5, 237.328, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 16455.5, -13506.3, 188.627, FourCC("nvlk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 15062.4, -12857.7, 213.600, FourCC("nhef"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17050.0, -13385.8, -72.056, FourCC("nhem"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17050.0, -13385.8, 287.944, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17094.3, -13791.3, 155.630, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3383.0, -3043.8, 359.463, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3379.6, -3626.1, 354.915, FourCC("hfoo"))
@@ -1101,7 +1108,7 @@ function CreateNeutralPassive()
     gg_unit_nvil_0501 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 10105.8, 10783.1, 264.480, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 13363.1, -11529.4, 354.451, FourCC("hgry"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4367.0, -3128.2, 34.037, FourCC("nsha"))
-    u = BlzCreateUnitWithSkin(p, FourCC("Hpal"), 6032.0, -100.3, -78.172, FourCC("Hpal"))
+    u = BlzCreateUnitWithSkin(p, FourCC("Hpal"), 6032.0, -100.3, 281.828, FourCC("Hpal"))
     u = BlzCreateUnitWithSkin(p, FourCC("h003"), 8188.8, 4251.6, 270.080, FourCC("h003"))
     SetUnitColor(u, ConvertPlayerColor(0))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 9201.0, 2530.1, 57.551, FourCC("nvl2"))
@@ -1302,7 +1309,7 @@ function CreateRegions()
     gg_rct_Cavalamere_Lake = Rect(15584.0, 12896.0, 15776.0, 13152.0)
     gg_rct_Darafftun_Monastery_Ruins = Rect(18272.0, 6176.0, 18528.0, 6400.0)
     gg_rct_Mountain_Trolls = Rect(28352.0, 9632.0, 28736.0, 10048.0)
-    gg_rct_Canyon_Valley_THIS_AREA_is_gonna_be_REALLY_COOL = Rect(24704.0, 12736.0, 25216.0, 13088.0)
+    gg_rct_Canyon_Valley_THIS_AREA_is_gonna_be_REALLY_COOL = Rect(22464.0, 12800.0, 22976.0, 13312.0)
     gg_rct_Flatter_Canyon = Rect(25056.0, 7680.0, 25376.0, 7968.0)
     gg_rct_Third_Entrance_Desert = Rect(27136.0, 15584.0, 27616.0, 16000.0)
     gg_rct_Second_Entrance_Desert = Rect(17376.0, 15008.0, 17728.0, 15424.0)
@@ -1382,6 +1389,21 @@ function CreateRegions()
     gg_rct_Dungeon_to_underseas_Ruins = Rect(-6368.0, 19296.0, -6208.0, 19424.0)
     gg_rct_Kill_area = Rect(6368.0, 2432.0, 6528.0, 2624.0)
     gg_rct_Kill_area_2 = Rect(8000.0, -672.0, 8224.0, -416.0)
+    gg_rct_Three_Kings_Creek = Rect(14080.0, 4224.0, 14304.0, 4352.0)
+    gg_rct_Shredder_Killing = Rect(19456.0, 1696.0, 19616.0, 1920.0)
+    gg_rct_Wilderness_Killing = Rect(28832.0, 4448.0, 29120.0, 4832.0)
+    gg_rct_Moonshine_in_jungle = Rect(6592.0, 23904.0, 7520.0, 24736.0)
+    we = AddWeatherEffect(gg_rct_Moonshine_in_jungle, FourCC("LRma"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Rain_Jungle = Rect(6464.0, 23488.0, 8064.0, 24864.0)
+    we = AddWeatherEffect(gg_rct_Rain_Jungle, FourCC("RAhr"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Ray_of_light_in_jungle_Copy = Rect(10528.0, 24800.0, 11456.0, 25632.0)
+    we = AddWeatherEffect(gg_rct_Ray_of_light_in_jungle_Copy, FourCC("LRaa"))
+    EnableWeatherEffect(we, true)
+    gg_rct_Ray_of_light_in_jungle_Copy_Copy = Rect(13312.0, 24544.0, 14240.0, 25376.0)
+    we = AddWeatherEffect(gg_rct_Ray_of_light_in_jungle_Copy_Copy, FourCC("LRaa"))
+    EnableWeatherEffect(we, true)
 end
 
 function CreateCameras()
@@ -2129,6 +2151,7 @@ function main()
     SetCameraBounds(-30208.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 31232.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 31744.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -30208.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 31744.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 31232.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
     SetTerrainFogEx(0, 15000.0, 16000.0, 0.500, 0.502, 0.502, 1.000)
+    SetWaterBaseColor(0, 128, 128, 255)
     NewSoundEnvironment("Default")
     SetAmbientDaySound("LordaeronSummerDay")
     SetAmbientNightSound("LordaeronSummerNight")

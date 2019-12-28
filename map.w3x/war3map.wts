@@ -2361,3 +2361,27 @@ STRING 424
 Wall Barred Large Help
 }
 
+STRING 425
+// Doodads: D03G (Huge Rocks), Name (Name)
+{
+Huge Rocks
+}
+
+STRING 426
+// Doodads: D03H (Jungle Tree Variation 5), Name (Name)
+{
+Jungle Tree Variation 5
+}
+
+STRING 427
+// Doodads: D03I (Jungle Tree Variation 6), Name (Name)
+{
+Jungle Tree Variation 6
+}
+
+STRING 428
+// Doodads: D03J (Jungle Tree Variation 7), Name (Name)
+{
+Jungle Tree Variation 7
+}
+
