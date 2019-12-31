@@ -50,7 +50,7 @@ gg_rct_Green_Fog_Dungeon_2 = nil
 gg_rct_Green_Fog_Dungeon = nil
 gg_rct_Swamp_monsters_Killing = nil
 gg_rct_Spooky_Corrupted_Forest_Deadzone = nil
-gg_rct_Gonna_be_a_Epic_Corrupted_Farmlands_Deadzone = nil
+gg_rct_Destroyed_Town = nil
 gg_rct_Corrupted_Steppes_Deadzone = nil
 gg_rct_Deathswamps_Deadzone = nil
 gg_rct_Completely_overrun_Deadzone = nil
@@ -131,6 +131,13 @@ gg_rct_Think_I_am_gonna_rewamp_this_zone = nil
 gg_rct_Dungeon_to_underseas_Ruins = nil
 gg_rct_Kill_area = nil
 gg_rct_Kill_area_2 = nil
+gg_rct_Three_Kings_Creek = nil
+gg_rct_Shredder_Killing = nil
+gg_rct_Wilderness_Killing = nil
+gg_rct_Moonshine_in_jungle = nil
+gg_rct_Rain_Jungle = nil
+gg_rct_Ray_of_light_in_jungle_Copy = nil
+gg_rct_Ray_of_light_in_jungle_Copy_Copy = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -211,13 +218,6 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Three_Kings_Creek = nil
-gg_rct_Shredder_Killing = nil
-gg_rct_Wilderness_Killing = nil
-gg_rct_Moonshine_in_jungle = nil
-gg_rct_Rain_Jungle = nil
-gg_rct_Ray_of_light_in_jungle_Copy = nil
-gg_rct_Ray_of_light_in_jungle_Copy_Copy = nil
 function InitGlobals()
 end
 
@@ -336,7 +336,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("lold"), -2785.1, -5553.7, 58.183, FourCC("lold"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 14542.3, -7942.4, 241.403, FourCC("htar"))
     u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), 1307.5, -5730.6, 197.737, FourCC("hmbs"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), 1318.8, -5288.2, 341.713, FourCC("hmbs"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), 1622.0, -6332.1, 341.713, FourCC("hmbs"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 14668.3, -8046.9, 218.719, FourCC("htar"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 15151.0, -8025.3, 290.733, FourCC("htar"))
     u = BlzCreateUnitWithSkin(p, FourCC("htar"), 15419.5, -8018.7, 246.827, FourCC("htar"))
@@ -568,6 +568,7 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 9895.8, -6898.9, 13.920, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 9553.5, -6254.0, 237.059, FourCC("h001"))
     u = BlzCreateUnitWithSkin(p, FourCC("h001"), 9288.4, -6243.1, 286.006, FourCC("h001"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), 2926.4, -7636.4, 80.194, FourCC("hmbs"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 14496.0, -5240.1, 221.485, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 11791.2, -5295.7, 294.660, FourCC("h000"))
     u = BlzCreateUnitWithSkin(p, FourCC("h000"), 12084.2, -5354.7, 221.485, FourCC("h000"))
@@ -634,7 +635,8 @@ function CreateNeutralHostile()
     u = BlzCreateUnitWithSkin(p, FourCC("h00B"), -1695.3, -451.5, 294.344, FourCC("h00B"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00B"), -1608.5, 515.4, 147.628, FourCC("h00B"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00B"), -3055.4, -226.9, 266.844, FourCC("h00B"))
-    u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 974.3, -4841.2, 120.853, FourCC("h00B"))
+    u = BlzCreateUnitWithSkin(p, FourCC("h00B"), 2624.3, -5971.2, 120.853, FourCC("h00B"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hmbs"), 3063.6, -8511.7, -0.355, FourCC("hmbs"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00G"), -3385.8, -1056.8, 72.018, FourCC("h00G"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -5669.4, -1596.3, 25.280, FourCC("h00C"))
     u = BlzCreateUnitWithSkin(p, FourCC("h00C"), -2827.1, -8962.7, 211.790, FourCC("h00C"))
@@ -1149,6 +1151,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4383.5, -3879.5, 250.639, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4280.6, -3868.1, 34.037, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4626.9, -4469.8, 170.157, FourCC("nsha"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 1341.9, -5011.0, 139.051, FourCC("nviw"))
     gg_unit_n007_0627 = BlzCreateUnitWithSkin(p, FourCC("n007"), 2949.4, -4842.7, 264.041, FourCC("n007"))
     SetUnitColor(gg_unit_n007_0627, ConvertPlayerColor(2))
     gg_unit_n008_0628 = BlzCreateUnitWithSkin(p, FourCC("n008"), 3045.3, -4899.1, 319.501, FourCC("n008"))
@@ -1159,6 +1162,7 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n00D_0630, ConvertPlayerColor(24))
     gg_unit_n00A_0631 = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3039.2, -5240.9, 179.080, FourCC("n00A"))
     SetUnitColor(gg_unit_n00A_0631, ConvertPlayerColor(24))
+    u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 1387.5, -5040.3, 156.836, FourCC("vl2w"))
     gg_unit_n00B_0637 = BlzCreateUnitWithSkin(p, FourCC("n00B"), 2788.9, -4858.4, 283.190, FourCC("n00B"))
     SetUnitColor(gg_unit_n00B_0637, ConvertPlayerColor(24))
     gg_unit_n005_0638 = BlzCreateUnitWithSkin(p, FourCC("n005"), 1105.7, 2355.2, 325.480, FourCC("nviw"))
@@ -1168,6 +1172,9 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n006_0640, ConvertPlayerColor(8))
     gg_unit_n006_0641 = BlzCreateUnitWithSkin(p, FourCC("n006"), 2034.3, -10340.5, 267.600, FourCC("n006"))
     SetUnitColor(gg_unit_n006_0641, ConvertPlayerColor(8))
+    u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 1501.1, -5049.4, 182.372, FourCC("vl2w"))
+    u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 1440.7, -5043.0, 174.761, FourCC("vlww"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1271.1, -5031.0, -28.853, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 3741.4, -1857.2, 261.065, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4052.0, -2175.9, 218.294, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4296.4, -2196.9, 250.639, FourCC("nsha"))
@@ -1292,7 +1299,9 @@ function CreateRegions()
     EnableWeatherEffect(we, true)
     gg_rct_Swamp_monsters_Killing = Rect(1632.0, 12160.0, 3104.0, 12704.0)
     gg_rct_Spooky_Corrupted_Forest_Deadzone = Rect(20992.0, -9760.0, 21280.0, -9472.0)
-    gg_rct_Gonna_be_a_Epic_Corrupted_Farmlands_Deadzone = Rect(19296.0, -6336.0, 19776.0, -5792.0)
+    gg_rct_Destroyed_Town = Rect(17568.0, -5792.0, 19616.0, -3776.0)
+    we = AddWeatherEffect(gg_rct_Destroyed_Town, FourCC("FDwl"))
+    EnableWeatherEffect(we, true)
     gg_rct_Corrupted_Steppes_Deadzone = Rect(25728.0, -11936.0, 26144.0, -11520.0)
     gg_rct_Deathswamps_Deadzone = Rect(24192.0, -6656.0, 24672.0, -6112.0)
     gg_rct_Completely_overrun_Deadzone = Rect(28320.0, -9760.0, 28928.0, -9056.0)

@@ -2385,3 +2385,21 @@ STRING 428
 Jungle Tree Variation 7
 }
 
+STRING 429
+// Doodads: D03K (Tavern 2), Name (Name)
+{
+Tavern 2
+}
+
+STRING 430
+// Doodads: D03L (Horse Gate), Name (Name)
+{
+Horse Gate
+}
+
+STRING 431
+// Doodads: D03M (Tree Wall), Name (Name)
+{
+Tree Wall
+}
+
