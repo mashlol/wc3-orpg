@@ -2403,3 +2403,21 @@ STRING 431
 Tree Wall
 }
 
+STRING 432
+// Doodads: D03N (Geyser water), Name (Name)
+{
+Geyser water
+}
+
+STRING 433
+// Doodads: D03O (Geyser Smoke), Name (Name)
+{
+Geyser Smoke
+}
+
+STRING 434
+// Doodads: D03P (Huge Tree), Name (Name)
+{
+Huge Tree
+}
+
