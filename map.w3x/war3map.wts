@@ -2421,3 +2421,27 @@ STRING 434
 Huge Tree
 }
 
+STRING 435
+// Doodads: D03Q (Wall Straight Dalaran 1), Name (Name)
+{
+Wall Straight Dalaran 1
+}
+
+STRING 436
+// Doodads: D03R (Wall Straight Dalaran 2), Name (Name)
+{
+Wall Straight Dalaran 2
+}
+
+STRING 437
+// Destructibles: XTbd (Dalaran Building), Name (Name)
+{
+Dalaran Building
+}
+
+STRING 438
+// Doodads: D03S (Dala building), Name (Name)
+{
+Dala building
+}
+

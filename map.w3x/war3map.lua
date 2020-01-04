@@ -242,6 +242,15 @@ function CreateBuildingsForPlayer0()
     u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7451.8, -18734.0, 270.000, FourCC("h00L"))
 end
 
+function CreateUnitsForPlayer0()
+    local p = Player(0)
+    local u
+    local unitID
+    local t
+    local life
+    u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), 17221.2, 25272.0, 246.508, FourCC("hmpr"))
+end
+
 function CreateNeutralHostileBuildings()
     local p = Player(PLAYER_NEUTRAL_AGGRESSIVE)
     local u
@@ -1151,7 +1160,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4383.5, -3879.5, 250.639, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4280.6, -3868.1, 34.037, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4626.9, -4469.8, 170.157, FourCC("nsha"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nviw"), 1341.9, -5011.0, 139.051, FourCC("nviw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1347.1, -5007.1, 148.057, FourCC("nvil"))
     gg_unit_n007_0627 = BlzCreateUnitWithSkin(p, FourCC("n007"), 2949.4, -4842.7, 264.041, FourCC("n007"))
     SetUnitColor(gg_unit_n007_0627, ConvertPlayerColor(2))
     gg_unit_n008_0628 = BlzCreateUnitWithSkin(p, FourCC("n008"), 3045.3, -4899.1, 319.501, FourCC("n008"))
@@ -1162,7 +1171,7 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n00D_0630, ConvertPlayerColor(24))
     gg_unit_n00A_0631 = BlzCreateUnitWithSkin(p, FourCC("n00A"), 3039.2, -5240.9, 179.080, FourCC("n00A"))
     SetUnitColor(gg_unit_n00A_0631, ConvertPlayerColor(24))
-    u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 1387.5, -5040.3, 156.836, FourCC("vl2w"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1447.7, -5024.1, 168.929, FourCC("nvlw"))
     gg_unit_n00B_0637 = BlzCreateUnitWithSkin(p, FourCC("n00B"), 2788.9, -4858.4, 283.190, FourCC("n00B"))
     SetUnitColor(gg_unit_n00B_0637, ConvertPlayerColor(24))
     gg_unit_n005_0638 = BlzCreateUnitWithSkin(p, FourCC("n005"), 1105.7, 2355.2, 325.480, FourCC("nviw"))
@@ -1172,9 +1181,8 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n006_0640, ConvertPlayerColor(8))
     gg_unit_n006_0641 = BlzCreateUnitWithSkin(p, FourCC("n006"), 2034.3, -10340.5, 267.600, FourCC("n006"))
     SetUnitColor(gg_unit_n006_0641, ConvertPlayerColor(8))
-    u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 1501.1, -5049.4, 182.372, FourCC("vl2w"))
-    u = BlzCreateUnitWithSkin(p, FourCC("vlww"), 1440.7, -5043.0, 174.761, FourCC("vlww"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1271.1, -5031.0, 331.147, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1510.4, -5036.7, 184.445, FourCC("nvil"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1266.1, -5023.7, 331.147, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 6967.4, 15213.5, 358.440, FourCC("nhyh"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 7332.8, 15564.6, 245.036, FourCC("nhyh"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 7740.9, 15930.5, 334.214, FourCC("nhyh"))
@@ -1185,6 +1193,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 6332.5, 16907.9, 113.756, FourCC("nhyh"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 6803.0, 17347.9, 88.069, FourCC("nhyh"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhyh"), 7426.8, 17042.0, 235.895, FourCC("nhyh"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1393.6, -5018.6, 168.710, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 3741.4, -1857.2, 261.065, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4052.0, -2175.9, 218.294, FourCC("nsha"))
     u = BlzCreateUnitWithSkin(p, FourCC("nsha"), 4296.4, -2196.9, 250.639, FourCC("nsha"))
@@ -1238,6 +1247,7 @@ function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
+    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
