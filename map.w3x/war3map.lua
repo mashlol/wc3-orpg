@@ -218,6 +218,41 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
+gg_rct_Dungeon_area_1 = nil
+gg_rct_Dungeon_Area_2 = nil
+gg_rct_Dungeon_Area_3 = nil
+gg_rct_Dungeon_Area_4 = nil
+gg_rct_Housing_Area = nil
+gg_rct_Housing_Area_2 = nil
+gg_rct_Vanilla_Zone_Making_Area = nil
+gg_rct_Dungeon_Area_5 = nil
+gg_rct_Dungeon_Area_6 = nil
+gg_rct_Dungeon_Area_7 = nil
+gg_rct_Dungeon_Area_8 = nil
+gg_rct_Raid_1 = nil
+gg_rct_Raid_2 = nil
+gg_rct_Raid_3 = nil
+gg_rct_Dungeon_Area_9 = nil
+gg_rct_Housing_Area_3 = nil
+gg_rct_Expension_Zone_2 = nil
+gg_rct_Expension_Zone_1 = nil
+gg_rct_Expension_Zone_3 = nil
+gg_rct_Expension_Zone_4 = nil
+gg_rct_Expension_Zone_5 = nil
+gg_rct_Expension_Zone_6 = nil
+gg_rct_Dungeon_Area_10 = nil
+gg_rct_Expension_Zone_7 = nil
+gg_rct_Hero_Story_Area_1 = nil
+gg_rct_Hero_Story_Area_2 = nil
+gg_rct_Hero_Story_Area_3 = nil
+gg_rct_Hero_Story_Area_4 = nil
+gg_rct_Expension_Zone_8 = nil
+gg_rct_Hero_Story_Area_5 = nil
+gg_rct_Expension_Zone_9 = nil
+gg_rct_Vanilla_Zone_Making_Area_2 = nil
+gg_rct_Inside_Caves_Mines_Delves = nil
+gg_rct_Vanilla_Zone_Making_Area_3 = nil
+gg_rct_Housing_Area_4 = nil
 function InitGlobals()
 end
 
@@ -1433,6 +1468,41 @@ function CreateRegions()
     gg_rct_Ray_of_light_in_jungle_Copy_Copy = Rect(13312.0, 24544.0, 14240.0, 25376.0)
     we = AddWeatherEffect(gg_rct_Ray_of_light_in_jungle_Copy_Copy, FourCC("LRaa"))
     EnableWeatherEffect(we, true)
+    gg_rct_Dungeon_area_1 = Rect(-22336.0, 25920.0, -14624.0, 31680.0)
+    gg_rct_Dungeon_Area_2 = Rect(-14592.0, 25888.0, -6880.0, 31648.0)
+    gg_rct_Dungeon_Area_3 = Rect(-6848.0, 25888.0, 864.0, 31648.0)
+    gg_rct_Dungeon_Area_4 = Rect(896.0, 25984.0, 8608.0, 31744.0)
+    gg_rct_Housing_Area = Rect(21056.0, 27424.0, 31200.0, 31648.0)
+    gg_rct_Housing_Area_2 = Rect(16896.0, 28864.0, 20992.0, 31648.0)
+    gg_rct_Vanilla_Zone_Making_Area = Rect(8640.0, 26720.0, 16736.0, 31648.0)
+    gg_rct_Dungeon_Area_6 = Rect(-30208.0, 14336.0, -22496.0, 20096.0)
+    gg_rct_Dungeon_Area_5 = Rect(-30176.0, 20128.0, -22464.0, 25888.0)
+    gg_rct_Dungeon_Area_7 = Rect(-30208.0, 8576.0, -22496.0, 14336.0)
+    gg_rct_Dungeon_Area_8 = Rect(-30176.0, -29632.0, -22464.0, -23872.0)
+    gg_rct_Raid_1 = Rect(-22432.0, -29600.0, -14720.0, -23392.0)
+    gg_rct_Raid_2 = Rect(-14688.0, -29664.0, -6976.0, -23392.0)
+    gg_rct_Raid_3 = Rect(-6976.0, -29568.0, 2272.0, -23392.0)
+    gg_rct_Dungeon_Area_9 = Rect(18688.0, -29632.0, 26400.0, -23232.0)
+    gg_rct_Housing_Area_3 = Rect(-2944.0, 24032.0, 4448.0, 25856.0)
+    gg_rct_Expension_Zone_2 = Rect(-15904.0, 21568.0, -3008.0, 25792.0)
+    gg_rct_Expension_Zone_1 = Rect(-15904.0, 7456.0, -9408.0, 21472.0)
+    gg_rct_Expension_Zone_3 = Rect(-22496.0, 6144.0, -15936.0, 12256.0)
+    gg_rct_Expension_Zone_4 = Rect(-22464.0, 12256.0, -15904.0, 18368.0)
+    gg_rct_Expension_Zone_5 = Rect(-22464.0, 18400.0, -15904.0, 25856.0)
+    gg_rct_Expension_Zone_6 = Rect(-30176.0, 2432.0, -22528.0, 8544.0)
+    gg_rct_Dungeon_Area_10 = Rect(-30144.0, -23808.0, -22432.0, -18048.0)
+    gg_rct_Expension_Zone_7 = Rect(-30144.0, -9856.0, -22368.0, -3712.0)
+    gg_rct_Hero_Story_Area_1 = Rect(-30144.0, -3712.0, -26400.0, 2400.0)
+    gg_rct_Hero_Story_Area_2 = Rect(-22400.0, -23360.0, -17696.0, -17088.0)
+    gg_rct_Hero_Story_Area_3 = Rect(-17600.0, -23360.0, -12896.0, -17056.0)
+    gg_rct_Hero_Story_Area_4 = Rect(-12832.0, -23360.0, -8096.0, -17024.0)
+    gg_rct_Expension_Zone_8 = Rect(-8032.0, -23360.0, 1440.0, -17504.0)
+    gg_rct_Hero_Story_Area_5 = Rect(3072.0, -29632.0, 8288.0, -22400.0)
+    gg_rct_Expension_Zone_9 = Rect(8352.0, -29632.0, 18656.0, -22176.0)
+    gg_rct_Vanilla_Zone_Making_Area_2 = Rect(15168.0, -22144.0, 18144.0, -16480.0)
+    gg_rct_Inside_Caves_Mines_Delves = Rect(-30144.0, -17984.0, -22400.0, -9920.0)
+    gg_rct_Vanilla_Zone_Making_Area_3 = Rect(20512.0, 24768.0, 23456.0, 27360.0)
+    gg_rct_Housing_Area_4 = Rect(29920.0, 25344.0, 31200.0, 27392.0)
 end
 
 function CreateCameras()
