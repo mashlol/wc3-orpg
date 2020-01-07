@@ -2451,3 +2451,15 @@ STRING 439
 Barrack
 }
 
+STRING 440
+// Doodads: D03U (Enclave Turret 2), Name (Name)
+{
+Enclave Turret 2
+}
+
+STRING 441
+// Doodads: D03V (Enclave main), Name (Name)
+{
+Enclave main
+}
+

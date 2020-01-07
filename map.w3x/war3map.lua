@@ -160,7 +160,7 @@ gg_rct_Expension_Zone_3 = nil
 gg_rct_Expension_Zone_4 = nil
 gg_rct_Expension_Zone_5 = nil
 gg_rct_Expension_Zone_6 = nil
-gg_rct_Dungeon_Area_10 = nil
+gg_rct_Arena_and_Battlegrounds = nil
 gg_rct_Expension_Zone_7 = nil
 gg_rct_Hero_Story_Area_1 = nil
 gg_rct_Hero_Story_Area_2 = nil
@@ -253,6 +253,7 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
+gg_rct_The_Achalorium = nil
 function InitGlobals()
 end
 
@@ -275,15 +276,6 @@ function CreateBuildingsForPlayer0()
     local t
     local life
     u = BlzCreateUnitWithSkin(p, FourCC("h00L"), 7451.8, -18734.0, 270.000, FourCC("h00L"))
-end
-
-function CreateUnitsForPlayer0()
-    local p = Player(0)
-    local u
-    local unitID
-    local t
-    local life
-    u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), 17221.2, 25272.0, 246.508, FourCC("hmpr"))
 end
 
 function CreateNeutralHostileBuildings()
@@ -1282,7 +1274,6 @@ function CreatePlayerBuildings()
 end
 
 function CreatePlayerUnits()
-    CreateUnitsForPlayer0()
 end
 
 function CreateAllUnits()
@@ -1490,7 +1481,7 @@ function CreateRegions()
     gg_rct_Expension_Zone_4 = Rect(-22464.0, 12256.0, -15904.0, 18368.0)
     gg_rct_Expension_Zone_5 = Rect(-22464.0, 18400.0, -15904.0, 25856.0)
     gg_rct_Expension_Zone_6 = Rect(-30176.0, 2432.0, -22528.0, 8544.0)
-    gg_rct_Dungeon_Area_10 = Rect(-30144.0, -23808.0, -22432.0, -18048.0)
+    gg_rct_Arena_and_Battlegrounds = Rect(-30144.0, -23808.0, -22432.0, -18048.0)
     gg_rct_Expension_Zone_7 = Rect(-30144.0, -9856.0, -22368.0, -3712.0)
     gg_rct_Hero_Story_Area_1 = Rect(-30144.0, -3712.0, -26400.0, 2400.0)
     gg_rct_Hero_Story_Area_2 = Rect(-22400.0, -23360.0, -17696.0, -17088.0)
@@ -1503,6 +1494,7 @@ function CreateRegions()
     gg_rct_Inside_Caves_Mines_Delves = Rect(-30144.0, -17984.0, -22400.0, -9920.0)
     gg_rct_Vanilla_Zone_Making_Area_3 = Rect(20512.0, 24768.0, 23456.0, 27360.0)
     gg_rct_Housing_Area_4 = Rect(29920.0, 25344.0, 31200.0, 27392.0)
+    gg_rct_The_Achalorium = Rect(18048.0, 25056.0, 18304.0, 25344.0)
 end
 
 function CreateCameras()
@@ -2188,7 +2180,7 @@ end
 
 function InitAllyPriorities()
     SetStartLocPrioCount(0, 1)
-    SetStartLocPrio(0, 0, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(0, 0, 9, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(1, 3)
     SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(1, 1, 4, MAP_LOC_PRIO_HIGH)
@@ -2205,27 +2197,18 @@ function InitAllyPriorities()
     SetStartLocPrio(5, 0, 2, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(5, 1, 3, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(5, 2, 8, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(6, 5)
-    SetStartLocPrio(6, 0, 0, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(6, 1, 2, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(6, 2, 3, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(6, 3, 5, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(6, 4, 8, MAP_LOC_PRIO_LOW)
+    SetStartLocPrioCount(6, 4)
+    SetStartLocPrio(6, 0, 2, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(6, 1, 3, MAP_LOC_PRIO_LOW)
+    SetStartLocPrio(6, 2, 5, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(6, 3, 8, MAP_LOC_PRIO_LOW)
     SetStartLocPrioCount(7, 1)
-    SetStartLocPrio(7, 0, 0, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(7, 0, 4, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(8, 2)
     SetStartLocPrio(8, 0, 2, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(8, 1, 3, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(9, 9)
+    SetStartLocPrioCount(9, 1)
     SetStartLocPrio(9, 0, 0, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 1, 1, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 2, 2, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 3, 3, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 4, 4, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(9, 5, 5, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(9, 6, 6, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(9, 7, 7, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(9, 8, 8, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(10, 8)
     SetStartLocPrio(10, 0, 0, MAP_LOC_PRIO_LOW)
     SetStartLocPrio(10, 1, 1, MAP_LOC_PRIO_LOW)
@@ -2270,7 +2253,7 @@ function config()
     SetPlayers(11)
     SetTeams(11)
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-    DefineStartLocation(0, -5824.0, -704.0)
+    DefineStartLocation(0, 17216.0, 25280.0)
     DefineStartLocation(1, 29760.0, -11264.0)
     DefineStartLocation(2, -19264.0, 11392.0)
     DefineStartLocation(3, -20032.0, 11008.0)
