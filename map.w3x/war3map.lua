@@ -173,6 +173,7 @@ gg_rct_Vanilla_Zone_Making_Area_2 = nil
 gg_rct_Inside_Caves_Mines_Delves = nil
 gg_rct_Vanilla_Zone_Making_Area_3 = nil
 gg_rct_Housing_Area_4 = nil
+gg_rct_The_Achalorium = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -253,7 +254,6 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_The_Achalorium = nil
 function InitGlobals()
 end
 
@@ -2181,10 +2181,9 @@ end
 function InitAllyPriorities()
     SetStartLocPrioCount(0, 1)
     SetStartLocPrio(0, 0, 9, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrioCount(1, 3)
-    SetStartLocPrio(1, 0, 0, MAP_LOC_PRIO_LOW)
-    SetStartLocPrio(1, 1, 4, MAP_LOC_PRIO_HIGH)
-    SetStartLocPrio(1, 2, 7, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrioCount(1, 2)
+    SetStartLocPrio(1, 0, 4, MAP_LOC_PRIO_HIGH)
+    SetStartLocPrio(1, 1, 7, MAP_LOC_PRIO_HIGH)
     SetStartLocPrioCount(2, 2)
     SetStartLocPrio(2, 0, 3, MAP_LOC_PRIO_HIGH)
     SetStartLocPrio(2, 1, 8, MAP_LOC_PRIO_HIGH)
@@ -2253,7 +2252,7 @@ function config()
     SetPlayers(11)
     SetTeams(11)
     SetGamePlacement(MAP_PLACEMENT_TEAMS_TOGETHER)
-    DefineStartLocation(0, 17216.0, 25280.0)
+    DefineStartLocation(0, 17920.0, 29632.0)
     DefineStartLocation(1, 29760.0, -11264.0)
     DefineStartLocation(2, -19264.0, 11392.0)
     DefineStartLocation(3, -20032.0, 11008.0)
