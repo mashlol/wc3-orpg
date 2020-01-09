@@ -254,6 +254,7 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
+gg_rct_Daratheon_Tunnel = nil
 function InitGlobals()
 end
 
@@ -1495,6 +1496,7 @@ function CreateRegions()
     gg_rct_Vanilla_Zone_Making_Area_3 = Rect(20512.0, 24768.0, 23456.0, 27360.0)
     gg_rct_Housing_Area_4 = Rect(29920.0, 25344.0, 31200.0, 27392.0)
     gg_rct_The_Achalorium = Rect(18048.0, 25056.0, 18304.0, 25344.0)
+    gg_rct_Daratheon_Tunnel = Rect(3168.0, 8960.0, 3264.0, 9088.0)
 end
 
 function CreateCameras()

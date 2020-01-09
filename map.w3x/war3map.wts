@@ -1179,12 +1179,6 @@ STRING 217
 Pine Tree Everywhere
 }
 
-STRING 218
-// Doodads: D01C (Ogre Building Everywhere), Name (Name)
-{
-Ogre Building Everywhere
-}
-
 STRING 219
 // Doodads: D01D (Chunk Wall), Name (Name)
 {
@@ -2461,5 +2455,23 @@ STRING 441
 // Doodads: D03V (Enclave main), Name (Name)
 {
 Enclave main
+}
+
+STRING 442
+// Doodads: D01C (Unbuilt House), Name (Name)
+{
+Unbuilt House
+}
+
+STRING 443
+// Doodads: D03W (Wall Fountain 2), Name (Name)
+{
+Wall Fountain 2
+}
+
+STRING 444
+// Destructibles: B01C (Abyss Flat 1), Name (Name)
+{
+Abyss Flat 1
 }
 
