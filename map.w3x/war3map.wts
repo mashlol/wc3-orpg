@@ -2475,3 +2475,57 @@ STRING 444
 Abyss Flat 1
 }
 
+STRING 445
+// Doodads: D03X (Human Building Green Big), Name (Name)
+{
+Human Building Green Big
+}
+
+STRING 446
+// Doodads: D03Y (Orgrimmar Wall), Name (Name)
+{
+Orgrimmar Wall
+}
+
+STRING 447
+// Doodads: D03Z (Orc Hut), Name (Name)
+{
+Orc Hut
+}
+
+STRING 448
+// Doodads: D040 (Orc Fortress), Name (Name)
+{
+Orc Fortress
+}
+
+STRING 449
+// Doodads: D041 (Orc Warmill), Name (Name)
+{
+Orc Warmill
+}
+
+STRING 450
+// Doodads: D042 (Orc Beastiary), Name (Name)
+{
+Orc Beastiary
+}
+
+STRING 451
+// Doodads: D043 (Orc Tower), Name (Name)
+{
+Orc Tower
+}
+
+STRING 452
+// Doodads: D044 (Orc Home), Name (Name)
+{
+Orc Home
+}
+
+STRING 453
+// Doodads: D045 (Orc Altar of Storms), Name (Name)
+{
+Orc Altar of Storms
+}
+

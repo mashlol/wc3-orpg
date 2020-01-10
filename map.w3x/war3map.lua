@@ -174,6 +174,7 @@ gg_rct_Inside_Caves_Mines_Delves = nil
 gg_rct_Vanilla_Zone_Making_Area_3 = nil
 gg_rct_Housing_Area_4 = nil
 gg_rct_The_Achalorium = nil
+gg_rct_Daratheon_Tunnel = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -254,7 +255,14 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Daratheon_Tunnel = nil
+gg_rct_house6enter1 = nil
+gg_rct_house6entrance1 = nil
+gg_rct_house6exit1 = nil
+gg_rct_house6leave1 = nil
+gg_rct_house6enter2 = nil
+gg_rct_house6entrance2 = nil
+gg_rct_house6exit2 = nil
+gg_rct_house6leave2 = nil
 function InitGlobals()
 end
 
@@ -1497,6 +1505,14 @@ function CreateRegions()
     gg_rct_Housing_Area_4 = Rect(29920.0, 25344.0, 31200.0, 27392.0)
     gg_rct_The_Achalorium = Rect(18048.0, 25056.0, 18304.0, 25344.0)
     gg_rct_Daratheon_Tunnel = Rect(3168.0, 8960.0, 3264.0, 9088.0)
+    gg_rct_house6enter1 = Rect(3136.0, 9152.0, 3264.0, 9280.0)
+    gg_rct_house6entrance1 = Rect(-23488.0, -10784.0, -23360.0, -10656.0)
+    gg_rct_house6exit1 = Rect(-29792.0, -10080.0, -29664.0, -9952.0)
+    gg_rct_house6leave1 = Rect(-8864.0, 12896.0, -8736.0, 13024.0)
+    gg_rct_house6enter2 = Rect(-8864.0, 12704.0, -8736.0, 12832.0)
+    gg_rct_house6entrance2 = Rect(-29792.0, -10304.0, -29664.0, -10176.0)
+    gg_rct_house6exit2 = Rect(-23264.0, -10784.0, -23136.0, -10656.0)
+    gg_rct_house6leave2 = Rect(3328.0, 9152.0, 3456.0, 9280.0)
 end
 
 function CreateCameras()
