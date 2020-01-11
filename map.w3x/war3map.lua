@@ -175,6 +175,12 @@ gg_rct_Vanilla_Zone_Making_Area_3 = nil
 gg_rct_Housing_Area_4 = nil
 gg_rct_The_Achalorium = nil
 gg_rct_Daratheon_Tunnel = nil
+gg_rct_house6enter1 = nil
+gg_rct_house6entrance1 = nil
+gg_rct_house6exit1 = nil
+gg_rct_house6enter2 = nil
+gg_rct_house6entrance2 = nil
+gg_rct_house6exit2 = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -255,14 +261,10 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_house6enter1 = nil
-gg_rct_house6entrance1 = nil
-gg_rct_house6exit1 = nil
-gg_rct_house6leave1 = nil
-gg_rct_house6enter2 = nil
-gg_rct_house6entrance2 = nil
-gg_rct_house6exit2 = nil
+gg_rct_Rising_Tides_Cove = nil
+gg_rct_The_Great_Lantern = nil
 gg_rct_house6leave2 = nil
+gg_rct_house6leave1 = nil
 function InitGlobals()
 end
 
@@ -955,8 +957,9 @@ function CreateNeutralPassive()
     local t
     local life
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 2804.5, -4316.2, 159.208, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 2226.6, -4109.0, 248.013, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 2386.1, -3037.9, 246.899, FourCC("nvlk"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 2431.0, -3062.8, 206.967, FourCC("nvk2"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 2627.1, -3178.6, 248.233, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1512.6, -3050.4, 278.567, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvl2"), 1359.0, -4038.7, 308.094, FourCC("nvl2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1375.3, -4125.4, 39.473, FourCC("nvil"))
@@ -967,7 +970,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nvlk"), 2964.1, -2662.3, 246.899, FourCC("nvlk"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvk2"), 2951.9, -2709.1, 72.716, FourCC("nvk2"))
     u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 2710.0, -2654.8, 347.812, FourCC("nvlw"))
-    gg_unit_nemi_0014 = BlzCreateUnitWithSkin(p, FourCC("nemi"), 1384.9, -3825.0, 353.960, FourCC("nemi"))
+    gg_unit_nemi_0014 = BlzCreateUnitWithSkin(p, FourCC("nemi"), 1371.7, -3802.9, 353.960, FourCC("nemi"))
     u = BlzCreateUnitWithSkin(p, FourCC("nbee"), 2364.1, -4356.1, 102.312, FourCC("nbee"))
     gg_unit_nvil_0016 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1400.7, -4331.1, 356.473, FourCC("nvil"))
     u = BlzCreateUnitWithSkin(p, FourCC("vl2w"), 16098.7, -13461.5, 261.384, FourCC("vl2w"))
@@ -1006,10 +1009,9 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 15062.4, -12857.7, 213.600, FourCC("nhef"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17050.0, -13385.8, 287.944, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17094.3, -13791.3, 155.630, FourCC("nhem"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3383.0, -3043.8, 359.463, FourCC("hfoo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 3379.6, -3626.1, 354.915, FourCC("hfoo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 2143.6, -4791.6, 268.801, FourCC("hfoo"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1623.1, -4777.0, 274.996, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1578.5, -3663.3, -67.599, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 2126.7, -4781.1, 249.052, FourCC("hfoo"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1698.7, -4781.0, 266.423, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), -381.7, -3037.1, 197.904, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), -422.3, -3582.1, 161.730, FourCC("hfoo"))
     gg_unit_nvil_0069 = BlzCreateUnitWithSkin(p, FourCC("nvil"), 1605.4, -3046.9, 286.063, FourCC("nvil"))
@@ -1174,7 +1176,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("hmpr"), -14326.7, 9557.0, 178.540, FourCC("hmpr"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 14318.7, 14179.3, 257.801, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hdhw"), 1323.0, -4217.2, 348.048, FourCC("hdhw"))
-    u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1305.9, -4483.5, 354.451, FourCC("hgry"))
+    u = BlzCreateUnitWithSkin(p, FourCC("hgry"), 1267.1, -4461.8, 354.451, FourCC("hgry"))
     u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28356.4, 9091.0, 154.104, FourCC("e000"))
     SetUnitColor(u, ConvertPlayerColor(21))
     u = BlzCreateUnitWithSkin(p, FourCC("e000"), 28288.4, 8847.0, 143.039, FourCC("e000"))
@@ -1267,7 +1269,7 @@ function CreateNeutralPassive()
     SetUnitColor(gg_unit_n00O_0838, ConvertPlayerColor(2))
     gg_unit_n00P_0839 = BlzCreateUnitWithSkin(p, FourCC("n00P"), -10890.3, 6918.1, 183.193, FourCC("n00P"))
     SetUnitColor(gg_unit_n00P_0839, ConvertPlayerColor(8))
-    gg_unit_n00Q_0841 = BlzCreateUnitWithSkin(p, FourCC("n00Q"), 910.1, -2951.7, 318.916, FourCC("n00Q"))
+    gg_unit_n00Q_0841 = BlzCreateUnitWithSkin(p, FourCC("n00Q"), 1010.7, -3072.0, 318.916, FourCC("n00Q"))
     gg_unit_n00K_0842 = BlzCreateUnitWithSkin(p, FourCC("n00K"), -3738.1, 2750.6, 214.420, FourCC("n00K"))
     SetUnitColor(gg_unit_n00K_0842, ConvertPlayerColor(24))
     gg_unit_n00S_0857 = BlzCreateUnitWithSkin(p, FourCC("n00S"), 2814.5, -4077.9, 198.940, FourCC("n00S"))
@@ -1482,7 +1484,7 @@ function CreateRegions()
     gg_rct_Raid_1 = Rect(-22432.0, -29600.0, -14720.0, -23392.0)
     gg_rct_Raid_2 = Rect(-14688.0, -29664.0, -6976.0, -23392.0)
     gg_rct_Raid_3 = Rect(-6976.0, -29568.0, 2272.0, -23392.0)
-    gg_rct_Dungeon_Area_9 = Rect(18688.0, -29632.0, 26400.0, -23232.0)
+    gg_rct_Dungeon_Area_9 = Rect(19968.0, -29632.0, 26400.0, -23232.0)
     gg_rct_Housing_Area_3 = Rect(-2944.0, 24032.0, 4448.0, 25856.0)
     gg_rct_Expension_Zone_2 = Rect(-15904.0, 21568.0, -3008.0, 25792.0)
     gg_rct_Expension_Zone_1 = Rect(-15904.0, 7456.0, -9408.0, 21472.0)
@@ -1498,7 +1500,7 @@ function CreateRegions()
     gg_rct_Hero_Story_Area_4 = Rect(-12832.0, -23360.0, -8096.0, -17024.0)
     gg_rct_Expension_Zone_8 = Rect(-8032.0, -23360.0, 1440.0, -17504.0)
     gg_rct_Hero_Story_Area_5 = Rect(3072.0, -29632.0, 8288.0, -22400.0)
-    gg_rct_Expension_Zone_9 = Rect(8352.0, -29632.0, 18656.0, -22176.0)
+    gg_rct_Expension_Zone_9 = Rect(8352.0, -29632.0, 19936.0, -22176.0)
     gg_rct_Vanilla_Zone_Making_Area_2 = Rect(15168.0, -22144.0, 18144.0, -16480.0)
     gg_rct_Inside_Caves_Mines_Delves = Rect(-30144.0, -17984.0, -22400.0, -9920.0)
     gg_rct_Vanilla_Zone_Making_Area_3 = Rect(20512.0, 24768.0, 23456.0, 27360.0)
@@ -1507,12 +1509,14 @@ function CreateRegions()
     gg_rct_Daratheon_Tunnel = Rect(3168.0, 8960.0, 3264.0, 9088.0)
     gg_rct_house6enter1 = Rect(3136.0, 9152.0, 3264.0, 9280.0)
     gg_rct_house6entrance1 = Rect(-23488.0, -10784.0, -23360.0, -10656.0)
-    gg_rct_house6exit1 = Rect(-29792.0, -10080.0, -29664.0, -9952.0)
-    gg_rct_house6leave1 = Rect(-8864.0, 12896.0, -8736.0, 13024.0)
+    gg_rct_house6exit1 = Rect(-8864.0, 12896.0, -8736.0, 13024.0)
     gg_rct_house6enter2 = Rect(-8864.0, 12704.0, -8736.0, 12832.0)
     gg_rct_house6entrance2 = Rect(-29792.0, -10304.0, -29664.0, -10176.0)
-    gg_rct_house6exit2 = Rect(-23264.0, -10784.0, -23136.0, -10656.0)
-    gg_rct_house6leave2 = Rect(3328.0, 9152.0, 3456.0, 9280.0)
+    gg_rct_house6exit2 = Rect(3328.0, 9152.0, 3456.0, 9280.0)
+    gg_rct_Rising_Tides_Cove = Rect(-9024.0, 14144.0, -8864.0, 14336.0)
+    gg_rct_The_Great_Lantern = Rect(-8768.0, 16096.0, -8704.0, 16160.0)
+    gg_rct_house6leave2 = Rect(-23264.0, -10784.0, -23136.0, -10656.0)
+    gg_rct_house6leave1 = Rect(-29792.0, -10080.0, -29664.0, -9952.0)
 end
 
 function CreateCameras()
