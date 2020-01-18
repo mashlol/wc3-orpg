@@ -25,7 +25,7 @@
     "levelRequirement": "1"
   },
   "2": {
-    "name": "Fred's Quest",
+    "name": "Fred's Quest (Main Quest)",
     "getQuestFrom": "gg_unit_nvl2_0070",
     "handQuestTo": "gg_unit_nvil_0071",
     "obtainText": "A neighbor of mine, Fred, has recently gone missing. I want you to go find him. Last time I saw him he was headed west into the forest.",
@@ -40,7 +40,7 @@
     "levelRequirement": "1"
   },
   "3": {
-    "name": "Fred's Soup",
+    "name": "Fred's Soup (Main Quest)",
     "getQuestFrom": "gg_unit_nvil_0071",
     "handQuestTo": "gg_unit_nvil_0071",
     "obtainText": "I'm starving! I was out here collecting turtle meat so I could make my famous turtle soup. However, I'm feeling a little woozy...could you please collect five River Turtle Meat and bring it back to me?",
@@ -68,7 +68,7 @@
     "handQuestTo": "gg_unit_nvl2_0070",
     "obtainText": "I appreciate all you've done for me, but I can take it from here. Return to Fjord and see what else he has for you.",
     "incompleteText": "Impossible!",
-    "completedText": "Fred sent you back here? Well, good I have some future work for you.",
+    "completedText": "Fred sent you back here? Well, good I have some work for you later.",
     "objectives": [],
     "rewards": {
       "exp": "16",
@@ -104,7 +104,7 @@
     "levelRequirement": "1"
   },
   "6": {
-    "name": "The Glacial Tundra",
+    "name": "The Glacial Tundra (Main Quest)",
     "getQuestFrom": "gg_unit_nvl2_0070",
     "handQuestTo": "gg_unit_nvil_0040",
     "obtainText": "Travel to The Glacial Tundra, it's just west of here. You can find my friend Higram there, he might have some work for you.",
@@ -671,7 +671,7 @@
   },
   "29": {
     "objectives": [],
-    "name": "Finally Awake",
+    "name": "Finally Awake (Main Quest)",
     "getQuestFrom": "gg_unit_n00I_0803",
     "handQuestTo": "gg_unit_n00I_0803",
     "levelRequirement": "1",
@@ -684,7 +684,7 @@
   },
   "30": {
     "objectives": [],
-    "name": "Finally Awake (Part 2)",
+    "name": "Finally Awake (Part 2) (Main Quest)",
     "getQuestFrom": "gg_unit_n00I_0803",
     "handQuestTo": "gg_unit_n00I_0803",
     "levelRequirement": "1",
@@ -701,7 +701,7 @@
   },
   "31": {
     "objectives": [],
-    "name": "He Who Stands Between Life and Death",
+    "name": "He Who Stands Between Life and Death (Main Quest)",
     "getQuestFrom": "gg_unit_n00I_0803",
     "handQuestTo": "gg_unit_n00J_0804",
     "levelRequirement": "1",
@@ -734,7 +734,7 @@
         "amount": "1"
       }
     ],
-    "name": "Insight from the Past and the Future",
+    "name": "Insight from the Past and the Future (Main Quest)",
     "getQuestFrom": "gg_unit_n00J_0804",
     "handQuestTo": "gg_unit_n00J_0804",
     "levelRequirement": "1",
@@ -751,7 +751,7 @@
   },
   "33": {
     "objectives": [],
-    "name": "Insight from the Past",
+    "name": "Insight from the Past (Main Quest)",
     "getQuestFrom": "gg_unit_n00J_0804",
     "handQuestTo": "gg_unit_life_0858",
     "levelRequirement": "1",
@@ -767,7 +767,7 @@
   },
   "34": {
     "objectives": [],
-    "name": "Insight into the Future",
+    "name": "Insight into the Future (Main Quest)",
     "getQuestFrom": "gg_unit_life_0858",
     "handQuestTo": "gg_unit_n00T_0859",
     "levelRequirement": "1",
@@ -783,7 +783,7 @@
   },
   "35": {
     "objectives": [],
-    "name": "He who.. Still Stands..",
+    "name": "He who.. Still Stands.. (Main Quests)",
     "getQuestFrom": "gg_unit_n00T_0859",
     "handQuestTo": "gg_unit_n00J_0804",
     "levelRequirement": "1",
@@ -984,7 +984,7 @@
   },
   "45": {
     "objectives": [],
-    "name": "He Who Stands in the Grove",
+    "name": "He Who Stands in the Grove (Main Quest)",
     "getQuestFrom": "gg_unit_n00Q_0841",
     "levelRequirement": "5",
     "obtainText": "Hey! Before you head out on other adventures!\nI just wanted to tell you that he who stands in the forest wanted to talk to you urgently.\nHe was talking about a icy region.",
@@ -1002,7 +1002,7 @@
   },
   "46": {
     "objectives": [],
-    "name": "He Who Stands in Snow",
+    "name": "He Who Stands in Snow (Main Quest)",
     "getQuestFrom": "gg_unit_n00J_0804",
     "handQuestTo": "gg_unit_n00P_0839",
     "levelRequirement": "1",

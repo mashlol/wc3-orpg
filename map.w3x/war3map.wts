@@ -388,11 +388,6 @@ STRING 76
 Tall Grass
 }
 
-STRING 77
-{
-PLACEHOLDER_TITLE_REPLACED
-}
-
 STRING 78
 {
 Player 2
@@ -2533,5 +2528,10 @@ STRING 454
 // Doodads: D046 (The Great Lantern), Name (Name)
 {
 The Great Lantern
+}
+
+STRING 455
+{
+The Veiled Throne
 }
 

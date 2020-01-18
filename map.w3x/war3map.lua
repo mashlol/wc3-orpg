@@ -181,6 +181,10 @@ gg_rct_house6exit1 = nil
 gg_rct_house6enter2 = nil
 gg_rct_house6entrance2 = nil
 gg_rct_house6exit2 = nil
+gg_rct_Rising_Tides_Cove = nil
+gg_rct_The_Great_Lantern = nil
+gg_rct_house6leave2 = nil
+gg_rct_house6leave1 = nil
 gg_cam_Camera_001 = nil
 gg_cam_Camera_Screenshot_1 = nil
 gg_cam_Camera_Screenshot_2 = nil
@@ -261,10 +265,6 @@ gg_dest_DTg7_14262 = nil
 gg_dest_DTg7_14263 = nil
 gg_dest_DTg7_14264 = nil
 gg_dest_DTg7_14265 = nil
-gg_rct_Rising_Tides_Cove = nil
-gg_rct_The_Great_Lantern = nil
-gg_rct_house6leave2 = nil
-gg_rct_house6leave1 = nil
 function InitGlobals()
 end
 
@@ -1009,7 +1009,7 @@ function CreateNeutralPassive()
     u = BlzCreateUnitWithSkin(p, FourCC("nhef"), 15062.4, -12857.7, 213.600, FourCC("nhef"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17050.0, -13385.8, 287.944, FourCC("nhem"))
     u = BlzCreateUnitWithSkin(p, FourCC("nhem"), 17094.3, -13791.3, 155.630, FourCC("nhem"))
-    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1578.5, -3663.3, -67.599, FourCC("nvlw"))
+    u = BlzCreateUnitWithSkin(p, FourCC("nvlw"), 1578.5, -3663.3, 292.401, FourCC("nvlw"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 2126.7, -4781.1, 249.052, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), 1698.7, -4781.0, 266.423, FourCC("hfoo"))
     u = BlzCreateUnitWithSkin(p, FourCC("hfoo"), -381.7, -3037.1, 197.904, FourCC("hfoo"))
@@ -2253,7 +2253,7 @@ end
 function main()
     SetCameraBounds(-30208.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM), 31232.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), 31744.0 - GetCameraMargin(CAMERA_MARGIN_TOP), -30208.0 + GetCameraMargin(CAMERA_MARGIN_LEFT), 31744.0 - GetCameraMargin(CAMERA_MARGIN_TOP), 31232.0 - GetCameraMargin(CAMERA_MARGIN_RIGHT), -29696.0 + GetCameraMargin(CAMERA_MARGIN_BOTTOM))
     SetDayNightModels("Environment\\DNC\\DNCLordaeron\\DNCLordaeronTerrain\\DNCLordaeronTerrain.mdl", "Environment\\DNC\\DNCLordaeron\\DNCLordaeronUnit\\DNCLordaeronUnit.mdl")
-    SetTerrainFogEx(0, 15000.0, 16000.0, 0.500, 0.502, 0.502, 1.000)
+    SetTerrainFogEx(0, 30000.0, 35000.0, 0.500, 0.502, 0.502, 1.000)
     SetWaterBaseColor(0, 128, 128, 255)
     NewSoundEnvironment("Default")
     SetAmbientDaySound("LordaeronSummerDay")
