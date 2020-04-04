@@ -1,8 +1,10 @@
-# WC3 ORPG TEMPLATE
+# WC3 ORPG "TEMPLATE"
 
 ## Info
 
 This is a wc3 project a few people were working on for a few months, but then Blizzard released 1.32 and caused issues with lua. We have since lost interest (and patience in Blizzard) in trying to fix it, so we've decided to open source the project in the hopes that someone might find it useful. There is probably something here that might be useful to someone, however the map itself will desync in multiplayer after a while.
+
+It's not really a template, hence the quotes, but with a little coding you could easily turn it into your own project. Making spells is fairly easy (check `src/spells/` and `src/spell.lua`). Making new heroes should be fairly easy (check out `src/hero.lua`), and making items/quests/vendors/drops is all done in a UI and doesn't require any coding.
 
 ## Setup
 
@@ -18,7 +20,7 @@ Make sure node & npm (in C:\Program Files\nodejs) are in your `$PATH` . [https:/
 
 You might also have to modify your wc3 executable path in `compile/build.sh`, since it only checks a couple of places.
 
-Open the “git bash” file which you downloaded from the git website (Mines in `C:\Program Files\Git\git-bash.exe`). Type the following:
+Open the “git bash” file which you downloaded from the git website (Mines in `C:\Program Files\Git\git-bash.exe`). Run the following:
 
 ```
 cd ~
