@@ -84,3 +84,11 @@ We've done a few weird hacks to make things work.
     *   Does decay - Means the unit is not elite.
 *   The field **Art - Use Extended Line of Sight** actually means whether the unit will give EXP or not.
     *   If it is marked as True, then the unit will NOT give exp!
+
+
+## Credits
+
+mashlol - Programming
+Magicon - Terrain, quests, items
+Spoon - Terrain, quests items
+Reckless - Terrain, quests, items
