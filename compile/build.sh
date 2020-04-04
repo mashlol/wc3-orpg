@@ -50,11 +50,11 @@ mv ./bin/war3map.lua ./bin/script_stored_min
 
 rm ./bin/*.lua
 
-if [ "$1" == "--bump" ]; then
-    echo "Bumping the version: $2"
+if [ "$1" == "--release" ]; then
+    echo "Creating release MPQ with name: $2"
 
-    echo "Replacing string files in w3x folder with version: $2"
-    sed -e "s/PLACEHOLDER_NAME_REPLACED/The Veiled Throne ORPG $2/g" -e "s/PLACEHOLDER_DESC_REPLACED/Pre alpha release of TVT ORPG. $2/g" -e "s/PLACEHOLDER_TITLE_REPLACED/The Veiled Throne ORPG $2/g" bin/built.w3x/war3map.wts > bin/temp_strings.wts
+    echo "Replacing string files in w3x folder with name: $2"
+    sed -e "s/PLACEHOLDER_NAME_REPLACED/$2/g" -e "s/PLACEHOLDER_DESC_REPLACED/Pre alpha release of $2/g" -e "s/PLACEHOLDER_TITLE_REPLACED/$2/g" bin/built.w3x/war3map.wts > bin/temp_strings.wts
     awk 'sub("$", "\r")' bin/temp_strings.wts > bin/built.w3x/war3map.wts
 
     rm -f bin/compiled_map.w3x
@@ -70,16 +70,6 @@ if [ "$1" == "--bump" ]; then
     cd compile
     ./MPQEditor.exe -console mopaq
     cd ..
-
-    echo 'Copying MPQ archive to ../tvt-releases/tvt-orpg-$2.w3x'
-    rm -f ../tvt-releases/*.w3x
-    cp bin/compiled_map.w3x "../tvt-releases/tvt-orpg-$2.w3x"
-
-    # echo 'Committing and pushing'
-    # cd ../tvt-releases
-    # git add .
-    # git commit -m "Version bump: $2"
-    # git push
 
     cd ../map
 else
@@ -104,6 +94,6 @@ else
         exit 0
     fi
 
-    echo "Unable to find wc3 executable. Exiting. Ask mash for help"
+    echo "Unable to find wc3 executable. Exiting."
     exit 1
 fi
