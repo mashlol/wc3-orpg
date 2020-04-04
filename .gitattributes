@@ -1,2 +1,0 @@
-map.w3x/war3map.doo filter=lfs diff=lfs merge=lfs -text lockable
-map.w3x/war3map.doo text !filter !merge !diff
