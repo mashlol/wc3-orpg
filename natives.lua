@@ -1,3 +1,5 @@
+-- From https://www.hiveworkshop.com/threads/lua-vscode-integration.314974/#post-3359392
+
 ---@class real
 ---@class handle
 ---@class code
