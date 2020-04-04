@@ -1,3 +1,5 @@
+-- From https://www.hiveworkshop.com/threads/lua-obliterate-all-gui-leaks-with-1-trigger.316054/
+
 GC = {}
 GC.Table = {}
 setmetatable(GC.Table, {__mode = "k"})
