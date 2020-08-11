@@ -80,14 +80,21 @@ else
     mkdir -p ~/Documents/Warcraft\ III/Maps/Download/temp/
     cp -r bin/built.w3x ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
 
-    WC=/c/Program\ Files/Warcraft\ III/x86_64/Warcraft\ III.exe
+    WC=/c/Program\ Files/Warcraft\ III/_retail_/x86_64/Warcraft\ III.exe
     if [ -f "$WC" ]; then
         echo "Found wc3 in $WC"
         "$WC" -launch -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
         exit 0
     fi
 
-    WC=/e/Warcraft\ III\ Reforged/x86_64/Warcraft\ III.exe
+    WC=/c/Program\ Files\ \(x86\)/Warcraft\ III/_retail_/x86_64/Warcraft\ III.exe
+    if [ -f "$WC" ]; then
+        echo "Found wc3 in $WC"
+        "$WC" -launch -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+        exit 0
+    fi
+
+    WC=/e/Warcraft\ III\ Reforged/_retail_/x86_64/Warcraft\ III.exe
     if [ -f "$WC" ]; then
         echo "Found wc3 in $WC"
         "$WC" -launch -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
