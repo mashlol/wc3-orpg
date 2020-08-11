@@ -101,6 +101,13 @@ else
         exit 0
     fi
 
+    WC=/c/spill/Warcraft\ III/_retail_/x86_64/Warcraft\ III.exe
+    if [ -f "$WC" ]; then
+        echo "Found wc3 in $WC"
+        "$WC" -launch -loadfile ~/Documents/Warcraft\ III/Maps/Download/temp/built_$BUILD_NUM.w3x
+        exit 0
+    fi
+
     echo "Unable to find wc3 executable. Exiting."
     exit 1
 fi
