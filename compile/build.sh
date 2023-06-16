@@ -32,7 +32,7 @@ node ./compile/build $@
 
 sed -e '/local REPLACE_ME/r./bin/war3map_compiled.lua' ./bin/war3map.lua > bin/war3map_replaced.lua
 
-sed -ie '/InitCustomTriggers()/a \ \ \ \ MapMain()' ./bin/war3map_replaced.lua
+sed -ie '/\ \ \ \ InitCustomTriggers()/a \ \ \ \ MapMain()' ./bin/war3map_replaced.lua
 
 echo 'Moving and cleaning up temp lua files'
 
