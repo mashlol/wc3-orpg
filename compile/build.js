@@ -52,38 +52,38 @@ async function build() {
     modules[result[0]] = result[1];
   });
 
-  const internalContents = await internalContentsHandle;
-
   const allModulesSource = results
     .map((result) => result[2])
-    .concat([internalContents])
     .join("\n");
 
-  const headerContents = await headerContentsHandle;
+  const internalContents = await internalContentsHandle;
 
-  let compiledSource = headerContents + "\n\nfunction MapMain()\n";
+  let innerSource = internalContents;
   if (skipMin) {
-    compiledSource += "__DEBUG__ = true\n";
+    innerSource += "__DEBUG__ = true\n";
   }
+
+  innerSource += "\n\n" + allModulesSource + "\n\n";
+
   for (let k in modules) {
-    compiledSource +=
+    innerSource +=
       "requireMap['" + k.replace(/\\/g, "/") + "'] = " + modules[k] + "\n";
   }
 
-  compiledSource += "\n\n" + allModulesSource + "\n\n";
-
   if (skipMin) {
-    compiledSource +=
+    innerSource +=
       "TimerStart(CreateTimer(), 0.0, false, function() local status, err = pcall(function() require('src/main.lua') end) print(status, err) end)\n\n";
   } else {
-    compiledSource += "require('src/main.lua')\n\n";
+    innerSource += "require('src/main.lua')\n\n";
   }
-
-  compiledSource += "end\n";
 
   if (!skipMin) {
-    compiledSource = luamin.minify(compiledSource);
+    innerSource = luamin.minify(innerSource);
   }
+
+  const headerContents = await headerContentsHandle;
+  const compiledSource =
+    headerContents + "\n\nfunction MapMain()\nprint('MapMain')\n" + innerSource + "\n\nend\n\n";
 
   await fs.writeFile("./bin/war3map_compiled.lua", compiledSource);
 }
