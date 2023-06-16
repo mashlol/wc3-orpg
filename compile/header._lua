@@ -88,10 +88,6 @@ for k, v in ipairs(methodsToWrap) do
         local blizzardHandle = oldGetHandleId(res)
         customHandleMap[blizzardHandle] = internalHandle
 
-        if __DEBUG__ then
-          print("Created a handle", v, internalHandle, blizzardHandle, GetStackTrace and GetStackTrace())
-        end
-
         return res
     end
 end
