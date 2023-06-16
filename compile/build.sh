@@ -72,8 +72,6 @@ if [ "$1" == "--release" ]; then
     cd compile
     ./MPQEditor.exe -console mopaq
     cd ..
-
-    cd ../map
 else
     echo 'Launching map in wc3'
 
