@@ -35,3 +35,113 @@ function string.split(inputstr, sep)
   end
   return t
 end
+
+local customHandleMap = {}
+local currentCustomHandleId = 0
+
+local methodsToWrap = {
+    "BlzCreateUnitWithSkin",
+    "CreateFogModifierRectSimple",
+    "CreateFogModifierRadiusLocSimple",
+    "CreateFogModifierRectBJ",
+    "CreateFogModifierRadiusLocBJ",
+    "CreateImageBJ",
+    "CreateUbersplatBJ",
+    "CreateItemLoc",
+    "CreateUnitAtLocSaveLast",
+    "CreateNUnitsAtLoc",
+    "CreateNUnitsAtLocFacingLocBJ",
+    "CreateCorpseLocBJ",
+    "CreatePermanentCorpseLocBJ",
+    "CreateDestructableLoc",
+    "CreateDeadDestructableLocBJ",
+    "CreateQuestBJ",
+    "CreateQuestItemBJ",
+    "CreateDefeatConditionBJ",
+    "CreateTimerBJ",
+    "CreateTimerDialogBJ",
+    "CreateLeaderboardBJ",
+    "CreateMultiboardBJ",
+    "CreateTextTagLocBJ",
+    "CreateTextTagUnitBJ",
+    "CreateTimer",
+    "CreateGroup",
+    "CreateForce",
+    "CreateRegion",
+    "CreateDestructable",
+    "CreateDestructableZ",
+    "CreateDeadDestructable",
+    "CreateDeadDestructableZ",
+    "CreateItem",
+    "CreateUnit",
+    "CreateUnitByName",
+    "CreateUnitAtLoc",
+    "CreateUnitAtLocByName",
+    "CreateCorpse",
+    "CreateFogModifierRect",
+    "CreateFogModifierRadius",
+    "CreateFogModifierRadiusLoc",
+    "CreateUnitPool",
+    "CreateItemPool",
+    "CreateTextTag",
+    "CreateTrackable",
+    "CreateQuest",
+    "CreateDefeatCondition",
+    "CreateTimerDialog",
+    "CreateLeaderboard",
+    "CreateMultiboard",
+    "CreateCameraSetup",
+    "CreateSound",
+    "CreateSoundFilenameWithLabel",
+    "CreateSoundFromLabel",
+    "CreateMIDISound",
+    "CreateImage",
+    "CreateUbersplat",
+    "CreateBlightedGoldmine",
+    "BlzCreateFrame",
+    "BlzCreateSimpleFrame",
+    "BlzCreateFrameByType",
+    "BlzGetTriggerPlayerMousePosition",
+    "CameraSetupGetDestPositionLoc",
+    "GetCameraEyePositionLoc",
+    "GetCameraTargetPositionLoc",
+    "GetOrderPointLoc",
+    "GetSpellTargetLoc",
+    "GetStartLocationLoc",
+    "GetUnitLoc",
+    "GetUnitRallyPoint",
+    "Location",
+}
+
+local oldGetHandleId = GetHandleId
+
+for k, v in ipairs(methodsToWrap) do
+    local oldMethod = _G[v]
+    _G[v] = function(...)
+        local res = oldMethod(...)
+
+        local internalHandle = currentCustomHandleId
+        currentCustomHandleId = currentCustomHandleId + 1
+
+        local blizzardHandle = oldGetHandleId(res)
+        customHandleMap[blizzardHandle] = internalHandle
+
+        if __DEBUG__ then
+          print("Created a handle", v, internalHandle, blizzardHandle, GetStackTrace and GetStackTrace())
+        end
+
+        return res
+    end
+end
+
+GetHandleId = function(obj)
+    local blizzHandle = oldGetHandleId(obj)
+
+    local internalHandle = customHandleMap[blizzHandle]
+
+    if obj == nil then
+        return blizzHandle
+    end
+
+    return internalHandle
+end
