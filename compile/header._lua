@@ -97,7 +97,7 @@ GetHandleId = function(obj)
 
     local internalHandle = customHandleMap[blizzHandle]
 
-    if obj == nil then
+    if internalHandle == nil then
         return blizzHandle
     end
 
