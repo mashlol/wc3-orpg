@@ -8,17 +8,17 @@ const concat = require("concat");
 console.log("build args: ", process.argv);
 var skipMin = process.argv[2] == "--no-min";
 
-var walk = function(dir, done) {
+var walk = function (dir, done) {
   var results = [];
-  fs.readdir(dir, function(err, list) {
+  fs.readdir(dir, function (err, list) {
     if (err) return done(err);
     var pending = list.length;
     if (!pending) return done(null, results);
-    list.forEach(function(file) {
+    list.forEach(function (file) {
       file = path.resolve(dir, file);
-      fs.stat(file, function(err, stat) {
+      fs.stat(file, function (err, stat) {
         if (stat && stat.isDirectory()) {
-          walk(file, function(err, res) {
+          walk(file, function (err, res) {
             results = results.concat(res);
             if (!--pending) done(null, results);
           });
@@ -46,7 +46,7 @@ walk("./src", (err, res) => {
     let numIterated = 0;
     const writtenFiles = [];
     const modules = {};
-    res.forEach(srcAbsPath => {
+    res.forEach((srcAbsPath) => {
       const relativeSrcPath = path
         .relative(".", srcAbsPath)
         .replace(/^gen/, "src");
@@ -58,66 +58,71 @@ walk("./src", (err, res) => {
           "local " + funcRequireName + " = function()\n\n" + data + "\nend\n\n";
 
         const buildPath = "./bin/" + funcRequireName + ".lua";
-        fs.writeFile(buildPath, data, { encoding: "utf-8", flag: "w" }, err => {
-          if (err) throw err;
+        fs.writeFile(
+          buildPath,
+          data,
+          { encoding: "utf-8", flag: "w" },
+          (err) => {
+            if (err) throw err;
 
-          numIterated++;
+            numIterated++;
 
-          writtenFiles.push(buildPath);
-          modules[relativeSrcPath] = funcRequireName;
+            writtenFiles.push(buildPath);
+            modules[relativeSrcPath] = funcRequireName;
 
-          if (numIterated == numFiles) {
-            // Concat the files into a single one
-            concat(
-              ["./compile/header._lua"].concat(writtenFiles),
-              "./bin/war3map_compiled.lua"
-            ).then(() => {
-              let requireMap = "\n";
-              if (skipMin) {
-                requireMap += "__DEBUG__ = true\n";
-              }
-              for (let k in modules) {
-                requireMap +=
-                  "requireMap['" +
-                  k.replace(/\\/g, "/") +
-                  "'] = " +
-                  modules[k] +
-                  "\n";
-              }
-
-              requireMap += "\n\n";
-
-              if (skipMin) {
-                requireMap +=
-                  "TimerStart(CreateTimer(), 0.0, false, function() local status, err = pcall(function() require('src/main.lua') end) print(status, err) end)\n\n";
-              } else {
-                requireMap += "require('src/main.lua')\n\n";
-              }
-
-              fs.appendFile(
-                "./bin/war3map_compiled.lua",
-                requireMap,
-                { encoding: "utf-8" },
-                err => {
-                  if (err) throw err;
-
-                  if (!skipMin) {
-                    console.log("Minifying");
-                    // Now minify the file
-                    const contents = fs.readFileSync(
-                      "./bin/war3map_compiled.lua",
-                      { encoding: "utf-8" }
-                    );
-                    fs.writeFileSync(
-                      "./bin/war3map_compiled.lua",
-                      luamin.minify(contents)
-                    );
-                  }
+            if (numIterated == numFiles) {
+              // Concat the files into a single one
+              concat(
+                ["./compile/header._lua"].concat(writtenFiles),
+                "./bin/war3map_compiled.lua"
+              ).then(() => {
+                let requireMap = "\n";
+                if (skipMin) {
+                  requireMap += "__DEBUG__ = true\n";
                 }
-              );
-            });
+                for (let k in modules) {
+                  requireMap +=
+                    "requireMap['" +
+                    k.replace(/\\/g, "/") +
+                    "'] = " +
+                    modules[k] +
+                    "\n";
+                }
+
+                requireMap += "\n\n";
+
+                if (skipMin) {
+                  requireMap +=
+                    "TimerStart(CreateTimer(), 0.0, false, function() local status, err = pcall(function() require('src/main.lua') end) print(status, err) end)\n\n";
+                } else {
+                  requireMap += "require('src/main.lua')\n\n";
+                }
+
+                fs.appendFile(
+                  "./bin/war3map_compiled.lua",
+                  requireMap,
+                  { encoding: "utf-8" },
+                  (err) => {
+                    if (err) throw err;
+
+                    if (!skipMin) {
+                      console.log("Minifying");
+                      // Now minify the file
+                      const contents = fs.readFileSync(
+                        "./bin/war3map_compiled.lua",
+                        { encoding: "utf-8" }
+                      );
+                      fs.writeFileSync(
+                        "./bin/war3map_compiled.lua",
+                        luamin.minify(contents)
+                      );
+                    }
+                  }
+                );
+              });
+            }
           }
-        });
+        );
       });
     });
   });
