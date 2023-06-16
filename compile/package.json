@@ -2,7 +2,7 @@
   "requires": true,
   "lockfileVersion": 1,
   "dependencies": {
-    "concat": "^1.0.3",
+    "glob": "^10.2.7",
     "luamin": "^1.0.4"
   }
 }
